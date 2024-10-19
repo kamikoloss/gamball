@@ -13,13 +13,11 @@ const BALL_COLORS = {
 
 @export var level: int = 0
 
-@export var _area: Area2D
 @export var _texture_rect: TextureRect
 @export var _label: Label
 
 
 func _ready() -> void:
-	_area.area_entered.connect(_on_area_entered)
 	_init_view()
 
 
@@ -27,9 +25,3 @@ func _ready() -> void:
 func _init_view() -> void:
 	_texture_rect.self_modulate = BALL_COLORS[level]
 	_label.text = str(level)
-
-
-func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("pocket"):
-		print("[Ball] entered to pocket.")
-		queue_free()

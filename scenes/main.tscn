@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=13 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_h2e4g"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="1_jd8wc"]
@@ -6,24 +6,27 @@
 [ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/base_triangle.png" id="2_k3p6f"]
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/base_circle.png" id="2_svx0d"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/ball.tscn" id="4_ldgjm"]
-[ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/pocket.tscn" id="6_wvfqf"]
+[ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/hole.tscn" id="6_wvfqf"]
 [ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="7_yeeqd"]
+[ext_resource type="Script" path="res://scripts/pachinko.gd" id="8_sipkv"]
 [ext_resource type="PackedScene" uid="uid://dli5r028n6byb" path="res://scenes/nail.tscn" id="8_ywild"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("_money_label", "_balls_label")]
+[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_pachinko", "_balls", "_money_label", "_balls_label")]
 script = ExtResource("1_h2e4g")
+_ball_scene = ExtResource("4_ldgjm")
+_billiards = NodePath("Billiards")
+_pachinko = NodePath("Pachinko")
+_balls = NodePath("Balls")
 _money_label = NodePath("UI/Money")
 _balls_label = NodePath("UI/Balls")
 
-[node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_start_point", "_balls")]
+[node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position")]
 script = ExtResource("2_5y3bg")
-_ball_scene = ExtResource("4_ldgjm")
-_start_point = NodePath("Points/TopPoint")
-_balls = NodePath("Balls")
+_spawn_position = NodePath("Points/BottomPoint")
 
 [node name="Board" type="Area2D" parent="Billiards"]
 position = Vector2(280, 360)
@@ -50,29 +53,10 @@ debug_color = Color(0, 0, 0, 0)
 [node name="Points" type="Node2D" parent="Billiards"]
 
 [node name="TopPoint" type="Node2D" parent="Billiards/Points"]
-position = Vector2(280, 520)
+position = Vector2(280, 200)
+rotation = -3.14159
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/TopPoint"]
-self_modulate = Color(0, 0.501961, 0, 1)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_k3p6f")
-expand_mode = 1
-
-[node name="BottomPoint" type="Node2D" parent="Billiards/Points"]
-position = Vector2(280, 200)
-rotation = 3.14159
-
-[node name="TextureRect" type="TextureRect" parent="Billiards/Points/BottomPoint"]
 self_modulate = Color(0, 0.501961, 0, 1)
 anchors_preset = 8
 anchor_left = 0.5
@@ -105,6 +89,25 @@ offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="BottomPoint" type="Node2D" parent="Billiards/Points"]
+position = Vector2(280, 520)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Points/BottomPoint"]
+self_modulate = Color(0, 0.501961, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_k3p6f")
 expand_mode = 1
 
 [node name="Walls" type="Node2D" parent="Billiards"]
@@ -198,65 +201,37 @@ expand_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall4"]
 shape = SubResource("RectangleShape2D_fi0lo")
 
-[node name="Pockets" type="Node2D" parent="Billiards"]
+[node name="Holes" type="Node2D" parent="Billiards"]
 
-[node name="Pocket" parent="Billiards/Pockets" instance=ExtResource("6_wvfqf")]
+[node name="Hole" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(60, 60)
+hole_type = 0
 
-[node name="Pocket2" parent="Billiards/Pockets" instance=ExtResource("6_wvfqf")]
+[node name="Hole2" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(60, 360)
+hole_type = 0
 
-[node name="Pocket3" parent="Billiards/Pockets" instance=ExtResource("6_wvfqf")]
+[node name="Hole3" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(60, 660)
+hole_type = 0
 
-[node name="Pocket4" parent="Billiards/Pockets" instance=ExtResource("6_wvfqf")]
+[node name="Hole4" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(500, 60)
+hole_type = 0
 
-[node name="Pocket5" parent="Billiards/Pockets" instance=ExtResource("6_wvfqf")]
+[node name="Hole5" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(500, 360)
+hole_type = 0
 
-[node name="Pocket6" parent="Billiards/Pockets" instance=ExtResource("6_wvfqf")]
+[node name="Hole6" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(500, 660)
+hole_type = 0
 
-[node name="Balls" type="Node2D" parent="Billiards"]
-
-[node name="Ball" parent="Billiards/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(280, 240)
-level = 1
-
-[node name="Ball2" parent="Billiards/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(260, 220)
-level = 8
-
-[node name="Ball3" parent="Billiards/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(300, 220)
-level = 2
-
-[node name="Ball4" parent="Billiards/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(240, 200)
-level = 7
-
-[node name="Ball5" parent="Billiards/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(280, 200)
-level = 9
-
-[node name="Ball6" parent="Billiards/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(320, 200)
-level = 3
-
-[node name="Ball7" parent="Billiards/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(260, 180)
-level = 6
-
-[node name="Ball8" parent="Billiards/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(300, 180)
-level = 4
-
-[node name="Ball9" parent="Billiards/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(280, 160)
-level = 5
-
-[node name="Pachinko" type="Node2D" parent="."]
+[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_balls")]
+script = ExtResource("8_sipkv")
+_ball_scene = ExtResource("4_ldgjm")
+_spawn_position = NodePath("Points/TopPoint")
+_balls = NodePath("../Balls")
 
 [node name="Board" type="Area2D" parent="Pachinko"]
 position = Vector2(280, 360)
@@ -278,6 +253,66 @@ expand_mode = 1
 position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
+
+[node name="Points" type="Node2D" parent="Pachinko"]
+
+[node name="TopPoint" type="Node2D" parent="Pachinko/Points"]
+position = Vector2(1000, 200)
+rotation = 3.14159
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Points/TopPoint"]
+self_modulate = Color(0.501961, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_k3p6f")
+expand_mode = 1
+
+[node name="CenterPoint" type="Node2D" parent="Pachinko/Points"]
+position = Vector2(1000, 360)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Points/CenterPoint"]
+self_modulate = Color(0.501961, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="BottomPoint" type="Node2D" parent="Pachinko/Points"]
+position = Vector2(1000, 520)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Points/BottomPoint"]
+self_modulate = Color(0.501961, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_k3p6f")
+expand_mode = 1
 
 [node name="Walls" type="Node2D" parent="Pachinko"]
 modulate = Color(0.501961, 0.501961, 0.501961, 1)
@@ -370,10 +405,42 @@ expand_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall4"]
 shape = SubResource("RectangleShape2D_fi0lo")
 
+[node name="Holes" type="Node2D" parent="Pachinko"]
+
+[node name="Hole" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(800, 660)
+hole_type = 1
+gain_ratio = 2
+
+[node name="Hole2" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(880, 660)
+hole_type = 1
+gain_ratio = 2
+
+[node name="Hole3" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(960, 660)
+hole_type = 1
+gain_ratio = 2
+
+[node name="Hole4" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(1040, 660)
+hole_type = 1
+gain_ratio = 2
+
+[node name="Hole5" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(1120, 660)
+hole_type = 1
+gain_ratio = 2
+
+[node name="Hole6" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(1200, 660)
+hole_type = 1
+gain_ratio = 2
+
 [node name="Nails" type="Node2D" parent="Pachinko"]
 
 [node name="Nail" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(1000, 360)
+position = Vector2(1000, 620)
 
 [node name="Nail2" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
 position = Vector2(960, 400)
@@ -388,73 +455,151 @@ position = Vector2(920, 440)
 position = Vector2(1080, 440)
 
 [node name="Nail6" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(820, 580)
+position = Vector2(840, 620)
 
 [node name="Nail7" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(900, 580)
+position = Vector2(920, 620)
 
 [node name="Nail8" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(1100, 580)
+position = Vector2(1080, 620)
 
 [node name="Nail9" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(1180, 580)
+position = Vector2(1160, 620)
 
-[node name="Pockets" type="Node2D" parent="Pachinko"]
+[node name="Stack" type="Node2D" parent="."]
 
-[node name="Pocket" parent="Pachinko/Pockets" instance=ExtResource("6_wvfqf")]
-position = Vector2(780, 660)
+[node name="Walls" type="Node2D" parent="Stack"]
+modulate = Color(0.501961, 0.501961, 0.501961, 1)
 
-[node name="Pocket2" parent="Pachinko/Pockets" instance=ExtResource("6_wvfqf")]
-position = Vector2(860, 660)
+[node name="Wall2" type="StaticBody2D" parent="Stack/Walls"]
+position = Vector2(640, 680)
+scale = Vector2(8, 1)
 
-[node name="Pocket3" parent="Pachinko/Pockets" instance=ExtResource("6_wvfqf")]
-position = Vector2(940, 660)
+[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Wall2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
 
-[node name="Pocket4" parent="Pachinko/Pockets" instance=ExtResource("6_wvfqf")]
-position = Vector2(1060, 660)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall2"]
+shape = SubResource("RectangleShape2D_fi0lo")
 
-[node name="Pocket5" parent="Pachinko/Pockets" instance=ExtResource("6_wvfqf")]
-position = Vector2(1140, 660)
+[node name="Wall3" type="StaticBody2D" parent="Stack/Walls"]
+position = Vector2(560, 520)
+scale = Vector2(1, 16)
 
-[node name="Pocket6" parent="Pachinko/Pockets" instance=ExtResource("6_wvfqf")]
-position = Vector2(1220, 660)
+[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Wall3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
 
-[node name="Balls" type="Node2D" parent="Pachinko"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall3"]
+shape = SubResource("RectangleShape2D_fi0lo")
 
-[node name="Ball" parent="Pachinko/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(1000, 240)
+[node name="Wall4" type="StaticBody2D" parent="Stack/Walls"]
+position = Vector2(720, 520)
+scale = Vector2(1, 16)
+
+[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Wall4"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall4"]
+shape = SubResource("RectangleShape2D_fi0lo")
+
+[node name="Points" type="Node2D" parent="Stack"]
+
+[node name="CenterPoint" type="Node2D" parent="Stack/Points"]
+position = Vector2(640, 360)
+
+[node name="TextureRect" type="TextureRect" parent="Stack/Points/CenterPoint"]
+self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Holes" type="Node2D" parent="Stack"]
+
+[node name="Hole" parent="Stack/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(640, 660)
+hole_type = 2
+
+[node name="Balls" type="Node2D" parent="."]
+
+[node name="Ball" parent="Balls" instance=ExtResource("4_ldgjm")]
+position = Vector2(280, 240)
 level = 1
 
-[node name="Ball2" parent="Pachinko/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(980, 220)
+[node name="Ball2" parent="Balls" instance=ExtResource("4_ldgjm")]
+position = Vector2(260, 220)
 level = 8
 
-[node name="Ball3" parent="Pachinko/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(1020, 220)
+[node name="Ball3" parent="Balls" instance=ExtResource("4_ldgjm")]
+position = Vector2(300, 220)
 level = 2
 
-[node name="Ball4" parent="Pachinko/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(960, 200)
+[node name="Ball4" parent="Balls" instance=ExtResource("4_ldgjm")]
+position = Vector2(240, 200)
 level = 7
 
-[node name="Ball5" parent="Pachinko/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(1000, 200)
+[node name="Ball5" parent="Balls" instance=ExtResource("4_ldgjm")]
+position = Vector2(280, 200)
 level = 9
 
-[node name="Ball6" parent="Pachinko/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(1040, 200)
+[node name="Ball6" parent="Balls" instance=ExtResource("4_ldgjm")]
+position = Vector2(320, 200)
 level = 3
 
-[node name="Ball7" parent="Pachinko/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(980, 180)
+[node name="Ball7" parent="Balls" instance=ExtResource("4_ldgjm")]
+position = Vector2(260, 180)
 level = 6
 
-[node name="Ball8" parent="Pachinko/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(1020, 180)
+[node name="Ball8" parent="Balls" instance=ExtResource("4_ldgjm")]
+position = Vector2(300, 180)
 level = 4
 
-[node name="Ball9" parent="Pachinko/Balls" instance=ExtResource("4_ldgjm")]
-position = Vector2(1000, 160)
+[node name="Ball9" parent="Balls" instance=ExtResource("4_ldgjm")]
+position = Vector2(280, 160)
 level = 5
 
 [node name="UI" type="Control" parent="."]
@@ -531,4 +676,18 @@ theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
 text = "999999999999"
 horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Version" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 700.0
+offset_right = 1200.0
+offset_bottom = 780.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "v0.0.0
+"
+horizontal_alignment = 1
 vertical_alignment = 1
