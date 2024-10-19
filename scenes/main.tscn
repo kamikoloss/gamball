@@ -1,0 +1,312 @@
+[gd_scene load_steps=6 format=3 uid="uid://l2y3sq1ikgmx"]
+
+[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="1_jd8wc"]
+[ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/base_triangle.png" id="2_k3p6f"]
+[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/base_circle.png" id="2_svx0d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i0j7q"]
+
+[node name="Main" type="Node"]
+
+[node name="Billiards" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Billiards"]
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 520.0
+offset_bottom = 680.0
+texture = ExtResource("1_jd8wc")
+
+[node name="Points" type="Node2D" parent="Billiards"]
+
+[node name="StartPoint" type="Node2D" parent="Billiards/Points"]
+position = Vector2(280, 520)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Points/StartPoint"]
+self_modulate = Color(0.501961, 0.752941, 0.501961, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_k3p6f")
+expand_mode = 1
+
+[node name="Walls" type="Node2D" parent="Billiards"]
+
+[node name="Wall" type="StaticBody2D" parent="Billiards/Walls"]
+position = Vector2(280, 40)
+scale = Vector2(24, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Wall"]
+self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall"]
+shape = SubResource("RectangleShape2D_fi0lo")
+
+[node name="Wall2" type="StaticBody2D" parent="Billiards/Walls"]
+position = Vector2(280, 680)
+scale = Vector2(24, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Wall2"]
+self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall2"]
+shape = SubResource("RectangleShape2D_fi0lo")
+
+[node name="Wall3" type="StaticBody2D" parent="Billiards/Walls"]
+position = Vector2(40, 360)
+scale = Vector2(1, 32)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Wall3"]
+self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall3"]
+shape = SubResource("RectangleShape2D_fi0lo")
+
+[node name="Wall4" type="StaticBody2D" parent="Billiards/Walls"]
+position = Vector2(520, 360)
+scale = Vector2(1, 32)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Wall4"]
+self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall4"]
+shape = SubResource("RectangleShape2D_fi0lo")
+
+[node name="Pockets" type="Node2D" parent="Billiards"]
+
+[node name="Pocket" type="Area2D" parent="Billiards/Pockets"]
+position = Vector2(60, 60)
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Pockets/Pocket"]
+self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Pockets/Pocket"]
+shape = SubResource("CircleShape2D_i0j7q")
+
+[node name="Pocket2" type="Area2D" parent="Billiards/Pockets"]
+position = Vector2(60, 360)
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Pockets/Pocket2"]
+self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Pockets/Pocket2"]
+shape = SubResource("CircleShape2D_i0j7q")
+
+[node name="Pocket3" type="Area2D" parent="Billiards/Pockets"]
+position = Vector2(60, 660)
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Pockets/Pocket3"]
+self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Pockets/Pocket3"]
+shape = SubResource("CircleShape2D_i0j7q")
+
+[node name="Pocket4" type="Area2D" parent="Billiards/Pockets"]
+position = Vector2(500, 60)
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Pockets/Pocket4"]
+self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Pockets/Pocket4"]
+shape = SubResource("CircleShape2D_i0j7q")
+
+[node name="Pocket5" type="Area2D" parent="Billiards/Pockets"]
+position = Vector2(500, 360)
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Pockets/Pocket5"]
+self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Pockets/Pocket5"]
+shape = SubResource("CircleShape2D_i0j7q")
+
+[node name="Pocket6" type="Area2D" parent="Billiards/Pockets"]
+position = Vector2(500, 660)
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/Pockets/Pocket6"]
+self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Pockets/Pocket6"]
+shape = SubResource("CircleShape2D_i0j7q")
+
+[node name="Pachinko" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko"]
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+offset_left = 760.0
+offset_top = 40.0
+offset_right = 1240.0
+offset_bottom = 680.0
+texture = ExtResource("1_jd8wc")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+offset_left = 560.0
+offset_top = 40.0
+offset_right = 720.0
+offset_bottom = 80.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+offset_left = 560.0
+offset_top = 120.0
+offset_right = 720.0
+offset_bottom = 160.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
