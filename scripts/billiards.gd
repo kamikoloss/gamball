@@ -11,15 +11,6 @@ extends Node2D
 var _current_ball: RigidBody2D
 
 
-func _ready() -> void:
-	pass
-
-
-func _process(delta: float) -> void:
-	pass
-
-
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
 		match event.keycode:
@@ -32,7 +23,6 @@ func _input(event: InputEvent) -> void:
 func _spawn_ball() -> void:
 	var ball: RigidBody2D = _ball_scene.instantiate()
 	ball.position = _start_point.position
-	ball.level = randi_range(0, 15)
 	_balls.add_child(ball)
 	_current_ball = ball
 

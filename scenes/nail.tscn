@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dli5r028n6byb"]
+
+[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/base_circle.png" id="1_4gqon"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_esniw"]
+radius = 2.0
+
+[node name="Nail" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_esniw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("1_4gqon")
+expand_mode = 1
