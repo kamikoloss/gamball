@@ -1,4 +1,4 @@
-class_name Pachinko
+class_name Stack
 extends Node2D
 
 

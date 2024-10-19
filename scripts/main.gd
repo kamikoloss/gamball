@@ -17,6 +17,7 @@ var balls: int = 0:
 # Nodes
 @export var _billiards: Billiards
 @export var _pachinko: Pachinko
+@export var _stack: Stack
 @export var _balls: Node2D
 # UI
 @export var _money_label: Label
@@ -60,14 +61,21 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	print("[Main] ball (%s) is entered to hole. (%s)" % [ball.level, hole.hole_type])
 
 	match hole.hole_type:
-		# Billiards の Hole に落ちたとき
+		# Billiards
 		Hole.HoleType.Billiards:
 			# Pachinko 上に出現させる
 			var new_ball = create_ball(ball.level)
 			_pachinko.spawn_ball(new_ball)
-		# Pachinko の Hole に落ちたとき
+		# Pachinko
 		Hole.HoleType.Pachinko:
-			pass
-		# 消失する Hole に落ちたとき: 何もしない
+			# Stack 上に出現させる
+			for i in range(hole.gain_ratio):
+				var new_ball = create_ball(ball.level)
+				_stack.spawn_ball(new_ball)
+		# Stack
+		Hole.HoleType.Stack:
+			# Ball の数をカウントする
+			balls += (ball.level + 1)
+		# Lost: 何もしない
 		Hole.HoleType.Lost:
 			pass
