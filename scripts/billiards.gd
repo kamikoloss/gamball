@@ -32,6 +32,7 @@ func _input(event: InputEvent) -> void:
 func _spawn_ball() -> void:
 	var ball: RigidBody2D = _ball_scene.instantiate()
 	ball.position = _start_point.position
+	ball.level = randi_range(0, 15)
 	_balls.add_child(ball)
 	_current_ball = ball
 
@@ -39,6 +40,6 @@ func _spawn_ball() -> void:
 func _shoot_ball() -> void:
 	if not _current_ball:
 		return
-	var force_x = randf_range(-1, 1) * 50000
-	var force_y = -1 * 50000
-	_current_ball.apply_force(Vector2(force_x, force_y))
+	var force_x = randf_range(-1, 1) * 1000
+	var force_y = -1 * 1000
+	_current_ball.apply_impulse(Vector2(force_x, force_y))

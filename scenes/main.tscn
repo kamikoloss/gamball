@@ -42,6 +42,7 @@ expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Board"]
 shape = SubResource("RectangleShape2D_uhuas")
+debug_color = Color(0, 0, 0, 0)
 
 [node name="Points" type="Node2D" parent="Billiards"]
 
@@ -156,9 +157,9 @@ expand_mode = 1
 shape = SubResource("RectangleShape2D_fi0lo")
 
 [node name="Pockets" type="Node2D" parent="Billiards"]
-modulate = Color(0.12549, 0.12549, 0.12549, 1)
 
 [node name="Pocket" parent="Billiards/Pockets" instance=ExtResource("6_wvfqf")]
+position = Vector2(60, 60)
 
 [node name="Pocket2" parent="Billiards/Pockets" instance=ExtResource("6_wvfqf")]
 position = Vector2(60, 360)
@@ -194,6 +195,7 @@ anchors_preset = 0
 [node name="TextureRect" type="TextureRect" parent="UI"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
 self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
 offset_left = 560.0
 offset_top = 40.0
 offset_right = 720.0
@@ -204,6 +206,7 @@ expand_mode = 1
 [node name="TextureRect2" type="TextureRect" parent="UI"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
 self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
 offset_left = 560.0
 offset_top = 120.0
 offset_right = 720.0
