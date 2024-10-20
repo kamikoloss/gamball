@@ -17,6 +17,10 @@ extends Node
 @export var _money_label: Label
 @export var _balls_label: Label
 @export var _payout_label: Label
+# Arrow
+@export var _arrow_center_position: Node2D
+@export var _arrow: Control
+@export var _arrow_square: TextureRect
 
 
 var money: int = 0:
@@ -31,10 +35,9 @@ var balls: int = 0:
 
 # 現在
 var _is_dragging: bool
-var _drag_position_from: Vector2
-var _drag_position_to: Vector2
-var _drag_length_max: float = 320
-var _impulse_ratio: float = 5
+var _drag_position: Vector2
+var _drag_length_max: float = 160
+var _impulse_ratio: float = 10 # _drag_length_max の逆数にする
 
 # 出現する Ball の level のリスト (確率込み)
 var _level_list: Array[int] = [0, 0, 0, 0, 0, 1, 1, 1, 2, 2]
@@ -51,6 +54,9 @@ var _sell_rate: Array[int] = [50, 100]
 
 
 func _ready() -> void:
+	_arrow.visible = false
+	_arrow_square.scale.y = 0
+
 	# Label 用に初期化する
 	money = 1000
 	balls = 0
@@ -68,7 +74,6 @@ func _ready() -> void:
 
 	# 貸し出しボタンを1プッシュしておく
 	_on_buy_balls_button_pressed()
-
 	# 払い出し処理を開始する
 	_start_payout()
 
@@ -84,25 +89,27 @@ func _input(event: InputEvent) -> void:
 	# TODO: ビリヤード盤面上のドラッグだけに限定したい
 	if event is InputEventMouseButton:
 		if event.pressed:
+			_drag_position = _arrow_center_position.position
+			_is_dragging = true
+			_arrow.visible = true
+			# Ball を生成する
 			if 0 < balls:
-				_is_dragging = true
-				_drag_position_from = event.position
-				_drag_position_to = event.position
-				# Ball を生成する
 				balls -= 1
 				var level = _level_list.pick_random()
 				var new_ball = create_new_ball(level)
 				_billiards.spawn_ball(new_ball)
 		else:
 			_is_dragging = false
+			_arrow.visible = false
+			_arrow_square.scale.y = 0
 			# Ball を発射する
-			var drag_vector = _drag_position_from - _drag_position_to
+			var drag_vector = _arrow_center_position.position - _drag_position
 			var clamped_length =  clampf(drag_vector.length(), 0, _drag_length_max)
 			var impulse = drag_vector.normalized() * clamped_length
 			_billiards.shoot_ball(impulse * _impulse_ratio)
 	if event is InputEventMouseMotion:
 		if _is_dragging:
-			_drag_position_to = event.position
+			_drag_position = event.position
 			_refresh_arrow()
 
 
@@ -172,4 +179,7 @@ func _pop_payout() -> void:
 
 
 func _refresh_arrow() -> void:
-	pass
+	var drag_vector = _arrow_center_position.position - _drag_position
+	var clamped_length =  clampf(drag_vector.length(), 0, _drag_length_max)
+	_arrow.rotation_degrees = rad_to_deg(drag_vector.angle()) + 90
+	_arrow_square.scale.y = (clamped_length / _drag_length_max) * 10

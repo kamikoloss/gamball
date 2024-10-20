@@ -3,8 +3,6 @@ extends Node2D
 
 
 @export var _spawn_position: Node2D
-@export var _arrow: Control
-@export var _arrow_square: TextureRect
 
 
 var _current_ball: Ball = null
