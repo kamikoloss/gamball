@@ -46,5 +46,4 @@ func _init_view() -> void:
 			pass
 		Hole.HoleType.Stack:
 			pass
-	
 	_label.visible = false

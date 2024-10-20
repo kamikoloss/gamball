@@ -84,14 +84,15 @@ func _input(event: InputEvent) -> void:
 	# TODO: ビリヤード盤面上のドラッグだけに限定したい
 	if event is InputEventMouseButton:
 		if event.pressed:
-			_is_dragging = true
-			_drag_position_from = event.position
-			_drag_position_to = event.position
-			# Ball を生成する
-			balls -= 1
-			var level = _level_list.pick_random()
-			var new_ball = create_new_ball(level)
-			_billiards.spawn_ball(new_ball)
+			if 0 < balls:
+				_is_dragging = true
+				_drag_position_from = event.position
+				_drag_position_to = event.position
+				# Ball を生成する
+				balls -= 1
+				var level = _level_list.pick_random()
+				var new_ball = create_new_ball(level)
+				_billiards.spawn_ball(new_ball)
 		else:
 			_is_dragging = false
 			# Ball を発射する

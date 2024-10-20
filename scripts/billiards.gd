@@ -7,7 +7,7 @@ extends Node2D
 @export var _arrow_square: TextureRect
 
 
-var _current_ball: Ball
+var _current_ball: Ball = null
 
 
 func spawn_ball(ball: Ball) -> void:
@@ -16,6 +16,7 @@ func spawn_ball(ball: Ball) -> void:
 
 
 func shoot_ball(implulse: Vector2) -> void:
-	if not _current_ball:
+	if _current_ball == null:
 		return
 	_current_ball.apply_impulse(implulse)
+	_current_ball = null
