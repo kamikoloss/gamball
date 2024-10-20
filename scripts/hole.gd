@@ -35,6 +35,6 @@ func _on_area_entered(area: Area2D) -> void:
 # 自身の見た目を決定する
 func _init_view() -> void:
 	if hole_type == HoleType.Pachinko:
-		_label.text = "x%s" % [gain_ratio]
+		_label.text = "×%s" % [gain_ratio]
 	else:
 		_label.visible = false
