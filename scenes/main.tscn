@@ -611,11 +611,11 @@ gain_ratio = 1
 
 [node name="Hole3" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(960, 660)
-gain_ratio = 2
+hole_type = 1
 
 [node name="Hole4" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(1040, 660)
-gain_ratio = 2
+hole_type = 1
 
 [node name="Hole5" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(1120, 660)
@@ -821,7 +821,7 @@ expand_mode = 1
 
 [node name="Hole" parent="Stack/Holes" instance=ExtResource("6_wvfqf")]
 position = Vector2(700, 660)
-hole_type = 2
+hole_type = 3
 
 [node name="Balls" type="Node2D" parent="."]
 

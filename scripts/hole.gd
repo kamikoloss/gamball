@@ -8,14 +8,14 @@ signal ball_entered
 
 enum HoleType {
 	Billiards,
-	Pachinko,
-	Stack,
+	Gain,
 	Lost,
+	Stack,
 }
 
 
 @export var hole_type: HoleType = HoleType.Lost
-@export var gain_ratio: int = 0 # Pachinko 用の増加する倍率
+@export var gain_ratio: int = 0 # 増加する倍率
 
 @export var _label: Label
 
@@ -34,7 +34,17 @@ func _on_area_entered(area: Area2D) -> void:
 
 # 自身の見た目を決定する
 func _init_view() -> void:
-	if hole_type == HoleType.Pachinko:
-		_label.text = "×%s" % [gain_ratio]
-	else:
-		_label.visible = false
+	match hole_type:
+		Hole.HoleType.Billiards:
+			pass
+		Hole.HoleType.Gain:
+			_label.text = "×%s" % [gain_ratio]
+			if gain_ratio == 0:
+				_label.self_modulate = Color.RED
+			return
+		Hole.HoleType.Lost:
+			pass
+		Hole.HoleType.Stack:
+			pass
+	
+	_label.visible = false

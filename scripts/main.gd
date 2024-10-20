@@ -119,25 +119,21 @@ func _on_info_button_pressed() -> void:
 # Ball が Hole に落ちたときの処理
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Main] ball (%s) is entered to hole. (%s)" % [ball.level, hole.hole_type])
-
 	match hole.hole_type:
-		# Billiards
 		Hole.HoleType.Billiards:
 			# Pachinko 上に出現させる
 			var new_ball = create_new_ball(ball.level)
 			_pachinko.spawn_ball(new_ball)
-		# Pachinko
-		Hole.HoleType.Pachinko:
+		Hole.HoleType.Gain:
 			# 払い出しリストに追加する
 			var amount = hole.gain_ratio * ball.level
-
-		# Stack
+			_push_payout(ball.level, amount)
+		Hole.HoleType.Lost:
+			# 何もしない
+			pass
 		Hole.HoleType.Stack:
 			# Ball の数をカウントする
 			balls += 1
-		# Lost: 何もしない
-		Hole.HoleType.Lost:
-			pass
 
 
 func _start_payout() -> void:
