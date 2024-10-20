@@ -754,6 +754,32 @@ expand_mode = 1
 
 [node name="Nails" type="Node2D" parent="Pachinko"]
 
+[node name="Side" type="Node2D" parent="Pachinko/Nails"]
+
+[node name="Nail13" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(780, 320)
+
+[node name="Nail14" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(1220, 320)
+
+[node name="Nail15" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(790, 400)
+
+[node name="Nail16" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(1210, 400)
+
+[node name="Nail17" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(780, 480)
+
+[node name="Nail18" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(1220, 480)
+
+[node name="Nail19" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(790, 560)
+
+[node name="Nail20" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(1210, 560)
+
 [node name="Bottom" type="Node2D" parent="Pachinko/Nails"]
 
 [node name="Nail10" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
@@ -786,28 +812,131 @@ position = Vector2(1080, 660)
 [node name="Nail19" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
 position = Vector2(1160, 660)
 
-[node name="Heso" type="Node2D" parent="Pachinko/Nails"]
+[node name="Extra" type="Node2D" parent="Pachinko/Nails"]
 
-[node name="Nail2" parent="Pachinko/Nails/Heso" instance=ExtResource("8_ywild")]
-position = Vector2(970, 420)
+[node name="Nail2" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+position = Vector2(970, 340)
 
-[node name="Nail3" parent="Pachinko/Nails/Heso" instance=ExtResource("8_ywild")]
-position = Vector2(1030, 420)
+[node name="Nail3" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+position = Vector2(1030, 340)
 
-[node name="Nail4" parent="Pachinko/Nails/Heso" instance=ExtResource("8_ywild")]
-position = Vector2(970, 440)
+[node name="Nail4" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+position = Vector2(970, 360)
 
-[node name="Nail5" parent="Pachinko/Nails/Heso" instance=ExtResource("8_ywild")]
-position = Vector2(1030, 440)
+[node name="Nail5" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+position = Vector2(1030, 360)
 
-[node name="Nail6" parent="Pachinko/Nails/Heso" instance=ExtResource("8_ywild")]
+[node name="Nail6" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+position = Vector2(970, 380)
+
+[node name="Nail7" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+position = Vector2(1030, 380)
+
+[node name="Nail8" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+position = Vector2(1000, 390)
+
+[node name="Nail9" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+visible = false
+position = Vector2(990, 280)
+
+[node name="Nail10" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+visible = false
+position = Vector2(1010, 280)
+
+[node name="x3a" type="Node2D" parent="Pachinko/Nails"]
+
+[node name="Nail2" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+position = Vector2(890, 420)
+
+[node name="Nail3" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+visible = false
+position = Vector2(950, 420)
+
+[node name="Nail4" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+position = Vector2(890, 440)
+
+[node name="Nail5" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+position = Vector2(950, 440)
+
+[node name="Nail6" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+position = Vector2(890, 460)
+
+[node name="Nail7" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+position = Vector2(950, 460)
+
+[node name="Nail8" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+position = Vector2(920, 470)
+
+[node name="Nail9" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+position = Vector2(920, 360)
+
+[node name="x3b" type="Node2D" parent="Pachinko/Nails"]
+
+[node name="Nail2" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+visible = false
+position = Vector2(1050, 420)
+
+[node name="Nail3" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+position = Vector2(1110, 420)
+
+[node name="Nail4" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+position = Vector2(1050, 440)
+
+[node name="Nail5" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+position = Vector2(1110, 440)
+
+[node name="Nail6" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+position = Vector2(1050, 460)
+
+[node name="Nail7" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+position = Vector2(1110, 460)
+
+[node name="Nail8" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+position = Vector2(1080, 470)
+
+[node name="Nail9" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+position = Vector2(1080, 360)
+
+[node name="x5" type="Node2D" parent="Pachinko/Nails"]
+
+[node name="Nail2" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
 position = Vector2(970, 460)
 
-[node name="Nail7" parent="Pachinko/Nails/Heso" instance=ExtResource("8_ywild")]
+[node name="Nail3" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
 position = Vector2(1030, 460)
 
-[node name="Nail8" parent="Pachinko/Nails/Heso" instance=ExtResource("8_ywild")]
-position = Vector2(1000, 470)
+[node name="Nail4" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+position = Vector2(970, 480)
+
+[node name="Nail5" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+position = Vector2(1030, 480)
+
+[node name="Nail6" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+position = Vector2(970, 500)
+
+[node name="Nail7" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+position = Vector2(1030, 500)
+
+[node name="Nail8" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+position = Vector2(1000, 510)
+
+[node name="Nail7" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(980, 220)
+
+[node name="Nail8" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(1020, 220)
+
+[node name="Nail9" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(920, 240)
+
+[node name="Nail10" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(1080, 240)
+
+[node name="Nail11" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(880, 280)
+
+[node name="Nail12" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(1120, 280)
 
 [node name="Holes" type="Node2D" parent="Pachinko"]
 
@@ -840,8 +969,23 @@ hole_type = 2
 gain_ratio = 2
 
 [node name="Hole7" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
-position = Vector2(1000, 440)
+position = Vector2(1000, 360)
 hole_type = 1
+
+[node name="Hole8" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(1000, 480)
+hole_type = 2
+gain_ratio = 5
+
+[node name="Hole9" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(920, 440)
+hole_type = 2
+gain_ratio = 3
+
+[node name="Hole10" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(1080, 440)
+hole_type = 2
+gain_ratio = 3
 
 [node name="Stack" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position")]
 script = ExtResource("10_ekmut")
