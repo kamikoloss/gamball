@@ -16,11 +16,11 @@ func _ready() -> void:
 
 
 func spawn_ball(ball: Ball) -> void:
-	var randf = randf()
-	if randf < 0.5:
-		ball.position = _spawn_position_a.position
-	else:
-		ball.position = _spawn_position_b.position
+	var spawn_posiiton = [
+		_spawn_position_a,
+		_spawn_position_b,
+	].pick_random()
+	ball.position = spawn_posiiton.position
 
 
 func _start_wall_rotation() -> void:

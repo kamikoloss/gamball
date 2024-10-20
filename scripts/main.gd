@@ -27,9 +27,6 @@ var balls: int = 0:
 	set(value):
 		balls = value
 		_balls_label.text = str(balls)
-var payout: int = 0:
-	get:
-		return _payout_list.size()
 
 
 # 出現する Ball の level のリスト (確率込み)
@@ -37,6 +34,7 @@ var _level_list: Array[int] = [0, 0, 0, 0, 0, 1, 1, 1, 2, 2]
 # 払い出しが残っている Ball の level のリスト
 var _payout_list: Array[int] = []
 # 何秒ごとに 1 Ball を払い出すか
+# Stack の排出速度を見ていい感じに調整する
 var _payout_interval: float = 0.1
 
 # [x, y] x money = y balls
@@ -66,10 +64,6 @@ func _ready() -> void:
 
 	# 払い出し処理を開始する
 	_start_payout()
-
-
-func _process(delta: float) -> void:
-	_payout_label.text = str(payout)
 
 
 func create_new_ball(level: int = 0) -> Ball:
@@ -102,9 +96,7 @@ func _on_buy_balls_button_pressed() -> void:
 	if money < money_unit:
 		return
 	money -= money_unit
-	#balls += balls_unit
-	for i in range(balls_unit):
-		_payout_list.push_back(0)
+	_push_payout(0, balls_unit)
 
 
 func _on_sell_balls_button_pressed() -> void:
@@ -138,8 +130,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 		Hole.HoleType.Pachinko:
 			# 払い出しリストに追加する
 			var amount = hole.gain_ratio * ball.level
-			for i in range(amount):
-				_payout_list.push_back(ball.level)
+
 		# Stack
 		Hole.HoleType.Stack:
 			# Ball の数をカウントする
@@ -152,11 +143,17 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 func _start_payout() -> void:
 	var tween = create_tween()
 	tween.set_loops()
-	tween.tween_callback(_payout).set_delay(_payout_interval)
+	tween.tween_callback(_pop_payout).set_delay(_payout_interval)
 
-func _payout() -> void:
+func _push_payout(level: int, amount: int) -> void:
+	for i in range(amount):
+		_payout_list.push_back(level)
+	_payout_label.text = str(_payout_list.size())
+
+func _pop_payout() -> void:
 	if _payout_list.is_empty():
 		return
 	var level = _payout_list.pop_front()
 	var new_ball = create_new_ball(level)
 	_stack.spawn_ball(new_ball)
+	_payout_label.text = str(_payout_list.size())
