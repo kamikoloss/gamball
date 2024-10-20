@@ -867,6 +867,7 @@ anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="UI"]
 self_modulate = Color(0, 0, 0.25098, 0.501961)
+layout_mode = 0
 offset_left = 560.0
 offset_top = 360.0
 offset_right = 720.0
@@ -1044,6 +1045,7 @@ offset_bottom = 400.0
 [node name="TextureRect" type="TextureRect" parent="UI/Score/Payout"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
 self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
 offset_top = 20.0
 offset_right = 80.0
 offset_bottom = 40.0
@@ -1051,6 +1053,7 @@ texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="UI/Score/Payout"]
+layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
@@ -1060,6 +1063,7 @@ text = "PAYOUT"
 vertical_alignment = 1
 
 [node name="Payout" type="Label" parent="UI/Score/Payout"]
+layout_mode = 0
 offset_top = 20.0
 offset_right = 320.0
 offset_bottom = 100.0
@@ -1119,6 +1123,36 @@ theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Arrow" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 280.0
+offset_top = 360.0
+offset_right = 280.0
+offset_bottom = 360.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Arrow"]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("2_k3p6f")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Arrow"]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = -5.0
+offset_right = 5.0
+offset_bottom = 10.0
+scale = Vector2(1, 10)
+pivot_offset = Vector2(5, 0)
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
 
 [node name="Version" type="Label" parent="UI"]
 layout_mode = 0

@@ -29,6 +29,13 @@ var balls: int = 0:
 		_balls_label.text = str(balls)
 
 
+# 現在
+var _is_dragging: bool
+var _drag_position_from: Vector2
+var _drag_position_to: Vector2
+var _drag_length_max: float = 320
+var _impulse_ratio: float = 5
+
 # 出現する Ball の level のリスト (確率込み)
 var _level_list: Array[int] = [0, 0, 0, 0, 0, 1, 1, 1, 2, 2]
 # 払い出しが残っている Ball の level のリスト
@@ -74,20 +81,28 @@ func create_new_ball(level: int = 0) -> Ball:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		match event.keycode:
-			KEY_ENTER:
-				# debug
-				balls -= 1
-				var level = _level_list.pick_random()
-				var new_ball = create_new_ball(level)
-				_billiards.spawn_ball(new_ball)
-			KEY_SPACE:
-				# debug
-				var force_x = randf_range(-1, 1) * 1000
-				var force_y = -1 * 1000
-				var impulse = Vector2(force_x, force_y)
-				_billiards.shoot_ball(impulse)
+	# TODO: ビリヤード盤面上のドラッグだけに限定したい
+	if event is InputEventMouseButton:
+		if event.pressed:
+			_is_dragging = true
+			_drag_position_from = event.position
+			_drag_position_to = event.position
+			# Ball を生成する
+			balls -= 1
+			var level = _level_list.pick_random()
+			var new_ball = create_new_ball(level)
+			_billiards.spawn_ball(new_ball)
+		else:
+			_is_dragging = false
+			# Ball を発射する
+			var drag_vector = _drag_position_from - _drag_position_to
+			var clamped_length =  clampf(drag_vector.length(), 0, _drag_length_max)
+			var impulse = drag_vector.normalized() * clamped_length
+			_billiards.shoot_ball(impulse * _impulse_ratio)
+	if event is InputEventMouseMotion:
+		if _is_dragging:
+			_drag_position_to = event.position
+			_refresh_arrow()
 
 
 func _on_buy_balls_button_pressed() -> void:
@@ -153,3 +168,7 @@ func _pop_payout() -> void:
 	var new_ball = create_new_ball(level)
 	_stack.spawn_ball(new_ball)
 	_payout_label.text = str(_payout_list.size())
+
+
+func _refresh_arrow() -> void:
+	pass

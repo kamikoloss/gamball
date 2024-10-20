@@ -2,7 +2,7 @@ class_name Hole
 extends Area2D
 
 
-# Ball が Hole に落ちたとき (Hole, Ball)
+# Ball が Hole に落ちたとき (Hole: 落ちた Hole, Ball: 落ちた Ball)
 signal ball_entered
 
 
