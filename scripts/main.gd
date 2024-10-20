@@ -151,9 +151,14 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Main] ball (%s) is entered to hole. (%s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
 		Hole.HoleType.Billiards:
-			# Pachinko 上に出現させる
+			# Pachinko 上に同じ Ball を出現させる
 			var new_ball = create_new_ball(ball.level)
 			_pachinko.spawn_ball(new_ball)
+		Hole.HoleType.Extra:
+			# Billiards 上に Extra Ball を出現させる
+			var level = _extra_level_list.pick_random()
+			var new_ball = create_new_ball(level)
+			_billiards.spawn_extra_ball(new_ball)
 		Hole.HoleType.Gain:
 			# 払い出しリストに追加する
 			var amount = hole.gain_ratio * ball.level

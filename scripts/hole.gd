@@ -8,6 +8,7 @@ signal ball_entered
 
 enum HoleType {
 	Billiards,
+	Extra,
 	Gain,
 	Lost,
 	Stack,
@@ -37,6 +38,10 @@ func refresh_view() -> void:
 	match hole_type:
 		Hole.HoleType.Billiards:
 			pass
+		Hole.HoleType.Extra:
+			_label.text = "EX"
+			_label.self_modulate = Color.GREEN
+			return
 		Hole.HoleType.Gain:
 			_label.text = "×%s" % [gain_ratio]
 			if gain_ratio <= 0:
@@ -45,5 +50,6 @@ func refresh_view() -> void:
 		Hole.HoleType.Lost:
 			pass
 		Hole.HoleType.Stack:
-			pass
+			_label.text = "＋"
+			return
 	_label.visible = false
