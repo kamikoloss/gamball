@@ -1690,6 +1690,6 @@ offset_bottom = 780.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
-text = "GAMBALL v0.0.0"
+text = "GAMBALL v0.1.0"
 horizontal_alignment = 1
 vertical_alignment = 1
