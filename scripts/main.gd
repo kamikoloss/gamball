@@ -2,9 +2,9 @@ class_name Main
 extends Node
 
 
-# PackedScenes
+# PackedScene
 @export var _ball_scene: PackedScene
-# Nodes
+# Node
 @export var _billiards: Billiards
 @export var _pachinko: Pachinko
 @export var _stack: Stack
@@ -17,6 +17,8 @@ extends Node
 @export var _money_label: Label
 @export var _balls_label: Label
 @export var _payout_label: Label
+@export var _balls_deck: Control
+@export var _balls_extra: Control
 # Arrow
 @export var _arrow_center_position: Node2D
 @export var _arrow: Control
@@ -39,10 +41,12 @@ var _drag_position: Vector2
 var _drag_length_max: float = 160
 var _impulse_ratio: float = 10 # _drag_length_max の逆数にする
 
-# 出現する Ball の level のリスト (確率込み)
-var _level_list: Array[int] = [0, 0, 0, 0, 0, 1, 1, 1, 2, 2]
-# 払い出しが残っている Ball の level のリスト
-var _payout_list: Array[int] = []
+# 出現する Deck Ball level のリスト (確率込み)
+var _deck_level_list: Array[int] = [0, 0, 0, 0, 0, 1, 1, 1, 2, 2]
+# 出現する Extra Ball level のリスト (確率込み)
+var _extra_level_list: Array[int] = [5, 6, 7, 8, 9]
+# 払い出しが残っている Ball level のリスト
+var _payout_level_list: Array[int] = []
 # 何秒ごとに 1 Ball を払い出すか
 # Stack の排出速度を見ていい感じに調整する
 var _payout_interval: float = 0.1
@@ -54,8 +58,12 @@ var _sell_rate: Array[int] = [50, 100]
 
 
 func _ready() -> void:
+	# Arrow
 	_arrow.visible = false
 	_arrow_square.scale.y = 0
+	# Balls
+	_refresh_balls(_balls_deck, _deck_level_list)
+	_refresh_balls(_balls_extra, _extra_level_list)
 
 	# Label 用に初期化する
 	money = 1000
@@ -66,7 +74,6 @@ func _ready() -> void:
 	_sell_balls_button.pressed.connect(_on_sell_balls_button_pressed)
 	_shop_button.pressed.connect(_on_shop_button_pressed)
 	_info_button.pressed.connect(_on_info_button_pressed)
-
 	# すべての Hole の signal に接続する
 	var holes = get_tree().get_nodes_in_group("hole")
 	for hole: Hole in holes:
@@ -89,13 +96,13 @@ func _input(event: InputEvent) -> void:
 	# TODO: ビリヤード盤面上のドラッグだけに限定したい
 	if event is InputEventMouseButton:
 		if event.pressed:
-			_drag_position = _arrow_center_position.position
-			_is_dragging = true
-			_arrow.visible = true
-			# Ball を生成する
 			if 0 < balls:
+				_drag_position = _arrow_center_position.position
+				_is_dragging = true
+				_arrow.visible = true
+				# Ball を生成する
 				balls -= 1
-				var level = _level_list.pick_random()
+				var level = _deck_level_list.pick_random()
 				var new_ball = create_new_ball(level)
 				_billiards.spawn_ball(new_ball)
 		else:
@@ -119,7 +126,7 @@ func _on_buy_balls_button_pressed() -> void:
 	if money < money_unit:
 		return
 	money -= money_unit
-	_push_payout(0, balls_unit)
+	_push_payout(-1, balls_unit)
 
 
 func _on_sell_balls_button_pressed() -> void:
@@ -165,17 +172,17 @@ func _start_payout() -> void:
 	tween.tween_callback(_pop_payout).set_delay(_payout_interval)
 
 func _push_payout(level: int, amount: int) -> void:
-	for i in range(amount):
-		_payout_list.push_back(level)
-	_payout_label.text = str(_payout_list.size())
+	for i in amount:
+		_payout_level_list.push_back(level)
+	_payout_label.text = str(_payout_level_list.size())
 
 func _pop_payout() -> void:
-	if _payout_list.is_empty():
+	if _payout_level_list.is_empty():
 		return
-	var level = _payout_list.pop_front()
+	var level = _payout_level_list.pop_front()
 	var new_ball = create_new_ball(level)
 	_stack.spawn_ball(new_ball)
-	_payout_label.text = str(_payout_list.size())
+	_payout_label.text = str(_payout_level_list.size())
 
 
 func _refresh_arrow() -> void:
@@ -183,3 +190,15 @@ func _refresh_arrow() -> void:
 	var clamped_length =  clampf(drag_vector.length(), 0, _drag_length_max)
 	_arrow.rotation_degrees = rad_to_deg(drag_vector.angle()) + 90
 	_arrow_square.scale.y = (clamped_length / _drag_length_max) * 10
+
+
+func _refresh_balls(parent_node: Node, level_list: Array[int]) -> void:
+	var index = 0
+	for node in parent_node.get_children():
+		if node is Ball: # Label もある
+			if index < level_list.size():
+				node.level = level_list[index]
+			else:
+				node.level = -1 # 空欄
+			node.refresh_view()
+			index += 1

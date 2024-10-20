@@ -16,7 +16,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_money_label", "_balls_label", "_payout_label", "_arrow_center_position", "_arrow", "_arrow_square")]
+[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_money_label", "_balls_label", "_payout_label", "_balls_deck", "_balls_extra", "_arrow_center_position", "_arrow", "_arrow_square")]
 script = ExtResource("1_h2e4g")
 _ball_scene = ExtResource("4_ldgjm")
 _billiards = NodePath("Billiards")
@@ -30,6 +30,8 @@ _info_button = NodePath("UI/Buttons/Info")
 _money_label = NodePath("UI/Score/Money/Money")
 _balls_label = NodePath("UI/Score/Control/Balls")
 _payout_label = NodePath("UI/Score/Payout/Payout")
+_balls_deck = NodePath("UI/BallsDeck")
+_balls_extra = NodePath("UI/BallsExtra")
 _arrow_center_position = NodePath("Billiards/Points/Center")
 _arrow = NodePath("UI/Arrow")
 _arrow_square = NodePath("UI/Arrow/Square")
@@ -420,7 +422,9 @@ _wall_b = NodePath("Walls/WallB")
 position = Vector2(280, 360)
 scale = Vector2(24, 32)
 priority = 10
-gravity = 0.0
+gravity_space_override = 3
+gravity_point_center = Vector2(0, 2)
+gravity_direction = Vector2(0, 2)
 linear_damp = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Board"]
@@ -744,36 +748,6 @@ grow_vertical = 2
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Holes" type="Node2D" parent="Pachinko"]
-
-[node name="Hole" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
-position = Vector2(800, 660)
-hole_type = 1
-gain_ratio = 2
-
-[node name="Hole2" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
-position = Vector2(880, 660)
-hole_type = 1
-gain_ratio = 1
-
-[node name="Hole3" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
-position = Vector2(960, 660)
-hole_type = 1
-
-[node name="Hole4" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
-position = Vector2(1040, 660)
-hole_type = 1
-
-[node name="Hole5" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
-position = Vector2(1120, 660)
-hole_type = 1
-gain_ratio = 1
-
-[node name="Hole6" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
-position = Vector2(1200, 660)
-hole_type = 1
-gain_ratio = 2
-
 [node name="Nails" type="Node2D" parent="Pachinko"]
 
 [node name="Nail2" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
@@ -817,6 +791,36 @@ position = Vector2(1080, 660)
 
 [node name="Nail19" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
 position = Vector2(1160, 660)
+
+[node name="Holes" type="Node2D" parent="Pachinko"]
+
+[node name="Hole" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(800, 660)
+hole_type = 1
+gain_ratio = 2
+
+[node name="Hole2" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(880, 660)
+hole_type = 1
+gain_ratio = 1
+
+[node name="Hole3" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(960, 660)
+hole_type = 1
+
+[node name="Hole4" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(1040, 660)
+hole_type = 1
+
+[node name="Hole5" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(1120, 660)
+hole_type = 1
+gain_ratio = 1
+
+[node name="Hole6" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(1200, 660)
+hole_type = 1
+gain_ratio = 2
 
 [node name="Stack" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position")]
 script = ExtResource("10_ekmut")
@@ -1075,15 +1079,15 @@ expand_mode = 1
 
 [node name="Buttons" type="Control" parent="UI"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 560.0
+offset_top = 30.0
+offset_right = 560.0
+offset_bottom = 30.0
 
 [node name="Buy" type="Button" parent="UI/Buttons"]
 layout_mode = 0
-offset_left = 560.0
-offset_top = 40.0
-offset_right = 640.0
-offset_bottom = 60.0
+offset_right = 80.0
+offset_bottom = 20.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
 [node name="Label" type="Label" parent="UI/Buttons/Buy"]
@@ -1111,10 +1115,9 @@ vertical_alignment = 1
 
 [node name="Sell" type="Button" parent="UI/Buttons"]
 layout_mode = 0
-offset_left = 560.0
-offset_top = 70.0
-offset_right = 640.0
-offset_bottom = 90.0
+offset_top = 30.0
+offset_right = 80.0
+offset_bottom = 50.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
 [node name="Label" type="Label" parent="UI/Buttons/Sell"]
@@ -1142,10 +1145,9 @@ vertical_alignment = 1
 
 [node name="Shop" type="Button" parent="UI/Buttons"]
 layout_mode = 0
-offset_left = 560.0
-offset_top = 100.0
-offset_right = 640.0
-offset_bottom = 120.0
+offset_top = 60.0
+offset_right = 80.0
+offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
 [node name="Label" type="Label" parent="UI/Buttons/Shop"]
@@ -1161,10 +1163,9 @@ vertical_alignment = 1
 
 [node name="Info" type="Button" parent="UI/Buttons"]
 layout_mode = 0
-offset_left = 560.0
-offset_top = 130.0
-offset_right = 640.0
-offset_bottom = 150.0
+offset_top = 90.0
+offset_right = 80.0
+offset_bottom = 110.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
 [node name="Label" type="Label" parent="UI/Buttons/Info"]
@@ -1180,15 +1181,15 @@ vertical_alignment = 1
 
 [node name="Score" type="Control" parent="UI"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 580.0
+offset_top = 360.0
+offset_right = 580.0
+offset_bottom = 360.0
 
 [node name="Money" type="Control" parent="UI/Score"]
 anchors_preset = 0
-offset_left = 600.0
-offset_top = 360.0
-offset_right = 600.0
-offset_bottom = 360.0
+offset_left = 20.0
+offset_right = 20.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Score/Money"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
@@ -1235,10 +1236,10 @@ vertical_alignment = 1
 
 [node name="Payout" type="Control" parent="UI/Score"]
 anchors_preset = 0
-offset_left = 600.0
-offset_top = 400.0
-offset_right = 600.0
-offset_bottom = 400.0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 20.0
+offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Score/Payout"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
@@ -1274,10 +1275,10 @@ vertical_alignment = 1
 
 [node name="Control" type="Control" parent="UI/Score"]
 anchors_preset = 0
-offset_left = 600.0
-offset_top = 440.0
-offset_right = 600.0
-offset_bottom = 440.0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 20.0
+offset_bottom = 80.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Score/Control"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
@@ -1321,6 +1322,169 @@ theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="BallsDeck" type="Control" parent="UI"]
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 160.0
+offset_right = 560.0
+offset_bottom = 160.0
+
+[node name="Label" type="Label" parent="UI/BallsDeck"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "DECK"
+vertical_alignment = 1
+
+[node name="Ball" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(10, 40)
+freeze = true
+
+[node name="Ball2" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(30, 40)
+freeze = true
+
+[node name="Ball3" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(50, 40)
+freeze = true
+
+[node name="Ball4" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(70, 40)
+freeze = true
+
+[node name="Ball5" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(90, 40)
+freeze = true
+
+[node name="Ball6" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(110, 40)
+freeze = true
+
+[node name="Ball7" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(130, 40)
+freeze = true
+
+[node name="Ball8" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(150, 40)
+freeze = true
+
+[node name="Ball9" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(10, 60)
+freeze = true
+
+[node name="Ball10" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(30, 60)
+freeze = true
+
+[node name="Ball11" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(50, 60)
+freeze = true
+
+[node name="Ball12" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(70, 60)
+freeze = true
+
+[node name="Ball13" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(90, 60)
+freeze = true
+
+[node name="Ball14" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(110, 60)
+freeze = true
+
+[node name="Ball15" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(130, 60)
+freeze = true
+
+[node name="Ball16" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(150, 60)
+freeze = true
+
+[node name="BallsExtra" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 240.0
+offset_right = 560.0
+offset_bottom = 240.0
+
+[node name="Label" type="Label" parent="UI/BallsExtra"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "EXTRA"
+vertical_alignment = 1
+
+[node name="Ball" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(10, 40)
+freeze = true
+
+[node name="Ball2" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(30, 40)
+freeze = true
+
+[node name="Ball3" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(50, 40)
+freeze = true
+
+[node name="Ball4" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(70, 40)
+freeze = true
+
+[node name="Ball5" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(90, 40)
+freeze = true
+
+[node name="Ball6" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(110, 40)
+freeze = true
+
+[node name="Ball7" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(130, 40)
+freeze = true
+
+[node name="Ball8" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(150, 40)
+freeze = true
+
+[node name="Ball9" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(10, 60)
+freeze = true
+
+[node name="Ball10" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(30, 60)
+freeze = true
+
+[node name="Ball11" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(50, 60)
+freeze = true
+
+[node name="Ball12" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(70, 60)
+freeze = true
+
+[node name="Ball13" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(90, 60)
+freeze = true
+
+[node name="Ball14" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(110, 60)
+freeze = true
+
+[node name="Ball15" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(130, 60)
+freeze = true
+
+[node name="Ball16" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(150, 60)
+freeze = true
 
 [node name="Arrow" type="Control" parent="UI"]
 modulate = Color(1, 1, 1, 0.501961)

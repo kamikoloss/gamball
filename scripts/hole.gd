@@ -22,7 +22,7 @@ enum HoleType {
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
-	_init_view()
+	refresh_view()
 
 
 func _on_area_entered(area: Area2D) -> void:
@@ -32,14 +32,14 @@ func _on_area_entered(area: Area2D) -> void:
 		maybe_ball.queue_free()
 
 
-# 自身の見た目を決定する
-func _init_view() -> void:
+# 自身の見た目を更新する
+func refresh_view() -> void:
 	match hole_type:
 		Hole.HoleType.Billiards:
 			pass
 		Hole.HoleType.Gain:
 			_label.text = "×%s" % [gain_ratio]
-			if gain_ratio == 0:
+			if gain_ratio <= 0:
 				_label.self_modulate = Color.RED
 			return
 		Hole.HoleType.Lost:
