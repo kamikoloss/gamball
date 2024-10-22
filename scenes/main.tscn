@@ -16,7 +16,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_money_label", "_balls_label", "_payout_label", "_balls_deck", "_balls_extra", "_arrow_center_position", "_arrow", "_arrow_square")]
+[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_money_label", "_balls_label", "_payout_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow_center_position", "_arrow", "_arrow_square")]
 script = ExtResource("1_h2e4g")
 _ball_scene = ExtResource("4_ldgjm")
 _billiards = NodePath("Billiards")
@@ -30,8 +30,8 @@ _info_button = NodePath("UI/Buttons/Info")
 _money_label = NodePath("UI/Score/Money/Money")
 _balls_label = NodePath("UI/Score/Control/Balls")
 _payout_label = NodePath("UI/Score/Payout/Payout")
-_balls_deck = NodePath("UI/BallsDeck")
-_balls_extra = NodePath("UI/BallsExtra")
+_balls_slot_deck = NodePath("UI/BallsSlotDeck")
+_balls_slot_extra = NodePath("UI/BallsSlotExtra")
 _arrow_center_position = NodePath("Billiards/Points/Center")
 _arrow = NodePath("UI/Arrow")
 _arrow_square = NodePath("UI/Arrow/Square")
@@ -994,7 +994,9 @@ _spawn_position = NodePath("Points/SpawnHole")
 [node name="Board" type="Area2D" parent="Stack"]
 position = Vector2(640, 520)
 scale = Vector2(8, 16)
-gravity = 0.0
+gravity_space_override = 3
+gravity_point_center = Vector2(0, 2)
+gravity_direction = Vector2(0, 2)
 linear_damp = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Stack/Board"]
@@ -1490,14 +1492,14 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="BallsDeck" type="Control" parent="UI"]
+[node name="BallsSlotDeck" type="Control" parent="UI"]
 anchors_preset = 0
 offset_left = 560.0
 offset_top = 160.0
 offset_right = 560.0
 offset_bottom = 160.0
 
-[node name="Label" type="Label" parent="UI/BallsDeck"]
+[node name="Label" type="Label" parent="UI/BallsSlotDeck"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1507,71 +1509,71 @@ theme_override_font_sizes/font_size = 64
 text = "DECK"
 vertical_alignment = 1
 
-[node name="Ball" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(10, 40)
 freeze = true
 
-[node name="Ball2" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball2" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(30, 40)
 freeze = true
 
-[node name="Ball3" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball3" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(50, 40)
 freeze = true
 
-[node name="Ball4" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball4" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(70, 40)
 freeze = true
 
-[node name="Ball5" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball5" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(90, 40)
 freeze = true
 
-[node name="Ball6" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball6" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(110, 40)
 freeze = true
 
-[node name="Ball7" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball7" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(130, 40)
 freeze = true
 
-[node name="Ball8" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball8" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(150, 40)
 freeze = true
 
-[node name="Ball9" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball9" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(10, 60)
 freeze = true
 
-[node name="Ball10" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball10" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(30, 60)
 freeze = true
 
-[node name="Ball11" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball11" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(50, 60)
 freeze = true
 
-[node name="Ball12" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball12" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(70, 60)
 freeze = true
 
-[node name="Ball13" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball13" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(90, 60)
 freeze = true
 
-[node name="Ball14" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball14" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(110, 60)
 freeze = true
 
-[node name="Ball15" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball15" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(130, 60)
 freeze = true
 
-[node name="Ball16" parent="UI/BallsDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball16" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(150, 60)
 freeze = true
 
-[node name="BallsExtra" type="Control" parent="UI"]
+[node name="BallsSlotExtra" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 560.0
@@ -1579,7 +1581,7 @@ offset_top = 240.0
 offset_right = 560.0
 offset_bottom = 240.0
 
-[node name="Label" type="Label" parent="UI/BallsExtra"]
+[node name="Label" type="Label" parent="UI/BallsSlotExtra"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1589,67 +1591,67 @@ theme_override_font_sizes/font_size = 64
 text = "EXTRA"
 vertical_alignment = 1
 
-[node name="Ball" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(10, 40)
 freeze = true
 
-[node name="Ball2" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball2" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(30, 40)
 freeze = true
 
-[node name="Ball3" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball3" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(50, 40)
 freeze = true
 
-[node name="Ball4" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball4" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(70, 40)
 freeze = true
 
-[node name="Ball5" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball5" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(90, 40)
 freeze = true
 
-[node name="Ball6" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball6" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(110, 40)
 freeze = true
 
-[node name="Ball7" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball7" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(130, 40)
 freeze = true
 
-[node name="Ball8" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball8" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(150, 40)
 freeze = true
 
-[node name="Ball9" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball9" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(10, 60)
 freeze = true
 
-[node name="Ball10" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball10" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(30, 60)
 freeze = true
 
-[node name="Ball11" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball11" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(50, 60)
 freeze = true
 
-[node name="Ball12" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball12" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(70, 60)
 freeze = true
 
-[node name="Ball13" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball13" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(90, 60)
 freeze = true
 
-[node name="Ball14" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball14" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(110, 60)
 freeze = true
 
-[node name="Ball15" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball15" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(130, 60)
 freeze = true
 
-[node name="Ball16" parent="UI/BallsExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball16" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(150, 60)
 freeze = true
 

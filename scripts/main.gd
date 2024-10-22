@@ -17,8 +17,8 @@ extends Node
 @export var _money_label: Label
 @export var _balls_label: Label
 @export var _payout_label: Label
-@export var _balls_deck: Control
-@export var _balls_extra: Control
+@export var _balls_slot_deck: Control
+@export var _balls_slot_extra: Control
 # Arrow
 @export var _arrow_center_position: Node2D
 @export var _arrow: Control
@@ -61,9 +61,9 @@ func _ready() -> void:
 	# Arrow
 	_arrow.visible = false
 	_arrow_square.scale.y = 0
-	# Balls
-	_refresh_balls(_balls_deck, _deck_level_list)
-	_refresh_balls(_balls_extra, _extra_level_list)
+	# Balls Slot
+	_refresh_balls_slot(_balls_slot_deck, _deck_level_list)
+	_refresh_balls_slot(_balls_slot_extra, _extra_level_list)
 
 	# Label 用に初期化する
 	money = 1000
@@ -126,7 +126,7 @@ func _on_buy_balls_button_pressed() -> void:
 	if money < money_unit:
 		return
 	money -= money_unit
-	_push_payout(-1, balls_unit)
+	_push_payout(0, balls_unit)
 
 
 func _on_sell_balls_button_pressed() -> void:
@@ -197,7 +197,7 @@ func _refresh_arrow() -> void:
 	_arrow_square.scale.y = (clamped_length / _drag_length_max) * 10
 
 
-func _refresh_balls(parent_node: Node, level_list: Array[int]) -> void:
+func _refresh_balls_slot(parent_node: Node, level_list: Array[int]) -> void:
 	var index = 0
 	for node in parent_node.get_children():
 		if node is Ball: # Label もある
