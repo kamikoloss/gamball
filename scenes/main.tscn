@@ -756,6 +756,12 @@ expand_mode = 1
 
 [node name="Side" type="Node2D" parent="Pachinko/Nails"]
 
+[node name="Nail11" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(790, 240)
+
+[node name="Nail12" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(1210, 240)
+
 [node name="Nail13" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
 position = Vector2(780, 320)
 
@@ -1234,7 +1240,7 @@ level = 5
 layout_mode = 3
 anchors_preset = 0
 
-[node name="TextureRect" type="TextureRect" parent="UI"]
+[node name="StackGlass" type="TextureRect" parent="UI"]
 self_modulate = Color(0, 0, 0.25098, 0.501961)
 layout_mode = 0
 offset_left = 560.0
@@ -1311,7 +1317,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Shop" type="Button" parent="UI/Buttons"]
-visible = false
 layout_mode = 0
 offset_top = 60.0
 offset_right = 80.0
@@ -1330,7 +1335,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Info" type="Button" parent="UI/Buttons"]
-visible = false
 layout_mode = 0
 offset_top = 90.0
 offset_right = 80.0
@@ -1511,67 +1515,67 @@ vertical_alignment = 1
 
 [node name="Ball" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(10, 40)
-freeze = true
+is_display = true
 
 [node name="Ball2" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(30, 40)
-freeze = true
+is_display = true
 
 [node name="Ball3" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(50, 40)
-freeze = true
+is_display = true
 
 [node name="Ball4" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(70, 40)
-freeze = true
+is_display = true
 
 [node name="Ball5" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(90, 40)
-freeze = true
+is_display = true
 
 [node name="Ball6" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(110, 40)
-freeze = true
+is_display = true
 
 [node name="Ball7" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(130, 40)
-freeze = true
+is_display = true
 
 [node name="Ball8" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(150, 40)
-freeze = true
+is_display = true
 
 [node name="Ball9" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(10, 60)
-freeze = true
+is_display = true
 
 [node name="Ball10" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(30, 60)
-freeze = true
+is_display = true
 
 [node name="Ball11" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(50, 60)
-freeze = true
+is_display = true
 
 [node name="Ball12" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(70, 60)
-freeze = true
+is_display = true
 
 [node name="Ball13" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(90, 60)
-freeze = true
+is_display = true
 
 [node name="Ball14" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(110, 60)
-freeze = true
+is_display = true
 
 [node name="Ball15" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(130, 60)
-freeze = true
+is_display = true
 
 [node name="Ball16" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
 position = Vector2(150, 60)
-freeze = true
+is_display = true
 
 [node name="BallsSlotExtra" type="Control" parent="UI"]
 layout_mode = 3
@@ -1593,67 +1597,67 @@ vertical_alignment = 1
 
 [node name="Ball" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(10, 40)
-freeze = true
+is_display = true
 
 [node name="Ball2" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(30, 40)
-freeze = true
+is_display = true
 
 [node name="Ball3" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(50, 40)
-freeze = true
+is_display = true
 
 [node name="Ball4" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(70, 40)
-freeze = true
+is_display = true
 
 [node name="Ball5" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(90, 40)
-freeze = true
+is_display = true
 
 [node name="Ball6" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(110, 40)
-freeze = true
+is_display = true
 
 [node name="Ball7" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(130, 40)
-freeze = true
+is_display = true
 
 [node name="Ball8" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(150, 40)
-freeze = true
+is_display = true
 
 [node name="Ball9" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(10, 60)
-freeze = true
+is_display = true
 
 [node name="Ball10" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(30, 60)
-freeze = true
+is_display = true
 
 [node name="Ball11" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(50, 60)
-freeze = true
+is_display = true
 
 [node name="Ball12" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(70, 60)
-freeze = true
+is_display = true
 
 [node name="Ball13" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(90, 60)
-freeze = true
+is_display = true
 
 [node name="Ball14" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(110, 60)
-freeze = true
+is_display = true
 
 [node name="Ball15" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(130, 60)
-freeze = true
+is_display = true
 
 [node name="Ball16" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
 position = Vector2(150, 60)
-freeze = true
+is_display = true
 
 [node name="Arrow" type="Control" parent="UI"]
 modulate = Color(1, 1, 1, 0.501961)
@@ -1697,3 +1701,325 @@ theme_override_font_sizes/font_size = 64
 text = "GAMBALL v0.1.0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Shop" type="Control" parent="UI"]
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Shop"]
+self_modulate = Color(0.12549, 0.12549, 0.12549, 0.878431)
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 520.0
+offset_bottom = 680.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Shop/TextureRect"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 60.0
+offset_right = 480.0
+offset_bottom = 140.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "<SHOP>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buy" type="Button" parent="UI/Shop/TextureRect"]
+offset_left = 40.0
+offset_top = 220.0
+offset_right = 120.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("7_yeeqd")
+
+[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "＄9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy"]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 600.0
+offset_bottom = 60.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "DECK Pack"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 20.0
+offset_right = 760.0
+offset_bottom = 220.0
+scale = Vector2(0.2, 0.2)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "Add random BALL x3
+(0-7) to DECK"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy"]
+offset_top = -100.0
+offset_right = 80.0
+offset_bottom = -20.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Buy2" type="Button" parent="UI/Shop/TextureRect"]
+offset_left = 200.0
+offset_top = 220.0
+offset_right = 280.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("7_yeeqd")
+
+[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy2"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "＄9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy2"]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 600.0
+offset_bottom = 60.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "DECK Pack+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy2"]
+offset_left = -40.0
+offset_top = 20.0
+offset_right = 760.0
+offset_bottom = 220.0
+scale = Vector2(0.2, 0.2)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "Add random BALL x1
+(8-15) to DECK"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy2"]
+offset_top = -100.0
+offset_right = 80.0
+offset_bottom = -20.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Buy3" type="Button" parent="UI/Shop/TextureRect"]
+offset_left = 360.0
+offset_top = 220.0
+offset_right = 440.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("7_yeeqd")
+
+[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy3"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "＄9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy3"]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 600.0
+offset_bottom = 60.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "DECK Cleaner"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy3"]
+offset_left = -40.0
+offset_top = 20.0
+offset_right = 760.0
+offset_bottom = 220.0
+scale = Vector2(0.2, 0.2)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "Remove the lowest
+BALL x1 from DECK"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy3"]
+offset_top = -100.0
+offset_right = 80.0
+offset_bottom = -20.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Buy4" type="Button" parent="UI/Shop/TextureRect"]
+offset_left = 40.0
+offset_top = 380.0
+offset_right = 120.0
+offset_bottom = 400.0
+theme_override_fonts/font = ExtResource("7_yeeqd")
+
+[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy4"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "＄9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy4"]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 600.0
+offset_bottom = 60.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "EXTRA Pack"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy4"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 20.0
+offset_right = 760.0
+offset_bottom = 220.0
+scale = Vector2(0.2, 0.2)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "Add random BALL x2
+(0-7) to EXTRA"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy4"]
+offset_top = -100.0
+offset_right = 80.0
+offset_bottom = -20.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Buy5" type="Button" parent="UI/Shop/TextureRect"]
+offset_left = 200.0
+offset_top = 380.0
+offset_right = 280.0
+offset_bottom = 400.0
+theme_override_fonts/font = ExtResource("7_yeeqd")
+
+[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy5"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "＄9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy5"]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 600.0
+offset_bottom = 60.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "EXTRA Pack+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy5"]
+offset_left = -40.0
+offset_top = 20.0
+offset_right = 760.0
+offset_bottom = 220.0
+scale = Vector2(0.2, 0.2)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "Add random BALL x1
+(8-15) to EXTRA"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy5"]
+offset_top = -100.0
+offset_right = 80.0
+offset_bottom = -20.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Buy6" type="Button" parent="UI/Shop/TextureRect"]
+offset_left = 360.0
+offset_top = 380.0
+offset_right = 440.0
+offset_bottom = 400.0
+theme_override_fonts/font = ExtResource("7_yeeqd")
+
+[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy6"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "＄9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy6"]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 600.0
+offset_bottom = 60.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "EXTRA Cleaner"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy6"]
+offset_left = -40.0
+offset_top = 20.0
+offset_right = 760.0
+offset_bottom = 220.0
+scale = Vector2(0.2, 0.2)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "Remove the lowest
+BALL x1 from EXTRA"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy6"]
+offset_top = -100.0
+offset_right = 80.0
+offset_bottom = -20.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1

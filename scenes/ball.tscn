@@ -12,12 +12,13 @@ radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_texture_rect", "_texture_rect_in", "_label")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_texture_rect", "_texture_rect_in", "_label", "_area2d")]
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 script = ExtResource("1_q12tn")
 _texture_rect = NodePath("TextureRect")
 _texture_rect_in = NodePath("TextureRect2")
 _label = NodePath("Label")
+_area2d = NodePath("Area2D")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
