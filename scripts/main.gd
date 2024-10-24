@@ -4,11 +4,14 @@ extends Node
 
 # PackedScene
 @export var _ball_scene: PackedScene
+
 # Node
 @export var _billiards: Billiards
+@export var _billiards_board: Area2D
 @export var _pachinko: Pachinko
 @export var _stack: Stack
-@export var _balls: Node2D
+@export var _balls: Node2D # Ball instances の親 Node
+
 # UI
 @export var _buy_balls_button: Button
 @export var _sell_balls_button: Button
@@ -35,11 +38,15 @@ var balls: int = 0:
 		_balls_label.text = str(balls)
 
 
-# 現在
+# 現在ドラッグ中かどうか
 var _is_dragging: bool
+# 現在ドラッグしている座標
 var _drag_position: Vector2
+# 引っ張りが最大になるドラッグの距離 (px)
 var _drag_length_max: float = 160
-var _impulse_ratio: float = 10 # _drag_length_max の逆数にする
+# 引っ張りで Ball が吹き飛ぶ強さ
+# NOTE: _drag_length_max と反比例させる
+var _impulse_ratio: float = 10
 
 # 出現する Deck Ball level のリスト (確率込み)
 var _deck_level_list: Array[int] = [0, 0, 0, 0, 0, 1, 1, 1, 2, 2]
@@ -48,11 +55,13 @@ var _extra_level_list: Array[int] = [5, 6, 7, 8, 9]
 # 払い出しが残っている Ball level のリスト
 var _payout_level_list: Array[int] = []
 # 何秒ごとに 1 Ball を払い出すか
-# Stack の排出速度を見ていい感じに調整する
+# NOTE: Stack の排出速度を見ていい感じに調整する
 var _payout_interval: float = 0.1
 
+# Ball の購入レート
 # [x, y] x money = y balls
 var _buy_rate: Array[int] = [100, 25]
+# Ball の売却レート
 # [x, y] x balls = y money
 var _sell_rate: Array[int] = [50, 100]
 
@@ -78,6 +87,8 @@ func _ready() -> void:
 	var holes = get_tree().get_nodes_in_group("hole")
 	for hole: Hole in holes:
 		hole.ball_entered.connect(_on_hole_ball_entered)
+	# Billiards Board 上の InputEvent を取得する
+	_billiards_board.input_event.connect(_on_billiards_board_input)
 
 	# 貸し出しボタンを1プッシュしておく
 	_on_buy_balls_button_pressed()
@@ -93,18 +104,12 @@ func create_new_ball(level: int = 0) -> Ball:
 
 
 func _input(event: InputEvent) -> void:
-	# TODO: ビリヤード盤面上のドラッグだけに限定したい
+	# マウスボタンを
 	if event is InputEventMouseButton:
+		# 押したとき: Billiards Board 上に限定する
 		if event.pressed:
-			if 0 < balls:
-				_drag_position = _arrow_center_position.position
-				_is_dragging = true
-				_arrow.visible = true
-				# Ball を生成する
-				balls -= 1
-				var level = _deck_level_list.pick_random()
-				var new_ball = create_new_ball(level)
-				_billiards.spawn_ball(new_ball)
+			pass
+		# 離したとき
 		else:
 			_is_dragging = false
 			_arrow.visible = false
@@ -114,8 +119,11 @@ func _input(event: InputEvent) -> void:
 			var clamped_length =  clampf(drag_vector.length(), 0, _drag_length_max)
 			var impulse = drag_vector.normalized() * clamped_length
 			_billiards.shoot_ball(impulse * _impulse_ratio)
+	# マウス全般を
 	if event is InputEventMouseMotion:
+		# マウスボタンを押している間
 		if _is_dragging:
+			# Arrow を更新する
 			_drag_position = event.position
 			_refresh_arrow()
 
@@ -169,6 +177,25 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 		Hole.HoleType.Stack:
 			# Ball の数をカウントする
 			balls += 1
+
+
+func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	# マウスボタンを
+	if event is InputEventMouseButton:
+		# 押したとき
+		if event.pressed:
+			if 0 < balls:
+				_drag_position = _arrow_center_position.position
+				_is_dragging = true
+				_arrow.visible = true
+				# Ball を生成する
+				balls -= 1
+				var level = _deck_level_list.pick_random()
+				var new_ball = create_new_ball(level)
+				_billiards.spawn_ball(new_ball)
+		# 離したとき: _input 全般で対応する
+		else:
+			pass
 
 
 func _start_payout() -> void:

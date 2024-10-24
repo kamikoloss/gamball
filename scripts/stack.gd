@@ -10,6 +10,7 @@ func _ready() -> void:
 
 func spawn_ball(ball: Ball) -> void:
 	ball.position = _spawn_position.position
+
 	# 詰まらないように下方向の初速をつける
 	var spawn_impulse = Vector2(0, randi_range(400, 500))
 	ball.apply_impulse(spawn_impulse) 

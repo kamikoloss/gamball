@@ -21,7 +21,8 @@ func spawn_ball(ball: Ball) -> void:
 		_spawn_position_b,
 	].pick_random()
 	ball.position = spawn_posiiton.position
-	# 初速
+
+	# 初速をつける
 	var spawn_impulse = Vector2(0, randi_range(400, 500))
 	ball.apply_impulse(spawn_impulse)
 

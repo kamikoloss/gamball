@@ -16,10 +16,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_money_label", "_balls_label", "_payout_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow_center_position", "_arrow", "_arrow_square")]
+[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_money_label", "_balls_label", "_payout_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow_center_position", "_arrow", "_arrow_square")]
 script = ExtResource("1_h2e4g")
 _ball_scene = ExtResource("4_ldgjm")
 _billiards = NodePath("Billiards")
+_billiards_board = NodePath("Billiards/Board")
 _pachinko = NodePath("Pachinko")
 _stack = NodePath("Stack")
 _balls = NodePath("Balls")
