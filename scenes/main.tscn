@@ -16,7 +16,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_money_label", "_balls_label", "_payout_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow_center_position", "_arrow", "_arrow_square")]
+[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_shop", "_info", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_money_label", "_balls_label", "_payout_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow_center_position", "_arrow", "_arrow_square")]
 script = ExtResource("1_h2e4g")
 _ball_scene = ExtResource("4_ldgjm")
 _billiards = NodePath("Billiards")
@@ -24,6 +24,8 @@ _billiards_board = NodePath("Billiards/Board")
 _pachinko = NodePath("Pachinko")
 _stack = NodePath("Stack")
 _balls = NodePath("Balls")
+_shop = NodePath("UI/Shop")
+_info = NodePath("UI/Info")
 _buy_balls_button = NodePath("UI/Buttons/Buy")
 _sell_balls_button = NodePath("UI/Buttons/Sell")
 _shop_button = NodePath("UI/Buttons/Shop")
@@ -1011,6 +1013,506 @@ position = Vector2(1080, 440)
 hole_type = 2
 gain_ratio = 3
 
+[node name="Rush" type="Node2D" parent="Pachinko"]
+position = Vector2(1000, 120)
+
+[node name="Display" type="Control" parent="Pachinko/Rush"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Display"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 40.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Pachinko/Rush/Display"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 280.0
+offset_bottom = 60.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "RUSH 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Pachinko/Rush/Display"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+offset_left = -40.0
+offset_right = 40.0
+offset_bottom = 20.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="Pachinko/Rush/Display"]
+offset_left = -40.0
+offset_right = 280.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "99/99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lamps" type="Control" parent="Pachinko/Rush"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Lamp" type="Control" parent="Pachinko/Rush/Lamps"]
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp2" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 0.261799
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp2"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp3" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 0.523598
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp3"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp4" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 0.785397
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp4"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp5" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 1.0472
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp5"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp6" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 1.309
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp6"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp7" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 1.57079
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp7"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp8" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 1.83259
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp8"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp9" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 2.09439
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp9"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp10" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 2.35619
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp10"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp11" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 2.61799
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp11"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp12" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 2.87979
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp12"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp13" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 3.14159
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp13"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp14" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 3.40339
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp14"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp15" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 3.66519
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp15"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp16" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 3.92699
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp16"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp17" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 4.18878
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp17"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp18" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 4.45058
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp18"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp19" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 4.71238
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp19"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp20" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 4.97418
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp20"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp21" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 5.23598
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp21"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp22" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 5.49778
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp22"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp23" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 5.75958
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp23"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Lamp24" type="Control" parent="Pachinko/Rush/Lamps"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_right = 40.0
+rotation = 6.02138
+pivot_offset = Vector2(-40, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp24"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_svx0d")
+expand_mode = 1
+
+[node name="Device" type="Node2D" parent="Pachinko/Rush"]
+
+[node name="Nails" type="Node2D" parent="Pachinko/Rush/Device"]
+
+[node name="Nail4" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(-120, 60)
+
+[node name="Nail5" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(-100, 80)
+
+[node name="Nail6" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(-60, 80)
+
+[node name="Nail7" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(-40, 60)
+
+[node name="Nail10" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(40, 60)
+
+[node name="Nail11" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(60, 80)
+
+[node name="Nail12" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(100, 80)
+
+[node name="Nail13" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+position = Vector2(120, 60)
+
+[node name="Holes" type="Node2D" parent="Pachinko/Rush/Device"]
+
+[node name="Hole" parent="Pachinko/Rush/Device/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(-80, 40)
+hole_type = 2
+gain_ratio = 10
+
+[node name="Hole2" parent="Pachinko/Rush/Device/Holes" instance=ExtResource("6_wvfqf")]
+position = Vector2(80, 40)
+hole_type = 2
+gain_ratio = 10
+
 [node name="Stack" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position")]
 script = ExtResource("10_ekmut")
 _spawn_position = NodePath("Points/SpawnHole")
@@ -1277,7 +1779,8 @@ offset_bottom = 30.0
 
 [node name="Buy" type="Button" parent="UI/Buttons"]
 layout_mode = 0
-offset_right = 80.0
+offset_left = -10.0
+offset_right = 70.0
 offset_bottom = 20.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
@@ -1288,27 +1791,28 @@ offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
-text = "＄ => ●"
+text = "＄⇒●"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UI/Buttons/Buy"]
 layout_mode = 0
-offset_left = 80.0
-offset_right = 480.0
-offset_bottom = 100.0
+offset_left = -10.0
+offset_top = 20.0
+offset_right = 490.0
+offset_bottom = 120.0
 scale = Vector2(0.2, 0.2)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
 text = "＄100=●025"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sell" type="Button" parent="UI/Buttons"]
 layout_mode = 0
-offset_top = 30.0
-offset_right = 80.0
-offset_bottom = 50.0
+offset_left = 90.0
+offset_right = 170.0
+offset_bottom = 20.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
 [node name="Label" type="Label" parent="UI/Buttons/Sell"]
@@ -1318,27 +1822,28 @@ offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
-text = "● => ＄"
+text = "●⇒＄"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UI/Buttons/Sell"]
 layout_mode = 0
-offset_left = 80.0
-offset_right = 480.0
-offset_bottom = 100.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 120.0
 scale = Vector2(0.2, 0.2)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
 text = "●050=＄100"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Shop" type="Button" parent="UI/Buttons"]
 layout_mode = 0
-offset_top = 60.0
-offset_right = 80.0
-offset_bottom = 80.0
+offset_left = -10.0
+offset_top = 50.0
+offset_right = 70.0
+offset_bottom = 70.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
 [node name="Label" type="Label" parent="UI/Buttons/Shop"]
@@ -1354,9 +1859,10 @@ vertical_alignment = 1
 
 [node name="Info" type="Button" parent="UI/Buttons"]
 layout_mode = 0
-offset_top = 90.0
-offset_right = 80.0
-offset_bottom = 110.0
+offset_left = 90.0
+offset_top = 50.0
+offset_right = 170.0
+offset_bottom = 70.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
 [node name="Label" type="Label" parent="UI/Buttons/Info"]
@@ -1428,7 +1934,7 @@ theme_override_font_sizes/font_size = 64
 text = "★"
 vertical_alignment = 1
 
-[node name="Tax" type="Control" parent="UI/Score"]
+[node name="Next" type="Control" parent="UI/Score"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0
@@ -1436,7 +1942,7 @@ offset_top = 60.0
 offset_right = 20.0
 offset_bottom = 60.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Score/Tax"]
+[node name="TextureRect" type="TextureRect" parent="UI/Score/Next"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
 self_modulate = Color(0.752941, 1, 0.752941, 1)
 layout_mode = 0
@@ -1446,32 +1952,20 @@ offset_bottom = 40.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Score/Tax"]
+[node name="Label" type="Label" parent="UI/Score/Next"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
-text = "TAX"
+text = "NEXT"
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="UI/Score/Tax"]
+[node name="Label2" type="Label" parent="UI/Score/Next"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 160.0
-offset_bottom = 100.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "★"
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="UI/Score/Tax"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 20.0
-offset_right = 200.0
 offset_bottom = 100.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("7_yeeqd")
@@ -1479,28 +1973,15 @@ theme_override_font_sizes/font_size = 64
 text = "＄"
 vertical_alignment = 1
 
-[node name="Turn" type="Label" parent="UI/Score/Tax"]
+[node name="Next" type="Label" parent="UI/Score/Next"]
 layout_mode = 0
 offset_top = 20.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 100.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
-text = "999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Tax" type="Label" parent="UI/Score/Tax"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 20.0
-offset_right = 200.0
-offset_bottom = 100.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "999"
+text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -2191,6 +2672,34 @@ offset_right = 80.0
 offset_bottom = -20.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
+
+[node name="Info" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Info"]
+self_modulate = Color(0.12549, 0.12549, 0.12549, 0.878431)
+layout_mode = 0
+offset_left = 760.0
+offset_top = 40.0
+offset_right = 1240.0
+offset_bottom = 680.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Info/TextureRect"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 40.0
+offset_right = 480.0
+offset_bottom = 120.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "<INFO>"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Version" type="Label" parent="UI"]
 layout_mode = 0

@@ -13,6 +13,8 @@ extends Node
 @export var _balls: Node2D # Ball instances の親 Node
 
 # UI
+@export var _shop: Control
+@export var _info: Control
 @export var _buy_balls_button: Button
 @export var _sell_balls_button: Button
 @export var _shop_button: Button
@@ -67,6 +69,9 @@ var _sell_rate: Array[int] = [50, 100]
 
 
 func _ready() -> void:
+	# UI
+	_shop.visible = false
+	_info.visible = false
 	# Arrow
 	_arrow.visible = false
 	_arrow_square.scale.y = 0
@@ -87,7 +92,7 @@ func _ready() -> void:
 	var holes = get_tree().get_nodes_in_group("hole")
 	for hole: Hole in holes:
 		hole.ball_entered.connect(_on_hole_ball_entered)
-	# Billiards Board 上の InputEvent を取得する
+	# ビリヤード盤面上の入力を処理する
 	_billiards_board.input_event.connect(_on_billiards_board_input)
 
 	# 貸し出しボタンを1プッシュしておく
@@ -147,11 +152,11 @@ func _on_sell_balls_button_pressed() -> void:
 
 
 func _on_shop_button_pressed() -> void:
-	pass
+	_shop.visible = not _shop.visible
 
 
 func _on_info_button_pressed() -> void:
-	pass
+	_info.visible = not _info.visible
 
 
 # Ball が Hole に落ちたときの処理
@@ -179,6 +184,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			balls += 1
 
 
+# ビリヤード盤面上で入力があったときの処理
 func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	# マウスボタンを
 	if event is InputEventMouseButton:
