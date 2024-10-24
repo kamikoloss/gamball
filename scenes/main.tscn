@@ -28,7 +28,7 @@ _sell_balls_button = NodePath("UI/Buttons/Sell")
 _shop_button = NodePath("UI/Buttons/Shop")
 _info_button = NodePath("UI/Buttons/Info")
 _money_label = NodePath("UI/Score/Money/Money")
-_balls_label = NodePath("UI/Score/Control/Balls")
+_balls_label = NodePath("UI/Score/Balls/Balls")
 _payout_label = NodePath("UI/Score/Payout/Payout")
 _balls_slot_deck = NodePath("UI/BallsSlotDeck")
 _balls_slot_extra = NodePath("UI/BallsSlotExtra")
@@ -754,37 +754,57 @@ expand_mode = 1
 
 [node name="Nails" type="Node2D" parent="Pachinko"]
 
+[node name="Top" type="Node2D" parent="Pachinko/Nails"]
+
+[node name="Nail7" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+position = Vector2(980, 220)
+
+[node name="Nail8" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+position = Vector2(1020, 220)
+
+[node name="Nail9" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+position = Vector2(920, 240)
+
+[node name="Nail10" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+position = Vector2(1080, 240)
+
+[node name="Nail11" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+position = Vector2(880, 280)
+
+[node name="Nail12" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+position = Vector2(1120, 280)
+
 [node name="Side" type="Node2D" parent="Pachinko/Nails"]
 
 [node name="Nail11" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(790, 240)
+position = Vector2(800, 240)
 
 [node name="Nail12" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(1210, 240)
+position = Vector2(1200, 240)
 
 [node name="Nail13" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(780, 320)
+position = Vector2(790, 320)
 
 [node name="Nail14" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(1220, 320)
+position = Vector2(1210, 320)
 
 [node name="Nail15" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(790, 400)
+position = Vector2(780, 400)
 
 [node name="Nail16" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(1210, 400)
+position = Vector2(1220, 400)
 
 [node name="Nail17" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(780, 480)
+position = Vector2(790, 480)
 
 [node name="Nail18" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(1220, 480)
+position = Vector2(1210, 480)
 
 [node name="Nail19" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(790, 560)
+position = Vector2(800, 560)
 
 [node name="Nail20" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
-position = Vector2(1210, 560)
+position = Vector2(1200, 560)
 
 [node name="Bottom" type="Node2D" parent="Pachinko/Nails"]
 
@@ -818,34 +838,43 @@ position = Vector2(1080, 660)
 [node name="Nail19" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
 position = Vector2(1160, 660)
 
-[node name="Extra" type="Node2D" parent="Pachinko/Nails"]
+[node name="Nail20" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+position = Vector2(880, 580)
 
-[node name="Nail2" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+[node name="Nail21" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+position = Vector2(1120, 580)
+
+[node name="Nail22" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+position = Vector2(1000, 590)
+
+[node name="Ex" type="Node2D" parent="Pachinko/Nails"]
+
+[node name="Nail2" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 position = Vector2(970, 340)
 
-[node name="Nail3" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+[node name="Nail3" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 position = Vector2(1030, 340)
 
-[node name="Nail4" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+[node name="Nail4" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 position = Vector2(970, 360)
 
-[node name="Nail5" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+[node name="Nail5" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 position = Vector2(1030, 360)
 
-[node name="Nail6" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+[node name="Nail6" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 position = Vector2(970, 380)
 
-[node name="Nail7" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+[node name="Nail7" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 position = Vector2(1030, 380)
 
-[node name="Nail8" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+[node name="Nail8" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 position = Vector2(1000, 390)
 
-[node name="Nail9" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+[node name="Nail9" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 visible = false
 position = Vector2(990, 280)
 
-[node name="Nail10" parent="Pachinko/Nails/Extra" instance=ExtResource("8_ywild")]
+[node name="Nail10" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 visible = false
 position = Vector2(1010, 280)
 
@@ -874,7 +903,10 @@ position = Vector2(950, 460)
 position = Vector2(920, 470)
 
 [node name="Nail9" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
-position = Vector2(920, 360)
+position = Vector2(900, 360)
+
+[node name="Nail10" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+position = Vector2(950, 320)
 
 [node name="x3b" type="Node2D" parent="Pachinko/Nails"]
 
@@ -901,7 +933,10 @@ position = Vector2(1110, 460)
 position = Vector2(1080, 470)
 
 [node name="Nail9" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
-position = Vector2(1080, 360)
+position = Vector2(1100, 360)
+
+[node name="Nail10" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+position = Vector2(1050, 320)
 
 [node name="x5" type="Node2D" parent="Pachinko/Nails"]
 
@@ -925,24 +960,6 @@ position = Vector2(1030, 500)
 
 [node name="Nail8" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
 position = Vector2(1000, 510)
-
-[node name="Nail7" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(980, 220)
-
-[node name="Nail8" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(1020, 220)
-
-[node name="Nail9" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(920, 240)
-
-[node name="Nail10" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(1080, 240)
-
-[node name="Nail11" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(880, 280)
-
-[node name="Nail12" parent="Pachinko/Nails" instance=ExtResource("8_ywild")]
-position = Vector2(1120, 280)
 
 [node name="Holes" type="Node2D" parent="Pachinko"]
 
@@ -1359,10 +1376,139 @@ offset_top = 360.0
 offset_right = 580.0
 offset_bottom = 360.0
 
+[node name="Turn" type="Control" parent="UI/Score"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Score/Turn"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
+offset_top = 20.0
+offset_right = 80.0
+offset_bottom = 40.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Score/Turn"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "TURN"
+vertical_alignment = 1
+
+[node name="Turn" type="Label" parent="UI/Score/Turn"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "999999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Score/Turn"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "★"
+vertical_alignment = 1
+
+[node name="Tax" type="Control" parent="UI/Score"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 20.0
+offset_bottom = 60.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Score/Tax"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
+offset_top = 20.0
+offset_right = 80.0
+offset_bottom = 40.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Score/Tax"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "TAX"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Score/Tax"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 160.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "★"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Score/Tax"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "＄"
+vertical_alignment = 1
+
+[node name="Turn" type="Label" parent="UI/Score/Tax"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 160.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Tax" type="Label" parent="UI/Score/Tax"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Money" type="Control" parent="UI/Score"]
 anchors_preset = 0
 offset_left = 20.0
+offset_top = 100.0
 offset_right = 20.0
+offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Score/Money"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
@@ -1410,9 +1556,9 @@ vertical_alignment = 1
 [node name="Payout" type="Control" parent="UI/Score"]
 anchors_preset = 0
 offset_left = 20.0
-offset_top = 40.0
+offset_top = 160.0
 offset_right = 20.0
-offset_bottom = 40.0
+offset_bottom = 160.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Score/Payout"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
@@ -1434,6 +1580,17 @@ theme_override_font_sizes/font_size = 64
 text = "PAYOUT"
 vertical_alignment = 1
 
+[node name="Label2" type="Label" parent="UI/Score/Payout"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "●"
+vertical_alignment = 1
+
 [node name="Payout" type="Label" parent="UI/Score/Payout"]
 layout_mode = 0
 offset_top = 20.0
@@ -1446,14 +1603,14 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="UI/Score"]
+[node name="Balls" type="Control" parent="UI/Score"]
 anchors_preset = 0
 offset_left = 20.0
-offset_top = 80.0
+offset_top = 200.0
 offset_right = 20.0
-offset_bottom = 80.0
+offset_bottom = 200.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Score/Control"]
+[node name="TextureRect" type="TextureRect" parent="UI/Score/Balls"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
 self_modulate = Color(0.752941, 1, 0.752941, 1)
 layout_mode = 0
@@ -1463,7 +1620,7 @@ offset_bottom = 40.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Score/Control"]
+[node name="Label" type="Label" parent="UI/Score/Balls"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1473,7 +1630,7 @@ theme_override_font_sizes/font_size = 64
 text = "BALLS"
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="UI/Score/Control"]
+[node name="Label2" type="Label" parent="UI/Score/Balls"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 320.0
@@ -1484,7 +1641,7 @@ theme_override_font_sizes/font_size = 64
 text = "●"
 vertical_alignment = 1
 
-[node name="Balls" type="Label" parent="UI/Score/Control"]
+[node name="Balls" type="Label" parent="UI/Score/Balls"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 320.0
@@ -1689,20 +1846,8 @@ pivot_offset = Vector2(5, 0)
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Version" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 560.0
-offset_top = 700.0
-offset_right = 1200.0
-offset_bottom = 780.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "GAMBALL v0.1.0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Shop" type="Control" parent="UI"]
+visible = false
 anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Shop"]
@@ -1718,9 +1863,9 @@ expand_mode = 1
 [node name="Label" type="Label" parent="UI/Shop/TextureRect"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 60.0
+offset_top = 40.0
 offset_right = 480.0
-offset_bottom = 140.0
+offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
@@ -1729,6 +1874,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Buy" type="Button" parent="UI/Shop/TextureRect"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 220.0
 offset_right = 120.0
@@ -1747,6 +1893,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
 offset_right = 600.0
@@ -1772,6 +1919,7 @@ text = "Add random BALL x3
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy"]
+layout_mode = 0
 offset_top = -100.0
 offset_right = 80.0
 offset_bottom = -20.0
@@ -1779,6 +1927,7 @@ texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
 [node name="Buy2" type="Button" parent="UI/Shop/TextureRect"]
+layout_mode = 0
 offset_left = 200.0
 offset_top = 220.0
 offset_right = 280.0
@@ -1797,6 +1946,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy2"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
 offset_right = 600.0
@@ -1809,6 +1959,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy2"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = 20.0
 offset_right = 760.0
@@ -1821,6 +1972,7 @@ text = "Add random BALL x1
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy2"]
+layout_mode = 0
 offset_top = -100.0
 offset_right = 80.0
 offset_bottom = -20.0
@@ -1828,6 +1980,7 @@ texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
 [node name="Buy3" type="Button" parent="UI/Shop/TextureRect"]
+layout_mode = 0
 offset_left = 360.0
 offset_top = 220.0
 offset_right = 440.0
@@ -1846,6 +1999,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy3"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
 offset_right = 600.0
@@ -1858,6 +2012,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy3"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = 20.0
 offset_right = 760.0
@@ -1870,6 +2025,7 @@ BALL x1 from DECK"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy3"]
+layout_mode = 0
 offset_top = -100.0
 offset_right = 80.0
 offset_bottom = -20.0
@@ -1877,6 +2033,7 @@ texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
 [node name="Buy4" type="Button" parent="UI/Shop/TextureRect"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 380.0
 offset_right = 120.0
@@ -1895,6 +2052,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy4"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
 offset_right = 600.0
@@ -1920,6 +2078,7 @@ text = "Add random BALL x2
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy4"]
+layout_mode = 0
 offset_top = -100.0
 offset_right = 80.0
 offset_bottom = -20.0
@@ -1927,6 +2086,7 @@ texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
 [node name="Buy5" type="Button" parent="UI/Shop/TextureRect"]
+layout_mode = 0
 offset_left = 200.0
 offset_top = 380.0
 offset_right = 280.0
@@ -1945,6 +2105,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy5"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
 offset_right = 600.0
@@ -1957,6 +2118,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy5"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = 20.0
 offset_right = 760.0
@@ -1969,6 +2131,7 @@ text = "Add random BALL x1
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy5"]
+layout_mode = 0
 offset_top = -100.0
 offset_right = 80.0
 offset_bottom = -20.0
@@ -1976,6 +2139,7 @@ texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
 [node name="Buy6" type="Button" parent="UI/Shop/TextureRect"]
+layout_mode = 0
 offset_left = 360.0
 offset_top = 380.0
 offset_right = 440.0
@@ -1994,6 +2158,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy6"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
 offset_right = 600.0
@@ -2006,6 +2171,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy6"]
+layout_mode = 0
 offset_left = -40.0
 offset_top = 20.0
 offset_right = 760.0
@@ -2018,8 +2184,22 @@ BALL x1 from EXTRA"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy6"]
+layout_mode = 0
 offset_top = -100.0
 offset_right = 80.0
 offset_bottom = -20.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
+
+[node name="Version" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 700.0
+offset_right = 1200.0
+offset_bottom = 780.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "GAMBALL v0.1.0"
+horizontal_alignment = 1
+vertical_alignment = 1
