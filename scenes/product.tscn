@@ -1,13 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8pf53q8cdbcj"]
 
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="1_5w4e2"]
-[ext_resource type="Script" path="res://scripts/product_panel.gd" id="1_as6e1"]
+[ext_resource type="Script" path="res://scripts/product.gd" id="1_as6e1"]
 [ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="2_0y3ap"]
 
-[node name="ProductPanel" type="Control"]
+[node name="ProductPanel" type="Control" node_paths=PackedStringArray("_icon_texture", "_name_label", "_desc_label", "_price_label")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_as6e1")
+_icon_texture = NodePath("Icon")
+_name_label = NodePath("Name")
+_desc_label = NodePath("Desc")
+_price_label = NodePath("Price")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 0
@@ -32,9 +36,9 @@ vertical_alignment = 1
 
 [node name="Price" type="Label" parent="."]
 layout_mode = 0
-offset_left = -40.0
+offset_left = -80.0
 offset_top = 100.0
-offset_right = 280.0
+offset_right = 560.0
 offset_bottom = 180.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("2_0y3ap")

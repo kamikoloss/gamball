@@ -30,6 +30,7 @@ extends Node
 @export var _arrow_square: TextureRect
 
 
+
 var money: int = 0:
 	set(value):
 		money = value
@@ -94,6 +95,11 @@ func _ready() -> void:
 		hole.ball_entered.connect(_on_hole_ball_entered)
 	# ビリヤード盤面上の入力を処理する
 	_billiards_board.input_event.connect(_on_billiards_board_input)
+	# すべての Product の signal に接続する
+	for maybe_product in _shop.get_children():
+		if maybe_product is Product:
+			maybe_product.icon_pressed.connect(_on_product_icon_pressed)
+
 
 	# 貸し出しボタンを1プッシュしておく
 	_on_buy_balls_button_pressed()
@@ -200,6 +206,23 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 				var level = _deck_level_list.pick_random()
 				var new_ball = create_new_ball(level)
 				_billiards.spawn_ball(new_ball)
+
+
+# 商品のアイコンがクリックされたときの処理
+func _on_product_icon_pressed(product: Product) -> void:
+	match product.product_type:
+		Product.ProductType.DeckPack:
+			pass
+		Product.ProductType.DeckPack2:
+			pass
+		Product.ProductType.DeckCleaner:
+			pass
+		Product.ProductType.ExtraPack:
+			pass
+		Product.ProductType.ExtraPack2:
+			pass
+		Product.ProductType.ExtraCleaner:
+			pass
 
 
 func _start_payout() -> void:

@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dli5r028n6byb" path="res://scenes/nail.tscn" id="8_ywild"]
 [ext_resource type="Script" path="res://scripts/stack.gd" id="10_ekmut"]
 [ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/lamp.tscn" id="11_hhfpi"]
-[ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/product_panel.tscn" id="13_d5gi3"]
+[ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/product.tscn" id="13_d5gi3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -2083,12 +2083,12 @@ offset_bottom = 680.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Shop/TextureRect"]
+[node name="Label" type="Label" parent="UI/Shop"]
 layout_mode = 0
-offset_left = 160.0
-offset_top = 40.0
-offset_right = 480.0
-offset_bottom = 120.0
+offset_left = 200.0
+offset_top = 80.0
+offset_right = 520.0
+offset_bottom = 160.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
@@ -2096,23 +2096,46 @@ text = "<SHOP>"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProductPanel" parent="UI/Shop/TextureRect" instance=ExtResource("13_d5gi3")]
-offset_left = 80.0
-offset_top = 120.0
-offset_right = 80.0
-offset_bottom = 120.0
+[node name="Product" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
+offset_left = 120.0
+offset_top = 160.0
+offset_right = 120.0
+offset_bottom = 160.0
 
-[node name="ProductPanel2" parent="UI/Shop/TextureRect" instance=ExtResource("13_d5gi3")]
-offset_left = 240.0
-offset_top = 120.0
-offset_right = 240.0
-offset_bottom = 120.0
+[node name="Product2" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
+offset_left = 280.0
+offset_top = 160.0
+offset_right = 280.0
+offset_bottom = 160.0
+product_type = 1
 
-[node name="ProductPanel3" parent="UI/Shop/TextureRect" instance=ExtResource("13_d5gi3")]
-offset_left = 400.0
-offset_top = 120.0
-offset_right = 400.0
-offset_bottom = 120.0
+[node name="Product3" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
+offset_left = 440.0
+offset_top = 160.0
+offset_right = 440.0
+offset_bottom = 160.0
+product_type = 2
+
+[node name="Product4" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
+offset_left = 120.0
+offset_top = 320.0
+offset_right = 120.0
+offset_bottom = 320.0
+product_type = 3
+
+[node name="Product5" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
+offset_left = 280.0
+offset_top = 320.0
+offset_right = 280.0
+offset_bottom = 320.0
+product_type = 4
+
+[node name="Product6" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
+offset_left = 440.0
+offset_top = 320.0
+offset_right = 440.0
+offset_bottom = 320.0
+product_type = 5
 
 [node name="Info" type="Control" parent="UI"]
 visible = false
