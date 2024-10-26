@@ -79,12 +79,11 @@ func _ready() -> void:
 	# UI
 	_shop.visible = false
 	_info.visible = false
+	_refresh_balls_slot_deck()
+	_refresh_balls_slot_extra()
 	# Arrow
 	_arrow.visible = false
 	_arrow_square.scale.y = 0
-	# Balls Slot
-	_refresh_balls_slot_deck()
-	_refresh_balls_slot_extra()
 
 	# Label 用に初期化する
 	money = 1000
@@ -106,8 +105,7 @@ func _ready() -> void:
 		if maybe_product is Product:
 			maybe_product.icon_pressed.connect(_on_product_icon_pressed)
 
-
-	# 貸し出しボタンを1プッシュしておく
+	# ボール購入ボタンを1プッシュする
 	_on_buy_balls_button_pressed()
 	# 払い出し処理を開始する
 	_start_payout()
@@ -220,11 +218,10 @@ func _on_product_icon_pressed(product: Product) -> void:
 	if money < product.price:
 		print("no money!")
 		return
-	else:
-		money -= product.price
 
 	# Product の効果を発動する
 	# TODO: マジックナンバーをなくす？
+	# TODO: 実行できない場合 return する
 	match product.product_type:
 		Product.ProductType.DeckPack:
 			for i in 3:
@@ -254,6 +251,9 @@ func _on_product_icon_pressed(product: Product) -> void:
 			if 1 < _extra_level_list.size():
 				_extra_level_list.sort()
 				_extra_level_list.pop_front()
+
+	# return しなかった場合: Money を減らす
+	money -= product.price
 
 	# DECK, EXTRA の見た目を更新する
 	_refresh_balls_slot_deck()

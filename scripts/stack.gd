@@ -4,6 +4,7 @@ extends Node2D
 
 @export var _spawn_position: Node2D
 
+
 func _ready() -> void:
 	pass
 

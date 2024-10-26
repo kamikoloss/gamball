@@ -73,6 +73,8 @@ func refresh_view() -> void:
 		Hole.HoleType.Stack:
 			_label.text = "＋"
 			return
+
+	# return しなかった場合:
 	_label.visible = false
 
 

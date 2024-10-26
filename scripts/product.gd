@@ -51,8 +51,8 @@ var price: int:
 
 
 func _ready() -> void:
-	refresh_view()
 	_icon_texture.gui_input.connect(_on_icon_input)
+	refresh_view()
 
 
 # 自身の見た目を更新する
