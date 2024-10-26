@@ -37,7 +37,15 @@ func _ready() -> void:
 func enable() -> void:
 	is_enabled = true
 	modulate = Color(1, 1, 1, 1)
-	_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_COMBINE_REPLACE
+
+	# 吸引力を有効化するかどうか
+	var gravity_hole_types = [
+		HoleType.Billiards,
+	]
+	if hole_type in gravity_hole_types:
+		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_COMBINE_REPLACE
+	else:
+		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_DISABLED
 
 # 無効化する
 func disable() -> void:
