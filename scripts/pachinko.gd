@@ -2,11 +2,17 @@ class_name Pachinko
 extends Node2D
 
 
+# Node
 @export var _spawn_position_a: Node2D
 @export var _spawn_position_b: Node2D
 @export var _wall_a: Node2D
 @export var _wall_b: Node2D
 @export var _rush_devices: Node2D
+
+# UI
+@export var _rush_lamps: Control
+@export var _rush_label_a: Label
+@export var _rush_label_b: Label
 
 
 var _tween_duration: float = 2.0
@@ -17,6 +23,7 @@ func _ready() -> void:
 	_start_wall_rotation()
 
 
+# ボールを生成する
 func spawn_ball(ball: Ball) -> void:
 	var spawn_posiiton = [
 		_spawn_position_a,
@@ -44,6 +51,8 @@ func disable_rush_devices() -> void:
 			device.disable()
 		elif device is Nail:
 			device.disable()
+	_rush_label_a.text = ""
+	_rush_label_b.text = ""
 
 
 # 回転床の動作を開始する

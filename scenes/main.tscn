@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=15 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_h2e4g"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="1_jd8wc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/pachinko.gd" id="8_sipkv"]
 [ext_resource type="PackedScene" uid="uid://dli5r028n6byb" path="res://scenes/nail.tscn" id="8_ywild"]
 [ext_resource type="Script" path="res://scripts/stack.gd" id="10_ekmut"]
+[ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/lamp.tscn" id="11_hhfpi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -418,13 +419,16 @@ hole_type = 0
 position = Vector2(500, 660)
 hole_type = 0
 
-[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_wall_a", "_wall_b", "_rush_devices")]
+[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_wall_a", "_wall_b", "_rush_devices", "_rush_lamps", "_rush_label_a", "_rush_label_b")]
 script = ExtResource("8_sipkv")
 _spawn_position_a = NodePath("Points/SpawnHoleA")
 _spawn_position_b = NodePath("Points/SpawnHoleB")
 _wall_a = NodePath("Walls/WallA")
 _wall_b = NodePath("Walls/WallB")
 _rush_devices = NodePath("Rush/Devices")
+_rush_lamps = NodePath("Rush/Lamps")
+_rush_label_a = NodePath("Rush/Display/RushA")
+_rush_label_b = NodePath("Rush/Display/RushB")
 
 [node name="Board" type="Area2D" parent="Pachinko"]
 position = Vector2(280, 360)
@@ -874,14 +878,6 @@ position = Vector2(1030, 380)
 [node name="Nail8" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 position = Vector2(1000, 390)
 
-[node name="Nail9" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
-visible = false
-position = Vector2(990, 280)
-
-[node name="Nail10" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
-visible = false
-position = Vector2(1010, 280)
-
 [node name="x3a" type="Node2D" parent="Pachinko/Nails"]
 
 [node name="Nail2" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
@@ -1031,7 +1027,7 @@ offset_right = 40.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="Pachinko/Rush/Display"]
+[node name="RushA" type="Label" parent="Pachinko/Rush/Display"]
 layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
@@ -1054,7 +1050,7 @@ offset_bottom = 20.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label2" type="Label" parent="Pachinko/Rush/Display"]
+[node name="RushB" type="Label" parent="Pachinko/Rush/Display"]
 layout_mode = 0
 offset_left = -40.0
 offset_right = 280.0
@@ -1070,411 +1066,148 @@ vertical_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Lamp" type="Control" parent="Pachinko/Rush/Lamps"]
-anchors_preset = 0
+[node name="Lamp" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp2" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp2" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 0.261799
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp2"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp3" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp3" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 0.523598
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp3"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp4" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp4" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 0.785397
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp4"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp5" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp5" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 1.0472
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp5"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp6" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp6" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 1.309
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp6"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp7" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp7" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 1.57079
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp7"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp8" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp8" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 1.83259
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp8"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp9" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp9" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 2.09439
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp9"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp10" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp10" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 2.35619
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp10"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp11" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp11" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 2.61799
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp11"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp12" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp12" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 2.87979
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp12"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp13" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp13" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 3.14159
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp13"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp14" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp14" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 3.40339
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp14"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp15" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp15" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 3.66519
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp15"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp16" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp16" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 3.92699
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp16"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp17" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp17" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 4.18878
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp17"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp18" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp18" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 4.45058
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp18"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp19" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp19" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 4.71238
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp19"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp20" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp20" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 4.97418
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp20"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp21" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp21" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 5.23598
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp21"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp22" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp22" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 5.49778
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp22"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp23" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp23" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 5.75958
 pivot_offset = Vector2(-40, 0)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp23"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
-
-[node name="Lamp24" type="Control" parent="Pachinko/Rush/Lamps"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Lamp24" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 6.02138
 pivot_offset = Vector2(-40, 0)
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Lamps/Lamp24"]
-layout_mode = 0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
-texture = ExtResource("2_svx0d")
-expand_mode = 1
 
 [node name="Devices" type="Node2D" parent="Pachinko/Rush"]
 

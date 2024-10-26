@@ -2,6 +2,10 @@ class_name Nail
 extends StaticBody2D
 
 
+func _ready() -> void:
+	enable()
+
+
 # 有効化する
 func enable() -> void:
 	modulate = Color(1, 1, 1, 1)

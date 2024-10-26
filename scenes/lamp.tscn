@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4j3v3c068tcf"]
+
+[ext_resource type="Script" path="res://scripts/lamp.gd" id="1_iuhpp"]
+[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/base_circle.png" id="2_vg38g"]
+
+[node name="Lamp" type="Control" node_paths=PackedStringArray("_texture")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_iuhpp")
+_texture = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("2_vg38g")
+expand_mode = 1

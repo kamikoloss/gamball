@@ -2,7 +2,7 @@ class_name Ball
 extends RigidBody2D
 
 
-# { <Level>: ボールの色 } 
+# ボールの色 { <Level>: Color } 
 const BALL_COLORS = {
 	-1: Color(0.5, 0.5, 0.5, 0.5),
 	0: Color(0.875, 0.875, 0.875), 1: Color.YELLOW, 2: Color.BLUE, 3: Color.RED,
