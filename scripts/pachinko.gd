@@ -6,12 +6,14 @@ extends Node2D
 @export var _spawn_position_b: Node2D
 @export var _wall_a: Node2D
 @export var _wall_b: Node2D
+@export var _rush_devices: Node2D
 
 
 var _tween_duration: float = 2.0
 
 
 func _ready() -> void:
+	disable_rush_devices()
 	_start_wall_rotation()
 
 
@@ -27,6 +29,24 @@ func spawn_ball(ball: Ball) -> void:
 	ball.apply_impulse(spawn_impulse)
 
 
+# ラッシュを装置を有効化する
+func enable_rush_devices() -> void:
+	for device in _rush_devices.get_children():
+		if device is Hole:
+			device.enable()
+		elif device is Nail:
+			device.enable()
+
+# ラッシュ装置を無効化する
+func disable_rush_devices() -> void:
+	for device in _rush_devices.get_children():
+		if device is Hole:
+			device.disable()
+		elif device is Nail:
+			device.disable()
+
+
+# 回転床の動作を開始する
 func _start_wall_rotation() -> void:
 	var wall_settings = [
 		{ "obj": _wall_a, "deg1": 60, "deg2": 0 },

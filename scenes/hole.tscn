@@ -8,10 +8,11 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_okw7p"]
 
-[node name="Hole" type="Area2D" node_paths=PackedStringArray("_label") groups=["hole"]]
+[node name="Hole" type="Area2D" node_paths=PackedStringArray("_label", "_gravity_area") groups=["hole"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_226au")
 _label = NodePath("Label")
+_gravity_area = NodePath("Area2D")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
@@ -47,7 +48,7 @@ shape = SubResource("CircleShape2D_i0j7q")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(1.5, 1.5)
-priority = 11
+priority = 20
 gravity_space_override = 2
 gravity_point = true
 

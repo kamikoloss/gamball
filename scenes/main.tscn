@@ -418,12 +418,13 @@ hole_type = 0
 position = Vector2(500, 660)
 hole_type = 0
 
-[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_wall_a", "_wall_b")]
+[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_wall_a", "_wall_b", "_rush_devices")]
 script = ExtResource("8_sipkv")
 _spawn_position_a = NodePath("Points/SpawnHoleA")
 _spawn_position_b = NodePath("Points/SpawnHoleB")
 _wall_a = NodePath("Walls/WallA")
 _wall_b = NodePath("Walls/WallB")
+_rush_devices = NodePath("Rush/Devices")
 
 [node name="Board" type="Area2D" parent="Pachinko"]
 position = Vector2(280, 360)
@@ -1039,13 +1040,14 @@ offset_bottom = 60.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
-text = "RUSH 1"
+text = "RUSH 00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Pachinko/Rush/Display"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
 self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
 offset_left = -40.0
 offset_right = 40.0
 offset_bottom = 20.0
@@ -1053,6 +1055,7 @@ texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="Pachinko/Rush/Display"]
+layout_mode = 0
 offset_left = -40.0
 offset_right = 280.0
 offset_bottom = 80.0
@@ -1473,42 +1476,38 @@ offset_bottom = 2.0
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Device" type="Node2D" parent="Pachinko/Rush"]
+[node name="Devices" type="Node2D" parent="Pachinko/Rush"]
 
-[node name="Nails" type="Node2D" parent="Pachinko/Rush/Device"]
-
-[node name="Nail4" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+[node name="Nail4" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
 position = Vector2(-120, 60)
 
-[node name="Nail5" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+[node name="Nail5" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
 position = Vector2(-100, 80)
 
-[node name="Nail6" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+[node name="Nail6" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
 position = Vector2(-60, 80)
 
-[node name="Nail7" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+[node name="Nail7" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
 position = Vector2(-40, 60)
 
-[node name="Nail10" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+[node name="Nail10" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
 position = Vector2(40, 60)
 
-[node name="Nail11" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+[node name="Nail11" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
 position = Vector2(60, 80)
 
-[node name="Nail12" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+[node name="Nail12" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
 position = Vector2(100, 80)
 
-[node name="Nail13" parent="Pachinko/Rush/Device/Nails" instance=ExtResource("8_ywild")]
+[node name="Nail13" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
 position = Vector2(120, 60)
 
-[node name="Holes" type="Node2D" parent="Pachinko/Rush/Device"]
-
-[node name="Hole" parent="Pachinko/Rush/Device/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole" parent="Pachinko/Rush/Devices" instance=ExtResource("6_wvfqf")]
 position = Vector2(-80, 40)
 hole_type = 2
 gain_ratio = 10
 
-[node name="Hole2" parent="Pachinko/Rush/Device/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole2" parent="Pachinko/Rush/Devices" instance=ExtResource("6_wvfqf")]
 position = Vector2(80, 40)
 hole_type = 2
 gain_ratio = 10
