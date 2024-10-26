@@ -113,6 +113,7 @@ func _input(event: InputEvent) -> void:
 	# マウスボタンを
 	if event is InputEventMouseButton:
 		# 押したとき: Billiards Board 上に限定する
+		# see. _on_billiards_board_input()
 		if event.pressed:
 			pass
 		# 離したとき
@@ -127,7 +128,7 @@ func _input(event: InputEvent) -> void:
 			_billiards.shoot_ball(impulse * _impulse_ratio)
 	# マウス全般を
 	if event is InputEventMouseMotion:
-		# マウスボタンを押している間
+		# ドラッグしている間
 		if _is_dragging:
 			# Arrow を更新する
 			_drag_position = event.position
@@ -189,8 +190,8 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	# マウスボタンを
 	if event is InputEventMouseButton:
-		# 押したとき
-		if event.pressed:
+		# 左クリックを押したとき
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if 0 < balls:
 				_drag_position = _arrow_center_position.position
 				_is_dragging = true
@@ -200,9 +201,6 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 				var level = _deck_level_list.pick_random()
 				var new_ball = create_new_ball(level)
 				_billiards.spawn_ball(new_ball)
-		# 離したとき: _input 全般で対応する
-		else:
-			pass
 
 
 func _start_payout() -> void:
