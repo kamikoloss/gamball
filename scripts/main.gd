@@ -2,6 +2,12 @@ class_name Main
 extends Node
 
 
+# DECK の最大数
+const DECK_MAX_SIZE = 16
+# EXTRA の最大数
+const EXTRA_MAX_SIZE = 16
+
+
 # PackedScene
 @export var _ball_scene: PackedScene
 
@@ -77,8 +83,8 @@ func _ready() -> void:
 	_arrow.visible = false
 	_arrow_square.scale.y = 0
 	# Balls Slot
-	_refresh_balls_slot(_balls_slot_deck, _deck_level_list)
-	_refresh_balls_slot(_balls_slot_extra, _extra_level_list)
+	_refresh_balls_slot_deck()
+	_refresh_balls_slot_extra()
 
 	# Label 用に初期化する
 	money = 1000
@@ -210,19 +216,48 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 
 # 商品のアイコンがクリックされたときの処理
 func _on_product_icon_pressed(product: Product) -> void:
+	# Money が足りない場合: 何もしない
+	if money < product.price:
+		print("no money!")
+		return
+	else:
+		money -= product.price
+
+	# Product の効果を発動する
+	# TODO: マジックナンバーをなくす？
 	match product.product_type:
 		Product.ProductType.DeckPack:
-			pass
+			for i in 3:
+				if _deck_level_list.size() < DECK_MAX_SIZE:
+					var level = randi_range(0, 7)
+					_deck_level_list.push_back(level)
 		Product.ProductType.DeckPack2:
-			pass
+			for i in 1:
+				if _deck_level_list.size() < DECK_MAX_SIZE:
+					var level = randi_range(8, 15)
+					_deck_level_list.push_back(level)
 		Product.ProductType.DeckCleaner:
-			pass
+			if 1 < _deck_level_list.size():
+				_deck_level_list.sort()
+				_deck_level_list.pop_front()
 		Product.ProductType.ExtraPack:
-			pass
+			for i in 2:
+				if _extra_level_list.size() < EXTRA_MAX_SIZE:
+					var level = randi_range(0, 7)
+					_extra_level_list.push_back(level)
 		Product.ProductType.ExtraPack2:
-			pass
+			for i in 1:
+				if _extra_level_list.size() < EXTRA_MAX_SIZE:
+					var level = randi_range(8, 15)
+					_extra_level_list.push_back(level)
 		Product.ProductType.ExtraCleaner:
-			pass
+			if 1 < _extra_level_list.size():
+				_extra_level_list.sort()
+				_extra_level_list.pop_front()
+
+	# DECK, EXTRA の見た目を更新する
+	_refresh_balls_slot_deck()
+	_refresh_balls_slot_extra()
 
 
 func _start_payout() -> void:
@@ -250,6 +285,12 @@ func _refresh_arrow() -> void:
 	_arrow.rotation_degrees = rad_to_deg(drag_vector.angle()) + 90
 	_arrow_square.scale.y = (clamped_length / _drag_length_max) * 10
 
+
+func _refresh_balls_slot_deck() -> void:
+	_refresh_balls_slot(_balls_slot_deck, _deck_level_list)
+
+func _refresh_balls_slot_extra() -> void:
+	_refresh_balls_slot(_balls_slot_extra, _extra_level_list)
 
 func _refresh_balls_slot(parent_node: Node, level_list: Array[int]) -> void:
 	var index = 0

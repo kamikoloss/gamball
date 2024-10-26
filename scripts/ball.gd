@@ -15,29 +15,31 @@ const BALL_COLORS = {
 @export var level: int = 0 # ボール番号
 @export var is_display: bool = false # 展示用かどうか
 
-@export var _texture_rect: TextureRect
-@export var _texture_rect_in: TextureRect
+@export var _texture_rect: TextureRect # ボールの色
+@export var _texture_rect_in: TextureRect # ボール番号の背景
 @export var _label: Label
 @export var _area2d: Area2D
 
 
 func _ready() -> void:
 	refresh_view()
-	refresh_display()
 
 
 # 自身の見た目を更新する
 func refresh_view() -> void:
+	# 色
 	_texture_rect.self_modulate = BALL_COLORS[level]
+
+	# ボール番号
 	if level < 0:
-		_label.visible = false
 		_texture_rect_in.visible = false
+		_label.visible = false
 	else:
+		_texture_rect_in.visible = true
+		_label.visible = true
 		_label.text = str(level)
 
-
-# 自身の展示設定を更新する
-func refresh_display() -> void:
+	# 展示用
 	if is_display:
 		freeze = true
 		collision_layer = 0
