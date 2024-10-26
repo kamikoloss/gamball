@@ -101,7 +101,7 @@ func _ready() -> void:
 	_start_payout()
 
 
-# Ball を生成する
+# Ball instance を作成する
 func create_new_ball(level: int = 0) -> Ball:
 	var ball: RigidBody2D = _ball_scene.instantiate()
 	ball.level = level
@@ -109,15 +109,13 @@ func create_new_ball(level: int = 0) -> Ball:
 	return ball
 
 
+# 左クリックを押したとき: Billiards Board 上に限定する
+# see. _on_billiards_board_input()
 func _input(event: InputEvent) -> void:
-	# マウスボタンを
+	# マウスボタン
 	if event is InputEventMouseButton:
-		# 押したとき: Billiards Board 上に限定する
-		# see. _on_billiards_board_input()
-		if event.pressed:
-			pass
-		# 離したとき
-		else:
+		# 左クリックを離したとき
+		if not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			_is_dragging = false
 			_arrow.visible = false
 			_arrow_square.scale.y = 0
@@ -126,7 +124,7 @@ func _input(event: InputEvent) -> void:
 			var clamped_length =  clampf(drag_vector.length(), 0, _drag_length_max)
 			var impulse = drag_vector.normalized() * clamped_length
 			_billiards.shoot_ball(impulse * _impulse_ratio)
-	# マウス全般を
+	# マウス動作
 	if event is InputEventMouseMotion:
 		# ドラッグしている間
 		if _is_dragging:
@@ -179,7 +177,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			var amount = hole.gain_ratio * ball.level
 			_push_payout(ball.level, amount)
 		Hole.HoleType.Lost:
-			# 何もしない
+			# 何もしない (Ball は消失する)
 			pass
 		Hole.HoleType.Stack:
 			# Ball の数をカウントする
@@ -188,10 +186,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 
 # ビリヤード盤面上で入力があったときの処理
 func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	# マウスボタンを
+	# マウスボタン
 	if event is InputEventMouseButton:
 		# 左クリックを押したとき
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			# 
 			if 0 < balls:
 				_drag_position = _arrow_center_position.position
 				_is_dragging = true
