@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=16 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_h2e4g"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="1_jd8wc"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dli5r028n6byb" path="res://scenes/nail.tscn" id="8_ywild"]
 [ext_resource type="Script" path="res://scripts/stack.gd" id="10_ekmut"]
 [ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/lamp.tscn" id="11_hhfpi"]
+[ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/product_panel.tscn" id="13_d5gi3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -2070,7 +2071,6 @@ texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
 [node name="Shop" type="Control" parent="UI"]
-visible = false
 anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Shop"]
@@ -2096,323 +2096,23 @@ text = "<SHOP>"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Buy" type="Button" parent="UI/Shop/TextureRect"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 220.0
-offset_right = 120.0
-offset_bottom = 240.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
-
-[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "＄9999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 600.0
-offset_bottom = 60.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "DECK Pack"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = 20.0
-offset_right = 760.0
-offset_bottom = 220.0
-scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "Add random BALL x3
-(0-7) to DECK"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy"]
-layout_mode = 0
-offset_top = -100.0
+[node name="ProductPanel" parent="UI/Shop/TextureRect" instance=ExtResource("13_d5gi3")]
+offset_left = 80.0
+offset_top = 120.0
 offset_right = 80.0
-offset_bottom = -20.0
-texture = ExtResource("1_jd8wc")
-expand_mode = 1
+offset_bottom = 120.0
 
-[node name="Buy2" type="Button" parent="UI/Shop/TextureRect"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 220.0
-offset_right = 280.0
-offset_bottom = 240.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
+[node name="ProductPanel2" parent="UI/Shop/TextureRect" instance=ExtResource("13_d5gi3")]
+offset_left = 240.0
+offset_top = 120.0
+offset_right = 240.0
+offset_bottom = 120.0
 
-[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy2"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "＄9999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy2"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 600.0
-offset_bottom = 60.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "DECK Pack+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy2"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = 20.0
-offset_right = 760.0
-offset_bottom = 220.0
-scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "Add random BALL x1
-(8-15) to DECK"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy2"]
-layout_mode = 0
-offset_top = -100.0
-offset_right = 80.0
-offset_bottom = -20.0
-texture = ExtResource("1_jd8wc")
-expand_mode = 1
-
-[node name="Buy3" type="Button" parent="UI/Shop/TextureRect"]
-layout_mode = 0
-offset_left = 360.0
-offset_top = 220.0
-offset_right = 440.0
-offset_bottom = 240.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
-
-[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy3"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "＄9999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy3"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 600.0
-offset_bottom = 60.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "DECK Cleaner"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy3"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = 20.0
-offset_right = 760.0
-offset_bottom = 220.0
-scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "Remove the lowest
-BALL x1 from DECK"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy3"]
-layout_mode = 0
-offset_top = -100.0
-offset_right = 80.0
-offset_bottom = -20.0
-texture = ExtResource("1_jd8wc")
-expand_mode = 1
-
-[node name="Buy4" type="Button" parent="UI/Shop/TextureRect"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 380.0
-offset_right = 120.0
-offset_bottom = 400.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
-
-[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy4"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "＄9999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy4"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 600.0
-offset_bottom = 60.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "EXTRA Pack"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy4"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = 20.0
-offset_right = 760.0
-offset_bottom = 220.0
-scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "Add random BALL x2
-(0-7) to EXTRA"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy4"]
-layout_mode = 0
-offset_top = -100.0
-offset_right = 80.0
-offset_bottom = -20.0
-texture = ExtResource("1_jd8wc")
-expand_mode = 1
-
-[node name="Buy5" type="Button" parent="UI/Shop/TextureRect"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 380.0
-offset_right = 280.0
-offset_bottom = 400.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
-
-[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy5"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "＄9999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy5"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 600.0
-offset_bottom = 60.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "EXTRA Pack+"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy5"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = 20.0
-offset_right = 760.0
-offset_bottom = 220.0
-scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "Add random BALL x1
-(8-15) to EXTRA"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy5"]
-layout_mode = 0
-offset_top = -100.0
-offset_right = 80.0
-offset_bottom = -20.0
-texture = ExtResource("1_jd8wc")
-expand_mode = 1
-
-[node name="Buy6" type="Button" parent="UI/Shop/TextureRect"]
-layout_mode = 0
-offset_left = 360.0
-offset_top = 380.0
-offset_right = 440.0
-offset_bottom = 400.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
-
-[node name="Label" type="Label" parent="UI/Shop/TextureRect/Buy6"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "＄9999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Shop/TextureRect/Buy6"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 600.0
-offset_bottom = 60.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "EXTRA Cleaner"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="UI/Shop/TextureRect/Buy6"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = 20.0
-offset_right = 760.0
-offset_bottom = 220.0
-scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "Remove the lowest
-BALL x1 from EXTRA"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UI/Shop/TextureRect/Buy6"]
-layout_mode = 0
-offset_top = -100.0
-offset_right = 80.0
-offset_bottom = -20.0
-texture = ExtResource("1_jd8wc")
-expand_mode = 1
+[node name="ProductPanel3" parent="UI/Shop/TextureRect" instance=ExtResource("13_d5gi3")]
+offset_left = 400.0
+offset_top = 120.0
+offset_right = 400.0
+offset_bottom = 120.0
 
 [node name="Info" type="Control" parent="UI"]
 visible = false
