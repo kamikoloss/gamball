@@ -814,6 +814,18 @@ position = Vector2(800, 560)
 [node name="Nail20" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
 position = Vector2(1200, 560)
 
+[node name="Nail21" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(780, 240)
+
+[node name="Nail22" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(780, 560)
+
+[node name="Nail23" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(1220, 240)
+
+[node name="Nail24" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+position = Vector2(1220, 560)
+
 [node name="Bottom" type="Node2D" parent="Pachinko/Nails"]
 
 [node name="Nail10" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
@@ -878,6 +890,9 @@ position = Vector2(1030, 380)
 [node name="Nail8" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
 position = Vector2(1000, 390)
 
+[node name="Nail10" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
+position = Vector2(1000, 280)
+
 [node name="x3a" type="Node2D" parent="Pachinko/Nails"]
 
 [node name="Nail2" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
@@ -905,9 +920,6 @@ position = Vector2(920, 470)
 [node name="Nail9" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
 position = Vector2(900, 360)
 
-[node name="Nail10" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
-position = Vector2(950, 320)
-
 [node name="x3b" type="Node2D" parent="Pachinko/Nails"]
 
 [node name="Nail2" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
@@ -934,9 +946,6 @@ position = Vector2(1080, 470)
 
 [node name="Nail9" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
 position = Vector2(1100, 360)
-
-[node name="Nail10" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
-position = Vector2(1050, 320)
 
 [node name="x5" type="Node2D" parent="Pachinko/Nails"]
 
