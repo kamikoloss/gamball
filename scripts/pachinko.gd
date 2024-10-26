@@ -23,7 +23,7 @@ func _ready() -> void:
 	_start_rotation_wall()
 
 
-# 盤面上に Ball を生成する
+# 盤面上に Ball を移動する
 func spawn_ball(ball: Ball) -> void:
 	var spawn_posiiton = [
 		_spawn_position_a,

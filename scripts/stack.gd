@@ -8,6 +8,7 @@ func _ready() -> void:
 	pass
 
 
+# 盤面上に Ball を移動する
 func spawn_ball(ball: Ball) -> void:
 	ball.position = _spawn_position.position
 

@@ -33,16 +33,6 @@ func _ready() -> void:
 	refresh_view()
 
 
-func _on_area_entered(area: Area2D) -> void:
-	if not is_enabled:
-		return
-
-	var maybe_ball = area.get_parent()
-	if maybe_ball is Ball:
-		ball_entered.emit(self, maybe_ball)
-		maybe_ball.queue_free()
-
-
 # 有効化する
 func enable() -> void:
 	is_enabled = true
@@ -76,3 +66,13 @@ func refresh_view() -> void:
 			_label.text = "＋"
 			return
 	_label.visible = false
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if not is_enabled:
+		return
+
+	var maybe_ball = area.get_parent()
+	if maybe_ball is Ball:
+		ball_entered.emit(self, maybe_ball)
+		maybe_ball.queue_free()

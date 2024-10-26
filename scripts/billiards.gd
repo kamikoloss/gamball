@@ -12,12 +12,14 @@ extends Node2D
 var _current_ball: Ball = null
 
 
+# 盤面上に Ball を移動する
 func spawn_ball(ball: Ball) -> void:
 	ball.position = _spawn_position.position
 	ball.freeze = true
 	_current_ball = ball
 
 
+# 盤面上に Extra Ball を移動する
 func spawn_extra_ball(ball: Ball) -> void:
 	var spawn_posiiton = [
 		_spawn_extra_position_a,
@@ -32,6 +34,7 @@ func spawn_extra_ball(ball: Ball) -> void:
 	ball.apply_impulse(spawn_impulse)
 
 
+# Ball を発射する
 func shoot_ball(implulse: Vector2) -> void:
 	if _current_ball == null:
 		return
