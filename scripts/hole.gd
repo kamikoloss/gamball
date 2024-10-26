@@ -2,7 +2,7 @@ class_name Hole
 extends Area2D
 
 
-# Ball が Hole に落ちたとき (Hole: 落ちた Hole, Ball: 落ちた Ball)
+# Ball が Hole に落ちたとき (Hole, Ball)
 signal ball_entered
 
 
@@ -20,7 +20,8 @@ var is_enabled = true
 
 
 @export var hole_type: HoleType = HoleType.Lost
-@export var gain_ratio: int = 0 # 増加する倍率
+@export var gain_ratio: int = 0 # (Gain 用) 増加する倍率
+
 
 @export var _label: Label
 @export var _gravity_area: Area2D

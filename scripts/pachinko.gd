@@ -20,10 +20,10 @@ var _tween_duration: float = 2.0
 
 func _ready() -> void:
 	disable_rush_devices()
-	_start_wall_rotation()
+	_start_rotation_wall()
 
 
-# ボールを生成する
+# 盤面上に Ball を生成する
 func spawn_ball(ball: Ball) -> void:
 	var spawn_posiiton = [
 		_spawn_position_a,
@@ -56,7 +56,7 @@ func disable_rush_devices() -> void:
 
 
 # 回転床の動作を開始する
-func _start_wall_rotation() -> void:
+func _start_rotation_wall() -> void:
 	var wall_settings = [
 		{ "obj": _wall_a, "deg1": 60, "deg2": 0 },
 		{ "obj": _wall_b, "deg1": 0, "deg2": -60 },

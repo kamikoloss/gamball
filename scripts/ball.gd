@@ -13,7 +13,7 @@ const BALL_COLORS = {
 
 
 @export var level: int = 0 # ボール番号
-@export var is_display: bool = false # 展示用のボールかどうか
+@export var is_display: bool = false # 展示用かどうか
 
 @export var _texture_rect: TextureRect
 @export var _texture_rect_in: TextureRect

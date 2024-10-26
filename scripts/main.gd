@@ -101,6 +101,7 @@ func _ready() -> void:
 	_start_payout()
 
 
+# Ball を生成する
 func create_new_ball(level: int = 0) -> Ball:
 	var ball: RigidBody2D = _ball_scene.instantiate()
 	ball.level = level
@@ -164,11 +165,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Main] ball (%s) is entered to hole. (%s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
 		Hole.HoleType.Billiards:
-			# Pachinko 上に同じ Ball を出現させる
+			# パチンコ盤面上に同じ Ball を出現させる
 			var new_ball = create_new_ball(ball.level)
 			_pachinko.spawn_ball(new_ball)
 		Hole.HoleType.Extra:
-			# Billiards 上に Extra Ball を出現させる
+			# ビリヤード盤面上にランダムな Extra Ball を出現させる
 			var level = _extra_level_list.pick_random()
 			var new_ball = create_new_ball(level)
 			_billiards.spawn_extra_ball(new_ball)
