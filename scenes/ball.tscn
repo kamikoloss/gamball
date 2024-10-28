@@ -12,11 +12,14 @@ radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_texture_rect", "_texture_rect_in", "_label", "_area2d")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_texture_rect", "_texture_rect_in", "_texture_rect_mask", "_label", "_area2d")]
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
+contact_monitor = true
+max_contacts_reported = 4
 script = ExtResource("1_q12tn")
 _texture_rect = NodePath("TextureRect")
 _texture_rect_in = NodePath("TextureRect2")
+_texture_rect_mask = NodePath("TextureRect3")
 _label = NodePath("Label")
 _area2d = NodePath("Area2D")
 
@@ -67,6 +70,24 @@ theme_override_font_sizes/font_size = 64
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+self_modulate = Color(1, 0, 1, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("1_8km44")
+expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rn34c")

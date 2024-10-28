@@ -112,9 +112,10 @@ func _ready() -> void:
 
 
 # Ball instance を作成する
-func create_new_ball(level: int = 0) -> Ball:
-	var ball: RigidBody2D = _ball_scene.instantiate()
+func create_new_ball(level: int = 0, is_active = true) -> Ball:
+	var ball: Ball = _ball_scene.instantiate()
 	ball.level = level
+	ball.is_active = is_active
 	_balls.add_child(ball)
 	return ball
 
@@ -174,6 +175,9 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Main] ball (%s) is entered to hole. (%s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
 		Hole.HoleType.Billiards:
+			# Ball が有効化されていない場合: 何もしない (Ball は消失する)
+			if not ball.is_active:
+				return
 			# パチンコ盤面上に同じ Ball を出現させる
 			var new_ball = create_new_ball(ball.level)
 			_pachinko.spawn_ball(new_ball)
@@ -200,15 +204,14 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 	if event is InputEventMouseButton:
 		# 左クリックを押したとき
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			# 
 			if 0 < balls:
 				_drag_position = _arrow_center_position.position
 				_is_dragging = true
 				_arrow.visible = true
-				# Ball を生成する
+				# ビリヤード盤面上に Ball を生成する
 				balls -= 1
 				var level = _deck_level_list.pick_random()
-				var new_ball = create_new_ball(level)
+				var new_ball = create_new_ball(level, false) # 最初の出現時には有効化されていない
 				_billiards.spawn_ball(new_ball)
 
 
@@ -219,7 +222,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 		print("no money!")
 		return
 
-	var rarity_level_dict = {
+	var ball_level_rarity = {
 		Ball.Rarity.Common: [0, 1, 2, 3],
 		Ball.Rarity.Rare: [4, 5, 6, 7],
 		Ball.Rarity.Epic: [8, 9, 10, 11],
@@ -234,7 +237,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 			for i in 3:
 				if _deck_level_list.size() < DECK_MAX_SIZE:
 					var random_rarity = _draw_random_rarity()
-					var level = rarity_level_dict[random_rarity].pick_random()
+					var level = ball_level_rarity[random_rarity].pick_random()
 					_deck_level_list.push_back(level)
 					print("random_rarity: %s, level: %s" % [random_rarity, level])
 		Product.ProductType.DeckPack2:
@@ -247,7 +250,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 			for i in 2:
 				if _extra_level_list.size() < EXTRA_MAX_SIZE:
 					var random_rarity = _draw_random_rarity()
-					var level = rarity_level_dict[random_rarity].pick_random()
+					var level = ball_level_rarity[random_rarity].pick_random()
 					_extra_level_list.push_back(level)
 					print("random_rarity: %s, level: %s" % [random_rarity, level])
 		Product.ProductType.ExtraPack2:
@@ -277,7 +280,7 @@ func _draw_random_rarity() -> Ball.Rarity:
 	# 抽選の分母 (合計)
 	var rarity_weight_total = 0
 	for rarity in rarity_weight.keys():
-		# TODO: 重みづけエフェクトを実装するならここ
+		# TODO: 重み変更効果を実装するならここ
 		rarity_weight_total += rarity_weight[rarity]
 
 	# 分母内の整数を抽選する
