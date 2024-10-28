@@ -2103,6 +2103,7 @@ offset_right = 120.0
 offset_bottom = 160.0
 
 [node name="Product2" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
+visible = false
 offset_left = 280.0
 offset_top = 160.0
 offset_right = 280.0
@@ -2124,6 +2125,7 @@ offset_bottom = 320.0
 product_type = 3
 
 [node name="Product5" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
+visible = false
 offset_left = 280.0
 offset_top = 320.0
 offset_right = 280.0

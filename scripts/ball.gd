@@ -2,6 +2,10 @@ class_name Ball
 extends RigidBody2D
 
 
+# ボールのレア度
+enum Rarity { Common, Rare, Epic, Legendary }
+
+
 # ボールの色の定義 { <Level>: Color } 
 const BALL_COLORS = {
 	-1: Color(0.5, 0.5, 0.5, 0.5),
@@ -19,6 +23,9 @@ const BALL_COLORS = {
 @export var _texture_rect_in: TextureRect # ボール番号の背景
 @export var _label: Label
 @export var _area2d: Area2D
+
+
+var rarity: Rarity = Rarity.Common # ボールのレア度
 
 
 func _ready() -> void:
