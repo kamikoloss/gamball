@@ -19,6 +19,13 @@ func spawn_ball(ball: Ball) -> void:
 	_current_ball = ball
 
 
+# spawn_ball() をなかったことにする
+func rollback_spawn_ball() -> void:
+	if _current_ball == null:
+		return
+	_current_ball.queue_free()
+
+
 # 盤面上に Extra Ball を移動する
 func spawn_extra_ball(ball: Ball) -> void:
 	var spawn_posiiton = [

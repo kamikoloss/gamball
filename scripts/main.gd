@@ -6,6 +6,10 @@ extends Node
 const DECK_MAX_SIZE = 16
 # EXTRA の最大数
 const EXTRA_MAX_SIZE = 16
+# Ball が発射される最低のドラッグの距離 (px)
+const DRAG_LENGTH_MIN: float = 10
+# 引っ張りが最大になるドラッグの距離 (px)
+const DRAG_LENGTH_MAX: float = 160
 
 
 # PackedScene
@@ -48,11 +52,9 @@ var balls: int = 0:
 
 
 # 現在ドラッグ中かどうか
-var _is_dragging: bool
+var _is_dragging: bool = false
 # 現在ドラッグしている座標
 var _drag_position: Vector2
-# 引っ張りが最大になるドラッグの距離 (px)
-var _drag_length_max: float = 160
 # 引っ張りで Ball が吹き飛ぶ強さ
 # NOTE: _drag_length_max と反比例させる
 var _impulse_ratio: float = 10
@@ -130,11 +132,19 @@ func _input(event: InputEvent) -> void:
 			_is_dragging = false
 			_arrow.visible = false
 			_arrow_square.scale.y = 0
-			# Ball を発射する
+			# ドラッグの距離を算出して丸める
 			var drag_vector = _arrow_center_position.position - _drag_position
-			var clamped_length =  clampf(drag_vector.length(), 0, _drag_length_max)
-			var impulse = drag_vector.normalized() * clamped_length
-			_billiards.shoot_ball(impulse * _impulse_ratio)
+			var clamped_length = clampf(drag_vector.length(), 0, DRAG_LENGTH_MAX)
+
+			# ドラッグの距離が充分な場合: Ball を発射する
+			if DRAG_LENGTH_MIN < clamped_length:
+				var impulse = drag_vector.normalized() * clamped_length
+				_billiards.shoot_ball(impulse * _impulse_ratio)
+			# ドラッグの距離が充分でない場合: Ball 生成をなかったことにする
+			else:
+				_billiards.rollback_spawn_ball()
+				balls += 1
+
 	# マウス動作
 	if event is InputEventMouseMotion:
 		# ドラッグしている間
@@ -236,12 +246,12 @@ func _on_product_icon_pressed(product: Product) -> void:
 		Product.ProductType.DeckPack:
 			for i in 3:
 				if _deck_level_list.size() < DECK_MAX_SIZE:
-					var random_rarity = _draw_random_rarity()
+					var random_rarity = _pick_random_rarity()
 					var level = ball_level_rarity[random_rarity].pick_random()
 					_deck_level_list.push_back(level)
-					print("random_rarity: %s, level: %s" % [random_rarity, level])
+					print("[Main] random_rarity: %s, level: %s" % [random_rarity, level])
 		Product.ProductType.DeckPack2:
-			pass
+			return
 		Product.ProductType.DeckCleaner:
 			if 1 < _deck_level_list.size():
 				_deck_level_list.sort()
@@ -249,12 +259,12 @@ func _on_product_icon_pressed(product: Product) -> void:
 		Product.ProductType.ExtraPack:
 			for i in 2:
 				if _extra_level_list.size() < EXTRA_MAX_SIZE:
-					var random_rarity = _draw_random_rarity()
+					var random_rarity = _pick_random_rarity()
 					var level = ball_level_rarity[random_rarity].pick_random()
 					_extra_level_list.push_back(level)
-					print("random_rarity: %s, level: %s" % [random_rarity, level])
+					print("[Main] random_rarity: %s, level: %s" % [random_rarity, level])
 		Product.ProductType.ExtraPack2:
-			pass
+			return
 		Product.ProductType.ExtraCleaner:
 			if 1 < _extra_level_list.size():
 				_extra_level_list.sort()
@@ -269,7 +279,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 
 
 # 重み付きのレア度を抽選する
-func _draw_random_rarity() -> Ball.Rarity:
+func _pick_random_rarity() -> Ball.Rarity:
 	# レア度の分子の割合
 	var rarity_weight = {
 		Ball.Rarity.Common: 40,
@@ -319,9 +329,9 @@ func _pop_payout() -> void:
 
 func _refresh_arrow() -> void:
 	var drag_vector = _arrow_center_position.position - _drag_position
-	var clamped_length =  clampf(drag_vector.length(), 0, _drag_length_max)
+	var clamped_length =  clampf(drag_vector.length(), 0, DRAG_LENGTH_MAX)
 	_arrow.rotation_degrees = rad_to_deg(drag_vector.angle()) + 90
-	_arrow_square.scale.y = (clamped_length / _drag_length_max) * 10
+	_arrow_square.scale.y = (clamped_length / DRAG_LENGTH_MAX) * 10 # scale 10 が最大
 
 
 func _refresh_balls_slot_deck() -> void:
