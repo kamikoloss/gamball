@@ -25,7 +25,12 @@ const PRODUCT_PRICES = {
 	ProductType.ExtraCleaner: 100,
 }
 
+const BUY_COLOR_ACTIVE = Color(0.25, 0.5, 0.25)
+const BUY_COLOR_DEACTIVE = Color(0.5, 0.25, 0.25)
+
+
 # 商品の [<名称>, <説明分>]
+# TODO: JSON に逃がす
 const PRODUCT_DATA = {
 	ProductType.DeckPack: ["DECK Pack", "Add random BALL x3\n(0-7) to DECK"],
 	ProductType.DeckPack2: ["DECK Pack+", "Add random BALL x1\n(8-15) to DECK"],
@@ -40,6 +45,7 @@ const PRODUCT_DATA = {
 
 # UI
 @export var _icon_texture: TextureRect
+@export var _buy_texture: TextureRect
 @export var _name_label: Label
 @export var _desc_label: Label
 @export var _price_label: Label
@@ -54,8 +60,14 @@ var price: int:
 		return PRODUCT_PRICES[product_type]
 
 
+# アイコン画像にカーソルが載っているか
+var _is_icon_hovered: bool = false
+
+
 func _ready() -> void:
 	_icon_texture.gui_input.connect(_on_icon_input)
+	_icon_texture.mouse_entered.connect(_on_icon_mouse_entered)
+	_icon_texture.mouse_exited.connect(_on_icon_mouse_exited)
 	refresh_view()
 
 
@@ -75,8 +87,24 @@ func refresh_view() -> void:
 	_desc_label.text = PRODUCT_DATA[product_type][1]
 	_price_label.text = "＄%s" % str(price)
 
+	# 購入ボタン
+	if _is_icon_hovered:
+		_buy_texture.visible = true
+		_buy_texture.self_modulate = BUY_COLOR_ACTIVE
+	else:
+		_buy_texture.visible = false
+
 
 func _on_icon_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			icon_pressed.emit(self)
+
+
+func _on_icon_mouse_entered() -> void:
+	_is_icon_hovered = true
+	refresh_view()
+
+func _on_icon_mouse_exited() -> void:
+	_is_icon_hovered = false
+	refresh_view()
