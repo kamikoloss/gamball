@@ -105,6 +105,7 @@ func _ready() -> void:
 	for maybe_product in _shop.get_children():
 		if maybe_product is Product:
 			maybe_product.icon_pressed.connect(_on_product_icon_pressed)
+			maybe_product.main_money = money
 
 	# ボール購入ボタンを1プッシュする
 	_on_buy_balls_button_pressed()
@@ -271,6 +272,10 @@ func _on_product_icon_pressed(product: Product) -> void:
 
 	# return しなかった場合: Money を減らす
 	money -= product.price
+	# Product に所持金を伝える
+	for maybe_product in _shop.get_children():
+		if maybe_product is Product:
+			maybe_product.main_money = money
 
 	# DECK, EXTRA の見た目を更新する
 	_refresh_balls_slot_deck()

@@ -45,19 +45,27 @@ const PRODUCT_DATA = {
 
 # UI
 @export var _icon_texture: TextureRect
-@export var _buy_texture: TextureRect
 @export var _name_label: Label
 @export var _desc_label: Label
 @export var _price_label: Label
+@export var _buy_texture: TextureRect
+@export var _buy_label: Label
 
 # Resources
 @export var _icon_pack: Texture
 @export var _icon_cleaner: Texture
 
 
+# 価格
 var price: int:
 	get:
 		return PRODUCT_PRICES[product_type]
+# 所持金
+# TODO: ここで持つのか？変な気がする
+var main_money: int = 0:
+	set (value):
+		main_money = value
+		refresh_view()
 
 
 # アイコン画像にカーソルが載っているか
@@ -88,9 +96,15 @@ func refresh_view() -> void:
 	_price_label.text = "＄%s" % str(price)
 
 	# 購入ボタン
+	# TODO: 買えないときは Deacive な色にする
 	if _is_icon_hovered:
 		_buy_texture.visible = true
-		_buy_texture.self_modulate = BUY_COLOR_ACTIVE
+		if main_money < price:
+			_buy_texture.self_modulate = BUY_COLOR_DEACTIVE
+			_buy_label.text = "NO MONEY"
+		else:
+			_buy_texture.self_modulate = BUY_COLOR_ACTIVE
+			_buy_label.text = "BUY"
 	else:
 		_buy_texture.visible = false
 

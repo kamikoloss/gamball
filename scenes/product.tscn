@@ -6,16 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://67twwbnnvine" path="res://images/package_1f4e6.png" id="2_wu7em"]
 [ext_resource type="Texture2D" uid="uid://h4jywlv57bwn" path="res://images/wastebasket_1f5d1-fe0f.png" id="3_ioklb"]
 
-[node name="Product" type="Control" node_paths=PackedStringArray("_icon_texture", "_buy_texture", "_name_label", "_desc_label", "_price_label")]
+[node name="Product" type="Control" node_paths=PackedStringArray("_icon_texture", "_name_label", "_desc_label", "_price_label", "_buy_texture", "_buy_label")]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_as6e1")
 _icon_texture = NodePath("Icon")
-_buy_texture = NodePath("Buy")
 _name_label = NodePath("Name")
 _desc_label = NodePath("Desc")
 _price_label = NodePath("Price")
+_buy_texture = NodePath("Buy")
+_buy_label = NodePath("Buy/Label")
 _icon_pack = ExtResource("2_wu7em")
 _icon_cleaner = ExtResource("3_ioklb")
 
