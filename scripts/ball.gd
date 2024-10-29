@@ -19,11 +19,11 @@ const BALL_COLORS = {
 @export var level: int = 0 # ボール番号
 @export var is_display: bool = false # 展示用かどうか
 
-@export var _texture_rect: TextureRect # ボールの色
-@export var _texture_rect_in: TextureRect # ボール番号の背景
-@export var _texture_rect_mask: TextureRect # ボールが有効化したら取れる色
-@export var _label: Label
-@export var _area2d: Area2D
+@export var _main_texture: TextureRect # ボールの色
+@export var _inner_texture: TextureRect # ボール番号の背景
+@export var _mask_texture: TextureRect # ボールが有効化したら取れる色
+@export var _level_label: Label
+@export var _hole_area: Area2D
 
 
 var rarity: Rarity = Rarity.Common # ボールのレア度
@@ -38,26 +38,23 @@ func _ready() -> void:
 # 自身の見た目を更新する
 func refresh_view() -> void:
 	# 色
-	_texture_rect.self_modulate = BALL_COLORS[level]
-	
-	# 
-	if is_active:
-		_texture_rect_mask.visible = false
+	_main_texture.self_modulate = BALL_COLORS[level]
+	_mask_texture.visible = not is_active # 有効なら表示しない
 
 	# ボール番号
 	if level < 0:
-		_texture_rect_in.visible = false
-		_label.visible = false
+		_inner_texture.visible = false
+		_level_label.visible = false
 	else:
-		_texture_rect_in.visible = true
-		_label.visible = true
-		_label.text = str(level)
+		_inner_texture.visible = true
+		_level_label.visible = true
+		_level_label.text = str(level)
 
 	# 展示用
 	if is_display:
 		freeze = true
 		collision_layer = 0
-		_area2d.monitoring = false
+		_hole_area.monitoring = false
 
 
 func _on_body_entered(body: Node) -> void:

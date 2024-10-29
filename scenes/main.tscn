@@ -322,10 +322,10 @@ expand_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall4"]
 shape = SubResource("RectangleShape2D_fi0lo")
 
-[node name="Edge" type="Node2D" parent="Billiards/Walls"]
+[node name="Corner" type="Node2D" parent="Billiards/Walls"]
 position = Vector2(40, 40)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Edge"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Corner"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -340,10 +340,10 @@ grow_vertical = 2
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Edge2" type="Node2D" parent="Billiards/Walls"]
+[node name="Corner2" type="Node2D" parent="Billiards/Walls"]
 position = Vector2(40, 680)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Edge2"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Corner2"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -358,10 +358,10 @@ grow_vertical = 2
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Edge3" type="Node2D" parent="Billiards/Walls"]
+[node name="Corner3" type="Node2D" parent="Billiards/Walls"]
 position = Vector2(520, 40)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Edge3"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Corner3"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -376,10 +376,10 @@ grow_vertical = 2
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Edge4" type="Node2D" parent="Billiards/Walls"]
+[node name="Corner4" type="Node2D" parent="Billiards/Walls"]
 position = Vector2(520, 680)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Edge4"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Corner4"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -689,10 +689,10 @@ expand_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/WallB"]
 shape = SubResource("RectangleShape2D_fi0lo")
 
-[node name="Edge" type="Node2D" parent="Pachinko/Walls"]
+[node name="Corner" type="Node2D" parent="Pachinko/Walls"]
 position = Vector2(760, 40)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Edge"]
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Corner"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -707,10 +707,10 @@ grow_vertical = 2
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Edge2" type="Node2D" parent="Pachinko/Walls"]
+[node name="Corner2" type="Node2D" parent="Pachinko/Walls"]
 position = Vector2(760, 680)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Edge2"]
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Corner2"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -725,10 +725,10 @@ grow_vertical = 2
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Edge3" type="Node2D" parent="Pachinko/Walls"]
+[node name="Corner3" type="Node2D" parent="Pachinko/Walls"]
 position = Vector2(1240, 40)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Edge3"]
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Corner3"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -743,10 +743,10 @@ grow_vertical = 2
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Edge4" type="Node2D" parent="Pachinko/Walls"]
+[node name="Corner4" type="Node2D" parent="Pachinko/Walls"]
 position = Vector2(1240, 680)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Edge4"]
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Corner4"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1418,10 +1418,10 @@ expand_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall5"]
 shape = SubResource("RectangleShape2D_fi0lo")
 
-[node name="Edge" type="Node2D" parent="Stack/Walls"]
+[node name="Corner" type="Node2D" parent="Stack/Walls"]
 position = Vector2(560, 680)
 
-[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Edge"]
+[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Corner"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1436,10 +1436,10 @@ grow_vertical = 2
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Edge2" type="Node2D" parent="Stack/Walls"]
+[node name="Corner2" type="Node2D" parent="Stack/Walls"]
 position = Vector2(720, 680)
 
-[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Edge2"]
+[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Corner2"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -2073,7 +2073,7 @@ expand_mode = 1
 [node name="Shop" type="Control" parent="UI"]
 anchors_preset = 0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Shop"]
+[node name="Background" type="TextureRect" parent="UI/Shop"]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 0.878431)
 layout_mode = 0
 offset_left = 40.0
@@ -2083,7 +2083,7 @@ offset_bottom = 680.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Shop"]
+[node name="Title" type="Label" parent="UI/Shop"]
 layout_mode = 0
 offset_left = 200.0
 offset_top = 80.0
@@ -2140,11 +2140,10 @@ offset_bottom = 320.0
 product_type = 5
 
 [node name="Info" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Info"]
+[node name="Background" type="TextureRect" parent="UI/Info"]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 0.878431)
 layout_mode = 0
 offset_left = 760.0
@@ -2154,12 +2153,12 @@ offset_bottom = 680.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Info/TextureRect"]
+[node name="Title" type="Label" parent="UI/Info"]
 layout_mode = 0
-offset_left = 160.0
-offset_top = 40.0
-offset_right = 480.0
-offset_bottom = 120.0
+offset_left = 920.0
+offset_top = 80.0
+offset_right = 1240.0
+offset_bottom = 160.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64

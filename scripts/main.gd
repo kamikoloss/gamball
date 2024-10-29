@@ -40,7 +40,6 @@ const DRAG_LENGTH_MAX: float = 160
 @export var _arrow_square: TextureRect
 
 
-
 var money: int = 0:
 	set(value):
 		money = value

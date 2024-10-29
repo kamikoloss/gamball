@@ -44,6 +44,10 @@ const PRODUCT_DATA = {
 @export var _desc_label: Label
 @export var _price_label: Label
 
+# Resources
+@export var _icon_pack: Texture
+@export var _icon_cleaner: Texture
+
 
 var price: int:
 	get:
@@ -57,7 +61,16 @@ func _ready() -> void:
 
 # 自身の見た目を更新する
 func refresh_view() -> void:
-	#icon_texture
+	match product_type:
+		ProductType.DeckPack:
+			_icon_texture.texture = _icon_pack
+		ProductType.DeckCleaner:
+			_icon_texture.texture = _icon_cleaner
+		ProductType.ExtraPack:
+			_icon_texture.texture = _icon_pack
+		ProductType.ExtraCleaner:
+			_icon_texture.texture = _icon_cleaner
+
 	_name_label.text = PRODUCT_DATA[product_type][0]
 	_desc_label.text = PRODUCT_DATA[product_type][1]
 	_price_label.text = "＄%s" % str(price)
