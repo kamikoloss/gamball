@@ -36,10 +36,9 @@ const DRAG_LENGTH_MAX: float = 160
 @export var _balls_slot_deck: Control
 @export var _balls_slot_extra: Control
 # Arrow
-@export var _arrow_center_position: Node2D
 @export var _arrow: Control
 @export var _arrow_square: TextureRect
-
+@export var _drag_point: TextureRect
 
 var turn: int = 0:
 	set(value):
@@ -57,8 +56,10 @@ var balls: int = 0:
 
 # 現在ドラッグ中かどうか
 var _is_dragging: bool = false
+# ドラッグを開始した座標
+var _drag_position_from: Vector2
 # 現在ドラッグしている座標
-var _drag_position: Vector2
+var _drag_position_to: Vector2
 # 引っ張りで Ball が吹き飛ぶ強さ
 # NOTE: _drag_length_max と反比例させる
 var _impulse_ratio: float = 10
@@ -90,6 +91,7 @@ func _ready() -> void:
 	# Arrow
 	_arrow.visible = false
 	_arrow_square.scale.y = 0
+	_drag_point.visible = false
 
 	# Label 用に初期化する
 	turn = 0
@@ -135,19 +137,23 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		# 左クリックを離したとき
 		if not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			# Arrow
 			_is_dragging = false
 			_arrow.visible = false
 			_arrow_square.scale.y = 0
+			_drag_point.visible = false
+
 			# ドラッグの距離を算出して丸める
-			var drag_vector = _arrow_center_position.position - _drag_position
-			var clamped_length = clampf(drag_vector.length(), 0, DRAG_LENGTH_MAX)
+			var drag_vector = Vector2.ZERO
+			var clamped_length = 0
+			if _drag_position_to != Vector2.ZERO:
+				drag_vector = _drag_position_from - _drag_position_to
+				clamped_length = clampf(drag_vector.length(), 0, DRAG_LENGTH_MAX)
 
 			# ドラッグの距離が充分な場合: Ball を発射する
 			if DRAG_LENGTH_MIN < clamped_length:
 				var impulse = drag_vector.normalized() * clamped_length
 				_billiards.shoot_ball(impulse * _impulse_ratio)
-				# ターンはここで進む
-				turn += 1
 			# ドラッグの距離が充分でない場合: Ball 生成をなかったことにする
 			else:
 				_billiards.rollback_spawn_ball()
@@ -157,8 +163,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		# ドラッグしている間
 		if _is_dragging:
-			# Arrow を更新する
-			_drag_position = event.position
+			_drag_position_to = event.position
 			_refresh_arrow()
 
 
@@ -223,15 +228,20 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 		# 左クリックを押したとき
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if 0 < balls:
-				_drag_position = _arrow_center_position.position
+				# ドラッグ関連
+				_drag_position_from = event.position
+				_drag_position_to = Vector2.ZERO
 				_is_dragging = true
 				_arrow.visible = true
+				_drag_point.visible = true
+				_drag_point.position = _drag_position_from
 				# ビリヤード盤面上に Ball を生成する
 				balls -= 1
 				var level = _deck_level_list.pick_random()
 				var new_ball = create_new_ball(level, false) # 最初の出現時には有効化されていない
 				_billiards.spawn_ball(new_ball)
-
+				# ターンを進める
+				turn += 1
 
 # 商品のアイコンがクリックされたときの処理
 func _on_product_icon_pressed(product: Product) -> void:
@@ -340,7 +350,7 @@ func _pop_payout() -> void:
 
 
 func _refresh_arrow() -> void:
-	var drag_vector = _arrow_center_position.position - _drag_position
+	var drag_vector = _drag_position_from - _drag_position_to
 	var clamped_length =  clampf(drag_vector.length(), 0, DRAG_LENGTH_MAX)
 	_arrow.rotation_degrees = rad_to_deg(drag_vector.angle()) + 90
 	_arrow_square.scale.y = (clamped_length / DRAG_LENGTH_MAX) * 10 # scale 10 が最大
