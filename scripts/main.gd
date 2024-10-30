@@ -29,6 +29,7 @@ const DRAG_LENGTH_MAX: float = 160
 @export var _sell_balls_button: Button
 @export var _shop_button: Button
 @export var _info_button: Button
+@export var _turn_label: Label
 @export var _money_label: Label
 @export var _balls_label: Label
 @export var _payout_label: Label
@@ -40,6 +41,10 @@ const DRAG_LENGTH_MAX: float = 160
 @export var _arrow_square: TextureRect
 
 
+var turn: int = 0:
+	set(value):
+		turn = value
+		_turn_label.text = str(turn)
 var money: int = 0:
 	set(value):
 		money = value
@@ -87,6 +92,7 @@ func _ready() -> void:
 	_arrow_square.scale.y = 0
 
 	# Label 用に初期化する
+	turn = 0
 	money = 1000
 	balls = 0
 
@@ -140,6 +146,8 @@ func _input(event: InputEvent) -> void:
 			if DRAG_LENGTH_MIN < clamped_length:
 				var impulse = drag_vector.normalized() * clamped_length
 				_billiards.shoot_ball(impulse * _impulse_ratio)
+				# ターンはここで進む
+				turn += 1
 			# ドラッグの距離が充分でない場合: Ball 生成をなかったことにする
 			else:
 				_billiards.rollback_spawn_ball()
@@ -229,7 +237,7 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 func _on_product_icon_pressed(product: Product) -> void:
 	# Money が足りない場合: 何もしない
 	if money < product.price:
-		print("no money!")
+		print("[Main] no money!")
 		return
 
 	var ball_level_rarity = {

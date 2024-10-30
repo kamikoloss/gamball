@@ -18,7 +18,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_shop", "_info", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_money_label", "_balls_label", "_payout_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow_center_position", "_arrow", "_arrow_square")]
+[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_shop", "_info", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_turn_label", "_money_label", "_balls_label", "_payout_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow_center_position", "_arrow", "_arrow_square")]
 script = ExtResource("1_h2e4g")
 _ball_scene = ExtResource("4_ldgjm")
 _billiards = NodePath("Billiards")
@@ -32,6 +32,7 @@ _buy_balls_button = NodePath("UI/Buttons/Buy")
 _sell_balls_button = NodePath("UI/Buttons/Sell")
 _shop_button = NodePath("UI/Buttons/Shop")
 _info_button = NodePath("UI/Buttons/Info")
+_turn_label = NodePath("UI/Score/Turn/Turn")
 _money_label = NodePath("UI/Score/Money/Money")
 _balls_label = NodePath("UI/Score/Balls/Balls")
 _payout_label = NodePath("UI/Score/Payout/Payout")
@@ -1628,9 +1629,9 @@ offset_bottom = 360.0
 [node name="Turn" type="Control" parent="UI/Score"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 20.0
+offset_left = -20.0
 offset_top = 20.0
-offset_right = 20.0
+offset_right = -20.0
 offset_bottom = 20.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Score/Turn"]
@@ -1653,18 +1654,6 @@ theme_override_font_sizes/font_size = 64
 text = "TURN"
 vertical_alignment = 1
 
-[node name="Turn" type="Label" parent="UI/Score/Turn"]
-layout_mode = 0
-offset_top = 20.0
-offset_right = 320.0
-offset_bottom = 100.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
 [node name="Label2" type="Label" parent="UI/Score/Turn"]
 layout_mode = 0
 offset_top = 20.0
@@ -1676,46 +1665,7 @@ theme_override_font_sizes/font_size = 64
 text = "★"
 vertical_alignment = 1
 
-[node name="Next" type="Control" parent="UI/Score"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 20.0
-offset_top = 60.0
-offset_right = 20.0
-offset_bottom = 60.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Score/Next"]
-modulate = Color(0.12549, 0.12549, 0.12549, 1)
-self_modulate = Color(0.752941, 1, 0.752941, 1)
-layout_mode = 0
-offset_top = 20.0
-offset_right = 80.0
-offset_bottom = 40.0
-texture = ExtResource("1_jd8wc")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/Score/Next"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "NEXT"
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Score/Next"]
-layout_mode = 0
-offset_top = 20.0
-offset_right = 160.0
-offset_bottom = 100.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "＄"
-vertical_alignment = 1
-
-[node name="Next" type="Label" parent="UI/Score/Next"]
+[node name="Turn" type="Label" parent="UI/Score/Turn"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 320.0
@@ -1729,10 +1679,10 @@ vertical_alignment = 1
 
 [node name="Money" type="Control" parent="UI/Score"]
 anchors_preset = 0
-offset_left = 20.0
-offset_top = 100.0
-offset_right = 20.0
-offset_bottom = 100.0
+offset_left = -20.0
+offset_top = 60.0
+offset_right = -20.0
+offset_bottom = 60.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Score/Money"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
@@ -1777,12 +1727,62 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="Balls" type="Control" parent="UI/Score"]
+anchors_preset = 0
+offset_left = -20.0
+offset_top = 100.0
+offset_right = -20.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Score/Balls"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
+offset_top = 20.0
+offset_right = 80.0
+offset_bottom = 40.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Score/Balls"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "BALLS"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Score/Balls"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "●"
+vertical_alignment = 1
+
+[node name="Balls" type="Label" parent="UI/Score/Balls"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "999999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Payout" type="Control" parent="UI/Score"]
 anchors_preset = 0
-offset_left = 20.0
-offset_top = 160.0
-offset_right = 20.0
-offset_bottom = 160.0
+offset_left = -20.0
+offset_top = 140.0
+offset_right = -20.0
+offset_bottom = 140.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Score/Payout"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
@@ -1827,14 +1827,15 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Balls" type="Control" parent="UI/Score"]
+[node name="Turn2" type="Control" parent="UI/Score"]
+layout_mode = 3
 anchors_preset = 0
-offset_left = 20.0
-offset_top = 200.0
-offset_right = 20.0
-offset_bottom = 200.0
+offset_left = 60.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 20.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Score/Balls"]
+[node name="TextureRect" type="TextureRect" parent="UI/Score/Turn2"]
 modulate = Color(0.12549, 0.12549, 0.12549, 1)
 self_modulate = Color(0.752941, 1, 0.752941, 1)
 layout_mode = 0
@@ -1844,17 +1845,7 @@ offset_bottom = 40.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Score/Balls"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "BALLS"
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Score/Balls"]
+[node name="Turn" type="Label" parent="UI/Score/Turn2"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 320.0
@@ -1862,10 +1853,59 @@ offset_bottom = 100.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
-text = "●"
+text = "999999"
+horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Balls" type="Label" parent="UI/Score/Balls"]
+[node name="Money2" type="Control" parent="UI/Score"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 60.0
+offset_right = 60.0
+offset_bottom = 60.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Score/Money2"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
+offset_top = 20.0
+offset_right = 80.0
+offset_bottom = 40.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Money" type="Label" parent="UI/Score/Money2"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "999999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Balls2" type="Control" parent="UI/Score"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 100.0
+offset_right = 60.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Score/Balls2"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
+offset_top = 20.0
+offset_right = 80.0
+offset_bottom = 40.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Balls" type="Label" parent="UI/Score/Balls2"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 320.0
@@ -2140,6 +2180,7 @@ offset_bottom = 320.0
 product_type = 5
 
 [node name="Info" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 

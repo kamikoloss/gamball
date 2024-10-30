@@ -69,6 +69,7 @@ horizontal_alignment = 1
 
 [node name="Buy" type="TextureRect" parent="."]
 self_modulate = Color(0.501961, 0.25098, 0.25098, 1)
+layout_mode = 0
 offset_left = -40.0
 offset_top = 30.0
 offset_right = 40.0
@@ -78,6 +79,7 @@ texture = ExtResource("1_5w4e2")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="Buy"]
+layout_mode = 0
 offset_left = -40.0
 offset_right = 600.0
 offset_bottom = 80.0
