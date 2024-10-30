@@ -137,8 +137,9 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		# 左クリックを離したとき
 		if not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			# Arrow
+			# ドラッグ関連
 			_is_dragging = false
+			# Arrow
 			_arrow.visible = false
 			_arrow_square.scale.y = 0
 			_drag_point.visible = false
@@ -156,8 +157,9 @@ func _input(event: InputEvent) -> void:
 				_billiards.shoot_ball(impulse * _impulse_ratio)
 			# ドラッグの距離が充分でない場合: Ball 生成をなかったことにする
 			else:
-				_billiards.rollback_spawn_ball()
-				balls += 1
+				var rollback = _billiards.rollback_spawn_ball()
+				if rollback:
+					balls += 1
 
 	# マウス動作
 	if event is InputEventMouseMotion:
@@ -229,9 +231,10 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if 0 < balls:
 				# ドラッグ関連
+				_is_dragging = true
 				_drag_position_from = event.position
 				_drag_position_to = Vector2.ZERO
-				_is_dragging = true
+				# Arrow
 				_arrow.visible = true
 				_drag_point.visible = true
 				_drag_point.position = _drag_position_from
@@ -369,6 +372,6 @@ func _refresh_balls_slot(parent_node: Node, level_list: Array[int]) -> void:
 			if index < level_list.size():
 				node.level = level_list[index]
 			else:
-				node.level = -1 # 空欄
+				node.level = Ball.BALL_LEVEL_EMPTY_SLOT
 			node.refresh_view()
 			index += 1

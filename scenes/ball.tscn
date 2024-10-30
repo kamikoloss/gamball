@@ -57,23 +57,8 @@ pivot_offset = Vector2(10, 10)
 texture = ExtResource("1_8km44")
 expand_mode = 1
 
-[node name="Level" type="Label" parent="."]
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.25, 0.25)
-pivot_offset = Vector2(40, 40)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_lk2l2")
-theme_override_font_sizes/font_size = 64
-text = "99"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Mask" type="TextureRect" parent="."]
-visible = false
-self_modulate = Color(1, 0, 1, 1)
+self_modulate = Color(0, 1, 1, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -89,6 +74,20 @@ scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(10, 10)
 texture = ExtResource("1_8km44")
 expand_mode = 1
+
+[node name="Level" type="Label" parent="."]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(40, 40)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_lk2l2")
+theme_override_font_sizes/font_size = 64
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rn34c")

@@ -8,12 +8,13 @@ enum Rarity { Common, Rare, Epic, Legendary }
 
 # ボールの色の定義 { <Level>: Color } 
 const BALL_COLORS = {
-	-1: Color(0.5, 0.5, 0.5, 0.5),
+	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.5), # 空きスロット用
 	0: Color(0.9, 0.9, 0.9), 1: Color.YELLOW, 2: Color.BLUE, 3: Color.RED,
 	4: Color.PURPLE, 5: Color.ORANGE, 6: Color.GREEN, 7: Color.SADDLE_BROWN,
 	8: Color(0.1, 0.1, 0.1), 9: Color.GOLD, 10: Color.LIGHT_BLUE, 11: Color.LIGHT_CORAL,
 	12: Color.LIGHT_SALMON, 13: Color.LIGHT_SALMON, 14: Color.LIGHT_GREEN, 15: Color.ROSY_BROWN,
 }
+const BALL_LEVEL_EMPTY_SLOT = -1
 
 
 @export var level: int = 0 # ボール番号
@@ -42,7 +43,10 @@ func refresh_view() -> void:
 	_mask_texture.visible = not is_active # 有効なら表示しない
 
 	# ボール番号
-	if level < 0:
+	if not is_active:
+		_level_label.visible = true
+		_level_label.text = "??"
+	elif level < 0:
 		_inner_texture.visible = false
 		_level_label.visible = false
 	else:

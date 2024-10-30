@@ -20,10 +20,12 @@ func spawn_ball(ball: Ball) -> void:
 
 
 # spawn_ball() をなかったことにする
-func rollback_spawn_ball() -> void:
+# そもそもなかったことにする Ball が存在しなかった場合は false を返す
+func rollback_spawn_ball() -> bool:
 	if _current_ball == null:
-		return
+		return false
 	_current_ball.queue_free()
+	return true
 
 
 # 盤面上に Extra Ball を移動する
