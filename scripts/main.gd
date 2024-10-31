@@ -2,6 +2,9 @@ class_name Main
 extends Node
 
 
+enum NextType { Money, Balls }
+
+
 # DECK の最大数
 const DECK_MAX_SIZE = 16
 # EXTRA の最大数
@@ -10,6 +13,20 @@ const EXTRA_MAX_SIZE = 16
 const DRAG_LENGTH_MIN: float = 10
 # 引っ張りが最大になるドラッグの距離 (px)
 const DRAG_LENGTH_MAX: float = 160
+
+# Next (ノルマ) のリスト
+# [<turn>, NextType, <amount>]
+const NEXT_LIST = [
+	[25, NextType.Balls, 100],
+	[50, NextType.Balls, 200],
+	[100, NextType.Balls, 400],
+	[150, NextType.Money, 400],
+	[200, NextType.Money, 800],
+	[250, NextType.Balls, 800],
+	[300, NextType.Balls, 1600],
+]
+# ゲームクリアになる Turn
+const CLEAR_TURN = 300
 
 
 # PackedScene
@@ -23,6 +40,7 @@ const DRAG_LENGTH_MAX: float = 160
 @export var _balls: Node2D # Ball instances の親 Node
 
 # UI
+# TODO: クラス分ける
 @export var _shop: Control
 @export var _info: Control
 @export var _buy_balls_button: Button
@@ -33,6 +51,9 @@ const DRAG_LENGTH_MAX: float = 160
 @export var _money_label: Label
 @export var _balls_label: Label
 @export var _payout_label: Label
+@export var _next_turn_label: Label
+@export var _next_type_label: Label
+@export var _next_amount_label: Label
 @export var _balls_slot_deck: Control
 @export var _balls_slot_extra: Control
 # Arrow
@@ -40,10 +61,13 @@ const DRAG_LENGTH_MAX: float = 160
 @export var _arrow_square: TextureRect
 @export var _drag_point: TextureRect
 
+
+# TODO: Autoload に置いていい気がする
 var turn: int = 0:
 	set(value):
 		turn = value
 		_turn_label.text = str(turn)
+		_refresh_next()
 var money: int = 0:
 	set(value):
 		money = value
@@ -244,8 +268,10 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 				var level = _deck_level_list.pick_random()
 				var new_ball = create_new_ball(level, false) # 最初の出現時には有効化されていない
 				_billiards.spawn_ball(new_ball)
-				# ターンを進める
-				turn += 1
+				# 1ターン進める
+				# Ball 生成をなかったことにしてもこれはなかったことにはしない
+				_go_to_next_turn()
+
 
 # 商品のアイコンがクリックされたときの処理
 func _on_product_icon_pressed(product: Product) -> void:
@@ -372,6 +398,42 @@ func _refresh_balls_slot(parent_node: Node, level_list: Array[int]) -> void:
 				node.level = Ball.BALL_LEVEL_EMPTY_SLOT
 			node.refresh_view()
 			index += 1
+
+
+func _refresh_next() -> void:
+	# クリアしたとき
+	if CLEAR_TURN <= turn:
+		_next_turn_label.text = ""
+		_next_type_label.text = ""
+		_next_amount_label.text = "CLEAR!!"
+		return
+
+	for next in NEXT_LIST:
+		var next_turn = next[0]
+		var next_type = next[1]
+		var next_amount = next[2]
+		var next_type_text = "¥" if next_type == NextType.Money else "●"
+
+		if turn < next_turn:
+			_next_turn_label.text = str(next_turn)
+			_next_type_label.text = next_type_text
+			_next_amount_label.text = "-%s" % [next_amount]
+			break
+
+# 1ターン進める
+func _go_to_next_turn() -> void:
+	turn += 1
+
+	for next in NEXT_LIST:
+		var next_turn = next[0]
+		var next_type = next[1]
+		var next_amount = next[2]
+
+		if turn == next_turn:
+			if next_type == NextType.Money:
+				money -= next_amount
+			elif next_type == NextType.Balls:
+				balls -= next_amount
 
 
 func _set_money_to_products() -> void:
