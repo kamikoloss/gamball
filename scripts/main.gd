@@ -2,7 +2,7 @@ class_name Main
 extends Node
 
 
-enum NextType { Money, Balls }
+enum TaxType { Money, Balls }
 
 
 # DECK の最大数
@@ -14,17 +14,16 @@ const DRAG_LENGTH_MIN: float = 10
 # 引っ張りが最大になるドラッグの距離 (px)
 const DRAG_LENGTH_MAX: float = 160
 
-# Next (ノルマ) のリスト
-# [<turn>, NextType, <amount>]
-const NEXT_LIST = [
-	[25, NextType.Balls, 100],
-	[50, NextType.Balls, 200],
-	[75, NextType.Money, 300],
-	[100, NextType.Money, 400],
-	[125, NextType.Balls, 500],
-	[150, NextType.Balls, 600],
-	[175, NextType.Money, 700],
-	[200, NextType.Money, 800],
+# Tax (ノルマ) のリスト
+# [<turn>, TaxType, <amount>]
+const TAX_LIST = [
+	[25, TaxType.Balls, 50],
+	[50, TaxType.Balls, 100],
+	[75, TaxType.Money, 400], # Balls 200
+	[100, TaxType.Money, 800], # Balls 400
+	[125, TaxType.Balls, 600],
+	[150, TaxType.Balls, 800],
+	[175, TaxType.Money, 2000], # Balls 1000
 ]
 # ゲームクリアになる Turn
 const CLEAR_TURN: int = 200
@@ -122,8 +121,8 @@ var _buy_rate: Array[int] = [100, 25]
 # [x, y] x balls = y money
 var _sell_rate: Array[int] = [50, 100]
 
-# 次に訪れる Next
-var _current_next = 0
+# 次に訪れる Tax
+var _next_tax_index = 0
 
 
 
@@ -145,7 +144,6 @@ func _ready() -> void:
 	_buy_balls_button.pressed.connect(_on_buy_balls_button_pressed)
 	_sell_balls_button.pressed.connect(_on_sell_balls_button_pressed)
 	_tax_pay_button.pressed.connect(_on_tax_pay_button_pressed)
-	_shop_button.pressed.connect(_on_shop_button_pressed)
 	_shop_exit_button.pressed.connect(_on_shop_exit_button_pressed)
 	_info_button.pressed.connect(_on_info_button_pressed)
 	# すべての Hole の signal に接続する
@@ -234,22 +232,20 @@ func _on_sell_balls_button_pressed() -> void:
 
 
 func _on_tax_pay_button_pressed() -> void:
-	var next_turn = NEXT_LIST[_current_next][0]
-	var next_type = NEXT_LIST[_current_next][1]
-	var next_amount = NEXT_LIST[_current_next][2]
+	var next_turn = TAX_LIST[_next_tax_index][0]
+	var next_type = TAX_LIST[_next_tax_index][1]
+	var next_amount = TAX_LIST[_next_tax_index][2]
 
-	if next_type == NextType.Money:
+	if next_type == TaxType.Money:
 		money -= next_amount
-	elif next_type == NextType.Balls:
+	elif next_type == TaxType.Balls:
 		balls -= next_amount
 
+	_next_tax_index += 1
+	_refresh_next()
 	_hide_tax_window()
 	_show_shop_window()
 
-
-
-func _on_shop_button_pressed() -> void:
-	_show_shop_window()
 
 func _on_shop_exit_button_pressed() -> void:
 	_hide_shop_window()
@@ -447,10 +443,10 @@ func _refresh_next() -> void:
 		_next_amount_label.text = "CLEAR!!"
 		return
 
-	var next_turn = NEXT_LIST[_current_next][0]
-	var next_type = NEXT_LIST[_current_next][1]
-	var next_type_text = "￥" if next_type == NextType.Money else "●"
-	var next_amount = NEXT_LIST[_current_next][2]
+	var next_turn = TAX_LIST[_next_tax_index][0]
+	var next_type = TAX_LIST[_next_tax_index][1]
+	var next_type_text = "￥" if next_type == TaxType.Money else "●"
+	var next_amount = TAX_LIST[_next_tax_index][2]
 
 	_next_turn_label.text = str(next_turn)
 	_next_type_label.text = next_type_text
@@ -461,7 +457,9 @@ func _refresh_next() -> void:
 func _go_to_next_turn() -> void:
 	turn += 1
 
-	if turn == NEXT_LIST[_current_next][0]:
+	if CLEAR_TURN <= turn:
+		return
+	if turn == TAX_LIST[_next_tax_index][0]:
 		_show_tax_window()
 
 

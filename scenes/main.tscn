@@ -43,7 +43,7 @@ _stack = NodePath("Stack")
 _balls = NodePath("Balls")
 _buy_balls_button = NodePath("UI/Main/Buttons/Buy")
 _sell_balls_button = NodePath("UI/Main/Buttons/Sell")
-_shop_button = NodePath("UI/Main/Buttons/Shop")
+_shop_button = NodePath("")
 _info_button = NodePath("UI/Main/Buttons/Info")
 _turn_label = NodePath("UI/Main/Score/Turn/Turn")
 _money_label = NodePath("UI/Main/Score/Money/Money")
@@ -2058,25 +2058,6 @@ text = "●050=＄100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Shop" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = -10.0
-offset_top = 50.0
-offset_right = 70.0
-offset_bottom = 70.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
-
-[node name="Label" type="Label" parent="UI/Main/Buttons/Shop"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "SHOP"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Info" type="Button" parent="UI/Main/Buttons"]
 visible = false
 layout_mode = 0
@@ -2310,7 +2291,7 @@ offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
-text = "NEXT"
+text = "NEXT TAX"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -2333,7 +2314,7 @@ offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("7_yeeqd")
 theme_override_font_sizes/font_size = 64
-text = "★"
+text = "〒"
 vertical_alignment = 1
 
 [node name="NextTurn" type="Label" parent="UI/Main/Score/Next"]

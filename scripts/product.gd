@@ -32,11 +32,11 @@ const BUY_COLOR_DEACTIVE = Color(0.5, 0.25, 0.25)
 # 商品の [<名称>, <説明分>]
 # TODO: JSON に逃がす
 const PRODUCT_DATA = {
-	ProductType.DeckPack: ["DECK Pack", "Add random BALL x3\n(0-7) to DECK"],
-	ProductType.DeckPack2: ["DECK Pack+", "Add random BALL x1\n(8-15) to DECK"],
+	ProductType.DeckPack: ["DECK Pack", "Add random BALL x3\nto DECK"],
+	ProductType.DeckPack2: ["DECK Pack+", "Add random BALL x1\nto DECK"],
 	ProductType.DeckCleaner: ["DECK Cleaner", "Remove the lowest\nBALL from DECK"],
-	ProductType.ExtraPack: ["EXTRA Pack", "Add random BALL x2\n(0-7) to EXTRA"],
-	ProductType.ExtraPack2: ["EXTRA Pack+", "Add random BALL x1\n(8-15) to EXTRA"],
+	ProductType.ExtraPack: ["EXTRA Pack", "Add random BALL x2\nto EXTRA"],
+	ProductType.ExtraPack2: ["EXTRA Pack+", "Add random BALL x1\nto EXTRA"],
 	ProductType.ExtraCleaner: ["EXTRA Cleaner", "Remove the lowest\nBALL from EXTRA"],
 }
 
