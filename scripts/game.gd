@@ -1,4 +1,4 @@
-class_name Main
+class_name Game
 extends Node
 
 
@@ -51,7 +51,6 @@ const UI_MOVE_DURATION: float = 1.0
 # UI Main
 @export var _buy_balls_button: Button
 @export var _sell_balls_button: Button
-@export var _shop_button: Button
 @export var _info_button: Button
 @export var _turn_label: Label
 @export var _money_label: Label

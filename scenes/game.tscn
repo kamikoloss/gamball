@@ -1,19 +1,20 @@
-[gd_scene load_steps=21 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=22 format=3 uid="uid://l2y3sq1ikgmx"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_h2e4g"]
-[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="1_jd8wc"]
-[ext_resource type="Script" path="res://scripts/billiards.gd" id="2_5y3bg"]
-[ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/base_triangle.png" id="2_k3p6f"]
-[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/base_circle.png" id="2_svx0d"]
-[ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/ball.tscn" id="4_ldgjm"]
-[ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/hole.tscn" id="6_wvfqf"]
-[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="7_yeeqd"]
-[ext_resource type="Script" path="res://scripts/pachinko.gd" id="8_sipkv"]
-[ext_resource type="PackedScene" uid="uid://dli5r028n6byb" path="res://scenes/nail.tscn" id="8_ywild"]
-[ext_resource type="Script" path="res://scripts/stack.gd" id="10_ekmut"]
-[ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/lamp.tscn" id="11_hhfpi"]
-[ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/product.tscn" id="13_d5gi3"]
-[ext_resource type="Texture2D" uid="uid://cpe6a6v2fx6tg" path="res://images/people/people_0.png" id="14_246jl"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_w7c5l"]
+[ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/ball.tscn" id="2_ma10n"]
+[ext_resource type="Script" path="res://scripts/billiards.gd" id="3_0s1kj"]
+[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="4_b0m3n"]
+[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/base_circle.png" id="5_j1dyl"]
+[ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/base_triangle.png" id="6_qy33h"]
+[ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/hole.tscn" id="7_71f2d"]
+[ext_resource type="Script" path="res://scripts/pachinko.gd" id="8_ud1qg"]
+[ext_resource type="PackedScene" uid="uid://dli5r028n6byb" path="res://scenes/nail.tscn" id="9_8yiuy"]
+[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="10_w3wxc"]
+[ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/lamp.tscn" id="11_6yw0s"]
+[ext_resource type="Script" path="res://scripts/stack.gd" id="12_7kfse"]
+[ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/product.tscn" id="13_232xx"]
+[ext_resource type="Script" path="res://scripts/game_ui.gd" id="13_aavli"]
+[ext_resource type="Texture2D" uid="uid://cpe6a6v2fx6tg" path="res://images/people/people_0.png" id="14_kq1b1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -33,9 +34,9 @@ colors = PackedColorArray(0.25098, 0.376471, 0.25098, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_44mdx"]
 gradient = SubResource("Gradient_id5ai")
 
-[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_turn_label", "_money_label", "_balls_label", "_payout_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow", "_arrow_square", "_drag_point", "_ui_tax", "_tax_pay_button", "_ui_shop", "_products", "_shop_exit_button", "_ui_people")]
-script = ExtResource("1_h2e4g")
-_ball_scene = ExtResource("4_ldgjm")
+[node name="Game" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_balls_label", "_payout_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow", "_arrow_square", "_drag_point", "_ui_tax", "_tax_pay_button", "_ui_shop", "_products", "_shop_exit_button", "_ui_people")]
+script = ExtResource("1_w7c5l")
+_ball_scene = ExtResource("2_ma10n")
 _billiards = NodePath("Billiards")
 _billiards_board = NodePath("Billiards/Board")
 _pachinko = NodePath("Pachinko")
@@ -43,7 +44,6 @@ _stack = NodePath("Stack")
 _balls = NodePath("Balls")
 _buy_balls_button = NodePath("UI/Main/Buttons/Buy")
 _sell_balls_button = NodePath("UI/Main/Buttons/Sell")
-_shop_button = NodePath("")
 _info_button = NodePath("UI/Main/Buttons/Info")
 _turn_label = NodePath("UI/Main/Score/Turn/Turn")
 _money_label = NodePath("UI/Main/Score/Money/Money")
@@ -65,7 +65,7 @@ _shop_exit_button = NodePath("UI/Shop/Exit")
 _ui_people = NodePath("UI/People")
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_position_a", "_spawn_extra_position_b", "_spawn_extra_position_c", "_spawn_extra_position_d")]
-script = ExtResource("2_5y3bg")
+script = ExtResource("3_0s1kj")
 _spawn_position = NodePath("Points/SpawnHole")
 _spawn_extra_position_a = NodePath("Points/SpawnHole2")
 _spawn_extra_position_b = NodePath("Points/SpawnHole3")
@@ -87,7 +87,7 @@ offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
 offset_bottom = 10.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Board"]
@@ -113,7 +113,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="SpawnHole2" type="Node2D" parent="Billiards/Points"]
@@ -132,7 +132,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="SpawnHole3" type="Node2D" parent="Billiards/Points"]
@@ -151,7 +151,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="SpawnHole4" type="Node2D" parent="Billiards/Points"]
@@ -170,7 +170,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="SpawnHole5" type="Node2D" parent="Billiards/Points"]
@@ -189,7 +189,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Top" type="Node2D" parent="Billiards/Points"]
@@ -209,7 +209,7 @@ offset_right = 5.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_k3p6f")
+texture = ExtResource("6_qy33h")
 expand_mode = 1
 
 [node name="Center" type="Node2D" parent="Billiards/Points"]
@@ -228,7 +228,7 @@ offset_right = 5.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Bottom" type="Node2D" parent="Billiards/Points"]
@@ -247,7 +247,7 @@ offset_right = 5.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_k3p6f")
+texture = ExtResource("6_qy33h")
 expand_mode = 1
 
 [node name="Walls" type="Node2D" parent="Billiards"]
@@ -269,7 +269,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall"]
@@ -291,7 +291,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall2"]
@@ -313,7 +313,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall3"]
@@ -335,7 +335,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall4"]
@@ -356,7 +356,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Corner2" type="Node2D" parent="Billiards/Walls"]
@@ -374,7 +374,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Corner3" type="Node2D" parent="Billiards/Walls"]
@@ -392,7 +392,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Corner4" type="Node2D" parent="Billiards/Walls"]
@@ -410,37 +410,37 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Holes" type="Node2D" parent="Billiards"]
 
-[node name="Hole" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 60)
 hole_type = 0
 
-[node name="Hole2" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole2" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 360)
 hole_type = 0
 
-[node name="Hole3" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole3" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 660)
 hole_type = 0
 
-[node name="Hole4" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole4" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 60)
 hole_type = 0
 
-[node name="Hole5" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole5" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 360)
 hole_type = 0
 
-[node name="Hole6" parent="Billiards/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole6" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 660)
 hole_type = 0
 
 [node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_wall_a", "_wall_b", "_rush_devices", "_rush_lamps", "_rush_label_a", "_rush_label_b")]
-script = ExtResource("8_sipkv")
+script = ExtResource("8_ud1qg")
 _spawn_position_a = NodePath("Points/SpawnHoleA")
 _spawn_position_b = NodePath("Points/SpawnHoleB")
 _wall_a = NodePath("Walls/WallA")
@@ -465,7 +465,7 @@ offset_left = 20.0
 offset_top = -10.0
 offset_right = 40.0
 offset_bottom = 10.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Board"]
@@ -492,7 +492,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="SpawnHoleB" type="Node2D" parent="Pachinko/Points"]
@@ -511,7 +511,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Top" type="Node2D" parent="Pachinko/Points"]
@@ -531,7 +531,7 @@ offset_right = 5.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_k3p6f")
+texture = ExtResource("6_qy33h")
 expand_mode = 1
 
 [node name="Center" type="Node2D" parent="Pachinko/Points"]
@@ -550,7 +550,7 @@ offset_right = 5.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Bottom" type="Node2D" parent="Pachinko/Points"]
@@ -569,7 +569,7 @@ offset_right = 5.0
 offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_k3p6f")
+texture = ExtResource("6_qy33h")
 expand_mode = 1
 
 [node name="Walls" type="Node2D" parent="Pachinko"]
@@ -591,7 +591,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall"]
@@ -613,7 +613,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall2"]
@@ -635,7 +635,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall3"]
@@ -657,7 +657,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall4"]
@@ -679,7 +679,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/WallA"]
@@ -701,7 +701,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/WallB"]
@@ -722,7 +722,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Corner2" type="Node2D" parent="Pachinko/Walls"]
@@ -740,7 +740,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Corner3" type="Node2D" parent="Pachinko/Walls"]
@@ -758,7 +758,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Corner4" type="Node2D" parent="Pachinko/Walls"]
@@ -776,264 +776,264 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Nails" type="Node2D" parent="Pachinko"]
 
 [node name="Top" type="Node2D" parent="Pachinko/Nails"]
 
-[node name="Nail7" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+[node name="Nail7" parent="Pachinko/Nails/Top" instance=ExtResource("9_8yiuy")]
 position = Vector2(980, 220)
 
-[node name="Nail8" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+[node name="Nail8" parent="Pachinko/Nails/Top" instance=ExtResource("9_8yiuy")]
 position = Vector2(1020, 220)
 
-[node name="Nail9" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+[node name="Nail9" parent="Pachinko/Nails/Top" instance=ExtResource("9_8yiuy")]
 position = Vector2(920, 240)
 
-[node name="Nail10" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+[node name="Nail10" parent="Pachinko/Nails/Top" instance=ExtResource("9_8yiuy")]
 position = Vector2(1080, 240)
 
-[node name="Nail11" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+[node name="Nail11" parent="Pachinko/Nails/Top" instance=ExtResource("9_8yiuy")]
 position = Vector2(880, 280)
 
-[node name="Nail12" parent="Pachinko/Nails/Top" instance=ExtResource("8_ywild")]
+[node name="Nail12" parent="Pachinko/Nails/Top" instance=ExtResource("9_8yiuy")]
 position = Vector2(1120, 280)
 
 [node name="Side" type="Node2D" parent="Pachinko/Nails"]
 
-[node name="Nail11" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail11" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(800, 240)
 
-[node name="Nail12" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail12" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(1200, 240)
 
-[node name="Nail13" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail13" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(790, 320)
 
-[node name="Nail14" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail14" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(1210, 320)
 
-[node name="Nail15" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail15" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(780, 400)
 
-[node name="Nail16" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail16" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(1220, 400)
 
-[node name="Nail17" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail17" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(790, 480)
 
-[node name="Nail18" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail18" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(1210, 480)
 
-[node name="Nail19" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail19" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(800, 560)
 
-[node name="Nail20" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail20" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(1200, 560)
 
-[node name="Nail21" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail21" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(780, 240)
 
-[node name="Nail22" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail22" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(780, 560)
 
-[node name="Nail23" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail23" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(1220, 240)
 
-[node name="Nail24" parent="Pachinko/Nails/Side" instance=ExtResource("8_ywild")]
+[node name="Nail24" parent="Pachinko/Nails/Side" instance=ExtResource("9_8yiuy")]
 position = Vector2(1220, 560)
 
 [node name="Bottom" type="Node2D" parent="Pachinko/Nails"]
 
-[node name="Nail10" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail10" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(1000, 640)
 
-[node name="Nail11" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail11" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(840, 640)
 
-[node name="Nail12" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail12" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(920, 640)
 
-[node name="Nail13" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail13" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(1080, 640)
 
-[node name="Nail14" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail14" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(1160, 640)
 
-[node name="Nail15" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail15" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(1000, 660)
 
-[node name="Nail16" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail16" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(840, 660)
 
-[node name="Nail17" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail17" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(920, 660)
 
-[node name="Nail18" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail18" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(1080, 660)
 
-[node name="Nail19" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail19" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(1160, 660)
 
-[node name="Nail20" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail20" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(880, 580)
 
-[node name="Nail21" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail21" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(1120, 580)
 
-[node name="Nail22" parent="Pachinko/Nails/Bottom" instance=ExtResource("8_ywild")]
+[node name="Nail22" parent="Pachinko/Nails/Bottom" instance=ExtResource("9_8yiuy")]
 position = Vector2(1000, 590)
 
 [node name="Ex" type="Node2D" parent="Pachinko/Nails"]
 
-[node name="Nail2" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
+[node name="Nail2" parent="Pachinko/Nails/Ex" instance=ExtResource("9_8yiuy")]
 position = Vector2(970, 340)
 
-[node name="Nail3" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
+[node name="Nail3" parent="Pachinko/Nails/Ex" instance=ExtResource("9_8yiuy")]
 position = Vector2(1030, 340)
 
-[node name="Nail4" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
+[node name="Nail4" parent="Pachinko/Nails/Ex" instance=ExtResource("9_8yiuy")]
 position = Vector2(970, 360)
 
-[node name="Nail5" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
+[node name="Nail5" parent="Pachinko/Nails/Ex" instance=ExtResource("9_8yiuy")]
 position = Vector2(1030, 360)
 
-[node name="Nail6" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
+[node name="Nail6" parent="Pachinko/Nails/Ex" instance=ExtResource("9_8yiuy")]
 position = Vector2(970, 380)
 
-[node name="Nail7" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
+[node name="Nail7" parent="Pachinko/Nails/Ex" instance=ExtResource("9_8yiuy")]
 position = Vector2(1030, 380)
 
-[node name="Nail8" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
+[node name="Nail8" parent="Pachinko/Nails/Ex" instance=ExtResource("9_8yiuy")]
 position = Vector2(1000, 390)
 
-[node name="Nail10" parent="Pachinko/Nails/Ex" instance=ExtResource("8_ywild")]
+[node name="Nail10" parent="Pachinko/Nails/Ex" instance=ExtResource("9_8yiuy")]
 position = Vector2(1000, 280)
 
 [node name="x3a" type="Node2D" parent="Pachinko/Nails"]
 
-[node name="Nail2" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+[node name="Nail2" parent="Pachinko/Nails/x3a" instance=ExtResource("9_8yiuy")]
 position = Vector2(890, 420)
 
-[node name="Nail3" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+[node name="Nail3" parent="Pachinko/Nails/x3a" instance=ExtResource("9_8yiuy")]
 visible = false
 position = Vector2(950, 420)
 
-[node name="Nail4" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+[node name="Nail4" parent="Pachinko/Nails/x3a" instance=ExtResource("9_8yiuy")]
 position = Vector2(890, 440)
 
-[node name="Nail5" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+[node name="Nail5" parent="Pachinko/Nails/x3a" instance=ExtResource("9_8yiuy")]
 position = Vector2(950, 440)
 
-[node name="Nail6" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+[node name="Nail6" parent="Pachinko/Nails/x3a" instance=ExtResource("9_8yiuy")]
 position = Vector2(890, 460)
 
-[node name="Nail7" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+[node name="Nail7" parent="Pachinko/Nails/x3a" instance=ExtResource("9_8yiuy")]
 position = Vector2(950, 460)
 
-[node name="Nail8" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+[node name="Nail8" parent="Pachinko/Nails/x3a" instance=ExtResource("9_8yiuy")]
 position = Vector2(920, 470)
 
-[node name="Nail9" parent="Pachinko/Nails/x3a" instance=ExtResource("8_ywild")]
+[node name="Nail9" parent="Pachinko/Nails/x3a" instance=ExtResource("9_8yiuy")]
 position = Vector2(900, 360)
 
 [node name="x3b" type="Node2D" parent="Pachinko/Nails"]
 
-[node name="Nail2" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+[node name="Nail2" parent="Pachinko/Nails/x3b" instance=ExtResource("9_8yiuy")]
 visible = false
 position = Vector2(1050, 420)
 
-[node name="Nail3" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+[node name="Nail3" parent="Pachinko/Nails/x3b" instance=ExtResource("9_8yiuy")]
 position = Vector2(1110, 420)
 
-[node name="Nail4" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+[node name="Nail4" parent="Pachinko/Nails/x3b" instance=ExtResource("9_8yiuy")]
 position = Vector2(1050, 440)
 
-[node name="Nail5" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+[node name="Nail5" parent="Pachinko/Nails/x3b" instance=ExtResource("9_8yiuy")]
 position = Vector2(1110, 440)
 
-[node name="Nail6" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+[node name="Nail6" parent="Pachinko/Nails/x3b" instance=ExtResource("9_8yiuy")]
 position = Vector2(1050, 460)
 
-[node name="Nail7" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+[node name="Nail7" parent="Pachinko/Nails/x3b" instance=ExtResource("9_8yiuy")]
 position = Vector2(1110, 460)
 
-[node name="Nail8" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+[node name="Nail8" parent="Pachinko/Nails/x3b" instance=ExtResource("9_8yiuy")]
 position = Vector2(1080, 470)
 
-[node name="Nail9" parent="Pachinko/Nails/x3b" instance=ExtResource("8_ywild")]
+[node name="Nail9" parent="Pachinko/Nails/x3b" instance=ExtResource("9_8yiuy")]
 position = Vector2(1100, 360)
 
 [node name="x5" type="Node2D" parent="Pachinko/Nails"]
 
-[node name="Nail2" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+[node name="Nail2" parent="Pachinko/Nails/x5" instance=ExtResource("9_8yiuy")]
 position = Vector2(970, 460)
 
-[node name="Nail3" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+[node name="Nail3" parent="Pachinko/Nails/x5" instance=ExtResource("9_8yiuy")]
 position = Vector2(1030, 460)
 
-[node name="Nail4" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+[node name="Nail4" parent="Pachinko/Nails/x5" instance=ExtResource("9_8yiuy")]
 position = Vector2(970, 480)
 
-[node name="Nail5" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+[node name="Nail5" parent="Pachinko/Nails/x5" instance=ExtResource("9_8yiuy")]
 position = Vector2(1030, 480)
 
-[node name="Nail6" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+[node name="Nail6" parent="Pachinko/Nails/x5" instance=ExtResource("9_8yiuy")]
 position = Vector2(970, 500)
 
-[node name="Nail7" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+[node name="Nail7" parent="Pachinko/Nails/x5" instance=ExtResource("9_8yiuy")]
 position = Vector2(1030, 500)
 
-[node name="Nail8" parent="Pachinko/Nails/x5" instance=ExtResource("8_ywild")]
+[node name="Nail8" parent="Pachinko/Nails/x5" instance=ExtResource("9_8yiuy")]
 position = Vector2(1000, 510)
 
 [node name="Holes" type="Node2D" parent="Pachinko"]
 
-[node name="Hole" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(800, 660)
 hole_type = 2
 gain_ratio = 2
 
-[node name="Hole2" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole2" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(880, 660)
 hole_type = 2
 gain_ratio = 1
 
-[node name="Hole3" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole3" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(960, 660)
 hole_type = 2
 
-[node name="Hole4" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole4" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1040, 660)
 hole_type = 2
 
-[node name="Hole5" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole5" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1120, 660)
 hole_type = 2
 gain_ratio = 1
 
-[node name="Hole6" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole6" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1200, 660)
 hole_type = 2
 gain_ratio = 2
 
-[node name="Hole7" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole7" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1000, 360)
 hole_type = 1
 
-[node name="Hole8" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole8" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1000, 480)
 hole_type = 2
 gain_ratio = 5
 
-[node name="Hole9" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole9" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(920, 440)
 hole_type = 2
 gain_ratio = 3
 
-[node name="Hole10" parent="Pachinko/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole10" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1080, 440)
 hole_type = 2
 gain_ratio = 3
@@ -1052,7 +1052,7 @@ layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
 offset_right = 40.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="RushA" type="Label" parent="Pachinko/Rush/Display"]
@@ -1062,7 +1062,7 @@ offset_top = -20.0
 offset_right = 280.0
 offset_bottom = 60.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "RUSH 00"
 horizontal_alignment = 1
@@ -1075,7 +1075,7 @@ layout_mode = 0
 offset_left = -40.0
 offset_right = 40.0
 offset_bottom = 20.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="RushB" type="Label" parent="Pachinko/Rush/Display"]
@@ -1084,7 +1084,7 @@ offset_left = -40.0
 offset_right = 280.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "99/99"
 horizontal_alignment = 1
@@ -1094,144 +1094,144 @@ vertical_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Lamp" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp2" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp2" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 0.261799
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp3" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp3" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 0.523598
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp4" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp4" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 0.785397
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp5" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp5" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 1.0472
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp6" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp6" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 1.309
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp7" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp7" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 1.57079
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp8" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp8" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 1.83259
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp9" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp9" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 2.09439
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp10" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp10" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 2.35619
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp11" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp11" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 2.61799
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp12" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp12" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 2.87979
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp13" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp13" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 3.14159
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp14" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp14" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 3.40339
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp15" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp15" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 3.66519
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp16" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp16" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 3.92699
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp17" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp17" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 4.18878
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp18" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp18" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 4.45058
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp19" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp19" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 4.71238
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp20" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp20" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 4.97418
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp21" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp21" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 5.23598
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp22" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp22" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 5.49778
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp23" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp23" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 5.75958
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp24" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_hhfpi")]
+[node name="Lamp24" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
 rotation = 6.02138
@@ -1239,42 +1239,42 @@ pivot_offset = Vector2(-40, 0)
 
 [node name="Devices" type="Node2D" parent="Pachinko/Rush"]
 
-[node name="Nail4" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
+[node name="Nail4" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
 position = Vector2(-120, 60)
 
-[node name="Nail5" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
+[node name="Nail5" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
 position = Vector2(-100, 80)
 
-[node name="Nail6" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
+[node name="Nail6" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
 position = Vector2(-60, 80)
 
-[node name="Nail7" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
+[node name="Nail7" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
 position = Vector2(-40, 60)
 
-[node name="Nail10" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
+[node name="Nail10" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
 position = Vector2(40, 60)
 
-[node name="Nail11" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
+[node name="Nail11" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
 position = Vector2(60, 80)
 
-[node name="Nail12" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
+[node name="Nail12" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
 position = Vector2(100, 80)
 
-[node name="Nail13" parent="Pachinko/Rush/Devices" instance=ExtResource("8_ywild")]
+[node name="Nail13" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
 position = Vector2(120, 60)
 
-[node name="Hole" parent="Pachinko/Rush/Devices" instance=ExtResource("6_wvfqf")]
+[node name="Hole" parent="Pachinko/Rush/Devices" instance=ExtResource("7_71f2d")]
 position = Vector2(-80, 40)
 hole_type = 2
 gain_ratio = 10
 
-[node name="Hole2" parent="Pachinko/Rush/Devices" instance=ExtResource("6_wvfqf")]
+[node name="Hole2" parent="Pachinko/Rush/Devices" instance=ExtResource("7_71f2d")]
 position = Vector2(80, 40)
 hole_type = 2
 gain_ratio = 10
 
 [node name="Stack" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position")]
-script = ExtResource("10_ekmut")
+script = ExtResource("12_7kfse")
 _spawn_position = NodePath("Points/SpawnHole")
 
 [node name="Board" type="Area2D" parent="Stack"]
@@ -1292,7 +1292,7 @@ offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
 offset_bottom = 10.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Board"]
@@ -1318,7 +1318,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Walls" type="Node2D" parent="Stack"]
@@ -1341,7 +1341,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall"]
@@ -1363,7 +1363,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall2"]
@@ -1385,7 +1385,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall3"]
@@ -1407,7 +1407,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall4"]
@@ -1430,7 +1430,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall5"]
@@ -1451,7 +1451,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Corner2" type="Node2D" parent="Stack/Walls"]
@@ -1469,50 +1469,50 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Holes" type="Node2D" parent="Stack"]
 
-[node name="Hole" parent="Stack/Holes" instance=ExtResource("6_wvfqf")]
+[node name="Hole" parent="Stack/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(700, 660)
 hole_type = 4
 
 [node name="Balls" type="Node2D" parent="."]
 
-[node name="Ball" parent="Balls" instance=ExtResource("4_ldgjm")]
+[node name="Ball" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(280, 240)
 level = 1
 
-[node name="Ball2" parent="Balls" instance=ExtResource("4_ldgjm")]
+[node name="Ball2" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(260, 220)
 level = 8
 
-[node name="Ball3" parent="Balls" instance=ExtResource("4_ldgjm")]
+[node name="Ball3" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(300, 220)
 level = 2
 
-[node name="Ball4" parent="Balls" instance=ExtResource("4_ldgjm")]
+[node name="Ball4" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(240, 200)
 level = 7
 
-[node name="Ball5" parent="Balls" instance=ExtResource("4_ldgjm")]
+[node name="Ball5" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(280, 200)
 level = 9
 
-[node name="Ball6" parent="Balls" instance=ExtResource("4_ldgjm")]
+[node name="Ball6" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(320, 200)
 level = 3
 
-[node name="Ball7" parent="Balls" instance=ExtResource("4_ldgjm")]
+[node name="Ball7" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(260, 180)
 level = 6
 
-[node name="Ball8" parent="Balls" instance=ExtResource("4_ldgjm")]
+[node name="Ball8" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(300, 180)
 level = 4
 
-[node name="Ball9" parent="Balls" instance=ExtResource("4_ldgjm")]
+[node name="Ball9" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(280, 160)
 level = 5
 
@@ -1522,12 +1522,13 @@ offset_left = 560.0
 offset_top = 360.0
 offset_right = 720.0
 offset_bottom = 680.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("13_aavli")
 
 [node name="Tax" type="Control" parent="UI"]
 layout_mode = 3
@@ -1536,13 +1537,13 @@ offset_top = 720.0
 offset_bottom = 720.0
 
 [node name="Background" type="TextureRect" parent="UI/Tax"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 0.878431)
+self_modulate = Color(0, 0, 0, 0.878431)
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 1260.0
 offset_bottom = 700.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="UI/Tax"]
@@ -1552,13 +1553,15 @@ offset_top = 40.0
 offset_right = 520.0
 offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "<TAX>"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Debt" type="TextureButton" parent="UI/Tax"]
+visible = false
+layout_mode = 0
 offset_left = 120.0
 offset_top = 480.0
 offset_right = 440.0
@@ -1573,13 +1576,14 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "GET DEBT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GiveUp" type="TextureButton" parent="UI/Tax"]
+layout_mode = 0
 offset_left = 120.0
 offset_top = 540.0
 offset_right = 440.0
@@ -1594,13 +1598,14 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "GIVE UP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Pay" type="TextureButton" parent="UI/Tax"]
+layout_mode = 0
 offset_left = 120.0
 offset_top = 600.0
 offset_right = 440.0
@@ -1615,7 +1620,7 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "PAY"
 horizontal_alignment = 1
@@ -1636,7 +1641,7 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = 1260.0
 offset_bottom = 700.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="UI/Shop"]
@@ -1646,7 +1651,7 @@ offset_top = 40.0
 offset_right = 520.0
 offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "<SHOP>"
 horizontal_alignment = 1
@@ -1668,7 +1673,7 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "EXIT"
 horizontal_alignment = 1
@@ -1678,13 +1683,13 @@ vertical_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Product" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+[node name="Product" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
 offset_left = 120.0
 offset_top = 120.0
 offset_right = 120.0
 offset_bottom = 120.0
 
-[node name="Product2" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+[node name="Product2" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
 visible = false
 offset_left = 280.0
 offset_top = 120.0
@@ -1692,21 +1697,21 @@ offset_right = 280.0
 offset_bottom = 120.0
 product_type = 1
 
-[node name="Product3" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+[node name="Product3" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
 offset_left = 440.0
 offset_top = 120.0
 offset_right = 440.0
 offset_bottom = 120.0
 product_type = 2
 
-[node name="Product4" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+[node name="Product4" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
 offset_left = 120.0
 offset_top = 280.0
 offset_right = 120.0
 offset_bottom = 280.0
 product_type = 3
 
-[node name="Product5" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+[node name="Product5" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
 visible = false
 offset_left = 280.0
 offset_top = 280.0
@@ -1714,14 +1719,14 @@ offset_right = 280.0
 offset_bottom = 280.0
 product_type = 4
 
-[node name="Product6" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+[node name="Product6" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
 offset_left = 440.0
 offset_top = 280.0
 offset_right = 440.0
 offset_bottom = 280.0
 product_type = 5
 
-[node name="Product7" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+[node name="Product7" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
 visible = false
 offset_left = 120.0
 offset_top = 440.0
@@ -1729,7 +1734,7 @@ offset_right = 120.0
 offset_bottom = 440.0
 product_type = 3
 
-[node name="Product8" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+[node name="Product8" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
 visible = false
 offset_left = 280.0
 offset_top = 440.0
@@ -1737,7 +1742,7 @@ offset_right = 280.0
 offset_bottom = 440.0
 product_type = 4
 
-[node name="Product9" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+[node name="Product9" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
 visible = false
 offset_left = 440.0
 offset_top = 440.0
@@ -1758,7 +1763,7 @@ offset_left = 720.0
 offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Bubbel" type="Control" parent="UI/People/Mask"]
@@ -1773,7 +1778,7 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 400.0
 offset_bottom = 100.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="UI/People/Mask/Bubbel"]
@@ -1783,7 +1788,7 @@ offset_top = 140.0
 offset_right = 120.0
 offset_bottom = 180.0
 rotation = 3.14159
-texture = ExtResource("2_k3p6f")
+texture = ExtResource("6_qy33h")
 expand_mode = 1
 
 [node name="Dialogue" type="Label" parent="UI/People/Mask/Bubbel"]
@@ -1794,7 +1799,7 @@ offset_right = 1530.0
 offset_bottom = 330.0
 scale = Vector2(0.25, 0.25)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 autowrap_mode = 1
@@ -1802,7 +1807,7 @@ autowrap_mode = 1
 [node name="SynthesizerVパッケージイラスト眼鏡あり" type="Sprite2D" parent="UI/People/Mask"]
 position = Vector2(280, 560)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("14_246jl")
+texture = ExtResource("14_kq1b1")
 
 [node name="Main" type="Control" parent="UI"]
 layout_mode = 3
@@ -1824,7 +1829,7 @@ offset_bottom = -350.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(5, 5)
-texture = ExtResource("2_svx0d")
+texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallsSlotDeck" type="Control" parent="UI/Main"]
@@ -1839,72 +1844,72 @@ layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "DECK"
 vertical_alignment = 1
 
-[node name="Ball" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(10, 40)
 is_display = true
 
-[node name="Ball2" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball2" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(30, 40)
 is_display = true
 
-[node name="Ball3" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball3" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(50, 40)
 is_display = true
 
-[node name="Ball4" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball4" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(70, 40)
 is_display = true
 
-[node name="Ball5" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball5" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(90, 40)
 is_display = true
 
-[node name="Ball6" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball6" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(110, 40)
 is_display = true
 
-[node name="Ball7" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball7" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(130, 40)
 is_display = true
 
-[node name="Ball8" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball8" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(150, 40)
 is_display = true
 
-[node name="Ball9" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball9" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(10, 60)
 is_display = true
 
-[node name="Ball10" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball10" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(30, 60)
 is_display = true
 
-[node name="Ball11" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball11" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(50, 60)
 is_display = true
 
-[node name="Ball12" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball12" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(70, 60)
 is_display = true
 
-[node name="Ball13" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball13" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(90, 60)
 is_display = true
 
-[node name="Ball14" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball14" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(110, 60)
 is_display = true
 
-[node name="Ball15" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball15" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(130, 60)
 is_display = true
 
-[node name="Ball16" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+[node name="Ball16" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(150, 60)
 is_display = true
 
@@ -1921,72 +1926,72 @@ layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "EXTRA"
 vertical_alignment = 1
 
-[node name="Ball" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(10, 40)
 is_display = true
 
-[node name="Ball2" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball2" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(30, 40)
 is_display = true
 
-[node name="Ball3" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball3" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(50, 40)
 is_display = true
 
-[node name="Ball4" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball4" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(70, 40)
 is_display = true
 
-[node name="Ball5" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball5" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(90, 40)
 is_display = true
 
-[node name="Ball6" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball6" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(110, 40)
 is_display = true
 
-[node name="Ball7" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball7" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(130, 40)
 is_display = true
 
-[node name="Ball8" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball8" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(150, 40)
 is_display = true
 
-[node name="Ball9" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball9" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(10, 60)
 is_display = true
 
-[node name="Ball10" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball10" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(30, 60)
 is_display = true
 
-[node name="Ball11" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball11" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(50, 60)
 is_display = true
 
-[node name="Ball12" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball12" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(70, 60)
 is_display = true
 
-[node name="Ball13" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball13" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(90, 60)
 is_display = true
 
-[node name="Ball14" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball14" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(110, 60)
 is_display = true
 
-[node name="Ball15" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball15" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(130, 60)
 is_display = true
 
-[node name="Ball16" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+[node name="Ball16" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(150, 60)
 is_display = true
 
@@ -2002,14 +2007,14 @@ layout_mode = 0
 offset_left = -10.0
 offset_right = 70.0
 offset_bottom = 20.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UI/Main/Buttons/Buy"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "＄⇒●"
 horizontal_alignment = 1
@@ -2022,7 +2027,7 @@ offset_top = 20.0
 offset_right = 490.0
 offset_bottom = 120.0
 scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "＄100=●025"
 horizontal_alignment = 1
@@ -2033,14 +2038,14 @@ layout_mode = 0
 offset_left = 90.0
 offset_right = 170.0
 offset_bottom = 20.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UI/Main/Buttons/Sell"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "●⇒＄"
 horizontal_alignment = 1
@@ -2052,7 +2057,7 @@ offset_top = 20.0
 offset_right = 400.0
 offset_bottom = 120.0
 scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "●050=＄100"
 horizontal_alignment = 1
@@ -2065,14 +2070,14 @@ offset_left = 90.0
 offset_top = 50.0
 offset_right = 170.0
 offset_bottom = 70.0
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UI/Main/Buttons/Info"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "INFO"
 horizontal_alignment = 1
@@ -2096,7 +2101,7 @@ layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "TURN"
 vertical_alignment = 1
@@ -2107,7 +2112,7 @@ layout_mode = 0
 offset_left = 80.0
 offset_right = 160.0
 offset_bottom = 20.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Turn"]
@@ -2116,7 +2121,7 @@ offset_left = 80.0
 offset_right = 400.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "〒"
 vertical_alignment = 1
@@ -2127,7 +2132,7 @@ offset_left = 80.0
 offset_right = 400.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
@@ -2143,7 +2148,7 @@ layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "MONEY"
 vertical_alignment = 1
@@ -2154,7 +2159,7 @@ layout_mode = 0
 offset_left = 80.0
 offset_right = 160.0
 offset_bottom = 20.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Money"]
@@ -2163,7 +2168,7 @@ offset_left = 80.0
 offset_right = 400.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "＄"
 vertical_alignment = 1
@@ -2174,7 +2179,7 @@ offset_left = 80.0
 offset_right = 400.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
@@ -2190,7 +2195,7 @@ layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "PAYOUT"
 vertical_alignment = 1
@@ -2201,7 +2206,7 @@ layout_mode = 0
 offset_left = 80.0
 offset_right = 160.0
 offset_bottom = 20.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Payout"]
@@ -2211,7 +2216,7 @@ offset_left = 60.0
 offset_right = 380.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "●"
 vertical_alignment = 1
@@ -2222,7 +2227,7 @@ offset_left = 80.0
 offset_right = 400.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
@@ -2238,7 +2243,7 @@ layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "BALLS"
 vertical_alignment = 1
@@ -2249,7 +2254,7 @@ layout_mode = 0
 offset_left = 80.0
 offset_right = 160.0
 offset_bottom = 20.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Balls"]
@@ -2258,7 +2263,7 @@ offset_left = 80.0
 offset_right = 400.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "●"
 vertical_alignment = 1
@@ -2269,7 +2274,7 @@ offset_left = 80.0
 offset_right = 400.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
@@ -2289,7 +2294,7 @@ offset_left = -80.0
 offset_right = 240.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "NEXT TAX"
 horizontal_alignment = 1
@@ -2302,7 +2307,7 @@ offset_left = -80.0
 offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 80.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Next"]
@@ -2312,7 +2317,7 @@ offset_top = 40.0
 offset_right = 240.0
 offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "〒"
 vertical_alignment = 1
@@ -2324,7 +2329,7 @@ offset_top = 40.0
 offset_right = 240.0
 offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
@@ -2337,7 +2342,7 @@ offset_left = -80.0
 offset_top = 80.0
 offset_right = 80.0
 offset_bottom = 120.0
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="NextType" type="Label" parent="UI/Main/Score/Next"]
@@ -2347,7 +2352,7 @@ offset_top = 80.0
 offset_right = 240.0
 offset_bottom = 160.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "★"
 vertical_alignment = 1
@@ -2359,7 +2364,7 @@ offset_top = 80.0
 offset_right = 240.0
 offset_bottom = 160.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
@@ -2381,7 +2386,7 @@ offset_top = -70.0
 offset_right = 10.0
 offset_bottom = -50.0
 pivot_offset = Vector2(10, 10)
-texture = ExtResource("2_k3p6f")
+texture = ExtResource("6_qy33h")
 expand_mode = 1
 
 [node name="Square" type="TextureRect" parent="UI/Main/Arrow"]
@@ -2392,7 +2397,7 @@ offset_right = 5.0
 offset_bottom = -40.0
 scale = Vector2(1, 10)
 pivot_offset = Vector2(5, 0)
-texture = ExtResource("1_jd8wc")
+texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Version" type="Label" parent="UI/Main"]
@@ -2402,7 +2407,7 @@ offset_top = 700.0
 offset_right = 1200.0
 offset_bottom = 780.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "GAMBALL v0.1.0"
 horizontal_alignment = 1
