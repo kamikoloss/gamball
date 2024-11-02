@@ -6,9 +6,9 @@ enum NextType { Money, Balls }
 
 
 # DECK の最大数
-const DECK_MAX_SIZE = 16
+const DECK_MAX_SIZE: int = 16
 # EXTRA の最大数
-const EXTRA_MAX_SIZE = 16
+const EXTRA_MAX_SIZE: int = 16
 # Ball が発射される最低のドラッグの距離 (px)
 const DRAG_LENGTH_MIN: float = 10
 # 引っ張りが最大になるドラッグの距離 (px)
@@ -19,14 +19,23 @@ const DRAG_LENGTH_MAX: float = 160
 const NEXT_LIST = [
 	[25, NextType.Balls, 100],
 	[50, NextType.Balls, 200],
-	[100, NextType.Balls, 400],
-	[150, NextType.Money, 400],
+	[75, NextType.Money, 300],
+	[100, NextType.Money, 400],
+	[125, NextType.Balls, 500],
+	[150, NextType.Balls, 600],
+	[175, NextType.Money, 700],
 	[200, NextType.Money, 800],
-	[250, NextType.Balls, 800],
-	[300, NextType.Balls, 1600],
 ]
 # ゲームクリアになる Turn
-const CLEAR_TURN = 300
+const CLEAR_TURN: int = 200
+
+# TODO: UI
+const UI_POSITION_BOTTOM_FROM: Vector2 = Vector2(0, 720)
+const UI_POSITION_BOTTOM_TO: Vector2 = Vector2(0, -720)
+const UI_POSITION_RIGHT_FROM: Vector2 = Vector2(1280, 0)
+const UI_POSITION_RIGHT_TO: Vector2 = Vector2(720, 0)
+const UI_POSITION_TO: Vector2 = Vector2(0, 0)
+const UI_MOVE_DURATION: float = 1.0
 
 
 # PackedScene
@@ -39,10 +48,8 @@ const CLEAR_TURN = 300
 @export var _stack: Stack
 @export var _balls: Node2D # Ball instances の親 Node
 
-# UI
 # TODO: クラス分ける
-@export var _shop: Control
-@export var _info: Control
+# UI Main
 @export var _buy_balls_button: Button
 @export var _sell_balls_button: Button
 @export var _shop_button: Button
@@ -56,10 +63,19 @@ const CLEAR_TURN = 300
 @export var _next_amount_label: Label
 @export var _balls_slot_deck: Control
 @export var _balls_slot_extra: Control
-# Arrow
+# UI Main Arrow
 @export var _arrow: Control
 @export var _arrow_square: TextureRect
 @export var _drag_point: TextureRect
+# UI Tax
+@export var _ui_tax: Control
+@export var _tax_pay_button: TextureButton
+# UI Shop
+@export var _ui_shop: Control
+@export var _products: Control
+@export var _shop_exit_button: TextureButton
+# UI People
+@export var _ui_people: Control
 
 
 # TODO: Autoload に置いていい気がする
@@ -106,11 +122,13 @@ var _buy_rate: Array[int] = [100, 25]
 # [x, y] x balls = y money
 var _sell_rate: Array[int] = [50, 100]
 
+# 次に訪れる Next
+var _current_next = 0
+
+
 
 func _ready() -> void:
 	# UI
-	_shop.visible = false
-	_info.visible = false
 	_refresh_balls_slot_deck()
 	_refresh_balls_slot_extra()
 	# Arrow
@@ -126,7 +144,9 @@ func _ready() -> void:
 	# Button に接続する
 	_buy_balls_button.pressed.connect(_on_buy_balls_button_pressed)
 	_sell_balls_button.pressed.connect(_on_sell_balls_button_pressed)
+	_tax_pay_button.pressed.connect(_on_tax_pay_button_pressed)
 	_shop_button.pressed.connect(_on_shop_button_pressed)
+	_shop_exit_button.pressed.connect(_on_shop_exit_button_pressed)
 	_info_button.pressed.connect(_on_info_button_pressed)
 	# すべての Hole の signal に接続する
 	var holes = get_tree().get_nodes_in_group("hole")
@@ -136,7 +156,7 @@ func _ready() -> void:
 	_billiards_board.input_event.connect(_on_billiards_board_input)
 
 	# すべての Product の signal に接続する
-	for maybe_product in _shop.get_children():
+	for maybe_product in _products.get_children():
 		if maybe_product is Product:
 			maybe_product.icon_pressed.connect(_on_product_icon_pressed)
 
@@ -212,12 +232,31 @@ func _on_sell_balls_button_pressed() -> void:
 	money += money_unit
 
 
+
+func _on_tax_pay_button_pressed() -> void:
+	var next_turn = NEXT_LIST[_current_next][0]
+	var next_type = NEXT_LIST[_current_next][1]
+	var next_amount = NEXT_LIST[_current_next][2]
+
+	if next_type == NextType.Money:
+		money -= next_amount
+	elif next_type == NextType.Balls:
+		balls -= next_amount
+
+	_hide_tax_window()
+	_show_shop_window()
+
+
+
 func _on_shop_button_pressed() -> void:
-	_shop.visible = not _shop.visible
+	_show_shop_window()
+
+func _on_shop_exit_button_pressed() -> void:
+	_hide_shop_window()
 
 
 func _on_info_button_pressed() -> void:
-	_info.visible = not _info.visible
+	pass
 
 
 # Ball が Hole に落ちたときの処理
@@ -408,35 +447,67 @@ func _refresh_next() -> void:
 		_next_amount_label.text = "CLEAR!!"
 		return
 
-	for next in NEXT_LIST:
-		var next_turn = next[0]
-		var next_type = next[1]
-		var next_amount = next[2]
-		var next_type_text = "¥" if next_type == NextType.Money else "●"
+	var next_turn = NEXT_LIST[_current_next][0]
+	var next_type = NEXT_LIST[_current_next][1]
+	var next_type_text = "￥" if next_type == NextType.Money else "●"
+	var next_amount = NEXT_LIST[_current_next][2]
 
-		if turn < next_turn:
-			_next_turn_label.text = str(next_turn)
-			_next_type_label.text = next_type_text
-			_next_amount_label.text = "-%s" % [next_amount]
-			break
+	_next_turn_label.text = str(next_turn)
+	_next_type_label.text = next_type_text
+	_next_amount_label.text = "-%s" % [next_amount]
+
 
 # 1ターン進める
 func _go_to_next_turn() -> void:
 	turn += 1
 
-	for next in NEXT_LIST:
-		var next_turn = next[0]
-		var next_type = next[1]
-		var next_amount = next[2]
-
-		if turn == next_turn:
-			if next_type == NextType.Money:
-				money -= next_amount
-			elif next_type == NextType.Balls:
-				balls -= next_amount
+	if turn == NEXT_LIST[_current_next][0]:
+		_show_tax_window()
 
 
+func _show_tax_window() -> void:
+	_show_people_window()
+	_ui_tax.visible = true
+	_ui_tax.position = UI_POSITION_BOTTOM_FROM
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(_ui_tax, "position", UI_POSITION_TO, UI_MOVE_DURATION)
+
+func _hide_tax_window() -> void:
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(_ui_tax, "position", UI_POSITION_BOTTOM_TO, UI_MOVE_DURATION)
+
+
+func _show_shop_window() -> void:
+	_ui_shop.visible = true
+	_ui_shop.position = UI_POSITION_BOTTOM_FROM
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(_ui_shop, "position", UI_POSITION_TO, UI_MOVE_DURATION)
+
+func _hide_shop_window() -> void:
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(_ui_shop, "position", UI_POSITION_BOTTOM_TO, UI_MOVE_DURATION)
+	_hide_people_window()
+
+
+func _show_people_window() -> void:
+	_ui_people.visible = true
+	_ui_people.position = UI_POSITION_RIGHT_FROM
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(_ui_people, "position", UI_POSITION_TO, UI_MOVE_DURATION)
+
+func _hide_people_window() -> void:
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(_ui_people, "position", UI_POSITION_RIGHT_TO, UI_MOVE_DURATION)
+
+
+# TODO: Autoload にしたらいらなくなる
 func _set_money_to_products() -> void:
-	for maybe_product in _shop.get_children():
+	for maybe_product in _products.get_children():
 		if maybe_product is Product:
 			maybe_product.main_money = money

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=21 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_h2e4g"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="1_jd8wc"]
@@ -13,12 +13,27 @@
 [ext_resource type="Script" path="res://scripts/stack.gd" id="10_ekmut"]
 [ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/lamp.tscn" id="11_hhfpi"]
 [ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/product.tscn" id="13_d5gi3"]
+[ext_resource type="Texture2D" uid="uid://cpe6a6v2fx6tg" path="res://images/people/people_0.png" id="14_246jl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_shop", "_info", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_turn_label", "_money_label", "_balls_label", "_payout_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow", "_arrow_square", "_drag_point")]
+[sub_resource type="Gradient" id="Gradient_vw8ig"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.25098, 0.501961, 0.25098, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dbrue"]
+gradient = SubResource("Gradient_vw8ig")
+
+[sub_resource type="Gradient" id="Gradient_id5ai"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.25098, 0.376471, 0.25098, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_44mdx"]
+gradient = SubResource("Gradient_id5ai")
+
+[node name="Main" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_shop_button", "_info_button", "_turn_label", "_money_label", "_balls_label", "_payout_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow", "_arrow_square", "_drag_point", "_ui_tax", "_tax_pay_button", "_ui_shop", "_products", "_shop_exit_button", "_ui_people")]
 script = ExtResource("1_h2e4g")
 _ball_scene = ExtResource("4_ldgjm")
 _billiards = NodePath("Billiards")
@@ -26,24 +41,28 @@ _billiards_board = NodePath("Billiards/Board")
 _pachinko = NodePath("Pachinko")
 _stack = NodePath("Stack")
 _balls = NodePath("Balls")
-_shop = NodePath("UI/Shop")
-_info = NodePath("UI/Info")
-_buy_balls_button = NodePath("UI/Buttons/Buy")
-_sell_balls_button = NodePath("UI/Buttons/Sell")
-_shop_button = NodePath("UI/Buttons/Shop")
-_info_button = NodePath("UI/Buttons/Info")
-_turn_label = NodePath("UI/Score/Turn/Turn")
-_money_label = NodePath("UI/Score/Money/Money")
-_balls_label = NodePath("UI/Score/Balls/Balls")
-_payout_label = NodePath("UI/Score/Payout/Payout")
-_next_turn_label = NodePath("UI/Score/Next/NextTurn")
-_next_type_label = NodePath("UI/Score/Next/NextType")
-_next_amount_label = NodePath("UI/Score/Next/NextAmount")
-_balls_slot_deck = NodePath("UI/BallsSlotDeck")
-_balls_slot_extra = NodePath("UI/BallsSlotExtra")
-_arrow = NodePath("UI/Arrow")
-_arrow_square = NodePath("UI/Arrow/Square")
-_drag_point = NodePath("UI/DragPoint")
+_buy_balls_button = NodePath("UI/Main/Buttons/Buy")
+_sell_balls_button = NodePath("UI/Main/Buttons/Sell")
+_shop_button = NodePath("UI/Main/Buttons/Shop")
+_info_button = NodePath("UI/Main/Buttons/Info")
+_turn_label = NodePath("UI/Main/Score/Turn/Turn")
+_money_label = NodePath("UI/Main/Score/Money/Money")
+_balls_label = NodePath("UI/Main/Score/Balls/Balls")
+_payout_label = NodePath("UI/Main/Score/Payout/Payout")
+_next_turn_label = NodePath("UI/Main/Score/Next/NextTurn")
+_next_type_label = NodePath("UI/Main/Score/Next/NextType")
+_next_amount_label = NodePath("UI/Main/Score/Next/NextAmount")
+_balls_slot_deck = NodePath("UI/Main/BallsSlotDeck")
+_balls_slot_extra = NodePath("UI/Main/BallsSlotExtra")
+_arrow = NodePath("UI/Main/Arrow")
+_arrow_square = NodePath("UI/Main/Arrow/Square")
+_drag_point = NodePath("UI/Main/DragPoint")
+_ui_tax = NodePath("UI/Tax")
+_tax_pay_button = NodePath("UI/Tax/Pay")
+_ui_shop = NodePath("UI/Shop")
+_products = NodePath("UI/Shop/Products")
+_shop_exit_button = NodePath("UI/Shop/Exit")
+_ui_people = NodePath("UI/People")
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_position_a", "_spawn_extra_position_b", "_spawn_extra_position_c", "_spawn_extra_position_d")]
 script = ExtResource("2_5y3bg")
@@ -76,13 +95,13 @@ shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
 [node name="Points" type="Node2D" parent="Billiards"]
+modulate = Color(0.501961, 0.501961, 0.501961, 0.25098)
 
 [node name="SpawnHole" type="Node2D" parent="Billiards/Points"]
 position = Vector2(280, 360)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHole"]
-self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -102,7 +121,6 @@ position = Vector2(160, 200)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHole2"]
-self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -122,7 +140,6 @@ position = Vector2(160, 520)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHole3"]
-self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -142,7 +159,6 @@ position = Vector2(400, 200)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHole4"]
-self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -162,7 +178,6 @@ position = Vector2(400, 520)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHole5"]
-self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -178,11 +193,11 @@ texture = ExtResource("2_svx0d")
 expand_mode = 1
 
 [node name="Top" type="Node2D" parent="Billiards/Points"]
+visible = false
 position = Vector2(280, 200)
 rotation = -3.14159
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/Top"]
-self_modulate = Color(0, 0.501961, 0, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -198,10 +213,10 @@ texture = ExtResource("2_k3p6f")
 expand_mode = 1
 
 [node name="Center" type="Node2D" parent="Billiards/Points"]
+visible = false
 position = Vector2(280, 360)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/Center"]
-self_modulate = Color(0.25098, 0.501961, 0.25098, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -217,10 +232,10 @@ texture = ExtResource("2_svx0d")
 expand_mode = 1
 
 [node name="Bottom" type="Node2D" parent="Billiards/Points"]
+visible = false
 position = Vector2(280, 520)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/Bottom"]
-self_modulate = Color(0, 0.501961, 0, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -459,13 +474,13 @@ shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
 [node name="Points" type="Node2D" parent="Pachinko"]
+modulate = Color(0.501961, 0.501961, 0.501961, 0.25098)
 
 [node name="SpawnHoleA" type="Node2D" parent="Pachinko/Points"]
 position = Vector2(800, 80)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Points/SpawnHoleA"]
-self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -485,7 +500,6 @@ position = Vector2(1200, 80)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Points/SpawnHoleB"]
-self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -501,11 +515,11 @@ texture = ExtResource("2_svx0d")
 expand_mode = 1
 
 [node name="Top" type="Node2D" parent="Pachinko/Points"]
+visible = false
 position = Vector2(1000, 200)
 rotation = 3.14159
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Points/Top"]
-self_modulate = Color(0.501961, 0, 0, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -521,10 +535,10 @@ texture = ExtResource("2_k3p6f")
 expand_mode = 1
 
 [node name="Center" type="Node2D" parent="Pachinko/Points"]
+visible = false
 position = Vector2(1000, 360)
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Points/Center"]
-self_modulate = Color(0.501961, 0, 0, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -540,10 +554,10 @@ texture = ExtResource("2_svx0d")
 expand_mode = 1
 
 [node name="Bottom" type="Node2D" parent="Pachinko/Points"]
+visible = false
 position = Vector2(1000, 520)
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Points/Bottom"]
-self_modulate = Color(0.501961, 0, 0, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1502,13 +1516,8 @@ level = 4
 position = Vector2(280, 160)
 level = 5
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="StackGlass" type="TextureRect" parent="UI"]
+[node name="StackGlass" type="TextureRect" parent="."]
 self_modulate = Color(0, 0, 0.25098, 0.501961)
-layout_mode = 0
 offset_left = 560.0
 offset_top = 360.0
 offset_right = 720.0
@@ -1516,7 +1525,291 @@ offset_bottom = 680.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="DragPoint" type="TextureRect" parent="UI"]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Tax" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 720.0
+offset_bottom = 720.0
+
+[node name="Background" type="TextureRect" parent="UI/Tax"]
+self_modulate = Color(0.12549, 0.12549, 0.12549, 0.878431)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1260.0
+offset_bottom = 700.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Tax"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 40.0
+offset_right = 520.0
+offset_bottom = 120.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "<TAX>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Debt" type="TextureButton" parent="UI/Tax"]
+offset_left = 120.0
+offset_top = 480.0
+offset_right = 440.0
+offset_bottom = 520.0
+texture_normal = SubResource("GradientTexture1D_dbrue")
+texture_hover = SubResource("GradientTexture1D_44mdx")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/Tax/Debt"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "GET DEBT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GiveUp" type="TextureButton" parent="UI/Tax"]
+offset_left = 120.0
+offset_top = 540.0
+offset_right = 440.0
+offset_bottom = 580.0
+texture_normal = SubResource("GradientTexture1D_dbrue")
+texture_hover = SubResource("GradientTexture1D_44mdx")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/Tax/GiveUp"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "GIVE UP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pay" type="TextureButton" parent="UI/Tax"]
+offset_left = 120.0
+offset_top = 600.0
+offset_right = 440.0
+offset_bottom = 640.0
+texture_normal = SubResource("GradientTexture1D_dbrue")
+texture_hover = SubResource("GradientTexture1D_44mdx")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/Tax/Pay"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "PAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shop" type="Control" parent="UI"]
+visible = false
+clip_children = 1
+layout_mode = 3
+anchors_preset = 0
+offset_top = 720.0
+offset_bottom = 720.0
+
+[node name="Background" type="TextureRect" parent="UI/Shop"]
+self_modulate = Color(0, 0, 0, 0.878431)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1260.0
+offset_bottom = 700.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Shop"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 40.0
+offset_right = 520.0
+offset_bottom = 120.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "<SHOP>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="TextureButton" parent="UI/Shop"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 600.0
+offset_right = 440.0
+offset_bottom = 640.0
+texture_normal = SubResource("GradientTexture1D_dbrue")
+texture_hover = SubResource("GradientTexture1D_44mdx")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/Shop/Exit"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "EXIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Products" type="Control" parent="UI/Shop"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Product" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+offset_left = 120.0
+offset_top = 120.0
+offset_right = 120.0
+offset_bottom = 120.0
+
+[node name="Product2" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+visible = false
+offset_left = 280.0
+offset_top = 120.0
+offset_right = 280.0
+offset_bottom = 120.0
+product_type = 1
+
+[node name="Product3" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+offset_left = 440.0
+offset_top = 120.0
+offset_right = 440.0
+offset_bottom = 120.0
+product_type = 2
+
+[node name="Product4" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+offset_left = 120.0
+offset_top = 280.0
+offset_right = 120.0
+offset_bottom = 280.0
+product_type = 3
+
+[node name="Product5" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+visible = false
+offset_left = 280.0
+offset_top = 280.0
+offset_right = 280.0
+offset_bottom = 280.0
+product_type = 4
+
+[node name="Product6" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+offset_left = 440.0
+offset_top = 280.0
+offset_right = 440.0
+offset_bottom = 280.0
+product_type = 5
+
+[node name="Product7" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+visible = false
+offset_left = 120.0
+offset_top = 440.0
+offset_right = 120.0
+offset_bottom = 440.0
+product_type = 3
+
+[node name="Product8" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+visible = false
+offset_left = 280.0
+offset_top = 440.0
+offset_right = 280.0
+offset_bottom = 440.0
+product_type = 4
+
+[node name="Product9" parent="UI/Shop/Products" instance=ExtResource("13_d5gi3")]
+visible = false
+offset_left = 440.0
+offset_top = 440.0
+offset_right = 440.0
+offset_bottom = 440.0
+product_type = 5
+
+[node name="People" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 720.0
+offset_bottom = 720.0
+
+[node name="Mask" type="TextureRect" parent="UI/People"]
+clip_children = 1
+layout_mode = 0
+offset_left = 720.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="Bubbel" type="Control" parent="UI/People/Mask"]
+modulate = Color(1, 1, 1, 0.752941)
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/People/Mask/Bubbel"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 100.0
+texture = ExtResource("1_jd8wc")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/People/Mask/Bubbel"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 140.0
+offset_right = 120.0
+offset_bottom = 180.0
+rotation = 3.14159
+texture = ExtResource("2_k3p6f")
+expand_mode = 1
+
+[node name="Dialogue" type="Label" parent="UI/People/Mask/Bubbel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1530.0
+offset_bottom = 330.0
+scale = Vector2(0.25, 0.25)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+autowrap_mode = 1
+
+[node name="SynthesizerVパッケージイラスト眼鏡あり" type="Sprite2D" parent="UI/People/Mask"]
+position = Vector2(280, 560)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_246jl")
+
+[node name="Main" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="DragPoint" type="TextureRect" parent="UI/Main"]
 self_modulate = Color(1, 0, 1, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -1524,31 +1817,194 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 275.0
-offset_top = 355.0
-offset_right = 285.0
-offset_bottom = 365.0
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -630.0
+offset_bottom = -350.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(5, 5)
 texture = ExtResource("2_svx0d")
 expand_mode = 1
 
-[node name="Buttons" type="Control" parent="UI"]
+[node name="BallsSlotDeck" type="Control" parent="UI/Main"]
 anchors_preset = 0
 offset_left = 560.0
-offset_top = 30.0
+offset_top = 40.0
 offset_right = 560.0
-offset_bottom = 30.0
+offset_bottom = 40.0
 
-[node name="Buy" type="Button" parent="UI/Buttons"]
+[node name="Label" type="Label" parent="UI/Main/BallsSlotDeck"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "DECK"
+vertical_alignment = 1
+
+[node name="Ball" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(10, 40)
+is_display = true
+
+[node name="Ball2" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(30, 40)
+is_display = true
+
+[node name="Ball3" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(50, 40)
+is_display = true
+
+[node name="Ball4" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(70, 40)
+is_display = true
+
+[node name="Ball5" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(90, 40)
+is_display = true
+
+[node name="Ball6" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(110, 40)
+is_display = true
+
+[node name="Ball7" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(130, 40)
+is_display = true
+
+[node name="Ball8" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(150, 40)
+is_display = true
+
+[node name="Ball9" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(10, 60)
+is_display = true
+
+[node name="Ball10" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(30, 60)
+is_display = true
+
+[node name="Ball11" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(50, 60)
+is_display = true
+
+[node name="Ball12" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(70, 60)
+is_display = true
+
+[node name="Ball13" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(90, 60)
+is_display = true
+
+[node name="Ball14" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(110, 60)
+is_display = true
+
+[node name="Ball15" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(130, 60)
+is_display = true
+
+[node name="Ball16" parent="UI/Main/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
+position = Vector2(150, 60)
+is_display = true
+
+[node name="BallsSlotExtra" type="Control" parent="UI/Main"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 120.0
+offset_right = 560.0
+offset_bottom = 120.0
+
+[node name="Label" type="Label" parent="UI/Main/BallsSlotExtra"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("7_yeeqd")
+theme_override_font_sizes/font_size = 64
+text = "EXTRA"
+vertical_alignment = 1
+
+[node name="Ball" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(10, 40)
+is_display = true
+
+[node name="Ball2" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(30, 40)
+is_display = true
+
+[node name="Ball3" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(50, 40)
+is_display = true
+
+[node name="Ball4" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(70, 40)
+is_display = true
+
+[node name="Ball5" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(90, 40)
+is_display = true
+
+[node name="Ball6" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(110, 40)
+is_display = true
+
+[node name="Ball7" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(130, 40)
+is_display = true
+
+[node name="Ball8" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(150, 40)
+is_display = true
+
+[node name="Ball9" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(10, 60)
+is_display = true
+
+[node name="Ball10" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(30, 60)
+is_display = true
+
+[node name="Ball11" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(50, 60)
+is_display = true
+
+[node name="Ball12" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(70, 60)
+is_display = true
+
+[node name="Ball13" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(90, 60)
+is_display = true
+
+[node name="Ball14" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(110, 60)
+is_display = true
+
+[node name="Ball15" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(130, 60)
+is_display = true
+
+[node name="Ball16" parent="UI/Main/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
+position = Vector2(150, 60)
+is_display = true
+
+[node name="Buttons" type="Control" parent="UI/Main"]
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 240.0
+offset_right = 560.0
+offset_bottom = 240.0
+
+[node name="Buy" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
 offset_left = -10.0
 offset_right = 70.0
 offset_bottom = 20.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
-[node name="Label" type="Label" parent="UI/Buttons/Buy"]
+[node name="Label" type="Label" parent="UI/Main/Buttons/Buy"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1559,7 +2015,7 @@ text = "＄⇒●"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="UI/Buttons/Buy"]
+[node name="Label2" type="Label" parent="UI/Main/Buttons/Buy"]
 layout_mode = 0
 offset_left = -10.0
 offset_top = 20.0
@@ -1572,14 +2028,14 @@ text = "＄100=●025"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sell" type="Button" parent="UI/Buttons"]
+[node name="Sell" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
 offset_left = 90.0
 offset_right = 170.0
 offset_bottom = 20.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
-[node name="Label" type="Label" parent="UI/Buttons/Sell"]
+[node name="Label" type="Label" parent="UI/Main/Buttons/Sell"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1590,7 +2046,7 @@ text = "●⇒＄"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="UI/Buttons/Sell"]
+[node name="Label2" type="Label" parent="UI/Main/Buttons/Sell"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 400.0
@@ -1602,7 +2058,7 @@ text = "●050=＄100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Shop" type="Button" parent="UI/Buttons"]
+[node name="Shop" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
 offset_left = -10.0
 offset_top = 50.0
@@ -1610,7 +2066,7 @@ offset_right = 70.0
 offset_bottom = 70.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
-[node name="Label" type="Label" parent="UI/Buttons/Shop"]
+[node name="Label" type="Label" parent="UI/Main/Buttons/Shop"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1621,7 +2077,8 @@ text = "SHOP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Info" type="Button" parent="UI/Buttons"]
+[node name="Info" type="Button" parent="UI/Main/Buttons"]
+visible = false
 layout_mode = 0
 offset_left = 90.0
 offset_top = 50.0
@@ -1629,7 +2086,7 @@ offset_right = 170.0
 offset_bottom = 70.0
 theme_override_fonts/font = ExtResource("7_yeeqd")
 
-[node name="Label" type="Label" parent="UI/Buttons/Info"]
+[node name="Label" type="Label" parent="UI/Main/Buttons/Info"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1640,20 +2097,20 @@ text = "INFO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Score" type="Control" parent="UI"]
+[node name="Score" type="Control" parent="UI/Main"]
 anchors_preset = 0
 offset_left = 560.0
 offset_top = 360.0
 offset_right = 560.0
 offset_bottom = 360.0
 
-[node name="Turn" type="Control" parent="UI/Score"]
+[node name="Turn" type="Control" parent="UI/Main/Score"]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 20.0
 offset_bottom = 20.0
 
-[node name="Label" type="Label" parent="UI/Score/Turn"]
+[node name="Label" type="Label" parent="UI/Main/Score/Turn"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1663,7 +2120,7 @@ theme_override_font_sizes/font_size = 64
 text = "TURN"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/Score/Turn"]
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Turn"]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
 layout_mode = 0
 offset_left = 80.0
@@ -1672,7 +2129,7 @@ offset_bottom = 20.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label2" type="Label" parent="UI/Score/Turn"]
+[node name="Label2" type="Label" parent="UI/Main/Score/Turn"]
 layout_mode = 0
 offset_left = 80.0
 offset_right = 400.0
@@ -1683,7 +2140,7 @@ theme_override_font_sizes/font_size = 64
 text = "〒"
 vertical_alignment = 1
 
-[node name="Turn" type="Label" parent="UI/Score/Turn"]
+[node name="Turn" type="Label" parent="UI/Main/Score/Turn"]
 layout_mode = 0
 offset_left = 80.0
 offset_right = 400.0
@@ -1695,12 +2152,12 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Money" type="Control" parent="UI/Score"]
+[node name="Money" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 40.0
-offset_bottom = 40.0
+offset_top = 50.0
+offset_bottom = 50.0
 
-[node name="Label" type="Label" parent="UI/Score/Money"]
+[node name="Label" type="Label" parent="UI/Main/Score/Money"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1710,7 +2167,7 @@ theme_override_font_sizes/font_size = 64
 text = "MONEY"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/Score/Money"]
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Money"]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
 layout_mode = 0
 offset_left = 80.0
@@ -1719,7 +2176,7 @@ offset_bottom = 20.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label2" type="Label" parent="UI/Score/Money"]
+[node name="Label2" type="Label" parent="UI/Main/Score/Money"]
 layout_mode = 0
 offset_left = 80.0
 offset_right = 400.0
@@ -1730,7 +2187,7 @@ theme_override_font_sizes/font_size = 64
 text = "＄"
 vertical_alignment = 1
 
-[node name="Money" type="Label" parent="UI/Score/Money"]
+[node name="Money" type="Label" parent="UI/Main/Score/Money"]
 layout_mode = 0
 offset_left = 80.0
 offset_right = 400.0
@@ -1742,12 +2199,12 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Payout" type="Control" parent="UI/Score"]
+[node name="Payout" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 60.0
-offset_bottom = 60.0
+offset_top = 80.0
+offset_bottom = 80.0
 
-[node name="Label" type="Label" parent="UI/Score/Payout"]
+[node name="Label" type="Label" parent="UI/Main/Score/Payout"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1757,7 +2214,7 @@ theme_override_font_sizes/font_size = 64
 text = "PAYOUT"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/Score/Payout"]
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Payout"]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
 layout_mode = 0
 offset_left = 80.0
@@ -1766,7 +2223,7 @@ offset_bottom = 20.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label2" type="Label" parent="UI/Score/Payout"]
+[node name="Label2" type="Label" parent="UI/Main/Score/Payout"]
 visible = false
 layout_mode = 0
 offset_left = 60.0
@@ -1778,7 +2235,7 @@ theme_override_font_sizes/font_size = 64
 text = "●"
 vertical_alignment = 1
 
-[node name="Payout" type="Label" parent="UI/Score/Payout"]
+[node name="Payout" type="Label" parent="UI/Main/Score/Payout"]
 layout_mode = 0
 offset_left = 80.0
 offset_right = 400.0
@@ -1790,12 +2247,12 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Balls" type="Control" parent="UI/Score"]
+[node name="Balls" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 80.0
-offset_bottom = 80.0
+offset_top = 100.0
+offset_bottom = 100.0
 
-[node name="Label" type="Label" parent="UI/Score/Balls"]
+[node name="Label" type="Label" parent="UI/Main/Score/Balls"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -1805,7 +2262,7 @@ theme_override_font_sizes/font_size = 64
 text = "BALLS"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/Score/Balls"]
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Balls"]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
 layout_mode = 0
 offset_left = 80.0
@@ -1814,7 +2271,7 @@ offset_bottom = 20.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label2" type="Label" parent="UI/Score/Balls"]
+[node name="Label2" type="Label" parent="UI/Main/Score/Balls"]
 layout_mode = 0
 offset_left = 80.0
 offset_right = 400.0
@@ -1825,7 +2282,7 @@ theme_override_font_sizes/font_size = 64
 text = "●"
 vertical_alignment = 1
 
-[node name="Balls" type="Label" parent="UI/Score/Balls"]
+[node name="Balls" type="Label" parent="UI/Main/Score/Balls"]
 layout_mode = 0
 offset_left = 80.0
 offset_right = 400.0
@@ -1837,15 +2294,15 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Next" type="Control" parent="UI/Score"]
+[node name="Next" type="Control" parent="UI/Main/Score"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 80.0
-offset_top = 120.0
+offset_top = 160.0
 offset_right = 80.0
-offset_bottom = 120.0
+offset_bottom = 160.0
 
-[node name="Label" type="Label" parent="UI/Score/Next"]
+[node name="Label" type="Label" parent="UI/Main/Score/Next"]
 layout_mode = 0
 offset_left = -80.0
 offset_right = 240.0
@@ -1857,8 +2314,9 @@ text = "NEXT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/Score/Next"]
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Next"]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 0.752941)
+layout_mode = 0
 offset_left = -80.0
 offset_top = 40.0
 offset_right = 80.0
@@ -1866,7 +2324,7 @@ offset_bottom = 80.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Label2" type="Label" parent="UI/Score/Next"]
+[node name="Label2" type="Label" parent="UI/Main/Score/Next"]
 layout_mode = 0
 offset_left = -80.0
 offset_top = 40.0
@@ -1878,7 +2336,7 @@ theme_override_font_sizes/font_size = 64
 text = "★"
 vertical_alignment = 1
 
-[node name="NextTurn" type="Label" parent="UI/Score/Next"]
+[node name="NextTurn" type="Label" parent="UI/Main/Score/Next"]
 layout_mode = 0
 offset_left = -80.0
 offset_top = 40.0
@@ -1891,8 +2349,9 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="UI/Score/Next"]
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Score/Next"]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 0.752941)
+layout_mode = 0
 offset_left = -80.0
 offset_top = 80.0
 offset_right = 80.0
@@ -1900,7 +2359,8 @@ offset_bottom = 120.0
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="NextType" type="Label" parent="UI/Score/Next"]
+[node name="NextType" type="Label" parent="UI/Main/Score/Next"]
+layout_mode = 0
 offset_left = -80.0
 offset_top = 80.0
 offset_right = 240.0
@@ -1911,7 +2371,8 @@ theme_override_font_sizes/font_size = 64
 text = "★"
 vertical_alignment = 1
 
-[node name="NextAmount" type="Label" parent="UI/Score/Next"]
+[node name="NextAmount" type="Label" parent="UI/Main/Score/Next"]
+layout_mode = 0
 offset_left = -80.0
 offset_top = 80.0
 offset_right = 240.0
@@ -1923,170 +2384,7 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="BallsSlotDeck" type="Control" parent="UI"]
-anchors_preset = 0
-offset_left = 560.0
-offset_top = 160.0
-offset_right = 560.0
-offset_bottom = 160.0
-
-[node name="Label" type="Label" parent="UI/BallsSlotDeck"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "DECK"
-vertical_alignment = 1
-
-[node name="Ball" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(10, 40)
-is_display = true
-
-[node name="Ball2" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(30, 40)
-is_display = true
-
-[node name="Ball3" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(50, 40)
-is_display = true
-
-[node name="Ball4" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(70, 40)
-is_display = true
-
-[node name="Ball5" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(90, 40)
-is_display = true
-
-[node name="Ball6" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(110, 40)
-is_display = true
-
-[node name="Ball7" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(130, 40)
-is_display = true
-
-[node name="Ball8" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(150, 40)
-is_display = true
-
-[node name="Ball9" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(10, 60)
-is_display = true
-
-[node name="Ball10" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(30, 60)
-is_display = true
-
-[node name="Ball11" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(50, 60)
-is_display = true
-
-[node name="Ball12" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(70, 60)
-is_display = true
-
-[node name="Ball13" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(90, 60)
-is_display = true
-
-[node name="Ball14" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(110, 60)
-is_display = true
-
-[node name="Ball15" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(130, 60)
-is_display = true
-
-[node name="Ball16" parent="UI/BallsSlotDeck" instance=ExtResource("4_ldgjm")]
-position = Vector2(150, 60)
-is_display = true
-
-[node name="BallsSlotExtra" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 560.0
-offset_top = 240.0
-offset_right = 560.0
-offset_bottom = 240.0
-
-[node name="Label" type="Label" parent="UI/BallsSlotExtra"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "EXTRA"
-vertical_alignment = 1
-
-[node name="Ball" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(10, 40)
-is_display = true
-
-[node name="Ball2" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(30, 40)
-is_display = true
-
-[node name="Ball3" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(50, 40)
-is_display = true
-
-[node name="Ball4" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(70, 40)
-is_display = true
-
-[node name="Ball5" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(90, 40)
-is_display = true
-
-[node name="Ball6" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(110, 40)
-is_display = true
-
-[node name="Ball7" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(130, 40)
-is_display = true
-
-[node name="Ball8" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(150, 40)
-is_display = true
-
-[node name="Ball9" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(10, 60)
-is_display = true
-
-[node name="Ball10" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(30, 60)
-is_display = true
-
-[node name="Ball11" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(50, 60)
-is_display = true
-
-[node name="Ball12" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(70, 60)
-is_display = true
-
-[node name="Ball13" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(90, 60)
-is_display = true
-
-[node name="Ball14" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(110, 60)
-is_display = true
-
-[node name="Ball15" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(130, 60)
-is_display = true
-
-[node name="Ball16" parent="UI/BallsSlotExtra" instance=ExtResource("4_ldgjm")]
-position = Vector2(150, 60)
-is_display = true
-
-[node name="Arrow" type="Control" parent="UI"]
+[node name="Arrow" type="Control" parent="UI/Main"]
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 3
 anchors_preset = 0
@@ -2095,7 +2393,7 @@ offset_top = 360.0
 offset_right = 280.0
 offset_bottom = 360.0
 
-[node name="Triangle" type="TextureRect" parent="UI/Arrow"]
+[node name="Triangle" type="TextureRect" parent="UI/Main/Arrow"]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -70.0
@@ -2105,7 +2403,7 @@ pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_k3p6f")
 expand_mode = 1
 
-[node name="Square" type="TextureRect" parent="UI/Arrow"]
+[node name="Square" type="TextureRect" parent="UI/Main/Arrow"]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -50.0
@@ -2116,105 +2414,7 @@ pivot_offset = Vector2(5, 0)
 texture = ExtResource("1_jd8wc")
 expand_mode = 1
 
-[node name="Shop" type="Control" parent="UI"]
-visible = false
-anchors_preset = 0
-
-[node name="Background" type="TextureRect" parent="UI/Shop"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 0.878431)
-layout_mode = 0
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 520.0
-offset_bottom = 680.0
-texture = ExtResource("1_jd8wc")
-expand_mode = 1
-
-[node name="Title" type="Label" parent="UI/Shop"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 80.0
-offset_right = 520.0
-offset_bottom = 160.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "<SHOP>"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Product" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
-offset_left = 120.0
-offset_top = 160.0
-offset_right = 120.0
-offset_bottom = 160.0
-
-[node name="Product2" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
-visible = false
-offset_left = 280.0
-offset_top = 160.0
-offset_right = 280.0
-offset_bottom = 160.0
-product_type = 1
-
-[node name="Product3" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
-offset_left = 440.0
-offset_top = 160.0
-offset_right = 440.0
-offset_bottom = 160.0
-product_type = 2
-
-[node name="Product4" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
-offset_left = 120.0
-offset_top = 320.0
-offset_right = 120.0
-offset_bottom = 320.0
-product_type = 3
-
-[node name="Product5" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
-visible = false
-offset_left = 280.0
-offset_top = 320.0
-offset_right = 280.0
-offset_bottom = 320.0
-product_type = 4
-
-[node name="Product6" parent="UI/Shop" instance=ExtResource("13_d5gi3")]
-offset_left = 440.0
-offset_top = 320.0
-offset_right = 440.0
-offset_bottom = 320.0
-product_type = 5
-
-[node name="Info" type="Control" parent="UI"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-
-[node name="Background" type="TextureRect" parent="UI/Info"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 0.878431)
-layout_mode = 0
-offset_left = 760.0
-offset_top = 40.0
-offset_right = 1240.0
-offset_bottom = 680.0
-texture = ExtResource("1_jd8wc")
-expand_mode = 1
-
-[node name="Title" type="Label" parent="UI/Info"]
-layout_mode = 0
-offset_left = 920.0
-offset_top = 80.0
-offset_right = 1240.0
-offset_bottom = 160.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("7_yeeqd")
-theme_override_font_sizes/font_size = 64
-text = "<INFO>"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Version" type="Label" parent="UI"]
+[node name="Version" type="Label" parent="UI/Main"]
 layout_mode = 0
 offset_left = 560.0
 offset_top = 700.0
