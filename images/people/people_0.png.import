@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpe6a6v2fx6tg"
-path="res://.godot/imported/SynthesizerVパッケージイラスト_眼鏡あり.png-b22e290bbf6852feb2060c204ba3c0a5.ctex"
+path="res://.godot/imported/people_0.png-77b563e0eaeb80424f65832d74e9e302.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/persons/SynthesizerVパッケージイラスト_眼鏡あり.png"
-dest_files=["res://.godot/imported/SynthesizerVパッケージイラスト_眼鏡あり.png-b22e290bbf6852feb2060c204ba3c0a5.ctex"]
+source_file="res://images/people/people_0.png"
+dest_files=["res://.godot/imported/people_0.png-77b563e0eaeb80424f65832d74e9e302.ctex"]
 
 [params]
 
