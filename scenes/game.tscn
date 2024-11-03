@@ -1892,7 +1892,8 @@ scale = Vector2(0.25, 0.25)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
-text = "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+text = "いらっしゃいませ！
+GAMBALL にようこそ！"
 autowrap_mode = 1
 
 [node name="Touch" type="TextureButton" parent="UI/People"]

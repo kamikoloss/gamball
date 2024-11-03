@@ -220,6 +220,14 @@ func _on_info_button_pressed() -> void:
 
 func _on_people_touch_button_pressed() -> void:
 	_bunny.shuffle_pose()
+	# TODO: JSON に逃がす
+	var dialogue_list = [
+		"GAMBALL は近未来のバーチャルハイリスクハイリターンギャンブルだよ！",
+		"ゲームを続けたいなら定期的にプレイ料を払ってね。真ん中の下らへんに出てるやつ。￥は MONEY で●は BALLS だよ。",
+		"ビリヤードポケットに入った玉はパチンコ盤面上に出現するよ。",
+		"水色の ?? ってなってる玉は他の玉にぶつかると有効化されるんだ。有効化されてない玉はビリヤードポケットに落ちるとなくなるから気をつけてね！",
+	]
+	_game_ui.refresh_dialogue_label(dialogue_list.pick_random())
 
 
 # Ball が Hole に落ちたときの処理
