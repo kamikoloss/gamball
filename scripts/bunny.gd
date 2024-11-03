@@ -9,7 +9,9 @@ enum TweenType { Pose }
 
 
 const POSE_CHANGE_DURATION = 0
-const POSE_MOVE_DURATION = 0.2
+const POSE_MOVE_DURATION_UP = 0.1
+const POSE_MOVE_DURATION_DOWN = 0.4
+
 const POSE_MOVE_POSITION_DIFF = Vector2(0, -20) # どれぐらい跳ねるか
 
 
@@ -80,11 +82,11 @@ func shuffle_pose() -> void:
 
 	# 跳ねさせる
 	position = _pose_move_position_from
-	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "position", _pose_move_position_to, POSE_MOVE_DURATION / 2) 
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "position", _pose_move_position_to, POSE_MOVE_DURATION_UP) 
 	tween.chain()
-	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(self, "position", _pose_move_position_from, POSE_MOVE_DURATION / 2) 
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "position", _pose_move_position_from, POSE_MOVE_DURATION_DOWN / 2) 
 
 	# 次回以降の動作対象を切り替える
 	tween.tween_callback(func(): _is_pose_a = not _is_pose_a)

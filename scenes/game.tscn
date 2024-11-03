@@ -50,7 +50,7 @@ colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ro4wp"]
 gradient = SubResource("Gradient_rja4h")
 
-[node name="Game" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_products", "_game_ui")]
+[node name="Game" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_game_ui", "_products", "_bunny")]
 script = ExtResource("1_w7c5l")
 _ball_scene = ExtResource("2_ma10n")
 _billiards = NodePath("Billiards")
@@ -58,8 +58,9 @@ _billiards_board = NodePath("Billiards/Board")
 _pachinko = NodePath("Pachinko")
 _stack = NodePath("Stack")
 _balls = NodePath("Balls")
-_products = NodePath("UI/Shop/Products")
 _game_ui = NodePath("UI")
+_products = NodePath("UI/Shop/Products")
+_bunny = NodePath("UI/People/Bunny")
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_position_a", "_spawn_extra_position_b", "_spawn_extra_position_c", "_spawn_extra_position_d")]
 script = ExtResource("3_0s1kj")
@@ -1522,7 +1523,7 @@ offset_bottom = 680.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window", "_dialogue_label")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window", "_dialogue_label", "_people_touch_button")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("13_aavli")
@@ -1548,6 +1549,7 @@ _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
 _dialogue_label = NodePath("People/Bubble/Dialogue")
+_people_touch_button = NodePath("People/Touch")
 
 [node name="Tax" type="Control" parent="UI"]
 visible = false
@@ -1892,6 +1894,14 @@ theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 autowrap_mode = 1
+
+[node name="Touch" type="TextureButton" parent="UI/People"]
+offset_left = 760.0
+offset_top = 40.0
+offset_right = 1240.0
+offset_bottom = 680.0
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="Main" type="Control" parent="UI"]
 layout_mode = 3

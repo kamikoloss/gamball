@@ -38,8 +38,9 @@ const CLEAR_TURN: int = 200
 @export var _pachinko: Pachinko
 @export var _stack: Stack
 @export var _balls: Node2D # Ball instances の親 Node
-@export var _products: Control # Product の親
 @export var _game_ui: GameUi
+@export var _products: Control # Product の親
+@export var _bunny: Bunny
 
 
 # TODO: Autoload に置いていい気がする
@@ -104,6 +105,8 @@ func _ready() -> void:
 	_game_ui.tax_pay_button_pressed.connect(_on_tax_pay_button_pressed)
 	_game_ui.shop_exit_button_pressed.connect(_on_shop_exit_button_pressed)
 	_game_ui.info_button_pressed.connect(_on_info_button_pressed)
+	_game_ui.people_touch_button_pressed.connect(_on_people_touch_button_pressed)
+
 	# Signal (Hole)
 	for maybe_hole in get_tree().get_nodes_in_group("hole"):
 		if maybe_hole is Hole:
@@ -213,6 +216,10 @@ func _on_shop_exit_button_pressed() -> void:
 
 func _on_info_button_pressed() -> void:
 	pass
+
+
+func _on_people_touch_button_pressed() -> void:
+	_bunny.shuffle_pose()
 
 
 # Ball が Hole に落ちたときの処理
@@ -401,7 +408,7 @@ func _go_to_next_turn() -> void:
 		return
 	if turn == TAX_LIST[_next_tax_index][0]:
 		_game_ui.show_tax_window()
-		_game_ui.show_people_window()
+		_game_ui.show_people_window() # 連動
 
 
 # TODO: Autoload にしたらいらなくなる

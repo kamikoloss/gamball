@@ -11,6 +11,7 @@ signal sell_balls_button_pressed
 signal tax_pay_button_pressed
 signal shop_exit_button_pressed
 signal info_button_pressed
+signal people_touch_button_pressed
 
 
 # Window 移動系
@@ -55,6 +56,7 @@ const WINDOW_MOVE_DURATION: float = 1.0
 @export_category("People")
 @export var _people_window: Control
 @export var _dialogue_label: Label
+@export var _people_touch_button: TextureButton
 
 
 # { TweenType: Tween, ... } 
@@ -72,6 +74,8 @@ func _ready() -> void:
 	hide_drag_point()
 	# Main/Arrow
 	hide_arrow()
+	# People
+	_people_touch_button.pressed.connect(func(): people_touch_button_pressed.emit())
 
 
 func show_tax_window() -> void:
