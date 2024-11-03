@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=25 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/ball.tscn" id="2_ma10n"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/product.tscn" id="13_232xx"]
 [ext_resource type="Script" path="res://scripts/game_ui.gd" id="13_aavli"]
 [ext_resource type="Texture2D" uid="uid://cpe6a6v2fx6tg" path="res://images/people/people_0.png" id="14_kq1b1"]
+[ext_resource type="Script" path="res://scripts/game_ui_debug.gd" id="16_cuefl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -2426,4 +2427,151 @@ theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "GAMBALL v0.1.0"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_debug_button", "_debug_window", "_game", "_game_ui", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_people_dialogue_button")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("16_cuefl")
+_debug_button = NodePath("Debug")
+_debug_window = NodePath("DebugWindow")
+_game = NodePath("..")
+_game_ui = NodePath("../UI")
+_show_tax_button = NodePath("DebugWindow/ShowTax")
+_hide_tax_button = NodePath("DebugWindow/HideTax")
+_show_shop_button = NodePath("DebugWindow/ShowShop")
+_hide_shop_button = NodePath("DebugWindow/HideShop")
+_show_people_button = NodePath("DebugWindow/ShowPeople")
+_hide_people_button = NodePath("DebugWindow/HidePeople")
+_refresh_people_dialogue_button = NodePath("DebugWindow/RefreshPeopleDialogue")
+
+[node name="Debug" type="Button" parent="UIDebug"]
+offset_right = 160.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/Debug"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "Debug ON/OFF"
+vertical_alignment = 1
+
+[node name="DebugWindow" type="Control" parent="UIDebug"]
+visible = false
+anchors_preset = 0
+
+[node name="ShowTax" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 40.0
+offset_right = 160.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/ShowTax"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "ShowTax"
+vertical_alignment = 1
+
+[node name="HideTax" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 60.0
+offset_right = 160.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/HideTax"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "HideTax"
+vertical_alignment = 1
+
+[node name="ShowShop" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 80.0
+offset_right = 160.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/ShowShop"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "ShowShop"
+vertical_alignment = 1
+
+[node name="HideShop" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 100.0
+offset_right = 160.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/HideShop"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "HideShop"
+vertical_alignment = 1
+
+[node name="ShowPeople" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 120.0
+offset_right = 160.0
+offset_bottom = 140.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/ShowPeople"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "ShowPeople"
+vertical_alignment = 1
+
+[node name="HidePeople" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 140.0
+offset_right = 160.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/HidePeople"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "HidePeople"
+vertical_alignment = 1
+
+[node name="RefreshPeopleDialogue" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 160.0
+offset_right = 160.0
+offset_bottom = 180.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/RefreshPeopleDialogue"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "RefreshPeopleDia"
 vertical_alignment = 1

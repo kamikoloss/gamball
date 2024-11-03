@@ -173,7 +173,11 @@ func refresh_arrow(deg: int, scale: float) -> void:
 
 # People
 func refresh_dialogue_label(dialogue: String) -> void:
-	_dialogue_label.text = dialogue
+	var tween = _get_tween(TweenType.PeopleDialogue)
+	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
+	tween.tween_callback(func(): _dialogue_label.text = dialogue) # セリフを変える
+	tween.tween_property(_dialogue_label, "modulate", Color.WHITE, 0.2) # 表示を戻す
 
 
 func _refresh_balls_slot(parent_node: Node, level_list: Array[int]) -> void:
