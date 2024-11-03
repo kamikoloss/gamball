@@ -1897,6 +1897,7 @@ GAMBALL にようこそ！"
 autowrap_mode = 1
 
 [node name="Touch" type="TextureButton" parent="UI/People"]
+layout_mode = 0
 offset_left = 760.0
 offset_top = 40.0
 offset_right = 1240.0
@@ -2747,6 +2748,7 @@ text = "RefreshPeopleDia"
 vertical_alignment = 1
 
 [node name="ShufflePeoplePose" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 180.0
 offset_right = 320.0
