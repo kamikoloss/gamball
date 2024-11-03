@@ -75,7 +75,6 @@ func _ready() -> void:
 
 
 func show_tax_window() -> void:
-	show_people_window() # 連動
 	_tax_window.visible = true
 	_tax_window.position = WINDOW_POSITION_BOTTOM_FROM
 	var tween = _get_tween(TweenType.Tax)
@@ -99,7 +98,6 @@ func hide_shop_window() -> void:
 	var tween = _get_tween(TweenType.Shop)
 	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_shop_window, "position", WINDOW_POSITION_BOTTOM_TO, WINDOW_MOVE_DURATION)
-	hide_people_window() # 連動
 
 
 func show_people_window() -> void:

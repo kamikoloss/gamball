@@ -124,6 +124,10 @@ func _ready() -> void:
 	_start_payout()
 
 
+func restart_game() -> void:
+	get_tree().reload_current_scene()
+
+
 # 左クリックを押したとき: Billiards Board 上に限定する
 # see. _on_billiards_board_input()
 func _input(event: InputEvent) -> void:
@@ -204,6 +208,7 @@ func _on_tax_pay_button_pressed() -> void:
 func _on_shop_exit_button_pressed() -> void:
 	_refresh_next()
 	_game_ui.hide_shop_window()
+	_game_ui.hide_people_window()
 
 
 func _on_info_button_pressed() -> void:
@@ -396,6 +401,7 @@ func _go_to_next_turn() -> void:
 		return
 	if turn == TAX_LIST[_next_tax_index][0]:
 		_game_ui.show_tax_window()
+		_game_ui.show_people_window()
 
 
 # TODO: Autoload にしたらいらなくなる
