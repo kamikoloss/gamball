@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=24 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/ball.tscn" id="2_ma10n"]
@@ -34,7 +34,14 @@ colors = PackedColorArray(0.25098, 0.376471, 0.25098, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_44mdx"]
 gradient = SubResource("Gradient_id5ai")
 
-[node name="Game" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_balls_label", "_payout_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_balls_slot_deck", "_balls_slot_extra", "_arrow", "_arrow_square", "_drag_point", "_ui_tax", "_tax_pay_button", "_ui_shop", "_products", "_shop_exit_button", "_ui_people")]
+[sub_resource type="Gradient" id="Gradient_rja4h"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ro4wp"]
+gradient = SubResource("Gradient_rja4h")
+
+[node name="Game" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_products", "_game_ui")]
 script = ExtResource("1_w7c5l")
 _ball_scene = ExtResource("2_ma10n")
 _billiards = NodePath("Billiards")
@@ -42,27 +49,8 @@ _billiards_board = NodePath("Billiards/Board")
 _pachinko = NodePath("Pachinko")
 _stack = NodePath("Stack")
 _balls = NodePath("Balls")
-_buy_balls_button = NodePath("UI/Main/Buttons/Buy")
-_sell_balls_button = NodePath("UI/Main/Buttons/Sell")
-_info_button = NodePath("UI/Main/Buttons/Info")
-_turn_label = NodePath("UI/Main/Score/Turn/Turn")
-_money_label = NodePath("UI/Main/Score/Money/Money")
-_balls_label = NodePath("UI/Main/Score/Balls/Balls")
-_payout_label = NodePath("UI/Main/Score/Payout/Payout")
-_next_turn_label = NodePath("UI/Main/Score/Next/NextTurn")
-_next_type_label = NodePath("UI/Main/Score/Next/NextType")
-_next_amount_label = NodePath("UI/Main/Score/Next/NextAmount")
-_balls_slot_deck = NodePath("UI/Main/BallsSlotDeck")
-_balls_slot_extra = NodePath("UI/Main/BallsSlotExtra")
-_arrow = NodePath("UI/Main/Arrow")
-_arrow_square = NodePath("UI/Main/Arrow/Square")
-_drag_point = NodePath("UI/Main/DragPoint")
-_ui_tax = NodePath("UI/Tax")
-_tax_pay_button = NodePath("UI/Tax/Pay")
-_ui_shop = NodePath("UI/Shop")
 _products = NodePath("UI/Shop/Products")
-_shop_exit_button = NodePath("UI/Shop/Exit")
-_ui_people = NodePath("UI/People")
+_game_ui = NodePath("UI")
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_position_a", "_spawn_extra_position_b", "_spawn_extra_position_c", "_spawn_extra_position_d")]
 script = ExtResource("3_0s1kj")
@@ -1525,12 +1513,34 @@ offset_bottom = 680.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("13_aavli")
+_balls_slot_deck = NodePath("Main/BallsSlotDeck")
+_balls_slot_extra = NodePath("Main/BallsSlotExtra")
+_buy_balls_button = NodePath("Main/Buttons/Buy")
+_sell_balls_button = NodePath("Main/Buttons/Sell")
+_info_button = NodePath("Main/Buttons/Info")
+_turn_label = NodePath("Main/Score/Turn/Turn")
+_money_label = NodePath("Main/Score/Money/Money")
+_payout_label = NodePath("Main/Score/Payout/Payout")
+_balls_label = NodePath("Main/Score/Balls/Balls")
+_next_turn_label = NodePath("Main/Score/Next/NextTurn")
+_next_type_label = NodePath("Main/Score/Next/NextType")
+_next_amount_label = NodePath("Main/Score/Next/NextAmount")
+_drag_point = NodePath("Main/DragPoint")
+_arrow = NodePath("Main/Arrow")
+_arrow_square = NodePath("Main/Arrow/Square")
+_tax_window = NodePath("Tax")
+_tax_pay_button = NodePath("Tax/Pay")
+_tax_give_up_button = NodePath("Tax/GiveUp")
+_shop_window = NodePath("Shop")
+_shop_exit_button = NodePath("Shop/Exit")
+_people_window = NodePath("People")
 
 [node name="Tax" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 720.0
@@ -1582,7 +1592,7 @@ text = "GET DEBT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GiveUp" type="TextureButton" parent="UI/Tax"]
+[node name="Pay" type="TextureButton" parent="UI/Tax"]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 540.0
@@ -1590,6 +1600,30 @@ offset_right = 440.0
 offset_bottom = 580.0
 texture_normal = SubResource("GradientTexture1D_dbrue")
 texture_hover = SubResource("GradientTexture1D_44mdx")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/Tax/Pay"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "PAY TAX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GiveUp" type="TextureButton" parent="UI/Tax"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 600.0
+offset_right = 440.0
+offset_bottom = 640.0
+disabled = true
+texture_normal = SubResource("GradientTexture1D_dbrue")
+texture_hover = SubResource("GradientTexture1D_44mdx")
+texture_disabled = SubResource("GradientTexture1D_ro4wp")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -1604,30 +1638,7 @@ text = "GIVE UP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Pay" type="TextureButton" parent="UI/Tax"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 600.0
-offset_right = 440.0
-offset_bottom = 640.0
-texture_normal = SubResource("GradientTexture1D_dbrue")
-texture_hover = SubResource("GradientTexture1D_44mdx")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="UI/Tax/Pay"]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "PAY"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Shop" type="Control" parent="UI"]
-visible = false
 clip_children = 1
 layout_mode = 3
 anchors_preset = 0
@@ -1813,24 +1824,6 @@ texture = ExtResource("14_kq1b1")
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
-
-[node name="DragPoint" type="TextureRect" parent="UI/Main"]
-self_modulate = Color(1, 0, 1, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -360.0
-offset_right = -630.0
-offset_bottom = -350.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(5, 5)
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
 
 [node name="BallsSlotDeck" type="Control" parent="UI/Main"]
 anchors_preset = 0
@@ -2354,7 +2347,7 @@ offset_bottom = 160.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
-text = "★"
+text = "●"
 vertical_alignment = 1
 
 [node name="NextAmount" type="Label" parent="UI/Main/Score/Next"]
@@ -2369,6 +2362,27 @@ theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="DragPoint" type="Control" parent="UI/Main"]
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/DragPoint"]
+self_modulate = Color(1, 0, 1, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(5, 5)
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
 
 [node name="Arrow" type="Control" parent="UI/Main"]
 modulate = Color(1, 1, 1, 0.501961)
