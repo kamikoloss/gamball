@@ -8,7 +8,9 @@ extends Control
 enum TweenType { Pose }
 
 
-const POSE_CHANGE_DURATION = 1.0
+const POSE_CHANGE_DURATION = 0
+const POSE_MOVE_DURATION = 0.2
+const POSE_MOVE_POSITION_DIFF = Vector2(0, -20) # どれぐらい跳ねるか
 
 
 @export var _pose_a: Control
@@ -27,10 +29,17 @@ const POSE_CHANGE_DURATION = 1.0
 
 # { TweenType: Tween, ... } 
 var _tweens: Dictionary = {}
-var _is_pose_a = true # 現在どちらのポーズ表示を使用しているか 交互に切り替える
+# 現在どちらのポーズ表示を使用しているか 交互に切り替える
+var _is_pose_a = true
+
+var _pose_move_position_from: Vector2
+var _pose_move_position_to: Vector2
 
 
 func _ready() -> void:
+	_pose_move_position_from = position
+	_pose_move_position_to = position + POSE_MOVE_POSITION_DIFF
+
 	_pose_a.visible = true
 	_pose_b.visible = true
 	_pose_a.modulate = Color.WHITE
@@ -56,16 +65,29 @@ func show_default_pose() -> void:
 func shuffle_pose() -> void:
 	var tween = _get_tween(TweenType.Pose)
 	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 
+	# A/B のポーズをランダムに変更する
 	_set_random_textures()
+
+	# A/B の表示を切り替える
 	if _is_pose_a:
 		tween.tween_property(_pose_a, "modulate", Color.TRANSPARENT, POSE_CHANGE_DURATION) # A を透明にする
 		tween.tween_property(_pose_b, "modulate", Color.WHITE, POSE_CHANGE_DURATION) # B を表示する
 	else:
 		tween.tween_property(_pose_b, "modulate", Color.TRANSPARENT, POSE_CHANGE_DURATION) # B を透明にする
 		tween.tween_property(_pose_a, "modulate", Color.WHITE, POSE_CHANGE_DURATION) # A を表示する
-	_is_pose_a = not _is_pose_a
+
+	# 跳ねさせる
+	position = _pose_move_position_from
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "position", _pose_move_position_to, POSE_MOVE_DURATION / 2) 
+	tween.chain()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "position", _pose_move_position_from, POSE_MOVE_DURATION / 2) 
+
+	# 次回以降の動作対象を切り替える
+	tween.tween_callback(func(): _is_pose_a = not _is_pose_a)
 
 
 # TODO: set だけメソッド切り出してランダムはラップする

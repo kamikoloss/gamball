@@ -83,7 +83,7 @@ func show_tax_window() -> void:
 
 func hide_tax_window() -> void:
 	var tween = _get_tween(TweenType.Tax)
-	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_tax_window, "position", WINDOW_POSITION_BOTTOM_TO, WINDOW_MOVE_DURATION)
 
 
@@ -96,7 +96,7 @@ func show_shop_window() -> void:
 
 func hide_shop_window() -> void:
 	var tween = _get_tween(TweenType.Shop)
-	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_shop_window, "position", WINDOW_POSITION_BOTTOM_TO, WINDOW_MOVE_DURATION)
 
 
@@ -109,7 +109,7 @@ func show_people_window() -> void:
 
 func hide_people_window() -> void:
 	var tween = _get_tween(TweenType.People)
-	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_people_window, "position", WINDOW_POSITION_RIGHT_TO, WINDOW_MOVE_DURATION)
 
 
@@ -172,7 +172,7 @@ func refresh_arrow(deg: int, scale: float) -> void:
 # People
 func refresh_dialogue_label(dialogue: String) -> void:
 	var tween = _get_tween(TweenType.PeopleDialogue)
-	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
 	tween.tween_callback(func(): _dialogue_label.text = dialogue) # セリフを変える
 	tween.tween_property(_dialogue_label, "modulate", Color.WHITE, 0.2) # 表示を戻す
