@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=33 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/ball.tscn" id="2_ma10n"]
@@ -14,8 +14,16 @@
 [ext_resource type="Script" path="res://scripts/stack.gd" id="12_7kfse"]
 [ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/product.tscn" id="13_232xx"]
 [ext_resource type="Script" path="res://scripts/game_ui.gd" id="13_aavli"]
-[ext_resource type="Texture2D" uid="uid://cpe6a6v2fx6tg" path="res://images/people/people_0.png" id="14_kq1b1"]
+[ext_resource type="Script" path="res://scripts/bunny.gd" id="15_7uhdx"]
+[ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/bunny/base.png" id="15_ncnjg"]
+[ext_resource type="Texture2D" uid="uid://cuwiiq1yrw76c" path="res://images/bunny/face_1.png" id="16_cjk3l"]
 [ext_resource type="Script" path="res://scripts/game_ui_debug.gd" id="16_cuefl"]
+[ext_resource type="Texture2D" uid="uid://bh4gotw50hou6" path="res://images/bunny/face_2.png" id="17_mt5cg"]
+[ext_resource type="Texture2D" uid="uid://cscmqneywp778" path="res://images/bunny/hand_left_1.png" id="17_qj08e"]
+[ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/bunny/hand_right_1.png" id="18_kawv6"]
+[ext_resource type="Texture2D" uid="uid://cmx70egbmx0sa" path="res://images/bunny/face_3.png" id="18_l12bf"]
+[ext_resource type="Texture2D" uid="uid://c17m6dsrq78ov" path="res://images/bunny/hand_left_2.png" id="20_r8nov"]
+[ext_resource type="Texture2D" uid="uid://uk0q0it6ta74" path="res://images/bunny/hand_right_2.png" id="22_am1vr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -1539,7 +1547,7 @@ _tax_give_up_button = NodePath("Tax/GiveUp")
 _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
-_dialogue_label = NodePath("People/Mask/Bubble/Dialogue")
+_dialogue_label = NodePath("People/Bubble/Dialogue")
 
 [node name="Tax" type="Control" parent="UI"]
 visible = false
@@ -1769,32 +1777,100 @@ anchors_preset = 0
 offset_top = 720.0
 offset_bottom = 720.0
 
-[node name="Mask" type="TextureRect" parent="UI/People"]
-clip_children = 1
-layout_mode = 0
-offset_left = 720.0
-offset_right = 1280.0
-offset_bottom = 720.0
-mouse_filter = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+[node name="Bunny" type="Control" parent="UI/People" node_paths=PackedStringArray("_pose_a", "_face_a", "_hand_left_a", "_hand_right_a", "_pose_b", "_face_b", "_hand_left_b", "_hand_right_b")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1000.0
+offset_top = 20.0
+offset_right = 1000.0
+offset_bottom = 20.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("15_7uhdx")
+_pose_a = NodePath("PoseA")
+_face_a = NodePath("PoseA/Face")
+_hand_left_a = NodePath("PoseA/HandLeft")
+_hand_right_a = NodePath("PoseA/HandRight")
+_pose_b = NodePath("PoseB")
+_face_b = NodePath("PoseB/Face")
+_hand_left_b = NodePath("PoseB/HandLeft")
+_hand_right_b = NodePath("PoseB/HandRight")
+_face_texures = Array[Texture]([ExtResource("16_cjk3l"), ExtResource("17_mt5cg"), ExtResource("18_l12bf")])
+_hand_left_textures = Array[Texture]([ExtResource("17_qj08e"), ExtResource("20_r8nov")])
+_hand_right_textures = Array[Texture]([ExtResource("18_kawv6"), ExtResource("22_am1vr")])
 
-[node name="Bubble" type="Control" parent="UI/People/Mask"]
+[node name="Base" type="TextureRect" parent="UI/People/Bunny"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("15_ncnjg")
+
+[node name="PoseA" type="Control" parent="UI/People/Bunny"]
+anchors_preset = 0
+
+[node name="Face" type="TextureRect" parent="UI/People/Bunny/PoseA"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("16_cjk3l")
+
+[node name="HandLeft" type="TextureRect" parent="UI/People/Bunny/PoseA"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("17_qj08e")
+
+[node name="HandRight" type="TextureRect" parent="UI/People/Bunny/PoseA"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("18_kawv6")
+
+[node name="PoseB" type="Control" parent="UI/People/Bunny"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Face" type="TextureRect" parent="UI/People/Bunny/PoseB"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("16_cjk3l")
+
+[node name="HandLeft" type="TextureRect" parent="UI/People/Bunny/PoseB"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("17_qj08e")
+
+[node name="HandRight" type="TextureRect" parent="UI/People/Bunny/PoseB"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("18_kawv6")
+
+[node name="Bubble" type="Control" parent="UI/People"]
 modulate = Color(1, 1, 1, 0.752941)
 anchors_preset = 0
-offset_left = 80.0
+offset_left = 800.0
 offset_top = 40.0
-offset_right = 80.0
+offset_right = 800.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/People/Mask/Bubble"]
+[node name="TextureRect" type="TextureRect" parent="UI/People/Bubble"]
 layout_mode = 0
 offset_right = 400.0
 offset_bottom = 100.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="UI/People/Mask/Bubble"]
+[node name="TextureRect2" type="TextureRect" parent="UI/People/Bubble"]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 140.0
@@ -1804,7 +1880,7 @@ rotation = 3.14159
 texture = ExtResource("6_qy33h")
 expand_mode = 1
 
-[node name="Dialogue" type="Label" parent="UI/People/Mask/Bubble"]
+[node name="Dialogue" type="Label" parent="UI/People/Bubble"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -1816,11 +1892,6 @@ theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 autowrap_mode = 1
-
-[node name="SynthesizerVパッケージイラスト眼鏡あり" type="Sprite2D" parent="UI/People/Mask"]
-position = Vector2(280, 560)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("14_kq1b1")
 
 [node name="Main" type="Control" parent="UI"]
 layout_mode = 3
@@ -2429,7 +2500,7 @@ text = "GAMBALL v0.1.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_debug_button", "_debug_window", "_game", "_game_ui", "_restart_game_button", "_turn_add_button", "_money_add_button", "_balls_add_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_people_dialogue_button")]
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_debug_button", "_debug_window", "_game", "_game_ui", "_bunny", "_restart_game_button", "_turn_add_button", "_money_add_button", "_balls_add_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_people_dialogue_button", "_shuffle_people_pose_button")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("16_cuefl")
@@ -2437,6 +2508,7 @@ _debug_button = NodePath("Debug")
 _debug_window = NodePath("DebugWindow")
 _game = NodePath("..")
 _game_ui = NodePath("../UI")
+_bunny = NodePath("../UI/People/Bunny")
 _restart_game_button = NodePath("DebugWindow/RestartGame")
 _turn_add_button = NodePath("DebugWindow/Turn+")
 _money_add_button = NodePath("DebugWindow/Money+")
@@ -2448,8 +2520,10 @@ _hide_shop_button = NodePath("DebugWindow/HideShop")
 _show_people_button = NodePath("DebugWindow/ShowPeople")
 _hide_people_button = NodePath("DebugWindow/HidePeople")
 _refresh_people_dialogue_button = NodePath("DebugWindow/RefreshPeopleDialogue")
+_shuffle_people_pose_button = NodePath("DebugWindow/ShufflePeoplePose")
 
 [node name="Debug" type="Button" parent="UIDebug"]
+layout_mode = 0
 offset_right = 160.0
 offset_bottom = 20.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2468,6 +2542,7 @@ vertical_alignment = 1
 anchors_preset = 0
 
 [node name="RestartGame" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 160.0
 offset_bottom = 60.0
@@ -2484,6 +2559,7 @@ text = "RestartGame"
 vertical_alignment = 1
 
 [node name="Turn+" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_top = 60.0
 offset_right = 160.0
 offset_bottom = 80.0
@@ -2500,6 +2576,7 @@ text = "TURN  +20"
 vertical_alignment = 1
 
 [node name="Money+" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 100.0
@@ -2516,6 +2593,7 @@ text = "MONEY +100"
 vertical_alignment = 1
 
 [node name="Balls+" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_top = 100.0
 offset_right = 160.0
 offset_bottom = 120.0
@@ -2532,6 +2610,7 @@ text = "BALLS +100"
 vertical_alignment = 1
 
 [node name="ShowTax" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 40.0
 offset_right = 320.0
@@ -2549,6 +2628,7 @@ text = "ShowTax"
 vertical_alignment = 1
 
 [node name="HideTax" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 60.0
 offset_right = 320.0
@@ -2566,6 +2646,7 @@ text = "HideTax"
 vertical_alignment = 1
 
 [node name="ShowShop" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 80.0
 offset_right = 320.0
@@ -2583,6 +2664,7 @@ text = "ShowShop"
 vertical_alignment = 1
 
 [node name="HideShop" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 100.0
 offset_right = 320.0
@@ -2600,6 +2682,7 @@ text = "HideShop"
 vertical_alignment = 1
 
 [node name="ShowPeople" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 120.0
 offset_right = 320.0
@@ -2617,6 +2700,7 @@ text = "ShowPeople"
 vertical_alignment = 1
 
 [node name="HidePeople" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 140.0
 offset_right = 320.0
@@ -2634,6 +2718,7 @@ text = "HidePeople"
 vertical_alignment = 1
 
 [node name="RefreshPeopleDialogue" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 160.0
 offset_right = 320.0
@@ -2648,4 +2733,21 @@ scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "RefreshPeopleDia"
+vertical_alignment = 1
+
+[node name="ShufflePeoplePose" type="Button" parent="UIDebug/DebugWindow"]
+offset_left = 160.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 200.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/ShufflePeoplePose"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "ShufflePeoplePose"
 vertical_alignment = 1

@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://bjd632ntwegwj"]
+
+[ext_resource type="Script" path="res://scripts/bunny.gd" id="1_ghohs"]
+[ext_resource type="Texture2D" uid="uid://cuwiiq1yrw76c" path="res://images/bunny/face_1.png" id="2_k2g1p"]
+[ext_resource type="Texture2D" uid="uid://bh4gotw50hou6" path="res://images/bunny/face_2.png" id="3_2yfyc"]
+[ext_resource type="Texture2D" uid="uid://cmx70egbmx0sa" path="res://images/bunny/face_3.png" id="4_0y16x"]
+[ext_resource type="Texture2D" uid="uid://cscmqneywp778" path="res://images/bunny/hand_left_1.png" id="5_nlw86"]
+[ext_resource type="Texture2D" uid="uid://c17m6dsrq78ov" path="res://images/bunny/hand_left_2.png" id="6_xgoh3"]
+[ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/bunny/hand_right_1.png" id="7_oxwla"]
+[ext_resource type="Texture2D" uid="uid://uk0q0it6ta74" path="res://images/bunny/hand_right_2.png" id="8_mrbc4"]
+[ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/bunny/base.png" id="9_iqeo7"]
+
+[node name="Bunny" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ghohs")
+_face_texures = Array[Texture]([ExtResource("2_k2g1p"), ExtResource("3_2yfyc"), ExtResource("4_0y16x")])
+_hand_left_textures = Array[Texture]([ExtResource("5_nlw86"), ExtResource("6_xgoh3")])
+_hand_right_textures = Array[Texture]([ExtResource("7_oxwla"), ExtResource("8_mrbc4")])
+
+[node name="Base" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("9_iqeo7")
+
+[node name="Face" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("2_k2g1p")
+
+[node name="HandLeft" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("5_nlw86")
+
+[node name="HandRight" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+texture = ExtResource("7_oxwla")

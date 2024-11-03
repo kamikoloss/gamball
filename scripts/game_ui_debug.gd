@@ -7,6 +7,7 @@ extends Control
 
 @export var _game: Game
 @export var _game_ui: GameUi
+@export var _bunny: Bunny
 
 @export var _restart_game_button: Button
 @export var _turn_add_button: Button
@@ -19,6 +20,7 @@ extends Control
 @export var _show_people_button: Button
 @export var _hide_people_button: Button
 @export var _refresh_people_dialogue_button: Button
+@export var _shuffle_people_pose_button: Button
 
 
 var _dialogue_sample_list = [
@@ -44,3 +46,4 @@ func _ready() -> void:
 	_show_people_button.pressed.connect(func(): _game_ui.show_people_window())
 	_hide_people_button.pressed.connect(func(): _game_ui.hide_people_window())
 	_refresh_people_dialogue_button.pressed.connect(func(): _game_ui.refresh_dialogue_label(_dialogue_sample_list.pick_random()))
+	_shuffle_people_pose_button.pressed.connect(func(): _bunny.shuffle_pose())
