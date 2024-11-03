@@ -132,7 +132,7 @@ func _input(event: InputEvent) -> void:
 		# 左クリックを離したとき
 		if not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			_is_dragging = false
-			
+
 			# GameUi
 			_game_ui.hide_drag_point()
 			_game_ui.hide_arrow()
@@ -195,8 +195,7 @@ func _on_tax_pay_button_pressed() -> void:
 		balls -= next_amount
 
 	_next_tax_index += 1
-
-
+	_refresh_next()
 
 	_game_ui.hide_tax_window()
 	_game_ui.show_shop_window()

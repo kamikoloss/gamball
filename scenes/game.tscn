@@ -1513,7 +1513,7 @@ offset_bottom = 680.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window", "_dialogue_label")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("13_aavli")
@@ -1538,6 +1538,7 @@ _tax_give_up_button = NodePath("Tax/GiveUp")
 _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
+_dialogue_label = NodePath("People/Mask/Bubble/Dialogue")
 
 [node name="Tax" type="Control" parent="UI"]
 visible = false
@@ -1777,7 +1778,7 @@ mouse_filter = 2
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="Bubbel" type="Control" parent="UI/People/Mask"]
+[node name="Bubble" type="Control" parent="UI/People/Mask"]
 modulate = Color(1, 1, 1, 0.752941)
 anchors_preset = 0
 offset_left = 80.0
@@ -1785,14 +1786,14 @@ offset_top = 40.0
 offset_right = 80.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/People/Mask/Bubbel"]
+[node name="TextureRect" type="TextureRect" parent="UI/People/Mask/Bubble"]
 layout_mode = 0
 offset_right = 400.0
 offset_bottom = 100.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="UI/People/Mask/Bubbel"]
+[node name="TextureRect2" type="TextureRect" parent="UI/People/Mask/Bubble"]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 140.0
@@ -1802,7 +1803,7 @@ rotation = 3.14159
 texture = ExtResource("6_qy33h")
 expand_mode = 1
 
-[node name="Dialogue" type="Label" parent="UI/People/Mask/Bubbel"]
+[node name="Dialogue" type="Label" parent="UI/People/Mask/Bubble"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
