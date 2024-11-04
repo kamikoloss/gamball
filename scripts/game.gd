@@ -17,16 +17,14 @@ const DRAG_LENGTH_MAX: float = 160
 # Tax (ノルマ) のリスト
 # [<turn>, TaxType, <amount>]
 const TAX_LIST = [
-	[25, TaxType.Balls, 50],
-	[50, TaxType.Balls, 100],
-	[75, TaxType.Money, 400], # Balls 200
-	[100, TaxType.Money, 800], # Balls 400
-	[125, TaxType.Balls, 600],
-	[150, TaxType.Balls, 800],
-	[175, TaxType.Balls, 1000], # Balls 1000
+	[25, TaxType.Balls, 50],	# Balls 50
+	[50, TaxType.Balls, 100],	# Balls 100
+	[75, TaxType.Money, 400],	# Balls 200
+	[100, TaxType.Money, 800],	# Balls 400
+	[125, TaxType.Balls, 600],	# Balls 600
+	[150, TaxType.Balls, 800],	# Balls 800
+	[175, TaxType.Balls, 1000],	# Balls 1000
 ]
-# ゲームクリアになる Turn
-const CLEAR_TURN: int = 200
 
 
 # PackedScene
@@ -399,24 +397,22 @@ func _pop_payout() -> void:
 
 # Next 関連の見た目を更新する
 func _refresh_next() -> void:
-	if CLEAR_TURN <= turn:
-		_game_ui.refresh_next_clear()
-	else:
+	if _next_tax_index < TAX_LIST.size():
 		var turn = TAX_LIST[_next_tax_index][0]
 		var type = TAX_LIST[_next_tax_index][1]
 		var amount = TAX_LIST[_next_tax_index][2]
 		_game_ui.refresh_next(turn, type, amount)
-
+	else:
+		_game_ui.refresh_next_clear()
 
 # 1ターン進める
 func _go_to_next_turn() -> void:
 	turn += 1
 
-	if CLEAR_TURN <= turn:
-		return
-	if turn == TAX_LIST[_next_tax_index][0]:
-		_game_ui.show_tax_window()
-		_game_ui.show_people_window() # 連動
+	if _next_tax_index < TAX_LIST.size():
+		if turn == TAX_LIST[_next_tax_index][0]:
+			_game_ui.show_tax_window()
+			_game_ui.show_people_window() # 連動
 
 
 # TODO: Autoload にしたらいらなくなる

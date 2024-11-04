@@ -1,6 +1,7 @@
 class_name GameUiDebug
 extends Control
 
+
 @export var _game: Game
 @export var _game_ui: GameUi
 @export var _bunny: Bunny
