@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=35 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/ball.tscn" id="2_ma10n"]
@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://cmx70egbmx0sa" path="res://images/bunny/face_3.png" id="18_l12bf"]
 [ext_resource type="Texture2D" uid="uid://c17m6dsrq78ov" path="res://images/bunny/hand_left_2.png" id="20_r8nov"]
 [ext_resource type="Texture2D" uid="uid://uk0q0it6ta74" path="res://images/bunny/hand_right_2.png" id="22_am1vr"]
+[ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/bunny2/bunny2a.png" id="24_d3cdg"]
+[ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/bunny2/bunny2b.png" id="25_tj6hx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -437,12 +439,12 @@ hole_type = 0
 position = Vector2(500, 660)
 hole_type = 0
 
-[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_wall_a", "_wall_b", "_rush_devices", "_rush_lamps", "_rush_label_a", "_rush_label_b")]
+[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_rotating_wall_a", "_rotating_wall_b", "_rush_devices", "_rush_lamps", "_rush_label_a", "_rush_label_b")]
 script = ExtResource("8_ud1qg")
 _spawn_position_a = NodePath("Points/SpawnHoleA")
 _spawn_position_b = NodePath("Points/SpawnHoleB")
-_wall_a = NodePath("Walls/WallA")
-_wall_b = NodePath("Walls/WallB")
+_rotating_wall_a = NodePath("Walls/RotatingWallA")
+_rotating_wall_b = NodePath("Walls/RotatingWallB")
 _rush_devices = NodePath("Rush/Devices")
 _rush_lamps = NodePath("Rush/Lamps")
 _rush_label_a = NodePath("Rush/Display/RushA")
@@ -661,11 +663,11 @@ expand_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall4"]
 shape = SubResource("RectangleShape2D_fi0lo")
 
-[node name="WallA" type="StaticBody2D" parent="Pachinko/Walls"]
+[node name="RotatingWallA" type="StaticBody2D" parent="Pachinko/Walls"]
 position = Vector2(800, 160)
 scale = Vector2(4, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/WallA"]
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/RotatingWallA"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -680,14 +682,14 @@ grow_vertical = 2
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/WallA"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/RotatingWallA"]
 shape = SubResource("RectangleShape2D_fi0lo")
 
-[node name="WallB" type="StaticBody2D" parent="Pachinko/Walls"]
+[node name="RotatingWallB" type="StaticBody2D" parent="Pachinko/Walls"]
 position = Vector2(1200, 160)
 scale = Vector2(4, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/WallB"]
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/RotatingWallB"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -702,7 +704,7 @@ grow_vertical = 2
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/WallB"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/RotatingWallB"]
 shape = SubResource("RectangleShape2D_fi0lo")
 
 [node name="Corner" type="Node2D" parent="Pachinko/Walls"]
@@ -1780,6 +1782,7 @@ offset_top = 720.0
 offset_bottom = 720.0
 
 [node name="Bunny" type="Control" parent="UI/People" node_paths=PackedStringArray("_pose_a", "_face_a", "_hand_left_a", "_hand_right_a", "_pose_b", "_face_b", "_hand_left_b", "_hand_right_b")]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1000.0
@@ -1856,6 +1859,74 @@ offset_left = -600.0
 offset_right = 600.0
 offset_bottom = 1600.0
 texture = ExtResource("18_kawv6")
+
+[node name="Bunny2" type="Control" parent="UI/People" node_paths=PackedStringArray("_pose_a", "_face_a", "_hand_left_a", "_hand_right_a", "_pose_b", "_face_b", "_hand_left_b", "_hand_right_b")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1000.0
+offset_top = 40.0
+offset_right = 1000.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("15_7uhdx")
+_pose_a = NodePath("PoseA")
+_face_a = NodePath("PoseA/Face")
+_hand_left_a = NodePath("PoseA/HandLeft")
+_hand_right_a = NodePath("PoseA/HandRight")
+_pose_b = NodePath("PoseB")
+_face_b = NodePath("PoseB/Face")
+_hand_left_b = NodePath("PoseB/HandLeft")
+_hand_right_b = NodePath("PoseB/HandRight")
+_face_texures = Array[Texture]([ExtResource("24_d3cdg"), ExtResource("25_tj6hx")])
+
+[node name="Base" type="TextureRect" parent="UI/People/Bunny2"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+
+[node name="PoseA" type="Control" parent="UI/People/Bunny2"]
+anchors_preset = 0
+
+[node name="Face" type="TextureRect" parent="UI/People/Bunny2/PoseA"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+
+[node name="HandLeft" type="TextureRect" parent="UI/People/Bunny2/PoseA"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+
+[node name="HandRight" type="TextureRect" parent="UI/People/Bunny2/PoseA"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+
+[node name="PoseB" type="Control" parent="UI/People/Bunny2"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Face" type="TextureRect" parent="UI/People/Bunny2/PoseB"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+
+[node name="HandLeft" type="TextureRect" parent="UI/People/Bunny2/PoseB"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
+
+[node name="HandRight" type="TextureRect" parent="UI/People/Bunny2/PoseB"]
+layout_mode = 0
+offset_left = -600.0
+offset_right = 600.0
+offset_bottom = 1600.0
 
 [node name="Bubble" type="Control" parent="UI/People"]
 modulate = Color(1, 1, 1, 0.752941)
@@ -2512,11 +2583,14 @@ text = "GAMBALL v0.2.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_people_dialogue_button", "_shuffle_people_pose_button")]
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_people_dialogue_button", "_shuffle_people_pose_button", "_pachinko_start_lamps_button")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("16_cuefl")
 _game = NodePath("..")
+_billards = NodePath("../Billiards")
+_pachinko = NodePath("../Pachinko")
+_stack = NodePath("../Stack")
 _game_ui = NodePath("../UI")
 _bunny = NodePath("../UI/People/Bunny")
 _debug_button = NodePath("Debug")
@@ -2536,6 +2610,7 @@ _show_people_button = NodePath("DebugWindow/ShowPeople")
 _hide_people_button = NodePath("DebugWindow/HidePeople")
 _refresh_people_dialogue_button = NodePath("DebugWindow/RefreshPeopleDialogue")
 _shuffle_people_pose_button = NodePath("DebugWindow/ShufflePeoplePose")
+_pachinko_start_lamps_button = NodePath("DebugWindow/StartLamps")
 
 [node name="Debug" type="Button" parent="UIDebug"]
 layout_mode = 0
@@ -2556,11 +2631,22 @@ vertical_alignment = 1
 [node name="DebugWindow" type="Control" parent="UIDebug"]
 anchors_preset = 0
 
-[node name="RestartGame" type="Button" parent="UIDebug/DebugWindow"]
+[node name="<Game>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_top = 40.0
+offset_right = 640.0
+offset_bottom = 120.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "<Game>"
+vertical_alignment = 1
+
+[node name="RestartGame" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
+offset_top = 60.0
 offset_right = 160.0
-offset_bottom = 60.0
+offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/RestartGame"]
@@ -2575,9 +2661,9 @@ vertical_alignment = 1
 
 [node name="TurnPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_top = 60.0
+offset_top = 80.0
 offset_right = 160.0
-offset_bottom = 80.0
+offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/TurnPlus"]
@@ -2591,9 +2677,10 @@ text = "TURN  +10"
 vertical_alignment = 1
 
 [node name="TurnMinus" type="Button" parent="UIDebug/DebugWindow"]
-offset_top = 80.0
+layout_mode = 0
+offset_top = 100.0
 offset_right = 160.0
-offset_bottom = 100.0
+offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/TurnMinus"]
@@ -2608,9 +2695,9 @@ vertical_alignment = 1
 
 [node name="MoneyPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_top = 100.0
+offset_top = 120.0
 offset_right = 160.0
-offset_bottom = 120.0
+offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/MoneyPlus"]
@@ -2624,9 +2711,10 @@ text = "MONEY +100"
 vertical_alignment = 1
 
 [node name="MoneyMinus" type="Button" parent="UIDebug/DebugWindow"]
-offset_top = 120.0
+layout_mode = 0
+offset_top = 140.0
 offset_right = 160.0
-offset_bottom = 140.0
+offset_bottom = 160.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/MoneyMinus"]
@@ -2641,9 +2729,9 @@ vertical_alignment = 1
 
 [node name="BallsPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_top = 140.0
+offset_top = 160.0
 offset_right = 160.0
-offset_bottom = 160.0
+offset_bottom = 180.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/BallsPlus"]
@@ -2657,9 +2745,10 @@ text = "BALLS +100"
 vertical_alignment = 1
 
 [node name="BallsMinus" type="Button" parent="UIDebug/DebugWindow"]
-offset_top = 160.0
+layout_mode = 0
+offset_top = 180.0
 offset_right = 160.0
-offset_bottom = 180.0
+offset_bottom = 200.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/BallsMinus"]
@@ -2672,12 +2761,24 @@ theme_override_font_sizes/font_size = 64
 text = "BALLS -100"
 vertical_alignment = 1
 
-[node name="ShowTax" type="Button" parent="UIDebug/DebugWindow"]
+[node name="<Window>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 40.0
+offset_right = 800.0
+offset_bottom = 120.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "<Window>"
+vertical_alignment = 1
+
+[node name="ShowTax" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 60.0
 offset_right = 320.0
-offset_bottom = 60.0
+offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/ShowTax"]
@@ -2693,9 +2794,9 @@ vertical_alignment = 1
 [node name="HideTax" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 60.0
+offset_top = 80.0
 offset_right = 320.0
-offset_bottom = 80.0
+offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/HideTax"]
@@ -2711,9 +2812,9 @@ vertical_alignment = 1
 [node name="ShowShop" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 80.0
+offset_top = 100.0
 offset_right = 320.0
-offset_bottom = 100.0
+offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/ShowShop"]
@@ -2729,9 +2830,9 @@ vertical_alignment = 1
 [node name="HideShop" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 100.0
+offset_top = 120.0
 offset_right = 320.0
-offset_bottom = 120.0
+offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/HideShop"]
@@ -2747,9 +2848,9 @@ vertical_alignment = 1
 [node name="ShowPeople" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 120.0
+offset_top = 140.0
 offset_right = 320.0
-offset_bottom = 140.0
+offset_bottom = 160.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/ShowPeople"]
@@ -2765,9 +2866,9 @@ vertical_alignment = 1
 [node name="HidePeople" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 140.0
+offset_top = 160.0
 offset_right = 320.0
-offset_bottom = 160.0
+offset_bottom = 180.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/HidePeople"]
@@ -2783,9 +2884,9 @@ vertical_alignment = 1
 [node name="RefreshPeopleDialogue" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 160.0
+offset_top = 180.0
 offset_right = 320.0
-offset_bottom = 180.0
+offset_bottom = 200.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/RefreshPeopleDialogue"]
@@ -2801,9 +2902,9 @@ vertical_alignment = 1
 [node name="ShufflePeoplePose" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 180.0
+offset_top = 200.0
 offset_right = 320.0
-offset_bottom = 200.0
+offset_bottom = 220.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/ShufflePeoplePose"]
@@ -2814,4 +2915,45 @@ scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "ShufflePeoplePose"
+vertical_alignment = 1
+
+[node name="<Billiards>" type="Label" parent="UIDebug/DebugWindow"]
+layout_mode = 0
+offset_top = 240.0
+offset_right = 640.0
+offset_bottom = 320.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "<Billiards>"
+vertical_alignment = 1
+
+[node name="<Pachinko>" type="Label" parent="UIDebug/DebugWindow"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 240.0
+offset_right = 800.0
+offset_bottom = 320.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "<Pachinko>"
+vertical_alignment = 1
+
+[node name="StartLamps" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 260.0
+offset_right = 320.0
+offset_bottom = 280.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/StartLamps"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "StartLamps"
 vertical_alignment = 1
