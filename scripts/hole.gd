@@ -25,6 +25,7 @@ var is_enabled = true
 
 @export var _label: Label
 @export var _gravity_area: Area2D
+@export var _gravity_texture: TextureRect
 
 
 func _ready() -> void:
@@ -44,8 +45,10 @@ func enable() -> void:
 	]
 	if hole_type in gravity_hole_types:
 		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_COMBINE_REPLACE
+		_gravity_texture.visible = true
 	else:
 		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_DISABLED
+		_gravity_texture.visible = false
 
 # 無効化する
 func disable() -> void:
