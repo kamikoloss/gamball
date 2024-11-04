@@ -4,25 +4,24 @@ extends Control
 
 # ランプの発光色の種類
 enum LightColor {
-	OFF,
-	OFF_GREEN,
-	WHITE,
-	RED,
-	GREEN,
+	DEFAULT_OFF, DEFAULT_ON,
+	GREEN_OFF, GREEN_ON,
 }
 
 
 # ランプの発光色 { LightColor: Color } 
 const LIGHT_COLORS = {
-	LightColor.OFF: Color(0.5, 0.5, 0.5),
-	LightColor.OFF_GREEN: Color(0.5, 1, 0.5),
-	LightColor.WHITE: Color.WHITE,
-	LightColor.RED: Color.RED,
-	LightColor.GREEN: Color.GREEN,
+	LightColor.DEFAULT_OFF: Color(0.1, 0.1, 0.1),
+	LightColor.DEFAULT_ON: Color(1, 1, 1),
+	LightColor.GREEN_OFF: Color(0, 0.5, 0),
+	LightColor.GREEN_ON: Color(0, 1, 0),
 }
 
 
 @export var _texture: TextureRect
+
+var _on_color: LightColor = LightColor.DEFAULT_ON # 点灯時の色
+var _off_color: LightColor = LightColor.DEFAULT_OFF # 消灯時の色
 
 
 func _ready() -> void:
@@ -31,13 +30,19 @@ func _ready() -> void:
 
 # ランプを点灯する
 func enable() -> void:
-	change_light_color(LightColor.WHITE)
+	_change_light_color(_on_color)
 
 # ランプを消灯する
 func disable() -> void:
-	change_light_color(LightColor.OFF)
+	_change_light_color(_off_color)
 
 
-# ランプの点灯色を変更する
-func change_light_color(color: LightColor) -> void:
+# ランプの 点灯色/消灯色 を設定する
+func set_light_colors(on_color: LightColor, off_color: LightColor) -> void:
+	_on_color = on_color
+	_off_color = off_color
+
+
+# ランプを 点灯/消灯 する
+func _change_light_color(color: LightColor) -> void:
 	_texture.self_modulate = LIGHT_COLORS[color]

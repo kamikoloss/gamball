@@ -3,6 +3,9 @@ extends Control
 
 
 @export var _game: Game
+@export var _billards: Billiards
+@export var _pachinko: Pachinko
+@export var _stack: Stack
 @export var _game_ui: GameUi
 @export var _bunny: Bunny
 
@@ -25,6 +28,8 @@ extends Control
 @export var _hide_people_button: Button
 @export var _refresh_people_dialogue_button: Button
 @export var _shuffle_people_pose_button: Button
+
+@export var _pachinko_start_lamps_button: Button
 
 
 var _dialogue_sample_list = [
@@ -55,3 +60,5 @@ func _ready() -> void:
 	_hide_people_button.pressed.connect(func(): _game_ui.hide_people_window())
 	_refresh_people_dialogue_button.pressed.connect(func(): _game_ui.refresh_dialogue_label(_dialogue_sample_list.pick_random()))
 	_shuffle_people_pose_button.pressed.connect(func(): _bunny.shuffle_pose())
+
+	_pachinko_start_lamps_button.pressed.connect(func(): _pachinko.start_rusn_lamps())
