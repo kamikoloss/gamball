@@ -1,18 +1,21 @@
 class_name GameUiDebug
 extends Control
 
-
-@export var _debug_button: Button
-@export var _debug_window: Control
-
 @export var _game: Game
 @export var _game_ui: GameUi
 @export var _bunny: Bunny
 
+@export var _debug_button: Button
+@export var _debug_window: Control
+
 @export var _restart_game_button: Button
-@export var _turn_add_button: Button
-@export var _money_add_button: Button
-@export var _balls_add_button: Button
+@export var _turn_plus_button: Button
+@export var _turn_minus_button: Button
+@export var _money_plus_button: Button
+@export var _money_minus_button: Button
+@export var _balls_plus_button: Button
+@export var _balls_minus_button: Button
+
 @export var _show_tax_button: Button
 @export var _hide_tax_button: Button
 @export var _show_shop_button: Button
@@ -33,12 +36,16 @@ var _dialogue_sample_list = [
 
 func _ready() -> void:
 	_debug_window.visible = false
+	_debug_button.pressed.connect(func(): _debug_window.visible = not _debug_window.visible)
 
 	_restart_game_button.pressed.connect(func(): _game.restart_game())
-	_turn_add_button.pressed.connect(func(): _game.turn += 20)
-	_money_add_button.pressed.connect(func(): _game.money += 100)
-	_balls_add_button.pressed.connect(func(): _game.balls += 100)
-	_debug_button.pressed.connect(func(): _debug_window.visible = not _debug_window.visible)
+	_turn_plus_button.pressed.connect(func(): _game.turn += 10)
+	_turn_minus_button.pressed.connect(func(): _game.turn -= 10)
+	_money_plus_button.pressed.connect(func(): _game.money += 100)
+	_money_minus_button.pressed.connect(func(): _game.money -= 100)
+	_balls_plus_button.pressed.connect(func(): _game.balls += 100)
+	_balls_minus_button.pressed.connect(func(): _game.balls -= 100)
+
 	_show_tax_button.pressed.connect(func(): _game_ui.show_tax_window())
 	_hide_tax_button.pressed.connect(func(): _game_ui.hide_tax_window())
 	_show_shop_button.pressed.connect(func(): _game_ui.show_shop_window())

@@ -2512,19 +2512,22 @@ text = "GAMBALL v0.2.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_debug_button", "_debug_window", "_game", "_game_ui", "_bunny", "_restart_game_button", "_turn_add_button", "_money_add_button", "_balls_add_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_people_dialogue_button", "_shuffle_people_pose_button")]
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_people_dialogue_button", "_shuffle_people_pose_button")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("16_cuefl")
-_debug_button = NodePath("Debug")
-_debug_window = NodePath("DebugWindow")
 _game = NodePath("..")
 _game_ui = NodePath("../UI")
 _bunny = NodePath("../UI/People/Bunny")
+_debug_button = NodePath("Debug")
+_debug_window = NodePath("DebugWindow")
 _restart_game_button = NodePath("DebugWindow/RestartGame")
-_turn_add_button = NodePath("DebugWindow/Turn+")
-_money_add_button = NodePath("DebugWindow/Money+")
-_balls_add_button = NodePath("DebugWindow/Balls+")
+_turn_plus_button = NodePath("DebugWindow/TurnPlus")
+_turn_minus_button = NodePath("DebugWindow/TurnMinus")
+_money_plus_button = NodePath("DebugWindow/MoneyPlus")
+_money_minus_button = NodePath("DebugWindow/MoneyMinus")
+_balls_plus_button = NodePath("DebugWindow/BallsPlus")
+_balls_minus_button = NodePath("DebugWindow/BallsMinus")
 _show_tax_button = NodePath("DebugWindow/ShowTax")
 _hide_tax_button = NodePath("DebugWindow/HideTax")
 _show_shop_button = NodePath("DebugWindow/ShowShop")
@@ -2570,31 +2573,47 @@ theme_override_font_sizes/font_size = 64
 text = "RestartGame"
 vertical_alignment = 1
 
-[node name="Turn+" type="Button" parent="UIDebug/DebugWindow"]
+[node name="TurnPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_top = 60.0
 offset_right = 160.0
 offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
-[node name="Label" type="Label" parent="UIDebug/DebugWindow/Turn+"]
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/TurnPlus"]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
-text = "TURN  +20"
+text = "TURN  +10"
 vertical_alignment = 1
 
-[node name="Money+" type="Button" parent="UIDebug/DebugWindow"]
-layout_mode = 0
+[node name="TurnMinus" type="Button" parent="UIDebug/DebugWindow"]
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
-[node name="Label" type="Label" parent="UIDebug/DebugWindow/Money+"]
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/TurnMinus"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "TURN  -10"
+vertical_alignment = 1
+
+[node name="MoneyPlus" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 160.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/MoneyPlus"]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
@@ -2604,14 +2623,30 @@ theme_override_font_sizes/font_size = 64
 text = "MONEY +100"
 vertical_alignment = 1
 
-[node name="Balls+" type="Button" parent="UIDebug/DebugWindow"]
-layout_mode = 0
-offset_top = 100.0
+[node name="MoneyMinus" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 120.0
 offset_right = 160.0
-offset_bottom = 120.0
+offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
-[node name="Label" type="Label" parent="UIDebug/DebugWindow/Balls+"]
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/MoneyMinus"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "MONEY -100"
+vertical_alignment = 1
+
+[node name="BallsPlus" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
+offset_top = 140.0
+offset_right = 160.0
+offset_bottom = 160.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/BallsPlus"]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
@@ -2619,6 +2654,22 @@ scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "BALLS +100"
+vertical_alignment = 1
+
+[node name="BallsMinus" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 160.0
+offset_right = 160.0
+offset_bottom = 180.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/BallsMinus"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "BALLS -100"
 vertical_alignment = 1
 
 [node name="ShowTax" type="Button" parent="UIDebug/DebugWindow"]
