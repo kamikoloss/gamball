@@ -141,7 +141,7 @@ func refresh_balls_label(balls: int) -> void:
 
 func refresh_next(turn: int, type: Game.TaxType, amount: int) -> void:
 	_next_turn_label.text = str(turn)
-	_next_type_label.text = "￥" if type == Game.TaxType.Money else "●"
+	_next_type_label.text = "＄" if type == Game.TaxType.Money else "●"
 	_next_amount_label.text = str(amount)
 
 func refresh_next_clear() -> void:
