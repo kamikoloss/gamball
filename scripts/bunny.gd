@@ -59,22 +59,23 @@ func _ready() -> void:
 
 # ポーズをデフォルトに変更する
 func reset_pose() -> void:
-	_set_textures([0, 0, 0, 0])
+	_refresh_textures([0, 0, 0, 0])
 	_is_pose_a = not _is_pose_a
-	_set_textures([0, 0, 0, 0])
+	_refresh_textures([0, 0, 0, 0])
 	_is_pose_a = not _is_pose_a
 
 
 # ポーズをランダムなものに変更する
 # 前と同じポーズが選択されたときは変わっていないように見えることもある
 # TODO: 必ず変える？
+# TODO: 跳ねる処理を切り分ける？
 func shuffle_pose() -> void:
 	var tween = _get_tween(TweenType.Pose)
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 
 	# A/B のポーズをランダムに変更する
-	_set_random_textures()
+	_refresh_textures_random()
 
 	# A/B の表示を切り替える
 	if _is_pose_a:
@@ -96,16 +97,8 @@ func shuffle_pose() -> void:
 	tween.tween_callback(func(): _is_pose_a = not _is_pose_a)
 
 
-func _set_random_textures() -> void:
-	var index_1 = randi_range(0, _parts_1_textures.size() - 1)
-	var index_2 = randi_range(0, _parts_2_textures.size() - 1)
-	var index_3 = randi_range(0, _parts_3_textures.size() - 1)
-	var index_4 = randi_range(0, _parts_4_textures.size() - 1)
-	_set_textures([index_1, index_2, index_3, index_4])
-
-
-func _set_textures(parts_index_list: Array[int]) -> void:
-	print("[Bunny] _set_textures(%s)" % [parts_index_list])
+func _refresh_textures(parts_index_list: Array[int]) -> void:
+	#print("[Bunny] _set_textures(%s)" % [parts_index_list])
 	var pose_parts_list = []
 	if _is_pose_a:
 		pose_parts_list = [_pose_a_parts_1, _pose_a_parts_2, _pose_a_parts_3, _pose_a_parts_4]
@@ -119,13 +112,21 @@ func _set_textures(parts_index_list: Array[int]) -> void:
 		var pose_parts: TextureRect = pose_parts_list[key]
 		var parts_textures: Array[Texture] = parts_textures_list[key]
 		# Texture が存在しない場合
-		if index < 0 or (parts_textures.size() - 1) < index:
+		if (parts_textures.size() - 1) < index:
 			pose_parts.visible = false
 		# Texture が存在する場合
 		else:
 			pose_parts.visible = true
 			pose_parts.texture = parts_textures[index]
 		key += 1
+
+
+func _refresh_textures_random() -> void:
+	var index_1 = clampi(randi_range(0, _parts_1_textures.size() - 1), 0, 9999)
+	var index_2 = clampi(randi_range(0, _parts_2_textures.size() - 1), 0, 9999)
+	var index_3 = clampi(randi_range(0, _parts_3_textures.size() - 1), 0, 9999)
+	var index_4 = clampi(randi_range(0, _parts_4_textures.size() - 1), 0, 9999)
+	_refresh_textures([index_1, index_2, index_3, index_4])
 
 
 func _get_tween(type: TweenType) -> Tween:

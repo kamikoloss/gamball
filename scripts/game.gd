@@ -217,9 +217,6 @@ func _on_info_button_pressed() -> void:
 
 
 func _on_people_touch_button_pressed() -> void:
-	# ポーズをランダムに変更する
-	_bunny.shuffle_pose()
-
 	# セリフをランダムに変更する
 	# TODO: JSON に逃がす
 	var dialogue_list = [
@@ -229,6 +226,9 @@ func _on_people_touch_button_pressed() -> void:
 		"水色の??玉が他の玉にぶつかる前にビリヤードポケットに落ちるとなくなるから気をつけてね！",
 	]
 	_game_ui.refresh_dialogue_label(dialogue_list.pick_random())
+
+	# ポーズをランダムに変更する
+	_bunny.shuffle_pose()
 
 
 # Ball が Hole に落ちたときの処理

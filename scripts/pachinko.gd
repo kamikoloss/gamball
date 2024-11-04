@@ -100,7 +100,7 @@ func start_rusn_lamps() -> int:
 	tween.chain()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	index_from = index_to # 前の終わり
-	index_step = randi_range(0, lamp_size)
+	index_step = lamp_size * randi_range(0, 1) + randi_range(0, lamp_size)
 	index_to = index_from + index_step
 	duration = index_step * 0.2 # TODO: const?
 	tween.tween_method(func(v): disable_rush_lamps(), 0, 0, duration)
