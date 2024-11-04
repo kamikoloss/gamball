@@ -35,13 +35,13 @@ extends Control
 @export var _shuffle_pose_button: Button
 
 
-var _dialogue_sample_list = [
+var _sample_dialogue_list = [
 	"セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。(030+04)",
 	"セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。(060+04)",
 	"セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。(090+04)",
 	"セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。セリフサンプルだよ。(120+04)",
 ]
-var _dialogue_big_sample_list = [
+var _sample_dialogue_big_list = [
 	"セリフサンプルだよ～！",
 	"セリフサンプルだよ～！\nセリフサンプルだよ～！",
 ]
@@ -68,6 +68,6 @@ func _ready() -> void:
 
 	_show_people_button.pressed.connect(func(): _game_ui.show_people_window())
 	_hide_people_button.pressed.connect(func(): _game_ui.hide_people_window())
-	_refresh_dialogue_button.pressed.connect(func(): _game_ui.refresh_dialogue_label(_dialogue_sample_list.pick_random()))
-	_refresh_dialogue_big_button.pressed.connect(func(): _game_ui.refresh_dialogue_big_label(_dialogue_big_sample_list.pick_random()))
+	_refresh_dialogue_button.pressed.connect(func(): _game_ui.refresh_dialogue_label(_sample_dialogue_list.pick_random()))
+	_refresh_dialogue_big_button.pressed.connect(func(): _game_ui.refresh_dialogue_big_label(_sample_dialogue_big_list.pick_random()))
 	_shuffle_pose_button.pressed.connect(func(): _bunny.shuffle_pose())

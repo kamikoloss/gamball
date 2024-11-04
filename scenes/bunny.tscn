@@ -9,8 +9,6 @@
 [node name="Bunny" type="Control" node_paths=PackedStringArray("_base_texture", "_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4")]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1200.0
-offset_bottom = 1600.0
 script = ExtResource("1_lr22c")
 _base_texture = NodePath("Base")
 _pose_a = NodePath("PoseA")
@@ -26,12 +24,15 @@ _pose_b_parts_4 = NodePath("PoseB/Parts4")
 
 [node name="Base" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 1200.0
+offset_left = -600.0
+offset_right = 600.0
 offset_bottom = 1600.0
 texture = ExtResource("9_yblo7")
 
 [node name="PoseA" type="Control" parent="."]
 anchors_preset = 0
+offset_left = -600.0
+offset_right = -600.0
 
 [node name="Parts1" type="TextureRect" parent="PoseA"]
 layout_mode = 0
@@ -61,6 +62,8 @@ texture = ExtResource("7_subrs")
 visible = false
 layout_mode = 3
 anchors_preset = 0
+offset_left = -600.0
+offset_right = -600.0
 
 [node name="Parts1" type="TextureRect" parent="PoseB"]
 layout_mode = 0

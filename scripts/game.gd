@@ -3,6 +3,7 @@ extends Node
 
 
 enum TaxType { Money, Balls }
+enum TweenType { TaxCountDown }
 
 
 # DECK の最大数
@@ -87,6 +88,9 @@ var _sell_rate: Array[int] = [50, 100]
 # 次に訪れる Tax
 var _next_tax_index = 0
 
+# { TweenType: Tween, ... } 
+var _tweens: Dictionary = {}
+
 
 func _ready() -> void:
 	# 初期化
@@ -97,14 +101,13 @@ func _ready() -> void:
 	# Input
 	_billiards_board.input_event.connect(_on_billiards_board_input)
 
-	# Signal
+	# Signal (GameUi)
 	_game_ui.buy_balls_button_pressed.connect(_on_buy_balls_button_pressed)
 	_game_ui.sell_balls_button_pressed.connect(_on_sell_balls_button_pressed)
 	_game_ui.tax_pay_button_pressed.connect(_on_tax_pay_button_pressed)
 	_game_ui.shop_exit_button_pressed.connect(_on_shop_exit_button_pressed)
 	_game_ui.info_button_pressed.connect(_on_info_button_pressed)
 	_game_ui.people_touch_button_pressed.connect(_on_people_touch_button_pressed)
-
 	# Signal (Hole)
 	for maybe_hole in get_tree().get_nodes_in_group("hole"):
 		if maybe_hole is Hole:
@@ -221,7 +224,6 @@ func _on_people_touch_button_pressed() -> void:
 	# TODO: JSON に逃がす
 	var dialogue_list = [
 		"GAMBALL は近未来のバーチャルハイリスクハイリターンギャンブルだよ！",
-		"ゲームを続けたいなら定期的にプレイ料を払ってね。真ん中の下らへんに出てるやつ。",
 		"ビリヤードポケットに入った玉はパチンコ盤面上に出現するよ。",
 		"水色の??玉が他の玉にぶつかる前にビリヤードポケットに落ちるとなくなるから気をつけてね！",
 	]
@@ -408,18 +410,46 @@ func _refresh_next() -> void:
 	else:
 		_game_ui.refresh_next_clear()
 
+
 # 1ターン進める
 func _go_to_next_turn() -> void:
 	turn += 1
 
 	if _next_tax_index < TAX_LIST.size():
 		if turn == TAX_LIST[_next_tax_index][0]:
-			_game_ui.show_tax_window()
-			_game_ui.show_people_window() # 連動
+			_start_tax_count_down()
 
 
+# Tax Window 表示までのカウントダウンを開始する
+func _start_tax_count_down() -> void:
+	# People を表示する
+	_game_ui.refresh_dialogue_big_label("延長のお時間で～す")
+	_game_ui.show_people_window()
+
+	# カウントダウンを開始する
+	var tween = _get_tween(TweenType.TaxCountDown)
+	tween.tween_interval(2.0)
+	tween.tween_callback(func(): _game_ui.refresh_dialogue_big_label("さ～～ん"))
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): _game_ui.refresh_dialogue_big_label("に～～い"))
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): _game_ui.refresh_dialogue_big_label("い～～ち"))
+	tween.tween_interval(1.0)
+	# Tax Window を表示する
+	tween.tween_callback(func(): _game_ui.show_tax_window())
+	tween.tween_callback(func(): _game_ui.refresh_dialogue_label("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
+
+
+# Product に MONEY を伝達する
 # TODO: Autoload にしたらいらなくなる
 func _set_money_to_products() -> void:
 	for maybe_product in _products.get_children():
 		if maybe_product is Product:
 			maybe_product.main_money = money
+
+
+func _get_tween(type: TweenType) -> Tween:
+	if _tweens.has(type):
+		_tweens[type].kill()
+	_tweens[type] = create_tween()
+	return _tweens[type]
