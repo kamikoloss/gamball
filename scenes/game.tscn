@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=34 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/ball.tscn" id="2_ma10n"]
@@ -14,8 +14,7 @@
 [ext_resource type="Script" path="res://scripts/stack.gd" id="12_7kfse"]
 [ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/product.tscn" id="13_232xx"]
 [ext_resource type="Script" path="res://scripts/game_ui.gd" id="13_aavli"]
-[ext_resource type="Script" path="res://scripts/bunny.gd" id="15_7uhdx"]
-[ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/bunny/base.png" id="15_ncnjg"]
+[ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/bunny.tscn" id="15_jt5ld"]
 [ext_resource type="Texture2D" uid="uid://cuwiiq1yrw76c" path="res://images/bunny/face_1.png" id="16_cjk3l"]
 [ext_resource type="Script" path="res://scripts/game_ui_debug.gd" id="16_cuefl"]
 [ext_resource type="Texture2D" uid="uid://bh4gotw50hou6" path="res://images/bunny/face_2.png" id="17_mt5cg"]
@@ -1781,152 +1780,25 @@ anchors_preset = 0
 offset_top = 720.0
 offset_bottom = 720.0
 
-[node name="Bunny" type="Control" parent="UI/People" node_paths=PackedStringArray("_pose_a", "_face_a", "_hand_left_a", "_hand_right_a", "_pose_b", "_face_b", "_hand_left_b", "_hand_right_b")]
+[node name="Bunny" parent="UI/People" instance=ExtResource("15_jt5ld")]
 visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1000.0
-offset_top = 40.0
-offset_right = 1000.0
-offset_bottom = 40.0
+layout_mode = 0
+offset_left = 700.0
+offset_top = 20.0
+offset_right = 1900.0
+offset_bottom = 1620.0
 scale = Vector2(0.5, 0.5)
-script = ExtResource("15_7uhdx")
-_pose_a = NodePath("PoseA")
-_face_a = NodePath("PoseA/Face")
-_hand_left_a = NodePath("PoseA/HandLeft")
-_hand_right_a = NodePath("PoseA/HandRight")
-_pose_b = NodePath("PoseB")
-_face_b = NodePath("PoseB/Face")
-_hand_left_b = NodePath("PoseB/HandLeft")
-_hand_right_b = NodePath("PoseB/HandRight")
-_face_texures = Array[Texture]([ExtResource("16_cjk3l"), ExtResource("17_mt5cg"), ExtResource("18_l12bf")])
-_hand_left_textures = Array[Texture]([ExtResource("17_qj08e"), ExtResource("20_r8nov")])
-_hand_right_textures = Array[Texture]([ExtResource("18_kawv6"), ExtResource("22_am1vr")])
+_parts_1_textures = Array[Texture]([ExtResource("16_cjk3l"), ExtResource("17_mt5cg"), ExtResource("18_l12bf")])
+_parts_2_textures = Array[Texture]([ExtResource("17_qj08e"), ExtResource("20_r8nov")])
+_parts_3_textures = Array[Texture]([ExtResource("18_kawv6"), ExtResource("22_am1vr")])
 
-[node name="Base" type="TextureRect" parent="UI/People/Bunny"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-texture = ExtResource("15_ncnjg")
-
-[node name="PoseA" type="Control" parent="UI/People/Bunny"]
-anchors_preset = 0
-
-[node name="Face" type="TextureRect" parent="UI/People/Bunny/PoseA"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-texture = ExtResource("16_cjk3l")
-
-[node name="HandLeft" type="TextureRect" parent="UI/People/Bunny/PoseA"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-texture = ExtResource("17_qj08e")
-
-[node name="HandRight" type="TextureRect" parent="UI/People/Bunny/PoseA"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-texture = ExtResource("18_kawv6")
-
-[node name="PoseB" type="Control" parent="UI/People/Bunny"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-
-[node name="Face" type="TextureRect" parent="UI/People/Bunny/PoseB"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-texture = ExtResource("16_cjk3l")
-
-[node name="HandLeft" type="TextureRect" parent="UI/People/Bunny/PoseB"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-texture = ExtResource("17_qj08e")
-
-[node name="HandRight" type="TextureRect" parent="UI/People/Bunny/PoseB"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-texture = ExtResource("18_kawv6")
-
-[node name="Bunny2" type="Control" parent="UI/People" node_paths=PackedStringArray("_pose_a", "_face_a", "_hand_left_a", "_hand_right_a", "_pose_b", "_face_b", "_hand_left_b", "_hand_right_b")]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1000.0
-offset_top = 40.0
-offset_right = 1000.0
-offset_bottom = 40.0
+[node name="Bunny2" parent="UI/People" instance=ExtResource("15_jt5ld")]
+offset_left = 700.0
+offset_top = 20.0
+offset_right = 1900.0
+offset_bottom = 1620.0
 scale = Vector2(0.5, 0.5)
-script = ExtResource("15_7uhdx")
-_pose_a = NodePath("PoseA")
-_face_a = NodePath("PoseA/Face")
-_hand_left_a = NodePath("PoseA/HandLeft")
-_hand_right_a = NodePath("PoseA/HandRight")
-_pose_b = NodePath("PoseB")
-_face_b = NodePath("PoseB/Face")
-_hand_left_b = NodePath("PoseB/HandLeft")
-_hand_right_b = NodePath("PoseB/HandRight")
-_face_texures = Array[Texture]([ExtResource("24_d3cdg"), ExtResource("25_tj6hx")])
-
-[node name="Base" type="TextureRect" parent="UI/People/Bunny2"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-
-[node name="PoseA" type="Control" parent="UI/People/Bunny2"]
-anchors_preset = 0
-
-[node name="Face" type="TextureRect" parent="UI/People/Bunny2/PoseA"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-
-[node name="HandLeft" type="TextureRect" parent="UI/People/Bunny2/PoseA"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-
-[node name="HandRight" type="TextureRect" parent="UI/People/Bunny2/PoseA"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-
-[node name="PoseB" type="Control" parent="UI/People/Bunny2"]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="Face" type="TextureRect" parent="UI/People/Bunny2/PoseB"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-
-[node name="HandLeft" type="TextureRect" parent="UI/People/Bunny2/PoseB"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
-
-[node name="HandRight" type="TextureRect" parent="UI/People/Bunny2/PoseB"]
-layout_mode = 0
-offset_left = -600.0
-offset_right = 600.0
-offset_bottom = 1600.0
+_parts_1_textures = Array[Texture]([ExtResource("24_d3cdg"), ExtResource("25_tj6hx")])
 
 [node name="Bubble" type="Control" parent="UI/People"]
 modulate = Color(1, 1, 1, 0.752941)
@@ -2592,7 +2464,7 @@ _billards = NodePath("../Billiards")
 _pachinko = NodePath("../Pachinko")
 _stack = NodePath("../Stack")
 _game_ui = NodePath("../UI")
-_bunny = NodePath("../UI/People/Bunny")
+_bunny = NodePath("../UI/People/Bunny2")
 _debug_button = NodePath("Debug")
 _debug_window = NodePath("DebugWindow")
 _restart_game_button = NodePath("DebugWindow/RestartGame")

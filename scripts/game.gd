@@ -217,7 +217,7 @@ func _on_info_button_pressed() -> void:
 
 
 func _on_people_touch_button_pressed() -> void:
-	_bunny.shuffle_pose()
+	_bunny.show_random_pose()
 	# TODO: JSON に逃がす
 	var dialogue_list = [
 		"GAMBALL は近未来のバーチャルハイリスクハイリターンギャンブルだよ！",

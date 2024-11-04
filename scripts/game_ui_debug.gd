@@ -59,6 +59,6 @@ func _ready() -> void:
 	_show_people_button.pressed.connect(func(): _game_ui.show_people_window())
 	_hide_people_button.pressed.connect(func(): _game_ui.hide_people_window())
 	_refresh_people_dialogue_button.pressed.connect(func(): _game_ui.refresh_dialogue_label(_dialogue_sample_list.pick_random()))
-	_shuffle_people_pose_button.pressed.connect(func(): _bunny.shuffle_pose())
+	_shuffle_people_pose_button.pressed.connect(func(): _bunny.show_random_pose())
 
 	_pachinko_start_lamps_button.pressed.connect(func(): _pachinko.start_rusn_lamps())
