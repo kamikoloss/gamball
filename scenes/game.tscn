@@ -1781,7 +1781,6 @@ offset_top = 720.0
 offset_bottom = 720.0
 
 [node name="Bunny" parent="UI/People" instance=ExtResource("15_jt5ld")]
-visible = false
 layout_mode = 0
 offset_left = 700.0
 offset_top = 20.0
@@ -1793,11 +1792,13 @@ _parts_2_textures = Array[Texture]([ExtResource("17_qj08e"), ExtResource("20_r8n
 _parts_3_textures = Array[Texture]([ExtResource("18_kawv6"), ExtResource("22_am1vr")])
 
 [node name="Bunny2" parent="UI/People" instance=ExtResource("15_jt5ld")]
+visible = false
 offset_left = 700.0
 offset_top = 20.0
 offset_right = 1900.0
 offset_bottom = 1620.0
 scale = Vector2(0.5, 0.5)
+_is_show_base = false
 _parts_1_textures = Array[Texture]([ExtResource("24_d3cdg"), ExtResource("25_tj6hx")])
 
 [node name="Bubble" type="Control" parent="UI/People"]

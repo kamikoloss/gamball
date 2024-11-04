@@ -6,12 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/bunny/hand_right_1.png" id="7_subrs"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/bunny/base.png" id="9_yblo7"]
 
-[node name="Bunny" type="Control" node_paths=PackedStringArray("_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4")]
+[node name="Bunny" type="Control" node_paths=PackedStringArray("_base_texture", "_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
 script = ExtResource("1_lr22c")
+_base_texture = NodePath("Base")
 _pose_a = NodePath("PoseA")
 _pose_a_parts_1 = NodePath("PoseA/Parts1")
 _pose_a_parts_2 = NodePath("PoseA/Parts2")
@@ -24,7 +25,6 @@ _pose_b_parts_3 = NodePath("PoseB/Parts3")
 _pose_b_parts_4 = NodePath("PoseB/Parts4")
 
 [node name="Base" type="TextureRect" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
@@ -34,21 +34,25 @@ texture = ExtResource("9_yblo7")
 anchors_preset = 0
 
 [node name="Parts1" type="TextureRect" parent="PoseA"]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
 texture = ExtResource("2_kbxbx")
 
 [node name="Parts2" type="TextureRect" parent="PoseA"]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
 texture = ExtResource("5_qlree")
 
 [node name="Parts3" type="TextureRect" parent="PoseA"]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
 texture = ExtResource("7_subrs")
 
 [node name="Parts4" type="TextureRect" parent="PoseA"]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
 texture = ExtResource("7_subrs")
@@ -59,21 +63,25 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="Parts1" type="TextureRect" parent="PoseB"]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
 texture = ExtResource("2_kbxbx")
 
 [node name="Parts2" type="TextureRect" parent="PoseB"]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
 texture = ExtResource("5_qlree")
 
 [node name="Parts3" type="TextureRect" parent="PoseB"]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
 texture = ExtResource("7_subrs")
 
 [node name="Parts4" type="TextureRect" parent="PoseB"]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
 texture = ExtResource("7_subrs")

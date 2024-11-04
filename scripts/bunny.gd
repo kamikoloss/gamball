@@ -14,6 +14,8 @@ const POSE_MOVE_DURATION_DOWN = 0.3 # 跳ねるときの下降時の秒数
 const POSE_MOVE_POSITION_DIFF = Vector2(0, -20) # どれぐらい跳ねるか
 
 
+@export var _is_show_base: bool = true
+@export var _base_texture: TextureRect
 @export_category("Pose A")
 @export var _pose_a: Control
 @export var _pose_a_parts_1: TextureRect
@@ -45,22 +47,28 @@ var _pose_move_position_to: Vector2
 func _ready() -> void:
 	_pose_move_position_from = position
 	_pose_move_position_to = position + POSE_MOVE_POSITION_DIFF
-	show_default_pose()
 
-
-# デフォルトのポーズを表示する
-func show_default_pose() -> void:
+	_base_texture.visible = _is_show_base
 	_pose_a.visible = true
 	_pose_b.visible = true
 	_pose_a.modulate = Color.WHITE
 	_pose_b.modulate = Color.TRANSPARENT
+
+	reset_pose()
+
+
+# ポーズをデフォルトに変更する
+func reset_pose() -> void:
 	_set_textures([0, 0, 0, 0])
+	_is_pose_a = not _is_pose_a
+	_set_textures([0, 0, 0, 0])
+	_is_pose_a = not _is_pose_a
 
 
-# ポーズをランダムに変更する
+# ポーズをランダムなものに変更する
 # 前と同じポーズが選択されたときは変わっていないように見えることもある
 # TODO: 必ず変える？
-func show_random_pose() -> void:
+func shuffle_pose() -> void:
 	var tween = _get_tween(TweenType.Pose)
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
@@ -108,17 +116,17 @@ func _set_textures(parts_index_list: Array[int]) -> void:
 
 	var key = 0
 	for index in parts_index_list:
-
 		var pose_parts: TextureRect = pose_parts_list[key]
 		var parts_textures: Array[Texture] = parts_textures_list[key]
 		# Texture が存在しない場合
-		if parts_textures.size() <= index or index < 0:
+		if index < 0 or (parts_textures.size() - 1) < index:
 			pose_parts.visible = false
 		# Texture が存在する場合
 		else:
 			pose_parts.visible = true
 			pose_parts.texture = parts_textures[index]
 		key += 1
+
 
 func _get_tween(type: TweenType) -> Tween:
 	if _tweens.has(type):
