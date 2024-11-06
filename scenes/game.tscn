@@ -2450,7 +2450,7 @@ text = "GAMBALL v0.2.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lamps_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lamps_button", "_pachinko_enable_rush_button", "_pachinko_disable_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("16_cuefl")
@@ -2470,6 +2470,8 @@ _money_minus_button = NodePath("DebugWindow/MoneyMinus")
 _balls_plus_button = NodePath("DebugWindow/BallsPlus")
 _balls_minus_button = NodePath("DebugWindow/BallsMinus")
 _pachinko_start_lamps_button = NodePath("DebugWindow/StartLamps")
+_pachinko_enable_rush_button = NodePath("DebugWindow/EnableRush")
+_pachinko_disable_rush_button = NodePath("DebugWindow/DisableRush")
 _show_tax_button = NodePath("DebugWindow/ShowTax")
 _hide_tax_button = NodePath("DebugWindow/HideTax")
 _show_shop_button = NodePath("DebugWindow/ShowShop")
@@ -2613,18 +2615,6 @@ theme_override_font_sizes/font_size = 64
 text = "BALLS -100"
 vertical_alignment = 1
 
-[node name="<Billiards>" type="Label" parent="UIDebug/DebugWindow"]
-visible = false
-layout_mode = 0
-offset_top = 220.0
-offset_right = 640.0
-offset_bottom = 300.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "<Billiards>"
-vertical_alignment = 1
-
 [node name="<Pachinko>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_top = 180.0
@@ -2651,6 +2641,38 @@ scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "StartLamps"
+vertical_alignment = 1
+
+[node name="EnableRush" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 220.0
+offset_right = 160.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/EnableRush"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "EnableRush"
+vertical_alignment = 1
+
+[node name="DisableRush" type="Button" parent="UIDebug/DebugWindow"]
+offset_top = 240.0
+offset_right = 160.0
+offset_bottom = 260.0
+theme_override_fonts/font = ExtResource("10_w3wxc")
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/DisableRush"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "DisableRush"
 vertical_alignment = 1
 
 [node name="<Tax>" type="Label" parent="UIDebug/DebugWindow"]

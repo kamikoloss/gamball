@@ -22,6 +22,8 @@ extends Control
 @export var _balls_minus_button: Button
 @export_category("Pachinko")
 @export var _pachinko_start_lamps_button: Button
+@export var _pachinko_enable_rush_button: Button
+@export var _pachinko_disable_rush_button: Button
 @export_category("Window")
 @export var _show_tax_button: Button
 @export var _hide_tax_button: Button
@@ -63,6 +65,8 @@ func _ready() -> void:
 		var index_list = _pachinko.pick_lamp_index_list()
 		_pachinko.start_rusn_lamps(index_list)
 	)
+	_pachinko_enable_rush_button.pressed.connect(func(): _pachinko.enable_rush_devices())
+	_pachinko_disable_rush_button.pressed.connect(func(): _pachinko.disable_rush_devices())
 
 	_show_tax_button.pressed.connect(func(): _game_ui.show_tax_window())
 	_hide_tax_button.pressed.connect(func(): _game_ui.hide_tax_window())
