@@ -2,10 +2,15 @@ class_name Pachinko
 extends Node2D
 
 
+# ラッシュ用ランプが消灯したとき
+signal rush_lamps_turned_off
+
+
 enum TweenType {
 	RotatingWallA, # 回転床 A
 	RotatingWallB, # 回転床 B
 	RushLamp, # ラッシュ用ランプ
+	RushLampFlash, # ラッシュ用ランプ点滅
 }
 
 
@@ -28,7 +33,7 @@ const WALL_ROTATION_DURATION = 2.0
 # { TweenType: Tween, ... } 
 var _tweens: Dictionary = {}
 
-var _rush_probability_bottom = 24 # 確率 分母
+var _rush_probability_bottom = 24 # 確率 分母 (ランプの数)
 var _rush_start_probability_top = 2 # 初当たり確率 分子
 var _rush_continue_probability_top = 16 # Rush 継続率 分子
 
@@ -71,49 +76,65 @@ func disable_rush_devices() -> void:
 	_rush_label_b.text = ""
 
 
-func set_rush_lamps(probability_top: int) -> void:
-	pass
+## 分母を元にランプ点灯用の番号を抽選する
+## @returns [ 点灯の初期位置, 周回点灯Aの終了位置, 周回点灯Bの終了位置 ]  
+func pick_lamp_index_list() -> Array[int]:
+	var size = _rush_probability_bottom
+
+	var index_from = randi_range(0, size)
+	var index_to_1 = index_from + size * randi_range(1, 2) + randi_range(0, size) # size * 1-3
+	var index_to_2 = index_to_1 + size * randi_range(0, 1) + randi_range(0, size) # size * 1-2
+
+	return [index_from, index_to_1, index_to_2]
 
 
 # ランプの抽選結果の点灯を開始する
-# TODO: 抽選部分を切り出す
-func start_rusn_lamps() -> int:
-	var index_from = 0
-	var index_step = 0
-	var index_to = 0
+func start_rusn_lamps(index_list: Array[int]) -> void:
+	var size = _rush_probability_bottom
 	var duration = 0.0
-	var lamp_size = _rush_probability_bottom # NOTE: ランプ数との兼ね合い取れる？
-
 	var tween = _get_tween(TweenType.RushLamp)
 	tween.set_parallel(true)
 
 	# 最初の早い周回点灯
-	index_from = randi_range(0, lamp_size)
-	index_step = lamp_size * randi_range(1, 4) + randi_range(0, lamp_size)
-	index_to = index_from + index_step
-	duration = index_step * 0.02 # TODO: const?
+	duration = (index_list[1] - index_list[0]) * 0.04
 	tween.set_trans(Tween.TRANS_LINEAR)
-	tween.tween_method(func(v): disable_rush_lamps(), 0, 0, duration)
-	tween.tween_method(func(v): enable_rush_lamp(v % lamp_size), index_from, index_to, duration)
+	tween.tween_method(func(v): enable_rush_lamp(v % size), index_list[0], index_list[1], duration)
 
 	# 止まる前のゆっくり点灯 (だんだん遅くなる)
 	tween.chain()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	index_from = index_to # 前の終わり
-	index_step = lamp_size * randi_range(0, 1) + randi_range(0, lamp_size)
-	index_to = index_from + index_step
-	duration = index_step * 0.2 # TODO: const?
-	tween.tween_method(func(v): disable_rush_lamps(), 0, 0, duration)
-	tween.tween_method(func(v): enable_rush_lamp(v % lamp_size), index_from, index_to, duration)
+	duration = (index_list[2] - index_list[1]) * 0.2
+	tween.tween_method(func(v): enable_rush_lamp(v % size), index_list[1], index_list[2], duration)
 
-	return index_to % lamp_size
+	# 止まったあとの点滅
+	tween.chain()
+	tween.tween_callback(func(): _flash_lamp(index_list[2] % size))
+
+func _flash_lamp(index: int) -> void:
+	# NOTE: set_loops は chain で切れないので Tween を分ける
+	var tween2 = _get_tween(TweenType.RushLampFlash)
+	tween2.set_loops(5)
+	tween2.tween_callback(func(): enable_rush_lamp(index))
+	tween2.tween_interval(0.1)
+	tween2.tween_callback(func(): disable_rush_lamps())
+	tween2.tween_interval(0.1)
+	tween2.finished.connect(func():
+		rush_lamps_turned_off.emit()
+		print("[Pachinko] rush_lamps_turned_off")
+	)
 
 
 # 特定のランプを点灯させる
 func enable_rush_lamp(index: int) -> void:
-	var maybe_lamp = _rush_lamps.get_children()[index]
-	if maybe_lamp is Lamp:
-		maybe_lamp.enable()
+	var count = 0
+	for maybe_lamp in _rush_lamps.get_children():
+		if maybe_lamp is Lamp:
+			if count == index:
+				maybe_lamp.enable()
+			else:
+				maybe_lamp.disable()
+		count += 1
+
 
 # すべてのランプを消灯する
 func disable_rush_lamps() -> void:
