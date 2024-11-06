@@ -430,14 +430,18 @@ func _start_tax_count_down() -> void:
 	var tween = _get_tween(TweenType.TaxCountDown)
 	tween.tween_interval(2.0)
 	tween.tween_callback(func(): _game_ui.refresh_dialogue_big_label("さ～～ん"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): _game_ui.refresh_dialogue_big_label("に～～い"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): _game_ui.refresh_dialogue_big_label("い～～ち"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
 	# Tax Window を表示する
 	tween.tween_callback(func(): _game_ui.show_tax_window())
 	tween.tween_callback(func(): _game_ui.refresh_dialogue_label("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
 
 
 # Product に MONEY を伝達する

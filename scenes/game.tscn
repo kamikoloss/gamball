@@ -2653,7 +2653,7 @@ theme_override_font_sizes/font_size = 64
 text = "StartLamps"
 vertical_alignment = 1
 
-[node name="<Window>" type="Label" parent="UIDebug/DebugWindow"]
+[node name="<Tax>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 20.0
@@ -2662,7 +2662,7 @@ offset_bottom = 100.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
-text = "<Window>"
+text = "<Tax>"
 vertical_alignment = 1
 
 [node name="ShowTax" type="Button" parent="UIDebug/DebugWindow"]
@@ -2701,12 +2701,23 @@ theme_override_font_sizes/font_size = 64
 text = "HideTax"
 vertical_alignment = 1
 
+[node name="<Shop>" type="Label" parent="UIDebug/DebugWindow"]
+offset_left = 160.0
+offset_top = 80.0
+offset_right = 800.0
+offset_bottom = 160.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "<Shop>"
+vertical_alignment = 1
+
 [node name="ShowShop" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 80.0
+offset_top = 100.0
 offset_right = 320.0
-offset_bottom = 100.0
+offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/ShowShop"]
@@ -2722,9 +2733,9 @@ vertical_alignment = 1
 [node name="HideShop" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 100.0
+offset_top = 120.0
 offset_right = 320.0
-offset_bottom = 120.0
+offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/HideShop"]
@@ -2740,9 +2751,9 @@ vertical_alignment = 1
 [node name="<People>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 120.0
+offset_top = 140.0
 offset_right = 800.0
-offset_bottom = 200.0
+offset_bottom = 220.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2752,9 +2763,9 @@ vertical_alignment = 1
 [node name="ShowPeople" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 140.0
+offset_top = 160.0
 offset_right = 320.0
-offset_bottom = 160.0
+offset_bottom = 180.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/ShowPeople"]
@@ -2770,9 +2781,9 @@ vertical_alignment = 1
 [node name="HidePeople" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 160.0
+offset_top = 180.0
 offset_right = 320.0
-offset_bottom = 180.0
+offset_bottom = 200.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/HidePeople"]
@@ -2788,9 +2799,9 @@ vertical_alignment = 1
 [node name="RefreshDialogue" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 180.0
+offset_top = 200.0
 offset_right = 320.0
-offset_bottom = 200.0
+offset_bottom = 220.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/RefreshDialogue"]
@@ -2806,9 +2817,9 @@ vertical_alignment = 1
 [node name="RefreshDialogueBig" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 200.0
+offset_top = 220.0
 offset_right = 320.0
-offset_bottom = 220.0
+offset_bottom = 240.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/RefreshDialogueBig"]
@@ -2824,9 +2835,9 @@ vertical_alignment = 1
 [node name="ShufflePose" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 220.0
+offset_top = 240.0
 offset_right = 320.0
-offset_bottom = 240.0
+offset_bottom = 260.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/ShufflePose"]
