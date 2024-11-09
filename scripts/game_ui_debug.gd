@@ -61,9 +61,9 @@ func _ready() -> void:
 	_balls_plus_button.pressed.connect(func(): _game.balls += 100)
 	_balls_minus_button.pressed.connect(func(): _game.balls -= 100)
 
-	_pachinko_start_lottery_button.pressed.connect(func(): _pachinko.start_lottery())
+	_pachinko_start_lottery_button.pressed.connect(func(): _pachinko.start_lottery(true))
 	_pachinko_start_rush_button.pressed.connect(func(): _pachinko._start_rush())
-	_pachinko_finish_rush_button.pressed.connect(func(): _pachinko._finish_rush())
+	_pachinko_finish_rush_button.pressed.connect(func(): _pachinko._finish_rush(true))
 
 	_show_tax_button.pressed.connect(func(): _game_ui.show_tax_window())
 	_hide_tax_button.pressed.connect(func(): _game_ui.hide_tax_window())

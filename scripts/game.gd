@@ -23,9 +23,10 @@ const TAX_LIST = [
 	[50, TaxType.Balls, 100],	# Balls 100
 	[75, TaxType.Money, 400],	# Balls 200
 	[100, TaxType.Money, 800],	# Balls 400
-	[125, TaxType.Balls, 600],	# Balls 600
 	[150, TaxType.Balls, 800],	# Balls 800
-	[175, TaxType.Balls, 1000],	# Balls 1000
+	[200, TaxType.Balls, 1600],	# Balls 1600
+	[250, TaxType.Money, 3200],	# Balls 3200
+	[300, TaxType.Money, 6400],	# Balls 6400
 ]
 
 
@@ -66,7 +67,7 @@ var _drag_position_from: Vector2
 # 現在ドラッグしている座標
 var _drag_position_to: Vector2
 # 引っ張りで Ball が吹き飛ぶ強さ
-# NOTE: _drag_length_max と反比例させる
+# NOTE: DRAG_LENGTH_MAX と反比例させる
 var _impulse_ratio: float = 10
 
 # 出現する Deck Ball level の初期リスト (確率込み)
@@ -94,7 +95,7 @@ var _tweens: Dictionary = {}
 
 
 func _ready() -> void:
-	# 初期化
+	# 初期化 (ラベル用)
 	turn = 0
 	money = 1000
 	balls = 0
@@ -110,13 +111,13 @@ func _ready() -> void:
 	_game_ui.info_button_pressed.connect(_on_info_button_pressed)
 	_game_ui.people_touch_button_pressed.connect(_on_people_touch_button_pressed)
 	# Signal (Hole)
-	for maybe_hole in get_tree().get_nodes_in_group("hole"):
-		if maybe_hole is Hole:
-			maybe_hole.ball_entered.connect(_on_hole_ball_entered)
+	for node in get_tree().get_nodes_in_group("hole"):
+		if node is Hole:
+			node.ball_entered.connect(_on_hole_ball_entered)
 	# Signal (Product)
-	for maybe_product in _products.get_children():
-		if maybe_product is Product:
-			maybe_product.icon_pressed.connect(_on_product_icon_pressed)
+	for node in _products.get_children():
+		if node is Product:
+			node.icon_pressed.connect(_on_product_icon_pressed)
 
 	# GameUi
 	_game_ui.refresh_balls_slot_deck(_deck_level_list)
@@ -249,9 +250,8 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			var level = _extra_level_list.pick_random()
 			var new_ball = _create_new_ball(level)
 			_billiards.spawn_extra_ball(new_ball)
-			# 抽選中でない場合: パチンコのラッシュ抽選を開始する
-			if not _pachinko.is_lottery_now:
-				_pachinko.start_lottery()
+			# パチンコのラッシュ抽選を開始する
+			_pachinko.start_lottery()
 		Hole.HoleType.Gain:
 			# 払い出しリストに追加する
 			var amount = hole.gain_ratio * ball.level
@@ -290,6 +290,7 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 
 
 # 商品のアイコンがクリックされたときの処理
+# TODO: shop 的なのに切り分ける
 func _on_product_icon_pressed(product: Product) -> void:
 	# Money が足りない場合: 何もしない
 	if money < product.price:
@@ -381,7 +382,7 @@ func _pick_random_rarity() -> Ball.Rarity:
 	return random_rarity
 
 
-# Payout のループを開始する
+# 払い出しキューの実行ループを開始する
 func _start_payout() -> void:
 	var tween = create_tween()
 	tween.set_loops()
@@ -448,11 +449,11 @@ func _start_tax_count_down() -> void:
 
 
 # Product に MONEY を伝達する
-# TODO: Autoload にしたらいらなくなる
+# TODO: Product ホバー時に値段もらってそこで比較する
 func _set_money_to_products() -> void:
-	for maybe_product in _products.get_children():
-		if maybe_product is Product:
-			maybe_product.main_money = money
+	for node in _products.get_children():
+		if node is Product:
+			node.main_money = money
 
 
 func _get_tween(type: TweenType) -> Tween:
