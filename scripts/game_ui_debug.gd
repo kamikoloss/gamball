@@ -21,9 +21,9 @@ extends Control
 @export var _balls_plus_button: Button
 @export var _balls_minus_button: Button
 @export_category("Pachinko")
-@export var _pachinko_start_lamps_button: Button
-@export var _pachinko_enable_rush_button: Button
-@export var _pachinko_disable_rush_button: Button
+@export var _pachinko_start_lottery_button: Button
+@export var _pachinko_start_rush_button: Button
+@export var _pachinko_finish_rush_button: Button
 @export_category("Window")
 @export var _show_tax_button: Button
 @export var _hide_tax_button: Button
@@ -61,12 +61,9 @@ func _ready() -> void:
 	_balls_plus_button.pressed.connect(func(): _game.balls += 100)
 	_balls_minus_button.pressed.connect(func(): _game.balls -= 100)
 
-	_pachinko_start_lamps_button.pressed.connect(func():
-		var index_list = _pachinko.pick_lamp_index_list()
-		_pachinko.start_rusn_lamps(index_list)
-	)
-	_pachinko_enable_rush_button.pressed.connect(func(): _pachinko.enable_rush_devices())
-	_pachinko_disable_rush_button.pressed.connect(func(): _pachinko.disable_rush_devices())
+	_pachinko_start_lottery_button.pressed.connect(func(): _pachinko.start_lottery())
+	_pachinko_start_rush_button.pressed.connect(func(): _pachinko._start_rush())
+	_pachinko_finish_rush_button.pressed.connect(func(): _pachinko._finish_rush())
 
 	_show_tax_button.pressed.connect(func(): _game_ui.show_tax_window())
 	_hide_tax_button.pressed.connect(func(): _game_ui.hide_tax_window())

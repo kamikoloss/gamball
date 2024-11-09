@@ -1,5 +1,6 @@
 class_name Game
 extends Node
+# TODO: Ball の処理を切り分ける
 
 
 enum TaxType { Money, Balls }
@@ -182,7 +183,6 @@ func _on_buy_balls_button_pressed() -> void:
 	money -= money_unit
 	_push_payout(0, balls_unit)
 
-
 func _on_sell_balls_button_pressed() -> void:
 	var balls_unit = _sell_rate[0]
 	var money_unit = _sell_rate[1]
@@ -249,6 +249,9 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			var level = _extra_level_list.pick_random()
 			var new_ball = _create_new_ball(level)
 			_billiards.spawn_extra_ball(new_ball)
+			# 抽選中でない場合: パチンコのラッシュ抽選を開始する
+			if not _pachinko.is_lottery_now:
+				_pachinko.start_lottery()
 		Hole.HoleType.Gain:
 			# 払い出しリストに追加する
 			var amount = hole.gain_ratio * ball.level

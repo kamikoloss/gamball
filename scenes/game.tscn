@@ -438,13 +438,14 @@ hole_type = 0
 position = Vector2(500, 660)
 hole_type = 0
 
-[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_rotating_wall_a", "_rotating_wall_b", "_rush_devices", "_rush_lamps", "_rush_label_a", "_rush_label_b")]
+[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_rotating_wall_a", "_rotating_wall_b", "_rush_holes", "_rush_nails", "_rush_lamps", "_rush_label_a", "_rush_label_b")]
 script = ExtResource("8_ud1qg")
 _spawn_position_a = NodePath("Points/SpawnHoleA")
 _spawn_position_b = NodePath("Points/SpawnHoleB")
 _rotating_wall_a = NodePath("Walls/RotatingWallA")
 _rotating_wall_b = NodePath("Walls/RotatingWallB")
-_rush_devices = NodePath("Rush/Devices")
+_rush_holes = NodePath("Rush/Holes")
+_rush_nails = NodePath("Rush/Nails")
 _rush_lamps = NodePath("Rush/Lamps")
 _rush_label_a = NodePath("Rush/Display/RushA")
 _rush_label_b = NodePath("Rush/Display/RushB")
@@ -1093,6 +1094,42 @@ vertical_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 
+[node name="Lamp19" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 40.0
+offset_right = 40.0
+rotation = 4.71238
+pivot_offset = Vector2(-40, 0)
+
+[node name="Lamp20" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 40.0
+offset_right = 40.0
+rotation = 4.97418
+pivot_offset = Vector2(-40, 0)
+
+[node name="Lamp21" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 40.0
+offset_right = 40.0
+rotation = 5.23598
+pivot_offset = Vector2(-40, 0)
+
+[node name="Lamp22" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 40.0
+offset_right = 40.0
+rotation = 5.49778
+pivot_offset = Vector2(-40, 0)
+
+[node name="Lamp23" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 40.0
+offset_right = 40.0
+rotation = 5.75958
+pivot_offset = Vector2(-40, 0)
+
+[node name="Lamp24" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 40.0
+offset_right = 40.0
+rotation = 6.02138
+pivot_offset = Vector2(-40, 0)
+
 [node name="Lamp" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
 offset_right = 40.0
@@ -1200,74 +1237,40 @@ offset_right = 40.0
 rotation = 4.45058
 pivot_offset = Vector2(-40, 0)
 
-[node name="Lamp19" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 4.71238
-pivot_offset = Vector2(-40, 0)
+[node name="Nails" type="Node2D" parent="Pachinko/Rush"]
 
-[node name="Lamp20" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 4.97418
-pivot_offset = Vector2(-40, 0)
-
-[node name="Lamp21" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 5.23598
-pivot_offset = Vector2(-40, 0)
-
-[node name="Lamp22" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 5.49778
-pivot_offset = Vector2(-40, 0)
-
-[node name="Lamp23" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 5.75958
-pivot_offset = Vector2(-40, 0)
-
-[node name="Lamp24" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 6.02138
-pivot_offset = Vector2(-40, 0)
-
-[node name="Devices" type="Node2D" parent="Pachinko/Rush"]
-
-[node name="Nail4" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
+[node name="Nail4" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
 position = Vector2(-120, 60)
 
-[node name="Nail5" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
+[node name="Nail5" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
 position = Vector2(-100, 80)
 
-[node name="Nail6" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
+[node name="Nail6" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
 position = Vector2(-60, 80)
 
-[node name="Nail7" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
+[node name="Nail7" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
 position = Vector2(-40, 60)
 
-[node name="Nail10" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
+[node name="Nail10" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
 position = Vector2(40, 60)
 
-[node name="Nail11" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
+[node name="Nail11" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
 position = Vector2(60, 80)
 
-[node name="Nail12" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
+[node name="Nail12" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
 position = Vector2(100, 80)
 
-[node name="Nail13" parent="Pachinko/Rush/Devices" instance=ExtResource("9_8yiuy")]
+[node name="Nail13" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
 position = Vector2(120, 60)
 
-[node name="Hole" parent="Pachinko/Rush/Devices" instance=ExtResource("7_71f2d")]
+[node name="Holes" type="Node2D" parent="Pachinko/Rush"]
+
+[node name="Hole" parent="Pachinko/Rush/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(-80, 40)
 hole_type = 2
 gain_ratio = 10
 
-[node name="Hole2" parent="Pachinko/Rush/Devices" instance=ExtResource("7_71f2d")]
+[node name="Hole2" parent="Pachinko/Rush/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(80, 40)
 hole_type = 2
 gain_ratio = 10
@@ -2450,7 +2453,7 @@ text = "GAMBALL v0.2.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lamps_button", "_pachinko_enable_rush_button", "_pachinko_disable_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("16_cuefl")
@@ -2469,9 +2472,9 @@ _money_plus_button = NodePath("DebugWindow/MoneyPlus")
 _money_minus_button = NodePath("DebugWindow/MoneyMinus")
 _balls_plus_button = NodePath("DebugWindow/BallsPlus")
 _balls_minus_button = NodePath("DebugWindow/BallsMinus")
-_pachinko_start_lamps_button = NodePath("DebugWindow/StartLamps")
-_pachinko_enable_rush_button = NodePath("DebugWindow/EnableRush")
-_pachinko_disable_rush_button = NodePath("DebugWindow/DisableRush")
+_pachinko_start_lottery_button = NodePath("DebugWindow/StartLottery")
+_pachinko_start_rush_button = NodePath("DebugWindow/StartRush")
+_pachinko_finish_rush_button = NodePath("DebugWindow/FinishRush")
 _show_tax_button = NodePath("DebugWindow/ShowTax")
 _hide_tax_button = NodePath("DebugWindow/HideTax")
 _show_shop_button = NodePath("DebugWindow/ShowShop")
@@ -2626,53 +2629,55 @@ theme_override_font_sizes/font_size = 64
 text = "<Pachinko>"
 vertical_alignment = 1
 
-[node name="StartLamps" type="Button" parent="UIDebug/DebugWindow"]
+[node name="StartLottery" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_top = 200.0
 offset_right = 160.0
 offset_bottom = 220.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
-[node name="Label" type="Label" parent="UIDebug/DebugWindow/StartLamps"]
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/StartLottery"]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
-text = "StartLamps"
+text = "StartLottery"
 vertical_alignment = 1
 
-[node name="EnableRush" type="Button" parent="UIDebug/DebugWindow"]
+[node name="StartRush" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_top = 220.0
 offset_right = 160.0
 offset_bottom = 240.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
-[node name="Label" type="Label" parent="UIDebug/DebugWindow/EnableRush"]
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/StartRush"]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
-text = "EnableRush"
+text = "StartRush"
 vertical_alignment = 1
 
-[node name="DisableRush" type="Button" parent="UIDebug/DebugWindow"]
+[node name="FinishRush" type="Button" parent="UIDebug/DebugWindow"]
+layout_mode = 0
 offset_top = 240.0
 offset_right = 160.0
 offset_bottom = 260.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
-[node name="Label" type="Label" parent="UIDebug/DebugWindow/DisableRush"]
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/FinishRush"]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
-text = "DisableRush"
+text = "FinishRush"
 vertical_alignment = 1
 
 [node name="<Tax>" type="Label" parent="UIDebug/DebugWindow"]

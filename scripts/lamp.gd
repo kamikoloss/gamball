@@ -13,7 +13,7 @@ enum LightColor {
 const LIGHT_COLORS = {
 	LightColor.DEFAULT_OFF: Color(0.1, 0.1, 0.1),
 	LightColor.DEFAULT_ON: Color(1, 1, 1),
-	LightColor.GREEN_OFF: Color(0, 0.5, 0),
+	LightColor.GREEN_OFF: Color(0.1, 0.4, 0.1),
 	LightColor.GREEN_ON: Color(0, 1, 0),
 }
 
