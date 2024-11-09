@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/bunny/hand_right_1.png" id="7_subrs"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/bunny/base.png" id="9_yblo7"]
 
-[node name="Bunny" type="Control" node_paths=PackedStringArray("_base_texture", "_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4")]
+[node name="Bunny" type="Control" node_paths=PackedStringArray("_base_parts", "_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_lr22c")
-_base_texture = NodePath("Base")
+_base_parts = NodePath("Base")
 _pose_a = NodePath("PoseA")
 _pose_a_parts_1 = NodePath("PoseA/Parts1")
 _pose_a_parts_2 = NodePath("PoseA/Parts2")

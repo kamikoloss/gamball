@@ -14,8 +14,7 @@ const POSE_MOVE_DURATION_DOWN = 0.3 # 跳ねるときの下降時の秒数
 const POSE_MOVE_POSITION_DIFF = Vector2(0, -20) # どれぐらい跳ねるか
 
 
-@export var _is_show_base: bool = true
-@export var _base_texture: TextureRect
+@export var _base_parts: TextureRect
 @export_category("Pose A")
 @export var _pose_a: Control
 @export var _pose_a_parts_1: TextureRect
@@ -29,26 +28,31 @@ const POSE_MOVE_POSITION_DIFF = Vector2(0, -20) # どれぐらい跳ねるか
 @export var _pose_b_parts_3: TextureRect
 @export var _pose_b_parts_4: TextureRect
 @export_category("Texutres")
+@export var _base_texture: Texture
 @export var _parts_1_textures: Array[Texture]
 @export var _parts_2_textures: Array[Texture]
 @export var _parts_3_textures: Array[Texture]
 @export var _parts_4_textures: Array[Texture]
 
 
-# { TweenType: Tween, ... } 
-var _tweens: Dictionary = {}
-# 現在どちらのポーズ表示を使用しているか 交互に切り替える
-var _is_pose_a = true
+var _is_pose_a = true # 現在どちらのポーズ表示を使用しているか 交互に切り替える
 
-var _pose_move_position_from: Vector2
-var _pose_move_position_to: Vector2
+var _pose_move_position_from: Vector2 # 跳ねるときの初期位置
+var _pose_move_position_to: Vector2 # 跳ねるときの頂点位置
+
+var _tweens: Dictionary = {} # { TweenType: Tween, ... } 
 
 
 func _ready() -> void:
 	_pose_move_position_from = position
 	_pose_move_position_to = position + POSE_MOVE_POSITION_DIFF
 
-	_base_texture.visible = _is_show_base
+	if _base_texture:
+		_base_parts.texture = _base_texture
+		_base_parts.visible = true
+	else:
+		_base_parts.visible = false
+
 	_pose_a.visible = true
 	_pose_b.visible = true
 	_pose_a.modulate = Color.WHITE
@@ -107,10 +111,10 @@ func _refresh_textures(parts_index_list: Array[int]) -> void:
 
 	var parts_textures_list = [_parts_1_textures, _parts_2_textures, _parts_3_textures, _parts_4_textures]
 
-	var key = 0
+	var i = 0
 	for index in parts_index_list:
-		var pose_parts: TextureRect = pose_parts_list[key]
-		var parts_textures: Array[Texture] = parts_textures_list[key]
+		var pose_parts: TextureRect = pose_parts_list[i]
+		var parts_textures: Array[Texture] = parts_textures_list[i]
 		# Texture が存在しない場合
 		if (parts_textures.size() - 1) < index:
 			pose_parts.visible = false
@@ -118,7 +122,7 @@ func _refresh_textures(parts_index_list: Array[int]) -> void:
 		else:
 			pose_parts.visible = true
 			pose_parts.texture = parts_textures[index]
-		key += 1
+		i += 1
 
 
 func _refresh_textures_random() -> void:
