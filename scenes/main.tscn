@@ -36,13 +36,19 @@ position = Vector2(640, 360)
 
 [node name="Game" parent="." instance=ExtResource("1_gfwkx")]
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_game_main_button", "_game_config_button", "_game_info_button")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_game_main_button", "_game_config_button", "_game_info_button", "_config_audio_master_slider", "_config_audio_master_slider_label", "_config_audio_bgm_slider", "_config_audio_bgm_slider_label", "_config_audio_se_slider", "_config_audio_se_slider_label")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("2_vr2oh")
 _game_main_button = NodePath("CanvasLayer/ForGame/Main")
 _game_config_button = NodePath("CanvasLayer/ForGame/Config")
 _game_info_button = NodePath("CanvasLayer/ForGame/Info")
+_config_audio_master_slider = NodePath("Config/Audio/Master/HSlider")
+_config_audio_master_slider_label = NodePath("Config/Audio/Master/Label2")
+_config_audio_bgm_slider = NodePath("Config/Audio/BGM/HSlider")
+_config_audio_bgm_slider_label = NodePath("Config/Audio/BGM/Label2")
+_config_audio_se_slider = NodePath("Config/Audio/Master3/HSlider")
+_config_audio_se_slider_label = NodePath("Config/Audio/Master3/Label2")
 
 [node name="Config" type="Control" parent="UI"]
 anchors_preset = 0
@@ -50,11 +56,11 @@ offset_left = -1280.0
 offset_right = -1280.0
 
 [node name="Background" type="TextureRect" parent="UI/Config"]
-self_modulate = Color(0, 0, 0, 0.878431)
+self_modulate = Color(0, 0, 0, 0.501961)
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
-offset_right = 1260.0
+offset_right = 540.0
 offset_bottom = 700.0
 texture = ExtResource("3_yy207")
 expand_mode = 1

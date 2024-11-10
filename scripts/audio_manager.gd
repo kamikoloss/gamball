@@ -33,10 +33,6 @@ enum SeType {
 
 
 func _ready() -> void:
-	set_volume(BusType.Master, 10)
-	set_volume(BusType.Bgm, 5)
-	set_volume(BusType.Se, 5)
-
 	# BGM はループ再生する
 	_bgm_player.finished.connect(func(): _bgm_player.play())
 
