@@ -37,6 +37,9 @@ func _ready() -> void:
 	set_volume(BusType.Bgm, 5)
 	set_volume(BusType.Se, 5)
 
+	# BGM はループ再生する
+	_bgm_player.finished.connect(func(): _bgm_player.play())
+
 
 func set_volume(type: BusType, volume_level: int) -> void:
 	var volume_clamped = clampi(volume_level, 0, 10)
@@ -60,10 +63,10 @@ func play_se(type: SeType) -> void:
 			se_player = _se_player_2
 			se_audio = _se_PachinkoLampOn
 		SeType.PachinkoRushStart:
-			se_player = _se_player_3
+			se_player = _se_player_2
 			se_audio = _se_PachinkoRushStart
 		SeType.PachinkoRushFinish:
-			se_player = _se_player_3
+			se_player = _se_player_2
 			se_audio = _se_PachinkoRushFinish
 
 	if not se_player or not se_audio:

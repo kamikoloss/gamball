@@ -60,8 +60,7 @@ const WINDOW_MOVE_DURATION: float = 1.0
 @export var _people_touch_button: TextureButton
 
 
-# { TweenType: Tween, ... } 
-var _tweens: Dictionary = {}
+var _tweens: Dictionary = {} # { TweenType: Tween, ... } 
 
 
 func _ready() -> void:

@@ -14,6 +14,8 @@ extends Control
 @export var _debug_button: Button
 @export var _debug_window: Control
 
+
+# TODO: 動的に生成する
 @export_category("Game")
 @export var _restart_game_button: Button
 @export var _turn_plus_button: Button
@@ -70,6 +72,7 @@ func _ready() -> void:
 
 	_show_tax_button.pressed.connect(func(): _game_ui.show_tax_window())
 	_hide_tax_button.pressed.connect(func(): _game_ui.hide_tax_window())
+
 	_show_shop_button.pressed.connect(func(): _game_ui.show_shop_window())
 	_hide_shop_button.pressed.connect(func(): _game_ui.hide_shop_window())
 
