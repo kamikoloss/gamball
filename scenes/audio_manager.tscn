@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://msfipkv05urf"]
+
+[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_kq5fi"]
+[ext_resource type="AudioStream" uid="uid://chjiw5n87xob8" path="res://sounds/8bit選択1.mp3" id="2_1u0wg"]
+[ext_resource type="AudioStream" uid="uid://q8jnjjalocgb" path="res://sounds/Future_1.mp3" id="2_2c226"]
+[ext_resource type="AudioStream" uid="uid://dwpd06xrun66g" path="res://sounds/8bitショット1.mp3" id="2_w0oeq"]
+[ext_resource type="AudioStream" uid="uid://cu3nrsxejvjhl" path="res://sounds/8bit選択3.mp3" id="3_dtax8"]
+[ext_resource type="AudioStream" uid="uid://cdggie8i5wgty" path="res://sounds/8bit失敗3.mp3" id="5_0vtw6"]
+[ext_resource type="AudioStream" uid="uid://d37mt8wunc5ae" path="res://sounds/8bit勝利1.mp3" id="5_ljrli"]
+
+[node name="AudioManager" type="Node" node_paths=PackedStringArray("_bgm_player", "_se_player_1", "_se_player_2", "_se_player_3", "_se_player_4")]
+script = ExtResource("1_kq5fi")
+_bgm_player = NodePath("BGM/AudioStreamPlayer")
+_se_player_1 = NodePath("SE/AudioStreamPlayer")
+_se_player_2 = NodePath("SE/AudioStreamPlayer2")
+_se_player_3 = NodePath("SE/AudioStreamPlayer3")
+_se_player_4 = NodePath("SE/AudioStreamPlayer4")
+_se_BilliardsShoot = ExtResource("2_w0oeq")
+_se_PachinkoLampOff = ExtResource("2_1u0wg")
+_se_PachinkoLampOn = ExtResource("3_dtax8")
+_se_PachinkoRushStart = ExtResource("5_ljrli")
+_se_PachinkoRushFinish = ExtResource("5_0vtw6")
+
+[node name="BGM" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BGM"]
+stream = ExtResource("2_2c226")
+autoplay = true
+bus = &"BGM"
+
+[node name="SE" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SE"]
+bus = &"SE"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="SE"]
+bus = &"SE"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="SE"]
+bus = &"SE"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="SE"]
+bus = &"SE"
