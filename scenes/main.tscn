@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cxkwcbih1rjqx"]
 
-[ext_resource type="PackedScene" uid="uid://l2y3sq1ikgmx" path="res://scenes/game.tscn" id="1_gfwkx"]
+[ext_resource type="PackedScene" uid="uid://b572sr4hn8ps8" path="res://scenes/title.tscn" id="1_oaxe4"]
 [ext_resource type="Script" path="res://scripts/main_ui.gd" id="2_vr2oh"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="3_yy207"]
 [ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="4_0sov8"]
@@ -8,19 +8,19 @@
 [ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/people/bunny2/bunny2a.png" id="6_247yj"]
 [ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="7_gxcoo"]
 
-[sub_resource type="Gradient" id="Gradient_vw8ig"]
+[sub_resource type="Gradient" id="Gradient_wlypo"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.25098, 0.501961, 0.25098, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_daj1h"]
-gradient = SubResource("Gradient_vw8ig")
+gradient = SubResource("Gradient_wlypo")
 
-[sub_resource type="Gradient" id="Gradient_id5ai"]
+[sub_resource type="Gradient" id="Gradient_w5fks"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.25098, 0.376471, 0.25098, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_w8r22"]
-gradient = SubResource("Gradient_id5ai")
+gradient = SubResource("Gradient_w5fks")
 
 [sub_resource type="Gradient" id="Gradient_rja4h"]
 offsets = PackedFloat32Array(0)
@@ -34,7 +34,7 @@ gradient = SubResource("Gradient_rja4h")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
 
-[node name="Game" parent="." instance=ExtResource("1_gfwkx")]
+[node name="Title" parent="." instance=ExtResource("1_oaxe4")]
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("_game_main_button", "_game_config_button", "_game_info_button", "_config_audio_master_slider", "_config_audio_master_slider_label", "_config_audio_bgm_slider", "_config_audio_bgm_slider_label", "_config_audio_se_slider", "_config_audio_se_slider_label")]
 layout_mode = 3
