@@ -37,19 +37,12 @@ func _ready() -> void:
 	set_volume(BusType.Bgm, 5)
 	set_volume(BusType.Se, 5)
 
-	_se_player_1.stream = _se_PachinkoLampOn
-
 
 func set_volume(type: BusType, volume_level: int) -> void:
 	var volume_clamped = clampi(volume_level, 0, 10)
 	var volume_db = -40 + volume_clamped * 4 # 0: -40db, 5: -20db, 10: 0db, 
 	AudioServer.set_bus_volume_db(type, volume_db)
 	print("[AudioManager] set_volume() Bus: %s, db: %s" % [type, AudioServer.get_bus_volume_db(type)])
-
-
-func play_bgm(type: BgmType) -> void:
-	_bgm_player.stop()
-	_bgm_player.play()
 
 
 func play_se(type: SeType) -> void:

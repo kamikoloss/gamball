@@ -7,6 +7,7 @@ enum TweenType {
 	RotatingWallB, # 回転床 B
 	RushLamp, # ラッシュ用ランプ
 	RushLampFlash, # ラッシュ用ランプ点滅
+	RushLampAudio, # ラッシュ用ランプ音
 }
 
 
@@ -112,8 +113,10 @@ func start_lottery(force: bool = false) -> void:
 	_is_lottery_now = false
 
 	if hit < top:
+		AudioManager.play_se(AudioManager.SeType.PachinkoRushStart)
 		_start_rush()
 	else:
+		AudioManager.play_se(AudioManager.SeType.PachinkoRushFinish)
 		_finish_rush()
 
 
@@ -207,16 +210,19 @@ func _start_rusn_lamps(index_list: Array[int]) -> void:
 	duration = (index_list[1] - index_list[0]) * 0.04
 	tween.set_trans(Tween.TRANS_LINEAR)
 	tween.tween_method(func(v): _enable_rush_lamp(v % size), index_list[0], index_list[1], duration)
+	tween.tween_callback(func(): _start_lamp_se_loop(0.2, AudioManager.SeType.PachinkoLampOff))
 
 	# 止まる前のゆっくり点灯 (だんだん遅くなる)
 	tween.chain()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	duration = (index_list[2] - index_list[1]) * 0.2
 	tween.tween_method(func(v): _enable_rush_lamp(v % size), index_list[1], index_list[2], duration)
+	tween.tween_callback(func(): _start_lamp_se_loop(0.4, AudioManager.SeType.PachinkoLampOn))
 
 	# 止まったあとの点滅
 	tween.chain()
 	tween.tween_callback(func(): _flash_lamp(index_list[2] % size))
+	tween.tween_callback(func(): _stop_lamp_se_loop())
 
 	await tween.finished
 
@@ -229,6 +235,16 @@ func _flash_lamp(index: int) -> void:
 	tween2.tween_callback(func(): _enable_rush_lamp(index))
 	tween2.tween_interval(0.1)
 	await tween2.finished
+
+func _start_lamp_se_loop(interval: float, type: AudioManager.SeType) -> void:
+	var tween = _get_tween(TweenType.RushLampAudio)
+	tween.set_loops()
+	tween.tween_callback(func(): AudioManager.play_se(type))
+	tween.tween_interval(interval)
+
+func _stop_lamp_se_loop() -> void:
+	# 取得時に kill するので止まる
+	var tween = _get_tween(TweenType.RushLampAudio)
 
 
 # ランプの色を初期化する

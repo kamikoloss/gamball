@@ -48,6 +48,7 @@ func shoot_ball(implulse: Vector2) -> void:
 	if _current_ball == null:
 		return
 
+	AudioManager.play_se(AudioManager.SeType.BilliardsShoot)
 	_current_ball.freeze = false
 	_current_ball.apply_impulse(implulse)
 	_current_ball = null
