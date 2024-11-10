@@ -412,6 +412,7 @@ func _go_to_next_turn() -> void:
 # Tax Window 表示までのカウントダウンを開始する
 func _start_tax_count_down() -> void:
 	# バニーを表示する
+	_bunny.disable_touch() # バニーのタッチを無効にする
 	_game_ui.show_people_window()
 	_bunny.refresh_dialogue_big_label("延長のお時間で～す")
 
@@ -431,6 +432,7 @@ func _start_tax_count_down() -> void:
 	tween.tween_callback(func(): _game_ui.show_tax_window())
 	tween.tween_callback(func(): _bunny.refresh_dialogue_label("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す
 
 
 # Product に MONEY を伝達する

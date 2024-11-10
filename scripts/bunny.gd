@@ -131,6 +131,13 @@ func refresh_dialogue_big_label(dialogue: String) -> void:
 	tween.tween_property(_dialogue_big_label, "modulate", Color.WHITE, 0.2) # 対象の label だけ表示を戻す
 
 
+func enable_touch() -> void:
+	_touch_button.disabled = false
+
+func disable_touch() -> void:
+	_touch_button.disabled = true
+
+
 func _on_touch_button_pressed() -> void:
 	# セリフをランダムに変更する
 	# TODO: JSON に逃がす
