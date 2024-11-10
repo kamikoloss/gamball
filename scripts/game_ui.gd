@@ -2,7 +2,7 @@ class_name GameUi
 extends Control
 
 
-enum TweenType { Tax, Shop, People, PeopleDialogue }
+enum TweenType { Tax, Shop, People }
 
 
 # Button 系
@@ -11,7 +11,6 @@ signal sell_balls_button_pressed
 signal tax_pay_button_pressed
 signal shop_exit_button_pressed
 signal info_button_pressed
-signal people_touch_button_pressed
 
 
 # Window 移動系
@@ -55,9 +54,6 @@ const WINDOW_MOVE_DURATION: float = 1.0
 
 @export_category("People")
 @export var _people_window: Control
-@export var _dialogue_label: Label
-@export var _dialogue_big_label: Label
-@export var _people_touch_button: TextureButton
 
 
 var _tweens: Dictionary = {} # { TweenType: Tween, ... } 
@@ -74,9 +70,6 @@ func _ready() -> void:
 	hide_drag_point()
 	# Main/Arrow
 	hide_arrow()
-	# People
-	_people_touch_button.pressed.connect(func(): people_touch_button_pressed.emit())
-	refresh_dialogue_label("")
 
 
 func show_tax_window() -> void:
@@ -172,28 +165,6 @@ func hide_arrow() -> void:
 func refresh_arrow(deg: int, scale: float) -> void:
 	_arrow.rotation_degrees = deg
 	_arrow_square.scale.y = scale
-
-
-# People
-func refresh_dialogue_label(dialogue: String) -> void:
-	var tween = _get_tween(TweenType.PeopleDialogue)
-	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
-	tween.tween_property(_dialogue_big_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
-	tween.chain()
-	tween.tween_callback(func(): _dialogue_label.text = dialogue) # セリフを変える
-	tween.tween_property(_dialogue_label, "modulate", Color.WHITE, 0.2) # 対象の label だけ表示を戻す
-
-func refresh_dialogue_big_label(dialogue: String) -> void:
-	var tween = _get_tween(TweenType.PeopleDialogue)
-	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
-	tween.tween_property(_dialogue_big_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
-	tween.chain()
-	tween.tween_callback(func(): _dialogue_big_label.text = dialogue) # セリフを変える
-	tween.tween_property(_dialogue_big_label, "modulate", Color.WHITE, 0.2) # 対象の label だけ表示を戻す
 
 
 func _refresh_balls_slot(parent_node: Node, level_list: Array[int]) -> void:

@@ -38,7 +38,7 @@ const TAX_LIST = [
 @export var _billiards_board: Area2D
 @export var _pachinko: Pachinko
 @export var _stack: Stack
-@export var _balls: Node2D # Ball instances の親 Node
+@export var _balls: Node2D # Ball の親
 @export var _game_ui: GameUi
 @export var _products: Control # Product の親
 @export var _bunny: Bunny
@@ -109,7 +109,6 @@ func _ready() -> void:
 	_game_ui.tax_pay_button_pressed.connect(_on_tax_pay_button_pressed)
 	_game_ui.shop_exit_button_pressed.connect(_on_shop_exit_button_pressed)
 	_game_ui.info_button_pressed.connect(_on_info_button_pressed)
-	_game_ui.people_touch_button_pressed.connect(_on_people_touch_button_pressed)
 	# Signal (Hole)
 	for node in get_tree().get_nodes_in_group("hole"):
 		if node is Hole:
@@ -218,20 +217,6 @@ func _on_shop_exit_button_pressed() -> void:
 
 func _on_info_button_pressed() -> void:
 	pass
-
-
-func _on_people_touch_button_pressed() -> void:
-	# セリフをランダムに変更する
-	# TODO: JSON に逃がす
-	var dialogue_list = [
-		"GAMBALL は近未来のバーチャルハイリスクハイリターンギャンブルだよ！",
-		"ビリヤードポケットに入った玉はパチンコ盤面上に出現するよ。",
-		"水色の??玉が他の玉にぶつかる前にビリヤードポケットに落ちるとなくなるから気をつけてね！",
-	]
-	_game_ui.refresh_dialogue_label(dialogue_list.pick_random())
-
-	# ポーズをランダムに変更する
-	_bunny.shuffle_pose()
 
 
 # Ball が Hole に落ちたときの処理
@@ -426,25 +411,25 @@ func _go_to_next_turn() -> void:
 
 # Tax Window 表示までのカウントダウンを開始する
 func _start_tax_count_down() -> void:
-	# People を表示する
-	_game_ui.refresh_dialogue_big_label("延長のお時間で～す")
+	# バニーを表示する
 	_game_ui.show_people_window()
+	_bunny.refresh_dialogue_big_label("延長のお時間で～す")
 
 	# カウントダウンを開始する
 	var tween = _get_tween(TweenType.TaxCountDown)
 	tween.tween_interval(2.0)
-	tween.tween_callback(func(): _game_ui.refresh_dialogue_big_label("さ～～ん"))
+	tween.tween_callback(func(): _bunny.refresh_dialogue_big_label("さ～～ん"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): _game_ui.refresh_dialogue_big_label("に～～い"))
+	tween.tween_callback(func(): _bunny.refresh_dialogue_big_label("に～～い"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): _game_ui.refresh_dialogue_big_label("い～～ち"))
+	tween.tween_callback(func(): _bunny.refresh_dialogue_big_label("い～～ち"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
 	# Tax Window を表示する
 	tween.tween_callback(func(): _game_ui.show_tax_window())
-	tween.tween_callback(func(): _game_ui.refresh_dialogue_label("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
+	tween.tween_callback(func(): _bunny.refresh_dialogue_label("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
 
 

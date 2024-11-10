@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=33 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/ball.tscn" id="2_ma10n"]
@@ -24,8 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://cmx70egbmx0sa" path="res://images/people/bunny/face_3.png" id="18_l12bf"]
 [ext_resource type="Texture2D" uid="uid://c17m6dsrq78ov" path="res://images/people/bunny/hand_left_2.png" id="20_r8nov"]
 [ext_resource type="Texture2D" uid="uid://uk0q0it6ta74" path="res://images/people/bunny/hand_right_2.png" id="22_am1vr"]
-[ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/people/bunny2/bunny2a.png" id="24_d3cdg"]
-[ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="25_tj6hx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -1505,7 +1503,7 @@ offset_bottom = 680.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window", "_dialogue_label", "_dialogue_big_label", "_people_touch_button")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("13_aavli")
@@ -1530,9 +1528,6 @@ _tax_give_up_button = NodePath("Tax/GiveUp")
 _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
-_dialogue_label = NodePath("People/Bubble/Dialogue")
-_dialogue_big_label = NodePath("People/Bubble/DialogueBig")
-_people_touch_button = NodePath("People/Touch")
 
 [node name="Tax" type="Control" parent="UI"]
 visible = false
@@ -1768,84 +1763,10 @@ offset_left = 1000.0
 offset_top = -40.0
 offset_right = 1000.0
 offset_bottom = -40.0
-scale = Vector2(0.6, 0.6)
 _base_texture = ExtResource("16_bxvmb")
 _parts_1_textures = Array[Texture]([ExtResource("16_cjk3l"), ExtResource("17_mt5cg"), ExtResource("18_l12bf")])
 _parts_2_textures = Array[Texture]([ExtResource("17_qj08e"), ExtResource("20_r8nov")])
 _parts_3_textures = Array[Texture]([ExtResource("18_kawv6"), ExtResource("22_am1vr")])
-
-[node name="Bunny2" parent="UI/People" instance=ExtResource("15_jt5ld")]
-visible = false
-offset_left = 1000.0
-offset_top = -40.0
-offset_right = 1000.0
-offset_bottom = -40.0
-scale = Vector2(0.6, 0.6)
-_parts_1_textures = Array[Texture]([ExtResource("24_d3cdg"), ExtResource("25_tj6hx")])
-
-[node name="Bubble" type="Control" parent="UI/People"]
-modulate = Color(1, 1, 1, 0.752941)
-anchors_preset = 0
-offset_left = 800.0
-offset_top = 40.0
-offset_right = 800.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/People/Bubble"]
-layout_mode = 0
-offset_right = 400.0
-offset_bottom = 100.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="UI/People/Bubble"]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 140.0
-offset_right = 120.0
-offset_bottom = 180.0
-rotation = 3.14159
-texture = ExtResource("6_qy33h")
-expand_mode = 1
-
-[node name="Dialogue" type="Label" parent="UI/People/Bubble"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 1530.0
-offset_bottom = 330.0
-scale = Vector2(0.25, 0.25)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "サンプルテキストサンプルテキストサンプルテキス
-サンプルテキストサンプルテキストサンプルテキス
-サンプルテキストサンプルテキストサンプルテキス
-サンプルテキストサンプルテキストサンプルテキス"
-autowrap_mode = 1
-
-[node name="DialogueBig" type="Label" parent="UI/People/Bubble"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 770.0
-offset_bottom = 170.0
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "サンプルテキストサンプ
-サンプルテキストサンプ"
-autowrap_mode = 1
-
-[node name="Touch" type="TextureButton" parent="UI/People"]
-layout_mode = 0
-offset_left = 760.0
-offset_top = 40.0
-offset_right = 1240.0
-offset_bottom = 680.0
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="Main" type="Control" parent="UI"]
 layout_mode = 3
