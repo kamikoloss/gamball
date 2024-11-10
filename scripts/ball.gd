@@ -81,10 +81,10 @@ func refresh_view() -> void:
 	# 残像
 	var gradient = Gradient.new()
 	if not is_active:
-		gradient.set_color(0, BALL_COLORS[0])
+		gradient.set_color(0, Color(BALL_COLORS[0], 0.5))
 		gradient.set_color(1, Color(BALL_COLORS[0], 0))
 	else:
-		gradient.set_color(0, BALL_COLORS[level])
+		gradient.set_color(0, Color(BALL_COLORS[level], 0.5))
 		gradient.set_color(1, Color(BALL_COLORS[level], 0))
 	_trail_line.gradient = gradient
 
