@@ -6,6 +6,8 @@ extends RigidBody2D
 enum Rarity { Common, Rare, Epic, Legendary }
 
 
+# 残像の頂点数
+const TRAIL_MAX_LENGTH = 16
 # 特殊なボール番号
 const BALL_LEVEL_EMPTY_SLOT = -1
 
@@ -27,15 +29,29 @@ const BALL_COLORS = {
 @export var _mask_texture: TextureRect # ボールが有効化されるまで全体を覆う部分
 @export var _level_label: Label
 @export var _hole_area: Area2D
+@export var _trail_line: Line2D
 
 
 var rarity: Rarity = Rarity.Common # ボールのレア度
 var is_active = true # 他のボールにぶつかって有効化されたかどうか
 
 
+var _trail_points: Array = []
+
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	refresh_view()
+
+
+func _process(delta: float) -> void:
+	_trail_points.push_front(self.position)
+	if TRAIL_MAX_LENGTH < _trail_points.size():
+		_trail_points.pop_back()
+	_trail_line.clear_points()
+	_trail_line.rotation = 0.0
+	for point in _trail_points:
+		_trail_line.add_point(point)
 
 
 # 自身の見た目を更新する
@@ -61,6 +77,16 @@ func refresh_view() -> void:
 		freeze = true
 		collision_layer = 0
 		_hole_area.monitoring = false
+
+	# 残像
+	var gradient = Gradient.new()
+	if not is_active:
+		gradient.set_color(0, BALL_COLORS[0])
+		gradient.set_color(1, Color(BALL_COLORS[0], 0))
+	else:
+		gradient.set_color(0, BALL_COLORS[level])
+		gradient.set_color(1, Color(BALL_COLORS[level], 0))
+	_trail_line.gradient = gradient
 
 
 func _on_body_entered(body: Node) -> void:

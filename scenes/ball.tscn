@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://0yg37qutkxad"]
+[gd_scene load_steps=8 format=3 uid="uid://0yg37qutkxad"]
 
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/base_circle.png" id="1_8km44"]
 [ext_resource type="Script" path="res://scripts/ball.gd" id="1_q12tn"]
@@ -12,7 +12,12 @@ radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_main_texture", "_inner_texture", "_mask_texture", "_level_label", "_hole_area")]
+[sub_resource type="Curve" id="Curve_pexpb"]
+_data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 1, 0]
+point_count = 2
+
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_main_texture", "_inner_texture", "_mask_texture", "_level_label", "_hole_area", "_trail_line")]
+z_index = 2
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
@@ -22,6 +27,7 @@ _inner_texture = NodePath("Inner")
 _mask_texture = NodePath("Mask")
 _level_label = NodePath("Level")
 _hole_area = NodePath("Area2D")
+_trail_line = NodePath("Line2D")
 
 [node name="Main" type="TextureRect" parent="."]
 self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
@@ -97,3 +103,9 @@ scale = Vector2(0.25, 0.25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_awq4m")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+z_index = 1
+width = 30.0
+width_curve = SubResource("Curve_pexpb")
