@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1c20ab2v1t7a"
-path="res://.godot/imported/bunny2a.png-0b9aa6c205053c24f8e00a4e62d1a899.ctex"
+uid="uid://uk0q0it6ta74"
+path="res://.godot/imported/hand_right_2.png-359b77d44ce9aa503ab171641adb9726.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/bunny2/bunny2a.png"
-dest_files=["res://.godot/imported/bunny2a.png-0b9aa6c205053c24f8e00a4e62d1a899.ctex"]
+source_file="res://images/people/bunny/hand_right_2.png"
+dest_files=["res://.godot/imported/hand_right_2.png-359b77d44ce9aa503ab171641adb9726.ctex"]
 
 [params]
 

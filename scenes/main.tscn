@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="3_yy207"]
 [ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="4_0sov8"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/bunny.tscn" id="5_bkv47"]
-[ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/bunny2/bunny2a.png" id="6_247yj"]
-[ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/bunny2/bunny2b.png" id="7_gxcoo"]
+[ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/people/bunny2/bunny2a.png" id="6_247yj"]
+[ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="7_gxcoo"]
 
 [sub_resource type="Gradient" id="Gradient_vw8ig"]
 offsets = PackedFloat32Array(0)

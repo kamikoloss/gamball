@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h4jywlv57bwn"
-path="res://.godot/imported/wastebasket_1f5d1-fe0f.png-cfa72e7c171463b9b4a39a4c43b9bcdf.ctex"
+uid="uid://bnttc1dj1f7aa"
+path="res://.godot/imported/base.png-da668ceedd74b6fb4250cff4dee77bd4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/wastebasket_1f5d1-fe0f.png"
-dest_files=["res://.godot/imported/wastebasket_1f5d1-fe0f.png-cfa72e7c171463b9b4a39a4c43b9bcdf.ctex"]
+source_file="res://images/people/bunny/base.png"
+dest_files=["res://.godot/imported/base.png-da668ceedd74b6fb4250cff4dee77bd4.ctex"]
 
 [params]
 

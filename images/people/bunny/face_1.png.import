@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dia2578imyuua"
-path="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"
+uid="uid://cuwiiq1yrw76c"
+path="res://.godot/imported/face_1.png-b0e50e74673b9f5ec28bdfa8b625d6d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=["res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"]
+source_file="res://images/people/bunny/face_1.png"
+dest_files=["res://.godot/imported/face_1.png-b0e50e74673b9f5ec28bdfa8b625d6d6.ctex"]
 
 [params]
 

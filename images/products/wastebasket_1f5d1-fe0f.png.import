@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh4gotw50hou6"
-path="res://.godot/imported/face_2.png-cbcd2b15e5bdaf829224a6b627e6790a.ctex"
+uid="uid://h4jywlv57bwn"
+path="res://.godot/imported/wastebasket_1f5d1-fe0f.png-7e7931c10e04de43ac2623864a38dd41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/bunny/face_2.png"
-dest_files=["res://.godot/imported/face_2.png-cbcd2b15e5bdaf829224a6b627e6790a.ctex"]
+source_file="res://images/products/wastebasket_1f5d1-fe0f.png"
+dest_files=["res://.godot/imported/wastebasket_1f5d1-fe0f.png-7e7931c10e04de43ac2623864a38dd41.ctex"]
 
 [params]
 
