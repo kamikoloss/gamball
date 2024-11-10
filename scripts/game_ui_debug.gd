@@ -1,6 +1,7 @@
 class_name GameUiDebug
 extends Control
 
+
 @export_category("Nodes")
 @export var _game: Game
 @export var _billards: Billiards
@@ -8,6 +9,7 @@ extends Control
 @export var _stack: Stack
 @export var _game_ui: GameUi
 @export var _bunny: Bunny
+
 @export_category("Debug")
 @export var _debug_button: Button
 @export var _debug_window: Control
@@ -24,9 +26,10 @@ extends Control
 @export var _pachinko_start_lottery_button: Button
 @export var _pachinko_start_rush_button: Button
 @export var _pachinko_finish_rush_button: Button
-@export_category("Window")
+@export_category("Tax")
 @export var _show_tax_button: Button
 @export var _hide_tax_button: Button
+@export_category("Shop")
 @export var _show_shop_button: Button
 @export var _hide_shop_button: Button
 @export_category("People")

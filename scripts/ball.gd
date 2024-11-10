@@ -6,6 +6,9 @@ extends RigidBody2D
 enum Rarity { Common, Rare, Epic, Legendary }
 
 
+# 特殊なボール番号
+const BALL_LEVEL_EMPTY_SLOT = -1
+
 # ボールの色の定義 { <Level>: Color } 
 const BALL_COLORS = {
 	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.5), # 空きスロット用
@@ -14,15 +17,14 @@ const BALL_COLORS = {
 	8: Color(0.1, 0.1, 0.1), 9: Color.GOLD, 10: Color.LIGHT_BLUE, 11: Color.LIGHT_CORAL,
 	12: Color.LIGHT_SALMON, 13: Color.LIGHT_SALMON, 14: Color.LIGHT_GREEN, 15: Color.ROSY_BROWN,
 }
-const BALL_LEVEL_EMPTY_SLOT = -1
 
 
 @export var level: int = 0 # ボール番号
 @export var is_display: bool = false # 展示用かどうか
 
-@export var _main_texture: TextureRect # ボールの色
-@export var _inner_texture: TextureRect # ボール番号の背景
-@export var _mask_texture: TextureRect # ボールが有効化したら取れる色
+@export var _main_texture: TextureRect # ボールの色部分
+@export var _inner_texture: TextureRect # ボール番号の背景部分
+@export var _mask_texture: TextureRect # ボールが有効化されるまで全体を覆う部分
 @export var _level_label: Label
 @export var _hole_area: Area2D
 
