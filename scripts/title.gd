@@ -2,19 +2,28 @@ class_name Title
 extends Node
 
 
-enum TweenType { Bunny }
+signal play_button_pressed
+signal options_button_pressed
+signal information_button_pressed
+signal exit_button_pressed
 
 
-const BUNNY_MOVE_DURATION = 4.0
-const BUNNY_POSITION_FROM = Vector2(400, -480)
-const BUNNY_POSITION_TO = Vector2(400, -240)
+enum TweenType { Front, Button, Bunny }
 
 
-@export var _play_button: Control
+const FRONT_HIDE_DURATION: float = 2.0
+const BUTTON_MOVE_DURATION: float = 0.5
+const BUTTON_MOVE_DIFF: Vector2 = Vector2(640, 0)
+const BUNNY_MOVE_DURATION: float = 4.0
+const BUNNY_MOVE_DIFF: Vector2 = Vector2(0, 320)
+
+
+@export var _play_button: TextureButton
 @export var _options_button: TextureButton
 @export var _information_button: TextureButton
 @export var _exit_button: TextureButton
 
+@export var _front_texture: TextureRect
 @export var _bunny_texture: TextureRect
 
 
@@ -22,18 +31,48 @@ var _tweens: Dictionary = {} # { TweenType: Tween, ... }
 
 
 func _ready() -> void:
+	_play_button.pressed.connect(func(): play_button_pressed.emit())
+	_options_button.pressed.connect(func(): options_button_pressed.emit())
+	_information_button.pressed.connect(func(): information_button_pressed.emit())
+	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
+
+	_front_texture.visible = true
+	_hide_front()
+	_show_buttons()
 	_show_bunny()
 
 
+func _hide_front() -> void:
+	_front_texture.modulate = Color.WHITE
+
+	var tween = _get_tween(TweenType.Front)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_front_texture, "modulate", Color.TRANSPARENT, FRONT_HIDE_DURATION)
+
+
+func _show_buttons() -> void:
+	_play_button.position = _play_button.position - BUTTON_MOVE_DIFF
+	_options_button.position = _options_button.position - BUTTON_MOVE_DIFF
+	_information_button.position = _information_button.position - BUTTON_MOVE_DIFF
+	_exit_button.position = _exit_button.position - BUTTON_MOVE_DIFF
+
+	var tween = _get_tween(TweenType.Button)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_play_button, "position", _play_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
+	tween.tween_property(_options_button, "position", _options_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
+	tween.tween_property(_information_button, "position", _information_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
+	tween.tween_property(_exit_button, "position", _exit_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
+
+
 func _show_bunny() -> void:
-	_bunny_texture.self_modulate = Color.TRANSPARENT
-	_bunny_texture.position = BUNNY_POSITION_FROM
+	_bunny_texture.modulate = Color.TRANSPARENT
+	_bunny_texture.position = _bunny_texture.position - BUNNY_MOVE_DIFF
 
 	var tween = _get_tween(TweenType.Bunny)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.set_parallel(true)
-	tween.tween_property(_bunny_texture, "self_modulate", Color.WHITE, BUNNY_MOVE_DURATION)
-	tween.tween_property(_bunny_texture, "position", BUNNY_POSITION_TO, BUNNY_MOVE_DURATION)
+	tween.tween_property(_bunny_texture, "modulate", Color.WHITE, BUNNY_MOVE_DURATION)
+	tween.tween_property(_bunny_texture, "position", _bunny_texture.position + BUNNY_MOVE_DIFF, BUNNY_MOVE_DURATION)
 
 
 func _get_tween(type: TweenType) -> Tween:

@@ -297,6 +297,7 @@ offset_bottom = -40.0
 _parts_1_textures = Array[Texture]([ExtResource("6_247yj"), ExtResource("7_gxcoo")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+visible = false
 
 [node name="ForGame" type="Control" parent="UI/CanvasLayer"]
 layout_mode = 3
