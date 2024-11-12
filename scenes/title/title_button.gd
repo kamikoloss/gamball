@@ -14,7 +14,9 @@ enum TweenType { Hover }
 
 
 var _size_x: float = 0
-var _tweens: Dictionary = {} # { TweenType: Tween, ... } 
+
+# { TweenType: Tween, ... } 
+var _tweens: Dictionary = {}
 
 
 func _ready() -> void:

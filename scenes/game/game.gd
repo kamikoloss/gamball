@@ -1,5 +1,5 @@
 class_name Game
-extends Node
+extends Node2D
 # TODO: Ball の処理を切り分ける
 
 
@@ -30,17 +30,19 @@ const TAX_LIST = [
 ]
 
 
-# PackedScene
+# Scenes
 @export var _ball_scene: PackedScene
 
-# Node
+# Nodes
 @export var _billiards: Billiards
 @export var _billiards_board: Area2D
 @export var _pachinko: Pachinko
 @export var _stack: Stack
-@export var _balls: Node2D # Ball の親
+@export var _balls_parent: Node2D
+
+# UI
 @export var _game_ui: GameUi
-@export var _products: Control # Product の親
+@export var _products_parent: Control
 @export var _bunny: Bunny
 
 
@@ -114,7 +116,7 @@ func _ready() -> void:
 		if node is Hole:
 			node.ball_entered.connect(_on_hole_ball_entered)
 	# Signal (Product)
-	for node in _products.get_children():
+	for node in _products_parent.get_children():
 		if node is Product:
 			node.icon_pressed.connect(_on_product_icon_pressed)
 
@@ -221,7 +223,7 @@ func _on_info_button_pressed() -> void:
 
 # Ball が Hole に落ちたときの処理
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
-	#print("[Main] ball (%s) is entered to hole. (%s)" % [ball.level, hole.hole_type])
+	#print("[Main] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
 		Hole.HoleType.Billiards:
 			# Ball が有効化されていない場合: 何もしない (Ball は消失する)
@@ -333,7 +335,7 @@ func _create_new_ball(level: int = 0, is_active = true) -> Ball:
 	var ball: Ball = _ball_scene.instantiate()
 	ball.level = level
 	ball.is_active = is_active
-	_balls.add_child(ball)
+	_balls_parent.add_child(ball)
 	return ball
 
 
@@ -438,7 +440,7 @@ func _start_tax_count_down() -> void:
 # Product に MONEY を伝達する
 # TODO: Product ホバー時に値段もらってそこで比較する
 func _set_money_to_products() -> void:
-	for node in _products.get_children():
+	for node in _products_parent.get_children():
 		if node is Product:
 			node.main_money = money
 

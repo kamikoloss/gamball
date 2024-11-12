@@ -64,6 +64,7 @@ texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
 [node name="Mask" type="TextureRect" parent="."]
+visible = false
 self_modulate = Color(0, 1, 1, 1)
 anchors_preset = 8
 anchor_left = 0.5

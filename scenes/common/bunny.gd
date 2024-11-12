@@ -1,6 +1,5 @@
 class_name Bunny
 extends Control
-
 # TODO: 表情を指定して変更する
 # TODO: 表情ポーズセットを指定して一括変更する
 
@@ -8,10 +7,14 @@ extends Control
 enum TweenType { Pose, Dialogue }
 
 
-const POSE_CHANGE_DURATION = 0.0 # A/B のフェードの秒数
-const POSE_MOVE_DURATION_UP = 0.1 # 跳ねるときの上昇時の秒数
-const POSE_MOVE_DURATION_DOWN = 0.3 # 跳ねるときの下降時の秒数
-const POSE_MOVE_POSITION_DIFF = Vector2(0, -20) # どれぐらい跳ねるか
+# A/B のフェードの秒数
+const POSE_CHANGE_DURATION = 0.0
+# 跳ねるときの上昇時の秒数
+const POSE_MOVE_DURATION_UP = 0.1
+# 跳ねるときの下降時の秒数
+const POSE_MOVE_DURATION_DOWN = 0.3
+# どれぐらい跳ねるか
+const POSE_MOVE_POSITION_DIFF = Vector2(0, -20)
 
 
 @export var _human: Control
@@ -42,11 +45,15 @@ const POSE_MOVE_POSITION_DIFF = Vector2(0, -20) # どれぐらい跳ねるか
 @export var _parts_4_textures: Array[Texture]
 
 
-var _is_human_pose_a = true # 現在どちらのポーズ表示を使用しているか 交互に切り替える
-var _human_move_position_from: Vector2 # 跳ねるときの初期位置
-var _human_move_position_to: Vector2 # 跳ねるときの頂点位置
+# 現在どちらのポーズ表示を使用しているか 交互に切り替える
+var _is_human_pose_a = true
 
-var _tweens: Dictionary = {} # { TweenType: Tween, ... } 
+# 跳ねるときの 初期位置/頂点位置
+var _human_move_position_from: Vector2
+var _human_move_position_to: Vector2
+
+# { TweenType: Tween, ... } 
+var _tweens: Dictionary = {}
 
 
 func _ready() -> void:
@@ -153,7 +160,7 @@ func _on_touch_button_pressed() -> void:
 
 
 func _refresh_textures(parts_index_list: Array[int]) -> void:
-	#print("[Bunny] _set_textures(%s)" % [parts_index_list])
+	#print("[Bunny] _refresh_textures(parts_index_list: %s)" % [parts_index_list])
 	var pose_parts_list = []
 	if _is_human_pose_a:
 		pose_parts_list = [_pose_a_parts_1, _pose_a_parts_2, _pose_a_parts_3, _pose_a_parts_4]

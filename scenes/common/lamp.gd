@@ -40,7 +40,7 @@ func disable() -> void:
 
 # ランプの 点灯色/消灯色 を設定する
 func set_light_colors(on_color: LightColor, off_color: LightColor) -> void:
-	#print("[Lamp] set_light_colors on/off = %s/%s" % [on_color, off_color])
+	#print("[Lamp] set_light_colors on/off: %s/%s" % [on_color, off_color])
 	_on_color = on_color
 	_off_color = off_color
 

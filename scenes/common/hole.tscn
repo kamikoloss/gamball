@@ -13,9 +13,9 @@ scale = Vector2(2, 2)
 script = ExtResource("1_226au")
 _label = NodePath("Label")
 _gravity_area = NodePath("Gravity")
-_gravity_texture = NodePath("Gravity2")
+_gravity_texture = NodePath("TextureRect2")
 
-[node name="Gravity2" type="TextureRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.12549)
 anchors_preset = 8
 anchor_left = 0.5
@@ -50,12 +50,12 @@ texture = ExtResource("1_3kxer")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="."]
-offset_left = -80.0
+offset_left = -40.0
 offset_top = -40.0
-offset_right = 80.0
+offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.125, 0.125)
-pivot_offset = Vector2(80, 40)
+pivot_offset = Vector2(40, 40)
 theme_override_fonts/font = ExtResource("3_l76vn")
 theme_override_font_sizes/font_size = 64
 text = "x9"

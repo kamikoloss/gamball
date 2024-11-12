@@ -157,6 +157,7 @@ text = "サンプルテキストサンプ
 autowrap_mode = 1
 
 [node name="Touch" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = -240.0
 offset_top = 40.0
 offset_right = 240.0

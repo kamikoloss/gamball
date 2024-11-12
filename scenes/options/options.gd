@@ -11,12 +11,7 @@ extends Control
 
 
 func _ready() -> void:
-	# 初期化
-	# TODO: ConfigManager でセーブデータを参照する
-	#_on_config_audio_slider_changed(AudioManager.BusType.Master, 8)
-	_on_audio_slider_changed(AudioManager.BusType.Master, 0)
-	_on_audio_slider_changed(AudioManager.BusType.Bgm, 8)
-	_on_audio_slider_changed(AudioManager.BusType.Se, 8)
+	# TODO: SaveManager で設定を読み込む
 
 	# Signal
 	_audio_master_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.Master, v))
@@ -24,13 +19,13 @@ func _ready() -> void:
 	_audio_se_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.Se, v))
 
 
-func _on_audio_slider_changed(type: AudioManager.BusType, volume_level: int) -> void:
-	print("[MainUi] _on_config_audio_slider_changed(type: %s, volume_level: %s)" % [type, volume_level])
-	AudioManager.set_volume(type, volume_level)
-	_refresh_config_audio_slider(type, volume_level)
+func _on_audio_slider_changed(bus_type: AudioManager.BusType, volume_level: int) -> void:
+	#print("[Options] _on_audio_slider_changed(bus_type: %s, volume_level: %s)" % [bus_type, volume_level])
+	AudioManager.set_volume(bus_type, volume_level)
+	_refresh_config_audio_slider(bus_type, volume_level)
 
-func _refresh_config_audio_slider(type: AudioManager.BusType, volume_level: int) -> void:
-	match type:
+func _refresh_config_audio_slider(bus_type: AudioManager.BusType, volume_level: int) -> void:
+	match bus_type:
 		AudioManager.BusType.Master:
 			_audio_master_slider.value = volume_level
 			_audio_master_slider_label.text = str(volume_level)

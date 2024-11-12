@@ -14,7 +14,6 @@ extends Control
 @export var _debug_button: Button
 @export var _debug_window: Control
 
-
 # TODO: 動的に生成する
 @export_category("Game")
 @export var _restart_game_button: Button
@@ -78,6 +77,6 @@ func _ready() -> void:
 
 	_show_people_button.pressed.connect(func(): _game_ui.show_people_window())
 	_hide_people_button.pressed.connect(func(): _game_ui.hide_people_window())
-	_refresh_dialogue_button.pressed.connect(func(): _game_ui.refresh_dialogue_label(_sample_dialogue_list.pick_random()))
-	_refresh_dialogue_big_button.pressed.connect(func(): _game_ui.refresh_dialogue_big_label(_sample_dialogue_big_list.pick_random()))
+	_refresh_dialogue_button.pressed.connect(func(): _bunny.refresh_dialogue_label(_sample_dialogue_list.pick_random()))
+	_refresh_dialogue_big_button.pressed.connect(func(): _bunny.refresh_dialogue_big_label(_sample_dialogue_big_list.pick_random()))
 	_shuffle_pose_button.pressed.connect(func(): _bunny.shuffle_pose())

@@ -14,35 +14,43 @@ enum TweenType {
 const WALL_ROTATION_DURATION = 2.0
 
 
-# Node
 @export var _spawn_position_a: Node2D
 @export var _spawn_position_b: Node2D
 @export var _rotating_wall_a: Node2D
 @export var _rotating_wall_b: Node2D
-@export var _rush_holes: Node2D # Hole の親
-@export var _rush_nails: Node2D # Nail の親
+@export var _rush_nails_parent: Node2D
+@export var _rush_holes_parent: Node2D
 
-# UI
-@export var _rush_lamps: Control # Lamp の親
 @export var _rush_label_a: Label
 @export var _rush_label_b: Label
+@export var _rush_lamps_parent: Control
 
 
+# 現在ラッシュ中かどうか
+var _is_rush_now: bool = false
+# 現在抽選中かどうか
+var _is_lottery_now: bool = false
 
-var _is_rush_now: bool = false # 現在ラッシュ中かどうか
-var _is_lottery_now: bool = false # 現在抽選中かどうか
+# ラッシュの抽選数 (通常時のゲーム数)
+var _rush_lottery_count: int = 0
+# ラッシュの継続数
+var _rush_continue_count: int = 0
+# ラッシュで入っている Ball の数
+var _rush_balls_count: int = 0
+# ラッシュで入れられる Ball の最大数
+var _rush_balls_max: int = 10
 
-var _rush_lottery_count: int = 0 # ラッシュの抽選数 (通常時のゲーム数)
-var _rush_continue_count: int = 0 # ラッシュの継続数
-var _rush_balls_count: int = 0 # ラッシュで入っている Ball の数
-var _rush_balls_max: int = 10 # ラッシュで入れられる Ball の最大数
-
-var _rush_probability_bottom: int = 24 # 抽選確率の分母 (ランプの数)
-var _rush_start_probability_top: int = 2 # ラッシュ初当たり抽選確率の分子
-var _rush_continue_probability_top: int = 16 # ラッシュ継続抽選確率の分子
+# 抽選確率の分母 (ランプの数)
+var _rush_probability_bottom: int = 24
+# ラッシュ初当たり抽選確率の分子
+var _rush_start_probability_top: int = 2
+# ラッシュ継続抽選確率の分子
+var _rush_continue_probability_top: int = 16
+# 最後に抽選した分子 (ランプの位置)
 var _rush_last_hit_number: int = -1
 
-var _tweens: Dictionary = {} # { TweenType: Tween, ... } 
+# { TweenType: Tween, ... } 
+var _tweens: Dictionary = {}
 
 
 func _ready() -> void:
@@ -55,7 +63,7 @@ func _ready() -> void:
 	_start_rotating_wall()
 
 	# Signal (Hole)
-	for node in _rush_holes.get_children():
+	for node in _rush_holes_parent.get_children():
 		if node is Hole:
 			node.ball_entered.connect(_on_rush_hole_ball_entered)
 
@@ -96,7 +104,7 @@ func start_lottery(force: bool = false) -> void:
 	var index_list: Array[int] = _pick_lamp_index_list()
 	var hit = index_list[2] % _rush_probability_bottom
 	var top = _rush_continue_probability_top if _is_rush_now else _rush_start_probability_top
-	print("[Pachinko] start_lottery hit/top/bottom = %s/%s/%s" % [hit, top, _rush_probability_bottom])
+	print("[Pachinko] start_lottery hit/top/bottom: %s/%s/%s" % [hit, top, _rush_probability_bottom])
 
 	# 初回: _pick_lamp_index_list() の初期位置をそのまま使う
 	if _rush_last_hit_number < 0:
@@ -168,19 +176,19 @@ func _finish_rush(force: bool = false) -> void:
 
 # ラッシュ装置を有効化する
 func _enable_rush_devices() -> void:
-	for node in _rush_holes.get_children():
+	for node in _rush_holes_parent.get_children():
 		if node is Hole:
 			node.enable()
-	for node in _rush_nails.get_children():
+	for node in _rush_nails_parent.get_children():
 		if node is Nail:
 			node.enable()
 
 # ラッシュ装置を無効化する
 func _disable_rush_devices() -> void:
-	for node in _rush_holes.get_children():
+	for node in _rush_holes_parent.get_children():
 		if node is Hole:
 			node.disable()
-	for node in _rush_nails.get_children():
+	for node in _rush_nails_parent.get_children():
 		if node is Nail:
 			node.disable()
 
@@ -195,7 +203,7 @@ func _pick_lamp_index_list() -> Array[int]:
 	var index_to_2 = index_to_1 + size * randi_range(0, 1) + randi_range(0, size) # size * 1-2
 
 	var index_list: Array[int] = [index_from, index_to_1, index_to_2]
-	print("[Pachinko] _pick_lamp_index_list %s" % [index_list])
+	print("[Pachinko] _pick_lamp_index_list() index_list: %s" % [index_list])
 	return index_list
 
 
@@ -251,7 +259,7 @@ func _stop_lamp_se_loop() -> void:
 func _refresh_rush_lamps(is_rush: bool) -> void:
 	var count = 0
 	var top = _rush_continue_probability_top if is_rush else _rush_start_probability_top
-	for node in _rush_lamps.get_children():
+	for node in _rush_lamps_parent.get_children():
 		if node is Lamp:
 			if count < top:
 				node.set_light_colors(Lamp.LightColor.GREEN_ON, Lamp.LightColor.GREEN_OFF)
@@ -263,7 +271,7 @@ func _refresh_rush_lamps(is_rush: bool) -> void:
 # 特定のランプを点灯させる
 func _enable_rush_lamp(index: int) -> void:
 	var count = 0
-	for node in _rush_lamps.get_children():
+	for node in _rush_lamps_parent.get_children():
 		if node is Lamp:
 			if count == index:
 				node.enable()
@@ -273,7 +281,7 @@ func _enable_rush_lamp(index: int) -> void:
 
 # すべてのランプを消灯する
 func _disable_rush_lamps() -> void:
-	for node in _rush_lamps.get_children():
+	for node in _rush_lamps_parent.get_children():
 		if node is Lamp:
 			node.disable()
 

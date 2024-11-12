@@ -20,7 +20,7 @@ func spawn_ball(ball: Ball) -> void:
 
 
 # spawn_ball() をなかったことにする
-# そもそもなかったことにする Ball が存在しなかった場合は false を返す
+# そもそもなかったことにする Ball が存在しなかった場合: false を返す
 func rollback_spawn_ball() -> bool:
 	if _current_ball == null:
 		return false

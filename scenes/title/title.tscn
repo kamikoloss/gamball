@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://pw4mjbvw1omu" path="res://images/people/bunny_sprite_2_2x.png" id="5_avggx"]
 [ext_resource type="PackedScene" uid="uid://crm5ab5e83gqf" path="res://scenes/title/title_button.tscn" id="6_43611"]
 
-[node name="Title" type="Node" node_paths=PackedStringArray("_play_button", "_options_button", "_information_button", "_exit_button", "_bunny_texture")]
+[node name="Title" type="Control" node_paths=PackedStringArray("_play_button", "_options_button", "_information_button", "_exit_button", "_bunny_texture")]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_nkca5")
 _play_button = NodePath("Play")
 _options_button = NodePath("Information")
@@ -49,10 +51,9 @@ texture = ExtResource("5_avggx")
 
 [node name="Play" parent="." instance=ExtResource("6_43611")]
 offset_left = 40.0
-offset_top = 440.0
-offset_right = 253.0
-offset_bottom = 520.0
-scale = Vector2(1.5, 1.5)
+offset_top = 480.0
+offset_right = 360.0
+offset_bottom = 560.0
 _label_text = "PLAY"
 
 [node name="Information" parent="." instance=ExtResource("6_43611")]

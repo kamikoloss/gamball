@@ -11,7 +11,7 @@ const CURTAIN_FADE_DURATION: float = 2.0
 @export var _curtain: Control
 
 
-var _tweens: Dictionary = {} # { TweenType: Tween, ... } 
+var _tweens: Dictionary = {}
 
 
 func _ready() -> void:

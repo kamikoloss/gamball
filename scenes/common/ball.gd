@@ -3,14 +3,14 @@ extends RigidBody2D
 
 
 # ボールのレア度
-enum Rarity { Common, Rare, Epic, Legendary }
+enum Rarity { Common, Uncommon, Rare, Epic, Legendary }
 
 
 # 残像の頂点数
 const TRAIL_MAX_LENGTH = 16
-# 特殊なボール番号
-const BALL_LEVEL_EMPTY_SLOT = -1
 
+# 特殊なボール番号
+const BALL_LEVEL_EMPTY_SLOT = -1 
 # ボールの色の定義 { <Level>: Color } 
 const BALL_COLORS = {
 	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.5), # 空きスロット用
@@ -21,19 +21,28 @@ const BALL_COLORS = {
 }
 
 
-@export var level: int = 0 # ボール番号
-@export var is_display: bool = false # 展示用かどうか
+# ボール番号
+@export var level: int = 0
+# 展示用かどうか
+@export var is_display: bool = false
 
-@export var _main_texture: TextureRect # ボールの色部分
-@export var _inner_texture: TextureRect # ボール番号の背景部分
-@export var _mask_texture: TextureRect # ボールが有効化されるまで全体を覆う部分
+
+# ボールの色部分
+@export var _main_texture: TextureRect
+# ボール番号の背景部分
+@export var _inner_texture: TextureRect
+# ボールが有効化されるまで全体を覆う部分
+@export var _mask_texture: TextureRect
+
 @export var _level_label: Label
 @export var _hole_area: Area2D
 @export var _trail_line: Line2D
 
 
-var rarity: Rarity = Rarity.Common # ボールのレア度
-var is_active = true # 他のボールにぶつかって有効化されたかどうか
+# ボールのレア度
+var rarity: Rarity = Rarity.Common
+# 他のボールにぶつかって有効化されたかどうか
+var is_active = true 
 
 
 var _trail_points: Array = []

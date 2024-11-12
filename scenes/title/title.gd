@@ -1,5 +1,5 @@
 class_name Title
-extends Node
+extends Control
 
 
 signal play_button_pressed
@@ -25,7 +25,7 @@ const BUNNY_MOVE_DIFF: Vector2 = Vector2(0, 320)
 @export var _bunny_texture: TextureRect
 
 
-var _tweens: Dictionary = {} # { TweenType: Tween, ... } 
+var _tweens: Dictionary = {}
 
 
 func _ready() -> void:

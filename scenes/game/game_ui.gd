@@ -56,7 +56,7 @@ const WINDOW_MOVE_DURATION: float = 1.0
 @export var _people_window: Control
 
 
-var _tweens: Dictionary = {} # { TweenType: Tween, ... } 
+var _tweens: Dictionary = {}
 
 
 func _ready() -> void:

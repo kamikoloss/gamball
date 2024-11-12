@@ -37,18 +37,19 @@ func _ready() -> void:
 	_bgm_player.finished.connect(func(): _bgm_player.play())
 
 
-func set_volume(type: BusType, volume_level: int) -> void:
+# 0: -40db, 5: -20db, 10: 0db, 
+func set_volume(bus_type: BusType, volume_level: int) -> void:
+	print("[AudioManager] set_volume(bus_type: %s, volume_level: %s)" % [bus_type, volume_level])
 	var volume_clamped = clampi(volume_level, 0, 10)
-	var volume_db = -40 + volume_clamped * 4 # 0: -40db, 5: -20db, 10: 0db, 
-	AudioServer.set_bus_volume_db(type, volume_db)
-	print("[AudioManager] set_volume() Bus: %s, db: %s" % [type, AudioServer.get_bus_volume_db(type)])
+	var volume_db = -40 + volume_clamped * 4
+	AudioServer.set_bus_volume_db(bus_type, volume_db)
 
 
-func play_se(type: SeType) -> void:
+func play_se(bus_type: SeType) -> void:
 	var se_player: AudioStreamPlayer
 	var se_audio: AudioStream
 
-	match type:
+	match bus_type:
 		SeType.BilliardsShoot:
 			se_player = _se_player_1
 			se_audio = _se_BilliardsShoot

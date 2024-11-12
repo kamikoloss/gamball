@@ -50,16 +50,16 @@ colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ro4wp"]
 gradient = SubResource("Gradient_rja4h")
 
-[node name="Game" type="Node" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls", "_game_ui", "_products", "_bunny")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls_parent", "_game_ui", "_products_parent", "_bunny")]
 script = ExtResource("1_w7c5l")
 _ball_scene = ExtResource("2_ma10n")
 _billiards = NodePath("Billiards")
 _billiards_board = NodePath("Billiards/Board")
 _pachinko = NodePath("Pachinko")
 _stack = NodePath("Stack")
-_balls = NodePath("Balls")
+_balls_parent = NodePath("Balls")
 _game_ui = NodePath("UI")
-_products = NodePath("UI/Shop/Products")
+_products_parent = NodePath("UI/Shop/Products")
 _bunny = NodePath("UI/People/Bunny")
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_position_a", "_spawn_extra_position_b", "_spawn_extra_position_c", "_spawn_extra_position_d")]
@@ -437,17 +437,17 @@ hole_type = 0
 position = Vector2(500, 660)
 hole_type = 0
 
-[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_rotating_wall_a", "_rotating_wall_b", "_rush_holes", "_rush_nails", "_rush_lamps", "_rush_label_a", "_rush_label_b")]
+[node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_rotating_wall_a", "_rotating_wall_b", "_rush_nails_parent", "_rush_holes_parent", "_rush_label_a", "_rush_label_b", "_rush_lamps_parent")]
 script = ExtResource("8_ud1qg")
 _spawn_position_a = NodePath("Points/SpawnHoleA")
 _spawn_position_b = NodePath("Points/SpawnHoleB")
 _rotating_wall_a = NodePath("Walls/RotatingWallA")
 _rotating_wall_b = NodePath("Walls/RotatingWallB")
-_rush_holes = NodePath("Rush/Holes")
-_rush_nails = NodePath("Rush/Nails")
-_rush_lamps = NodePath("Rush/Lamps")
+_rush_nails_parent = NodePath("Rush/Nails")
+_rush_holes_parent = NodePath("Rush/Holes")
 _rush_label_a = NodePath("Rush/Display/RushA")
 _rush_label_b = NodePath("Rush/Display/RushB")
+_rush_lamps_parent = NodePath("Rush/Lamps")
 
 [node name="Board" type="Area2D" parent="Pachinko"]
 position = Vector2(280, 360)
@@ -1093,148 +1093,141 @@ vertical_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Lamp19" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 4.71238
-pivot_offset = Vector2(-40, 0)
-
-[node name="Lamp20" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 4.97418
-pivot_offset = Vector2(-40, 0)
-
-[node name="Lamp21" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 5.23598
-pivot_offset = Vector2(-40, 0)
-
-[node name="Lamp22" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 5.49778
-pivot_offset = Vector2(-40, 0)
-
-[node name="Lamp23" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 5.75958
-pivot_offset = Vector2(-40, 0)
-
-[node name="Lamp24" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 6.02138
-pivot_offset = Vector2(-40, 0)
-
 [node name="Lamp" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-pivot_offset = Vector2(-40, 0)
+offset_top = -25.0
+offset_bottom = -25.0
 
 [node name="Lamp2" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 0.261799
-pivot_offset = Vector2(-40, 0)
+offset_left = 10.0
+offset_top = -25.0
+offset_right = 10.0
+offset_bottom = -25.0
 
 [node name="Lamp3" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 0.523598
-pivot_offset = Vector2(-40, 0)
+offset_left = 20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = -25.0
 
 [node name="Lamp4" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 0.785397
-pivot_offset = Vector2(-40, 0)
+offset_left = 30.0
+offset_top = -25.0
+offset_right = 30.0
+offset_bottom = -25.0
 
 [node name="Lamp5" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
+offset_top = -20.0
 offset_right = 40.0
-rotation = 1.0472
-pivot_offset = Vector2(-40, 0)
+offset_bottom = -20.0
 
 [node name="Lamp6" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 1.309
-pivot_offset = Vector2(-40, 0)
+offset_left = 45.0
+offset_top = -10.0
+offset_right = 45.0
+offset_bottom = -10.0
 
 [node name="Lamp7" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 1.57079
-pivot_offset = Vector2(-40, 0)
+offset_left = 50.0
+offset_right = 50.0
 
 [node name="Lamp8" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 1.83259
-pivot_offset = Vector2(-40, 0)
+offset_left = 45.0
+offset_top = 10.0
+offset_right = 45.0
+offset_bottom = 10.0
 
 [node name="Lamp9" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 40.0
+offset_top = 20.0
 offset_right = 40.0
-rotation = 2.09439
-pivot_offset = Vector2(-40, 0)
+offset_bottom = 20.0
 
 [node name="Lamp10" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 2.35619
-pivot_offset = Vector2(-40, 0)
+offset_left = 30.0
+offset_top = 25.0
+offset_right = 30.0
+offset_bottom = 25.0
 
 [node name="Lamp11" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 2.61799
-pivot_offset = Vector2(-40, 0)
+offset_left = 20.0
+offset_top = 25.0
+offset_right = 20.0
+offset_bottom = 25.0
 
 [node name="Lamp12" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 2.87979
-pivot_offset = Vector2(-40, 0)
+offset_left = 10.0
+offset_top = 25.0
+offset_right = 10.0
+offset_bottom = 25.0
 
 [node name="Lamp13" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 3.14159
-pivot_offset = Vector2(-40, 0)
+offset_top = 25.0
+offset_bottom = 25.0
 
 [node name="Lamp14" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 3.40339
-pivot_offset = Vector2(-40, 0)
+offset_left = -10.0
+offset_top = 25.0
+offset_right = -10.0
+offset_bottom = 25.0
 
 [node name="Lamp15" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 3.66519
-pivot_offset = Vector2(-40, 0)
+offset_left = -20.0
+offset_top = 25.0
+offset_right = -20.0
+offset_bottom = 25.0
 
 [node name="Lamp16" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 3.92699
-pivot_offset = Vector2(-40, 0)
+offset_left = -30.0
+offset_top = 25.0
+offset_right = -30.0
+offset_bottom = 25.0
 
 [node name="Lamp17" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 4.18878
-pivot_offset = Vector2(-40, 0)
+offset_left = -40.0
+offset_top = 20.0
+offset_right = -40.0
+offset_bottom = 20.0
 
 [node name="Lamp18" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_right = 40.0
-rotation = 4.45058
-pivot_offset = Vector2(-40, 0)
+offset_left = -45.0
+offset_top = 10.0
+offset_right = -45.0
+offset_bottom = 10.0
+
+[node name="Lamp19" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -50.0
+offset_right = -50.0
+
+[node name="Lamp20" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -45.0
+offset_top = -10.0
+offset_right = -45.0
+offset_bottom = -10.0
+
+[node name="Lamp21" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = -40.0
+offset_bottom = -20.0
+
+[node name="Lamp22" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -30.0
+offset_top = -25.0
+offset_right = -30.0
+offset_bottom = -25.0
+
+[node name="Lamp23" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -20.0
+offset_top = -25.0
+offset_right = -20.0
+offset_bottom = -25.0
+
+[node name="Lamp24" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -10.0
+offset_top = -25.0
+offset_right = -10.0
+offset_bottom = -25.0
 
 [node name="Nails" type="Node2D" parent="Pachinko/Rush"]
 
