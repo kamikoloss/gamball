@@ -17,12 +17,11 @@ const BUNNY_MOVE_DURATION: float = 4.0
 const BUNNY_MOVE_DIFF: Vector2 = Vector2(0, 320)
 
 
-@export var _play_button: TextureButton
-@export var _options_button: TextureButton
-@export var _information_button: TextureButton
-@export var _exit_button: TextureButton
+@export var _play_button: TitleButton
+@export var _options_button: TitleButton
+@export var _information_button: TitleButton
+@export var _exit_button: TitleButton
 
-@export var _front_texture: TextureRect
 @export var _bunny_texture: TextureRect
 
 

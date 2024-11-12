@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://msfipkv05urf"]
 
-[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_kq5fi"]
-[ext_resource type="AudioStream" uid="uid://chjiw5n87xob8" path="res://sounds/se/8bit選択1.mp3" id="2_1u0wg"]
-[ext_resource type="AudioStream" uid="uid://dwpd06xrun66g" path="res://sounds/se/8bitショット1.mp3" id="2_w0oeq"]
-[ext_resource type="AudioStream" uid="uid://cu3nrsxejvjhl" path="res://sounds/se/8bit選択3.mp3" id="3_dtax8"]
-[ext_resource type="AudioStream" uid="uid://cdggie8i5wgty" path="res://sounds/se/8bit失敗3.mp3" id="5_0vtw6"]
-[ext_resource type="AudioStream" uid="uid://d37mt8wunc5ae" path="res://sounds/se/8bit勝利1.mp3" id="5_ljrli"]
-[ext_resource type="AudioStream" uid="uid://dav3von4ee3o3" path="res://sounds/bgm/Springin_ラジオ_メイン.mp3" id="7_ghso5"]
+[ext_resource type="Script" path="res://scenes/singletons/audio_manager.gd" id="1_kq5fi"]
+[ext_resource type="AudioStream" uid="uid://chjiw5n87xob8" path="res://audio/se/8bit選択1.mp3" id="2_1u0wg"]
+[ext_resource type="AudioStream" uid="uid://dwpd06xrun66g" path="res://audio/se/8bitショット1.mp3" id="2_w0oeq"]
+[ext_resource type="AudioStream" uid="uid://cu3nrsxejvjhl" path="res://audio/se/8bit選択3.mp3" id="3_dtax8"]
+[ext_resource type="AudioStream" uid="uid://cdggie8i5wgty" path="res://audio/se/8bit失敗3.mp3" id="5_0vtw6"]
+[ext_resource type="AudioStream" uid="uid://d37mt8wunc5ae" path="res://audio/se/8bit勝利1.mp3" id="5_ljrli"]
+[ext_resource type="AudioStream" uid="uid://dav3von4ee3o3" path="res://audio/bgm/Springin_ラジオ_メイン.mp3" id="7_ghso5"]
 
 [node name="AudioManager" type="Node" node_paths=PackedStringArray("_bgm_player", "_se_player_1", "_se_player_2", "_se_player_3", "_se_player_4")]
 script = ExtResource("1_kq5fi")

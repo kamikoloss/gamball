@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d4j3v3c068tcf"]
 
-[ext_resource type="Script" path="res://scripts/lamp.gd" id="1_iuhpp"]
-[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/base_circle.png" id="2_vg38g"]
+[ext_resource type="Script" path="res://scenes/common/lamp.gd" id="1_iuhpp"]
+[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="2_vg38g"]
 
 [node name="Lamp" type="Control" node_paths=PackedStringArray("_texture")]
 layout_mode = 3

@@ -1,5 +1,5 @@
-class_name MainUi
-extends Control
+class_name Main
+extends Node
 
 
 enum TweenType { Curtain }

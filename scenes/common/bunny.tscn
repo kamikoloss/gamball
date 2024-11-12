@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://bjd632ntwegwj"]
 
-[ext_resource type="Script" path="res://scripts/bunny.gd" id="1_lr22c"]
+[ext_resource type="Script" path="res://scenes/common/bunny.gd" id="1_lr22c"]
 [ext_resource type="Texture2D" uid="uid://cuwiiq1yrw76c" path="res://images/people/bunny/face_1.png" id="2_kbxbx"]
 [ext_resource type="Texture2D" uid="uid://cscmqneywp778" path="res://images/people/bunny/hand_left_1.png" id="5_qlree"]
-[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="6_ex8u5"]
-[ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/base_triangle.png" id="7_k78g3"]
+[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="6_ex8u5"]
+[ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="7_k78g3"]
 [ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/people/bunny/hand_right_1.png" id="7_subrs"]
 [ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="8_or1ej"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/people/bunny/base.png" id="9_yblo7"]

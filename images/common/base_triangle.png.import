@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dt3h4qyqg6tp6"
-path="res://.godot/imported/base_triangle.png-807101415ff6c2da145406c62e734af9.ctex"
+path="res://.godot/imported/base_triangle.png-8349de3ac40ea9fbf5ebb673c188fa42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/base_triangle.png"
-dest_files=["res://.godot/imported/base_triangle.png-807101415ff6c2da145406c62e734af9.ctex"]
+source_file="res://images/common/base_triangle.png"
+dest_files=["res://.godot/imported/base_triangle.png-8349de3ac40ea9fbf5ebb673c188fa42.ctex"]
 
 [params]
 

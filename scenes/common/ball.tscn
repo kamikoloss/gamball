@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://0yg37qutkxad"]
 
-[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/base_circle.png" id="1_8km44"]
-[ext_resource type="Script" path="res://scripts/ball.gd" id="1_q12tn"]
-[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="4_lk2l2"]
+[ext_resource type="Script" path="res://scenes/common/ball.gd" id="1_rcr8u"]
+[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="2_4bc8b"]
+[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="3_r213a"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nh6hv"]
 bounce = 0.8
@@ -21,7 +21,7 @@ z_index = 2
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
-script = ExtResource("1_q12tn")
+script = ExtResource("1_rcr8u")
 _main_texture = NodePath("Main")
 _inner_texture = NodePath("Inner")
 _mask_texture = NodePath("Mask")
@@ -44,7 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(10, 10)
-texture = ExtResource("1_8km44")
+texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
 [node name="Inner" type="TextureRect" parent="."]
@@ -60,7 +60,7 @@ offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(10, 10)
-texture = ExtResource("1_8km44")
+texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
 [node name="Mask" type="TextureRect" parent="."]
@@ -78,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(10, 10)
-texture = ExtResource("1_8km44")
+texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
 [node name="Level" type="Label" parent="."]
@@ -89,7 +89,7 @@ offset_bottom = 40.0
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(40, 40)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_lk2l2")
+theme_override_fonts/font = ExtResource("3_r213a")
 theme_override_font_sizes/font_size = 64
 text = "99"
 horizontal_alignment = 1

@@ -19,12 +19,12 @@ config/icon="res://images/icon.png"
 
 [audio]
 
-buses/default_bus_layout="res://sounds/default_bus_layout.tres"
+buses/default_bus_layout="res://audio/default_bus_layout.tres"
 
 [autoload]
 
-AudioManager="*res://scenes/audio_manager.tscn"
-CameraManager="*res://scripts/camera_manager.gd"
+AudioManager="*res://scenes/singletons/audio_manager.tscn"
+CameraManager="*res://scenes/singletons/camera_manager.gd"
 
 [display]
 

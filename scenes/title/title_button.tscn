@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://crm5ab5e83gqf"]
 
-[ext_resource type="Script" path="res://scripts/title_button.gd" id="1_0bysg"]
+[ext_resource type="Script" path="res://scenes/title/title_button.gd" id="1_k8gp7"]
 [ext_resource type="FontFile" uid="uid://braqe561majhb" path="res://themes/RedHatDisplayBold.ttf" id="2_8tbsj"]
-[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/base_square.png" id="3_uppqy"]
+[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="3_uppqy"]
 
 [node name="TitleButton" type="TextureButton" node_paths=PackedStringArray("_hover_texture", "_label_1", "_label_2")]
 offset_right = 320.0
@@ -10,7 +10,7 @@ offset_bottom = 80.0
 mouse_default_cursor_shape = 2
 disabled = true
 ignore_texture_size = true
-script = ExtResource("1_0bysg")
+script = ExtResource("1_k8gp7")
 _hover_texture = NodePath("Hover")
 _label_1 = NodePath("Label")
 _label_2 = NodePath("Hover/Label2")
