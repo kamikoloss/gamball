@@ -1487,16 +1487,8 @@ level = 4
 position = Vector2(280, 160)
 level = 5
 
-[node name="StackGlass" type="TextureRect" parent="."]
-self_modulate = Color(0, 0, 0.25098, 0.501961)
-offset_left = 560.0
-offset_top = 360.0
-offset_right = 720.0
-offset_bottom = 680.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
+z_index = 20
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("13_aavli")
@@ -1521,6 +1513,16 @@ _tax_give_up_button = NodePath("Tax/GiveUp")
 _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
+
+[node name="StackGlass" type="TextureRect" parent="UI"]
+self_modulate = Color(0, 0, 0.25098, 0.501961)
+layout_mode = 0
+offset_left = 560.0
+offset_top = 360.0
+offset_right = 720.0
+offset_bottom = 680.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
 
 [node name="Tax" type="Control" parent="UI"]
 visible = false
@@ -2369,6 +2371,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
+z_index = 20
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("16_cuefl")

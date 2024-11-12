@@ -17,7 +17,7 @@ _data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 1, 0]
 point_count = 2
 
 [node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_main_texture", "_inner_texture", "_mask_texture", "_level_label", "_hole_area", "_trail_line")]
-z_index = 2
+z_index = 4
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
@@ -107,6 +107,6 @@ shape = SubResource("CircleShape2D_awq4m")
 
 [node name="Line2D" type="Line2D" parent="."]
 top_level = true
-z_index = 1
+z_index = 2
 width = 30.0
 width_curve = SubResource("Curve_pexpb")
