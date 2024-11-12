@@ -8,11 +8,10 @@ signal information_button_pressed
 signal exit_button_pressed
 
 
-enum TweenType { Front, Button, Bunny }
+enum TweenType { Button, Bunny }
 
 
-const FRONT_HIDE_DURATION: float = 2.0
-const BUTTON_MOVE_DURATION: float = 0.5
+const BUTTON_MOVE_DURATION: float = 0.4
 const BUTTON_MOVE_DIFF: Vector2 = Vector2(640, 0)
 const BUNNY_MOVE_DURATION: float = 4.0
 const BUNNY_MOVE_DIFF: Vector2 = Vector2(0, 320)
@@ -36,18 +35,8 @@ func _ready() -> void:
 	_information_button.pressed.connect(func(): information_button_pressed.emit())
 	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
 
-	_front_texture.visible = true
-	_hide_front()
 	_show_buttons()
 	_show_bunny()
-
-
-func _hide_front() -> void:
-	_front_texture.modulate = Color.WHITE
-
-	var tween = _get_tween(TweenType.Front)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_front_texture, "modulate", Color.TRANSPARENT, FRONT_HIDE_DURATION)
 
 
 func _show_buttons() -> void:
