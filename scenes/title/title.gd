@@ -18,8 +18,8 @@ const BUNNY_MOVE_DIFF: Vector2 = Vector2(0, 320)
 
 
 @export var _play_button: TitleButton
-@export var _options_button: TitleButton
 @export var _information_button: TitleButton
+@export var _options_button: TitleButton
 @export var _exit_button: TitleButton
 
 @export var _bunny_texture: TextureRect
@@ -29,9 +29,9 @@ var _tweens: Dictionary = {}
 
 
 func _ready() -> void:
-	_play_button.pressed.connect(func(): play_button_pressed.emit())
-	_options_button.pressed.connect(func(): options_button_pressed.emit())
+	_play_button.pressed.connect(func():play_button_pressed.emit())
 	_information_button.pressed.connect(func(): information_button_pressed.emit())
+	_options_button.pressed.connect(func(): options_button_pressed.emit())
 	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
 
 	_show_buttons()
@@ -47,8 +47,8 @@ func _show_buttons() -> void:
 	var tween = _get_tween(TweenType.Button)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_play_button, "position", _play_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
-	tween.tween_property(_options_button, "position", _options_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
 	tween.tween_property(_information_button, "position", _information_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
+	tween.tween_property(_options_button, "position", _options_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
 	tween.tween_property(_exit_button, "position", _exit_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
 
 

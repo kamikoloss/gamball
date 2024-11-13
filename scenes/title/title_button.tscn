@@ -8,8 +8,6 @@
 offset_right = 320.0
 offset_bottom = 80.0
 mouse_default_cursor_shape = 2
-disabled = true
-ignore_texture_size = true
 script = ExtResource("1_k8gp7")
 _hover_texture = NodePath("Hover")
 _label_1 = NodePath("Label")
