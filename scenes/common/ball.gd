@@ -7,7 +7,7 @@ enum Rarity { Common, Uncommon, Rare, Epic, Legendary }
 
 
 # 残像の頂点数
-const TRAIL_MAX_LENGTH = 16
+const TRAIL_MAX_LENGTH = 15
 
 # 特殊なボール番号
 const BALL_LEVEL_EMPTY_SLOT = -1 

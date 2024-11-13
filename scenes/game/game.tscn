@@ -1130,6 +1130,7 @@ offset_bottom = -10.0
 [node name="Lamp7" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 50.0
 offset_right = 50.0
+scale = Vector2(2, 2)
 
 [node name="Lamp8" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 45.0
@@ -1198,6 +1199,7 @@ offset_bottom = 10.0
 [node name="Lamp19" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = -50.0
 offset_right = -50.0
+scale = Vector2(2, 2)
 
 [node name="Lamp20" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = -45.0
@@ -2356,19 +2358,6 @@ scale = Vector2(1, 10)
 pivot_offset = Vector2(5, 0)
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
-
-[node name="Version" type="Label" parent="UI/Main"]
-layout_mode = 0
-offset_left = 560.0
-offset_top = 700.0
-offset_right = 1200.0
-offset_bottom = 780.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "GAMBALL v0.3.0"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
 z_index = 20
