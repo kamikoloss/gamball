@@ -19,6 +19,7 @@ _curtain = NodePath("Camera2D/Curtain")
 anchor_mode = 0
 
 [node name="Curtain" type="Control" parent="Camera2D"]
+visible = false
 z_index = 100
 layout_mode = 3
 anchors_preset = 0
@@ -32,6 +33,10 @@ mouse_filter = 2
 texture = ExtResource("3_yy207")
 expand_mode = 1
 
+[node name="Loading" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+
 [node name="Title" parent="." instance=ExtResource("1_oaxe4")]
 
 [node name="Options" parent="." instance=ExtResource("5_u1stv")]
@@ -39,6 +44,7 @@ offset_left = -1280.0
 offset_right = -1280.0
 
 [node name="Version" type="Label" parent="."]
+z_index = 98
 offset_left = 1200.0
 offset_top = 680.0
 offset_right = 1520.0

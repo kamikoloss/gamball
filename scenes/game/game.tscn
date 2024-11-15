@@ -1,9 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=34 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_ma10n"]
 [ext_resource type="Script" path="res://scenes/game/billiards.gd" id="3_0s1kj"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="4_b0m3n"]
+[ext_resource type="Texture2D" uid="uid://d2efapl0vglp0" path="res://images/common/dia.png" id="4_nc85m"]
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="5_j1dyl"]
 [ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="6_qy33h"]
 [ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/common/hole.tscn" id="7_71f2d"]
@@ -61,6 +62,22 @@ _balls_parent = NodePath("Balls")
 _game_ui = NodePath("UI")
 _products_parent = NodePath("UI/Shop/Products")
 _bunny = NodePath("UI/People/Bunny")
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Background2" type="TextureRect" parent="."]
+self_modulate = Color(0.12549, 0.12549, 0.12549, 0.25098)
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("4_nc85m")
+stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_position_a", "_spawn_extra_position_b", "_spawn_extra_position_c", "_spawn_extra_position_d")]
 script = ExtResource("3_0s1kj")
@@ -1096,6 +1113,7 @@ anchors_preset = 0
 [node name="Lamp" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_top = -25.0
 offset_bottom = -25.0
+scale = Vector2(2, 2)
 
 [node name="Lamp2" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = 10.0
@@ -1165,6 +1183,7 @@ offset_bottom = 25.0
 [node name="Lamp13" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_top = 25.0
 offset_bottom = 25.0
+scale = Vector2(2, 2)
 
 [node name="Lamp14" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
 offset_left = -10.0

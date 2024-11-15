@@ -90,7 +90,7 @@ func _show_curtain(speed_ratio: float = 1.0) -> void:
 func _hide_curtain(speed_ratio: float = 1.0) -> void:
 	_curtain.modulate = Color.WHITE
 	var tween = _get_tween(TweenType.CurtainHide)
-	tween.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_curtain, "modulate", Color.TRANSPARENT, CURTAIN_FADE_DURATION / speed_ratio)
 	await tween.finished
 

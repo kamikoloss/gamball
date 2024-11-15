@@ -43,7 +43,7 @@ func _on_mouse_exited() -> void:
 	_hover_texture.size.x = _size_x
 	var tween = _get_tween(TweenType.Hover)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_hover_texture, "size:x", 0, 0.2 * 2) # ゆっくり戻る
+	tween.tween_property(_hover_texture, "size:x", 0, 0.8) # ゆっくり戻る
 
 
 func _get_tween(type: TweenType) -> Tween:

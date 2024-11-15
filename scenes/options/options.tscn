@@ -51,6 +51,7 @@ texture = ExtResource("1_f0h7j")
 expand_mode = 1
 
 [node name="Background2" type="TextureRect" parent="."]
+visible = false
 self_modulate = Color(0, 0, 0, 0.501961)
 layout_mode = 0
 offset_left = 560.0
@@ -72,9 +73,9 @@ text = "OPTIONS"
 [node name="Audio" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 40.0
-offset_top = 160.0
+offset_top = 120.0
 offset_right = 40.0
-offset_bottom = 160.0
+offset_bottom = 120.0
 
 [node name="Label" type="Label" parent="Audio"]
 layout_mode = 0
