@@ -25,7 +25,7 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D/Curtain"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
