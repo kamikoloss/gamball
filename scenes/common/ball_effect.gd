@@ -2,38 +2,53 @@ class_name BallEffect
 extends Node
 
 
+# 効果の種類
 # TODO: 命名のルール欲しいかも？
 enum EffectType {
-	# Game
-	MONEY_UP_ON_BREAK, # (a) 破壊時に MONEY xa
-	MONEY_UP_ON_FALL, # (a) 落下時に MONEY +a
-	DECK_MIN_SIZE_DOWN, # (a) Deck の最小サイズ -a
-	DECK_COMPLETE_GAIN_UP, # (a, b) Deck に LV 0-a が揃っているとき Gain xb
-	DECK_COUNT_GAIN_UP, # (a, b) Deck の Ball が a 個以下のとき Gain +b
-	EXTRA_MAX_SIZE_UP, # (a) Extra の最大サイズ +a
-	RARITY_TOP_UP, RARITY_TOP_DOWN, # (r) レアリティ r の出現確率が 上がる/下がる
-	TAX_DOWN, # (a) 延長料 -a%
-	# Game/Billiards
-	BILLIARDS_COUNT_GAIN_UP, # (a, b) ビリヤード盤面上の Ball が a 個以下のとき Gain +b
-	BILLIARDS_COUNT_GAIN_UP_2, # (a, b) ビリヤード盤面上の Ball が a 個以下のとき Gain xb
-	BILLIARDS_LV_UP_ON_SPAWN, # (a) 出現時にビリヤード盤面上の Ball LV +a
-	BILLIARDS_MERGE_BALLS_ON_SPAWN, # (a, b) 出現時にビリヤード顔面上の Ball LV a xb を LV 15 x1 に変換する
-	# Game/Pachinko
-	PACHINKO_START_TOP_UP, # (a) パチンコの初当たり確率の分子 +a
-	PACHINKO_CONTINUE_TOP_UP, # (a) パチンコの継続確率の分子 +a
-	# Ball
-	LV_UP, # (a, b) LV a 以下の Ball の LV +b
-	LV_UP_2, # (a, b) LV a の Ball の LV xb
-	# Hole
-	HOLE_GAIN_UP, # (a) Hole の Gain +a
-	HOLE_SIZE_UP, # (a) Hole のサイズ xa
-	HOLE_GRAVITY_SIZE_UP, # (a) Hole の重力範囲サイズ xa
+	BILLIARDS_COUNT_GAIN_UP,
+	BILLIARDS_COUNT_GAIN_UP_2,
+	BILLIARDS_LV_UP_ON_SPAWN,
+	BILLIARDS_MERGE_BALLS_ON_SPAWN,
+	DECK_MIN_SIZE_DOWN,
+	DECK_COMPLETE_GAIN_UP,
+	DECK_COUNT_GAIN_UP,
+	EXTRA_MAX_SIZE_UP,
+	HOLE_GAIN_UP,
+	HOLE_SIZE_UP,
+	HOLE_GRAVITY_SIZE_UP,
+	LV_UP,
+	LV_UP_2,
+	MONEY_UP_ON_BREAK,
+	MONEY_UP_ON_FALL,
+	PACHINKO_START_TOP_UP,
+	PACHINKO_CONTINUE_TOP_UP,
+	RARITY_TOP_UP, RARITY_TOP_DOWN,
+	TAX_DOWN,
 }
 
 
 # 効果の説明文
-const EFFECT_TEMPLATE = {
-	EffectType.MONEY_UP_ON_BREAK: "",
+const EFFECT_DESCRIPTIONS = {
+	EffectType.BILLIARDS_COUNT_GAIN_UP: "ビリヤード盤面上の Ball が %s 個以下のとき Gain +%s",
+	EffectType.BILLIARDS_COUNT_GAIN_UP_2: "ビリヤード盤面上の Ball が %s 個以下のとき Gain x%s",
+	EffectType.BILLIARDS_LV_UP_ON_SPAWN: "出現時にビリヤード盤面上の Ball LV +%s",
+	EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN: "出現時にビリヤード顔面上の Ball LV %s x%s を LV 15 x1 に変換する",
+	EffectType.DECK_MIN_SIZE_DOWN: "DECK の最小サイズ -%s",
+	EffectType.DECK_COMPLETE_GAIN_UP: "Deck に 0-%s が揃っているとき Gain x%s",
+	EffectType.DECK_COUNT_GAIN_UP: "Deck の Ball が %s 個以下のとき Gain +%s",
+	EffectType.EXTRA_MAX_SIZE_UP: "Extra の最大サイズ +%s",
+	EffectType.HOLE_GAIN_UP: "Hole の Gain +%s",
+	EffectType.HOLE_SIZE_UP: "Hole のサイズ x%s",
+	EffectType.HOLE_GRAVITY_SIZE_UP: "Hole の重力範囲サイズ x%s",
+	EffectType.LV_UP: "LV %s 以下の Ball の LV +%s",
+	EffectType.LV_UP_2: "LV % の Ball の LV x%",
+	EffectType.MONEY_UP_ON_BREAK: "破壊時に MONEY x%s",
+	EffectType.MONEY_UP_ON_FALL: "落下時に MONEY +%s",
+	EffectType.PACHINKO_START_TOP_UP: "パチンコの初当たり確率 +%s",
+	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続確率 +%s",
+	EffectType.RARITY_TOP_UP: "レアリティ %s の出現確率が 上がる",
+	EffectType.RARITY_TOP_DOWN: "レアリティ %s の出現確率が 下がる",
+	EffectType.TAX_DOWN: "延長料 -%s%",
 }
 
 # Ball LV/Rarity ごとの初期効果
