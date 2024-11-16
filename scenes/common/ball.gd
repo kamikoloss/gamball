@@ -8,9 +8,9 @@ enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 
 # 残像の頂点数
 const TRAIL_MAX_LENGTH = 15
-
 # 特殊なボール番号
-const BALL_LEVEL_EMPTY_SLOT = -1 
+const BALL_LEVEL_EMPTY_SLOT = -1
+
 # ボールの色の定義 { <Level>: Color } 
 const BALL_COLORS = {
 	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.5), # 空きスロット用
@@ -18,6 +18,14 @@ const BALL_COLORS = {
 	4: Color.PURPLE, 5: Color.ORANGE, 6: Color.GREEN, 7: Color.SADDLE_BROWN,
 	8: Color(0.1, 0.1, 0.1), 9: Color.GOLD, 10: Color.LIGHT_BLUE, 11: Color.LIGHT_CORAL,
 	12: Color.LIGHT_SALMON, 13: Color.LIGHT_SALMON, 14: Color.LIGHT_GREEN, 15: Color.ROSY_BROWN,
+}
+# ボールのレア度の色  { <Rarity>: Color } 
+const BALL_RARITY_COLORS = {
+	Rarity.COMMON:		Color.DARK_GRAY,
+	Rarity.UNCOMMON:	Color.DARK_GREEN,
+	Rarity.RARE:		Color.DARK_BLUE,
+	Rarity.EPIC:		Color.DARK_ORCHID,
+	Rarity.LEGENDARY:	Color.DARK_GOLDENROD,
 }
 
 
