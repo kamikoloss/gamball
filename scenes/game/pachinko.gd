@@ -121,10 +121,10 @@ func start_lottery(force: bool = false) -> void:
 	_is_lottery_now = false
 
 	if hit < top:
-		AudioManager.play_se(AudioManager.SeType.PachinkoRushStart)
+		AudioManager.play_se(AudioManager.SeType.PACHINKO_RUSH_START)
 		_start_rush()
 	else:
-		AudioManager.play_se(AudioManager.SeType.PachinkoRushFinish)
+		AudioManager.play_se(AudioManager.SeType.PACHINKO_RUSH_FINISH)
 		_finish_rush()
 
 
@@ -218,14 +218,14 @@ func _start_rusn_lamps(index_list: Array[int]) -> void:
 	duration = (index_list[1] - index_list[0]) * 0.04
 	tween.set_trans(Tween.TRANS_LINEAR)
 	tween.tween_method(func(v): _enable_rush_lamp(v % size), index_list[0], index_list[1], duration)
-	tween.tween_callback(func(): _start_lamp_se_loop(0.2, AudioManager.SeType.PachinkoLampOff))
+	tween.tween_callback(func(): _start_lamp_se_loop(0.2, AudioManager.SeType.PACHINKO_LAMP_OFF))
 
 	# 止まる前のゆっくり点灯 (だんだん遅くなる)
 	tween.chain()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	duration = (index_list[2] - index_list[1]) * 0.2
 	tween.tween_method(func(v): _enable_rush_lamp(v % size), index_list[1], index_list[2], duration)
-	tween.tween_callback(func(): _start_lamp_se_loop(0.4, AudioManager.SeType.PachinkoLampOn))
+	tween.tween_callback(func(): _start_lamp_se_loop(0.4, AudioManager.SeType.PACHINKO_LAMP_ON))
 
 	# 止まったあとの点滅
 	tween.chain()

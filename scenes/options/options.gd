@@ -14,9 +14,9 @@ func _ready() -> void:
 	# TODO: SaveManager で設定を読み込む
 
 	# Signal
-	_audio_master_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.Master, v))
-	_audio_bgm_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.Bgm, v))
-	_audio_se_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.Se, v))
+	_audio_master_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.MASTER, v))
+	_audio_bgm_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.BGM, v))
+	_audio_se_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.SE, v))
 
 
 func _on_audio_slider_changed(bus_type: AudioManager.BusType, volume_level: int) -> void:
@@ -26,12 +26,12 @@ func _on_audio_slider_changed(bus_type: AudioManager.BusType, volume_level: int)
 
 func _refresh_config_audio_slider(bus_type: AudioManager.BusType, volume_level: int) -> void:
 	match bus_type:
-		AudioManager.BusType.Master:
+		AudioManager.BusType.MASTER:
 			_audio_master_slider.value = volume_level
 			_audio_master_slider_label.text = str(volume_level)
-		AudioManager.BusType.Bgm:
+		AudioManager.BusType.BGM:
 			_audio_bgm_slider.value = volume_level
 			_audio_bgm_slider_label.text = str(volume_level)
-		AudioManager.BusType.Se:
+		AudioManager.BusType.SE:
 			_audio_se_slider.value = volume_level
 			_audio_se_slider_label.text = str(volume_level)
