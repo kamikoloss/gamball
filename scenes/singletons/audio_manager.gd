@@ -3,17 +3,17 @@ extends Node
 
 
 enum BusType {
-	Master = 0,
-	Bgm = 1,
-	Se = 2,
+	MASTER = 0,
+	BGM = 1,
+	SE = 2,
 }
 enum BgmType {
-	Default,
+	DEFAULT,
 }
 enum SeType {
-	BilliardsShoot,
-	PachinkoLampOff, PachinkoLampOn,
-	PachinkoRushStart, PachinkoRushFinish,
+	BILLIARDS_SHOT,
+	PACHINKO_LAMP_OFF, PACHINKO_LAMP_ON,
+	PACHINKO_RUSH_START, PACHINKO_RUSH_FINISH,
 }
 
 
@@ -50,19 +50,19 @@ func play_se(bus_type: SeType) -> void:
 	var se_audio: AudioStream
 
 	match bus_type:
-		SeType.BilliardsShoot:
+		SeType.BILLIARDS_SHOT:
 			se_player = _se_player_1
 			se_audio = _se_BilliardsShoot
-		SeType.PachinkoLampOff:
+		SeType.PACHINKO_LAMP_OFF:
 			se_player = _se_player_2
 			se_audio = _se_PachinkoLampOff
-		SeType.PachinkoLampOn:
+		SeType.PACHINKO_LAMP_ON:
 			se_player = _se_player_2
 			se_audio = _se_PachinkoLampOn
-		SeType.PachinkoRushStart:
+		SeType.PACHINKO_RUSH_START:
 			se_player = _se_player_2
 			se_audio = _se_PachinkoRushStart
-		SeType.PachinkoRushFinish:
+		SeType.PACHINKO_RUSH_FINISH:
 			se_player = _se_player_2
 			se_audio = _se_PachinkoRushFinish
 

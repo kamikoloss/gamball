@@ -3,8 +3,8 @@ extends Node2D
 # TODO: Ball の処理を切り分ける
 
 
-enum TaxType { Money, Balls }
-enum TweenType { TaxCountDown }
+enum TaxType { MONEY, BALLS }
+enum TweenType { TAX_COUNT_DOWN }
 
 
 # DECK の最大数
@@ -19,14 +19,14 @@ const DRAG_LENGTH_MAX: float = 160
 # Tax (ノルマ) のリスト
 # [<turn>, TaxType, <amount>]
 const TAX_LIST = [
-	[25, TaxType.Balls, 50],	# Balls 50
-	[50, TaxType.Balls, 100],	# Balls 100
-	[75, TaxType.Money, 400],	# Balls 200
-	[100, TaxType.Money, 800],	# Balls 400
-	[150, TaxType.Balls, 800],	# Balls 800
-	[200, TaxType.Balls, 1600],	# Balls 1600
-	[250, TaxType.Money, 3200],	# Balls 3200
-	[300, TaxType.Money, 6400],	# Balls 6400
+	[25, TaxType.BALLS, 50],	# Balls 50
+	[50, TaxType.BALLS, 100],	# Balls 100
+	[75, TaxType.MONEY, 400],	# Balls 200
+	[100, TaxType.MONEY, 800],	# Balls 400
+	[150, TaxType.BALLS, 800],	# Balls 800
+	[200, TaxType.BALLS, 1600],	# Balls 1600
+	[250, TaxType.MONEY, 3200],	# Balls 3200
+	[300, TaxType.MONEY, 6400],	# Balls 6400
 ]
 
 
@@ -199,9 +199,9 @@ func _on_tax_pay_button_pressed() -> void:
 	var next_type = TAX_LIST[_next_tax_index][1]
 	var next_amount = TAX_LIST[_next_tax_index][2]
 
-	if next_type == TaxType.Money:
+	if next_type == TaxType.MONEY:
 		money -= next_amount
-	elif next_type == TaxType.Balls:
+	elif next_type == TaxType.BALLS:
 		balls -= next_amount
 
 	_next_tax_index += 1
@@ -225,28 +225,28 @@ func _on_info_button_pressed() -> void:
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Main] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
-		Hole.HoleType.Billiards:
+		Hole.HoleType.BILLIARDS:
 			# Ball が有効化されていない場合: 何もしない (Ball は消失する)
 			if not ball.is_active:
 				return
 			# パチンコ盤面上に同じ Ball を出現させる
 			var new_ball = _create_new_ball(ball.level)
 			_pachinko.spawn_ball(new_ball)
-		Hole.HoleType.Extra:
+		Hole.HoleType.EXTRA:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
 			var level = _extra_level_list.pick_random()
 			var new_ball = _create_new_ball(level)
 			_billiards.spawn_extra_ball(new_ball)
 			# パチンコのラッシュ抽選を開始する
 			_pachinko.start_lottery()
-		Hole.HoleType.Gain:
+		Hole.HoleType.GAIN:
 			# 払い出しリストに追加する
 			var amount = hole.gain_ratio * ball.level
 			_push_payout(ball.level, amount)
-		Hole.HoleType.Lost:
+		Hole.HoleType.LOST:
 			# 何もしない (Ball は消失する)
 			pass
-		Hole.HoleType.Stack:
+		Hole.HoleType.STACK:
 			# Ball の数をカウントする
 			balls += 1
 
@@ -285,39 +285,35 @@ func _on_product_icon_pressed(product: Product) -> void:
 		return
 
 	var ball_level_rarity = {
-		Ball.Rarity.Common: [0, 1, 2, 3],
-		Ball.Rarity.Rare: [4, 5, 6, 7],
-		Ball.Rarity.Epic: [8, 9, 10, 11],
-		Ball.Rarity.Legendary: [12, 13, 14, 15],
+		Ball.Rarity.COMMON: [0, 1, 2, 3],
+		Ball.Rarity.RARE: [4, 5, 6, 7],
+		Ball.Rarity.EPIC: [8, 9, 10, 11],
+		Ball.Rarity.LEGENDARY: [12, 13, 14, 15],
 	}
 
 	# Product の効果を発動する
 	# TODO: マジックナンバーをなくす？
 	# TODO: 実行できない場合 return する
 	match product.product_type:
-		Product.ProductType.DeckPack:
+		Product.ProductType.DECK_PACK:
 			for i in 3:
 				if _deck_level_list.size() < DECK_MAX_SIZE:
 					var random_rarity = _pick_random_rarity()
 					var level = ball_level_rarity[random_rarity].pick_random()
 					_deck_level_list.push_back(level)
 					print("[Main] random_rarity: %s, level: %s" % [random_rarity, level])
-		Product.ProductType.DeckPack2:
-			return
-		Product.ProductType.DeckCleaner:
+		Product.ProductType.DECK_CLEANER:
 			if 1 < _deck_level_list.size():
 				_deck_level_list.sort()
 				_deck_level_list.pop_front()
-		Product.ProductType.ExtraPack:
+		Product.ProductType.EXTRA_PACK:
 			for i in 2:
 				if _extra_level_list.size() < EXTRA_MAX_SIZE:
 					var random_rarity = _pick_random_rarity()
 					var level = ball_level_rarity[random_rarity].pick_random()
 					_extra_level_list.push_back(level)
 					print("[Main] random_rarity: %s, level: %s" % [random_rarity, level])
-		Product.ProductType.ExtraPack2:
-			return
-		Product.ProductType.ExtraCleaner:
+		Product.ProductType.EXTRA_CLEANER:
 			if 1 < _extra_level_list.size():
 				_extra_level_list.sort()
 				_extra_level_list.pop_front()
@@ -343,10 +339,10 @@ func _create_new_ball(level: int = 0, is_active = true) -> Ball:
 func _pick_random_rarity() -> Ball.Rarity:
 	# レア度の分子の割合
 	var rarity_weight = {
-		Ball.Rarity.Common: 40,
-		Ball.Rarity.Rare: 30,
-		Ball.Rarity.Epic: 20,
-		Ball.Rarity.Legendary: 10,
+		Ball.Rarity.COMMON: 40,
+		Ball.Rarity.RARE: 30,
+		Ball.Rarity.EPIC: 20,
+		Ball.Rarity.LEGENDARY: 10,
 	}
 	# 抽選の分母 (合計)
 	var rarity_weight_total = 0
@@ -359,7 +355,7 @@ func _pick_random_rarity() -> Ball.Rarity:
 
 	# 抽選した整数に対応するレア度を決定する
 	var rarity_check = 0
-	var random_rarity = Ball.Rarity.Common
+	var random_rarity = Ball.Rarity.COMMON
 	for rarity in rarity_weight.keys():
 		random_rarity = rarity
 		rarity_check += rarity_weight[rarity]
@@ -419,7 +415,7 @@ func _start_tax_count_down() -> void:
 	_bunny.refresh_dialogue_big_label("延長のお時間で～す")
 
 	# カウントダウンを開始する
-	var tween = _get_tween(TweenType.TaxCountDown)
+	var tween = _get_tween(TweenType.TAX_COUNT_DOWN)
 	tween.tween_interval(2.0)
 	tween.tween_callback(func(): _bunny.refresh_dialogue_big_label("さ～～ん"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())

@@ -4,7 +4,7 @@ extends Control
 # TODO: 表情ポーズセットを指定して一括変更する
 
 
-enum TweenType { Pose, Dialogue }
+enum TweenType { POSE, DIALOGUE }
 
 
 # A/B のフェードの秒数
@@ -90,7 +90,7 @@ func reset_pose() -> void:
 # TODO: 必ず変える？
 # TODO: 跳ねる処理を切り分ける？
 func shuffle_pose() -> void:
-	var tween = _get_tween(TweenType.Pose)
+	var tween = _get_tween(TweenType.POSE)
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 
@@ -118,7 +118,7 @@ func shuffle_pose() -> void:
 
 
 func refresh_dialogue_label(dialogue: String) -> void:
-	var tween = _get_tween(TweenType.Dialogue)
+	var tween = _get_tween(TweenType.DIALOGUE)
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
@@ -128,7 +128,7 @@ func refresh_dialogue_label(dialogue: String) -> void:
 	tween.tween_property(_dialogue_label, "modulate", Color.WHITE, 0.2) # 対象の label だけ表示を戻す
 
 func refresh_dialogue_big_label(dialogue: String) -> void:
-	var tween = _get_tween(TweenType.Dialogue)
+	var tween = _get_tween(TweenType.DIALOGUE)
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す

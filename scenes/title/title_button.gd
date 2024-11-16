@@ -2,7 +2,7 @@ class_name TitleButton
 extends TextureButton
 
 
-enum TweenType { Hover }
+enum TweenType { HOVER }
 
 
 @export var _font_size: int = 128
@@ -35,13 +35,13 @@ func _ready() -> void:
 
 func _on_mouse_entered() -> void:
 	_hover_texture.size.x = 0
-	var tween = _get_tween(TweenType.Hover)
+	var tween = _get_tween(TweenType.HOVER)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_hover_texture, "size:x", _size_x, 0.2)
 
 func _on_mouse_exited() -> void:
 	_hover_texture.size.x = _size_x
-	var tween = _get_tween(TweenType.Hover)
+	var tween = _get_tween(TweenType.HOVER)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_hover_texture, "size:x", 0, 0.8) # ゆっくり戻る
 

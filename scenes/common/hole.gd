@@ -7,11 +7,11 @@ signal ball_entered
 
 
 enum HoleType {
-	Billiards,
-	Extra,
-	Gain,
-	Lost,
-	Stack,
+	BILLIARDS,
+	EXTRA,
+	GAIN,
+	LOST,
+	STACK,
 }
 
 
@@ -19,7 +19,7 @@ enum HoleType {
 var is_enabled = true
 
 
-@export var hole_type: HoleType = HoleType.Lost
+@export var hole_type: HoleType = HoleType.LOST
 @export var gain_ratio: int = 0 # (Gain 用) 増加する倍率
 
 
@@ -41,7 +41,7 @@ func enable() -> void:
 
 	# 吸引力を有効化するかどうか
 	var gravity_hole_types = [
-		HoleType.Billiards,
+		HoleType.BILLIARDS,
 	]
 	if hole_type in gravity_hole_types:
 		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_COMBINE_REPLACE
@@ -60,20 +60,20 @@ func disable() -> void:
 # 自身の見た目を更新する
 func refresh_view() -> void:
 	match hole_type:
-		Hole.HoleType.Billiards:
+		Hole.HoleType.BILLIARDS:
 			pass
-		Hole.HoleType.Extra:
+		Hole.HoleType.EXTRA:
 			_label.text = "EX"
 			_label.self_modulate = Color.GREEN
 			return
-		Hole.HoleType.Gain:
+		Hole.HoleType.GAIN:
 			_label.text = "×%s" % [gain_ratio]
 			if gain_ratio <= 0:
 				_label.self_modulate = Color.RED
 			return
-		Hole.HoleType.Lost:
+		Hole.HoleType.LOST:
 			pass
-		Hole.HoleType.Stack:
+		Hole.HoleType.STACK:
 			_label.text = "＋"
 			return
 

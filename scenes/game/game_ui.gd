@@ -2,7 +2,7 @@ class_name GameUi
 extends Control
 
 
-enum TweenType { Tax, Shop, People }
+enum TweenType { TAX, SHOP, PEOPLE }
 
 
 # Button 系
@@ -75,12 +75,12 @@ func _ready() -> void:
 func show_tax_window() -> void:
 	_tax_window.visible = true
 	_tax_window.position = WINDOW_POSITION_BOTTOM_FROM
-	var tween = _get_tween(TweenType.Tax)
+	var tween = _get_tween(TweenType.TAX)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_tax_window, "position", WINDOW_POSITION_TO, WINDOW_MOVE_DURATION)
 
 func hide_tax_window() -> void:
-	var tween = _get_tween(TweenType.Tax)
+	var tween = _get_tween(TweenType.TAX)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_tax_window, "position", WINDOW_POSITION_BOTTOM_TO, WINDOW_MOVE_DURATION)
 
@@ -88,12 +88,12 @@ func hide_tax_window() -> void:
 func show_shop_window() -> void:
 	_shop_window.visible = true
 	_shop_window.position = WINDOW_POSITION_BOTTOM_FROM
-	var tween = _get_tween(TweenType.Shop)
+	var tween = _get_tween(TweenType.SHOP)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_shop_window, "position", WINDOW_POSITION_TO, WINDOW_MOVE_DURATION)
 
 func hide_shop_window() -> void:
-	var tween = _get_tween(TweenType.Shop)
+	var tween = _get_tween(TweenType.SHOP)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_shop_window, "position", WINDOW_POSITION_BOTTOM_TO, WINDOW_MOVE_DURATION)
 
@@ -101,12 +101,12 @@ func hide_shop_window() -> void:
 func show_people_window() -> void:
 	_people_window.visible = true
 	_people_window.position = WINDOW_POSITION_RIGHT_FROM
-	var tween = _get_tween(TweenType.People)
+	var tween = _get_tween(TweenType.PEOPLE)
 	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_people_window, "position", WINDOW_POSITION_TO, WINDOW_MOVE_DURATION)
 
 func hide_people_window() -> void:
-	var tween = _get_tween(TweenType.People)
+	var tween = _get_tween(TweenType.PEOPLE)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(_people_window, "position", WINDOW_POSITION_RIGHT_TO, WINDOW_MOVE_DURATION)
 

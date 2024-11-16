@@ -8,7 +8,7 @@ signal information_button_pressed
 signal exit_button_pressed
 
 
-enum TweenType { Button, Bunny }
+enum TweenType { BUTTON, BUNNY }
 
 
 const BUTTON_MOVE_DURATION: float = 0.4
@@ -44,7 +44,7 @@ func _show_buttons() -> void:
 	_information_button.position = _information_button.position - BUTTON_MOVE_DIFF
 	_exit_button.position = _exit_button.position - BUTTON_MOVE_DIFF
 
-	var tween = _get_tween(TweenType.Button)
+	var tween = _get_tween(TweenType.BUTTON)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_play_button, "position", _play_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
 	tween.tween_property(_information_button, "position", _information_button.position + BUTTON_MOVE_DIFF, BUTTON_MOVE_DURATION)
@@ -56,7 +56,7 @@ func _show_bunny() -> void:
 	_bunny_texture.modulate = Color.TRANSPARENT
 	_bunny_texture.position = _bunny_texture.position - BUNNY_MOVE_DIFF
 
-	var tween = _get_tween(TweenType.Bunny)
+	var tween = _get_tween(TweenType.BUNNY)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.set_parallel(true)
 	tween.tween_property(_bunny_texture, "modulate", Color.WHITE, BUNNY_MOVE_DURATION)

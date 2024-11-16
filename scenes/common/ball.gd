@@ -3,7 +3,7 @@ extends RigidBody2D
 
 
 # ボールのレア度
-enum Rarity { Common, Uncommon, Rare, Epic, Legendary }
+enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 
 
 # 残像の頂点数
@@ -40,7 +40,7 @@ const BALL_COLORS = {
 
 
 # ボールのレア度
-var rarity: Rarity = Rarity.Common
+var rarity: Rarity = Rarity.COMMON
 # 他のボールにぶつかって有効化されたかどうか
 var is_active = true 
 

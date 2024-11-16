@@ -2,8 +2,8 @@ class_name Main
 extends Node
 
 
-enum TweenType { CurtainShow, CurtainHide }
-enum SceneType { Title, Game }
+enum TweenType { CURTAIN_SHOW, CURTAIN_HIDE }
+enum SceneType { TITLE, GAME }
 
 
 const CURTAIN_FADE_DURATION: float = 1.0
@@ -18,7 +18,7 @@ const CURTAIN_FADE_DURATION: float = 1.0
 
 
 var _is_loading_now: bool = false
-var _current_scene_type: SceneType = SceneType.Title
+var _current_scene_type: SceneType = SceneType.TITLE
 var _game: Game
 var _tweens: Dictionary = {}
 
@@ -28,7 +28,7 @@ func _ready() -> void:
 	_hide_curtain(0.5) # 最初はゆっくり非表示にする
 
 	# Title
-	_title.play_button_pressed.connect(func():_load_scene(SceneType.Game))
+	_title.play_button_pressed.connect(func():_load_scene(SceneType.GAME))
 	_title.information_button_pressed.connect(func(): print("TODO"))
 	_title.options_button_pressed.connect(func(): _goto_options())
 	_title.exit_button_pressed.connect(func(): get_tree().quit())
@@ -45,12 +45,12 @@ func _load_scene(scene_type: SceneType) -> void:
 	await _show_curtain()
 
 	# シーンを読み込む
-	if scene_type == SceneType.Title:
+	if scene_type == SceneType.TITLE:
 		# ロード済みなので表示を切り替えるだけ
 		_title.visible = true
 		if _game:
 			_game.queue_free()
-	elif scene_type == SceneType.Game:
+	elif scene_type == SceneType.GAME:
 		_title.visible = false
 		_game = _game_scene.instantiate()
 		add_child(_game)
@@ -82,14 +82,14 @@ func _goto_options() -> void:
 
 func _show_curtain(speed_ratio: float = 1.0) -> void:
 	_curtain.modulate = Color.TRANSPARENT
-	var tween = _get_tween(TweenType.CurtainShow)
+	var tween = _get_tween(TweenType.CURTAIN_SHOW)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_curtain, "modulate", Color.WHITE, CURTAIN_FADE_DURATION / speed_ratio)
 	await tween.finished
 
 func _hide_curtain(speed_ratio: float = 1.0) -> void:
 	_curtain.modulate = Color.WHITE
-	var tween = _get_tween(TweenType.CurtainHide)
+	var tween = _get_tween(TweenType.CURTAIN_HIDE)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_curtain, "modulate", Color.TRANSPARENT, CURTAIN_FADE_DURATION / speed_ratio)
 	await tween.finished

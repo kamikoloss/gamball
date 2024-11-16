@@ -7,22 +7,18 @@ signal icon_pressed
 
 
 enum ProductType {
-	DeckPack,
-	DeckPack2,
-	DeckCleaner,
-	ExtraPack,
-	ExtraPack2,
-	ExtraCleaner,
+	DECK_PACK,
+	DECK_CLEANER,
+	EXTRA_PACK,
+	EXTRA_CLEANER,
 }
 
 
 const PRODUCT_PRICES = {
-	ProductType.DeckPack: 100,
-	ProductType.DeckPack2: 200,
-	ProductType.DeckCleaner: 50,
-	ProductType.ExtraPack: 200,
-	ProductType.ExtraPack2: 400,
-	ProductType.ExtraCleaner: 100,
+	ProductType.DECK_PACK: 100,
+	ProductType.DECK_CLEANER: 50,
+	ProductType.EXTRA_PACK: 200,
+	ProductType.EXTRA_CLEANER: 100,
 }
 
 const BUY_COLOR_ACTIVE = Color(0.25, 0.5, 0.25)
@@ -32,16 +28,14 @@ const BUY_COLOR_DEACTIVE = Color(0.5, 0.25, 0.25)
 # 商品の [<名称>, <説明分>]
 # TODO: JSON に逃がす
 const PRODUCT_DATA = {
-	ProductType.DeckPack: ["DECK Pack", "Add random BALL x3\nto DECK"],
-	ProductType.DeckPack2: ["DECK Pack+", "Add random BALL x1\nto DECK"],
-	ProductType.DeckCleaner: ["DECK Cleaner", "Remove the lowest\nBALL from DECK"],
-	ProductType.ExtraPack: ["EXTRA Pack", "Add random BALL x2\nto EXTRA"],
-	ProductType.ExtraPack2: ["EXTRA Pack+", "Add random BALL x1\nto EXTRA"],
-	ProductType.ExtraCleaner: ["EXTRA Cleaner", "Remove the lowest\nBALL from EXTRA"],
+	ProductType.DECK_PACK: ["DECK Pack", "Add random BALL x3\nto DECK"],
+	ProductType.DECK_CLEANER: ["DECK Cleaner", "Remove the lowest\nBALL from DECK"],
+	ProductType.EXTRA_PACK: ["EXTRA Pack", "Add random BALL x2\nto EXTRA"],
+	ProductType.EXTRA_CLEANER: ["EXTRA Cleaner", "Remove the lowest\nBALL from EXTRA"],
 }
 
 
-@export var product_type: ProductType = ProductType.DeckPack
+@export var product_type: ProductType = ProductType.DECK_PACK
 
 # UI
 @export var _icon_texture: TextureRect
@@ -82,13 +76,13 @@ func _ready() -> void:
 # 自身の見た目を更新する
 func refresh_view() -> void:
 	match product_type:
-		ProductType.DeckPack:
+		ProductType.DECK_PACK:
 			_icon_texture.texture = _icon_pack
-		ProductType.DeckCleaner:
+		ProductType.DECK_CLEANER:
 			_icon_texture.texture = _icon_cleaner
-		ProductType.ExtraPack:
+		ProductType.EXTRA_PACK:
 			_icon_texture.texture = _icon_pack
-		ProductType.ExtraCleaner:
+		ProductType.EXTRA_CLEANER:
 			_icon_texture.texture = _icon_cleaner
 
 	_name_label.text = PRODUCT_DATA[product_type][0]

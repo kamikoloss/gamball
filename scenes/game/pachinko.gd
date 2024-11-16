@@ -3,11 +3,11 @@ extends Node2D
 
 
 enum TweenType {
-	RotatingWallA, # 回転床 A
-	RotatingWallB, # 回転床 B
-	RushLamp, # ラッシュ用ランプ
-	RushLampFlash, # ラッシュ用ランプ点滅
-	RushLampAudio, # ラッシュ用ランプ音
+	ROTATING_WALL_A, # 回転床 A
+	ROTATING_WALL_B, # 回転床 B
+	RUSH_LAMP, # ラッシュ用ランプ
+	RUSH_LAMP_FLASH, # ラッシュ用ランプ点滅
+	RUSH_LAMP_AUDIO, # ラッシュ用ランプ音
 }
 
 
@@ -211,7 +211,7 @@ func _pick_lamp_index_list() -> Array[int]:
 func _start_rusn_lamps(index_list: Array[int]) -> void:
 	var size = _rush_probability_bottom
 	var duration = 0.0
-	var tween = _get_tween(TweenType.RushLamp)
+	var tween = _get_tween(TweenType.RUSH_LAMP)
 	tween.set_parallel(true)
 
 	# 最初の早い周回点灯
@@ -236,7 +236,7 @@ func _start_rusn_lamps(index_list: Array[int]) -> void:
 
 # NOTE: set_loops は chain で切れないので Tween を分ける
 func _flash_lamp(index: int) -> void:
-	var tween2 = _get_tween(TweenType.RushLampFlash)
+	var tween2 = _get_tween(TweenType.RUSH_LAMP_FLASH)
 	tween2.set_loops(4)
 	tween2.tween_callback(func(): _disable_rush_lamps())
 	tween2.tween_interval(0.1)
@@ -245,14 +245,14 @@ func _flash_lamp(index: int) -> void:
 	await tween2.finished
 
 func _start_lamp_se_loop(interval: float, type: AudioManager.SeType) -> void:
-	var tween = _get_tween(TweenType.RushLampAudio)
+	var tween = _get_tween(TweenType.RUSH_LAMP_AUDIO)
 	tween.set_loops()
 	tween.tween_callback(func(): AudioManager.play_se(type))
 	tween.tween_interval(interval)
 
 func _stop_lamp_se_loop() -> void:
 	# 取得時に kill するので止まる
-	var tween = _get_tween(TweenType.RushLampAudio)
+	var tween = _get_tween(TweenType.RUSH_LAMP_AUDIO)
 
 
 # ランプの色を初期化する
@@ -289,8 +289,8 @@ func _disable_rush_lamps() -> void:
 # 回転床の動作を開始する
 func _start_rotating_wall() -> void:
 	var wall_settings = [
-		{ "type": TweenType.RotatingWallA, "obj": _rotating_wall_a, "deg1": 60, "deg2": 0 },
-		{ "type": TweenType.RotatingWallB, "obj": _rotating_wall_b, "deg1": 0, "deg2": -60 },
+		{ "type": TweenType.ROTATING_WALL_A, "obj": _rotating_wall_a, "deg1": 60, "deg2": 0 },
+		{ "type": TweenType.ROTATING_WALL_B, "obj": _rotating_wall_b, "deg1": 0, "deg2": -60 },
 	]
 	for setting in wall_settings:
 		var tween = _get_tween(setting["type"])
