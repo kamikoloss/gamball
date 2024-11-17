@@ -22,14 +22,34 @@ physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
-_main_texture = NodePath("Main")
-_inner_texture = NodePath("Inner")
-_mask_texture = NodePath("Mask")
-_level_label = NodePath("Level")
+_main_texture = NodePath("View/Body")
+_inner_texture = NodePath("View/Inner")
+_mask_texture = NodePath("View/Mask")
+_level_label = NodePath("View/Level")
 _hole_area = NodePath("Area2D")
 _trail_line = NodePath("Trail")
 
-[node name="Main" type="TextureRect" parent="."]
+[node name="View" type="Node2D" parent="."]
+
+[node name="Rarity" type="TextureRect" parent="View"]
+self_modulate = Color(1, 1, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.6, 1.6)
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("2_4bc8b")
+expand_mode = 1
+
+[node name="Body" type="TextureRect" parent="View"]
 self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
 anchors_preset = 8
 anchor_left = 0.5
@@ -47,7 +67,7 @@ pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Inner" type="TextureRect" parent="."]
+[node name="Inner" type="TextureRect" parent="View"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -63,7 +83,7 @@ pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Mask" type="TextureRect" parent="."]
+[node name="Mask" type="TextureRect" parent="View"]
 visible = false
 self_modulate = Color(0, 1, 1, 1)
 anchors_preset = 8
@@ -82,7 +102,7 @@ pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Level" type="Label" parent="."]
+[node name="Level" type="Label" parent="View"]
 offset_left = -40.0
 offset_top = -40.0
 offset_right = 40.0

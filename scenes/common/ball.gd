@@ -12,7 +12,7 @@ const TRAIL_MAX_LENGTH = 15
 const BALL_LEVEL_EMPTY_SLOT = -1
 
 # ボールの色の定義 { <Level>: Color } 
-const BALL_COLORS = {
+const BALL_BODY_COLORS = {
 	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.5), # 空きスロット用
 	0: Color(0.9, 0.9, 0.9), 1: Color.YELLOW, 2: Color.BLUE, 3: Color.RED,
 	4: Color.PURPLE, 5: Color.ORANGE, 6: Color.GREEN, 7: Color.SADDLE_BROWN,
@@ -51,6 +51,8 @@ const BALL_RARITY_COLORS = {
 var rarity: Rarity = Rarity.COMMON
 # 他のボールにぶつかって有効化されたかどうか
 var is_active = true 
+# ボールの効果
+var effects: Array[BallEffect] = []
 
 
 var _trail_points: Array = []
@@ -74,7 +76,7 @@ func _process(delta: float) -> void:
 # 自身の見た目を更新する
 func refresh_view() -> void:
 	# 色
-	_main_texture.self_modulate = BALL_COLORS[level]
+	_main_texture.self_modulate = BALL_BODY_COLORS[level]
 	_mask_texture.visible = not is_active # 有効なら表示しない
 
 	# ボール番号
@@ -98,11 +100,11 @@ func refresh_view() -> void:
 	# 残像
 	var gradient = Gradient.new()
 	if not is_active:
-		gradient.set_color(0, Color(BALL_COLORS[0], 0.5))
-		gradient.set_color(1, Color(BALL_COLORS[0], 0))
+		gradient.set_color(0, Color(BALL_BODY_COLORS[0], 0.5))
+		gradient.set_color(1, Color(BALL_BODY_COLORS[0], 0))
 	else:
-		gradient.set_color(0, Color(BALL_COLORS[level], 0.5))
-		gradient.set_color(1, Color(BALL_COLORS[level], 0))
+		gradient.set_color(0, Color(BALL_BODY_COLORS[level], 0.5))
+		gradient.set_color(1, Color(BALL_BODY_COLORS[level], 0))
 	_trail_line.gradient = gradient
 
 

@@ -11,11 +11,13 @@
 [node name="Hole" type="Area2D" node_paths=PackedStringArray("_label", "_gravity_area", "_gravity_texture") groups=["hole"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_226au")
-_label = NodePath("Label")
+_label = NodePath("View/Label")
 _gravity_area = NodePath("Gravity")
-_gravity_texture = NodePath("TextureRect2")
+_gravity_texture = NodePath("View/Gravity")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="View" type="Node2D" parent="."]
+
+[node name="Gravity" type="TextureRect" parent="View"]
 self_modulate = Color(1, 1, 1, 0.12549)
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,7 +35,7 @@ pivot_offset = Vector2(10, 10)
 texture = ExtResource("1_3kxer")
 expand_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Body" type="TextureRect" parent="View"]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
 anchors_preset = 8
 anchor_left = 0.5
@@ -49,7 +51,7 @@ grow_vertical = 2
 texture = ExtResource("1_3kxer")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="View"]
 offset_left = -40.0
 offset_top = -40.0
 offset_right = 40.0

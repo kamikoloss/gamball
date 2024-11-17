@@ -54,7 +54,7 @@ const EFFECT_DESCRIPTIONS = {
 # Ball LV/Rarity ごとの初期効果
 # { <Ball LV>: { <Ball Rarity>: [ <EffectType>, param1, (param2) ], ... } }
 # TODO: 表っぽいデータなので Google Sheets とかに外出しする？
-const EFFECT_POOL_1 = {
+const EFFECTS_POOL_1 = {
 	0: {
 		Ball.Rarity.UNCOMMON:	[EffectType.MONEY_UP_ON_BREAK, 2],
 		Ball.Rarity.RARE:		[EffectType.MONEY_UP_ON_BREAK, 3],
@@ -80,10 +80,10 @@ const EFFECT_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_COUNT_GAIN_UP_2, 1, 10],
 	},
 	4: {
-		Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 10],
-		Ball.Rarity.RARE:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 20],
-		Ball.Rarity.EPIC:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 30],
-		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 50],
+		Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 1],
+		Ball.Rarity.RARE:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 2],
+		Ball.Rarity.EPIC:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 3],
+		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 5],
 	},
 	5: {
 		Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 10],

@@ -7,11 +7,11 @@ signal ball_entered
 
 
 enum HoleType {
-	BILLIARDS,
-	EXTRA,
-	GAIN,
-	LOST,
-	STACK,
+	BILLIARDS, # (ビリヤード用) パチンコ盤面上に転送する
+	EXTRA, # (パチンコ用) EXTRA を1個ビリヤード盤面上に出す + 抽選を行う
+	GAIN, # (パチンコ用) 何倍かにして PAYOUT に加算する
+	LOST, # 通常使わない 何もしない (失う)
+	STACK, # (払い出し用) そのまま BALLS に加算する
 }
 
 
@@ -19,8 +19,10 @@ enum HoleType {
 var is_enabled = true
 
 
+# 
 @export var hole_type: HoleType = HoleType.LOST
-@export var gain_ratio: int = 0 # (Gain 用) 増加する倍率
+# (HoleType.GAIN 用) 増加する倍率
+@export var gain_ratio: int = 0
 
 
 @export var _label: Label
@@ -40,9 +42,7 @@ func enable() -> void:
 	modulate = Color(1, 1, 1, 1)
 
 	# 吸引力を有効化するかどうか
-	var gravity_hole_types = [
-		HoleType.BILLIARDS,
-	]
+	var gravity_hole_types = [HoleType.BILLIARDS, HoleType.STACK]
 	if hole_type in gravity_hole_types:
 		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_COMBINE_REPLACE
 		_gravity_texture.visible = true
