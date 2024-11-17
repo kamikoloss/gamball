@@ -2,6 +2,11 @@ class_name Ball
 extends RigidBody2D
 
 
+signal pressed
+#signal mouse_entered # CollisionObject2D が発火する
+#signal mouse_exited # CollisionObject2D が発火する
+
+
 # ボールのレア度
 enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 # Tween
@@ -35,7 +40,6 @@ const BALL_RARITY_COLORS = {
 # 展示用かどうか
 @export var is_display: bool = false
 
-
 # ボールの本体の色部分
 @export var _body_texture: TextureRect
 # ボール番号の背景部分
@@ -46,13 +50,14 @@ const BALL_RARITY_COLORS = {
 
 @export var _level_label: Label
 @export var _hole_area: Area2D
+@export var _touch_area: Area2D
 @export var _trail_line: Line2D
 
 
-# ボールのレア度
-var rarity: Rarity = Rarity.COMMON
 # 他のボールにぶつかって有効化されたかどうか
 var is_active = true 
+# ボールのレア度
+var rarity: Rarity = Rarity.COMMON
 # ボールの効果
 var effects: Array[BallEffect] = []
 
@@ -68,6 +73,7 @@ func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+	input_event.connect(_on_input)
 	refresh_view()
 
 
@@ -87,28 +93,24 @@ func refresh_view() -> void:
 	_body_texture.self_modulate = BALL_BODY_COLORS[level]
 	# レア度色
 	if rarity == Rarity.COMMON:
-		_inner_texture_2.self_modulate = Color.WHITE
-		_level_label.self_modulate = Color.BLACK
+		_inner_texture_2.visible = false
 	else:
-		#_inner_texture_2.self_modulate = Color(BALL_RARITY_COLORS[rarity], 0.3)
-		_level_label.self_modulate = BALL_RARITY_COLORS[rarity]
+		_inner_texture_2.visible = true
+		_inner_texture_2.self_modulate = Color(BALL_RARITY_COLORS[rarity], 0.3)
 	# マスク
 	_mask_texture.visible = not is_active # 有効なら表示しない
 
 	# ボール番号
 	if not is_active:
 		_inner_texture.visible = true
-		_inner_texture_2.visible = true
 		_level_label.visible = true
 		_level_label.text = "??"
 	elif level < 0:
 		_inner_texture.visible = false
-		_inner_texture_2.visible = false
 		_level_label.visible = false
 		_level_label.text = ""
 	else:
 		_inner_texture.visible = true
-		_inner_texture_2.visible = true
 		_level_label.visible = true
 		_level_label.text = str(level)
 
@@ -136,3 +138,9 @@ func _on_body_entered(body: Node) -> void:
 		if not is_active:
 			is_active = true
 			refresh_view()
+
+
+func _on_input(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			pressed.emit()

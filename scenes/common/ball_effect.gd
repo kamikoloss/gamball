@@ -27,28 +27,28 @@ enum EffectType {
 }
 
 
-# 効果の説明文
+# 効果の説明文 (BBCode)
 const EFFECT_DESCRIPTIONS = {
-	EffectType.BILLIARDS_COUNT_GAIN_UP: "ビリヤード盤面上の Ball が %s 個以下のとき Gain +%s",
-	EffectType.BILLIARDS_COUNT_GAIN_UP_2: "ビリヤード盤面上の Ball が %s 個以下のとき Gain x%s",
-	EffectType.BILLIARDS_LV_UP_ON_SPAWN: "出現時にビリヤード盤面上の Ball LV +%s",
-	EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN: "出現時にビリヤード顔面上の Ball LV %s x%s を LV 15 x1 に変換する",
-	EffectType.DECK_MIN_SIZE_DOWN: "DECK の最小サイズ -%s",
-	EffectType.DECK_COMPLETE_GAIN_UP: "Deck に 0-%s が揃っているとき Gain x%s",
-	EffectType.DECK_COUNT_GAIN_UP: "Deck の Ball が %s 個以下のとき Gain +%s",
-	EffectType.EXTRA_MAX_SIZE_UP: "Extra の最大サイズ +%s",
-	EffectType.HOLE_GAIN_UP: "Hole の Gain +%s",
-	EffectType.HOLE_SIZE_UP: "Hole のサイズ x%s",
-	EffectType.HOLE_GRAVITY_SIZE_UP: "Hole の重力範囲サイズ x%s",
-	EffectType.LV_UP: "LV %s 以下の Ball の LV +%s",
-	EffectType.LV_UP_2: "LV % の Ball の LV x%",
-	EffectType.MONEY_UP_ON_BREAK: "破壊時に MONEY x%s",
-	EffectType.MONEY_UP_ON_FALL: "落下時に MONEY +%s",
-	EffectType.PACHINKO_START_TOP_UP: "パチンコの初当たり確率 +%s",
-	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続確率 +%s",
-	EffectType.RARITY_TOP_UP: "レアリティ %s の出現確率が 上がる",
-	EffectType.RARITY_TOP_DOWN: "レアリティ %s の出現確率が 下がる",
-	EffectType.TAX_DOWN: "延長料 -%s%",
+	EffectType.BILLIARDS_COUNT_GAIN_UP: "ビリヤード盤面上の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][+{b}][/color]",
+	EffectType.BILLIARDS_COUNT_GAIN_UP_2: "ビリヤード盤面上の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][x{b}][/color]",
+	EffectType.BILLIARDS_LV_UP_ON_SPAWN: "出現時にビリヤード盤面上の Ball LV [color={r}][+{a}]",
+	EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN: "出現時にビリヤード顔面上の Ball LV 0 [color={r}][x{a}][/color] を LV 15 x1 に変換する",
+	EffectType.DECK_MIN_SIZE_DOWN: "DECK の最小サイズ [color={r}][-{a}][/color]",
+	EffectType.DECK_COMPLETE_GAIN_UP: "Deck に [color={r}][0-{a}][/color] が揃っているとき Gain [color={r}][x{b}][/color]",
+	EffectType.DECK_COUNT_GAIN_UP: "Deck の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][+{b}][/color]",
+	EffectType.EXTRA_MAX_SIZE_UP: "Extra の最大サイズ [color={r}][+{a}][/color]",
+	EffectType.HOLE_GAIN_UP: "Hole の Gain [color={r}][+{a}][/color]",
+	EffectType.HOLE_SIZE_UP: "Hole のサイズ [color={r}][x{a}][/color]",
+	EffectType.HOLE_GRAVITY_SIZE_UP: "Hole の重力範囲サイズ [color={r}][x{a}][/color]",
+	EffectType.LV_UP: "LV [color={r}][{a}][/color] 以下の Ball の LV [color={r}][+{b}][/color]",
+	EffectType.LV_UP_2: "LV [color={r}][{a}][/color] の Ball の LV [color={r}][x{b}][/color",
+	EffectType.MONEY_UP_ON_BREAK: "破壊時に MONEY [color={r}][x{a}][/color]",
+	EffectType.MONEY_UP_ON_FALL: "落下時に MONEY [color={r}][+{a}][/color]",
+	EffectType.PACHINKO_START_TOP_UP: "パチンコの初当たり確率 [color={r}][+{a}][/color]",
+	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続確率 [color={r}][+{a}][/color]",
+	EffectType.RARITY_TOP_UP: "[color={r}][{a}][/color] の出現確率が上がる",
+	EffectType.RARITY_TOP_DOWN: "[color={r}][{a}][/color] の出現確率が下がる",
+	EffectType.TAX_DOWN: "延長料 [color={r}][-{a}%][/color]",
 }
 
 # Ball LV/Rarity ごとの初期効果
@@ -86,10 +86,10 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 5],
 	},
 	5: {
-		Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 10],
-		Ball.Rarity.RARE:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 20],
-		Ball.Rarity.EPIC:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 30],
-		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 50],
+		Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 50],
+		Ball.Rarity.RARE:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 30],
+		Ball.Rarity.EPIC:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 20],
+		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 10],
 	},
 	6: {
 		Ball.Rarity.UNCOMMON:	[EffectType.LV_UP, 3, 1],

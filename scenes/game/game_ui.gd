@@ -22,9 +22,14 @@ const WINDOW_POSITION_TO: Vector2 = Vector2(0, 0)
 const WINDOW_MOVE_DURATION: float = 1.0
 
 
-@export_category("Main/BallsSlot")
+@export_category("Main/Ball")
 @export var _balls_slot_deck: Control
 @export var _balls_slot_extra: Control
+@export var _ball_popup: Control
+@export var _ball_popup_level: Label
+@export var _ball_popup_rarity: Label
+@export var _ball_popup_description: RichTextLabel
+
 @export_category("Main/Buttons")
 @export var _buy_balls_button: Button
 @export var _sell_balls_button: Button

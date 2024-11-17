@@ -11,6 +11,7 @@ bounce = 0.8
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
+radius = 15.0
 
 [sub_resource type="Curve" id="Curve_pexpb"]
 _data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 1, 0]
@@ -22,12 +23,14 @@ physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
+level = null
+is_display = null
 _body_texture = NodePath("View/Body")
 _inner_texture = NodePath("View/Inner")
 _inner_texture_2 = NodePath("View/Inner2")
 _mask_texture = NodePath("View/Mask")
 _level_label = NodePath("View/Level")
-_hole_area = NodePath("Area2D")
+_hole_area = NodePath("Hole")
 _trail_line = NodePath("Trail")
 
 [node name="View" type="Node2D" parent="."]
@@ -108,7 +111,7 @@ offset_right = 80.0
 offset_bottom = 40.0
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(80, 40)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_r213a")
 theme_override_font_sizes/font_size = 64
 text = "99"
@@ -116,13 +119,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_rn34c")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hole" type="Area2D" parent="."]
 scale = Vector2(0.25, 0.25)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
+shape = SubResource("CircleShape2D_awq4m")
+
+[node name="Touch" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Touch"]
 shape = SubResource("CircleShape2D_awq4m")
 
 [node name="Trail" type="Line2D" parent="."]

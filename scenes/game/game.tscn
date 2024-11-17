@@ -1475,38 +1475,47 @@ hole_type = 4
 [node name="Ball" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(280, 240)
 level = 1
+is_display = false
 
 [node name="Ball2" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(260, 220)
 level = 8
+is_display = false
 
 [node name="Ball3" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(300, 220)
 level = 2
+is_display = false
 
 [node name="Ball4" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(240, 200)
 level = 7
+is_display = false
 
 [node name="Ball5" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(280, 200)
 level = 9
+is_display = false
 
 [node name="Ball6" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(320, 200)
 level = 3
+is_display = false
 
 [node name="Ball7" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(260, 180)
 level = 6
+is_display = false
 
 [node name="Ball8" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(300, 180)
 level = 4
+is_display = false
 
 [node name="Ball9" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(280, 160)
 level = 5
+is_display = false
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
 z_index = 20
@@ -1805,66 +1814,82 @@ offset_bottom = 70.0
 
 [node name="Ball" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(10, 10)
+level = 0
 is_display = true
 
 [node name="Ball2" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(30, 10)
+level = 0
 is_display = true
 
 [node name="Ball3" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(50, 10)
+level = 0
 is_display = true
 
 [node name="Ball4" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(70, 10)
+level = 0
 is_display = true
 
 [node name="Ball5" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(90, 10)
+level = 0
 is_display = true
 
 [node name="Ball6" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(110, 10)
+level = 0
 is_display = true
 
 [node name="Ball7" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(130, 10)
+level = 0
 is_display = true
 
 [node name="Ball8" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(150, 10)
+level = 0
 is_display = true
 
 [node name="Ball9" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(10, 30)
+level = 0
 is_display = true
 
 [node name="Ball10" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(30, 30)
+level = 0
 is_display = true
 
 [node name="Ball11" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(50, 30)
+level = 0
 is_display = true
 
 [node name="Ball12" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(70, 30)
+level = 0
 is_display = true
 
 [node name="Ball13" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(90, 30)
+level = 0
 is_display = true
 
 [node name="Ball14" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(110, 30)
+level = 0
 is_display = true
 
 [node name="Ball15" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(130, 30)
+level = 0
 is_display = true
 
 [node name="Ball16" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(150, 30)
+level = 0
 is_display = true
 
 [node name="Label2" type="Label" parent="UI/Main"]
@@ -1889,66 +1914,82 @@ offset_bottom = 150.0
 
 [node name="Ball" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(10, 10)
+level = 0
 is_display = true
 
 [node name="Ball2" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(30, 10)
+level = 0
 is_display = true
 
 [node name="Ball3" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(50, 10)
+level = 0
 is_display = true
 
 [node name="Ball4" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(70, 10)
+level = 0
 is_display = true
 
 [node name="Ball5" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(90, 10)
+level = 0
 is_display = true
 
 [node name="Ball6" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(110, 10)
+level = 0
 is_display = true
 
 [node name="Ball7" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(130, 10)
+level = 0
 is_display = true
 
 [node name="Ball8" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(150, 10)
+level = 0
 is_display = true
 
 [node name="Ball9" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(10, 30)
+level = 0
 is_display = true
 
 [node name="Ball10" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(30, 30)
+level = 0
 is_display = true
 
 [node name="Ball11" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(50, 30)
+level = 0
 is_display = true
 
 [node name="Ball12" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(70, 30)
+level = 0
 is_display = true
 
 [node name="Ball13" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(90, 30)
+level = 0
 is_display = true
 
 [node name="Ball14" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(110, 30)
+level = 0
 is_display = true
 
 [node name="Ball15" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(130, 30)
+level = 0
 is_display = true
 
 [node name="Ball16" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
 position = Vector2(150, 30)
+level = 0
 is_display = true
 
 [node name="Buttons" type="Control" parent="UI/Main"]
@@ -2377,7 +2418,53 @@ pivot_offset = Vector2(5, 0)
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
+[node name="BallPopup" type="Control" parent="UI/Main"]
+anchors_preset = 0
+
+[node name="Background" type="TextureRect" parent="UI/Main/BallPopup"]
+self_modulate = Color(0, 0, 0, 0.878431)
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 160.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="Level" type="Label" parent="UI/Main/BallPopup"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 80.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rarity" type="Label" parent="UI/Main/BallPopup"]
+self_modulate = Color(1, 1, 0, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_right = 400.0
+offset_bottom = 80.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "LEGENDARY"
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UI/Main/BallPopup"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 960.0
+offset_bottom = 520.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/normal_font = ExtResource("10_w3wxc")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "出現時にビリヤード盤面上の Ball LV.0 x[color=YELLOW][9][/color] を LV.15 x1 に変換する"
+
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_game_state_label", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
+visible = false
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -2428,6 +2515,7 @@ text = "Show/Hide Debug"
 vertical_alignment = 1
 
 [node name="DebugWindow" type="Control" parent="UIDebug"]
+visible = false
 anchors_preset = 0
 
 [node name="GameState" type="Label" parent="UIDebug/DebugWindow"]
