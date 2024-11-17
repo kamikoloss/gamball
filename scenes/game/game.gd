@@ -3,6 +3,7 @@ extends Node2D
 # TODO: Ball の処理を切り分ける
 
 
+enum GameState { GAME, COUNT_DOWN, TAX, SHOP }
 enum TaxType { MONEY, BALLS }
 enum TweenType { TAX_COUNT_DOWN }
 
@@ -45,6 +46,9 @@ const TAX_LIST = [
 @export var _products_parent: Control
 @export var _bunny: Bunny
 
+
+# ゲームの状態
+var game_state: GameState = GameState.GAME
 
 # TODO: Autoload に置いていい気がする
 var turn: int = 0:
@@ -209,12 +213,14 @@ func _on_tax_pay_button_pressed() -> void:
 
 	_game_ui.hide_tax_window()
 	_game_ui.show_shop_window()
+	game_state = GameState.SHOP
 
 
 func _on_shop_exit_button_pressed() -> void:
 	_refresh_next()
 	_game_ui.hide_shop_window()
 	_game_ui.hide_people_window()
+	game_state = GameState.GAME
 
 
 func _on_info_button_pressed() -> void:
@@ -402,13 +408,16 @@ func _refresh_next() -> void:
 func _go_to_next_turn() -> void:
 	turn += 1
 
-	if _next_tax_index < TAX_LIST.size():
-		if turn == TAX_LIST[_next_tax_index][0]:
-			_start_tax_count_down()
+	# 延長料支払いターンである場合: カウントダウンを表示する
+	var in_next_tax_turn = _next_tax_index < TAX_LIST.size() and TAX_LIST[_next_tax_index][0] < turn
+	if in_next_tax_turn and game_state == GameState.GAME:
+		_start_tax_count_down()
 
 
 # Tax Window 表示までのカウントダウンを開始する
 func _start_tax_count_down() -> void:
+	game_state = GameState.COUNT_DOWN
+
 	# バニーを表示する
 	_bunny.disable_touch() # バニーのタッチを無効にする
 	_game_ui.show_people_window()
@@ -431,6 +440,9 @@ func _start_tax_count_down() -> void:
 	tween.tween_callback(func(): _bunny.refresh_dialogue_label("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す
+
+	await tween.finished
+	game_state = GameState.TAX
 
 
 # Product に MONEY を伝達する
