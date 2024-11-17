@@ -203,7 +203,7 @@ func _pick_lamp_index_list() -> Array[int]:
 	var index_to_2 = index_to_1 + size * randi_range(0, 1) + randi_range(0, size) # size * 1-2
 
 	var index_list: Array[int] = [index_from, index_to_1, index_to_2]
-	print("[Pachinko] _pick_lamp_index_list() index_list: %s" % [index_list])
+	#print("[Pachinko] _pick_lamp_index_list() index_list: %s" % [index_list])
 	return index_list
 
 

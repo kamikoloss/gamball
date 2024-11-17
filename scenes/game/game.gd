@@ -30,6 +30,29 @@ const TAX_LIST = [
 	[300, TaxType.MONEY, 6400],	# Balls 6400
 ]
 
+# レア度の分子の割合
+const RAIRTY_WEIGHT = {
+	Ball.Rarity.COMMON: 50,
+	Ball.Rarity.UNCOMMON: 40,
+	Ball.Rarity.RARE: 30,
+	Ball.Rarity.EPIC: 20,
+	Ball.Rarity.LEGENDARY: 10,
+}
+# DECK Ball のレア度ごとの LV
+const DECK_BALL_LEVEL_RARITY = {
+	Ball.Rarity.UNCOMMON: [0, 1, 2, 3],
+	Ball.Rarity.RARE: [4, 5, 6, 7],
+	Ball.Rarity.EPIC: [8, 9, 10, 11],
+	Ball.Rarity.LEGENDARY: [12, 13, 14, 15],
+}
+# EXTRA Ball のレア度ごとの LV
+const EXTRA_BALL_LEVEL_RARITY = {
+	Ball.Rarity.UNCOMMON: [6, 7, 8, 9],
+	Ball.Rarity.RARE: [2, 3, 12, 13],
+	Ball.Rarity.EPIC: [4, 5, 10, 11],
+	Ball.Rarity.LEGENDARY: [0, 1, 14, 15],
+}
+
 
 # Scenes
 @export var _ball_scene: PackedScene
@@ -66,6 +89,9 @@ var balls: int = 0:
 		_game_ui.refresh_balls_label(value)
 
 
+# 次に訪れる TAX_LIST の index
+var _next_tax_index: int = 0
+
 # 現在ドラッグ中かどうか
 var _is_dragging: bool = false
 # ドラッグを開始した座標
@@ -76,10 +102,26 @@ var _drag_position_to: Vector2
 # NOTE: DRAG_LENGTH_MAX と反比例させる
 var _impulse_ratio: float = 10
 
-# 出現する Deck Ball level の初期リスト (確率込み)
-var _deck_level_list: Array[int] = [0, 0, 0, 0, 0, 1, 1, 1, 2, 2]
-# 出現する Extra Ball level の初期リスト (確率込み)
-var _extra_level_list: Array[int] = [5, 6, 7, 8, 9]
+# 出現する Deck Ball の初期リスト
+# [ [ LV, <Ball LV> ] ]
+var _deck_ball_list: Array[Ball] = [
+	Ball.new(0, Ball.Rarity.COMMON),
+	Ball.new(0, Ball.Rarity.COMMON),
+	Ball.new(0, Ball.Rarity.COMMON),
+	Ball.new(0, Ball.Rarity.COMMON),
+	Ball.new(0, Ball.Rarity.COMMON),
+	Ball.new(1, Ball.Rarity.COMMON),
+	Ball.new(1, Ball.Rarity.COMMON),
+	Ball.new(1, Ball.Rarity.COMMON),
+]
+# 出現する Extra Ball の初期リスト
+# [ [ LV, <Ball LV> ] ]
+var _extra_ball_list: Array[Ball] = [
+	Ball.new(2, Ball.Rarity.COMMON),
+	Ball.new(3, Ball.Rarity.COMMON),
+	Ball.new(4, Ball.Rarity.COMMON),
+	Ball.new(5, Ball.Rarity.COMMON),
+]
 # 払い出しキューが残っている Ball level のリスト
 var _payout_level_list: Array[int] = []
 # 何秒ごとに 1 Ball を払い出すか
@@ -92,9 +134,6 @@ var _buy_rate: Array[int] = [100, 25]
 # Ball の売却レート
 # [x, y] x balls = y money
 var _sell_rate: Array[int] = [50, 100]
-
-# 次に訪れる Tax
-var _next_tax_index = 0
 
 # { TweenType: Tween, ... } 
 var _tweens: Dictionary = {}
@@ -125,8 +164,9 @@ func _ready() -> void:
 			node.icon_pressed.connect(_on_product_icon_pressed)
 
 	# GameUi
-	_game_ui.refresh_balls_slot_deck(_deck_level_list)
-	_game_ui.refresh_balls_slot_extra(_extra_level_list)
+	_game_ui.refresh_balls_slot_deck(_deck_ball_list)
+	_game_ui.refresh_balls_slot_extra(_extra_ball_list)
+	_bunny.visible = false
 	_refresh_next()
 
 	# ボール購入ボタンを1プッシュする
@@ -240,8 +280,8 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			_pachinko.spawn_ball(new_ball)
 		Hole.HoleType.EXTRA:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
-			var level = _extra_level_list.pick_random()
-			var new_ball = _create_new_ball(level)
+			var random_ball: Ball = _extra_ball_list.pick_random()
+			var new_ball = _create_new_ball(random_ball.level, random_ball.rarity)
 			_billiards.spawn_extra_ball(new_ball)
 			# パチンコのラッシュ抽選を開始する
 			_pachinko.start_lottery()
@@ -274,8 +314,8 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 
 				# ビリヤード盤面上に Ball を生成する
 				balls -= 1
-				var level = _deck_level_list.pick_random()
-				var new_ball = _create_new_ball(level, false) # 最初の出現時には有効化されていない
+				var ball: Ball = _deck_ball_list.pick_random()
+				var new_ball = _create_new_ball(ball.level, ball.rarity, false) # 最初の出現時には有効化されていない
 				_billiards.spawn_ball(new_ball)
 				# 1ターン進める
 				# Ball 生成をなかったことにしてもこれはなかったことにはしない
@@ -287,15 +327,9 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 func _on_product_icon_pressed(product: Product) -> void:
 	# Money が足りない場合: 何もしない
 	if money < product.price:
-		print("[Main] no money!")
+		_bunny.shuffle_pose()
+		_bunny.refresh_dialogue_label("お金が足りないよ～")
 		return
-
-	var ball_level_rarity = {
-		Ball.Rarity.COMMON: [0, 1, 2, 3],
-		Ball.Rarity.RARE: [4, 5, 6, 7],
-		Ball.Rarity.EPIC: [8, 9, 10, 11],
-		Ball.Rarity.LEGENDARY: [12, 13, 14, 15],
-	}
 
 	# Product の効果を発動する
 	# TODO: マジックナンバーをなくす？
@@ -303,58 +337,59 @@ func _on_product_icon_pressed(product: Product) -> void:
 	match product.product_type:
 		Product.ProductType.DECK_PACK:
 			for i in 3:
-				if _deck_level_list.size() < DECK_MAX_SIZE:
-					var random_rarity = _pick_random_rarity()
-					var level = ball_level_rarity[random_rarity].pick_random()
-					_deck_level_list.push_back(level)
-					print("[Main] random_rarity: %s, level: %s" % [random_rarity, level])
+				if _deck_ball_list.size() < DECK_MAX_SIZE:
+					var level_rarity = _pick_random_rarity(true) # COMMON 抜き
+					var level = DECK_BALL_LEVEL_RARITY[level_rarity].pick_random()
+					_deck_ball_list.push_back(Ball.new(level))
+					print("[Main] DECK_PACK level: %s (%s)" % [level, Ball.Rarity.keys()[level_rarity]])
 		Product.ProductType.DECK_CLEANER:
-			if 1 < _deck_level_list.size():
-				_deck_level_list.sort()
-				_deck_level_list.pop_front()
+			# TODO: 最小数チェック
+			if 1 < _deck_ball_list.size():
+				_deck_ball_list.sort()
+				_deck_ball_list.pop_front()
 		Product.ProductType.EXTRA_PACK:
+			# TODO: 最大数チェック
 			for i in 2:
-				if _extra_level_list.size() < EXTRA_MAX_SIZE:
-					var random_rarity = _pick_random_rarity()
-					var level = ball_level_rarity[random_rarity].pick_random()
-					_extra_level_list.push_back(level)
-					print("[Main] random_rarity: %s, level: %s" % [random_rarity, level])
+				if _extra_ball_list.size() < EXTRA_MAX_SIZE:
+					var level_rarity = _pick_random_rarity(true) # COMMON 抜き
+					var level = EXTRA_BALL_LEVEL_RARITY[level_rarity].pick_random()
+					var rarity = _pick_random_rarity()
+					_extra_ball_list.push_back(Ball.new(level, rarity))
+					print("[Main] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
 		Product.ProductType.EXTRA_CLEANER:
-			if 1 < _extra_level_list.size():
-				_extra_level_list.sort()
-				_extra_level_list.pop_front()
+			if 1 < _extra_ball_list.size():
+				_extra_ball_list.sort()
+				_extra_ball_list.pop_front()
 
 	# return しなかった場合: Money を減らす
 	money -= product.price
 
 	# DECK, EXTRA の見た目を更新する
-	_game_ui.refresh_balls_slot_deck(_deck_level_list)
-	_game_ui.refresh_balls_slot_extra(_extra_level_list)
+	_game_ui.refresh_balls_slot_deck(_deck_ball_list)
+	_game_ui.refresh_balls_slot_extra(_extra_ball_list)
 
 
 # Ball instance を作成する
-func _create_new_ball(level: int = 0, is_active = true) -> Ball:
+func _create_new_ball(level: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, is_active = true) -> Ball:
 	var ball: Ball = _ball_scene.instantiate()
 	ball.level = level
+	ball.rarity = rarity
 	ball.is_active = is_active
 	_balls_parent.add_child(ball)
 	return ball
 
 
 # 重み付きのレア度を抽選する
-func _pick_random_rarity() -> Ball.Rarity:
-	# レア度の分子の割合
-	var rarity_weight = {
-		Ball.Rarity.COMMON: 40,
-		Ball.Rarity.RARE: 30,
-		Ball.Rarity.EPIC: 20,
-		Ball.Rarity.LEGENDARY: 10,
-	}
+# exclude_common: COMMON 抜きの抽選を行う (Ball LV 用)
+func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 	# 抽選の分母 (合計)
+	# TODO: 重み変更効果を実装するならここ？
 	var rarity_weight_total = 0
-	for rarity in rarity_weight.keys():
-		# TODO: 重み変更効果を実装するならここ
-		rarity_weight_total += rarity_weight[rarity]
+	for rarity in RAIRTY_WEIGHT.keys():
+		if exclude_common and rarity == Ball.Rarity.COMMON:
+			continue
+		else:
+			rarity_weight_total += RAIRTY_WEIGHT[rarity]
 
 	# 分母内の整数を抽選する
 	var random = randi_range(0, rarity_weight_total)
@@ -362,11 +397,14 @@ func _pick_random_rarity() -> Ball.Rarity:
 	# 抽選した整数に対応するレア度を決定する
 	var rarity_check = 0
 	var random_rarity = Ball.Rarity.COMMON
-	for rarity in rarity_weight.keys():
-		random_rarity = rarity
-		rarity_check += rarity_weight[rarity]
-		if random < rarity_check:
-			break
+	for rarity in RAIRTY_WEIGHT.keys():
+		if exclude_common and rarity == Ball.Rarity.COMMON:
+			continue
+		else:
+			random_rarity = rarity
+			rarity_check += RAIRTY_WEIGHT[rarity]
+			if random < rarity_check:
+				break
 
 	return random_rarity
 
@@ -408,7 +446,7 @@ func _refresh_next() -> void:
 func _go_to_next_turn() -> void:
 	turn += 1
 
-	# 延長料支払いターンである場合: カウントダウンを表示する
+	# 延長料支払いターンを超えている場合: カウントダウンを表示する
 	var in_next_tax_turn = _next_tax_index < TAX_LIST.size() and TAX_LIST[_next_tax_index][0] < turn
 	if in_next_tax_turn and game_state == GameState.GAME:
 		_start_tax_count_down()
@@ -419,6 +457,7 @@ func _start_tax_count_down() -> void:
 	game_state = GameState.COUNT_DOWN
 
 	# バニーを表示する
+	_bunny.visible = true
 	_bunny.disable_touch() # バニーのタッチを無効にする
 	_game_ui.show_people_window()
 	_bunny.refresh_dialogue_big_label("延長のお時間で～す")

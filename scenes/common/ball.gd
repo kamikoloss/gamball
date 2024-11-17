@@ -4,6 +4,8 @@ extends RigidBody2D
 
 # ボールのレア度
 enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
+# Tween
+enum TweenType { RARITY }
 
 
 # 残像の頂点数
@@ -11,17 +13,16 @@ const TRAIL_MAX_LENGTH = 15
 # 特殊なボール番号
 const BALL_LEVEL_EMPTY_SLOT = -1
 
-# ボールの色の定義 { <Level>: Color } 
+# ボールの本体の色の定義 { <Level>: Color } 
 const BALL_BODY_COLORS = {
-	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.5), # 空きスロット用
+	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.3), # 空きスロット用
 	0: Color(0.9, 0.9, 0.9), 1: Color.YELLOW, 2: Color.BLUE, 3: Color.RED,
 	4: Color.PURPLE, 5: Color.ORANGE, 6: Color.GREEN, 7: Color.SADDLE_BROWN,
 	8: Color(0.1, 0.1, 0.1), 9: Color.GOLD, 10: Color.LIGHT_BLUE, 11: Color.LIGHT_CORAL,
 	12: Color.LIGHT_SALMON, 13: Color.LIGHT_SALMON, 14: Color.LIGHT_GREEN, 15: Color.ROSY_BROWN,
 }
-# ボールのレア度の色  { <Rarity>: Color } 
+# ボールのレア度の色の定義  { <Rarity>: Color } 
 const BALL_RARITY_COLORS = {
-	Rarity.COMMON:		Color.DARK_GRAY,
 	Rarity.UNCOMMON:	Color.DARK_GREEN,
 	Rarity.RARE:		Color.DARK_BLUE,
 	Rarity.EPIC:		Color.DARK_ORCHID,
@@ -35,10 +36,11 @@ const BALL_RARITY_COLORS = {
 @export var is_display: bool = false
 
 
-# ボールの色部分
-@export var _main_texture: TextureRect
+# ボールの本体の色部分
+@export var _body_texture: TextureRect
 # ボール番号の背景部分
 @export var _inner_texture: TextureRect
+@export var _inner_texture_2: TextureRect
 # ボールが有効化されるまで全体を覆う部分
 @export var _mask_texture: TextureRect
 
@@ -55,7 +57,13 @@ var is_active = true
 var effects: Array[BallEffect] = []
 
 
+# 残像の頂点座標
 var _trail_points: Array = []
+
+
+func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
+	self.level = level
+	self.rarity = rarity
 
 
 func _ready() -> void:
@@ -75,19 +83,32 @@ func _process(delta: float) -> void:
 
 # 自身の見た目を更新する
 func refresh_view() -> void:
-	# 色
-	_main_texture.self_modulate = BALL_BODY_COLORS[level]
+	# 本体色
+	_body_texture.self_modulate = BALL_BODY_COLORS[level]
+	# レア度色
+	if rarity == Rarity.COMMON:
+		_inner_texture_2.self_modulate = Color.WHITE
+		_level_label.self_modulate = Color.BLACK
+	else:
+		#_inner_texture_2.self_modulate = Color(BALL_RARITY_COLORS[rarity], 0.3)
+		_level_label.self_modulate = BALL_RARITY_COLORS[rarity]
+	# マスク
 	_mask_texture.visible = not is_active # 有効なら表示しない
 
 	# ボール番号
 	if not is_active:
+		_inner_texture.visible = true
+		_inner_texture_2.visible = true
 		_level_label.visible = true
 		_level_label.text = "??"
 	elif level < 0:
 		_inner_texture.visible = false
+		_inner_texture_2.visible = false
 		_level_label.visible = false
+		_level_label.text = ""
 	else:
 		_inner_texture.visible = true
+		_inner_texture_2.visible = true
 		_level_label.visible = true
 		_level_label.text = str(level)
 

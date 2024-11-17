@@ -1784,167 +1784,171 @@ layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
 
-[node name="BallsSlotDeck" type="Control" parent="UI/Main"]
-anchors_preset = 0
+[node name="Label" type="Label" parent="UI/Main"]
+layout_mode = 0
 offset_left = 560.0
 offset_top = 40.0
-offset_right = 560.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="UI/Main/BallsSlotDeck"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
+offset_right = 880.0
+offset_bottom = 120.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "DECK"
 vertical_alignment = 1
 
+[node name="BallsSlotDeck" type="Control" parent="UI/Main"]
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 70.0
+offset_right = 560.0
+offset_bottom = 70.0
+
 [node name="Ball" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(10, 40)
+position = Vector2(10, 10)
 is_display = true
 
 [node name="Ball2" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(30, 40)
+position = Vector2(30, 10)
 is_display = true
 
 [node name="Ball3" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(50, 40)
+position = Vector2(50, 10)
 is_display = true
 
 [node name="Ball4" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(70, 40)
+position = Vector2(70, 10)
 is_display = true
 
 [node name="Ball5" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(90, 40)
+position = Vector2(90, 10)
 is_display = true
 
 [node name="Ball6" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(110, 40)
+position = Vector2(110, 10)
 is_display = true
 
 [node name="Ball7" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(130, 40)
+position = Vector2(130, 10)
 is_display = true
 
 [node name="Ball8" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(150, 40)
+position = Vector2(150, 10)
 is_display = true
 
 [node name="Ball9" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(10, 60)
+position = Vector2(10, 30)
 is_display = true
 
 [node name="Ball10" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(30, 60)
+position = Vector2(30, 30)
 is_display = true
 
 [node name="Ball11" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(50, 60)
+position = Vector2(50, 30)
 is_display = true
 
 [node name="Ball12" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(70, 60)
+position = Vector2(70, 30)
 is_display = true
 
 [node name="Ball13" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(90, 60)
+position = Vector2(90, 30)
 is_display = true
 
 [node name="Ball14" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(110, 60)
+position = Vector2(110, 30)
 is_display = true
 
 [node name="Ball15" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(130, 60)
+position = Vector2(130, 30)
 is_display = true
 
 [node name="Ball16" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
-position = Vector2(150, 60)
+position = Vector2(150, 30)
 is_display = true
 
-[node name="BallsSlotExtra" type="Control" parent="UI/Main"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Label2" type="Label" parent="UI/Main"]
+layout_mode = 0
 offset_left = 560.0
 offset_top = 120.0
-offset_right = 560.0
-offset_bottom = 120.0
-
-[node name="Label" type="Label" parent="UI/Main/BallsSlotExtra"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
+offset_right = 880.0
+offset_bottom = 200.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "EXTRA"
 vertical_alignment = 1
 
+[node name="BallsSlotExtra" type="Control" parent="UI/Main"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 150.0
+offset_right = 560.0
+offset_bottom = 150.0
+
 [node name="Ball" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(10, 40)
+position = Vector2(10, 10)
 is_display = true
 
 [node name="Ball2" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(30, 40)
+position = Vector2(30, 10)
 is_display = true
 
 [node name="Ball3" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(50, 40)
+position = Vector2(50, 10)
 is_display = true
 
 [node name="Ball4" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(70, 40)
+position = Vector2(70, 10)
 is_display = true
 
 [node name="Ball5" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(90, 40)
+position = Vector2(90, 10)
 is_display = true
 
 [node name="Ball6" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(110, 40)
+position = Vector2(110, 10)
 is_display = true
 
 [node name="Ball7" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(130, 40)
+position = Vector2(130, 10)
 is_display = true
 
 [node name="Ball8" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(150, 40)
+position = Vector2(150, 10)
 is_display = true
 
 [node name="Ball9" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(10, 60)
+position = Vector2(10, 30)
 is_display = true
 
 [node name="Ball10" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(30, 60)
+position = Vector2(30, 30)
 is_display = true
 
 [node name="Ball11" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(50, 60)
+position = Vector2(50, 30)
 is_display = true
 
 [node name="Ball12" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(70, 60)
+position = Vector2(70, 30)
 is_display = true
 
 [node name="Ball13" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(90, 60)
+position = Vector2(90, 30)
 is_display = true
 
 [node name="Ball14" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(110, 60)
+position = Vector2(110, 30)
 is_display = true
 
 [node name="Ball15" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(130, 60)
+position = Vector2(130, 30)
 is_display = true
 
 [node name="Ball16" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]
-position = Vector2(150, 60)
+position = Vector2(150, 30)
 is_display = true
 
 [node name="Buttons" type="Control" parent="UI/Main"]
@@ -2373,7 +2377,7 @@ pivot_offset = Vector2(5, 0)
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_game_state_label", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -2386,6 +2390,7 @@ _game_ui = NodePath("../UI")
 _bunny = NodePath("../UI/People/Bunny")
 _debug_button = NodePath("Debug")
 _debug_window = NodePath("DebugWindow")
+_game_state_label = NodePath("DebugWindow/GameState")
 _restart_game_button = NodePath("DebugWindow/RestartGame")
 _turn_plus_button = NodePath("DebugWindow/TurnPlus")
 _turn_minus_button = NodePath("DebugWindow/TurnMinus")
@@ -2425,10 +2430,22 @@ vertical_alignment = 1
 [node name="DebugWindow" type="Control" parent="UIDebug"]
 anchors_preset = 0
 
-[node name="<Game>" type="Label" parent="UIDebug/DebugWindow"]
+[node name="GameState" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 640.0
+offset_bottom = 100.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "State: XXXX"
+vertical_alignment = 1
+
+[node name="<Game>" type="Label" parent="UIDebug/DebugWindow"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 20.0
+offset_right = 800.0
 offset_bottom = 100.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2438,8 +2455,9 @@ vertical_alignment = 1
 
 [node name="RestartGame" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 40.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 60.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2455,8 +2473,9 @@ vertical_alignment = 1
 
 [node name="TurnPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 60.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2472,8 +2491,9 @@ vertical_alignment = 1
 
 [node name="TurnMinus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 80.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2489,8 +2509,9 @@ vertical_alignment = 1
 
 [node name="MoneyPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 100.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2506,8 +2527,9 @@ vertical_alignment = 1
 
 [node name="MoneyMinus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 120.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2523,8 +2545,9 @@ vertical_alignment = 1
 
 [node name="BallsPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 140.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 160.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2540,8 +2563,9 @@ vertical_alignment = 1
 
 [node name="BallsMinus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 160.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 180.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2557,8 +2581,9 @@ vertical_alignment = 1
 
 [node name="<Pachinko>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 180.0
-offset_right = 640.0
+offset_right = 800.0
 offset_bottom = 260.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2568,8 +2593,9 @@ vertical_alignment = 1
 
 [node name="StartLottery" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 200.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 220.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2585,8 +2611,9 @@ vertical_alignment = 1
 
 [node name="StartRush" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 220.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 240.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2602,8 +2629,9 @@ vertical_alignment = 1
 
 [node name="FinishRush" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
+offset_left = 160.0
 offset_top = 240.0
-offset_right = 160.0
+offset_right = 320.0
 offset_bottom = 260.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2619,9 +2647,9 @@ vertical_alignment = 1
 
 [node name="<Tax>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 20.0
-offset_right = 800.0
+offset_right = 960.0
 offset_bottom = 100.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2631,9 +2659,9 @@ vertical_alignment = 1
 
 [node name="ShowTax" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 40.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 60.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2649,9 +2677,9 @@ vertical_alignment = 1
 
 [node name="HideTax" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 60.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2667,9 +2695,9 @@ vertical_alignment = 1
 
 [node name="<Shop>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 80.0
-offset_right = 800.0
+offset_right = 960.0
 offset_bottom = 160.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2679,9 +2707,9 @@ vertical_alignment = 1
 
 [node name="ShowShop" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 100.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2697,9 +2725,9 @@ vertical_alignment = 1
 
 [node name="HideShop" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 120.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2715,9 +2743,9 @@ vertical_alignment = 1
 
 [node name="<People>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 140.0
-offset_right = 800.0
+offset_right = 960.0
 offset_bottom = 220.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2727,9 +2755,9 @@ vertical_alignment = 1
 
 [node name="ShowPeople" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 160.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 180.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2745,9 +2773,9 @@ vertical_alignment = 1
 
 [node name="HidePeople" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 180.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 200.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2763,9 +2791,9 @@ vertical_alignment = 1
 
 [node name="RefreshDialogue" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 200.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 220.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2781,9 +2809,9 @@ vertical_alignment = 1
 
 [node name="RefreshDialogueBig" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 220.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 240.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2799,9 +2827,9 @@ vertical_alignment = 1
 
 [node name="ShufflePose" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 240.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 260.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 

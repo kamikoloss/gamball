@@ -16,38 +16,21 @@ radius = 15.0
 _data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 1, 0]
 point_count = 2
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_main_texture", "_inner_texture", "_mask_texture", "_level_label", "_hole_area", "_trail_line")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_body_texture", "_inner_texture", "_inner_texture_2", "_mask_texture", "_level_label", "_hole_area", "_trail_line")]
 z_index = 4
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
-_main_texture = NodePath("View/Body")
+_body_texture = NodePath("View/Body")
 _inner_texture = NodePath("View/Inner")
+_inner_texture_2 = NodePath("View/Inner2")
 _mask_texture = NodePath("View/Mask")
 _level_label = NodePath("View/Level")
 _hole_area = NodePath("Area2D")
 _trail_line = NodePath("Trail")
 
 [node name="View" type="Node2D" parent="."]
-
-[node name="Rarity" type="TextureRect" parent="View"]
-self_modulate = Color(1, 1, 0, 1)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.6, 1.6)
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("2_4bc8b")
-expand_mode = 1
 
 [node name="Body" type="TextureRect" parent="View"]
 self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
@@ -83,6 +66,22 @@ pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
+[node name="Inner2" type="TextureRect" parent="View"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("2_4bc8b")
+expand_mode = 1
+
 [node name="Mask" type="TextureRect" parent="View"]
 visible = false
 self_modulate = Color(0, 1, 1, 1)
@@ -103,13 +102,13 @@ texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
 [node name="Level" type="Label" parent="View"]
-offset_left = -40.0
+offset_left = -80.0
 offset_top = -40.0
-offset_right = 40.0
+offset_right = 80.0
 offset_bottom = 40.0
 scale = Vector2(0.25, 0.25)
-pivot_offset = Vector2(40, 40)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+pivot_offset = Vector2(80, 40)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_r213a")
 theme_override_font_sizes/font_size = 64
 text = "99"
@@ -117,6 +116,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_rn34c")
 
 [node name="Area2D" type="Area2D" parent="."]

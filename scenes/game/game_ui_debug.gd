@@ -14,6 +14,11 @@ extends Control
 @export var _debug_button: Button
 @export var _debug_window: Control
 
+# Label
+@export_category("Label")
+@export var _game_state_label: Label
+
+# Button
 # TODO: 動的に生成する
 @export_category("Game")
 @export var _restart_game_button: Button
@@ -80,3 +85,7 @@ func _ready() -> void:
 	_refresh_dialogue_button.pressed.connect(func(): _bunny.refresh_dialogue_label(_sample_dialogue_list.pick_random()))
 	_refresh_dialogue_big_button.pressed.connect(func(): _bunny.refresh_dialogue_big_label(_sample_dialogue_big_list.pick_random()))
 	_shuffle_pose_button.pressed.connect(func(): _bunny.shuffle_pose())
+
+
+func _process(delta: float) -> void:
+	_game_state_label.text = "State: %s" % [Game.GameState.keys()[_game.game_state]]

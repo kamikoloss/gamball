@@ -112,11 +112,11 @@ func hide_people_window() -> void:
 
 
 #Main/BallsSlotXxxx
-func refresh_balls_slot_deck(deck_level_list: Array[int]) -> void:
-	_refresh_balls_slot(_balls_slot_deck, deck_level_list)
+func refresh_balls_slot_deck(deck_ball_list: Array[Ball]) -> void:
+	_refresh_balls_slot(_balls_slot_deck, deck_ball_list)
 
-func refresh_balls_slot_extra(extra_level_list: Array[int]) -> void:
-	_refresh_balls_slot(_balls_slot_extra, extra_level_list)
+func refresh_balls_slot_extra(extra_ball_list: Array[Ball]) -> void:
+	_refresh_balls_slot(_balls_slot_extra, extra_ball_list)
 
 
 # Main/Score
@@ -167,14 +167,16 @@ func refresh_arrow(deg: int, scale: float) -> void:
 	_arrow_square.scale.y = scale
 
 
-func _refresh_balls_slot(parent_node: Node, level_list: Array[int]) -> void:
+func _refresh_balls_slot(parent_node: Node, ball_list: Array[Ball]) -> void:
 	var index = 0
 	for node in parent_node.get_children():
 		if node is Ball: # Label もある
-			if index < level_list.size():
-				node.level = level_list[index]
+			if index < ball_list.size():
+				node.level = ball_list[index].level
+				node.rarity = ball_list[index].rarity
 			else:
 				node.level = Ball.BALL_LEVEL_EMPTY_SLOT
+				node.rarity = Ball.Rarity.COMMON
 			node.refresh_view()
 			index += 1
 
