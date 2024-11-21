@@ -21,6 +21,8 @@ const WINDOW_POSITION_RIGHT_TO: Vector2 = Vector2(720, 0)
 const WINDOW_POSITION_TO: Vector2 = Vector2(0, 0)
 const WINDOW_MOVE_DURATION: float = 1.0
 
+const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 80)
+
 
 @export_category("Main/Ball")
 @export var _balls_slot_deck: Control
@@ -29,7 +31,6 @@ const WINDOW_MOVE_DURATION: float = 1.0
 @export var _ball_popup_level: Label
 @export var _ball_popup_rarity: Label
 @export var _ball_popup_description: RichTextLabel
-
 @export_category("Main/Buttons")
 @export var _buy_balls_button: Button
 @export var _sell_balls_button: Button
@@ -65,14 +66,22 @@ var _tweens: Dictionary = {}
 
 
 func _ready() -> void:
+	# Main/Ball
+	for node in _balls_slot_extra.get_children():
+		if node is Ball:
+			node.pressed.connect(_show_ball_popup)
+	_hide_ball_popup()
+
 	# Main/Buttons
 	_buy_balls_button.pressed.connect(func(): buy_balls_button_pressed.emit())
 	_sell_balls_button.pressed.connect(func(): sell_balls_button_pressed.emit())
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
 	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
 	_info_button.pressed.connect(func(): info_button_pressed.emit())
+
 	# Main/DragPoint
 	hide_drag_point()
+
 	# Main/Arrow
 	hide_arrow()
 
@@ -170,6 +179,18 @@ func hide_arrow() -> void:
 func refresh_arrow(deg: int, scale: float) -> void:
 	_arrow.rotation_degrees = deg
 	_arrow_square.scale.y = scale
+
+
+func _show_ball_popup(ball: Ball) -> void:
+	print("_show_ball_popup(%s)" % [ball])
+	_ball_popup.visible = true
+	_ball_popup.position = ball.position + BALL_POPUP_POSITION_DIFF
+	_ball_popup_level.text = str(ball.level)
+	_ball_popup_rarity.text = Ball.Rarity.keys()[ball.rarity]
+	_ball_popup_description.text = BallEffect.get_effect_description(ball.level, ball.rarity)
+
+func _hide_ball_popup() -> void:
+	_ball_popup.visible = false
 
 
 func _refresh_balls_slot(parent_node: Node, ball_list: Array[Ball]) -> void:

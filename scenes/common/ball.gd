@@ -2,9 +2,7 @@ class_name Ball
 extends RigidBody2D
 
 
-signal pressed
-#signal mouse_entered # CollisionObject2D が発火する
-#signal mouse_exited # CollisionObject2D が発火する
+signal pressed # (self)
 
 
 # ボールのレア度
@@ -28,10 +26,11 @@ const BALL_BODY_COLORS = {
 }
 # ボールのレア度の色の定義  { <Rarity>: Color } 
 const BALL_RARITY_COLORS = {
-	Rarity.UNCOMMON:	Color.DARK_GREEN,
-	Rarity.RARE:		Color.DARK_BLUE,
-	Rarity.EPIC:		Color.DARK_ORCHID,
-	Rarity.LEGENDARY:	Color.DARK_GOLDENROD,
+	Rarity.COMMON: Color.WHITE,
+	Rarity.UNCOMMON: Color(Color.GREEN, 0.5),
+	Rarity.RARE: Color(Color.BLUE, 0.5),
+	Rarity.EPIC: Color(Color.PURPLE, 0.5),
+	Rarity.LEGENDARY: Color(Color.YELLOW, 0.5),
 }
 
 
@@ -59,7 +58,8 @@ var is_active = true
 # ボールのレア度
 var rarity: Rarity = Rarity.COMMON
 # ボールの効果
-var effects: Array[BallEffect] = []
+# [ [ <BallEffect.EffectType>, param1, (param2) ], ... ]
+var effects: Array = []
 
 
 # 残像の頂点座標
@@ -143,4 +143,5 @@ func _on_body_entered(body: Node) -> void:
 func _on_input(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			pressed.emit()
+			print("[Ball] pressed!")
+			pressed.emit(self)

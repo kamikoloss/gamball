@@ -152,3 +152,24 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.RARITY_TOP_DOWN, Ball.Rarity.COMMON],
 	},
 }
+
+
+# 効果の説明文を取得する
+static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
+	var effect_data = EFFECTS_POOL_1[level][rarity]
+
+	if level == -1:
+		return  "----"
+	if rarity == Ball.Rarity.COMMON:
+		return "(効果なし)"
+
+	var description_base = EFFECT_DESCRIPTIONS[effect_data[0]]
+	var rarity_color: Color = Ball.BALL_RARITY_COLORS[rarity]
+	var rarity_color_code = rarity_color.to_html()
+
+	if effect_data.size() == 2:
+		return description_base.format({ "r": rarity_color_code, "a": effect_data[1] })
+	elif effect_data.size() == 3:
+		return description_base.format({ "r": rarity_color_code, "a": effect_data[1], "b": effect_data[2] })
+
+	return ""
