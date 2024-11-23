@@ -30,7 +30,7 @@ const BALL_RARITY_COLORS = {
 	Rarity.COMMON: Color.WHITE,
 	Rarity.UNCOMMON: Color.GREEN,
 	Rarity.RARE: Color.CYAN,
-	Rarity.EPIC: Color.PURPLE,
+	Rarity.EPIC: Color.MAGENTA,
 	Rarity.LEGENDARY: Color.YELLOW,
 }
 

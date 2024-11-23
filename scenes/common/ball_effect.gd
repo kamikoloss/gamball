@@ -31,12 +31,12 @@ enum EffectType {
 const EFFECT_DESCRIPTIONS = {
 	EffectType.BILLIARDS_COUNT_GAIN_UP: "ビリヤード盤面上の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][+{b}][/color]",
 	EffectType.BILLIARDS_COUNT_GAIN_UP_2: "ビリヤード盤面上の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][x{b}][/color]",
-	EffectType.BILLIARDS_LV_UP_ON_SPAWN: "出現時にビリヤード盤面上の Ball LV [color={r}][+{a}]",
+	EffectType.BILLIARDS_LV_UP_ON_SPAWN: "出現時にビリヤード盤面上の Ball LV [color={r}][+{a}][/color]",
 	EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN: "出現時にビリヤード顔面上の Ball LV 0 [color={r}][x{a}][/color] を LV 15 x1 に変換する",
 	EffectType.DECK_MIN_SIZE_DOWN: "DECK の最小サイズ [color={r}][-{a}][/color]",
-	EffectType.DECK_COMPLETE_GAIN_UP: "Deck に [color={r}][0-{a}][/color] が揃っているとき Gain [color={r}][x{b}][/color]",
-	EffectType.DECK_COUNT_GAIN_UP: "Deck の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][+{b}][/color]",
-	EffectType.EXTRA_MAX_SIZE_UP: "Extra の最大サイズ [color={r}][+{a}][/color]",
+	EffectType.DECK_COMPLETE_GAIN_UP: "DECK に [color={r}][0-{a}][/color] が揃っているとき Gain [color={r}][x{b}][/color]",
+	EffectType.DECK_COUNT_GAIN_UP: "DECK の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][+{b}][/color]",
+	EffectType.EXTRA_MAX_SIZE_UP: "EXTRA の最大サイズ [color={r}][+{a}][/color]",
 	EffectType.HOLE_GAIN_UP: "Hole の Gain [color={r}][+{a}][/color]",
 	EffectType.HOLE_SIZE_UP: "Hole のサイズ [color={r}][x{a}][/color]",
 	EffectType.HOLE_GRAVITY_SIZE_UP: "Hole の重力範囲サイズ [color={r}][x{a}][/color]",
@@ -154,21 +154,25 @@ const EFFECTS_POOL_1 = {
 }
 
 
-# 効果の説明文を取得する
+# 効果の説明文 (RichTextLabel 用) を取得する
 static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
 	if level == -1:
 		return "(空きスロット)"
 	if rarity == Ball.Rarity.COMMON:
 		return "(効果なし)"
 
-	var effect_data = EFFECTS_POOL_1[level][rarity]
+	var effect_data = EFFECTS_POOL_1[level][rarity] # [ <EffectType>, param1, (param2) ]
 	var description_base = EFFECT_DESCRIPTIONS[effect_data[0]]
 	var rarity_color: Color = Ball.BALL_RARITY_COLORS[rarity]
 	var rarity_color_code = rarity_color.to_html()
 
+	if effect_data[1] in [EffectType.RARITY_TOP_UP, EffectType.RARITY_TOP_DOWN]:
+		var a = Ball.Rarity.keys()[effect_data[1]]
+		return description_base.format({ "r": rarity_color_code, "a": a })
+
 	if effect_data.size() == 2:
 		return description_base.format({ "r": rarity_color_code, "a": effect_data[1] })
-	elif effect_data.size() == 3:
+	if effect_data.size() == 3:
 		return description_base.format({ "r": rarity_color_code, "a": effect_data[1], "b": effect_data[2] })
 
 	return ""
