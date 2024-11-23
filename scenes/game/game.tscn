@@ -2378,6 +2378,8 @@ texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="BallPopup" type="Control" parent="UI/Main"]
+visible = false
+z_index = 4
 anchors_preset = 0
 
 [node name="Background" type="TextureRect" parent="UI/Main/BallPopup"]
@@ -2474,14 +2476,13 @@ text = "Show/Hide Debug"
 vertical_alignment = 1
 
 [node name="DebugWindow" type="Control" parent="UIDebug"]
-visible = false
 anchors_preset = 0
 
 [node name="GameState" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_top = 20.0
-offset_right = 640.0
-offset_bottom = 100.0
+offset_left = 160.0
+offset_right = 800.0
+offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2490,9 +2491,8 @@ vertical_alignment = 1
 
 [node name="<Game>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 20.0
-offset_right = 800.0
+offset_right = 640.0
 offset_bottom = 100.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2502,9 +2502,8 @@ vertical_alignment = 1
 
 [node name="RestartGame" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 40.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 60.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2520,9 +2519,8 @@ vertical_alignment = 1
 
 [node name="TurnPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 60.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2538,9 +2536,8 @@ vertical_alignment = 1
 
 [node name="TurnMinus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 80.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2556,9 +2553,8 @@ vertical_alignment = 1
 
 [node name="MoneyPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 100.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2574,9 +2570,8 @@ vertical_alignment = 1
 
 [node name="MoneyMinus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 120.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2592,9 +2587,8 @@ vertical_alignment = 1
 
 [node name="BallsPlus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 140.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 160.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2610,9 +2604,8 @@ vertical_alignment = 1
 
 [node name="BallsMinus" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 160.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 180.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2628,9 +2621,8 @@ vertical_alignment = 1
 
 [node name="<Pachinko>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 180.0
-offset_right = 800.0
+offset_right = 640.0
 offset_bottom = 260.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2640,9 +2632,8 @@ vertical_alignment = 1
 
 [node name="StartLottery" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 200.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 220.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2658,9 +2649,8 @@ vertical_alignment = 1
 
 [node name="StartRush" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 220.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 240.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2676,9 +2666,8 @@ vertical_alignment = 1
 
 [node name="FinishRush" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 160.0
 offset_top = 240.0
-offset_right = 320.0
+offset_right = 160.0
 offset_bottom = 260.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2694,9 +2683,9 @@ vertical_alignment = 1
 
 [node name="<Tax>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 20.0
-offset_right = 960.0
+offset_right = 800.0
 offset_bottom = 100.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2706,9 +2695,9 @@ vertical_alignment = 1
 
 [node name="ShowTax" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 40.0
-offset_right = 480.0
+offset_right = 320.0
 offset_bottom = 60.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2724,9 +2713,9 @@ vertical_alignment = 1
 
 [node name="HideTax" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 60.0
-offset_right = 480.0
+offset_right = 320.0
 offset_bottom = 80.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2742,9 +2731,9 @@ vertical_alignment = 1
 
 [node name="<Shop>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 80.0
-offset_right = 960.0
+offset_right = 800.0
 offset_bottom = 160.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2754,9 +2743,9 @@ vertical_alignment = 1
 
 [node name="ShowShop" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 100.0
-offset_right = 480.0
+offset_right = 320.0
 offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2772,9 +2761,9 @@ vertical_alignment = 1
 
 [node name="HideShop" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 120.0
-offset_right = 480.0
+offset_right = 320.0
 offset_bottom = 140.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2790,9 +2779,9 @@ vertical_alignment = 1
 
 [node name="<People>" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 140.0
-offset_right = 960.0
+offset_right = 800.0
 offset_bottom = 220.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2802,9 +2791,9 @@ vertical_alignment = 1
 
 [node name="ShowPeople" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 160.0
-offset_right = 480.0
+offset_right = 320.0
 offset_bottom = 180.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2820,9 +2809,9 @@ vertical_alignment = 1
 
 [node name="HidePeople" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 180.0
-offset_right = 480.0
+offset_right = 320.0
 offset_bottom = 200.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2838,9 +2827,9 @@ vertical_alignment = 1
 
 [node name="RefreshDialogue" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 200.0
-offset_right = 480.0
+offset_right = 320.0
 offset_bottom = 220.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2856,9 +2845,9 @@ vertical_alignment = 1
 
 [node name="RefreshDialogueBig" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 220.0
-offset_right = 480.0
+offset_right = 320.0
 offset_bottom = 240.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
@@ -2874,9 +2863,9 @@ vertical_alignment = 1
 
 [node name="ShufflePose" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 160.0
 offset_top = 240.0
-offset_right = 480.0
+offset_right = 320.0
 offset_bottom = 260.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 

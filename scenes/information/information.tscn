@@ -74,9 +74,9 @@ vertical_alignment = 1
 
 [node name="Balls" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 100.0
+offset_left = 140.0
 offset_top = 180.0
-offset_right = 100.0
+offset_right = 140.0
 offset_bottom = 180.0
 
 [node name="Ball" parent="Balls" instance=ExtResource("4_p785c")]
@@ -95,136 +95,51 @@ position = Vector2(120, 0)
 is_display = true
 
 [node name="Ball5" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(0, 40)
+position = Vector2(160, 0)
 is_display = true
 
 [node name="Ball6" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(40, 40)
+position = Vector2(200, 0)
 is_display = true
 
 [node name="Ball7" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(80, 40)
+position = Vector2(240, 0)
 is_display = true
 
 [node name="Ball8" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(120, 40)
+position = Vector2(280, 0)
 is_display = true
 
 [node name="Ball9" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(0, 80)
-is_display = true
-
-[node name="Ball10" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(40, 80)
-is_display = true
-
-[node name="Ball11" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(80, 80)
-is_display = true
-
-[node name="Ball12" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(120, 80)
-is_display = true
-
-[node name="Ball13" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(0, 120)
-is_display = true
-
-[node name="Ball14" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(40, 120)
-is_display = true
-
-[node name="Ball15" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(80, 120)
-is_display = true
-
-[node name="Ball16" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(120, 120)
-is_display = true
-
-[node name="Pool2" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 320.0
-offset_top = 140.0
-offset_right = 960.0
-offset_bottom = 220.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("3_77b3f")
-theme_override_font_sizes/font_size = 64
-text = "POOL 2"
-vertical_alignment = 1
-
-[node name="Balls2" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = 340.0
-offset_top = 180.0
-offset_right = 340.0
-offset_bottom = 180.0
-
-[node name="Ball" parent="Balls2" instance=ExtResource("4_p785c")]
-is_display = true
-
-[node name="Ball2" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(40, 0)
-is_display = true
-
-[node name="Ball3" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(80, 0)
-is_display = true
-
-[node name="Ball4" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(120, 0)
-is_display = true
-
-[node name="Ball5" parent="Balls2" instance=ExtResource("4_p785c")]
 position = Vector2(0, 40)
 is_display = true
 
-[node name="Ball6" parent="Balls2" instance=ExtResource("4_p785c")]
+[node name="Ball10" parent="Balls" instance=ExtResource("4_p785c")]
 position = Vector2(40, 40)
 is_display = true
 
-[node name="Ball7" parent="Balls2" instance=ExtResource("4_p785c")]
+[node name="Ball11" parent="Balls" instance=ExtResource("4_p785c")]
 position = Vector2(80, 40)
 is_display = true
 
-[node name="Ball8" parent="Balls2" instance=ExtResource("4_p785c")]
+[node name="Ball12" parent="Balls" instance=ExtResource("4_p785c")]
 position = Vector2(120, 40)
 is_display = true
 
-[node name="Ball9" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(0, 80)
+[node name="Ball13" parent="Balls" instance=ExtResource("4_p785c")]
+position = Vector2(160, 40)
 is_display = true
 
-[node name="Ball10" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(40, 80)
+[node name="Ball14" parent="Balls" instance=ExtResource("4_p785c")]
+position = Vector2(200, 40)
 is_display = true
 
-[node name="Ball11" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(80, 80)
+[node name="Ball15" parent="Balls" instance=ExtResource("4_p785c")]
+position = Vector2(240, 40)
 is_display = true
 
-[node name="Ball12" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(120, 80)
-is_display = true
-
-[node name="Ball13" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(0, 120)
-is_display = true
-
-[node name="Ball14" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(40, 120)
-is_display = true
-
-[node name="Ball15" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(80, 120)
-is_display = true
-
-[node name="Ball16" parent="Balls2" instance=ExtResource("4_p785c")]
-position = Vector2(120, 120)
+[node name="Ball16" parent="Balls" instance=ExtResource("4_p785c")]
+position = Vector2(280, 40)
 is_display = true
 
 [node name="BallPopup" type="Control" parent="."]

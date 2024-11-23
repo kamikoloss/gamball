@@ -67,9 +67,11 @@ var _tweens: Dictionary = {}
 
 func _ready() -> void:
 	# Main/Ball
+	for node in _balls_slot_deck.get_children():
+		if node is Ball:
+			node.hovered.connect(func(entered): _show_ball_popup(node) if entered else _hide_ball_popup())
 	for node in _balls_slot_extra.get_children():
 		if node is Ball:
-			#node.pressed.connect(_show_ball_popup)
 			node.hovered.connect(func(entered): _show_ball_popup(node) if entered else _hide_ball_popup())
 	_hide_ball_popup()
 

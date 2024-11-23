@@ -48,12 +48,12 @@ anchors_preset = 0
 [node name="Version" type="Label" parent="."]
 z_index = 99
 offset_left = 1200.0
-offset_top = 680.0
+offset_top = 690.0
 offset_right = 1520.0
-offset_bottom = 840.0
+offset_bottom = 850.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("3_i67e3")
 theme_override_font_sizes/font_size = 64
 text = "v0.3.0"
 horizontal_alignment = 2
-vertical_alignment = 2
+vertical_alignment = 1
