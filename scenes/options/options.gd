@@ -2,6 +2,12 @@ class_name Options
 extends Control
 
 
+signal exit_button_pressed
+
+
+@export var _exit_button: TextureButton
+
+@export_category("Audio")
 @export var _audio_master_slider: HSlider
 @export var _audio_master_slider_label: Label
 @export var _audio_bgm_slider: HSlider
@@ -11,9 +17,13 @@ extends Control
 
 
 func _ready() -> void:
-	# TODO: SaveManager で設定を読み込む
+	# TODO: ConfifgManager で設定を読み込む
+	_on_audio_slider_changed(AudioManager.BusType.MASTER, 8)
+	_on_audio_slider_changed(AudioManager.BusType.BGM, 8)
+	_on_audio_slider_changed(AudioManager.BusType.SE, 8)
 
 	# Signal
+	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
 	_audio_master_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.MASTER, v))
 	_audio_bgm_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.BGM, v))
 	_audio_se_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.SE, v))

@@ -186,9 +186,14 @@ func _show_ball_popup(ball: Ball) -> void:
 	#print("[GameUi] _show_ball_popup(%s)" % [ball])
 	_ball_popup.visible = true
 	_ball_popup.position = ball.global_position + BALL_POPUP_POSITION_DIFF
-	_ball_popup_level.text = str(ball.level)
-	_ball_popup_rarity.text = Ball.Rarity.keys()[ball.rarity]
-	_ball_popup_rarity.self_modulate = Ball.BALL_RARITY_COLORS[ball.rarity]
+	if ball.level == Ball.BALL_LEVEL_EMPTY_SLOT:
+		_ball_popup_level.text = "-"
+		_ball_popup_rarity.text = ""
+		_ball_popup_rarity.self_modulate = Color.WHITE
+	else:
+		_ball_popup_level.text = str(ball.level)
+		_ball_popup_rarity.text = Ball.Rarity.keys()[ball.rarity]
+		_ball_popup_rarity.self_modulate = Ball.BALL_RARITY_COLORS[ball.rarity]
 	_ball_popup_description.text = BallEffect.get_effect_description(ball.level, ball.rarity)
 
 func _hide_ball_popup() -> void:

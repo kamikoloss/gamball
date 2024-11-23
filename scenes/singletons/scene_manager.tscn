@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://byves5qpwewta"]
+
+[ext_resource type="Script" path="res://scenes/singletons/scene_manager.gd" id="1_axwg5"]
+[ext_resource type="PackedScene" uid="uid://l2y3sq1ikgmx" path="res://scenes/game/game.tscn" id="2_k43e2"]
+[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="2_xeacv"]
+[ext_resource type="PackedScene" uid="uid://0ajps5kdo6nb" path="res://scenes/information/information.tscn" id="3_aef2h"]
+[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="3_i67e3"]
+[ext_resource type="PackedScene" uid="uid://b572sr4hn8ps8" path="res://scenes/title/title.tscn" id="3_oyfl5"]
+[ext_resource type="PackedScene" uid="uid://dt4t8h3rfr8gk" path="res://scenes/options/options.tscn" id="4_gqtso"]
+
+[node name="SceneManager" type="Node" node_paths=PackedStringArray("title", "information", "options", "_curtain")]
+script = ExtResource("1_axwg5")
+title = NodePath("LoadedScenes/Title")
+information = NodePath("LoadedScenes/Information")
+options = NodePath("LoadedScenes/Options")
+_game_scene = ExtResource("2_k43e2")
+_curtain = NodePath("Curtain")
+
+[node name="LoadedScenes" type="Node" parent="."]
+
+[node name="Title" parent="LoadedScenes" instance=ExtResource("3_oyfl5")]
+
+[node name="Information" parent="LoadedScenes" instance=ExtResource("3_aef2h")]
+visible = false
+
+[node name="Options" parent="LoadedScenes" instance=ExtResource("4_gqtso")]
+visible = false
+
+[node name="Curtain" type="Control" parent="."]
+visible = false
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="Curtain"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("2_xeacv")
+expand_mode = 1
+
+[node name="Loading" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Version" type="Label" parent="."]
+z_index = 99
+offset_left = 1200.0
+offset_top = 680.0
+offset_right = 1520.0
+offset_bottom = 840.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("3_i67e3")
+theme_override_font_sizes/font_size = 64
+text = "v0.3.0"
+horizontal_alignment = 2
+vertical_alignment = 2

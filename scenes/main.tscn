@@ -1,61 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxkwcbih1rjqx"]
+[gd_scene load_steps=2 format=3 uid="uid://cxkwcbih1rjqx"]
 
-[ext_resource type="PackedScene" uid="uid://b572sr4hn8ps8" path="res://scenes/title/title.tscn" id="1_oaxe4"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_weokb"]
-[ext_resource type="PackedScene" uid="uid://l2y3sq1ikgmx" path="res://scenes/game/game.tscn" id="2_bq2dv"]
-[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="3_yy207"]
-[ext_resource type="PackedScene" uid="uid://dt4t8h3rfr8gk" path="res://scenes/options/options.tscn" id="5_u1stv"]
-[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="6_mi8gx"]
-[ext_resource type="PackedScene" uid="uid://0ajps5kdo6nb" path="res://scenes/information/information.tscn" id="7_rxgvf"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("_camera", "_curtain", "_title", "_information", "_options")]
+[node name="Main" type="Node"]
 script = ExtResource("1_weokb")
-_game_scene = ExtResource("2_bq2dv")
-_camera = NodePath("Camera2D")
-_curtain = NodePath("Camera2D/Curtain")
-_title = NodePath("Title")
-_information = NodePath("Information")
-_options = NodePath("Options")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-
-[node name="Curtain" type="Control" parent="Camera2D"]
-visible = false
-z_index = 100
-layout_mode = 3
-anchors_preset = 0
-
-[node name="TextureRect" type="TextureRect" parent="Camera2D/Curtain"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_right = 1280.0
-offset_bottom = 720.0
-mouse_filter = 2
-texture = ExtResource("3_yy207")
-expand_mode = 1
-
-[node name="Loading" type="Control" parent="Camera2D"]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="Version" type="Label" parent="Camera2D"]
-z_index = 99
-offset_left = 1200.0
-offset_top = 680.0
-offset_right = 1520.0
-offset_bottom = 840.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("6_mi8gx")
-theme_override_font_sizes/font_size = 64
-text = "v0.3.0"
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="Title" parent="." instance=ExtResource("1_oaxe4")]
-
-[node name="Information" parent="." instance=ExtResource("7_rxgvf")]
-
-[node name="Options" parent="." instance=ExtResource("5_u1stv")]
-offset_left = -1280.0
-offset_right = -1280.0

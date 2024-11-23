@@ -30,12 +30,11 @@ colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ag4dl"]
 gradient = SubResource("Gradient_rja4h")
 
-[node name="Information" type="Control" node_paths=PackedStringArray("_balls_parent", "_ball_popup_level", "_ball_popup_description")]
+[node name="Information" type="Control" node_paths=PackedStringArray("_exit_button", "_balls_parent", "_ball_popup_level", "_ball_popup_description")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1280.0
-offset_right = 1280.0
 script = ExtResource("1_5baeu")
+_exit_button = NodePath("Exit")
 _balls_parent = NodePath("Balls")
 _ball_popup_level = NodePath("BallPopup/Level")
 _ball_popup_description = NodePath("BallPopup/Description")

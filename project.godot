@@ -24,6 +24,7 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 [autoload]
 
 AudioManager="*res://scenes/singletons/audio_manager.tscn"
+SceneManager="*res://scenes/singletons/scene_manager.tscn"
 
 [display]
 

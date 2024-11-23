@@ -17,13 +17,14 @@ radius = 15.0
 _data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 1, 0]
 point_count = 2
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_hover_texture", "_body_texture", "_inner_texture", "_inner_texture_2", "_mask_texture", "_level_label", "_hole_area", "_trail_line", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_hover_texture", "_base_texture", "_body_texture", "_inner_texture", "_inner_texture_2", "_mask_texture", "_level_label", "_hole_area", "_trail_line", "_touch_button")]
 z_index = 4
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
 _hover_texture = NodePath("View/Hover")
+_base_texture = NodePath("View/Base")
 _body_texture = NodePath("View/Body")
 _inner_texture = NodePath("View/Inner")
 _inner_texture_2 = NodePath("View/Inner2")

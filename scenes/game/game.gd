@@ -269,7 +269,7 @@ func _on_info_button_pressed() -> void:
 
 # Ball が Hole に落ちたときの処理
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
-	#print("[Main] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
+	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
 		Hole.HoleType.BILLIARDS:
 			# Ball が有効化されていない場合: 何もしない (Ball は消失する)
@@ -341,7 +341,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 					var level_rarity = _pick_random_rarity(true) # COMMON 抜き
 					var level = DECK_BALL_LEVEL_RARITY[level_rarity].pick_random()
 					_deck_ball_list.push_back(Ball.new(level))
-					print("[Main] DECK_PACK level: %s (%s)" % [level, Ball.Rarity.keys()[level_rarity]])
+					print("[Game] DECK_PACK level: %s (%s)" % [level, Ball.Rarity.keys()[level_rarity]])
 		Product.ProductType.DECK_CLEANER:
 			# TODO: 最小数チェック
 			if 1 < _deck_ball_list.size():
@@ -355,7 +355,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 					var level = EXTRA_BALL_LEVEL_RARITY[level_rarity].pick_random()
 					var rarity = _pick_random_rarity()
 					_extra_ball_list.push_back(Ball.new(level, rarity))
-					print("[Main] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
+					print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
 		Product.ProductType.EXTRA_CLEANER:
 			if 1 < _extra_ball_list.size():
 				_extra_ball_list.sort()

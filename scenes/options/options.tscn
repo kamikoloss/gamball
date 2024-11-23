@@ -29,10 +29,11 @@ colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ag4dl"]
 gradient = SubResource("Gradient_rja4h")
 
-[node name="Options" type="Control" node_paths=PackedStringArray("_audio_master_slider", "_audio_master_slider_label", "_audio_bgm_slider", "_audio_bgm_slider_label", "_audio_se_slider", "_audio_se_slider_label")]
+[node name="Options" type="Control" node_paths=PackedStringArray("_exit_button", "_audio_master_slider", "_audio_master_slider_label", "_audio_bgm_slider", "_audio_bgm_slider_label", "_audio_se_slider", "_audio_se_slider_label")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_oy0wl")
+_exit_button = NodePath("Exit")
 _audio_master_slider = NodePath("Audio/Master/HSlider")
 _audio_master_slider_label = NodePath("Audio/Master/Label2")
 _audio_bgm_slider = NodePath("Audio/BGM/HSlider")

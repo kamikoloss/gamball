@@ -14,6 +14,7 @@ enum TweenType { RARITY }
 
 # 残像の頂点数
 const TRAIL_MAX_LENGTH = 16
+
 # 特殊なボール番号
 const BALL_LEVEL_EMPTY_SLOT = -1
 
@@ -43,7 +44,8 @@ const BALL_RARITY_COLORS = {
 
 # ボールの選択を示す周辺部分
 @export var _hover_texture: TextureRect
-# ボールの本体の色部分
+# ボールの本体の 下地/色 部分
+@export var _base_texture: TextureRect
 @export var _body_texture: TextureRect
 # ボール番号の背景部分
 @export var _inner_texture: TextureRect
@@ -99,6 +101,10 @@ func _process(delta: float) -> void:
 # 自身の見た目を更新する
 func refresh_view() -> void:
 	# 本体色
+	if level == BALL_LEVEL_EMPTY_SLOT:
+		_base_texture.visible = false
+	else:
+		_base_texture.visible = true
 	_body_texture.self_modulate = BALL_BODY_COLORS[level]
 	# レア度色
 	if rarity == Rarity.COMMON:
@@ -106,6 +112,7 @@ func refresh_view() -> void:
 	else:
 		_inner_texture_2.visible = true
 		_inner_texture_2.self_modulate = Color(BALL_RARITY_COLORS[rarity], 0.3)
+
 	# マスク
 	_mask_texture.visible = not is_active # 有効なら表示しない
 
@@ -114,7 +121,7 @@ func refresh_view() -> void:
 		_inner_texture.visible = true
 		_level_label.visible = true
 		_level_label.text = "??"
-	elif level < 0:
+	elif level == BALL_LEVEL_EMPTY_SLOT:
 		_inner_texture.visible = false
 		_level_label.visible = false
 		_level_label.text = ""

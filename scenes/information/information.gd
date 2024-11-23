@@ -2,12 +2,25 @@ class_name Information
 extends Control
 
 
+signal exit_button_pressed
+
+
+@export var _exit_button: TextureButton
+
 @export var _balls_parent: Control
 @export var _ball_popup_level: Label
 @export var _ball_popup_description: RichTextLabel
 
 
 func _ready() -> void:
+	# Signal
+	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
+
+	_init_display_balls()
+
+
+# ボールの展示を初期化する
+func _init_display_balls() -> void:
 	var level = 0
 	for node in _balls_parent.get_children():
 		if node is Ball:
