@@ -22,8 +22,8 @@ const BALL_BODY_COLORS = {
 	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.3), # 空きスロット用
 	0: Color(0.9, 0.9, 0.9), 1: Color.YELLOW, 2: Color.BLUE, 3: Color.RED,
 	4: Color.PURPLE, 5: Color.ORANGE, 6: Color.GREEN, 7: Color.SADDLE_BROWN,
-	8: Color(0.1, 0.1, 0.1), 9: Color.GOLD, 10: Color.LIGHT_BLUE, 11: Color.LIGHT_CORAL,
-	12: Color.LIGHT_SALMON, 13: Color.LIGHT_SALMON, 14: Color.LIGHT_GREEN, 15: Color.ROSY_BROWN,
+	8: Color(0.1, 0.1, 0.1), 9: Color(Color.YELLOW, 0.7), 10: Color(Color.BLUE, 0.7), 11: Color(Color.RED, 0.7),
+	12: Color(Color.PURPLE, 0.7), 13: Color(Color.ORANGE, 0.7), 14: Color(Color.GREEN, 0.7), 15: Color(Color.SADDLE_BROWN, 0.7),
 }
 # ボールのレア度の色の定義  { <Rarity>: Color } 
 const BALL_RARITY_COLORS = {
@@ -41,6 +41,8 @@ const BALL_RARITY_COLORS = {
 # pressed は展示用のみ発火する
 @export var is_display: bool = false
 
+# ボールの選択を示す周辺部分
+@export var _hover_texture: TextureRect
 # ボールの本体の色部分
 @export var _body_texture: TextureRect
 # ボール番号の背景部分
@@ -81,6 +83,7 @@ func _ready() -> void:
 
 	refresh_view()
 	refresh_physics()
+	hide_hover()
 
 
 func _process(delta: float) -> void:
@@ -137,6 +140,13 @@ func refresh_physics() -> void:
 		freeze = true
 		collision_layer = 0
 		_hole_area.monitoring = false
+
+
+func show_hover() -> void:
+	_hover_texture.visible = true
+
+func hide_hover() -> void:
+	_hover_texture.visible = false
 
 
 func _on_body_entered(body: Node) -> void:

@@ -143,52 +143,124 @@ is_display = true
 position = Vector2(120, 120)
 is_display = true
 
+[node name="Pool2" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 320.0
+offset_top = 140.0
+offset_right = 960.0
+offset_bottom = 220.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("3_77b3f")
+theme_override_font_sizes/font_size = 64
+text = "POOL 2"
+vertical_alignment = 1
+
+[node name="Balls2" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 340.0
+offset_top = 180.0
+offset_right = 340.0
+offset_bottom = 180.0
+
+[node name="Ball" parent="Balls2" instance=ExtResource("4_p785c")]
+is_display = true
+
+[node name="Ball2" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(40, 0)
+is_display = true
+
+[node name="Ball3" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(80, 0)
+is_display = true
+
+[node name="Ball4" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(120, 0)
+is_display = true
+
+[node name="Ball5" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(0, 40)
+is_display = true
+
+[node name="Ball6" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(40, 40)
+is_display = true
+
+[node name="Ball7" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(80, 40)
+is_display = true
+
+[node name="Ball8" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(120, 40)
+is_display = true
+
+[node name="Ball9" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(0, 80)
+is_display = true
+
+[node name="Ball10" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(40, 80)
+is_display = true
+
+[node name="Ball11" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(80, 80)
+is_display = true
+
+[node name="Ball12" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(120, 80)
+is_display = true
+
+[node name="Ball13" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(0, 120)
+is_display = true
+
+[node name="Ball14" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(40, 120)
+is_display = true
+
+[node name="Ball15" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(80, 120)
+is_display = true
+
+[node name="Ball16" parent="Balls2" instance=ExtResource("4_p785c")]
+position = Vector2(120, 120)
+is_display = true
+
 [node name="BallPopup" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 260.0
-offset_top = 80.0
-offset_right = 260.0
-offset_bottom = 80.0
+offset_left = 540.0
+offset_top = 40.0
+offset_right = 540.0
+offset_bottom = 40.0
 
 [node name="Background" type="TextureRect" parent="BallPopup"]
-self_modulate = Color(0, 0, 0, 0.878431)
+self_modulate = Color(0, 0, 0, 0.752941)
 layout_mode = 0
-offset_right = 240.0
-offset_bottom = 480.0
+offset_right = 200.0
+offset_bottom = 640.0
 texture = ExtResource("1_r8q6u")
 expand_mode = 1
 
 [node name="Level" type="Label" parent="BallPopup"]
 layout_mode = 0
-offset_right = 160.0
+offset_left = 10.0
+offset_right = 170.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("3_77b3f")
 theme_override_font_sizes/font_size = 64
 text = "99"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Rarity" type="Label" parent="BallPopup"]
-visible = false
-self_modulate = Color(1, 1, 0, 1)
-layout_mode = 0
-offset_left = 80.0
-offset_right = 720.0
-offset_bottom = 160.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("3_77b3f")
-theme_override_font_sizes/font_size = 64
-text = "LEGENDARY"
 vertical_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="BallPopup"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 40.0
-offset_right = 890.0
-offset_bottom = 1760.0
+offset_right = 730.0
+offset_bottom = 2440.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/normal_font = ExtResource("3_77b3f")
 theme_override_font_sizes/normal_font_size = 64

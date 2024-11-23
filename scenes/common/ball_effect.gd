@@ -166,7 +166,7 @@ static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
 	var rarity_color: Color = Ball.BALL_RARITY_COLORS[rarity]
 	var rarity_color_code = rarity_color.to_html()
 
-	if effect_data[1] in [EffectType.RARITY_TOP_UP, EffectType.RARITY_TOP_DOWN]:
+	if effect_data[0] in [EffectType.RARITY_TOP_UP, EffectType.RARITY_TOP_DOWN]:
 		var a = Ball.Rarity.keys()[effect_data[1]]
 		return description_base.format({ "r": rarity_color_code, "a": a })
 

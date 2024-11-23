@@ -2390,20 +2390,20 @@ expand_mode = 1
 
 [node name="Level" type="Label" parent="UI/Main/BallPopup"]
 layout_mode = 0
-offset_right = 160.0
+offset_left = 10.0
+offset_right = 170.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "99"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Rarity" type="Label" parent="UI/Main/BallPopup"]
 self_modulate = Color(1, 1, 0, 1)
 layout_mode = 0
-offset_left = 80.0
-offset_right = 720.0
+offset_left = 90.0
+offset_right = 410.0
 offset_bottom = 160.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
@@ -2416,7 +2416,7 @@ layout_mode = 0
 offset_left = 10.0
 offset_top = 40.0
 offset_right = 890.0
-offset_bottom = 480.0
+offset_bottom = 520.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/normal_font = ExtResource("10_w3wxc")
 theme_override_font_sizes/normal_font_size = 64
