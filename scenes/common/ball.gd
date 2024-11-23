@@ -2,7 +2,8 @@ class_name Ball
 extends RigidBody2D
 
 
-signal pressed # (self)
+signal pressed # ()
+signal hovered # (entered: bool)
 
 
 # ボールのレア度
@@ -12,7 +13,7 @@ enum TweenType { RARITY }
 
 
 # 残像の頂点数
-const TRAIL_MAX_LENGTH = 15
+const TRAIL_MAX_LENGTH = 16
 # 特殊なボール番号
 const BALL_LEVEL_EMPTY_SLOT = -1
 
@@ -27,16 +28,17 @@ const BALL_BODY_COLORS = {
 # ボールのレア度の色の定義  { <Rarity>: Color } 
 const BALL_RARITY_COLORS = {
 	Rarity.COMMON: Color.WHITE,
-	Rarity.UNCOMMON: Color(Color.GREEN, 0.5),
-	Rarity.RARE: Color(Color.BLUE, 0.5),
-	Rarity.EPIC: Color(Color.PURPLE, 0.5),
-	Rarity.LEGENDARY: Color(Color.YELLOW, 0.5),
+	Rarity.UNCOMMON: Color.GREEN,
+	Rarity.RARE: Color.CYAN,
+	Rarity.EPIC: Color.PURPLE,
+	Rarity.LEGENDARY: Color.YELLOW,
 }
 
 
 # ボール番号
 @export var level: int = 0
 # 展示用かどうか
+# pressed は展示用のみ発火する
 @export var is_display: bool = false
 
 # ボールの本体の色部分
@@ -49,8 +51,8 @@ const BALL_RARITY_COLORS = {
 
 @export var _level_label: Label
 @export var _hole_area: Area2D
-@export var _touch_area: Area2D
 @export var _trail_line: Line2D
+@export var _touch_button: TextureButton
 
 
 # 他のボールにぶつかって有効化されたかどうか
@@ -73,8 +75,12 @@ func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	input_event.connect(_on_input)
+	_touch_button.pressed.connect(func(): pressed.emit())
+	_touch_button.mouse_entered.connect(func(): hovered.emit(true))
+	_touch_button.mouse_exited.connect(func(): hovered.emit(false))
+
 	refresh_view()
+	refresh_physics()
 
 
 func _process(delta: float) -> void:
@@ -114,21 +120,23 @@ func refresh_view() -> void:
 		_level_label.visible = true
 		_level_label.text = str(level)
 
+	# 残像
+	var gradient = Gradient.new()
+	if is_active:
+		gradient.set_color(0, Color(BALL_BODY_COLORS[level], 0.5))
+		gradient.set_color(1, Color(BALL_BODY_COLORS[level], 0))
+	else:
+		gradient.set_color(0, Color(BALL_BODY_COLORS[0], 0.5))
+		gradient.set_color(1, Color(BALL_BODY_COLORS[0], 0))
+	_trail_line.gradient = gradient
+
+
+func refresh_physics() -> void:
 	# 展示用
 	if is_display:
 		freeze = true
 		collision_layer = 0
 		_hole_area.monitoring = false
-
-	# 残像
-	var gradient = Gradient.new()
-	if not is_active:
-		gradient.set_color(0, Color(BALL_BODY_COLORS[0], 0.5))
-		gradient.set_color(1, Color(BALL_BODY_COLORS[0], 0))
-	else:
-		gradient.set_color(0, Color(BALL_BODY_COLORS[level], 0.5))
-		gradient.set_color(1, Color(BALL_BODY_COLORS[level], 0))
-	_trail_line.gradient = gradient
 
 
 func _on_body_entered(body: Node) -> void:
@@ -138,10 +146,3 @@ func _on_body_entered(body: Node) -> void:
 		if not is_active:
 			is_active = true
 			refresh_view()
-
-
-func _on_input(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			print("[Ball] pressed!")
-			pressed.emit(self)

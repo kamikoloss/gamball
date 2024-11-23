@@ -17,7 +17,7 @@ radius = 15.0
 _data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 1, 0]
 point_count = 2
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_body_texture", "_inner_texture", "_inner_texture_2", "_mask_texture", "_level_label", "_hole_area", "_trail_line")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_body_texture", "_inner_texture", "_inner_texture_2", "_mask_texture", "_level_label", "_hole_area", "_trail_line", "_touch_button")]
 z_index = 4
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
@@ -30,6 +30,10 @@ _mask_texture = NodePath("View/Mask")
 _level_label = NodePath("View/Level")
 _hole_area = NodePath("Hole")
 _trail_line = NodePath("Trail")
+_touch_button = NodePath("Touch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rn34c")
 
 [node name="View" type="Node2D" parent="."]
 
@@ -48,6 +52,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(10, 10)
+mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
@@ -116,18 +121,10 @@ text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_rn34c")
-
 [node name="Hole" type="Area2D" parent="."]
 scale = Vector2(0.25, 0.25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
-shape = SubResource("CircleShape2D_awq4m")
-
-[node name="Touch" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Touch"]
 shape = SubResource("CircleShape2D_awq4m")
 
 [node name="Trail" type="Line2D" parent="."]
@@ -135,3 +132,9 @@ top_level = true
 z_index = 2
 width = 30.0
 width_curve = SubResource("Curve_pexpb")
+
+[node name="Touch" type="TextureButton" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0

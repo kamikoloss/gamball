@@ -41,7 +41,7 @@ const EFFECT_DESCRIPTIONS = {
 	EffectType.HOLE_SIZE_UP: "Hole のサイズ [color={r}][x{a}][/color]",
 	EffectType.HOLE_GRAVITY_SIZE_UP: "Hole の重力範囲サイズ [color={r}][x{a}][/color]",
 	EffectType.LV_UP: "LV [color={r}][{a}][/color] 以下の Ball の LV [color={r}][+{b}][/color]",
-	EffectType.LV_UP_2: "LV [color={r}][{a}][/color] の Ball の LV [color={r}][x{b}][/color",
+	EffectType.LV_UP_2: "LV [color={r}][{a}][/color] の Ball の LV [color={r}][x{b}][/color]",
 	EffectType.MONEY_UP_ON_BREAK: "破壊時に MONEY [color={r}][x{a}][/color]",
 	EffectType.MONEY_UP_ON_FALL: "落下時に MONEY [color={r}][+{a}][/color]",
 	EffectType.PACHINKO_START_TOP_UP: "パチンコの初当たり確率 [color={r}][+{a}][/color]",
@@ -156,13 +156,12 @@ const EFFECTS_POOL_1 = {
 
 # 効果の説明文を取得する
 static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
-	var effect_data = EFFECTS_POOL_1[level][rarity]
-
 	if level == -1:
-		return  "----"
+		return "(空きスロット)"
 	if rarity == Ball.Rarity.COMMON:
 		return "(効果なし)"
 
+	var effect_data = EFFECTS_POOL_1[level][rarity]
 	var description_base = EFFECT_DESCRIPTIONS[effect_data[0]]
 	var rarity_color: Color = Ball.BALL_RARITY_COLORS[rarity]
 	var rarity_color_code = rarity_color.to_html()

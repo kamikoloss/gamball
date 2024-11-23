@@ -76,7 +76,7 @@ func _ready() -> void:
 # 自身の見た目を更新する
 func refresh_view() -> void:
 	if not product_type in ProductType.values():
-		print("[ERROR] invalid product type")
+		print("[Product] ERROR: invalid product type")
 
 	match product_type:
 		ProductType.DECK_PACK:
