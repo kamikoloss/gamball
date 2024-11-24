@@ -381,12 +381,15 @@ func _on_product_icon_pressed(product: Product) -> void:
 	# TODO: 実行できない場合 return する
 	match product.product_type:
 		Product.ProductType.DECK_PACK:
+			if DECK_SIZE_MAX <= _deck_ball_list.size():
+				return
 			for i in 3:
-				if _deck_ball_list.size() < DECK_SIZE_MAX:
-					var level_rarity = _pick_random_rarity(true) # COMMON 抜き
-					var level = DECK_BALL_LEVEL_RARITY[level_rarity].pick_random()
-					_deck_ball_list.push_back(Ball.new(level))
-					print("[Game] DECK_PACK level: %s (%s)" % [level, Ball.Rarity.keys()[level_rarity]])
+				if DECK_SIZE_MAX <= _deck_ball_list.size():
+					continue
+				var level_rarity = _pick_random_rarity(true) # COMMON 抜き
+				var level = DECK_BALL_LEVEL_RARITY[level_rarity].pick_random()
+				_deck_ball_list.push_back(Ball.new(level))
+				print("[Game] DECK_PACK level: %s (%s)" % [level, Ball.Rarity.keys()[level_rarity]])
 		Product.ProductType.DECK_CLEANER:
 			# ex: [EffectType.DECK_SIZE_MIN_DOWN, 1]
 			var deck_size_min = DECK_SIZE_MIN_DEFAULT
@@ -394,9 +397,10 @@ func _on_product_icon_pressed(product: Product) -> void:
 				deck_size_min -= effect_data[1]
 			deck_size_min = clampi(deck_size_min, DECK_SIZE_MIN, deck_size_min)
 			print("[Game/BallEffect] DECK_SIZE_MIN_DOWN deck_size_min: %s" % [deck_size_min])
-			if deck_size_min < _deck_ball_list.size():
-				_deck_ball_list.sort_custom(func(a: Ball, b: Ball): a.level < b.level)
-				_deck_ball_list.pop_front()
+			if _deck_ball_list.size() <= deck_size_min:
+				return
+			_deck_ball_list.sort_custom(func(a: Ball, b: Ball): a.level < b.level)
+			_deck_ball_list.pop_front()
 		Product.ProductType.EXTRA_PACK:
 			# ex: [EffectType.EXTRA_SIZE_MAX_UP, 2]
 			var extra_size_max = EXTRA_SIZE_MAX_DEFAULT
@@ -404,17 +408,21 @@ func _on_product_icon_pressed(product: Product) -> void:
 				extra_size_max += effect_data[1]
 			extra_size_max = clampi(extra_size_max, extra_size_max, EXTRA_SIZE_MAX)
 			print("[Game/BallEffect] EXTRA_SIZE_MAX_UP extra_size_max: %s" % [extra_size_max])
+			if extra_size_max <= _extra_ball_list.size():
+				return
 			for i in 2:
-				if _extra_ball_list.size() < extra_size_max:
-					var level_rarity = _pick_random_rarity(true) # COMMON 抜き
-					var level = EXTRA_BALL_LEVEL_RARITY[level_rarity].pick_random()
-					var rarity = _pick_random_rarity()
-					_extra_ball_list.push_back(Ball.new(level, rarity))
-					print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
+				if extra_size_max <= _extra_ball_list.size():
+					continue
+				var level_rarity = _pick_random_rarity(true) # COMMON 抜き
+				var level = EXTRA_BALL_LEVEL_RARITY[level_rarity].pick_random()
+				var rarity = _pick_random_rarity()
+				_extra_ball_list.push_back(Ball.new(level, rarity))
+				print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
 		Product.ProductType.EXTRA_CLEANER:
-			if 1 < _extra_ball_list.size():
-				_extra_ball_list.sort_custom(func(a: Ball, b: Ball): a.level < b.level)
-				_extra_ball_list.pop_front()
+			if _extra_ball_list.size() == 0:
+				return
+			_extra_ball_list.sort_custom(func(a: Ball, b: Ball): a.level < b.level)
+			_extra_ball_list.pop_front()
 
 	# return しなかった場合: Money を減らす
 	money -= product.price

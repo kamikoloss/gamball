@@ -17,11 +17,12 @@ const TRAIL_MAX_LENGTH = 16
 
 # 特殊なボール番号
 const BALL_LEVEL_EMPTY_SLOT = -1 # 空きスロット用
-const BALL_LEVEL_NOT_EMPTY_SLOT = -2 # 見た目スロット用
+const BALL_LEVEL_NOT_EMPTY_SLOT = -2 # 使用不可スロット用
 
 # ボールの本体の色の定義 { <Level>: Color } 
 const BALL_BODY_COLORS = {
 	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.3),
+	BALL_LEVEL_NOT_EMPTY_SLOT: Color(0.9, 0.5, 0.5, 0.3),
 	0: Color(0.9, 0.9, 0.9), 1: Color.YELLOW, 2: Color.BLUE, 3: Color.RED,
 	4: Color.PURPLE, 5: Color.ORANGE, 6: Color.GREEN, 7: Color.SADDLE_BROWN,
 	8: Color(0.1, 0.1, 0.1), 9: Color(Color.YELLOW, 0.7), 10: Color(Color.BLUE, 0.7), 11: Color(Color.RED, 0.7),
