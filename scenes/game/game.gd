@@ -1,6 +1,12 @@
 class_name Game
 extends Node2D
-# TODO: Ball の処理を切り分ける
+# TODO: Ball 移動の処理を切り分ける
+# TODO: 引っ張りの処理を切り分ける
+# TODO: 料金所の処理を切り分ける
+# TODO: Shop の処理を切り分ける
+
+
+signal exited
 
 
 enum GameState { GAME, COUNT_DOWN, TAX, SHOP }
@@ -8,10 +14,14 @@ enum TaxType { MONEY, BALLS }
 enum TweenType { TAX_COUNT_DOWN }
 
 
-# DECK の最大数
-const DECK_MAX_SIZE: int = 16
-# EXTRA の最大数
-const EXTRA_MAX_SIZE: int = 16
+# DECK の 最小数/最大数 の 絶対値/初期値
+const DECK_SIZE_MIN: int = 4
+const DECK_SIZE_MIN_DEFAULT: int = 8
+const DECK_SIZE_MAX: int = 16
+# EXTRA の 最小数/最大数の 絶対値/初期値
+const EXTRA_SIZE_MIN: int = 0
+const EXTRA_SIZE_MAX: int = 16
+const EXTRA_SIZE_MAX_DEFAULT: int = 8
 # Ball が発射される最低のドラッグの距離 (px)
 const DRAG_LENGTH_MIN: float = 10
 # 引っ張りが最大になるドラッグの距離 (px)
@@ -88,6 +98,12 @@ var balls: int = 0:
 		balls = value
 		_game_ui.refresh_balls_label(value)
 
+# ビリヤード盤面上の Ball の数
+# TODO: pachinko も stack も カウントしてるので parent node を分けるか enum var でフィルターできるようにする
+var billiards_balls: int = 0:
+	get:
+		return _balls_parent.get_child_count()
+
 
 # 次に訪れる TAX_LIST の index
 var _next_tax_index: int = 0
@@ -103,7 +119,6 @@ var _drag_position_to: Vector2
 var _impulse_ratio: float = 10
 
 # 出現する Deck Ball の初期リスト
-# [ [ LV, <Ball LV> ] ]
 var _deck_ball_list: Array[Ball] = [
 	Ball.new(0, Ball.Rarity.COMMON),
 	Ball.new(0, Ball.Rarity.COMMON),
@@ -115,7 +130,6 @@ var _deck_ball_list: Array[Ball] = [
 	Ball.new(1, Ball.Rarity.COMMON),
 ]
 # 出現する Extra Ball の初期リスト
-# [ [ LV, <Ball LV> ] ]
 var _extra_ball_list: Array[Ball] = [
 	Ball.new(2, Ball.Rarity.COMMON),
 	Ball.new(3, Ball.Rarity.COMMON),
@@ -163,11 +177,13 @@ func _ready() -> void:
 		if node is Product:
 			node.icon_pressed.connect(_on_product_icon_pressed)
 
-	# GameUi
+	# UI (GameUi)
 	_game_ui.refresh_balls_slot_deck(_deck_ball_list)
 	_game_ui.refresh_balls_slot_extra(_extra_ball_list)
 	_bunny.visible = false
 	_refresh_next()
+	# UI (Billiards)
+	_billiards.refresh_balls_count(billiards_balls)
 
 	# ボール購入ボタンを1プッシュする
 	_on_buy_balls_button_pressed()
@@ -268,6 +284,7 @@ func _on_info_button_pressed() -> void:
 
 
 # Ball が Hole に落ちたときの処理
+# TODO: hole_type ごとにメソッド分ける？
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
@@ -286,8 +303,18 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# パチンコのラッシュ抽選を開始する
 			_pachinko.start_lottery()
 		Hole.HoleType.GAIN:
+			var gain_plus: int = 0
+			var gain_times: int = 1
+			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP, 50, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
+				if billiards_balls <= effect_data[1]:
+					gain_plus += effect_data[2]
+			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP_2, 5, 2]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
+				if billiards_balls <= effect_data[1]:
+					gain_times += effect_data[2]
 			# 払い出しリストに追加する
-			var amount = hole.gain_ratio * ball.level
+			var amount = (hole.gain_ratio + gain_plus) * gain_times * ball.level
 			_push_payout(ball.level, amount)
 		Hole.HoleType.LOST:
 			# 何もしない (Ball は消失する)
@@ -337,7 +364,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 	match product.product_type:
 		Product.ProductType.DECK_PACK:
 			for i in 3:
-				if _deck_ball_list.size() < DECK_MAX_SIZE:
+				if _deck_ball_list.size() < DECK_SIZE_MAX:
 					var level_rarity = _pick_random_rarity(true) # COMMON 抜き
 					var level = DECK_BALL_LEVEL_RARITY[level_rarity].pick_random()
 					_deck_ball_list.push_back(Ball.new(level))
@@ -350,7 +377,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 		Product.ProductType.EXTRA_PACK:
 			# TODO: 最大数チェック
 			for i in 2:
-				if _extra_ball_list.size() < EXTRA_MAX_SIZE:
+				if _extra_ball_list.size() < EXTRA_SIZE_MAX:
 					var level_rarity = _pick_random_rarity(true) # COMMON 抜き
 					var level = EXTRA_BALL_LEVEL_RARITY[level_rarity].pick_random()
 					var rarity = _pick_random_rarity()
@@ -369,6 +396,17 @@ func _on_product_icon_pressed(product: Product) -> void:
 	_game_ui.refresh_balls_slot_extra(_extra_ball_list)
 
 
+# EXTRA Ball 内の特定の効果をまとめて取得する
+func _get_extra_ball_effects(target_effect_type: BallEffect.EffectType) -> Array:
+	var effects = []
+	for ball in _deck_ball_list:
+		for effect_data in ball.effects:
+			if target_effect_type == effect_data[0]:
+				effects.append(effect_data)
+	print("[Game] _get_extra_ball_effects(%s) -> %s" % [BallEffect.EffectType.keys()[target_effect_type], effects])
+	return effects
+
+
 # Ball instance を作成する
 func _create_new_ball(level: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, is_active = true) -> Ball:
 	var ball: Ball = _ball_scene.instantiate()
@@ -376,6 +414,7 @@ func _create_new_ball(level: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, 
 	ball.rarity = rarity
 	ball.is_active = is_active
 	_balls_parent.add_child(ball)
+	_billiards.refresh_balls_count(billiards_balls)
 	return ball
 
 

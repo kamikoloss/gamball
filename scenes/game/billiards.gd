@@ -8,6 +8,8 @@ extends Node2D
 @export var _spawn_extra_position_c: Node2D
 @export var _spawn_extra_position_d: Node2D
 
+@export var _balls_count_label: Label
+
 
 var _current_ball: Ball = null
 
@@ -52,3 +54,7 @@ func shoot_ball(implulse: Vector2) -> void:
 	_current_ball.freeze = false
 	_current_ball.apply_impulse(implulse)
 	_current_ball = null
+
+
+func refresh_balls_count(count: int) -> void:
+	_balls_count_label.text = str(count)

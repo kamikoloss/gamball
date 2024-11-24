@@ -79,13 +79,14 @@ texture = ExtResource("4_nc85m")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_position_a", "_spawn_extra_position_b", "_spawn_extra_position_c", "_spawn_extra_position_d")]
+[node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_position_a", "_spawn_extra_position_b", "_spawn_extra_position_c", "_spawn_extra_position_d", "_balls_count_label")]
 script = ExtResource("3_0s1kj")
 _spawn_position = NodePath("Points/SpawnHole")
 _spawn_extra_position_a = NodePath("Points/SpawnHole2")
 _spawn_extra_position_b = NodePath("Points/SpawnHole3")
 _spawn_extra_position_c = NodePath("Points/SpawnHole4")
 _spawn_extra_position_d = NodePath("Points/SpawnHole5")
+_balls_count_label = NodePath("UI/Display/BallsB")
 
 [node name="Board" type="Area2D" parent="Billiards"]
 position = Vector2(280, 360)
@@ -453,6 +454,63 @@ hole_type = 0
 [node name="Hole6" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 660)
 hole_type = 0
+
+[node name="UI" type="Control" parent="Billiards"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Display" type="Control" parent="Billiards/UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 280.0
+offset_top = 120.0
+offset_right = 280.0
+offset_bottom = 120.0
+
+[node name="TextureRect" type="TextureRect" parent="Billiards/UI/Display"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 40.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="BallsA" type="Label" parent="Billiards/UI/Display"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 280.0
+offset_bottom = 60.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Billiards/UI/Display"]
+modulate = Color(0.12549, 0.12549, 0.12549, 1)
+self_modulate = Color(0.752941, 1, 0.752941, 1)
+layout_mode = 0
+offset_left = -40.0
+offset_right = 40.0
+offset_bottom = 20.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="BallsB" type="Label" parent="Billiards/UI/Display"]
+layout_mode = 0
+offset_left = -40.0
+offset_right = 280.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "9999"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position_a", "_spawn_position_b", "_rotating_wall_a", "_rotating_wall_b", "_rush_nails_parent", "_rush_holes_parent", "_rush_label_a", "_rush_label_b", "_rush_lamps_parent")]
 script = ExtResource("8_ud1qg")
