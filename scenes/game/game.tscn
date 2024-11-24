@@ -1533,38 +1533,47 @@ hole_type = 4
 [node name="Ball" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(280, 240)
 level = 1
+is_on_billiards = true
 
 [node name="Ball2" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(260, 220)
 level = 8
+is_on_billiards = true
 
 [node name="Ball3" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(300, 220)
 level = 2
+is_on_billiards = true
 
 [node name="Ball4" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(240, 200)
 level = 7
+is_on_billiards = true
 
 [node name="Ball5" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(280, 200)
 level = 9
+is_on_billiards = true
 
 [node name="Ball6" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(320, 200)
 level = 3
+is_on_billiards = true
 
 [node name="Ball7" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(260, 180)
 level = 6
+is_on_billiards = true
 
 [node name="Ball8" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(300, 180)
 level = 4
+is_on_billiards = true
 
 [node name="Ball9" parent="Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(280, 160)
 level = 5
+is_on_billiards = true
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
 z_index = 20

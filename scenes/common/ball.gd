@@ -42,6 +42,10 @@ const BALL_RARITY_COLORS = {
 # 展示用かどうか
 # pressed は展示用のみ発火する
 @export var is_display: bool = false
+# ボールがビリヤード盤面上にあるかどうか
+# NOTE: ビリヤード盤面上の初期 Ball 用に export している
+@export var is_on_billiards: bool = false
+
 
 # ボールの選択を示す周辺部分
 @export var _hover_texture: TextureRect
@@ -61,7 +65,7 @@ const BALL_RARITY_COLORS = {
 
 
 # 他のボールにぶつかって有効化されたかどうか
-var is_active = true 
+var is_active: bool = true 
 # ボールのレア度
 var rarity: Rarity = Rarity.COMMON
 # ボールの効果

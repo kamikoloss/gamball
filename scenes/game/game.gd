@@ -102,7 +102,7 @@ var balls: int = 0:
 # TODO: pachinko も stack も カウントしてるので parent node を分けるか enum var でフィルターできるようにする
 var billiards_balls: int = 0:
 	get:
-		return _balls_parent.get_child_count()
+		return _balls_parent.get_children().filter(func(ball: Ball): return ball.is_on_billiards).size()
 
 
 # 次に訪れる TAX_LIST の index
@@ -298,11 +298,13 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				print("[Game/BallEffect] BILLIARDS_COUNT_GAIN_UP MONEY +%s" % [effect_data[1]])
 			# パチンコ盤面上に同じ Ball を出現させる
 			var new_ball = _create_new_ball(ball.level)
+			new_ball.is_on_billiards = false
 			_pachinko.spawn_ball(new_ball)
 		Hole.HoleType.EXTRA:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
 			var random_ball: Ball = _extra_ball_list.pick_random()
 			var new_ball = _create_new_ball(random_ball.level, random_ball.rarity)
+			new_ball.is_on_billiards = true
 			_billiards.spawn_extra_ball(new_ball)
 			# パチンコのラッシュ抽選を開始する
 			_pachinko.start_lottery()
@@ -336,6 +338,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 		Hole.HoleType.STACK:
 			# Ball の数をカウントする
 			balls += 1
+	_billiards.refresh_balls_count(billiards_balls)
 
 
 # ビリヤード盤面上で入力があったときの処理
@@ -357,6 +360,7 @@ func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int
 				balls -= 1
 				var ball: Ball = _deck_ball_list.pick_random()
 				var new_ball = _create_new_ball(ball.level, ball.rarity, false) # 最初の出現時には有効化されていない
+				new_ball.is_on_billiards = true
 				_billiards.spawn_ball(new_ball)
 				# 1ターン進める
 				# Ball 生成をなかったことにしてもこれはなかったことにはしない
