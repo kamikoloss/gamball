@@ -124,7 +124,7 @@ var _deck_ball_list: Array[Ball] = [
 	Ball.new(0, Ball.Rarity.COMMON),
 	Ball.new(0, Ball.Rarity.COMMON),
 	Ball.new(0, Ball.Rarity.COMMON),
-	Ball.new(0, Ball.Rarity.COMMON),
+	Ball.new(1, Ball.Rarity.COMMON),
 	Ball.new(1, Ball.Rarity.COMMON),
 	Ball.new(1, Ball.Rarity.COMMON),
 	Ball.new(1, Ball.Rarity.COMMON),
@@ -288,6 +288,7 @@ func _on_info_button_pressed() -> void:
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
+
 		Hole.HoleType.BILLIARDS:
 			# Ball が有効化されていない場合: 何もしない (Ball は消失する)
 			if not ball.is_active:
@@ -300,6 +301,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			var new_ball = _create_new_ball(ball.level)
 			new_ball.is_on_billiards = false
 			_pachinko.spawn_ball(new_ball)
+
 		Hole.HoleType.EXTRA:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
 			var random_ball: Ball = _extra_ball_list.pick_random()
@@ -308,8 +310,8 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			_billiards.spawn_extra_ball(new_ball)
 			# パチンコのラッシュ抽選を開始する
 			_pachinko.start_lottery()
+
 		Hole.HoleType.GAIN:
-			# [BallEffect] Gain の +/x を取得する
 			var gain_plus: int = 0
 			var gain_times: int = 1
 			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP, 50, 1]
@@ -320,28 +322,39 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
 				if billiards_balls <= effect_data[1]:
 					gain_times += effect_data[2]
+			# ex: [EffectType.DECK_COMPLETE_GAIN_UP, 5, 2]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_COMPLETE_GAIN_UP):
+				if billiards_balls <= effect_data[1]:
+					gain_times += effect_data[2]
 			# ex: [EffectType.DECK_COUNT_GAIN_UP, 50, 1]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_COUNT_GAIN_UP):
 				if _deck_ball_list.size() <= effect_data[1]:
 					gain_plus += effect_data[2]
-			# ex: [EffectType.GAIN_UP, 3, 1],
+			# ex: [EffectType.GAIN_UP, 3, 1]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP):
 				if ball.level <= effect_data[1]:
 					gain_plus += effect_data[2]
-			# ex: [EffectType.GAIN_UP_2, 1, 2],
+			# ex: [EffectType.GAIN_UP_2, 1, 2]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_2):
 				if ball.level == effect_data[1]:
 					gain_times += effect_data[2]
+			# ex: [EffectType.HOLE_GAIN_UP, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_GAIN_UP):
+				gain_plus += effect_data[1]
 			print("[Game/BallEffect] XXXX_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
+
 			# 払い出しリストに追加する
 			var amount = (hole.gain_ratio + gain_plus) * gain_times * ball.level
 			_push_payout(ball.level, amount)
+
 		Hole.HoleType.LOST:
 			# 何もしない (Ball は消失する)
 			pass
+
 		Hole.HoleType.STACK:
 			# Ball の数をカウントする
 			balls += 1
+
 	_billiards.refresh_balls_count(billiards_balls)
 
 
@@ -383,6 +396,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 	# Product の効果を発動する
 	# TODO: マジックナンバーをなくす？
 	match product.product_type:
+
 		Product.ProductType.DECK_PACK:
 			if DECK_SIZE_MAX <= _deck_ball_list.size():
 				return
@@ -484,10 +498,11 @@ func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 	var rarity_weight = RAIRTY_WEIGHT
 	# ex: [EffectType.RARITY_TOP_UP, Ball.Rarity.RARE]
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.RARITY_TOP_UP):
-		rarity_weight[effect_data[0]] *= 2
+		rarity_weight[effect_data[0]] += RAIRTY_WEIGHT[effect_data[0]]
 	# ex: [EffectType.RARITY_TOP_DOWN, Ball.Rarity.COMMON]
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.RARITY_TOP_DOWN):
-		rarity_weight[effect_data[0]] /= 2
+		var rarity_top_down = rarity_weight[effect_data[0]] - RAIRTY_WEIGHT[effect_data[0]] / 2
+		rarity_weight[effect_data[0]] = clampi(rarity_top_down, 0, rarity_top_down)
 	print("[Game/BallEffect] RARITY_TOP_UP(/DOWN) rarity_weight: %s" % [rarity_weight])
 
 	# 抽選の分母 (合計)

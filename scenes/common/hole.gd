@@ -6,8 +6,8 @@ extends Area2D
 signal ball_entered
 
 
-const HOLE_SCALE_STEP = 1.0
-const GRAVITY_SCALE_STEP = 0.5
+const HOLE_SCALE_STEP = 0.5
+const GRAVITY_SCALE_STEP = 0.25
 
 
 enum HoleType {

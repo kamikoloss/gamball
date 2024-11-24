@@ -37,17 +37,17 @@ const EFFECT_DESCRIPTIONS = {
 	EffectType.DECK_COUNT_GAIN_UP: "DECK の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][+{b}][/color]",
 	EffectType.EXTRA_SIZE_MAX_UP: "EXTRA の最大サイズ [color={r}][+{a}][/color]",
 	EffectType.HOLE_GAIN_UP: "Hole の Gain [color={r}][+{a}][/color]",
-	EffectType.HOLE_SIZE_UP: "Hole のサイズ [color={r}][x{a}][/color]",
-	EffectType.HOLE_GRAVITY_SIZE_UP: "Hole の重力範囲サイズ [color={r}][x{a}][/color]",
+	EffectType.HOLE_SIZE_UP: "Hole のサイズ [color={r}][+{a}][/color] (最大 +4)",
+	EffectType.HOLE_GRAVITY_SIZE_UP: "Hole の重力範囲サイズ [color={r}][+{a}][/color] (最大 +4)",
 	EffectType.GAIN_UP: "LV [color={r}][{a}][/color] 以下の Ball の Gain [color={r}][+{b}][/color]",
 	EffectType.GAIN_UP_2: "LV [color={r}][{a}][/color] の Ball の Gain [color={r}][x{b}][/color]",
 	EffectType.MONEY_UP_ON_BREAK: "破壊時に MONEY [color={r}][x{a}][/color]",
 	EffectType.MONEY_UP_ON_FALL: "落下時に MONEY [color={r}][+{a}][/color]",
 	EffectType.PACHINKO_START_TOP_UP: "パチンコの初当たり確率 [color={r}][+{a}][/color]",
 	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続確率 [color={r}][+{a}][/color]",
-	EffectType.RARITY_TOP_UP: "[color={r}][{a}][/color] の出現確率が上がる",
-	EffectType.RARITY_TOP_DOWN: "[color={r}][{a}][/color] の出現確率が下がる",
-	EffectType.TAX_DOWN: "延長料 [color={r}][-{a}%][/color]",
+	EffectType.RARITY_TOP_UP: "[color={r}][{a}][/color] の出現確率 +1 (+1: 2倍, +2: 3倍, ...)",
+	EffectType.RARITY_TOP_DOWN: "[color={r}][{a}][/color] の出現確率 -1 (-1: 半減, -2: 出なくなる)",
+	EffectType.TAX_DOWN: "延長料 [color={r}][-{a}%][/color] (同一効果は足し算)",
 }
 
 # Ball LV/Rarity ごとの初期効果
