@@ -1,9 +1,10 @@
 class_name BallEffect
 extends Node
+# Ball の効果に関する enum, const, static func をまとめたクラス
 
 
 # 効果の種類
-# TODO: 命名のルール欲しいかも？
+# TODO: 命名もっとメソッド的にしたい BILLIARDS_MERGE_BALLS_ON_SPAWN あたりはちょうどいい
 enum EffectType {
 	BILLIARDS_COUNT_GAIN_UP,
 	BILLIARDS_COUNT_GAIN_UP_2,
@@ -156,8 +157,10 @@ const EFFECTS_POOL_1 = {
 
 # 効果の説明文 (RichTextLabel 用) を取得する
 static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
-	if level == -1:
+	if level == Ball.BALL_LEVEL_EMPTY_SLOT:
 		return "(空きスロット)"
+	if level == Ball.BALL_LEVEL_NOT_EMPTY_SLOT:
+		return "(使用不可スロット)"
 	if rarity == Ball.Rarity.COMMON:
 		return "(効果なし)"
 
@@ -166,12 +169,15 @@ static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
 	var rarity_color: Color = Ball.BALL_RARITY_COLORS[rarity]
 	var rarity_color_code = rarity_color.to_html()
 
+	# [ <EffectType>, Ball.Rarity ]
 	if effect_data[0] in [EffectType.RARITY_TOP_UP, EffectType.RARITY_TOP_DOWN]:
 		var a = Ball.Rarity.keys()[effect_data[1]]
 		return description_base.format({ "r": rarity_color_code, "a": a })
 
+	# [ <EffectType>, param1 ]
 	if effect_data.size() == 2:
 		return description_base.format({ "r": rarity_color_code, "a": effect_data[1] })
+	# [ <EffectType>, param1, param2 ]
 	if effect_data.size() == 3:
 		return description_base.format({ "r": rarity_color_code, "a": effect_data[1], "b": effect_data[2] })
 

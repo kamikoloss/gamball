@@ -16,11 +16,12 @@ enum TweenType { RARITY }
 const TRAIL_MAX_LENGTH = 16
 
 # 特殊なボール番号
-const BALL_LEVEL_EMPTY_SLOT = -1
+const BALL_LEVEL_EMPTY_SLOT = -1 # 空きスロット用
+const BALL_LEVEL_NOT_EMPTY_SLOT = -2 # 見た目スロット用
 
 # ボールの本体の色の定義 { <Level>: Color } 
 const BALL_BODY_COLORS = {
-	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.3), # 空きスロット用
+	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.3),
 	0: Color(0.9, 0.9, 0.9), 1: Color.YELLOW, 2: Color.BLUE, 3: Color.RED,
 	4: Color.PURPLE, 5: Color.ORANGE, 6: Color.GREEN, 7: Color.SADDLE_BROWN,
 	8: Color(0.1, 0.1, 0.1), 9: Color(Color.YELLOW, 0.7), 10: Color(Color.BLUE, 0.7), 11: Color(Color.RED, 0.7),
@@ -75,6 +76,8 @@ var _trail_points: Array = []
 func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 	self.level = level
 	self.rarity = rarity
+	if Rarity.COMMON < rarity:
+		self.effects.append(BallEffect.EFFECTS_POOL_1[level][rarity])
 
 
 func _ready() -> void:
@@ -141,6 +144,7 @@ func refresh_view() -> void:
 	_trail_line.gradient = gradient
 
 
+# 自信の物理判定を更新する
 func refresh_physics() -> void:
 	# 展示用
 	if is_display:
