@@ -318,7 +318,15 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
 				if billiards_balls <= effect_data[1]:
 					gain_times += effect_data[2]
-			print("[Game/BallEffect] BILLIARDS_COUNT_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
+			# ex: [EffectType.GAIN_UP, 3, 1],
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP):
+				if ball.level <= effect_data[1]:
+					gain_plus += effect_data[2]
+			# ex: [EffectType.GAIN_UP_2, 1, 2],
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_2):
+				if ball.level == effect_data[1]:
+					gain_times += effect_data[2]
+			print("[Game/BallEffect] XXXX_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
 			# 払い出しリストに追加する
 			var amount = (hole.gain_ratio + gain_plus) * gain_times * ball.level
 			_push_payout(ball.level, amount)
