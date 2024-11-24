@@ -293,9 +293,9 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			if not ball.is_active:
 				return
 			# ex: [EffectType.MONEY_UP_ON_FALL, 10]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.MONEY_UP_ON_FALL):
 				money += effect_data[1]
-				print("[Game/BallEffect] BILLIARDS_COUNT_GAIN_UP MONEY +%s" % [effect_data[1]])
+				print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
 			# パチンコ盤面上に同じ Ball を出現させる
 			var new_ball = _create_new_ball(ball.level)
 			new_ball.is_on_billiards = false
@@ -455,7 +455,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 # EXTRA Ball 内の特定の効果をまとめて取得する
 func _get_extra_ball_effects(target_effect_type: BallEffect.EffectType) -> Array:
 	var effects = []
-	for ball in _deck_ball_list:
+	for ball in _extra_ball_list:
 		for effect_data in ball.effects:
 			if target_effect_type == effect_data[0]:
 				effects.append(effect_data)

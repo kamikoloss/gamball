@@ -86,11 +86,11 @@ func refresh_view() -> void:
 
 
 func set_hole_size(level: int = 0) -> void:
-	var ratio = 1 + HOLE_SCALE_STEP * (level + 1)
+	var ratio: float = 1 + HOLE_SCALE_STEP * (level + 1)
 	self.scale = Vector2(ratio , ratio)
 
 func set_gravity_size(level: int = 0) -> void:
-	var ratio = 1 + GRAVITY_SCALE_STEP * (level + 1)
+	var ratio: float = 1 + GRAVITY_SCALE_STEP * (level + 1)
 	_gravity_area.scale = Vector2(ratio, ratio)
 
 
