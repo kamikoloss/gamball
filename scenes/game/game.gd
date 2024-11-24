@@ -384,14 +384,24 @@ func _on_product_icon_pressed(product: Product) -> void:
 					_deck_ball_list.push_back(Ball.new(level))
 					print("[Game] DECK_PACK level: %s (%s)" % [level, Ball.Rarity.keys()[level_rarity]])
 		Product.ProductType.DECK_CLEANER:
-			# TODO: 最小数チェック
-			if 1 < _deck_ball_list.size():
-				_deck_ball_list.sort()
+			# ex: [EffectType.DECK_SIZE_MIN_DOWN, 1]
+			var deck_size_min = DECK_SIZE_MIN_DEFAULT
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_SIZE_MIN_DOWN):
+				deck_size_min -= effect_data[1]
+			deck_size_min = clampi(deck_size_min, DECK_SIZE_MIN, deck_size_min)
+			print("[Game/BallEffect] DECK_SIZE_MIN_DOWN deck_size_min: %s" % [deck_size_min])
+			if deck_size_min < _deck_ball_list.size():
+				_deck_ball_list.sort_custom(func(a: Ball, b: Ball): a.level < b.level)
 				_deck_ball_list.pop_front()
 		Product.ProductType.EXTRA_PACK:
-			# TODO: 最大数チェック
+			# ex: [EffectType.EXTRA_SIZE_MAX_UP, 2]
+			var extra_size_max = EXTRA_SIZE_MAX_DEFAULT
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.EXTRA_SIZE_MAX_UP):
+				extra_size_max += effect_data[1]
+			extra_size_max = clampi(extra_size_max, extra_size_max, EXTRA_SIZE_MAX)
+			print("[Game/BallEffect] EXTRA_SIZE_MAX_UP extra_size_max: %s" % [extra_size_max])
 			for i in 2:
-				if _extra_ball_list.size() < EXTRA_SIZE_MAX:
+				if _extra_ball_list.size() < extra_size_max:
 					var level_rarity = _pick_random_rarity(true) # COMMON 抜き
 					var level = EXTRA_BALL_LEVEL_RARITY[level_rarity].pick_random()
 					var rarity = _pick_random_rarity()
@@ -399,7 +409,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 					print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
 		Product.ProductType.EXTRA_CLEANER:
 			if 1 < _extra_ball_list.size():
-				_extra_ball_list.sort()
+				_extra_ball_list.sort_custom(func(a: Ball, b: Ball): a.level < b.level)
 				_extra_ball_list.pop_front()
 
 	# return しなかった場合: Money を減らす
