@@ -103,10 +103,10 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.GAIN_UP_2, 5, 2],
 	},
 	8: {
-		Ball.Rarity.UNCOMMON:	[EffectType.DECK_COUNT_GAIN_UP, 4, 1],
-		Ball.Rarity.RARE:		[EffectType.DECK_COUNT_GAIN_UP, 8, 2],
-		Ball.Rarity.EPIC:		[EffectType.DECK_COUNT_GAIN_UP, 12, 3],
-		Ball.Rarity.LEGENDARY:	[EffectType.DECK_COUNT_GAIN_UP, 16, 5],
+		Ball.Rarity.UNCOMMON:	[EffectType.DECK_COUNT_GAIN_UP, 2, 1],
+		Ball.Rarity.RARE:		[EffectType.DECK_COUNT_GAIN_UP, 4, 2],
+		Ball.Rarity.EPIC:		[EffectType.DECK_COUNT_GAIN_UP, 6, 3],
+		Ball.Rarity.LEGENDARY:	[EffectType.DECK_COUNT_GAIN_UP, 8, 5],
 	},
 	9: {
 		Ball.Rarity.UNCOMMON:	[EffectType.HOLE_GAIN_UP, 1],

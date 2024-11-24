@@ -320,6 +320,10 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
 				if billiards_balls <= effect_data[1]:
 					gain_times += effect_data[2]
+			# ex: [EffectType.DECK_COUNT_GAIN_UP, 50, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_COUNT_GAIN_UP):
+				if _deck_ball_list.size() <= effect_data[1]:
+					gain_plus += effect_data[2]
 			# ex: [EffectType.GAIN_UP, 3, 1],
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP):
 				if ball.level <= effect_data[1]:
