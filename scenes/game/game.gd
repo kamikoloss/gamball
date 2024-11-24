@@ -292,6 +292,10 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# Ball が有効化されていない場合: 何もしない (Ball は消失する)
 			if not ball.is_active:
 				return
+			# [BallEffect] MONEY +
+			# ex: [EffectType.MONEY_UP_ON_FALL, 10]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
+				money += effect_data[1]
 			# パチンコ盤面上に同じ Ball を出現させる
 			var new_ball = _create_new_ball(ball.level)
 			_pachinko.spawn_ball(new_ball)
@@ -303,6 +307,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# パチンコのラッシュ抽選を開始する
 			_pachinko.start_lottery()
 		Hole.HoleType.GAIN:
+			# [BallEffect] Gain の +/x を取得する
 			var gain_plus: int = 0
 			var gain_times: int = 1
 			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP, 50, 1]
