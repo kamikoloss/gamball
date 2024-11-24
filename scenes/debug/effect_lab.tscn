@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://djdoeo5sfgols"]
+
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_iocfj"]
+[ext_resource type="Script" path="res://scenes/debug/effect_lab.gd" id="1_vrmv7"]
+[ext_resource type="Script" path="res://scenes/game/billiards.gd" id="2_cit1t"]
+[ext_resource type="Script" path="res://scenes/game/pachinko.gd" id="3_jm12q"]
+[ext_resource type="Script" path="res://scenes/game/stack.gd" id="4_t7bf7"]
+[ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="6_gte1x"]
+
+[node name="EffectLab" type="Node2D"]
+script = ExtResource("1_vrmv7")
+
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("_billiards", "_pachinko", "_stack", "_balls_parent")]
+script = ExtResource("1_iocfj")
+_billiards = NodePath("../Billiards")
+_pachinko = NodePath("../Pachinko")
+_stack = NodePath("../Stack")
+_balls_parent = NodePath("../Balls")
+
+[node name="Billiards" type="Node2D" parent="."]
+script = ExtResource("2_cit1t")
+
+[node name="Pachinko" type="Node2D" parent="."]
+script = ExtResource("3_jm12q")
+
+[node name="Stack" type="Node2D" parent="."]
+script = ExtResource("4_t7bf7")
+
+[node name="Balls" type="Node2D" parent="."]
+
+[node name="Balls2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="Ball" parent="Balls2" instance=ExtResource("6_gte1x")]
+is_display = true
+
+[node name="Ball2" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(40, 0)
+is_display = true
+
+[node name="Ball3" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(80, 0)
+is_display = true
+
+[node name="Ball4" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(120, 0)
+is_display = true
+
+[node name="Ball5" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(160, 0)
+is_display = true
+
+[node name="Ball6" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(200, 0)
+is_display = true
+
+[node name="Ball7" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(240, 0)
+is_display = true
+
+[node name="Ball8" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(280, 0)
+is_display = true
+
+[node name="Ball9" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(0, 40)
+is_display = true
+
+[node name="Ball10" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(40, 40)
+is_display = true
+
+[node name="Ball11" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(80, 40)
+is_display = true
+
+[node name="Ball12" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(120, 40)
+is_display = true
+
+[node name="Ball13" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(160, 40)
+is_display = true
+
+[node name="Ball14" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(200, 40)
+is_display = true
+
+[node name="Ball15" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(240, 40)
+is_display = true
+
+[node name="Ball16" parent="Balls2" instance=ExtResource("6_gte1x")]
+position = Vector2(280, 40)
+is_display = true
