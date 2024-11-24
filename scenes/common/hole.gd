@@ -6,6 +6,10 @@ extends Area2D
 signal ball_entered
 
 
+const HOLE_SCALE_STEP = 1.0
+const GRAVITY_SCALE_STEP = 0.5
+
+
 enum HoleType {
 	BILLIARDS, # (ビリヤード用) パチンコ盤面上に転送する
 	EXTRA, # (パチンコ用) EXTRA を1個ビリヤード盤面上に出す + 抽選を行う
@@ -79,6 +83,15 @@ func refresh_view() -> void:
 
 	# return しなかった場合:
 	_label.visible = false
+
+
+func set_hole_size(level: int = 0) -> void:
+	var ratio = 1 + HOLE_SCALE_STEP * (level + 1)
+	self.scale = Vector2(ratio , ratio)
+
+func set_gravity_size(level: int = 0) -> void:
+	var ratio = 1 + GRAVITY_SCALE_STEP * (level + 1)
+	_gravity_area.scale = Vector2(ratio, ratio)
 
 
 func _on_area_entered(area: Area2D) -> void:

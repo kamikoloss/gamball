@@ -434,26 +434,32 @@ expand_mode = 1
 [node name="Hole" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 60)
 hole_type = 0
+gain_ratio = null
 
 [node name="Hole2" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 360)
 hole_type = 0
+gain_ratio = null
 
 [node name="Hole3" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 660)
 hole_type = 0
+gain_ratio = null
 
 [node name="Hole4" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 60)
 hole_type = 0
+gain_ratio = null
 
 [node name="Hole5" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 360)
 hole_type = 0
+gain_ratio = null
 
 [node name="Hole6" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 660)
 hole_type = 0
+gain_ratio = null
 
 [node name="UI" type="Control" parent="Billiards"]
 layout_mode = 3
@@ -1078,10 +1084,12 @@ gain_ratio = 1
 [node name="Hole3" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(960, 660)
 hole_type = 2
+gain_ratio = null
 
 [node name="Hole4" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1040, 660)
 hole_type = 2
+gain_ratio = null
 
 [node name="Hole5" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1120, 660)
@@ -1096,6 +1104,7 @@ gain_ratio = 2
 [node name="Hole7" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1000, 360)
 hole_type = 1
+gain_ratio = null
 
 [node name="Hole8" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1000, 480)
@@ -1527,6 +1536,7 @@ expand_mode = 1
 [node name="Hole" parent="Stack/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(700, 660)
 hole_type = 4
+gain_ratio = null
 
 [node name="Balls" type="Node2D" parent="."]
 

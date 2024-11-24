@@ -118,7 +118,7 @@ var _drag_position_to: Vector2
 # NOTE: DRAG_LENGTH_MAX と反比例させる
 var _impulse_ratio: float = 10
 
-# 出現する Deck Ball の初期リスト
+# 出現する Deck Ball のリストの初期値
 var _deck_ball_list: Array[Ball] = [
 	Ball.new(0, Ball.Rarity.COMMON),
 	Ball.new(0, Ball.Rarity.COMMON),
@@ -129,7 +129,7 @@ var _deck_ball_list: Array[Ball] = [
 	Ball.new(1, Ball.Rarity.COMMON),
 	Ball.new(1, Ball.Rarity.COMMON),
 ]
-# 出現する Extra Ball の初期リスト
+# 出現する Extra Ball のリストの初期値
 var _extra_ball_list: Array[Ball] = [
 	Ball.new(2, Ball.Rarity.COMMON),
 	Ball.new(3, Ball.Rarity.COMMON),
@@ -378,7 +378,6 @@ func _on_product_icon_pressed(product: Product) -> void:
 
 	# Product の効果を発動する
 	# TODO: マジックナンバーをなくす？
-	# TODO: 実行できない場合 return する
 	match product.product_type:
 		Product.ProductType.DECK_PACK:
 			if DECK_SIZE_MAX <= _deck_ball_list.size():
@@ -390,6 +389,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 				var level = DECK_BALL_LEVEL_RARITY[level_rarity].pick_random()
 				_deck_ball_list.push_back(Ball.new(level))
 				print("[Game] DECK_PACK level: %s (%s)" % [level, Ball.Rarity.keys()[level_rarity]])
+
 		Product.ProductType.DECK_CLEANER:
 			# ex: [EffectType.DECK_SIZE_MIN_DOWN, 1]
 			var deck_size_min = DECK_SIZE_MIN_DEFAULT
@@ -397,10 +397,12 @@ func _on_product_icon_pressed(product: Product) -> void:
 				deck_size_min -= effect_data[1]
 			deck_size_min = clampi(deck_size_min, DECK_SIZE_MIN, deck_size_min)
 			print("[Game/BallEffect] DECK_SIZE_MIN_DOWN deck_size_min: %s" % [deck_size_min])
+
 			if _deck_ball_list.size() <= deck_size_min:
 				return
 			_deck_ball_list.sort_custom(func(a: Ball, b: Ball): a.level < b.level)
 			_deck_ball_list.pop_front()
+
 		Product.ProductType.EXTRA_PACK:
 			# ex: [EffectType.EXTRA_SIZE_MAX_UP, 2]
 			var extra_size_max = EXTRA_SIZE_MAX_DEFAULT
@@ -408,6 +410,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 				extra_size_max += effect_data[1]
 			extra_size_max = clampi(extra_size_max, extra_size_max, EXTRA_SIZE_MAX)
 			print("[Game/BallEffect] EXTRA_SIZE_MAX_UP extra_size_max: %s" % [extra_size_max])
+
 			if extra_size_max <= _extra_ball_list.size():
 				return
 			for i in 2:
@@ -418,6 +421,23 @@ func _on_product_icon_pressed(product: Product) -> void:
 				var rarity = _pick_random_rarity()
 				_extra_ball_list.push_back(Ball.new(level, rarity))
 				print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
+
+			# ex: [EffectType.HOLE_SIZE_UP, 1]
+			var hole_size = 0
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_SIZE_UP):
+				hole_size += effect_data[1]
+			# ex: [EffectType.HOLE_GRAVITY_SIZE_UP, 1]
+			var gravity_size = 0
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_GRAVITY_SIZE_UP):
+				gravity_size += effect_data[1]
+			print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size: %s, gravity_size: %s" % [hole_size, gravity_size])
+
+			for node in get_tree().get_nodes_in_group("hole"):
+				if node is Hole:
+					if node.hole_type == Hole.HoleType.BILLIARDS:
+						node.set_hole_size(hole_size)
+						node.set_gravity_size(gravity_size)
+
 		Product.ProductType.EXTRA_CLEANER:
 			if _extra_ball_list.size() == 0:
 				return

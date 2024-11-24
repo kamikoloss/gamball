@@ -127,10 +127,10 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.TAX_DOWN, 50],
 	},
 	12: {
-		Ball.Rarity.UNCOMMON:	[EffectType.HOLE_SIZE_UP, 2],
-		Ball.Rarity.RARE:		[EffectType.HOLE_SIZE_UP, 3],
-		Ball.Rarity.EPIC:		[EffectType.HOLE_GRAVITY_SIZE_UP, 2],
-		Ball.Rarity.LEGENDARY:	[EffectType.HOLE_GRAVITY_SIZE_UP, 3],
+		Ball.Rarity.UNCOMMON:	[EffectType.HOLE_SIZE_UP, 1],
+		Ball.Rarity.RARE:		[EffectType.HOLE_SIZE_UP, 2],
+		Ball.Rarity.EPIC:		[EffectType.HOLE_GRAVITY_SIZE_UP, 1],
+		Ball.Rarity.LEGENDARY:	[EffectType.HOLE_GRAVITY_SIZE_UP, 2],
 	},
 	13: {
 		Ball.Rarity.UNCOMMON:	[EffectType.DECK_COMPLETE_GAIN_UP, 3, 2],
