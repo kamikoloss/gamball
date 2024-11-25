@@ -42,10 +42,10 @@ var _rush_balls_max: int = 10
 
 # 抽選確率の分母 (ランプの数)
 var _rush_probability_bottom: int = 24
-# ラッシュ初当たり抽選確率の分子
-var _rush_start_probability_top: int = 2
-# ラッシュ継続抽選確率の分子
-var _rush_continue_probability_top: int = 16
+# ラッシュ初当たり抽選確率の分子のリスト
+var _rush_start_probability_top: Array = [0, 12]
+# ラッシュ継続抽選確率の分子のリスト
+var _rush_continue_probability_top: Array = range(12) # [0, 1, ..., 11]
 # 最後に抽選した分子 (ランプの位置)
 var _rush_last_hit_number: int = -1
 
@@ -120,12 +120,25 @@ func start_lottery(force: bool = false) -> void:
 	await _start_rusn_lamps(index_list)
 	_is_lottery_now = false
 
-	if hit < top:
+	if hit in top:
 		AudioManager.play_se(AudioManager.SeType.PACHINKO_RUSH_START)
 		_start_rush()
 	else:
 		AudioManager.play_se(AudioManager.SeType.PACHINKO_RUSH_FINISH)
 		_finish_rush()
+
+
+func set_rush_start_top(level: int = 0) -> void:
+	if level == 0:
+		_rush_start_probability_top = [0, 12]
+	elif level == 1:
+		_rush_start_probability_top = [0, 12, 6]
+	else:
+		_rush_start_probability_top = [0, 12, 6, 18]
+
+func set_rush_continue_top(level: int = 0) -> void:
+	var clamped = clampi(level, 0, 6)
+	_rush_continue_probability_top = range(12 + clamped)
 
 
 # Ball が ラッシュ用 Hole に落ちたときの処理
@@ -261,7 +274,7 @@ func _refresh_rush_lamps(is_rush: bool) -> void:
 	var top = _rush_continue_probability_top if is_rush else _rush_start_probability_top
 	for node in _rush_lamps_parent.get_children():
 		if node is Lamp:
-			if count < top:
+			if count in top:
 				node.set_light_colors(Lamp.LightColor.GREEN_ON, Lamp.LightColor.GREEN_OFF)
 			else:
 				node.set_light_colors(Lamp.LightColor.DEFAULT_ON, Lamp.LightColor.DEFAULT_OFF)

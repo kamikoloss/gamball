@@ -47,7 +47,7 @@ const EFFECT_DESCRIPTIONS = {
 	EffectType.MONEY_UP_ON_BREAK: "破壊時に MONEY [color={r}][x{a}][/color]",
 	EffectType.MONEY_UP_ON_FALL: "落下時に MONEY [color={r}][+{a}][/color]",
 	EffectType.PACHINKO_START_TOP_UP: "パチンコの初当たり確率 [color={r}][+{a}][/color] (最大 +2)",
-	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続確率 [color={r}][+{a}][/color] (最大 +4)",
+	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続確率 [color={r}][+{a}][/color] (最大 +6)",
 	EffectType.RARITY_TOP_UP: "[color={r}][{a}][/color] の出現確率 +1 (+1 = 2倍, +2 = 3倍, ...)",
 	EffectType.RARITY_TOP_DOWN: "[color={r}][{a}][/color] の出現確率 -1 (-1 = 半減, -2 = 出なくなる)",
 	EffectType.TAX_DOWN: "延長料 [color={r}][-{a}%][/color] (同一効果は足し算, 最大 -50%)",

@@ -459,6 +459,18 @@ func _on_product_icon_pressed(product: Product) -> void:
 						node.set_hole_size(hole_size)
 						node.set_gravity_size(gravity_size)
 
+			# ex: [EffectType.PACHINKO_START_TOP_UP, 1]
+			var start_level = 0
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_START_TOP_UP):
+				start_level += effect_data[1]
+			# ex: [EffectType.PACHINKO_CONTINUE_TOP_UP, 1]
+			var continue_level = 0
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_CONTINUE_TOP_UP):
+				continue_level += effect_data[1]
+			print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
+			_pachinko.set_rush_start_top(start_level)
+			_pachinko.set_rush_continue_top(continue_level)
+
 		Product.ProductType.EXTRA_CLEANER:
 			if _extra_ball_list.size() == 0:
 				return
@@ -501,11 +513,11 @@ func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 	var rarity_weight = RAIRTY_WEIGHT
 	# ex: [EffectType.RARITY_TOP_UP, Ball.Rarity.RARE]
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.RARITY_TOP_UP):
-		rarity_weight[effect_data[0]] += RAIRTY_WEIGHT[effect_data[0]]
+		rarity_weight[effect_data[1]] += RAIRTY_WEIGHT[effect_data[1]]
 	# ex: [EffectType.RARITY_TOP_DOWN, Ball.Rarity.COMMON]
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.RARITY_TOP_DOWN):
-		var rarity_top_down = rarity_weight[effect_data[0]] - RAIRTY_WEIGHT[effect_data[0]] / 2
-		rarity_weight[effect_data[0]] = clampi(rarity_top_down, 0, rarity_top_down)
+		var rarity_top_down = rarity_weight[effect_data[1]] - RAIRTY_WEIGHT[effect_data[1]] / 2
+		rarity_weight[effect_data[1]] = clampi(rarity_top_down, 0, rarity_top_down)
 	print("[Game/BallEffect] RARITY_TOP_UP(/DOWN) rarity_weight: %s" % [rarity_weight])
 
 	# 抽選の分母 (合計)
