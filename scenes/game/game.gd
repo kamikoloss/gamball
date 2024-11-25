@@ -322,9 +322,12 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
 				if billiards_balls <= effect_data[1]:
 					gain_times += effect_data[2]
-			# ex: [EffectType.DECK_COMPLETE_GAIN_UP, 5, 2]
+			# ex: [EffectType.DECK_COMPLETE_GAIN_UP, 3, 2]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_COMPLETE_GAIN_UP):
-				if billiards_balls <= effect_data[1]:
+				var complete_list = range(effect_data[1] + 1) # 3 以下 => [0, 1, 2, 3]
+				for deck_ball in _deck_ball_list:
+					complete_list = complete_list.filter(func(v): return v != deck_ball.level) # LV 以外を絞り込む = LV を消す
+				if complete_list.is_empty():
 					gain_times += effect_data[2]
 			# ex: [EffectType.DECK_COUNT_GAIN_UP, 50, 1]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_COUNT_GAIN_UP):

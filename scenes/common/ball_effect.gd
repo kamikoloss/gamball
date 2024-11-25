@@ -6,6 +6,7 @@ extends Node
 # 効果の種類
 # TODO: 命名もっとメソッド的にしたい BILLIARDS_MERGE_BALLS_ON_SPAWN あたりはちょうどいい
 enum EffectType {
+	NONE,
 	BILLIARDS_COUNT_GAIN_UP, BILLIARDS_COUNT_GAIN_UP_2,
 	BILLIARDS_LV_UP_ON_SPAWN,
 	BILLIARDS_MERGE_BALLS_ON_SPAWN,
@@ -27,7 +28,9 @@ enum EffectType {
 
 
 # 効果の説明文 (BBCode)
+# TODO: color は replace 処理側に入れていい
 const EFFECT_DESCRIPTIONS = {
+	EffectType.NONE: "",
 	EffectType.BILLIARDS_COUNT_GAIN_UP: "ビリヤード盤面上の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][+{b}][/color]",
 	EffectType.BILLIARDS_COUNT_GAIN_UP_2: "ビリヤード盤面上の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][x{b}][/color]",
 	EffectType.BILLIARDS_LV_UP_ON_SPAWN: "出現時にビリヤード盤面上の Ball LV [color={r}][+{a}][/color]",
@@ -37,17 +40,17 @@ const EFFECT_DESCRIPTIONS = {
 	EffectType.DECK_COUNT_GAIN_UP: "DECK の Ball が [color={r}][{a}][/color] 個以下のとき Gain [color={r}][+{b}][/color]",
 	EffectType.EXTRA_SIZE_MAX_UP: "EXTRA の最大サイズ [color={r}][+{a}][/color]",
 	EffectType.HOLE_GAIN_UP: "Hole の Gain [color={r}][+{a}][/color]",
-	EffectType.HOLE_SIZE_UP: "Hole のサイズ [color={r}][+{a}][/color] (最大 +4)",
-	EffectType.HOLE_GRAVITY_SIZE_UP: "Hole の重力範囲サイズ [color={r}][+{a}][/color] (最大 +4)",
+	EffectType.HOLE_SIZE_UP: "Hole のサイズ [color={r}][+{a}][/color] (最大 +4 = x2)",
+	EffectType.HOLE_GRAVITY_SIZE_UP: "Hole の重力範囲サイズ [color={r}][+{a}][/color] (最大 +4 = x2)",
 	EffectType.GAIN_UP: "LV [color={r}][{a}][/color] 以下の Ball の Gain [color={r}][+{b}][/color]",
 	EffectType.GAIN_UP_2: "LV [color={r}][{a}][/color] の Ball の Gain [color={r}][x{b}][/color]",
 	EffectType.MONEY_UP_ON_BREAK: "破壊時に MONEY [color={r}][x{a}][/color]",
 	EffectType.MONEY_UP_ON_FALL: "落下時に MONEY [color={r}][+{a}][/color]",
-	EffectType.PACHINKO_START_TOP_UP: "パチンコの初当たり確率 [color={r}][+{a}][/color]",
-	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続確率 [color={r}][+{a}][/color]",
-	EffectType.RARITY_TOP_UP: "[color={r}][{a}][/color] の出現確率 +1 (+1: 2倍, +2: 3倍, ...)",
-	EffectType.RARITY_TOP_DOWN: "[color={r}][{a}][/color] の出現確率 -1 (-1: 半減, -2: 出なくなる)",
-	EffectType.TAX_DOWN: "延長料 [color={r}][-{a}%][/color] (同一効果は足し算)",
+	EffectType.PACHINKO_START_TOP_UP: "パチンコの初当たり確率 [color={r}][+{a}][/color] (最大 +2)",
+	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続確率 [color={r}][+{a}][/color] (最大 +4)",
+	EffectType.RARITY_TOP_UP: "[color={r}][{a}][/color] の出現確率 +1 (+1 = 2倍, +2 = 3倍, ...)",
+	EffectType.RARITY_TOP_DOWN: "[color={r}][{a}][/color] の出現確率 -1 (-1 = 半減, -2 = 出なくなる)",
+	EffectType.TAX_DOWN: "延長料 [color={r}][-{a}%][/color] (同一効果は足し算, 最大 -50%)",
 }
 
 # Ball LV/Rarity ごとの初期効果
@@ -55,10 +58,14 @@ const EFFECT_DESCRIPTIONS = {
 # TODO: 表っぽいデータなので Google Sheets とかに外出しする？
 const EFFECTS_POOL_1 = {
 	0: {
-		Ball.Rarity.UNCOMMON:	[EffectType.MONEY_UP_ON_BREAK, 2],
-		Ball.Rarity.RARE:		[EffectType.MONEY_UP_ON_BREAK, 3],
-		Ball.Rarity.EPIC:		[EffectType.MONEY_UP_ON_BREAK, 5],
-		Ball.Rarity.LEGENDARY:	[EffectType.MONEY_UP_ON_BREAK, 10],
+		#Ball.Rarity.UNCOMMON:	[EffectType.MONEY_UP_ON_BREAK, 2],
+		#Ball.Rarity.RARE:		[EffectType.MONEY_UP_ON_BREAK, 3],
+		#Ball.Rarity.EPIC:		[EffectType.MONEY_UP_ON_BREAK, 5],
+		#Ball.Rarity.LEGENDARY:	[EffectType.MONEY_UP_ON_BREAK, 10],
+		Ball.Rarity.UNCOMMON:	[EffectType.NONE],
+		Ball.Rarity.RARE:		[EffectType.NONE],
+		Ball.Rarity.EPIC:		[EffectType.NONE],
+		Ball.Rarity.LEGENDARY:	[EffectType.NONE],
 	},
 	1: {
 		Ball.Rarity.UNCOMMON:	[EffectType.MONEY_UP_ON_FALL, 10],
@@ -79,16 +86,24 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_COUNT_GAIN_UP_2, 1, 10],
 	},
 	4: {
-		Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 1],
-		Ball.Rarity.RARE:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 2],
-		Ball.Rarity.EPIC:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 3],
-		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 5],
+		#Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 1],
+		#Ball.Rarity.RARE:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 2],
+		#Ball.Rarity.EPIC:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 3],
+		#Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 5],
+		Ball.Rarity.UNCOMMON:	[EffectType.NONE],
+		Ball.Rarity.RARE:		[EffectType.NONE],
+		Ball.Rarity.EPIC:		[EffectType.NONE],
+		Ball.Rarity.LEGENDARY:	[EffectType.NONE],
 	},
 	5: {
-		Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 50],
-		Ball.Rarity.RARE:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 30],
-		Ball.Rarity.EPIC:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 20],
-		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 10],
+		#Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 50],
+		#Ball.Rarity.RARE:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 30],
+		#Ball.Rarity.EPIC:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 20],
+		#Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 10],
+		Ball.Rarity.UNCOMMON:	[EffectType.NONE],
+		Ball.Rarity.RARE:		[EffectType.NONE],
+		Ball.Rarity.EPIC:		[EffectType.NONE],
+		Ball.Rarity.LEGENDARY:	[EffectType.NONE],
 	},
 	6: {
 		Ball.Rarity.UNCOMMON:	[EffectType.GAIN_UP, 3, 1],
@@ -121,10 +136,14 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.PACHINKO_START_TOP_UP, 2],
 	},
 	11: {
-		Ball.Rarity.UNCOMMON:	[EffectType.TAX_DOWN, 10],
-		Ball.Rarity.RARE:		[EffectType.TAX_DOWN, 20],
-		Ball.Rarity.EPIC:		[EffectType.TAX_DOWN, 30],
-		Ball.Rarity.LEGENDARY:	[EffectType.TAX_DOWN, 50],
+		#Ball.Rarity.UNCOMMON:	[EffectType.TAX_DOWN, 10],
+		#Ball.Rarity.RARE:		[EffectType.TAX_DOWN, 20],
+		#Ball.Rarity.EPIC:		[EffectType.TAX_DOWN, 30],
+		#Ball.Rarity.LEGENDARY:	[EffectType.TAX_DOWN, 50],
+		Ball.Rarity.UNCOMMON:	[EffectType.NONE],
+		Ball.Rarity.RARE:		[EffectType.NONE],
+		Ball.Rarity.EPIC:		[EffectType.NONE],
+		Ball.Rarity.LEGENDARY:	[EffectType.NONE],
 	},
 	12: {
 		Ball.Rarity.UNCOMMON:	[EffectType.HOLE_SIZE_UP, 1],
@@ -167,6 +186,9 @@ static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
 	var rarity_color: Color = Ball.BALL_RARITY_COLORS[rarity]
 	var rarity_color_code = rarity_color.to_html()
 
+	# 効果なし
+	if effect_data[0] == EffectType.NONE:
+		return "(TODO)"
 	# [ <EffectType>, Ball.Rarity ]
 	if effect_data[0] in [EffectType.RARITY_TOP_UP, EffectType.RARITY_TOP_DOWN]:
 		var a = Ball.Rarity.keys()[effect_data[1]]
