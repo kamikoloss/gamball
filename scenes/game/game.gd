@@ -180,6 +180,8 @@ func _ready() -> void:
 	# UI (GameUi)
 	_game_ui.refresh_balls_slot_deck(_deck_ball_list)
 	_game_ui.refresh_balls_slot_extra(_extra_ball_list)
+	_game_ui.refresh_deck_size(DECK_SIZE_MIN_DEFAULT, DECK_SIZE_MAX)
+	_game_ui.refresh_extra_size(EXTRA_SIZE_MIN, EXTRA_SIZE_MAX_DEFAULT)
 	_bunny.visible = false
 	_refresh_next()
 	# UI (Billiards)
@@ -417,6 +419,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_SIZE_MIN_DOWN):
 				deck_size_min -= effect_data[1]
 			deck_size_min = clampi(deck_size_min, DECK_SIZE_MIN, deck_size_min)
+			_game_ui.refresh_deck_size(deck_size_min, DECK_SIZE_MAX)
 			print("[Game/BallEffect] DECK_SIZE_MIN_DOWN deck_size_min: %s" % [deck_size_min])
 
 			if _deck_ball_list.size() <= deck_size_min:
@@ -430,6 +433,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.EXTRA_SIZE_MAX_UP):
 				extra_size_max += effect_data[1]
 			extra_size_max = clampi(extra_size_max, extra_size_max, EXTRA_SIZE_MAX)
+			_game_ui.refresh_extra_size(EXTRA_SIZE_MIN, extra_size_max)
 			print("[Game/BallEffect] EXTRA_SIZE_MAX_UP extra_size_max: %s" % [extra_size_max])
 
 			if extra_size_max <= _extra_ball_list.size():

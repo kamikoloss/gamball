@@ -1575,13 +1575,15 @@ position = Vector2(280, 160)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_deck_size_label", "_extra_size_label", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("13_aavli")
 _balls_slot_deck = NodePath("Main/BallsSlotDeck")
 _balls_slot_extra = NodePath("Main/BallsSlotExtra")
+_deck_size_label = NodePath("Main/BallsSlotDeck/DeckSize")
+_extra_size_label = NodePath("Main/BallsSlotExtra/ExtraSize")
 _ball_popup = NodePath("Main/BallPopup")
 _ball_popup_level = NodePath("Main/BallPopup/Level")
 _ball_popup_rarity = NodePath("Main/BallPopup/Rarity")
@@ -1872,6 +1874,16 @@ theme_override_font_sizes/font_size = 64
 text = "DECK"
 vertical_alignment = 1
 
+[node name="DeckSize" type="Label" parent="UI/Main/BallsSlotDeck"]
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "[SIZE:99-99]"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [node name="Ball" parent="UI/Main/BallsSlotDeck" instance=ExtResource("2_ma10n")]
 position = Vector2(10, 40)
 is_display = true
@@ -1952,6 +1964,16 @@ scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "EXTRA"
+vertical_alignment = 1
+
+[node name="ExtraSize" type="Label" parent="UI/Main/BallsSlotExtra"]
+offset_right = 640.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "[SIZE:99-99]"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Ball" parent="UI/Main/BallsSlotExtra" instance=ExtResource("2_ma10n")]

@@ -27,6 +27,8 @@ const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 @export_category("Main/Ball")
 @export var _balls_slot_deck: Control
 @export var _balls_slot_extra: Control
+@export var _deck_size_label: Label
+@export var _extra_size_label: Label
 @export var _ball_popup: Control
 @export var _ball_popup_level: Label
 @export var _ball_popup_rarity: Label
@@ -134,6 +136,13 @@ func refresh_balls_slot_deck(deck_ball_list: Array[Ball]) -> void:
 
 func refresh_balls_slot_extra(extra_ball_list: Array[Ball]) -> void:
 	_refresh_balls_slot(_balls_slot_extra, extra_ball_list)
+
+
+func refresh_deck_size(min: int, max: int) -> void:
+	_deck_size_label.text = "[SIZE:%02d-%02d]" % [min, max]
+
+func refresh_extra_size(min: int, max: int) -> void:
+	_extra_size_label.text = "[SIZE:%02d-%02d]" % [min, max]
 
 
 # Main/Score
