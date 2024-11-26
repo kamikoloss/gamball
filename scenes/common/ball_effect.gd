@@ -27,6 +27,16 @@ enum EffectType {
 }
 
 
+# TODO: 居場所はここではない？
+# TODO: Rarity って言葉が変？
+const RARITY_TEXT = {
+	Ball.Rarity.COMMON: 	"★",
+	Ball.Rarity.UNCOMMON:	"★★",
+	Ball.Rarity.RARE:		"★★★",
+	Ball.Rarity.EPIC:		"★★★★",
+	Ball.Rarity.LEGENDARY:	"★★★★★",
+}
+
 # 効果の説明文 (BBCode)
 # TODO: color は replace 処理側に入れていい
 const EFFECT_DESCRIPTIONS = {
@@ -190,25 +200,25 @@ static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
 	var description_base = EFFECT_DESCRIPTIONS[effect_data[0]]
 	var rarity_color: Color = Ball.BALL_RARITY_COLORS[rarity]
 	var rarity_color_code = rarity_color.to_html()
-	var get_color_tagged_text = func(x) -> String:
-		return "[color={r}]{x}[/color]".format({ "r": rarity_color_code, "x": x })
+	var get_variable_text = func(x) -> String:
+		return "[color={r}][b]{x}[/b][/color]".format({ "r": rarity_color_code, "x": x })
 
 	# [ <EffectType>, Ball.Rarity ]
 	if effect_data[0] in [EffectType.RARITY_TOP_UP, EffectType.RARITY_TOP_DOWN]:
 		var a = Ball.Rarity.keys()[effect_data[1]]
 		return description_base.format({
-			"a": get_color_tagged_text.call(a),
+			"a": get_variable_text.call(a),
 		})
 	# [ <EffectType>, param1 ]
 	if effect_data.size() == 2:
 		return description_base.format({
-			"a": get_color_tagged_text.call(effect_data[1]),
+			"a": get_variable_text.call(effect_data[1]),
 		})
 	# [ <EffectType>, param1, param2 ]
 	if effect_data.size() == 3:
 		return description_base.format({
-			"a": get_color_tagged_text.call(effect_data[1]),
-			"b": get_color_tagged_text.call(effect_data[2]),
+			"a": get_variable_text.call(effect_data[1]),
+			"b": get_variable_text.call(effect_data[2]),
 		})
 
 	return ""
