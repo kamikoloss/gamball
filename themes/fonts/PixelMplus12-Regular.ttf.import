@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cddqcb7np26y8"
-path="res://.godot/imported/PixelMplus12-Regular.ttf-7e61da9d15ce00aef10d3faabdb7a4a7.fontdata"
+path="res://.godot/imported/PixelMplus12-Regular.ttf-8dd5a119f7be75912439c39f0b8f470b.fontdata"
 
 [deps]
 
-source_file="res://themes/PixelMplus12-Regular.ttf"
-dest_files=["res://.godot/imported/PixelMplus12-Regular.ttf-7e61da9d15ce00aef10d3faabdb7a4a7.fontdata"]
+source_file="res://themes/fonts/PixelMplus12-Regular.ttf"
+dest_files=["res://.godot/imported/PixelMplus12-Regular.ttf-8dd5a119f7be75912439c39f0b8f470b.fontdata"]
 
 [params]
 

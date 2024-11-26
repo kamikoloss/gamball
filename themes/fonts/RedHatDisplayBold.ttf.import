@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://braqe561majhb"
-path="res://.godot/imported/RedHatDisplayBold.ttf-4d0aace259226165ae5473db7cddfc6d.fontdata"
+path="res://.godot/imported/RedHatDisplayBold.ttf-4c5c83a65654e2c21267ec617307531c.fontdata"
 
 [deps]
 
-source_file="res://themes/RedHatDisplayBold.ttf"
-dest_files=["res://.godot/imported/RedHatDisplayBold.ttf-4d0aace259226165ae5473db7cddfc6d.fontdata"]
+source_file="res://themes/fonts/RedHatDisplayBold.ttf"
+dest_files=["res://.godot/imported/RedHatDisplayBold.ttf-4c5c83a65654e2c21267ec617307531c.fontdata"]
 
 [params]
 
