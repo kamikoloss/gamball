@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://dnjsv11k857r7"]
+
+[ext_resource type="FontFile" uid="uid://h0c4o6txwib" path="res://themes/fonts/NotoSansJP-VariableFont_wght.ttf" id="1_nrh8c"]
+
+[resource]
+base_font = ExtResource("1_nrh8c")
+variation_opentype = {
+2003265652: 700
+}
