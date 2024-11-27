@@ -8,13 +8,15 @@ enum TweenType { POSE, DIALOGUE }
 
 
 # A/B のフェードの秒数
-const POSE_CHANGE_DURATION = 0.0
+const POSE_CHANGE_DURATION: float = 0.0
 # 跳ねるときの上昇時の秒数
-const POSE_MOVE_DURATION_UP = 0.1
+const POSE_MOVE_DURATION_UP: float = 0.1
 # 跳ねるときの下降時の秒数
-const POSE_MOVE_DURATION_DOWN = 0.3
+const POSE_MOVE_DURATION_DOWN: float = 0.3
 # どれぐらい跳ねるか
-const POSE_MOVE_POSITION_DIFF = Vector2(0, -20)
+const POSE_MOVE_POSITION_DIFF: Vector2 = Vector2(0, -20)
+# セリフのフェードの秒数
+const DIALOGUE_FADE_DURATION: float = 0.2
 
 
 @export var _human: Control
@@ -34,8 +36,7 @@ const POSE_MOVE_POSITION_DIFF = Vector2(0, -20)
 @export var _pose_b_parts_4: TextureRect
 
 @export_category("Bubble")
-@export var _dialogue_label: Label
-@export var _dialogue_big_label: Label
+@export var _dialogue_label: RichTextLabel
 
 @export_category("Texutres")
 @export var _base_texture: Texture
@@ -121,21 +122,10 @@ func refresh_dialogue_label(dialogue: String) -> void:
 	var tween = _get_tween(TweenType.DIALOGUE)
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
-	tween.tween_property(_dialogue_big_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
+	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION / 2) # 表示を消す
 	tween.chain()
-	tween.tween_callback(func(): _dialogue_label.text = dialogue) # セリフを変える
-	tween.tween_property(_dialogue_label, "modulate", Color.WHITE, 0.2) # 対象の label だけ表示を戻す
-
-func refresh_dialogue_big_label(dialogue: String) -> void:
-	var tween = _get_tween(TweenType.DIALOGUE)
-	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
-	tween.tween_property(_dialogue_big_label, "modulate", Color.TRANSPARENT, 0.2) # 表示を消す
-	tween.chain()
-	tween.tween_callback(func(): _dialogue_big_label.text = dialogue) # セリフを変える
-	tween.tween_property(_dialogue_big_label, "modulate", Color.WHITE, 0.2) # 対象の label だけ表示を戻す
+	tween.tween_callback(func(): _dialogue_label.text = "[color=BLACK]%s[/color]" % [dialogue]) # セリフを変える
+	tween.tween_property(_dialogue_label, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION) # 表示を戻す
 
 
 func enable_touch() -> void:
