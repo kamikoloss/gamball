@@ -5,15 +5,16 @@ extends Control
 signal exit_button_pressed
 
 
-@export var _exit_button: TextureButton
+@export var _reset_button: Button
+@export var _exit_button: Button
 
 @export_category("Audio")
 @export var _audio_master_slider: HSlider
-@export var _audio_master_slider_label: Label
+@export var _audio_master_ball: Ball
 @export var _audio_bgm_slider: HSlider
-@export var _audio_bgm_slider_label: Label
+@export var _audio_bgm_ball: Ball
 @export var _audio_se_slider: HSlider
-@export var _audio_se_slider_label: Label
+@export var _audio_se_ball: Ball
 
 
 func _ready() -> void:
@@ -34,14 +35,18 @@ func _on_audio_slider_changed(bus_type: AudioManager.BusType, volume_level: int)
 	AudioManager.set_volume(bus_type, volume_level)
 	_refresh_config_audio_slider(bus_type, volume_level)
 
+
 func _refresh_config_audio_slider(bus_type: AudioManager.BusType, volume_level: int) -> void:
 	match bus_type:
 		AudioManager.BusType.MASTER:
 			_audio_master_slider.value = volume_level
-			_audio_master_slider_label.text = str(volume_level)
+			_audio_master_ball.level = volume_level
+			_audio_master_ball.refresh_view()
 		AudioManager.BusType.BGM:
 			_audio_bgm_slider.value = volume_level
-			_audio_bgm_slider_label.text = str(volume_level)
+			_audio_bgm_ball.level = volume_level
+			_audio_bgm_ball.refresh_view()
 		AudioManager.BusType.SE:
 			_audio_se_slider.value = volume_level
-			_audio_se_slider_label.text = str(volume_level)
+			_audio_se_ball.level = volume_level
+			_audio_se_ball.refresh_view()
