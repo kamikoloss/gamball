@@ -17,14 +17,13 @@ radius = 15.0
 _data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 1, 0]
 point_count = 2
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_hover_texture", "_base_texture", "_body_texture", "_inner_texture", "_inner_texture_2", "_mask_texture", "_level_label", "_hole_area", "_trail_line", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_hover_texture", "_body_texture", "_inner_texture", "_inner_texture_2", "_mask_texture", "_level_label", "_hole_area", "_trail_line", "_touch_button")]
 z_index = 4
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
 _hover_texture = NodePath("View/Hover")
-_base_texture = NodePath("View/Base")
 _body_texture = NodePath("View/Body")
 _inner_texture = NodePath("View/Inner")
 _inner_texture_2 = NodePath("View/Inner2")
@@ -59,24 +58,6 @@ mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Base" type="TextureRect" parent="View"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.5, 1.5)
-pivot_offset = Vector2(10, 10)
-mouse_filter = 2
-texture = ExtResource("2_4bc8b")
-expand_mode = 1
-
 [node name="Body" type="TextureRect" parent="View"]
 self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
 anchors_preset = 8
@@ -96,7 +77,8 @@ mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Inner" type="TextureRect" parent="View"]
+[node name="Inner2" type="TextureRect" parent="View"]
+self_modulate = Color(1, 0, 1, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -108,11 +90,12 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.1, 1.1)
 pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Inner2" type="TextureRect" parent="View"]
+[node name="Inner" type="TextureRect" parent="View"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

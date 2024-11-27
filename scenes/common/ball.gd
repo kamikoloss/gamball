@@ -39,6 +39,7 @@ const BALL_RARITY_COLORS = {
 
 
 # ボール番号
+# TODO: number の方がいい
 @export var level: int = 0
 # 展示用かどうか
 # pressed は展示用のみ発火する
@@ -50,8 +51,7 @@ const BALL_RARITY_COLORS = {
 
 # ボールの選択を示す周辺部分
 @export var _hover_texture: TextureRect
-# ボールの本体の 下地/色 部分
-@export var _base_texture: TextureRect
+# ボールの本体色部分
 @export var _body_texture: TextureRect
 # ボール番号の背景部分
 @export var _inner_texture: TextureRect
@@ -68,8 +68,10 @@ const BALL_RARITY_COLORS = {
 # 他のボールにぶつかって有効化されたかどうか
 var is_active: bool = true 
 # ボールのレア度
+# TODO: level の方がいい
 var rarity: Rarity = Rarity.COMMON
 # ボールの効果
+# NOTE: 効果移譲とかありそうなので配列で持つ
 # [ [ <BallEffect.EffectType>, param1, (param2) ], ... ]
 var effects: Array = []
 
@@ -109,17 +111,16 @@ func _process(delta: float) -> void:
 # 自身の見た目を更新する
 func refresh_view() -> void:
 	# 本体色
-	if level == BALL_LEVEL_EMPTY_SLOT:
-		_base_texture.visible = false
-	else:
-		_base_texture.visible = true
 	_body_texture.self_modulate = BALL_BODY_COLORS[level]
-	# レア度色
+	# レア度
 	if rarity == Rarity.COMMON:
+		_inner_texture.self_modulate = Color.WHITE
 		_inner_texture_2.visible = false
 	else:
+		_inner_texture.self_modulate = Color.BLACK
 		_inner_texture_2.visible = true
-		_inner_texture_2.self_modulate = Color(BALL_RARITY_COLORS[rarity], 0.3)
+		_inner_texture_2.self_modulate = BALL_RARITY_COLORS[rarity]
+		_level_label.self_modulate = BALL_RARITY_COLORS[rarity]
 
 	# マスク
 	_mask_texture.visible = not is_active # 有効なら表示しない

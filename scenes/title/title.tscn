@@ -61,6 +61,7 @@ offset_bottom = 560.0
 _label_text = "PLAY"
 
 [node name="Information" parent="." instance=ExtResource("6_43611")]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 560.0
 offset_right = 360.0
@@ -69,6 +70,7 @@ _font_size_ratio = 0.5
 _label_text = "INFORMATION"
 
 [node name="Options" parent="." instance=ExtResource("6_43611")]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 600.0
 offset_right = 360.0
@@ -77,6 +79,7 @@ _font_size_ratio = 0.5
 _label_text = "OPTIONS"
 
 [node name="Exit" parent="." instance=ExtResource("6_43611")]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 640.0
 offset_right = 360.0
