@@ -2,11 +2,13 @@
 extends Node
 
 
+# NOTE: bus_idx として使うので bus_layout の順番を合致させる必要がある
 enum BusType {
 	MASTER = 0,
 	BGM = 1,
 	SE = 2,
 }
+
 enum BgmType {
 	DEFAULT,
 }
@@ -25,11 +27,11 @@ enum SeType {
 @export var _se_player_4: AudioStreamPlayer
 
 @export_category("SE AudioStream")
-@export var _se_BilliardsShoot: AudioStream
-@export var _se_PachinkoLampOff: AudioStream
-@export var _se_PachinkoLampOn: AudioStream
-@export var _se_PachinkoRushStart: AudioStream
-@export var _se_PachinkoRushFinish: AudioStream
+@export var _se_BILLIARDS_SHOT: AudioStream
+@export var _se_PACHINKO_LAMP_OFF: AudioStream
+@export var _se_PACHINKO_LAMP_ON: AudioStream
+@export var _se_PACHINKO_RUSH_START: AudioStream
+@export var _se_PACHINKO_RUSH_FINISH: AudioStream
 
 
 func _ready() -> void:
@@ -45,29 +47,39 @@ func set_volume(bus_type: BusType, volume_level: int) -> void:
 	AudioServer.set_bus_volume_db(bus_type, volume_db)
 
 
-func play_se(bus_type: SeType) -> void:
+func play_se(se_type: SeType) -> void:
 	var se_player: AudioStreamPlayer
 	var se_audio: AudioStream
 
-	match bus_type:
-		SeType.BILLIARDS_SHOT:
-			se_player = _se_player_1
-			se_audio = _se_BilliardsShoot
-		SeType.PACHINKO_LAMP_OFF:
-			se_player = _se_player_2
-			se_audio = _se_PachinkoLampOff
-		SeType.PACHINKO_LAMP_ON:
-			se_player = _se_player_2
-			se_audio = _se_PachinkoLampOn
-		SeType.PACHINKO_RUSH_START:
-			se_player = _se_player_2
-			se_audio = _se_PachinkoRushStart
-		SeType.PACHINKO_RUSH_FINISH:
-			se_player = _se_player_2
-			se_audio = _se_PachinkoRushFinish
+	for se_group in _get_se_groups():
+		if se_type in se_group["audio"].keys():
+			se_player = se_group["player"]
+			se_audio = se_group["audio"][se_type]
+			continue
 
 	if not se_player or not se_audio:
 		return
 
 	se_player.stream = se_audio
 	se_player.play()
+
+
+# Player と SE の対応を取得する
+func _get_se_groups() -> Array:
+	return [
+		{
+			"player": _se_player_1,
+			"audio": {
+				SeType.BILLIARDS_SHOT: _se_BILLIARDS_SHOT,
+			},
+		},
+		{
+			"player": _se_player_2,
+			"audio": {
+				SeType.PACHINKO_LAMP_OFF: _se_PACHINKO_LAMP_OFF,
+				SeType.PACHINKO_LAMP_ON: _se_PACHINKO_LAMP_ON,
+				SeType.PACHINKO_RUSH_START: _se_PACHINKO_RUSH_START,
+				SeType.PACHINKO_RUSH_FINISH: _se_PACHINKO_RUSH_FINISH,
+			},
+		}
+	]
