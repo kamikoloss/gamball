@@ -25,11 +25,11 @@ enum SeType {
 @export var _se_player_4: AudioStreamPlayer
 
 @export_category("SE AudioStream")
-@export var _se_BilliardsShoot: AudioStream
-@export var _se_PachinkoLampOff: AudioStream
-@export var _se_PachinkoLampOn: AudioStream
-@export var _se_PachinkoRushStart: AudioStream
-@export var _se_PachinkoRushFinish: AudioStream
+@export var _se_BILLIARDS_SHOT: AudioStream
+@export var _se_PACHINKO_LAMP_OFF: AudioStream
+@export var _se_PACHINKO_LAMP_ON: AudioStream
+@export var _se_PACHINKO_RUSH_START: AudioStream
+@export var _se_PACHINKO_RUSH_FINISH: AudioStream
 
 
 func _ready() -> void:
@@ -45,26 +45,33 @@ func set_volume(bus_type: BusType, volume_level: int) -> void:
 	AudioServer.set_bus_volume_db(bus_type, volume_db)
 
 
-func play_se(bus_type: SeType) -> void:
+func play_se(se_type: SeType) -> void:
 	var se_player: AudioStreamPlayer
 	var se_audio: AudioStream
 
-	match bus_type:
-		SeType.BILLIARDS_SHOT:
-			se_player = _se_player_1
-			se_audio = _se_BilliardsShoot
-		SeType.PACHINKO_LAMP_OFF:
-			se_player = _se_player_2
-			se_audio = _se_PachinkoLampOff
-		SeType.PACHINKO_LAMP_ON:
-			se_player = _se_player_2
-			se_audio = _se_PachinkoLampOn
-		SeType.PACHINKO_RUSH_START:
-			se_player = _se_player_2
-			se_audio = _se_PachinkoRushStart
-		SeType.PACHINKO_RUSH_FINISH:
-			se_player = _se_player_2
-			se_audio = _se_PachinkoRushFinish
+	var se_group = [
+		{
+			"player": _se_player_1,
+			"audio": {
+				SeType.BILLIARDS_SHOT: _se_BILLIARDS_SHOT,
+			},
+		},
+		{
+			"player": _se_player_2,
+			"audio": {
+				SeType.PACHINKO_LAMP_OFF: _se_PACHINKO_LAMP_OFF,
+				SeType.PACHINKO_LAMP_ON: _se_PACHINKO_LAMP_ON,
+				SeType.PACHINKO_RUSH_START: _se_PACHINKO_RUSH_START,
+				SeType.PACHINKO_RUSH_FINISH: _se_PACHINKO_RUSH_FINISH,
+			},
+		}
+	]
+
+	for se_data in se_group:
+		if se_type in se_data["audio"].keys():
+			se_player = se_data["player"]
+			se_audio = se_data["audio"][se_type]
+			continue
 
 	if not se_player or not se_audio:
 		return

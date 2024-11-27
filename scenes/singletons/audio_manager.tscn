@@ -15,11 +15,11 @@ _se_player_1 = NodePath("SE/AudioStreamPlayer")
 _se_player_2 = NodePath("SE/AudioStreamPlayer2")
 _se_player_3 = NodePath("SE/AudioStreamPlayer3")
 _se_player_4 = NodePath("SE/AudioStreamPlayer4")
-_se_BilliardsShoot = ExtResource("2_w0oeq")
-_se_PachinkoLampOff = ExtResource("2_1u0wg")
-_se_PachinkoLampOn = ExtResource("3_dtax8")
-_se_PachinkoRushStart = ExtResource("5_ljrli")
-_se_PachinkoRushFinish = ExtResource("5_0vtw6")
+_se_BILLIARDS_SHOT = ExtResource("2_w0oeq")
+_se_PACHINKO_LAMP_OFF = ExtResource("2_1u0wg")
+_se_PACHINKO_LAMP_ON = ExtResource("3_dtax8")
+_se_PACHINKO_RUSH_START = ExtResource("5_ljrli")
+_se_PACHINKO_RUSH_FINISH = ExtResource("5_0vtw6")
 
 [node name="BGM" type="Node" parent="."]
 
