@@ -3,6 +3,7 @@ extends Node
 
 
 func _ready() -> void:
+	SceneManager.initialize()
 	SceneManager.title.exit_button_pressed.connect(_exit_game)
 
 

@@ -601,18 +601,18 @@ func _start_tax_count_down() -> void:
 	_bunny.visible = true
 	_bunny.disable_touch() # バニーのタッチを無効にする
 	_game_ui.show_people_window()
-	_bunny.refresh_dialogue_big_label("延長のお時間で～す")
+	_bunny.refresh_dialogue_label("延長のお時間で～す")
 
 	# カウントダウンを開始する
 	var tween = _get_tween(TweenType.TAX_COUNT_DOWN)
 	tween.tween_interval(2.0)
-	tween.tween_callback(func(): _bunny.refresh_dialogue_big_label("さ～～ん"))
+	tween.tween_callback(func(): _bunny.refresh_dialogue_label("さ～～ん"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): _bunny.refresh_dialogue_big_label("に～～い"))
+	tween.tween_callback(func(): _bunny.refresh_dialogue_label("に～～い"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): _bunny.refresh_dialogue_big_label("い～～ち"))
+	tween.tween_callback(func(): _bunny.refresh_dialogue_label("い～～ち"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
 	# Tax Window を表示する

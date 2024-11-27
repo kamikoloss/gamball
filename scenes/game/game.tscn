@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/common/hole.tscn" id="7_71f2d"]
 [ext_resource type="Script" path="res://scenes/game/pachinko.gd" id="8_ud1qg"]
 [ext_resource type="PackedScene" uid="uid://dli5r028n6byb" path="res://scenes/common/nail.tscn" id="9_8yiuy"]
-[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="10_w3wxc"]
+[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/fonts/PixelMplus12-Regular.ttf" id="10_w3wxc"]
 [ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/common/lamp.tscn" id="11_6yw0s"]
 [ext_resource type="Script" path="res://scenes/game/stack.gd" id="12_7kfse"]
 [ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/common/product.tscn" id="13_232xx"]
@@ -1875,6 +1875,7 @@ text = "DECK"
 vertical_alignment = 1
 
 [node name="DeckSize" type="Label" parent="UI/Main/BallsSlotDeck"]
+layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
@@ -1967,6 +1968,7 @@ text = "EXTRA"
 vertical_alignment = 1
 
 [node name="ExtraSize" type="Label" parent="UI/Main/BallsSlotExtra"]
+layout_mode = 0
 offset_right = 640.0
 offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
@@ -2514,7 +2516,7 @@ theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "出現時にビリヤード盤面上の Ball LV.0 x[color=YELLOW][9][/color] を LV.15 x1 に変換する"
 
-[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_game_state_label", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_refresh_dialogue_big_button", "_shuffle_pose_button")]
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_game_state_label", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_shuffle_pose_button")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -2545,7 +2547,6 @@ _hide_shop_button = NodePath("DebugWindow/HideShop")
 _show_people_button = NodePath("DebugWindow/ShowPeople")
 _hide_people_button = NodePath("DebugWindow/HidePeople")
 _refresh_dialogue_button = NodePath("DebugWindow/RefreshDialogue")
-_refresh_dialogue_big_button = NodePath("DebugWindow/RefreshDialogueBig")
 _shuffle_pose_button = NodePath("DebugWindow/ShufflePose")
 
 [node name="Debug" type="Button" parent="UIDebug"]
@@ -2932,30 +2933,12 @@ theme_override_font_sizes/font_size = 64
 text = "RefreshDialogue"
 vertical_alignment = 1
 
-[node name="RefreshDialogueBig" type="Button" parent="UIDebug/DebugWindow"]
+[node name="ShufflePose" type="Button" parent="UIDebug/DebugWindow"]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 220.0
 offset_right = 320.0
 offset_bottom = 240.0
-theme_override_fonts/font = ExtResource("10_w3wxc")
-
-[node name="Label" type="Label" parent="UIDebug/DebugWindow/RefreshDialogueBig"]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "RefreshDialogueBig"
-vertical_alignment = 1
-
-[node name="ShufflePose" type="Button" parent="UIDebug/DebugWindow"]
-layout_mode = 0
-offset_left = 160.0
-offset_top = 240.0
-offset_right = 320.0
-offset_bottom = 260.0
 theme_override_fonts/font = ExtResource("10_w3wxc")
 
 [node name="Label" type="Label" parent="UIDebug/DebugWindow/ShufflePose"]

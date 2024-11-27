@@ -27,6 +27,14 @@ var _tweens: Dictionary = {}
 
 
 func _ready() -> void:
+	title.visible = false
+	information.visible = false
+	options.visible = false
+
+
+# 初期化処理
+# Main シーンから呼ぶ想定
+func initialize() -> void:
 	title.visible = true
 	information.visible = false
 	options.visible = false
@@ -40,14 +48,14 @@ func _ready() -> void:
 	# Option
 	options.exit_button_pressed.connect(func(): goto_scene(_back_scene_type))
 
-	# カーテン
+	# 目隠し
 	_curtain.visible = true
 	_hide_curtain(0.5) # 最初はゆっくり非表示にする
 
 
 func goto_scene(scene_type: SceneType) -> void:
 	print("[SceneManager] _load_scene(%s)" % [SceneType.keys()[scene_type]])
-	
+
 	if _is_loading_now:
 		return
 	_is_loading_now = true
@@ -72,6 +80,7 @@ func goto_scene(scene_type: SceneType) -> void:
 		var visible = scene_type == scene_key
 		if scenes[scene_key]:
 			scenes[scene_key].visible = visible
+			print(scene_key, visible)
 
 	# ステータスを変更する
 	_current_scene_type = scene_type

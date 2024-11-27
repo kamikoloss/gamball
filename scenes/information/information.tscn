@@ -188,7 +188,7 @@ offset_top = 600.0
 offset_right = 440.0
 offset_bottom = 640.0
 theme = ExtResource("4_wugw1")
-text = "EXIT"
+text = "Exit"
 
 [node name="Bunny" parent="." instance=ExtResource("5_7wbwg")]
 offset_left = 1000.0
