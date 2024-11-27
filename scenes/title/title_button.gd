@@ -5,7 +5,10 @@ extends TextureButton
 enum TweenType { HOVER }
 
 
-@export var _font_size: int = 128
+const FONT_SIZE_BASE = 48
+
+
+@export var _font_size_ratio: float = 1.0
 @export var _label_text: String = "SAMPLE"
 
 @export var _hover_texture: TextureRect
@@ -26,9 +29,9 @@ func _ready() -> void:
 	_hover_texture.size.x = 0
 
 	_label_1.text = _label_text
-	_label_1.add_theme_font_size_override("font_size", _font_size)
+	_label_1.add_theme_font_size_override("font_size", FONT_SIZE_BASE * _font_size_ratio)
 	_label_2.text = _label_text
-	_label_2.add_theme_font_size_override("font_size", _font_size)
+	_label_2.add_theme_font_size_override("font_size", FONT_SIZE_BASE * _font_size_ratio)
 
 	_size_x = size.x
 

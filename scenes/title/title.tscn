@@ -36,7 +36,7 @@ stretch_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="Logo" type="TextureRect" parent="."]
-self_modulate = Color(0.988235, 0.768627, 0.227451, 1)
+self_modulate = Color(1, 0.8, 0.2, 1)
 layout_mode = 0
 offset_right = 2560.0
 offset_bottom = 640.0
@@ -61,28 +61,25 @@ offset_bottom = 560.0
 _label_text = "PLAY"
 
 [node name="Information" parent="." instance=ExtResource("6_43611")]
-layout_mode = 0
 offset_left = 40.0
 offset_top = 560.0
 offset_right = 360.0
 offset_bottom = 600.0
-_font_size = 64
+_font_size_ratio = 0.5
 _label_text = "INFORMATION"
 
 [node name="Options" parent="." instance=ExtResource("6_43611")]
-layout_mode = 0
 offset_left = 40.0
 offset_top = 600.0
 offset_right = 360.0
 offset_bottom = 640.0
-_font_size = 64
+_font_size_ratio = 0.5
 _label_text = "OPTIONS"
 
 [node name="Exit" parent="." instance=ExtResource("6_43611")]
-layout_mode = 0
 offset_left = 40.0
 offset_top = 640.0
 offset_right = 360.0
 offset_bottom = 680.0
-_font_size = 64
+_font_size_ratio = 0.5
 _label_text = "EXIT"
