@@ -1,42 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://0ajps5kdo6nb"]
+[gd_scene load_steps=8 format=3 uid="uid://0ajps5kdo6nb"]
 
 [ext_resource type="Script" path="res://scenes/information/information.gd" id="1_5baeu"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="1_r8q6u"]
-[ext_resource type="FontFile" uid="uid://braqe561majhb" path="res://themes/RedHatDisplayBold.ttf" id="2_34oxd"]
-[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/PixelMplus12-Regular.ttf" id="3_77b3f"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="4_p785c"]
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/default_theme.tres" id="4_wugw1"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="5_7wbwg"]
 [ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/people/bunny2/bunny2a.png" id="6_yhis1"]
 [ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="7_ogwcd"]
 
-[sub_resource type="Gradient" id="Gradient_wlypo"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.25098, 0.501961, 0.25098, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_daj1h"]
-gradient = SubResource("Gradient_wlypo")
-
-[sub_resource type="Gradient" id="Gradient_w5fks"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.25098, 0.376471, 0.25098, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_w8r22"]
-gradient = SubResource("Gradient_w5fks")
-
-[sub_resource type="Gradient" id="Gradient_rja4h"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ag4dl"]
-gradient = SubResource("Gradient_rja4h")
-
-[node name="Information" type="Control" node_paths=PackedStringArray("_exit_button", "_balls_parent", "_ball_popup_level", "_ball_popup_description")]
+[node name="Information" type="Control" node_paths=PackedStringArray("_exit_button", "_balls_parent", "_ball_popup_title", "_ball_popup_description")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5baeu")
 _exit_button = NodePath("Exit")
 _balls_parent = NodePath("Balls")
-_ball_popup_level = NodePath("BallPopup/Level")
+_ball_popup_title = NodePath("BallPopup/Title")
 _ball_popup_description = NodePath("BallPopup/Description")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -49,27 +27,26 @@ offset_bottom = 680.0
 texture = ExtResource("1_r8q6u")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 layout_mode = 0
 offset_top = -40.0
-offset_right = 1280.0
-offset_bottom = 280.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("2_34oxd")
-theme_override_font_sizes/font_size = 128
+offset_right = 640.0
+offset_bottom = 120.0
+theme = ExtResource("4_wugw1")
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 64
 text = "INFORMATION"
 vertical_alignment = 1
 
-[node name="Pool1" type="Label" parent="."]
+[node name="PoolA" type="Label" parent="."]
 layout_mode = 0
 offset_left = 80.0
-offset_top = 140.0
-offset_right = 720.0
-offset_bottom = 220.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("3_77b3f")
-theme_override_font_sizes/font_size = 64
-text = "POOL 1"
+offset_top = 100.0
+offset_right = 400.0
+offset_bottom = 180.0
+theme = ExtResource("4_wugw1")
+theme_type_variation = &"LabelHeader"
+text = "POOL <A>"
 vertical_alignment = 1
 
 [node name="Balls" type="Control" parent="."]
@@ -142,6 +119,30 @@ is_display = true
 position = Vector2(280, 40)
 is_display = true
 
+[node name="PoolB" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_top = 260.0
+offset_right = 400.0
+offset_bottom = 340.0
+theme = ExtResource("4_wugw1")
+theme_type_variation = &"LabelHeader"
+text = "POOL 02"
+vertical_alignment = 1
+
+[node name="PoolC" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_top = 420.0
+offset_right = 400.0
+offset_bottom = 500.0
+theme = ExtResource("4_wugw1")
+theme_type_variation = &"LabelHeader"
+text = "POOL 03"
+vertical_alignment = 1
+
 [node name="BallPopup" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -158,51 +159,36 @@ offset_bottom = 640.0
 texture = ExtResource("1_r8q6u")
 expand_mode = 1
 
-[node name="Level" type="Label" parent="BallPopup"]
+[node name="Title" type="Label" parent="BallPopup"]
 layout_mode = 0
 offset_left = 10.0
-offset_right = 170.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("3_77b3f")
-theme_override_font_sizes/font_size = 64
-text = "99"
+offset_top = -20.0
+offset_right = 330.0
+offset_bottom = 60.0
+theme = ExtResource("4_wugw1")
+theme_type_variation = &"LabelHeader"
+text = "No.9999"
 vertical_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="BallPopup"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 40.0
-offset_right = 730.0
-offset_bottom = 2440.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/normal_font = ExtResource("3_77b3f")
-theme_override_font_sizes/normal_font_size = 64
+offset_right = 190.0
+offset_bottom = 630.0
+theme = ExtResource("4_wugw1")
 bbcode_enabled = true
-text = "出現時にビリヤード盤面上の Ball LV.0 x[color=YELLOW][9][/color] を LV.15 x1 に変換する"
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+autowrap_mode = 1
 
-[node name="Exit" type="TextureButton" parent="."]
+[node name="Exit" type="Button" parent="."]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 600.0
 offset_right = 440.0
 offset_bottom = 640.0
-texture_normal = SubResource("GradientTexture1D_daj1h")
-texture_hover = SubResource("GradientTexture1D_w8r22")
-texture_disabled = SubResource("GradientTexture1D_ag4dl")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="Exit"]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("3_77b3f")
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("4_wugw1")
 text = "EXIT"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Bunny" parent="." instance=ExtResource("5_7wbwg")]
 offset_left = 1000.0
