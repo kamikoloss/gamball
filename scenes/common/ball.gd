@@ -21,12 +21,16 @@ const BALL_LEVEL_NOT_EMPTY_SLOT = -2 # 使用不可スロット用
 
 # ボールの本体の色の定義 { <Level>: Color } 
 const BALL_BODY_COLORS = {
-	BALL_LEVEL_EMPTY_SLOT: Color(0.5, 0.5, 0.5, 0.3),
-	BALL_LEVEL_NOT_EMPTY_SLOT: Color(0.9, 0.5, 0.5, 0.3),
-	0: Color(0.9, 0.9, 0.9), 1: Color.YELLOW, 2: Color.BLUE, 3: Color.RED,
-	4: Color.PURPLE, 5: Color.ORANGE, 6: Color.GREEN, 7: Color.SADDLE_BROWN,
-	8: Color(0.1, 0.1, 0.1), 9: Color(Color.YELLOW, 0.7), 10: Color(Color.BLUE, 0.7), 11: Color(Color.RED, 0.7),
-	12: Color(Color.PURPLE, 0.7), 13: Color(Color.ORANGE, 0.7), 14: Color(Color.GREEN, 0.7), 15: Color(Color.SADDLE_BROWN, 0.7),
+	BALL_LEVEL_EMPTY_SLOT: Color(0.4, 0.4, 0.4, 0.4),
+	BALL_LEVEL_NOT_EMPTY_SLOT: Color(0.8, 0.4, 0.4, 0.4),
+	0: Color(0.8, 0.8, 0.8), 8: Color(0.2, 0.2, 0.2), # White/Black
+	1: Color(1.0, 0.8, 0.0), 9: Color(0.8, 0.8, 0.0), # Yellow
+	2: Color(0.0, 0.0, 0.8), 10: Color(0.0, 0.0, 0.6), # Blue
+	3: Color(0.8, 0.0, 0.0), 11: Color(0.6, 0.0, 0.0), # Red
+	4: Color(0.6, 0.0, 0.6), 12: Color(0.4, 0.0, 0.4), # Purple
+	5: Color(1.0, 0.6, 0.0), 13: Color(1.0, 0.4, 0.0), # Orange
+	6: Color(0.0, 0.4, 0.0), 14: Color(0.0, 0.2, 0.0), # Green
+	7: Color(0.6, 0.2, 0.0), 15: Color(0.4, 0.2, 0.0), # Brown
 }
 # ボールのレア度の色の定義  { <Rarity>: Color } 
 const BALL_RARITY_COLORS = {
@@ -116,6 +120,7 @@ func refresh_view() -> void:
 	if rarity == Rarity.COMMON:
 		_inner_texture.self_modulate = Color.WHITE
 		_inner_texture_2.visible = false
+		_level_label.self_modulate = Color.BLACK
 	else:
 		_inner_texture.self_modulate = Color.BLACK
 		_inner_texture_2.visible = true
