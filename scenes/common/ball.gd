@@ -24,13 +24,13 @@ const BALL_BODY_COLORS = {
 	BALL_LEVEL_EMPTY_SLOT: Color(0.4, 0.4, 0.4, 0.4),
 	BALL_LEVEL_NOT_EMPTY_SLOT: Color(0.8, 0.4, 0.4, 0.4),
 	0: Color(0.8, 0.8, 0.8), 8: Color(0.2, 0.2, 0.2), # White/Black
-	1: Color(1.0, 0.8, 0.0), 9: Color(0.8, 0.8, 0.0), # Yellow
-	2: Color(0.0, 0.0, 0.8), 10: Color(0.0, 0.0, 0.6), # Blue
-	3: Color(0.8, 0.0, 0.0), 11: Color(0.6, 0.0, 0.0), # Red
-	4: Color(0.6, 0.0, 0.6), 12: Color(0.4, 0.0, 0.4), # Purple
-	5: Color(1.0, 0.6, 0.0), 13: Color(1.0, 0.4, 0.0), # Orange
-	6: Color(0.0, 0.4, 0.0), 14: Color(0.0, 0.2, 0.0), # Green
-	7: Color(0.6, 0.2, 0.0), 15: Color(0.4, 0.2, 0.0), # Brown
+	1: Color(1.0, 0.8, 0.0), 9: Color(1.0, 0.8, 0.0), # Yellow
+	2: Color(0.0, 0.0, 0.8), 10: Color(0.0, 0.0, 0.8), # Blue
+	3: Color(0.8, 0.0, 0.0), 11: Color(0.8, 0.0, 0.0), # Red
+	4: Color(0.6, 0.0, 0.6), 12: Color(0.6, 0.0, 0.6), # Purple
+	5: Color(1.0, 0.6, 0.0), 13: Color(1.0, 0.6, 0.0), # Orange
+	6: Color(0.0, 0.4, 0.0), 14: Color(0.0, 0.4, 0.0), # Green
+	7: Color(0.6, 0.2, 0.0), 15: Color(0.6, 0.2, 0.0), # Brown
 }
 # ボールのレア度の色の定義  { <Rarity>: Color } 
 const BALL_RARITY_COLORS = {
@@ -57,6 +57,8 @@ const BALL_RARITY_COLORS = {
 @export var _hover_texture: TextureRect
 # ボールの本体色部分
 @export var _body_texture: TextureRect
+@export var _body_stripe_texture: TextureRect
+@export var _body_stripe_2_texture: TextureRect
 # ボール番号の背景部分
 @export var _inner_texture: TextureRect
 @export var _inner_texture_2: TextureRect
@@ -116,6 +118,9 @@ func _process(delta: float) -> void:
 func refresh_view() -> void:
 	# 本体色
 	_body_texture.self_modulate = BALL_BODY_COLORS[level]
+	var show_stripe = 9 <= level and level <= 15
+	_body_stripe_texture.visible = show_stripe
+	_body_stripe_2_texture.visible = show_stripe
 	# レア度
 	if rarity == Rarity.COMMON:
 		_inner_texture.self_modulate = Color.WHITE
