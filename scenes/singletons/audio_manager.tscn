@@ -25,7 +25,6 @@ _se_PACHINKO_RUSH_FINISH = ExtResource("5_0vtw6")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BGM"]
 stream = ExtResource("7_ghso5")
-autoplay = true
 bus = &"BGM"
 
 [node name="SE" type="Node" parent="."]

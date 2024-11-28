@@ -1,5 +1,6 @@
 class_name Options
 extends Control
+# TODO: スライダーの初期値はどうする？
 
 
 signal exit_button_pressed
@@ -18,11 +19,6 @@ signal exit_button_pressed
 
 
 func _ready() -> void:
-	# TODO: ConfifgManager で設定を読み込む
-	_on_audio_slider_changed(AudioManager.BusType.MASTER, 8)
-	_on_audio_slider_changed(AudioManager.BusType.BGM, 8)
-	_on_audio_slider_changed(AudioManager.BusType.SE, 8)
-
 	# Signal
 	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
 	_audio_master_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.MASTER, v))

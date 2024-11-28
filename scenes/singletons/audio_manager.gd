@@ -39,6 +39,10 @@ func _ready() -> void:
 	_bgm_player.finished.connect(func(): _bgm_player.play())
 
 
+func initialize() -> void:
+	_bgm_player.play()
+
+
 # 0: -40db, 5: -20db, 10: 0db, 
 func set_volume(bus_type: BusType, volume_level: int) -> void:
 	print("[AudioManager] set_volume(bus_type: %s, volume_level: %s)" % [bus_type, volume_level])
