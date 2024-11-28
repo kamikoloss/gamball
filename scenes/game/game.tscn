@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=29 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_ma10n"]
@@ -25,31 +25,11 @@
 [ext_resource type="Texture2D" uid="uid://cmx70egbmx0sa" path="res://images/people/bunny/face_3.png" id="18_l12bf"]
 [ext_resource type="Texture2D" uid="uid://c17m6dsrq78ov" path="res://images/people/bunny/hand_left_2.png" id="20_r8nov"]
 [ext_resource type="Texture2D" uid="uid://uk0q0it6ta74" path="res://images/people/bunny/hand_right_2.png" id="22_am1vr"]
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="25_qsn7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
-
-[sub_resource type="Gradient" id="Gradient_vw8ig"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.25098, 0.501961, 0.25098, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dbrue"]
-gradient = SubResource("Gradient_vw8ig")
-
-[sub_resource type="Gradient" id="Gradient_id5ai"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.25098, 0.376471, 0.25098, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_44mdx"]
-gradient = SubResource("Gradient_id5ai")
-
-[sub_resource type="Gradient" id="Gradient_rja4h"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ro4wp"]
-gradient = SubResource("Gradient_rja4h")
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls_parent", "_game_ui", "_products_parent", "_bunny")]
 script = ExtResource("1_w7c5l")
@@ -1575,7 +1555,7 @@ position = Vector2(280, 160)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_deck_size_label", "_extra_size_label", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_deck_size_label", "_extra_size_label", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_type_label", "_next_amount_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -1590,7 +1570,6 @@ _ball_popup_rarity = NodePath("Main/BallPopup/Rarity")
 _ball_popup_description = NodePath("Main/BallPopup/Description")
 _buy_balls_button = NodePath("Main/Buttons/Buy")
 _sell_balls_button = NodePath("Main/Buttons/Sell")
-_info_button = NodePath("Main/Buttons/Info")
 _turn_label = NodePath("Main/Score/Turn/Turn")
 _money_label = NodePath("Main/Score/Money/Money")
 _payout_label = NodePath("Main/Score/Payout/Payout")
@@ -1619,7 +1598,6 @@ texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Tax" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 720.0
@@ -1637,87 +1615,47 @@ expand_mode = 1
 
 [node name="Label" type="Label" parent="UI/Tax"]
 layout_mode = 0
-offset_left = 200.0
+offset_left = 120.0
 offset_top = 40.0
-offset_right = 520.0
+offset_right = 440.0
 offset_bottom = 120.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("25_qsn7e")
+theme_type_variation = &"LabelHeader"
 text = "<TAX>"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Debt" type="TextureButton" parent="UI/Tax"]
+[node name="Debt" type="Button" parent="UI/Tax"]
 visible = false
 layout_mode = 0
 offset_left = 120.0
 offset_top = 480.0
 offset_right = 440.0
 offset_bottom = 520.0
-texture_normal = SubResource("GradientTexture1D_dbrue")
-texture_hover = SubResource("GradientTexture1D_44mdx")
-ignore_texture_size = true
-stretch_mode = 0
+theme = ExtResource("25_qsn7e")
+text = "Debt Money"
 
-[node name="Label" type="Label" parent="UI/Tax/Debt"]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "GET DEBT"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Pay" type="TextureButton" parent="UI/Tax"]
+[node name="Pay" type="Button" parent="UI/Tax"]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 540.0
 offset_right = 440.0
 offset_bottom = 580.0
-texture_normal = SubResource("GradientTexture1D_dbrue")
-texture_hover = SubResource("GradientTexture1D_44mdx")
-ignore_texture_size = true
-stretch_mode = 0
+theme = ExtResource("25_qsn7e")
+text = "Pay Tax"
 
-[node name="Label" type="Label" parent="UI/Tax/Pay"]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "PAY TAX"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GiveUp" type="TextureButton" parent="UI/Tax"]
+[node name="GiveUp" type="Button" parent="UI/Tax"]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 600.0
 offset_right = 440.0
 offset_bottom = 640.0
+theme = ExtResource("25_qsn7e")
 disabled = true
-texture_normal = SubResource("GradientTexture1D_dbrue")
-texture_hover = SubResource("GradientTexture1D_44mdx")
-texture_disabled = SubResource("GradientTexture1D_ro4wp")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="UI/Tax/GiveUp"]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "GIVE UP"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "Give Up"
 
 [node name="Shop" type="Control" parent="UI"]
+visible = false
 clip_children = 1
 layout_mode = 3
 anchors_preset = 0
@@ -1736,38 +1674,24 @@ expand_mode = 1
 
 [node name="Label" type="Label" parent="UI/Shop"]
 layout_mode = 0
-offset_left = 200.0
+offset_left = 120.0
 offset_top = 40.0
-offset_right = 520.0
+offset_right = 440.0
 offset_bottom = 120.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "<SHOP>"
+theme = ExtResource("25_qsn7e")
+theme_type_variation = &"LabelHeader"
+text = "SHOP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Exit" type="TextureButton" parent="UI/Shop"]
+[node name="Exit" type="Button" parent="UI/Shop"]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 600.0
 offset_right = 440.0
 offset_bottom = 640.0
-texture_normal = SubResource("GradientTexture1D_dbrue")
-texture_hover = SubResource("GradientTexture1D_44mdx")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="UI/Shop/Exit"]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "EXIT"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme = ExtResource("25_qsn7e")
+text = "Exit"
 
 [node name="Products" type="Control" parent="UI/Shop"]
 layout_mode = 3
@@ -1866,21 +1790,20 @@ offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="UI/Main/BallsSlotDeck"]
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
+offset_top = -10.0
+offset_right = 160.0
+offset_bottom = 30.0
+theme = ExtResource("25_qsn7e")
+theme_type_variation = &"LabelBold"
 text = "DECK"
 vertical_alignment = 1
 
 [node name="DeckSize" type="Label" parent="UI/Main/BallsSlotDeck"]
 layout_mode = 0
-offset_right = 640.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
+offset_top = -10.0
+offset_right = 160.0
+offset_bottom = 30.0
+theme = ExtResource("25_qsn7e")
 text = "[SIZE:99-99]"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -1959,21 +1882,20 @@ offset_bottom = 120.0
 
 [node name="Label" type="Label" parent="UI/Main/BallsSlotExtra"]
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
+offset_top = -10.0
+offset_right = 160.0
+offset_bottom = 30.0
+theme = ExtResource("25_qsn7e")
+theme_type_variation = &"LabelBold"
 text = "EXTRA"
 vertical_alignment = 1
 
 [node name="ExtraSize" type="Label" parent="UI/Main/BallsSlotExtra"]
 layout_mode = 0
-offset_right = 640.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
+offset_top = -10.0
+offset_right = 160.0
+offset_bottom = 30.0
+theme = ExtResource("25_qsn7e")
 text = "[SIZE:99-99]"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -2052,83 +1974,40 @@ offset_bottom = 240.0
 [node name="Buy" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
 offset_left = -10.0
-offset_right = 70.0
-offset_bottom = 20.0
-theme_override_fonts/font = ExtResource("10_w3wxc")
+offset_right = 150.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("25_qsn7e")
+text = "Buy"
 
-[node name="Label" type="Label" parent="UI/Main/Buttons/Buy"]
+[node name="Label" type="Label" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "＄⇒●"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Main/Buttons/Buy"]
-layout_mode = 0
-offset_left = -10.0
+offset_left = -30.0
 offset_top = 20.0
-offset_right = 490.0
-offset_bottom = 120.0
-scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "＄100=●025"
+offset_right = 130.0
+offset_bottom = 60.0
+scale = Vector2(0.75, 0.75)
+text = "$100 >> ●25"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Sell" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
 offset_left = 90.0
-offset_right = 170.0
-offset_bottom = 20.0
-theme_override_fonts/font = ExtResource("10_w3wxc")
+offset_right = 250.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("25_qsn7e")
+text = "Sell"
 
-[node name="Label" type="Label" parent="UI/Main/Buttons/Sell"]
+[node name="Label2" type="Label" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "●⇒＄"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Main/Buttons/Sell"]
-layout_mode = 0
+offset_left = 70.0
 offset_top = 20.0
-offset_right = 400.0
-offset_bottom = 120.0
-scale = Vector2(0.2, 0.2)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "●050=＄100"
+offset_right = 230.0
+offset_bottom = 60.0
+scale = Vector2(0.75, 0.75)
+text = "●25 >> $100"
 horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Info" type="Button" parent="UI/Main/Buttons"]
-visible = false
-layout_mode = 0
-offset_left = 90.0
-offset_top = 50.0
-offset_right = 170.0
-offset_bottom = 70.0
-theme_override_fonts/font = ExtResource("10_w3wxc")
-
-[node name="Label" type="Label" parent="UI/Main/Buttons/Info"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "INFO"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Score" type="Control" parent="UI/Main"]
 anchors_preset = 0
@@ -2469,54 +2348,49 @@ texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="BallPopup" type="Control" parent="UI/Main"]
-visible = false
 z_index = 4
 anchors_preset = 0
 
-[node name="Background" type="TextureRect" parent="UI/Main/BallPopup"]
-self_modulate = Color(0, 0, 0, 0.878431)
+[node name="Panel" type="Panel" parent="UI/Main/BallPopup"]
 layout_mode = 0
 offset_right = 240.0
 offset_bottom = 160.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+theme = ExtResource("25_qsn7e")
 
 [node name="Level" type="Label" parent="UI/Main/BallPopup"]
 layout_mode = 0
 offset_left = 10.0
+offset_top = -20.0
 offset_right = 170.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "99"
+offset_bottom = 60.0
+theme = ExtResource("25_qsn7e")
+theme_type_variation = &"LabelHeader"
+text = "99-A"
 vertical_alignment = 1
 
 [node name="Rarity" type="Label" parent="UI/Main/BallPopup"]
 self_modulate = Color(1, 1, 0, 1)
 layout_mode = 0
-offset_left = 90.0
-offset_right = 410.0
-offset_bottom = 160.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "LEGENDARY"
+offset_left = 70.0
+offset_right = 230.0
+offset_bottom = 40.0
+text = "★★★★★"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="UI/Main/BallPopup"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 40.0
-offset_right = 890.0
-offset_bottom = 520.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/normal_font = ExtResource("10_w3wxc")
-theme_override_font_sizes/normal_font_size = 64
+offset_right = 230.0
+offset_bottom = 160.0
+theme = ExtResource("25_qsn7e")
 bbcode_enabled = true
-text = "出現時にビリヤード盤面上の Ball LV.0 x[color=YELLOW][9][/color] を LV.15 x1 に変換する"
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+autowrap_mode = 1
 
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_game_state_label", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_shuffle_pose_button")]
+visible = false
 z_index = 20
 layout_mode = 3
 anchors_preset = 0

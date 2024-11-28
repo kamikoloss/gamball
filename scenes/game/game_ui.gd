@@ -36,7 +36,6 @@ const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 @export_category("Main/Buttons")
 @export var _buy_balls_button: Button
 @export var _sell_balls_button: Button
-@export var _info_button: Button
 @export_category("Main/Score")
 @export var _turn_label: Label
 @export var _money_label: Label
@@ -53,12 +52,12 @@ const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 
 @export_category("Tax")
 @export var _tax_window: Control
-@export var _tax_pay_button: TextureButton
-@export var _tax_give_up_button: TextureButton
+@export var _tax_pay_button: Button
+@export var _tax_give_up_button: Button
 
 @export_category("Shop")
 @export var _shop_window: Control
-@export var _shop_exit_button: TextureButton
+@export var _shop_exit_button: Button
 
 @export_category("People")
 @export var _people_window: Control
@@ -82,7 +81,6 @@ func _ready() -> void:
 	_sell_balls_button.pressed.connect(func(): sell_balls_button_pressed.emit())
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
 	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
-	_info_button.pressed.connect(func(): info_button_pressed.emit())
 
 	# Main/DragPoint
 	hide_drag_point()

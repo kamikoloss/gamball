@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/common/ball.gd" id="1_rcr8u"]
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="2_4bc8b"]
-[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/default_theme.tres" id="3_11qrs"]
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="3_11qrs"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="3_rxati"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nh6hv"]
@@ -71,16 +71,20 @@ offset_right = 15.0
 offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Body" type="TextureRect" parent="View/Mask"]
 self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
+mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="BodyStripe" type="TextureRect" parent="View/Mask"]
 layout_mode = 0
@@ -89,14 +93,17 @@ offset_bottom = 4.0
 mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="BodyStripe2" type="TextureRect" parent="View/Mask"]
 layout_mode = 0
 offset_top = 26.0
 offset_right = 30.0
 offset_bottom = 30.0
+mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Inner2" type="TextureRect" parent="View/Mask"]
 self_modulate = Color(1, 0, 1, 1)
@@ -112,6 +119,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
@@ -128,6 +136,7 @@ offset_right = 9.0
 offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
@@ -137,6 +146,7 @@ self_modulate = Color(0, 1, 1, 1)
 layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
+mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
 
@@ -153,6 +163,7 @@ theme_type_variation = &"LabelHeader"
 text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Hole" type="Area2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -171,3 +182,4 @@ offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
 offset_bottom = 10.0
+metadata/_edit_use_anchors_ = true

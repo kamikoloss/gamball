@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="6_ex8u5"]
 [ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="7_k78g3"]
 [ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/people/bunny/hand_right_1.png" id="7_subrs"]
-[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/default_theme.tres" id="8_oo1t5"]
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="8_oo1t5"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/people/bunny/base.png" id="9_yblo7"]
 
 [node name="Bunny" type="Control" node_paths=PackedStringArray("_human", "_base_parts", "_touch_button", "_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4", "_dialogue_label")]
