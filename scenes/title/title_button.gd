@@ -5,7 +5,7 @@ extends TextureButton
 enum TweenType { HOVER }
 
 
-const FONT_SIZE_BASE = 48
+const FONT_SIZE_BASE = 64
 
 
 @export var _font_size_ratio: float = 1.0

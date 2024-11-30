@@ -80,7 +80,6 @@ func goto_scene(scene_type: SceneType) -> void:
 		var visible = scene_type == scene_key
 		if scenes[scene_key]:
 			scenes[scene_key].visible = visible
-			print(scene_key, visible)
 
 	# ステータスを変更する
 	_current_scene_type = scene_type
