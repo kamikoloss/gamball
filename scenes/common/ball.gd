@@ -28,7 +28,7 @@ const BALL_BODY_COLORS = {
 	2: Color(0.0, 0.0, 0.8), 10: Color(0.0, 0.0, 0.8), # Blue
 	3: Color(0.8, 0.0, 0.0), 11: Color(0.8, 0.0, 0.0), # Red
 	4: Color(0.6, 0.0, 0.6), 12: Color(0.6, 0.0, 0.6), # Purple
-	5: Color(1.0, 0.6, 0.0), 13: Color(1.0, 0.6, 0.0), # Orange
+	5: Color(1.0, 0.4, 0.0), 13: Color(1.0, 0.4, 0.0), # Orange
 	6: Color(0.0, 0.4, 0.0), 14: Color(0.0, 0.4, 0.0), # Green
 	7: Color(0.6, 0.2, 0.0), 15: Color(0.6, 0.2, 0.0), # Brown
 }

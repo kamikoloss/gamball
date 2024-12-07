@@ -42,8 +42,8 @@ const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 @export var _payout_label: Label
 @export var _balls_label: Label
 @export var _next_turn_label: Label
-@export var _next_type_label: Label
-@export var _next_amount_label: Label
+@export var _next_money_label: Label
+@export var _next_balls_label: Label
 @export_category("Main/DragPoint")
 @export var _drag_point: Control
 @export_category("Main/Arrow")
@@ -159,13 +159,18 @@ func refresh_balls_label(balls: int) -> void:
 
 func refresh_next(turn: int, type: Game.TaxType, amount: int) -> void:
 	_next_turn_label.text = str(turn)
-	_next_type_label.text = "＄" if type == Game.TaxType.MONEY else "●"
-	_next_amount_label.text = str(amount)
+	if type == Game.TaxType.MONEY:
+		_next_money_label.text = str(amount)
+		_next_balls_label.text = ""
+	else:
+		_next_money_label.text = ""
+		_next_balls_label.text = str(amount)
+
 
 func refresh_next_clear() -> void:
-	_next_turn_label.text = ""
-	_next_type_label.text = ""
-	_next_amount_label.text = "CLEAR!!"
+	_next_turn_label.text = "CLEAR!!"
+	_next_money_label.text = "CLEAR!!"
+	_next_balls_label.text = "CLEAR!!"
 
 
 # Main/DragPoint

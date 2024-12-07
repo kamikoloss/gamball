@@ -65,7 +65,7 @@ offset_right = 275.0
 offset_bottom = 355.0
 theme = ExtResource("1_fekh7")
 bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+text = "あの[rainbow]イーハトーヴォ[/rainbow]の[b]すきとおった[/b]風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 autowrap_mode = 1
 
 [node name="Button" type="Button" parent="."]
