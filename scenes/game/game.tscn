@@ -1600,20 +1600,19 @@ texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Tax" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 720.0
 offset_bottom = 720.0
 
-[node name="Background" type="TextureRect" parent="UI/Tax"]
-self_modulate = Color(0, 0, 0, 0.878431)
+[node name="Panel" type="Panel" parent="UI/Tax"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 1260.0
 offset_bottom = 700.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+theme = ExtResource("25_qsn7e")
 
 [node name="Label" type="Label" parent="UI/Tax"]
 layout_mode = 0
@@ -1657,22 +1656,18 @@ disabled = true
 text = "Give Up"
 
 [node name="Shop" type="Control" parent="UI"]
-visible = false
 clip_children = 1
 layout_mode = 3
 anchors_preset = 0
 offset_top = 720.0
 offset_bottom = 720.0
 
-[node name="Background" type="TextureRect" parent="UI/Shop"]
-self_modulate = Color(0, 0, 0, 0.878431)
-layout_mode = 0
+[node name="Panel" type="Panel" parent="UI/Shop"]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 1260.0
 offset_bottom = 700.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+theme = ExtResource("25_qsn7e")
 
 [node name="Label" type="Label" parent="UI/Shop"]
 layout_mode = 0
@@ -2024,6 +2019,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Icon2" type="Button" parent="UI/Main/Buttons"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 70.0
 offset_right = 80.0
@@ -2035,6 +2031,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Icon3" type="Button" parent="UI/Main/Buttons"]
+layout_mode = 0
 offset_left = 90.0
 offset_top = 70.0
 offset_right = 130.0
@@ -2045,6 +2042,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Icon4" type="Button" parent="UI/Main/Buttons"]
+layout_mode = 0
 offset_left = 130.0
 offset_top = 70.0
 offset_right = 170.0

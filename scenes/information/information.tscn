@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://0ajps5kdo6nb"]
+[gd_scene load_steps=7 format=3 uid="uid://0ajps5kdo6nb"]
 
 [ext_resource type="Script" path="res://scenes/information/information.gd" id="1_5baeu"]
-[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="1_r8q6u"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="4_p785c"]
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="4_wugw1"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="5_7wbwg"]
@@ -17,15 +16,13 @@ _balls_parent = NodePath("Balls")
 _ball_popup_title = NodePath("BallPopup/Title")
 _ball_popup_description = NodePath("BallPopup/Description")
 
-[node name="Background" type="TextureRect" parent="."]
-self_modulate = Color(0, 0, 0, 0.501961)
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 520.0
 offset_bottom = 680.0
-texture = ExtResource("1_r8q6u")
-expand_mode = 1
+theme = ExtResource("4_wugw1")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
@@ -151,13 +148,10 @@ offset_top = 40.0
 offset_right = 540.0
 offset_bottom = 40.0
 
-[node name="Background" type="TextureRect" parent="BallPopup"]
-self_modulate = Color(0, 0, 0, 0.752941)
-layout_mode = 0
+[node name="Panel" type="Panel" parent="BallPopup"]
 offset_right = 200.0
 offset_bottom = 640.0
-texture = ExtResource("1_r8q6u")
-expand_mode = 1
+theme = ExtResource("4_wugw1")
 
 [node name="Title" type="Label" parent="BallPopup"]
 layout_mode = 0

@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt4t8h3rfr8gk"]
+[gd_scene load_steps=7 format=3 uid="uid://dt4t8h3rfr8gk"]
 
-[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="1_f0h7j"]
 [ext_resource type="Script" path="res://scenes/options/options.gd" id="1_oy0wl"]
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="3_6sgbf"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="3_hpxrg"]
@@ -21,15 +20,13 @@ _audio_bgm_ball = NodePath("Audio/BGM/Ball")
 _audio_se_slider = NodePath("Audio/SE/HSlider")
 _audio_se_ball = NodePath("Audio/SE/Ball")
 
-[node name="Background" type="TextureRect" parent="."]
-self_modulate = Color(0, 0, 0, 0.501961)
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 520.0
 offset_bottom = 680.0
-texture = ExtResource("1_f0h7j")
-expand_mode = 1
+theme = ExtResource("3_6sgbf")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
