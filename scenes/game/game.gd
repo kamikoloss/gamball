@@ -306,7 +306,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 					money += effect_data[1]
 					print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
 			# パチンコ盤面上に同じ Ball を出現させる
-			var new_ball = _create_new_ball(ball.level)
+			var new_ball = _create_new_ball(ball.level, ball.rarity)
 			new_ball.is_on_billiards = false
 			_pachinko.spawn_ball(new_ball)
 
