@@ -5,12 +5,13 @@ extends Control
 enum TweenType { TAX, SHOP, PEOPLE }
 
 
-# Button 系
+# Signal
 signal buy_balls_button_pressed
 signal sell_balls_button_pressed
 signal tax_pay_button_pressed
 signal shop_exit_button_pressed
 signal info_button_pressed
+signal options_button_pressed
 
 
 # Window 移動系
@@ -36,6 +37,8 @@ const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 @export_category("Main/Buttons")
 @export var _buy_balls_button: Button
 @export var _sell_balls_button: Button
+@export var _info_button: Button
+@export var _options_button: Button
 @export_category("Main/Score")
 @export var _turn_label: Label
 @export var _money_label: Label
@@ -79,7 +82,11 @@ func _ready() -> void:
 	# Main/Buttons
 	_buy_balls_button.pressed.connect(func(): buy_balls_button_pressed.emit())
 	_sell_balls_button.pressed.connect(func(): sell_balls_button_pressed.emit())
+	_info_button.pressed.connect(func(): info_button_pressed.emit())
+	_options_button.pressed.connect(func(): options_button_pressed.emit())
+	# Tax
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
+	# Shop
 	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
 
 	# Main/DragPoint

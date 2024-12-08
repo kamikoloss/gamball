@@ -168,6 +168,7 @@ func _ready() -> void:
 	_game_ui.tax_pay_button_pressed.connect(_on_tax_pay_button_pressed)
 	_game_ui.shop_exit_button_pressed.connect(_on_shop_exit_button_pressed)
 	_game_ui.info_button_pressed.connect(_on_info_button_pressed)
+	_game_ui.options_button_pressed.connect(_on_options_button_pressed)
 	# Signal (Hole)
 	for node in get_tree().get_nodes_in_group("hole"):
 		if node is Hole:
@@ -282,7 +283,11 @@ func _on_shop_exit_button_pressed() -> void:
 
 
 func _on_info_button_pressed() -> void:
-	pass
+	SceneManager.goto_scene(SceneManager.SceneType.INFORMATION)
+
+
+func _on_options_button_pressed() -> void:
+	SceneManager.goto_scene(SceneManager.SceneType.OPTIONS)
 
 
 # Ball が Hole に落ちたときの処理

@@ -1557,7 +1557,7 @@ position = Vector2(280, 160)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_deck_size_label", "_extra_size_label", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_money_label", "_next_balls_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_balls_slot_deck", "_balls_slot_extra", "_deck_size_label", "_extra_size_label", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_money_label", "_next_balls_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -1572,6 +1572,8 @@ _ball_popup_rarity = NodePath("Main/BallPopup/Rarity")
 _ball_popup_description = NodePath("Main/BallPopup/Description")
 _buy_balls_button = NodePath("Main/Buttons/Buy")
 _sell_balls_button = NodePath("Main/Buttons/Sell")
+_info_button = NodePath("Main/Buttons/Icon")
+_options_button = NodePath("Main/Buttons/Icon2")
 _turn_label = NodePath("Main/Score/Turn/Turn")
 _money_label = NodePath("Main/Score/Money/Money")
 _payout_label = NodePath("Main/Score/Payout/Payout")
@@ -2014,7 +2016,7 @@ offset_right = 40.0
 offset_bottom = 110.0
 scale = Vector2(0.75, 0.75)
 theme = ExtResource("25_qsn7e")
-icon = ExtResource("26_7xc11")
+icon = ExtResource("27_k84dy")
 icon_alignment = 1
 expand_icon = true
 
@@ -2026,7 +2028,7 @@ offset_right = 80.0
 offset_bottom = 110.0
 scale = Vector2(0.75, 0.75)
 theme = ExtResource("25_qsn7e")
-icon = ExtResource("27_k84dy")
+icon = ExtResource("26_7xc11")
 icon_alignment = 1
 expand_icon = true
 
