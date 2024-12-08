@@ -296,9 +296,10 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			if not ball.is_active:
 				return
 			# ex: [EffectType.MONEY_UP_ON_FALL, 10]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.MONEY_UP_ON_FALL):
-				money += effect_data[1]
-				print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
+			for effect_data in ball.effects:
+				if effect_data[0] == BallEffect.EffectType.MONEY_UP_ON_FALL:
+					money += effect_data[1]
+					print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
 			# パチンコ盤面上に同じ Ball を出現させる
 			var new_ball = _create_new_ball(ball.level)
 			new_ball.is_on_billiards = false
@@ -514,7 +515,7 @@ func _create_new_ball(level: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, 
 # 重み付きのレア度を抽選する
 # exclude_common: COMMON 抜きの抽選を行う (Ball LV 用)
 func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
-	var rarity_weight = RAIRTY_WEIGHT
+	var rarity_weight = RAIRTY_WEIGHT.duplicate()
 	# ex: [EffectType.RARITY_TOP_UP, Ball.Rarity.RARE]
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.RARITY_TOP_UP):
 		rarity_weight[effect_data[1]] += RAIRTY_WEIGHT[effect_data[1]]
