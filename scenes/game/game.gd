@@ -99,7 +99,6 @@ var balls: int = 0:
 		_game_ui.refresh_balls_label(value)
 
 # ビリヤード盤面上の Ball の数
-# TODO: pachinko も stack も カウントしてるので parent node を分けるか enum var でフィルターできるようにする
 var billiards_balls: int = 0:
 	get:
 		return _balls_parent.get_children().filter(func(ball: Ball): return ball.is_on_billiards).size()
