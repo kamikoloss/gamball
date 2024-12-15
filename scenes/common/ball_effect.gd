@@ -205,7 +205,7 @@ static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
 
 	# [ <EffectType>, Ball.Rarity ]
 	if effect_data[0] in [EffectType.RARITY_TOP_UP, EffectType.RARITY_TOP_DOWN]:
-		var a = Ball.Rarity.keys()[effect_data[1]]
+		var a = BallEffect.RARITY_TEXT[effect_data[1]]
 		return description_base.format({
 			"a": get_variable_text.call(a),
 		})
