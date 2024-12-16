@@ -184,9 +184,9 @@ const EFFECTS_POOL_1 = {
 
 # 効果の説明文 (RichTextLabel 用) を取得する
 static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
-	if level == Ball.BALL_LEVEL_EMPTY_SLOT:
+	if level == Ball.BALL_LEVEL_OPTIONAL_SLOT:
 		return "(空きスロット)"
-	if level == Ball.BALL_LEVEL_NOT_EMPTY_SLOT:
+	if level == Ball.BALL_LEVEL_DISABLED_SLOT:
 		return "(使用不可スロット)"
 	if rarity == Ball.Rarity.COMMON:
 		return "(効果なし)"

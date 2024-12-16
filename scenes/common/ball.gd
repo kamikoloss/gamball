@@ -12,17 +12,19 @@ enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 enum TweenType { RARITY }
 
 
+const Z_INDEX_DEFAULT = 4
+const Z_INDEX_SLOT = 3
 # 残像の頂点数
 const TRAIL_MAX_LENGTH = 16
 
 # 特殊なボール番号
-const BALL_LEVEL_EMPTY_SLOT = -1 # 空きスロット用
-const BALL_LEVEL_NOT_EMPTY_SLOT = -2 # 使用不可スロット用
+const BALL_LEVEL_OPTIONAL_SLOT = -1 # 空きスロット用
+const BALL_LEVEL_DISABLED_SLOT = -2 # 使用不可スロット用
 
 # ボールの本体の色の定義 { <Level>: Color } 
 const BALL_BODY_COLORS = {
-	BALL_LEVEL_EMPTY_SLOT: Color(0.4, 0.4, 0.4, 0.4),
-	BALL_LEVEL_NOT_EMPTY_SLOT: Color(0.8, 0.4, 0.4, 0.4),
+	BALL_LEVEL_OPTIONAL_SLOT: Color(0.2, 0.2, 0.2),
+	BALL_LEVEL_DISABLED_SLOT: Color(0.4, 0.2, 0.2),
 	0: Color(0.8, 0.8, 0.8), 8: Color(0.2, 0.2, 0.2), # White/Black
 	1: Color(1.0, 0.8, 0.0), 9: Color(1.0, 0.8, 0.0), # Yellow
 	2: Color(0.0, 0.0, 0.8), 10: Color(0.0, 0.0, 0.8), # Blue
@@ -53,6 +55,8 @@ const BALL_RARITY_COLORS = {
 @export var is_on_billiards: bool = false
 
 
+# 見た目部分をまとめる親
+@export var _view_parent: Node2D
 # ボールの選択を示す周辺部分
 @export var _hover_texture: TextureRect
 # ボールの本体色部分
@@ -105,6 +109,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	# TODO: 秒数管理にする
 	_trail_points.push_front(self.position)
 	if TRAIL_MAX_LENGTH < _trail_points.size():
 		_trail_points.pop_back()
@@ -116,6 +121,12 @@ func _process(delta: float) -> void:
 
 # 自身の見た目を更新する
 func refresh_view() -> void:
+	# Ordering
+	if level < 0:
+		z_index = Z_INDEX_SLOT
+	else:
+		z_index = Z_INDEX_DEFAULT
+
 	# 本体色
 	_body_texture.self_modulate = BALL_BODY_COLORS[level]
 	var show_stripe = 9 <= level and level <= 15
@@ -140,10 +151,9 @@ func refresh_view() -> void:
 		_inner_texture.visible = true
 		_level_label.visible = true
 		_level_label.text = "??"
-	elif level == BALL_LEVEL_EMPTY_SLOT:
+	elif level < 0:
 		_inner_texture.visible = false
 		_level_label.visible = false
-		_level_label.text = ""
 	else:
 		_inner_texture.visible = true
 		_level_label.visible = true

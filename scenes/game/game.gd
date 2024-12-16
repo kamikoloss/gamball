@@ -135,6 +135,11 @@ var _extra_ball_list: Array[Ball] = [
 	Ball.new(4, Ball.Rarity.COMMON),
 	Ball.new(5, Ball.Rarity.COMMON),
 ]
+var _deck_size_min: int = DECK_SIZE_MIN_DEFAULT
+var _deck_size_max: int = DECK_SIZE_MAX
+var _extra_size_min: int = EXTRA_SIZE_MIN
+var _extra_size_max: int = EXTRA_SIZE_MAX_DEFAULT
+
 # 払い出しキューが残っている Ball level のリスト
 var _payout_level_list: Array[int] = []
 # 何秒ごとに 1 Ball を払い出すか
@@ -178,10 +183,10 @@ func _ready() -> void:
 			node.icon_pressed.connect(_on_product_icon_pressed)
 
 	# UI (GameUi)
-	_game_ui.refresh_balls_slot_deck(_deck_ball_list)
-	_game_ui.refresh_balls_slot_extra(_extra_ball_list)
-	_game_ui.refresh_deck_size(DECK_SIZE_MIN_DEFAULT, DECK_SIZE_MAX)
-	_game_ui.refresh_extra_size(EXTRA_SIZE_MIN, EXTRA_SIZE_MAX_DEFAULT)
+	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
+	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
+	_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
+	_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
 	_bunny.visible = false
 	_refresh_next()
 	# UI (Billiards)
@@ -408,10 +413,10 @@ func _on_product_icon_pressed(product: Product) -> void:
 	match product.product_type:
 
 		Product.ProductType.DECK_PACK:
-			if DECK_SIZE_MAX <= _deck_ball_list.size():
+			if _deck_size_max <= _deck_ball_list.size():
 				return
 			for i in 3:
-				if DECK_SIZE_MAX <= _deck_ball_list.size():
+				if _deck_size_max <= _deck_ball_list.size():
 					continue
 				var level_rarity = _pick_random_rarity(true) # COMMON 抜き
 				var level = DECK_BALL_LEVEL_RARITY[level_rarity].pick_random()
@@ -419,32 +424,33 @@ func _on_product_icon_pressed(product: Product) -> void:
 				print("[Game] DECK_PACK level: %s (%s)" % [level, Ball.Rarity.keys()[level_rarity]])
 
 		Product.ProductType.DECK_CLEANER:
-			# ex: [EffectType.DECK_SIZE_MIN_DOWN, 1]
-			var deck_size_min = DECK_SIZE_MIN_DEFAULT
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_SIZE_MIN_DOWN):
-				deck_size_min -= effect_data[1]
-			deck_size_min = clampi(deck_size_min, DECK_SIZE_MIN, deck_size_min)
-			_game_ui.refresh_deck_size(deck_size_min, DECK_SIZE_MAX)
-			print("[Game/BallEffect] DECK_SIZE_MIN_DOWN deck_size_min: %s" % [deck_size_min])
-
-			if _deck_ball_list.size() <= deck_size_min:
+			if _deck_ball_list.size() <= _deck_size_min:
 				return
 			_deck_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
 			_deck_ball_list.pop_front()
 
 		Product.ProductType.EXTRA_PACK:
-			# ex: [EffectType.EXTRA_SIZE_MAX_UP, 2]
-			var extra_size_max = EXTRA_SIZE_MAX_DEFAULT
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.EXTRA_SIZE_MAX_UP):
-				extra_size_max += effect_data[1]
-			extra_size_max = clampi(extra_size_max, extra_size_max, EXTRA_SIZE_MAX)
-			_game_ui.refresh_extra_size(EXTRA_SIZE_MIN, extra_size_max)
-			print("[Game/BallEffect] EXTRA_SIZE_MAX_UP extra_size_max: %s" % [extra_size_max])
+			# ex: [EffectType.DECK_SIZE_MIN_DOWN, 1]
+			var new_deck_size_min = DECK_SIZE_MIN_DEFAULT
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_SIZE_MIN_DOWN):
+				new_deck_size_min -= effect_data[1]
+			_deck_size_min = clampi(new_deck_size_min, DECK_SIZE_MIN, new_deck_size_min)
+			_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
+			print("[Game/BallEffect] DECK_SIZE_MIN_DOWN _deck_size_min: %s" % [_deck_size_min])
 
-			if extra_size_max <= _extra_ball_list.size():
+			# ex: [EffectType.EXTRA_SIZE_MAX_UP, 2]
+			var new_extra_size_max = EXTRA_SIZE_MAX_DEFAULT
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.EXTRA_SIZE_MAX_UP):
+				new_extra_size_max += effect_data[1]
+			_extra_size_max = clampi(new_extra_size_max, new_extra_size_max, EXTRA_SIZE_MAX)
+			_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
+			print("[Game/BallEffect] EXTRA_SIZE_MAX_UP _extra_size_max: %s" % [_extra_size_max])
+
+			if _extra_size_max <= _extra_ball_list.size():
 				return
+				# TODO: あふれるとき注意出す
 			for i in 2:
-				if extra_size_max <= _extra_ball_list.size():
+				if _extra_size_max <= _extra_ball_list.size():
 					continue
 				var level_rarity = _pick_random_rarity(true) # COMMON 抜き
 				var level = EXTRA_BALL_LEVEL_RARITY[level_rarity].pick_random()
@@ -461,7 +467,6 @@ func _on_product_icon_pressed(product: Product) -> void:
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_GRAVITY_SIZE_UP):
 				gravity_size += effect_data[1]
 			print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size: %s, gravity_size: %s" % [hole_size, gravity_size])
-
 			for node in get_tree().get_nodes_in_group("hole"):
 				if node is Hole:
 					if node.hole_type == Hole.HoleType.BILLIARDS:
@@ -490,8 +495,8 @@ func _on_product_icon_pressed(product: Product) -> void:
 	money -= product.price
 
 	# DECK, EXTRA の見た目を更新する
-	_game_ui.refresh_balls_slot_deck(_deck_ball_list)
-	_game_ui.refresh_balls_slot_extra(_extra_ball_list)
+	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
+	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
 
 
 # EXTRA Ball 内の特定の効果をまとめて取得する

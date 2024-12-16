@@ -22,14 +22,19 @@ const WINDOW_POSITION_RIGHT_TO: Vector2 = Vector2(720, 0)
 const WINDOW_POSITION_TO: Vector2 = Vector2(0, 0)
 const WINDOW_MOVE_DURATION: float = 1.0
 
+# DECK/EXTRA Slot の背景色
+const BALL_SLOT_COLOR_REQUIRED: Color = Color(0.2, 0.6, 0.2) # 必須 (min より下)
+const BALL_SLOT_COLOR_OPTIONAL: Color = Color(0.6, 0.6, 0.6) # 任意 (min と max の間)
+const BALL_SLOT_COLOR_DISABLED: Color = Color(0.6, 0.2, 0.2) # 不可 (max より上)
+
 const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 
 
 @export_category("Main/Ball")
-@export var _balls_slot_deck: Control
-@export var _balls_slot_extra: Control
-@export var _deck_size_label: Label
-@export var _extra_size_label: Label
+@export var _deck_balls_parent: Node2D
+@export var _deck_slots_parent: Control
+@export var _extra_balls_parent: Node2D
+@export var _extra_slots_parent: Control
 @export var _ball_popup: Control
 @export var _ball_popup_level: Label
 @export var _ball_popup_rarity: Label
@@ -71,10 +76,10 @@ var _tweens: Dictionary = {}
 
 func _ready() -> void:
 	# Main/Ball
-	for node in _balls_slot_deck.get_children():
+	for node in _deck_balls_parent.get_children():
 		if node is Ball:
 			node.hovered.connect(func(entered): _show_ball_popup(node) if entered else _hide_ball_popup())
-	for node in _balls_slot_extra.get_children():
+	for node in _extra_balls_parent.get_children():
 		if node is Ball:
 			node.hovered.connect(func(entered): _show_ball_popup(node) if entered else _hide_ball_popup())
 	_hide_ball_popup()
@@ -136,18 +141,17 @@ func hide_people_window() -> void:
 
 
 #Main/BallsSlotXxxx
-func refresh_balls_slot_deck(deck_ball_list: Array[Ball]) -> void:
-	_refresh_balls_slot(_balls_slot_deck, deck_ball_list)
+func refresh_deck_balls(deck_ball_list: Array[Ball], min: int, max: int) -> void:
+	_refresh_balls(_deck_balls_parent, deck_ball_list, min, max)
 
-func refresh_balls_slot_extra(extra_ball_list: Array[Ball]) -> void:
-	_refresh_balls_slot(_balls_slot_extra, extra_ball_list)
+func refresh_extra_balls(extra_ball_list: Array[Ball], min: int, max: int) -> void:
+	_refresh_balls(_extra_balls_parent, extra_ball_list, min, max)
 
+func refresh_deck_slots(min: int, max: int) -> void:
+	_refresh_slots(_deck_slots_parent, min, max)
 
-func refresh_deck_size(min: int, max: int) -> void:
-	_deck_size_label.text = "[SIZE:%02d-%02d]" % [min, max]
-
-func refresh_extra_size(min: int, max: int) -> void:
-	_extra_size_label.text = "[SIZE:%02d-%02d]" % [min, max]
+func refresh_extra_slots(min: int, max: int) -> void:
+	_refresh_slots(_extra_slots_parent, min, max)
 
 
 # Main/Score
@@ -207,7 +211,7 @@ func _show_ball_popup(ball: Ball) -> void:
 	#print("[GameUi] _show_ball_popup(%s)" % [ball])
 	_ball_popup.visible = true
 	_ball_popup.position = ball.global_position + BALL_POPUP_POSITION_DIFF
-	if ball.level == Ball.BALL_LEVEL_EMPTY_SLOT:
+	if ball.level < 0:
 		_ball_popup_level.text = "-"
 		_ball_popup_rarity.text = ""
 		_ball_popup_rarity.self_modulate = Color.WHITE
@@ -222,17 +226,32 @@ func _hide_ball_popup() -> void:
 	_ball_popup.visible = false
 
 
-func _refresh_balls_slot(parent_node: Node, ball_list: Array[Ball]) -> void:
+func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: int) -> void:
 	var index = 0
 	for node in parent_node.get_children():
-		if node is Ball: # Label もある
+		if node is Ball:
 			if index < ball_list.size():
 				node.level = ball_list[index].level
 				node.rarity = ball_list[index].rarity
+			elif max <= index:
+				node.level = Ball.BALL_LEVEL_DISABLED_SLOT
+				node.rarity = Ball.Rarity.COMMON
 			else:
-				node.level = Ball.BALL_LEVEL_EMPTY_SLOT
+				node.level = Ball.BALL_LEVEL_OPTIONAL_SLOT
 				node.rarity = Ball.Rarity.COMMON
 			node.refresh_view()
+			index += 1
+
+func _refresh_slots(parent_node: Control, min: int, max: int) -> void:
+	var index = 0
+	for node in parent_node.get_children():
+		if node is TextureRect:
+			if index < min:
+				node.self_modulate = BALL_SLOT_COLOR_REQUIRED
+			elif max <= index:
+				node.self_modulate = BALL_SLOT_COLOR_DISABLED
+			else:
+				node.self_modulate = BALL_SLOT_COLOR_OPTIONAL
 			index += 1
 
 
