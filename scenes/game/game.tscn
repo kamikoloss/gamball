@@ -2783,20 +2783,20 @@ theme = ExtResource("25_qsn7e")
 
 [node name="Level" type="Label" parent="UI/Main/BallPopup"]
 layout_mode = 0
-offset_left = 10.0
+offset_left = 5.0
 offset_top = -20.0
-offset_right = 170.0
+offset_right = 165.0
 offset_bottom = 60.0
 theme = ExtResource("25_qsn7e")
 theme_type_variation = &"LabelHeader"
-text = "99-A"
+text = "A-99"
 vertical_alignment = 1
 
 [node name="Rarity" type="Label" parent="UI/Main/BallPopup"]
 self_modulate = Color(1, 1, 0, 1)
 layout_mode = 0
-offset_left = 70.0
-offset_right = 230.0
+offset_left = 75.0
+offset_right = 235.0
 offset_bottom = 40.0
 text = "★★★★★"
 horizontal_alignment = 2
@@ -2804,9 +2804,9 @@ vertical_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="UI/Main/BallPopup"]
 layout_mode = 0
-offset_left = 10.0
+offset_left = 5.0
 offset_top = 40.0
-offset_right = 230.0
+offset_right = 235.0
 offset_bottom = 160.0
 theme = ExtResource("25_qsn7e")
 bbcode_enabled = true

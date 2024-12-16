@@ -78,10 +78,10 @@ func _ready() -> void:
 	# Main/Ball
 	for node in _deck_balls_parent.get_children():
 		if node is Ball:
-			node.hovered.connect(func(entered): _show_ball_popup(node) if entered else _hide_ball_popup())
+			node.hovered.connect(func(entered): _on_deck_extra_balls_hovered(node, entered))
 	for node in _extra_balls_parent.get_children():
 		if node is Ball:
-			node.hovered.connect(func(entered): _show_ball_popup(node) if entered else _hide_ball_popup())
+			node.hovered.connect(func(entered): _on_deck_extra_balls_hovered(node, entered))
 	_hide_ball_popup()
 
 	# Main/Buttons
@@ -205,6 +205,16 @@ func hide_arrow() -> void:
 func refresh_arrow(deg: int, scale: float) -> void:
 	_arrow.rotation_degrees = deg
 	_arrow_square.scale.y = scale
+
+
+
+func _on_deck_extra_balls_hovered(ball: Ball, entered: bool) -> void:
+	if entered:
+		_show_ball_popup(ball)
+		ball.show_hover()
+	else:
+		_hide_ball_popup()
+		ball.hide_hover()
 
 
 func _show_ball_popup(ball: Ball) -> void:

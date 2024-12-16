@@ -26,12 +26,12 @@ max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
 _view_parent = NodePath("View")
 _hover_texture = NodePath("View/Hover")
-_body_texture = NodePath("View/Mask/Body")
-_body_stripe_texture = NodePath("View/Mask/BodyStripe")
-_body_stripe_2_texture = NodePath("View/Mask/BodyStripe2")
-_inner_texture = NodePath("View/Mask/Inner")
-_inner_texture_2 = NodePath("View/Mask/Inner2")
-_mask_texture = NodePath("View/Mask/Active")
+_body_texture = NodePath("View/Mask/Control/Body")
+_body_stripe_texture = NodePath("View/Mask/Control/BodyStripe")
+_body_stripe_2_texture = NodePath("View/Mask/Control/BodyStripe2")
+_inner_texture = NodePath("View/Mask/Control/Inner")
+_inner_texture_2 = NodePath("View/Mask/Control/Inner2")
+_mask_texture = NodePath("View/Mask/Control/Active")
 _level_label = NodePath("View/Level")
 _hole_area = NodePath("Hole")
 _trail_line = NodePath("Trail")
@@ -43,19 +43,13 @@ shape = SubResource("CircleShape2D_rn34c")
 [node name="View" type="Node2D" parent="."]
 
 [node name="Hover" type="TextureRect" parent="View"]
-visible = false
 self_modulate = Color(1, 1, 1, 0.501961)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
@@ -77,37 +71,59 @@ texture = ExtResource("2_4bc8b")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Body" type="TextureRect" parent="View/Mask"]
+[node name="Control" type="Control" parent="View/Mask"]
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 15.0
+offset_bottom = 15.0
+
+[node name="Body" type="TextureRect" parent="View/Mask/Control"]
 self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
 layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(10, 10)
 mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="BodyStripe" type="TextureRect" parent="View/Mask"]
+[node name="BodyStripe" type="TextureRect" parent="View/Mask/Control"]
 layout_mode = 0
-offset_right = 30.0
-offset_bottom = 4.0
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = -11.0
 mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="BodyStripe2" type="TextureRect" parent="View/Mask"]
+[node name="BodyStripe2" type="TextureRect" parent="View/Mask/Control"]
 layout_mode = 0
-offset_top = 26.0
-offset_right = 30.0
-offset_bottom = 30.0
+offset_left = -15.0
+offset_top = 11.0
+offset_right = 15.0
+offset_bottom = 15.0
 mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="Inner2" type="TextureRect" parent="View/Mask"]
+[node name="Inner2" type="TextureRect" parent="View/Mask/Control"]
 self_modulate = Color(1, 0, 1, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("2_4bc8b")
+expand_mode = 1
+
+[node name="Inner" type="TextureRect" parent="View/Mask/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -120,33 +136,22 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+pivot_offset = Vector2(10, 10)
 mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Inner" type="TextureRect" parent="View/Mask"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -9.0
-offset_right = 9.0
-offset_bottom = 9.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("2_4bc8b")
-expand_mode = 1
-
-[node name="Active" type="TextureRect" parent="View/Mask"]
+[node name="Active" type="TextureRect" parent="View/Mask/Control"]
 visible = false
 self_modulate = Color(0, 1, 1, 1)
 layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(10, 10)
 mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1

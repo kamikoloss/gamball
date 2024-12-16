@@ -43,7 +43,7 @@ offset_right = 400.0
 offset_bottom = 180.0
 theme = ExtResource("4_wugw1")
 theme_type_variation = &"LabelHeader"
-text = "POOL <A>"
+text = "Pool A"
 vertical_alignment = 1
 
 [node name="Balls" type="Control" parent="."]
@@ -149,6 +149,7 @@ offset_right = 540.0
 offset_bottom = 40.0
 
 [node name="Panel" type="Panel" parent="BallPopup"]
+layout_mode = 0
 offset_right = 200.0
 offset_bottom = 640.0
 theme = ExtResource("4_wugw1")
@@ -161,7 +162,7 @@ offset_right = 330.0
 offset_bottom = 60.0
 theme = ExtResource("4_wugw1")
 theme_type_variation = &"LabelHeader"
-text = "No.9999"
+text = "A-99"
 vertical_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="BallPopup"]
