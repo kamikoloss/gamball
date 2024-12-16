@@ -36,7 +36,7 @@ func _init_display_balls() -> void:
 func _show_ball_popup(ball: Ball) -> void:
 	ball.show_hover()
 
-	_ball_popup_title.text = "No.%s" % ball.level
+	_ball_popup_title.text = "%s-%s" % [Ball.Pool.keys()[ball.pool], ball.level]
 	var description = "[font_size=8] [/font_size]\n" # ハーフ改行
 	for rarity in Ball.Rarity.values():
 		var rarity_value = BallEffect.RARITY_TEXT[rarity]

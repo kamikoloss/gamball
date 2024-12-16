@@ -216,7 +216,7 @@ func _show_ball_popup(ball: Ball) -> void:
 		_ball_popup_rarity.text = ""
 		_ball_popup_rarity.self_modulate = Color.WHITE
 	else:
-		_ball_popup_level.text = str(ball.level)
+		_ball_popup_level.text = "%s-%s" % [Ball.Pool.keys()[ball.pool], ball.level]
 		_ball_popup_rarity.text = BallEffect.RARITY_TEXT[ball.rarity]
 		_ball_popup_rarity.self_modulate = Ball.BALL_RARITY_COLORS[ball.rarity]
 	_ball_popup_description.text = BallEffect.get_effect_description(ball.level, ball.rarity)

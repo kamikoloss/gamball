@@ -8,6 +8,8 @@ signal hovered # (entered: bool)
 
 # ボールのレア度
 enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
+# ボールのプール 名称表示に使用される
+enum Pool { A }
 # Tween
 enum TweenType { RARITY }
 
@@ -80,6 +82,8 @@ var is_active: bool = true
 # ボールのレア度
 # TODO: level の方がいい
 var rarity: Rarity = Rarity.COMMON
+# ボールのプール
+var pool: Pool = Pool.A
 # ボールの効果
 # NOTE: 効果移譲とかありそうなので配列で持つ
 # [ [ <BallEffect.EffectType>, param1, (param2) ], ... ]
