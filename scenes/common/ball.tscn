@@ -42,17 +42,6 @@ shape = SubResource("CircleShape2D_rn34c")
 
 [node name="View" type="Node2D" parent="."]
 
-[node name="Hover" type="TextureRect" parent="View"]
-self_modulate = Color(1, 1, 1, 0.501961)
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-scale = Vector2(2, 2)
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("2_4bc8b")
-expand_mode = 1
-
 [node name="Mask" type="TextureRect" parent="View"]
 clip_children = 1
 anchors_preset = 8
@@ -144,7 +133,7 @@ expand_mode = 1
 
 [node name="Active" type="TextureRect" parent="View/Mask/Control"]
 visible = false
-self_modulate = Color(0, 1, 1, 1)
+self_modulate = Color(0, 1, 0, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -170,6 +159,19 @@ text = "99"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Hover" type="TextureRect" parent="View"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.6)
+z_index = 1
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("2_4bc8b")
+expand_mode = 1
 
 [node name="Hole" type="Area2D" parent="."]
 scale = Vector2(0.25, 0.25)

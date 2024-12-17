@@ -133,6 +133,8 @@ func refresh_view() -> void:
 
 	# 本体色
 	_body_texture.self_modulate = BALL_BODY_COLORS[level]
+	if 0 < level:
+		_body_texture.self_modulate = BALL_BODY_COLORS[5] # オレンジ固定
 	var show_stripe = 9 <= level and level <= 15
 	_body_stripe_texture.visible = show_stripe
 	_body_stripe_2_texture.visible = show_stripe
@@ -168,6 +170,9 @@ func refresh_view() -> void:
 	if is_active:
 		gradient.set_color(0, Color(BALL_BODY_COLORS[level], 0.5))
 		gradient.set_color(1, Color(BALL_BODY_COLORS[level], 0))
+		if 0 < level:
+			gradient.set_color(0, Color(BALL_BODY_COLORS[5], 0.5)) # オレンジ固定
+			gradient.set_color(1, Color(BALL_BODY_COLORS[5], 0)) # オレンジ固定
 	else:
 		gradient.set_color(0, Color(BALL_BODY_COLORS[0], 0.5))
 		gradient.set_color(1, Color(BALL_BODY_COLORS[0], 0))

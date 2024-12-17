@@ -54,7 +54,7 @@ expand_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="Background2" type="TextureRect" parent="."]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 0.25098)
+self_modulate = Color(1, 1, 1, 0.2)
 offset_right = 1280.0
 offset_bottom = 720.0
 texture = ExtResource("4_nc85m")
@@ -80,7 +80,7 @@ linear_damp_space_override = 3
 linear_damp = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Board"]
-self_modulate = Color(0.12549, 0.25098, 0.12549, 1)
+self_modulate = Color(0, 0, 0, 0.6)
 offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
@@ -93,7 +93,7 @@ shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
 [node name="Points" type="Node2D" parent="Billiards"]
-modulate = Color(0.501961, 0.501961, 0.501961, 0.25098)
+modulate = Color(0.6, 0.6, 0.6, 0.2)
 
 [node name="SpawnHole" type="Node2D" parent="Billiards/Points"]
 position = Vector2(280, 360)
@@ -249,7 +249,7 @@ texture = ExtResource("6_qy33h")
 expand_mode = 1
 
 [node name="Walls" type="Node2D" parent="Billiards"]
-modulate = Color(0.501961, 0.501961, 0.501961, 1)
+modulate = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Wall" type="StaticBody2D" parent="Billiards/Walls"]
 position = Vector2(280, 40)
@@ -450,8 +450,7 @@ offset_right = 280.0
 offset_bottom = 120.0
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/UI/Display"]
-modulate = Color(0.12549, 0.12549, 0.12549, 1)
-self_modulate = Color(0.752941, 1, 0.752941, 1)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
@@ -473,8 +472,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Billiards/UI/Display"]
-modulate = Color(0.12549, 0.12549, 0.12549, 1)
-self_modulate = Color(0.752941, 1, 0.752941, 1)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -40.0
 offset_right = 40.0
@@ -490,7 +488,7 @@ offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
-text = "9999"
+text = "9999/9999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -516,7 +514,7 @@ gravity_direction = Vector2(0, 2)
 linear_damp = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Board"]
-self_modulate = Color(0.25098, 0.12549, 0.12549, 1)
+self_modulate = Color(0, 0, 0, 0.6)
 offset_left = 20.0
 offset_top = -10.0
 offset_right = 40.0
@@ -530,7 +528,7 @@ shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
 [node name="Points" type="Node2D" parent="Pachinko"]
-modulate = Color(0.501961, 0.501961, 0.501961, 0.25098)
+modulate = Color(0.6, 0.6, 0.6, 0.2)
 
 [node name="SpawnHoleA" type="Node2D" parent="Pachinko/Points"]
 position = Vector2(800, 80)
@@ -629,7 +627,7 @@ texture = ExtResource("6_qy33h")
 expand_mode = 1
 
 [node name="Walls" type="Node2D" parent="Pachinko"]
-modulate = Color(0.501961, 0.501961, 0.501961, 1)
+modulate = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Wall" type="StaticBody2D" parent="Pachinko/Walls"]
 position = Vector2(1000, 40)
@@ -1102,8 +1100,7 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Display"]
-modulate = Color(0.12549, 0.12549, 0.12549, 1)
-self_modulate = Color(0.752941, 1, 0.752941, 1)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
@@ -1125,8 +1122,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Pachinko/Rush/Display"]
-modulate = Color(0.12549, 0.12549, 0.12549, 1)
-self_modulate = Color(0.752941, 1, 0.752941, 1)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -40.0
 offset_right = 40.0
@@ -1142,7 +1138,7 @@ offset_bottom = 80.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
-text = "99/99"
+text = "9999/9999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1340,28 +1336,18 @@ gravity_point_center = Vector2(0, 2)
 gravity_direction = Vector2(0, 2)
 linear_damp = 1.0
 
-[node name="TextureRect" type="TextureRect" parent="Stack/Board"]
-visible = false
-self_modulate = Color(0.12549, 0.12549, 0.25098, 1)
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Board"]
 shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
 [node name="Points" type="Node2D" parent="Stack"]
+modulate = Color(0.6, 0.6, 0.6, 0.2)
 
 [node name="SpawnHole" type="Node2D" parent="Stack/Points"]
 position = Vector2(600, 520)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Stack/Points/SpawnHole"]
-self_modulate = Color(0.25098, 0.25098, 0.25098, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1377,7 +1363,7 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="Walls" type="Node2D" parent="Stack"]
-modulate = Color(0.501961, 0.501961, 0.501961, 1)
+modulate = Color(0.8, 0.8, 0.8, 1)
 
 [node name="Wall2" type="StaticBody2D" parent="Stack/Walls"]
 position = Vector2(640, 680)
@@ -1592,7 +1578,7 @@ _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
 
 [node name="StackGlass" type="TextureRect" parent="UI"]
-self_modulate = Color(0, 0, 0.25098, 0.501961)
+self_modulate = Color(0.2, 0.2, 0.2, 0.6)
 layout_mode = 0
 offset_left = 560.0
 offset_top = 360.0
@@ -2391,29 +2377,94 @@ offset_top = 380.0
 offset_right = 560.0
 offset_bottom = 380.0
 
-[node name="Label4" type="Label" parent="UI/Main/Score"]
+[node name="TitleTurn" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_top = -20.0
 offset_right = 160.0
-offset_bottom = 20.0
+offset_bottom = 40.0
 theme = ExtResource("25_qsn7e")
 theme_type_variation = &"LabelBold"
 text = "TURN"
 vertical_alignment = 1
 
-[node name="Turn" type="Control" parent="UI/Main/Score"]
-layout_mode = 3
+[node name="Textures" type="Control" parent="UI/Main/Score"]
+modulate = Color(0, 0, 0, 1)
 anchors_preset = 0
 offset_top = 20.0
 offset_bottom = 20.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Turn"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Textures"]
 layout_mode = 0
+offset_top = 20.0
 offset_right = 80.0
-offset_bottom = 20.0
+offset_bottom = 40.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Score/Textures"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 20.0
+offset_right = 160.0
+offset_bottom = 40.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="UI/Main/Score/Textures"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 100.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="UI/Main/Score/Textures"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 160.0
+offset_bottom = 100.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="UI/Main/Score/Textures"]
+layout_mode = 0
+offset_top = 140.0
+offset_right = 80.0
+offset_bottom = 160.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="TextureRect6" type="TextureRect" parent="UI/Main/Score/Textures"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 140.0
+offset_right = 160.0
+offset_bottom = 160.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="TextureRect7" type="TextureRect" parent="UI/Main/Score/Textures"]
+layout_mode = 0
+offset_top = 160.0
+offset_right = 80.0
+offset_bottom = 180.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="TextureRect8" type="TextureRect" parent="UI/Main/Score/Textures"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 160.0
+offset_right = 160.0
+offset_bottom = 180.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="Turn" type="Control" parent="UI/Main/Score"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 40.0
+offset_bottom = 40.0
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Turn"]
 layout_mode = 0
@@ -2440,17 +2491,9 @@ vertical_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = 80.0
-offset_top = 20.0
+offset_top = 40.0
 offset_right = 80.0
-offset_bottom = 20.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Turn2"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 20.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+offset_bottom = 40.0
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Turn2"]
 visible = false
@@ -2476,11 +2519,11 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="UI/Main/Score"]
+[node name="TitleMoney" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_top = 40.0
+offset_top = 60.0
 offset_right = 160.0
-offset_bottom = 80.0
+offset_bottom = 100.0
 theme = ExtResource("25_qsn7e")
 theme_type_variation = &"LabelBold"
 text = "MONEY"
@@ -2488,16 +2531,8 @@ vertical_alignment = 1
 
 [node name="Money" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 80.0
-offset_bottom = 80.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Money"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 20.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+offset_top = 100.0
+offset_bottom = 100.0
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Money"]
 layout_mode = 0
@@ -2524,17 +2559,9 @@ vertical_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = 80.0
-offset_top = 80.0
+offset_top = 100.0
 offset_right = 80.0
-offset_bottom = 80.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Money2"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 20.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+offset_bottom = 100.0
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Money2"]
 visible = false
@@ -2560,11 +2587,11 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Label5" type="Label" parent="UI/Main/Score"]
+[node name="TitleBalls" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_top = 100.0
+offset_top = 120.0
 offset_right = 160.0
-offset_bottom = 140.0
+offset_bottom = 160.0
 theme = ExtResource("25_qsn7e")
 theme_type_variation = &"LabelBold"
 text = "BALLS"
@@ -2572,16 +2599,8 @@ vertical_alignment = 1
 
 [node name="Payout" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 140.0
-offset_bottom = 140.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Payout"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 20.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+offset_top = 160.0
+offset_bottom = 160.0
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Payout"]
 visible = false
@@ -2610,17 +2629,9 @@ vertical_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = 80.0
-offset_top = 140.0
+offset_top = 160.0
 offset_right = 80.0
-offset_bottom = 140.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Payout2"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 20.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+offset_bottom = 160.0
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Payout2"]
 visible = false
@@ -2648,16 +2659,8 @@ vertical_alignment = 1
 
 [node name="Balls" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 160.0
-offset_bottom = 160.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Balls"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 20.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+offset_top = 180.0
+offset_bottom = 180.0
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Balls"]
 layout_mode = 0
@@ -2684,17 +2687,9 @@ vertical_alignment = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = 80.0
-offset_top = 160.0
+offset_top = 180.0
 offset_right = 80.0
-offset_bottom = 160.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Score/Balls2"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 20.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
+offset_bottom = 180.0
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Balls2"]
 visible = false
@@ -2724,7 +2719,7 @@ vertical_alignment = 1
 anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/DragPoint"]
-self_modulate = Color(1, 0, 1, 1)
+self_modulate = Color(0, 1, 0, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
