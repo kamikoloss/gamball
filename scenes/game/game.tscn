@@ -1,10 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=32 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_ma10n"]
 [ext_resource type="Script" path="res://scenes/game/billiards.gd" id="3_0s1kj"]
+[ext_resource type="Shader" path="res://shaders/neuronal_network_waves.gdshader" id="3_cdybq"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="4_b0m3n"]
-[ext_resource type="Texture2D" uid="uid://d2efapl0vglp0" path="res://images/common/dia.png" id="4_nc85m"]
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="5_j1dyl"]
 [ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="6_qy33h"]
 [ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/common/hole.tscn" id="7_71f2d"]
@@ -29,6 +29,12 @@
 [ext_resource type="Texture2D" uid="uid://cg10xkxv5pj4y" path="res://images/icons/settings.png" id="26_7xc11"]
 [ext_resource type="Texture2D" uid="uid://dgu210g062myp" path="res://images/icons/info.png" id="27_k84dy"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_abgdr"]
+shader = ExtResource("3_cdybq")
+shader_parameter/mouse_position = Vector2(0.5, 0.5)
+shader_parameter/wave_color = Color(1, 0.4, 0, 1)
+shader_parameter/wave_transparency = 0.8
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
@@ -45,21 +51,15 @@ _game_ui = NodePath("UI")
 _products_parent = NodePath("UI/Shop/Products")
 _bunny = NodePath("UI/People/Bunny")
 
-[node name="Background" type="TextureRect" parent="."]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
+[node name="BgBase" type="ColorRect" parent="."]
 offset_right = 1280.0
 offset_bottom = 720.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-metadata/_edit_lock_ = true
+color = Color(0, 0, 0, 1)
 
-[node name="Background2" type="TextureRect" parent="."]
-self_modulate = Color(1, 1, 1, 0.2)
+[node name="BgShader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_abgdr")
 offset_right = 1280.0
 offset_bottom = 720.0
-texture = ExtResource("4_nc85m")
-stretch_mode = 1
-metadata/_edit_lock_ = true
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_position_a", "_spawn_extra_position_b", "_spawn_extra_position_c", "_spawn_extra_position_d", "_balls_count_label")]
 script = ExtResource("3_0s1kj")
@@ -80,7 +80,7 @@ linear_damp_space_override = 3
 linear_damp = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Board"]
-self_modulate = Color(0, 0, 0, 0.6)
+self_modulate = Color(0, 0, 0, 0.8)
 offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
@@ -514,7 +514,7 @@ gravity_direction = Vector2(0, 2)
 linear_damp = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Board"]
-self_modulate = Color(0, 0, 0, 0.6)
+self_modulate = Color(0, 0, 0, 0.8)
 offset_left = 20.0
 offset_top = -10.0
 offset_right = 40.0
@@ -1578,7 +1578,7 @@ _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
 
 [node name="StackGlass" type="TextureRect" parent="UI"]
-self_modulate = Color(0.2, 0.2, 0.2, 0.6)
+self_modulate = Color(0, 0, 0, 0.8)
 layout_mode = 0
 offset_left = 560.0
 offset_top = 360.0
