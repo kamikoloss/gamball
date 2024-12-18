@@ -430,22 +430,6 @@ func _on_product_icon_pressed(product: Product) -> void:
 			_deck_ball_list.pop_front()
 
 		Product.ProductType.EXTRA_PACK:
-			# ex: [EffectType.DECK_SIZE_MIN_DOWN, 1]
-			var new_deck_size_min = DECK_SIZE_MIN_DEFAULT
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_SIZE_MIN_DOWN):
-				new_deck_size_min -= effect_data[1]
-			_deck_size_min = clampi(new_deck_size_min, DECK_SIZE_MIN, new_deck_size_min)
-			_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
-			print("[Game/BallEffect] DECK_SIZE_MIN_DOWN _deck_size_min: %s" % [_deck_size_min])
-
-			# ex: [EffectType.EXTRA_SIZE_MAX_UP, 2]
-			var new_extra_size_max = EXTRA_SIZE_MAX_DEFAULT
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.EXTRA_SIZE_MAX_UP):
-				new_extra_size_max += effect_data[1]
-			_extra_size_max = clampi(new_extra_size_max, new_extra_size_max, EXTRA_SIZE_MAX)
-			_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
-			print("[Game/BallEffect] EXTRA_SIZE_MAX_UP _extra_size_max: %s" % [_extra_size_max])
-
 			if _extra_size_max <= _extra_ball_list.size():
 				return
 				# TODO: あふれるとき注意出す
@@ -457,33 +441,6 @@ func _on_product_icon_pressed(product: Product) -> void:
 				var rarity = _pick_random_rarity()
 				_extra_ball_list.push_back(Ball.new(level, rarity))
 				print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
-
-			# ex: [EffectType.HOLE_SIZE_UP, 1]
-			var hole_size = 0
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_SIZE_UP):
-				hole_size += effect_data[1]
-			# ex: [EffectType.HOLE_GRAVITY_SIZE_UP, 1]
-			var gravity_size = 0
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_GRAVITY_SIZE_UP):
-				gravity_size += effect_data[1]
-			print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size: %s, gravity_size: %s" % [hole_size, gravity_size])
-			for node in get_tree().get_nodes_in_group("hole"):
-				if node is Hole:
-					if node.hole_type == Hole.HoleType.BILLIARDS:
-						node.set_hole_size(hole_size)
-						node.set_gravity_size(gravity_size)
-
-			# ex: [EffectType.PACHINKO_START_TOP_UP, 1]
-			var start_level = 0
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_START_TOP_UP):
-				start_level += effect_data[1]
-			# ex: [EffectType.PACHINKO_CONTINUE_TOP_UP, 1]
-			var continue_level = 0
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_CONTINUE_TOP_UP):
-				continue_level += effect_data[1]
-			print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
-			_pachinko.set_rush_start_top(start_level)
-			_pachinko.set_rush_continue_top(continue_level)
 
 		Product.ProductType.EXTRA_CLEANER:
 			if _extra_ball_list.size() == 0:
@@ -497,6 +454,53 @@ func _on_product_icon_pressed(product: Product) -> void:
 	# DECK, EXTRA の見た目を更新する
 	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
 	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
+
+
+# EXTRA Ball の効果をまとめて反映する
+func _apply_extra_ball_effects() -> void:
+	# ex: [EffectType.DECK_SIZE_MIN_DOWN, 1]
+	var new_deck_size_min = DECK_SIZE_MIN_DEFAULT
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_SIZE_MIN_DOWN):
+		new_deck_size_min -= effect_data[1]
+	_deck_size_min = clampi(new_deck_size_min, DECK_SIZE_MIN, new_deck_size_min)
+	_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
+	print("[Game/BallEffect] DECK_SIZE_MIN_DOWN _deck_size_min: %s" % [_deck_size_min])
+
+	# ex: [EffectType.EXTRA_SIZE_MAX_UP, 2]
+	var new_extra_size_max = EXTRA_SIZE_MAX_DEFAULT
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.EXTRA_SIZE_MAX_UP):
+		new_extra_size_max += effect_data[1]
+	_extra_size_max = clampi(new_extra_size_max, new_extra_size_max, EXTRA_SIZE_MAX)
+	_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
+	print("[Game/BallEffect] EXTRA_SIZE_MAX_UP _extra_size_max: %s" % [_extra_size_max])
+
+	# ex: [EffectType.HOLE_SIZE_UP, 1]
+	var hole_size = 0
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_SIZE_UP):
+		hole_size += effect_data[1]
+	# ex: [EffectType.HOLE_GRAVITY_SIZE_UP, 1]
+	var gravity_size = 0
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_GRAVITY_SIZE_UP):
+		gravity_size += effect_data[1]
+	print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size: %s, gravity_size: %s" % [hole_size, gravity_size])
+	for node in get_tree().get_nodes_in_group("hole"):
+		if node is Hole:
+			if node.hole_type == Hole.HoleType.BILLIARDS:
+				node.set_hole_size(hole_size)
+				node.set_gravity_size(gravity_size)
+
+	# ex: [EffectType.PACHINKO_START_TOP_UP, 1]
+	var start_level = 0
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_START_TOP_UP):
+		start_level += effect_data[1]
+	_pachinko.set_rush_start_top(start_level)
+
+	# ex: [EffectType.PACHINKO_CONTINUE_TOP_UP, 1]
+	var continue_level = 0
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_CONTINUE_TOP_UP):
+		continue_level += effect_data[1]
+	print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
+	_pachinko.set_rush_continue_top(continue_level)
 
 
 # EXTRA Ball 内の特定の効果をまとめて取得する
