@@ -68,7 +68,7 @@ _spawn_extra_position_a = NodePath("Points/SpawnHole2")
 _spawn_extra_position_b = NodePath("Points/SpawnHole3")
 _spawn_extra_position_c = NodePath("Points/SpawnHole4")
 _spawn_extra_position_d = NodePath("Points/SpawnHole5")
-_balls_count_label = NodePath("UI/Display/BallsB")
+_balls_count_label = NodePath("UI/Labels/BallsB")
 
 [node name="Board" type="Area2D" parent="Billiards"]
 position = Vector2(280, 360)
@@ -80,7 +80,7 @@ linear_damp_space_override = 3
 linear_damp = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Board"]
-self_modulate = Color(0, 0, 0, 0.8)
+self_modulate = Color(0.2, 0.2, 0.2, 0.9)
 offset_left = -10.0
 offset_top = -10.0
 offset_right = 10.0
@@ -93,7 +93,7 @@ shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
 [node name="Points" type="Node2D" parent="Billiards"]
-modulate = Color(0.6, 0.6, 0.6, 0.2)
+modulate = Color(1, 1, 1, 0.1)
 
 [node name="SpawnHole" type="Node2D" parent="Billiards/Points"]
 position = Vector2(280, 360)
@@ -441,7 +441,17 @@ hole_type = 0
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Display" type="Control" parent="Billiards/UI"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/UI"]
+self_modulate = Color(0.1, 0.1, 0.1, 1)
+layout_mode = 0
+offset_left = 240.0
+offset_top = 100.0
+offset_right = 320.0
+offset_bottom = 140.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="Labels" type="Control" parent="Billiards/UI"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 280.0
@@ -449,16 +459,7 @@ offset_top = 120.0
 offset_right = 280.0
 offset_bottom = 120.0
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/UI/Display"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 40.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="BallsA" type="Label" parent="Billiards/UI/Display"]
+[node name="BallsA" type="Label" parent="Billiards/UI/Labels"]
 layout_mode = 0
 offset_left = -40.0
 offset_top = -20.0
@@ -471,16 +472,7 @@ text = "BALLS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Billiards/UI/Display"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -40.0
-offset_right = 40.0
-offset_bottom = 20.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="BallsB" type="Label" parent="Billiards/UI/Display"]
+[node name="BallsB" type="Label" parent="Billiards/UI/Labels"]
 layout_mode = 0
 offset_left = -40.0
 offset_right = 280.0
@@ -500,9 +492,9 @@ _rotating_wall_a = NodePath("Walls/RotatingWallA")
 _rotating_wall_b = NodePath("Walls/RotatingWallB")
 _rush_nails_parent = NodePath("Rush/Nails")
 _rush_holes_parent = NodePath("Rush/Holes")
-_rush_label_a = NodePath("Rush/Display/RushA")
-_rush_label_b = NodePath("Rush/Display/RushB")
-_rush_lamps_parent = NodePath("Rush/Lamps")
+_rush_label_a = NodePath("UI/Labels/RushA")
+_rush_label_b = NodePath("UI/Labels/RushB")
+_rush_lamps_parent = NodePath("UI/Lamps")
 
 [node name="Board" type="Area2D" parent="Pachinko"]
 position = Vector2(280, 360)
@@ -514,7 +506,7 @@ gravity_direction = Vector2(0, 2)
 linear_damp = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Pachinko/Board"]
-self_modulate = Color(0, 0, 0, 0.8)
+self_modulate = Color(0.2, 0.2, 0.2, 0.9)
 offset_left = 20.0
 offset_top = -10.0
 offset_right = 40.0
@@ -528,7 +520,7 @@ shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
 [node name="Points" type="Node2D" parent="Pachinko"]
-modulate = Color(0.6, 0.6, 0.6, 0.2)
+modulate = Color(1, 1, 1, 0.1)
 
 [node name="SpawnHoleA" type="Node2D" parent="Pachinko/Points"]
 position = Vector2(800, 80)
@@ -1095,197 +1087,6 @@ gain_ratio = 3
 [node name="Rush" type="Node2D" parent="Pachinko"]
 position = Vector2(1000, 120)
 
-[node name="Display" type="Control" parent="Pachinko/Rush"]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Rush/Display"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 40.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="RushA" type="Label" parent="Pachinko/Rush/Display"]
-layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 280.0
-offset_bottom = 60.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "RUSH 00"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TextureRect2" type="TextureRect" parent="Pachinko/Rush/Display"]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -40.0
-offset_right = 40.0
-offset_bottom = 20.0
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="RushB" type="Label" parent="Pachinko/Rush/Display"]
-layout_mode = 0
-offset_left = -40.0
-offset_right = 280.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "9999/9999"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Lamps" type="Control" parent="Pachinko/Rush"]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="Lamp" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_top = -25.0
-offset_bottom = -25.0
-scale = Vector2(2, 2)
-
-[node name="Lamp2" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 10.0
-offset_top = -25.0
-offset_right = 10.0
-offset_bottom = -25.0
-
-[node name="Lamp3" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 20.0
-offset_top = -25.0
-offset_right = 20.0
-offset_bottom = -25.0
-
-[node name="Lamp4" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 30.0
-offset_top = -25.0
-offset_right = 30.0
-offset_bottom = -25.0
-
-[node name="Lamp5" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_top = -20.0
-offset_right = 40.0
-offset_bottom = -20.0
-
-[node name="Lamp6" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 45.0
-offset_top = -10.0
-offset_right = 45.0
-offset_bottom = -10.0
-
-[node name="Lamp7" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 50.0
-offset_right = 50.0
-scale = Vector2(2, 2)
-
-[node name="Lamp8" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 45.0
-offset_top = 10.0
-offset_right = 45.0
-offset_bottom = 10.0
-
-[node name="Lamp9" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 40.0
-offset_top = 20.0
-offset_right = 40.0
-offset_bottom = 20.0
-
-[node name="Lamp10" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 30.0
-offset_top = 25.0
-offset_right = 30.0
-offset_bottom = 25.0
-
-[node name="Lamp11" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 20.0
-offset_top = 25.0
-offset_right = 20.0
-offset_bottom = 25.0
-
-[node name="Lamp12" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = 10.0
-offset_top = 25.0
-offset_right = 10.0
-offset_bottom = 25.0
-
-[node name="Lamp13" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_top = 25.0
-offset_bottom = 25.0
-scale = Vector2(2, 2)
-
-[node name="Lamp14" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -10.0
-offset_top = 25.0
-offset_right = -10.0
-offset_bottom = 25.0
-
-[node name="Lamp15" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -20.0
-offset_top = 25.0
-offset_right = -20.0
-offset_bottom = 25.0
-
-[node name="Lamp16" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -30.0
-offset_top = 25.0
-offset_right = -30.0
-offset_bottom = 25.0
-
-[node name="Lamp17" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -40.0
-offset_top = 20.0
-offset_right = -40.0
-offset_bottom = 20.0
-
-[node name="Lamp18" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -45.0
-offset_top = 10.0
-offset_right = -45.0
-offset_bottom = 10.0
-
-[node name="Lamp19" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -50.0
-offset_right = -50.0
-scale = Vector2(2, 2)
-
-[node name="Lamp20" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -45.0
-offset_top = -10.0
-offset_right = -45.0
-offset_bottom = -10.0
-
-[node name="Lamp21" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -40.0
-offset_top = -20.0
-offset_right = -40.0
-offset_bottom = -20.0
-
-[node name="Lamp22" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -30.0
-offset_top = -25.0
-offset_right = -30.0
-offset_bottom = -25.0
-
-[node name="Lamp23" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -20.0
-offset_top = -25.0
-offset_right = -20.0
-offset_bottom = -25.0
-
-[node name="Lamp24" parent="Pachinko/Rush/Lamps" instance=ExtResource("11_6yw0s")]
-offset_left = -10.0
-offset_top = -25.0
-offset_right = -10.0
-offset_bottom = -25.0
-
 [node name="Nails" type="Node2D" parent="Pachinko/Rush"]
 
 [node name="Nail4" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
@@ -1323,6 +1124,203 @@ gain_ratio = 10
 position = Vector2(80, 40)
 hole_type = 2
 gain_ratio = 10
+
+[node name="UI" type="Control" parent="Pachinko"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Pachinko/UI"]
+self_modulate = Color(0.1, 0.1, 0.1, 1)
+layout_mode = 0
+offset_left = 960.0
+offset_top = 100.0
+offset_right = 1040.0
+offset_bottom = 140.0
+texture = ExtResource("4_b0m3n")
+expand_mode = 1
+
+[node name="Labels" type="Control" parent="Pachinko/UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1000.0
+offset_top = 120.0
+offset_right = 1000.0
+offset_bottom = 120.0
+
+[node name="RushA" type="Label" parent="Pachinko/UI/Labels"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -20.0
+offset_right = 280.0
+offset_bottom = 60.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "RUSH 00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RushB" type="Label" parent="Pachinko/UI/Labels"]
+layout_mode = 0
+offset_left = -40.0
+offset_right = 280.0
+offset_bottom = 80.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "9999/9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lamps" type="Control" parent="Pachinko/UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1000.0
+offset_top = 120.0
+offset_right = 1000.0
+offset_bottom = 120.0
+
+[node name="Lamp" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_top = -25.0
+offset_bottom = -25.0
+scale = Vector2(2, 2)
+
+[node name="Lamp2" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 10.0
+offset_top = -25.0
+offset_right = 10.0
+offset_bottom = -25.0
+
+[node name="Lamp3" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = -25.0
+
+[node name="Lamp4" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 30.0
+offset_top = -25.0
+offset_right = 30.0
+offset_bottom = -25.0
+
+[node name="Lamp5" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 40.0
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = -20.0
+
+[node name="Lamp6" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 45.0
+offset_top = -10.0
+offset_right = 45.0
+offset_bottom = -10.0
+
+[node name="Lamp7" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 50.0
+offset_right = 50.0
+scale = Vector2(2, 2)
+
+[node name="Lamp8" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 45.0
+offset_top = 10.0
+offset_right = 45.0
+offset_bottom = 10.0
+
+[node name="Lamp9" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="Lamp10" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 30.0
+offset_top = 25.0
+offset_right = 30.0
+offset_bottom = 25.0
+
+[node name="Lamp11" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 20.0
+offset_top = 25.0
+offset_right = 20.0
+offset_bottom = 25.0
+
+[node name="Lamp12" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = 10.0
+offset_top = 25.0
+offset_right = 10.0
+offset_bottom = 25.0
+
+[node name="Lamp13" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_top = 25.0
+offset_bottom = 25.0
+scale = Vector2(2, 2)
+
+[node name="Lamp14" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -10.0
+offset_top = 25.0
+offset_right = -10.0
+offset_bottom = 25.0
+
+[node name="Lamp15" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -20.0
+offset_top = 25.0
+offset_right = -20.0
+offset_bottom = 25.0
+
+[node name="Lamp16" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -30.0
+offset_top = 25.0
+offset_right = -30.0
+offset_bottom = 25.0
+
+[node name="Lamp17" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -40.0
+offset_top = 20.0
+offset_right = -40.0
+offset_bottom = 20.0
+
+[node name="Lamp18" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -45.0
+offset_top = 10.0
+offset_right = -45.0
+offset_bottom = 10.0
+
+[node name="Lamp19" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -50.0
+offset_right = -50.0
+scale = Vector2(2, 2)
+
+[node name="Lamp20" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -45.0
+offset_top = -10.0
+offset_right = -45.0
+offset_bottom = -10.0
+
+[node name="Lamp21" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -40.0
+offset_top = -20.0
+offset_right = -40.0
+offset_bottom = -20.0
+
+[node name="Lamp22" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -30.0
+offset_top = -25.0
+offset_right = -30.0
+offset_bottom = -25.0
+
+[node name="Lamp23" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -20.0
+offset_top = -25.0
+offset_right = -20.0
+offset_bottom = -25.0
+
+[node name="Lamp24" parent="Pachinko/UI/Lamps" instance=ExtResource("11_6yw0s")]
+offset_left = -10.0
+offset_top = -25.0
+offset_right = -10.0
+offset_bottom = -25.0
 
 [node name="Stack" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position")]
 script = ExtResource("12_7kfse")
@@ -1578,7 +1576,7 @@ _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
 
 [node name="StackGlass" type="TextureRect" parent="UI"]
-self_modulate = Color(0, 0, 0, 0.8)
+self_modulate = Color(0.2, 0.2, 0.2, 0.9)
 layout_mode = 0
 offset_left = 560.0
 offset_top = 360.0
@@ -2377,17 +2375,8 @@ offset_top = 380.0
 offset_right = 560.0
 offset_bottom = 380.0
 
-[node name="TitleTurn" type="Label" parent="UI/Main/Score"]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 40.0
-theme = ExtResource("25_qsn7e")
-theme_type_variation = &"LabelBold"
-text = "TURN"
-vertical_alignment = 1
-
 [node name="Textures" type="Control" parent="UI/Main/Score"]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0.1, 0.1, 0.1, 1)
 anchors_preset = 0
 offset_top = 20.0
 offset_bottom = 20.0
@@ -2459,6 +2448,15 @@ offset_right = 160.0
 offset_bottom = 180.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
+
+[node name="TitleTurn" type="Label" parent="UI/Main/Score"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 40.0
+theme = ExtResource("25_qsn7e")
+theme_type_variation = &"LabelBold"
+text = "TURN"
+vertical_alignment = 1
 
 [node name="Turn" type="Control" parent="UI/Main/Score"]
 layout_mode = 3

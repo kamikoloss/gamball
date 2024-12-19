@@ -18,7 +18,7 @@ _gravity_texture = NodePath("View/Gravity")
 [node name="View" type="Node2D" parent="."]
 
 [node name="Gravity" type="TextureRect" parent="View"]
-self_modulate = Color(1, 1, 1, 0.12549)
+self_modulate = Color(1, 1, 1, 0.2)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -36,7 +36,7 @@ texture = ExtResource("1_3kxer")
 expand_mode = 1
 
 [node name="Body" type="TextureRect" parent="View"]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0.1, 0.1, 0.1, 1)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
