@@ -6,38 +6,22 @@
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 280.0
-offset_bottom = 200.0
-theme = ExtResource("1_fekh7")
-
-[node name="Panel2" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 240.0
-offset_right = 280.0
-offset_bottom = 400.0
-theme = ExtResource("1_fekh7")
-
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 40.0
 offset_top = 40.0
-offset_right = 240.0
+offset_right = 200.0
 offset_bottom = 80.0
 theme = ExtResource("1_fekh7")
 text = "Label"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="."]
+[node name="LabelBold" type="Label" parent="."]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 40.0
 offset_top = 80.0
-offset_right = 240.0
+offset_right = 200.0
 offset_bottom = 120.0
 theme = ExtResource("1_fekh7")
 theme_type_variation = &"LabelBold"
@@ -45,22 +29,43 @@ text = "LabelBold"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label4" type="Label" parent="."]
-layout_mode = 0
+[node name="LabelScore" type="Label" parent="."]
+offset_left = 40.0
 offset_top = 120.0
-offset_right = 320.0
-offset_bottom = 200.0
+offset_right = 200.0
+offset_bottom = 160.0
+theme = ExtResource("1_fekh7")
+theme_type_variation = &"LabelScore"
+text = "LabelScore"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelHeader" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 160.0
+offset_right = 360.0
+offset_bottom = 240.0
+scale = Vector2(0.5, 0.5)
 theme = ExtResource("1_fekh7")
 theme_type_variation = &"LabelHeader"
 text = "LabelHeader"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 240.0
+offset_right = 360.0
+offset_bottom = 400.0
+theme = ExtResource("1_fekh7")
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 45.0
 offset_top = 245.0
-offset_right = 275.0
+offset_right = 355.0
 offset_bottom = 395.0
 theme = ExtResource("1_fekh7")
 bbcode_enabled = true
@@ -69,18 +74,18 @@ autowrap_mode = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 400.0
 offset_top = 40.0
-offset_right = 520.0
+offset_right = 600.0
 offset_bottom = 80.0
 theme = ExtResource("1_fekh7")
 text = "Button"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 320.0
+offset_left = 400.0
 offset_top = 100.0
-offset_right = 520.0
+offset_right = 600.0
 offset_bottom = 140.0
 theme = ExtResource("1_fekh7")
 disabled = true

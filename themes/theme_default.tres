@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bula4jj133y50"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://bula4jj133y50"]
 
 [ext_resource type="FontVariation" uid="uid://dnjsv11k857r7" path="res://themes/fonts/noto_sans_jp_bold.tres" id="1_ecnqh"]
 [ext_resource type="FontVariation" uid="uid://cd3htl35cu6uk" path="res://themes/fonts/noto_sans_jp_regular.tres" id="3_adjwb"]
+[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/fonts/PixelMplus12-Regular.ttf" id="4_1cv46"]
 [ext_resource type="FontFile" uid="uid://braqe561majhb" path="res://themes/fonts/RedHatDisplayBold.ttf" id="4_rafy3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7kb0"]
@@ -76,6 +77,12 @@ LabelBold/fonts/font = ExtResource("1_ecnqh")
 LabelHeader/base_type = &"Label"
 LabelHeader/font_sizes/font_size = 32
 LabelHeader/fonts/font = ExtResource("4_rafy3")
+LabelScore/base_type = &"Label"
+LabelScore/colors/font_color = Color(1, 1, 1, 1)
+LabelScore/colors/font_outline_color = Color(0, 0, 0, 1)
+LabelScore/constants/line_spacing = -2
+LabelScore/constants/outline_size = 4
+LabelScore/fonts/font = ExtResource("4_1cv46")
 Panel/styles/panel = SubResource("StyleBoxFlat_fuf28")
 RichTextLabel/font_sizes/bold_font_size = 16
 RichTextLabel/font_sizes/normal_font_size = 16
