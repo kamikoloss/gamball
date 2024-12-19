@@ -11,18 +11,23 @@ enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 # ボールのプール 名称表示に使用される
 enum Pool { A }
 # Tween
-enum TweenType { RARITY }
+enum TweenType { TRAIL }
 
 
+# Z index
 const Z_INDEX_DEFAULT = 4
 const Z_INDEX_SLOT = 3
+
 # 残像の頂点数
-const TRAIL_MAX_LENGTH = 16
+const TRAIL_MAX_LENGTH = 10
+# 残像の頂点の更新インターバル (秒)
+const TRAIL_INTERVAL = 0.02
 
 # 特殊なボール番号
 const BALL_LEVEL_OPTIONAL_SLOT = -1 # 空きスロット用
 const BALL_LEVEL_DISABLED_SLOT = -2 # 使用不可スロット用
 
+# TODO: 色系まとめた const に移す？
 # ボールの本体の色の定義 { <Level>: Color } 
 const BALL_BODY_COLORS = {
 	BALL_LEVEL_OPTIONAL_SLOT: Color(0.2, 0.2, 0.2),
@@ -93,12 +98,20 @@ var effects: Array = []
 # 残像の頂点座標
 var _trail_points: Array = []
 
+var _tweens: Dictionary = {}
+
 
 func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 	self.level = level
 	self.rarity = rarity
 	if Rarity.COMMON < rarity:
 		self.effects.append(BallEffect.EFFECTS_POOL_1[level][rarity])
+
+	# 残像の頂点の記録を開始する
+	var tween = _get_tween(TweenType.TRAIL)
+	tween.set_loops()
+	tween.tween_interval(TRAIL_INTERVAL)
+	tween.tween_callback(_refresh_trail_points)
 
 
 func _ready() -> void:
@@ -110,17 +123,6 @@ func _ready() -> void:
 	refresh_view()
 	refresh_physics()
 	hide_hover()
-
-
-func _process(delta: float) -> void:
-	# TODO: 秒数管理にする
-	_trail_points.push_front(self.position)
-	if TRAIL_MAX_LENGTH < _trail_points.size():
-		_trail_points.pop_back()
-	_trail_line.clear_points()
-	_trail_line.rotation = 0.0
-	for point in _trail_points:
-		_trail_line.add_point(point)
 
 
 # 自身の見た目を更新する
@@ -202,3 +204,21 @@ func _on_body_entered(body: Node) -> void:
 		if not is_active:
 			is_active = true
 			refresh_view()
+
+
+# 残像の頂点を記録する
+func _refresh_trail_points() -> void:
+	_trail_points.push_front(self.position)
+	if TRAIL_MAX_LENGTH < _trail_points.size():
+		_trail_points.pop_back()
+	_trail_line.clear_points()
+	_trail_line.rotation = 0.0
+	for point in _trail_points:
+		_trail_line.add_point(point)
+
+
+func _get_tween(type: TweenType) -> Tween:
+	if _tweens.has(type):
+		_tweens[type].kill()
+	_tweens[type] = create_tween()
+	return _tweens[type]
