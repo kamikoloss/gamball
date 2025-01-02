@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn3emqhpy7fbt"]
+
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_asfrc"]
+[ext_resource type="Script" path="res://scenes/common/popup_score.gd" id="1_f6l6k"]
+
+[node name="PopupScore" type="Control" node_paths=PackedStringArray("_label")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_f6l6k")
+_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -80.0
+offset_top = -40.0
+offset_right = 80.0
+offset_bottom = 40.0
+theme = ExtResource("1_asfrc")
+theme_type_variation = &"LabelScore"
+text = "+9999"
+horizontal_alignment = 1
+vertical_alignment = 1
