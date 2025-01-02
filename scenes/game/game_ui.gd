@@ -30,6 +30,9 @@ const BALL_SLOT_COLOR_DISABLED: Color = Color(0.6, 0.2, 0.2) # 不可 (max よ�
 const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 
 
+@export_category("Scenes")
+@export var _popup_score_scene: PackedScene
+
 @export_category("Main/Ball")
 @export var _deck_balls_parent: Node2D
 @export var _deck_slots_parent: Control
@@ -206,6 +209,11 @@ func refresh_arrow(deg: int, scale: float) -> void:
 	_arrow.rotation_degrees = deg
 	_arrow_square.scale.y = scale
 
+
+func popup_score(from: Vector2, text: String) -> void:
+	var popup_score: PopupScore = _popup_score_scene.instantiate()
+	add_child(popup_score)
+	popup_score.popup(from, text)
 
 
 func _on_deck_extra_balls_hovered(ball: Ball, entered: bool) -> void:

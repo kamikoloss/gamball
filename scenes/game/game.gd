@@ -361,6 +361,8 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# 払い出しリストに追加する
 			var amount = (hole.gain_ratio + gain_plus) * gain_times * ball.level
 			_push_payout(ball.level, amount)
+			# スコアを表示する
+			_game_ui.popup_score(hole.global_position, "+%s" % [amount]) # TODO: +0 以下は danger color にする
 
 		Hole.HoleType.LOST:
 			# 何もしない (Ball は消失する)
