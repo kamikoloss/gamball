@@ -2,7 +2,7 @@ class_name PopupScore
 extends Control
 
 
-const POPUP_DURATION: float = 1.0
+const POPUP_DURATION: float = 0.8
 const POPUP_DISTANCE: Vector2 = Vector2(0, -40)
 const STOP_DURATION: float = 0.4
 const DIE_DURATION: float = 0.4
@@ -14,6 +14,10 @@ const DIE_DURATION: float = 0.4
 func _ready() -> void:
 	#popup(Vector2(640, 360), "+9999") # debug
 	pass
+
+
+func set_label_color(color: Color) -> void:
+	_label.self_modulate = color
 
 
 func popup(from: Vector2, text: String) -> void:

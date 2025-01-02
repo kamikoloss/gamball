@@ -362,7 +362,12 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			var amount = (hole.gain_ratio + gain_plus) * gain_times * ball.level
 			_push_payout(ball.level, amount)
 			# スコアを表示する
-			_game_ui.popup_score(hole.global_position, "+%s" % [amount]) # TODO: +0 以下は danger color にする
+			var popup_text = "+%s" % [amount]
+			var popup_color = Color.WHITE
+			if amount <= 0:
+				popup_text = "%s" % [amount]
+				popup_color = Color.RED
+			_game_ui.popup_score(hole.global_position, popup_text, popup_color)
 
 		Hole.HoleType.LOST:
 			# 何もしない (Ball は消失する)

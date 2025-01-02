@@ -210,8 +210,9 @@ func refresh_arrow(deg: int, scale: float) -> void:
 	_arrow_square.scale.y = scale
 
 
-func popup_score(from: Vector2, text: String) -> void:
+func popup_score(from: Vector2, text: String, color: Color) -> void:
 	var popup_score: PopupScore = _popup_score_scene.instantiate()
+	popup_score.set_label_color(color)
 	add_child(popup_score)
 	popup_score.popup(from, text)
 
