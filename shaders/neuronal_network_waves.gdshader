@@ -6,13 +6,13 @@ uniform vec4 wave_color: source_color = vec4(1.0, 2.0, 4.0, 1.0);
 uniform float wave_transparency: hint_range(0.0, 1.0) = 1.0;
 
 mat2 rotate2D(float r) {
-	// Matriz de rotación 2D	
+	// Matriz de rotación 2D
 	return mat2(vec2(cos(r), sin(r)), vec2(-sin(r), cos(r)));
 }
 
 void fragment() {
 	// Coordenadas de textura
-	vec2 uv = (FRAGCOORD.xy / TEXTURE_PIXEL_SIZE.y) * 0.001;	
+	vec2 uv = (FRAGCOORD.xy / TEXTURE_PIXEL_SIZE.y) * 0.001;
 	// Color inicial
 	vec3 col = vec3(0.0);
 	// Tiempo
