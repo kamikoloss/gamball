@@ -8,10 +8,8 @@ anchors_preset = 0
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 200.0
-offset_bottom = 80.0
+offset_right = 160.0
+offset_bottom = 40.0
 theme = ExtResource("1_fekh7")
 text = "Label"
 horizontal_alignment = 1
@@ -19,10 +17,9 @@ vertical_alignment = 1
 
 [node name="LabelBold" type="Label" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 80.0
-offset_right = 200.0
-offset_bottom = 120.0
+offset_top = 40.0
+offset_right = 160.0
+offset_bottom = 80.0
 theme = ExtResource("1_fekh7")
 theme_type_variation = &"LabelBold"
 text = "LabelBold"
@@ -31,10 +28,9 @@ vertical_alignment = 1
 
 [node name="LabelScore" type="Label" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 120.0
-offset_right = 200.0
-offset_bottom = 160.0
+offset_top = 80.0
+offset_right = 160.0
+offset_bottom = 120.0
 theme = ExtResource("1_fekh7")
 theme_type_variation = &"LabelScore"
 text = "LabelScore"
@@ -43,11 +39,9 @@ vertical_alignment = 1
 
 [node name="LabelHeader" type="Label" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 160.0
-offset_right = 360.0
-offset_bottom = 240.0
-scale = Vector2(0.5, 0.5)
+offset_top = 120.0
+offset_right = 160.0
+offset_bottom = 160.0
 theme = ExtResource("1_fekh7")
 theme_type_variation = &"LabelHeader"
 text = "LabelHeader"
@@ -56,18 +50,18 @@ vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 240.0
-offset_right = 360.0
-offset_bottom = 400.0
+offset_left = 35.0
+offset_top = 195.0
+offset_right = 365.0
+offset_bottom = 365.0
 theme = ExtResource("1_fekh7")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 245.0
-offset_right = 355.0
-offset_bottom = 395.0
+offset_left = 40.0
+offset_top = 200.0
+offset_right = 360.0
+offset_bottom = 360.0
 theme = ExtResource("1_fekh7")
 bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]の[b]すきとおった[/b]風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
@@ -75,19 +69,18 @@ autowrap_mode = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 400.0
-offset_top = 40.0
-offset_right = 600.0
-offset_bottom = 80.0
+offset_left = 160.0
+offset_right = 320.0
+offset_bottom = 40.0
 theme = ExtResource("1_fekh7")
 text = "Button"
 
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 400.0
-offset_top = 100.0
-offset_right = 600.0
-offset_bottom = 140.0
+offset_left = 160.0
+offset_top = 40.0
+offset_right = 320.0
+offset_bottom = 80.0
 theme = ExtResource("1_fekh7")
 disabled = true
 text = "Button"
