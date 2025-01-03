@@ -157,11 +157,11 @@ theme = ExtResource("4_wugw1")
 [node name="Title" type="Label" parent="BallPopup"]
 layout_mode = 0
 offset_left = 10.0
-offset_top = -20.0
-offset_right = 330.0
-offset_bottom = 60.0
+offset_right = 190.0
+offset_bottom = 40.0
 theme = ExtResource("4_wugw1")
-theme_type_variation = &"LabelHeader"
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
 text = "A-99"
 vertical_alignment = 1
 

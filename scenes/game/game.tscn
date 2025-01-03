@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="5_j1dyl"]
 [ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="6_qy33h"]
 [ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/common/hole.tscn" id="7_71f2d"]
+[ext_resource type="PackedScene" uid="uid://b0bdf1eipkyus" path="res://scenes/common/wall.tscn" id="8_hgooo"]
 [ext_resource type="Script" path="res://scenes/game/pachinko.gd" id="8_ud1qg"]
 [ext_resource type="PackedScene" uid="uid://dli5r028n6byb" path="res://scenes/common/nail.tscn" id="9_8yiuy"]
 [ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/fonts/PixelMplus12-Regular.ttf" id="10_w3wxc"]
@@ -37,8 +38,6 @@ shader_parameter/wave_color = Color(1, 0.4, 0, 1)
 shader_parameter/wave_transparency = 0.8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fi0lo"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls_parent", "_game_ui", "_products_parent", "_bunny")]
 script = ExtResource("1_w7c5l")
@@ -252,93 +251,22 @@ expand_mode = 1
 [node name="Walls" type="Node2D" parent="Billiards"]
 modulate = Color(0.8, 0.8, 0.8, 1)
 
-[node name="Wall" type="StaticBody2D" parent="Billiards/Walls"]
+[node name="Wall" parent="Billiards/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(280, 40)
-scale = Vector2(24, 1)
+rotation = 3.14159
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Wall"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="Wall2" type="StaticBody2D" parent="Billiards/Walls"]
+[node name="Wall2" parent="Billiards/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(280, 680)
-scale = Vector2(24, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Wall2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall2"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="Wall3" type="StaticBody2D" parent="Billiards/Walls"]
+[node name="Wall3" parent="Billiards/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(40, 360)
-scale = Vector2(1, 32)
+rotation = 1.5708
+scale = Vector2(32, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Wall3"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall3"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="Wall4" type="StaticBody2D" parent="Billiards/Walls"]
+[node name="Wall4" parent="Billiards/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(520, 360)
-scale = Vector2(1, 32)
-
-[node name="TextureRect" type="TextureRect" parent="Billiards/Walls/Wall4"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Walls/Wall4"]
-shape = SubResource("RectangleShape2D_fi0lo")
+rotation = -1.5708
+scale = Vector2(32, 1)
 
 [node name="Corner" type="Node2D" parent="Billiards/Walls"]
 position = Vector2(40, 40)
@@ -487,8 +415,8 @@ vertical_alignment = 1
 script = ExtResource("8_ud1qg")
 _spawn_position_a = NodePath("Points/SpawnHoleA")
 _spawn_position_b = NodePath("Points/SpawnHoleB")
-_rotating_wall_a = NodePath("Walls/RotatingWallA")
-_rotating_wall_b = NodePath("Walls/RotatingWallB")
+_rotating_wall_a = NodePath("Walls/Wall5")
+_rotating_wall_b = NodePath("Walls/Wall6")
 _rush_nails_parent = NodePath("Rush/Nails")
 _rush_holes_parent = NodePath("Rush/Holes")
 _rush_label_a = NodePath("UI/Labels/RushA")
@@ -620,137 +548,30 @@ expand_mode = 1
 [node name="Walls" type="Node2D" parent="Pachinko"]
 modulate = Color(0.8, 0.8, 0.8, 1)
 
-[node name="Wall" type="StaticBody2D" parent="Pachinko/Walls"]
+[node name="Wall" parent="Pachinko/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(1000, 40)
-scale = Vector2(24, 1)
+rotation = 3.14159
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Wall"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="Wall2" type="StaticBody2D" parent="Pachinko/Walls"]
+[node name="Wall2" parent="Pachinko/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(1000, 680)
-scale = Vector2(24, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Wall2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall2"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="Wall3" type="StaticBody2D" parent="Pachinko/Walls"]
+[node name="Wall3" parent="Pachinko/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(760, 360)
-scale = Vector2(1, 32)
+rotation = 1.5708
+scale = Vector2(32, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Wall3"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall3"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="Wall4" type="StaticBody2D" parent="Pachinko/Walls"]
+[node name="Wall4" parent="Pachinko/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(1240, 360)
-scale = Vector2(1, 32)
+rotation = -1.5708
+scale = Vector2(32, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/Wall4"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/Wall4"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="RotatingWallA" type="StaticBody2D" parent="Pachinko/Walls"]
+[node name="Wall5" parent="Pachinko/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(800, 160)
 scale = Vector2(4, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/RotatingWallA"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/RotatingWallA"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="RotatingWallB" type="StaticBody2D" parent="Pachinko/Walls"]
+[node name="Wall6" parent="Pachinko/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(1200, 160)
 scale = Vector2(4, 1)
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Walls/RotatingWallB"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Walls/RotatingWallB"]
-shape = SubResource("RectangleShape2D_fi0lo")
 
 [node name="Corner" type="Node2D" parent="Pachinko/Walls"]
 position = Vector2(760, 40)
@@ -1360,94 +1181,24 @@ expand_mode = 1
 [node name="Walls" type="Node2D" parent="Stack"]
 modulate = Color(0.8, 0.8, 0.8, 1)
 
-[node name="Wall2" type="StaticBody2D" parent="Stack/Walls"]
+[node name="Wall" parent="Stack/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(640, 680)
 scale = Vector2(8, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Wall2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall2"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="Wall3" type="StaticBody2D" parent="Stack/Walls"]
+[node name="Wall2" parent="Stack/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(560, 520)
-scale = Vector2(1, 16)
+rotation = 1.5708
+scale = Vector2(16, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Wall3"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall3"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="Wall4" type="StaticBody2D" parent="Stack/Walls"]
+[node name="Wall3" parent="Stack/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(720, 520)
-scale = Vector2(1, 16)
+rotation = -1.5708
+scale = Vector2(16, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Wall4"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall4"]
-shape = SubResource("RectangleShape2D_fi0lo")
-
-[node name="Wall5" type="StaticBody2D" parent="Stack/Walls"]
+[node name="Wall4" parent="Stack/Walls" instance=ExtResource("8_hgooo")]
 position = Vector2(600, 660)
-rotation = 0.523598
+rotation = 0.523599
 scale = Vector2(4, 1)
-
-[node name="TextureRect" type="TextureRect" parent="Stack/Walls/Wall5"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Walls/Wall5"]
-shape = SubResource("RectangleShape2D_fi0lo")
 
 [node name="Corner" type="Node2D" parent="Stack/Walls"]
 position = Vector2(560, 680)
@@ -1574,7 +1325,7 @@ _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
 
 [node name="StackGlass" type="TextureRect" parent="UI"]
-self_modulate = Color(0.2, 0.2, 0.2, 0.9)
+self_modulate = Color(0.2, 0.2, 0.2, 0.8)
 layout_mode = 0
 offset_left = 550.0
 offset_top = 360.0
@@ -2720,6 +2471,7 @@ texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="BallPopup" type="Control" parent="UI/Main"]
+visible = false
 z_index = 4
 anchors_preset = 0
 
@@ -2761,6 +2513,7 @@ text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風�
 autowrap_mode = 1
 
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_game_state_label", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_shuffle_pose_button")]
+visible = false
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
