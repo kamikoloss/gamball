@@ -2513,7 +2513,6 @@ text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風�
 autowrap_mode = 1
 
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_game_state_label", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_shuffle_pose_button")]
-visible = false
 z_index = 20
 layout_mode = 3
 anchors_preset = 0

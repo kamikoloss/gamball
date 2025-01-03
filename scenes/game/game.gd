@@ -364,10 +364,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# スコアを表示する
 			var popup_text = "+%s" % [amount]
 			var popup_color = Color.WHITE
+			var popup_size = clamp(amount / 10, 1.0, 4.0) # TODO: const
 			if amount <= 0:
 				popup_text = "%s" % [amount]
 				popup_color = Color.RED
-			_game_ui.popup_score(hole.global_position, popup_text, popup_color)
+			_game_ui.popup_score(hole.global_position, popup_text, popup_color, popup_size)
 
 		Hole.HoleType.LOST:
 			# 何もしない (Ball は消失する)
