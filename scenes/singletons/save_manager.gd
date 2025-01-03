@@ -10,12 +10,13 @@ var audio_config: AudioConfig
 
 
 func _ready() -> void:
-	init_config()
+	init_save_data()
 	load_config()
 
 
-func initialize() -> void:
-	pass
+func init_save_data() -> void:
+	if not audio_config:
+		audio_config = AudioConfig.new()
 
 
 func load_config() -> void:
@@ -39,12 +40,7 @@ func save_config() -> void:
 	#print("[SaveManager] save_config() config_data: %s" % [config_data])
 
 
-func init_config() -> void:
-	if not audio_config:
-		audio_config = AudioConfig.new()
-
-
-class ConfigBase:
+class SaveDataBase:
 	func serialize() -> Dictionary:
 		var dict = {}
 		for property_name in get_peroperty_names():
@@ -56,13 +52,11 @@ class ConfigBase:
 	func get_peroperty_names() -> Array[String]:
 		return []
 
-class AudioConfig extends ConfigBase:
+class AudioConfig extends SaveDataBase:
 	var volume_master: int = 8
 	var volume_bgm: int = 8
 	var volume_se: int = 8
 	func get_peroperty_names() -> Array[String]:
 		return [
-			"volume_master",
-			"volume_bgm",
-			"volume_se",
+			"volume_master", "volume_bgm", "volume_se",
 		]
