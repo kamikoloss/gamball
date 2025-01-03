@@ -104,6 +104,10 @@ func set_gravity_size(level: int = 0) -> void:
 	_gravity_area.scale = Vector2(ratio, ratio)
 
 
+func die() -> void:
+	queue_free()
+
+
 func _on_area_entered(area: Area2D) -> void:
 	if not is_enabled:
 		return
@@ -113,4 +117,3 @@ func _on_area_entered(area: Area2D) -> void:
 	var maybe_ball = area.get_parent()
 	if maybe_ball is Ball:
 		ball_entered.emit(self, maybe_ball)
-		maybe_ball.queue_free()

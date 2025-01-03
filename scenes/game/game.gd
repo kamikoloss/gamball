@@ -83,7 +83,6 @@ const EXTRA_BALL_LEVEL_RARITY = {
 # ゲームの状態
 var game_state: GameState = GameState.GAME
 
-# TODO: Autoload に置いていい気がする
 var turn: int = 0:
 	set(value):
 		turn = value
@@ -228,8 +227,7 @@ func _input(event: InputEvent) -> void:
 				_billiards.shoot_ball(impulse * _impulse_ratio)
 			# ドラッグの距離が充分でない場合: Ball 生成をなかったことにする
 			else:
-				var rollback = _billiards.rollback_spawn_ball()
-				if rollback:
+				if _billiards.rollback_spawn_ball():
 					balls += 1
 
 	# マウス動作
@@ -310,9 +308,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 					money += effect_data[1]
 					print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
 			# 同じ GroupType の Hole に Ball を移動する
-			var new_ball = _create_new_ball(ball.level, ball.rarity)
-			new_ball.is_on_billiards = false
-			_pachinko.spawn_ball(new_ball)
+			ball.is_on_billiards = false
+			for node in get_tree().get_nodes_in_group("hole"):
+				if node is Hole:
+					if node.warp_group == hole.warp_group:
+						ball.warp(node.global_position)
 
 		Hole.HoleType.EXTRA:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる

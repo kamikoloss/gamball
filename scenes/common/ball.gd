@@ -11,17 +11,20 @@ enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 # ボールのプール 名称表示に使用される
 enum Pool { A }
 # Tween
-enum TweenType { TRAIL }
+enum TweenType { TRAIL, WARP, WARP_CURVE }
 
 
 # Z index
-const Z_INDEX_DEFAULT = 4
-const Z_INDEX_SLOT = 3
+const Z_INDEX_DEFAULT: int = 4
+const Z_INDEX_SLOT: int = 3
+
+# WARP
+const WARP_DURATION: float = 1.0
 
 # 残像の頂点数
-const TRAIL_MAX_LENGTH = 10
+const TRAIL_MAX_LENGTH: int = 10
 # 残像の頂点の更新インターバル (秒)
-const TRAIL_INTERVAL = 0.02
+const TRAIL_INTERVAL: float = 0.02
 
 # 特殊なボール番号
 const BALL_LEVEL_OPTIONAL_SLOT = -1 # 空きスロット用
@@ -195,6 +198,13 @@ func show_hover() -> void:
 
 func hide_hover() -> void:
 	_hover_texture.visible = false
+
+
+# 移動する
+func warp(to: Vector2) -> void:
+	var tween = _get_tween(TweenType.WARP)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "position", to, WARP_DURATION)
 
 
 func _on_body_entered(body: Node) -> void:

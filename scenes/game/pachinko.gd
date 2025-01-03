@@ -14,8 +14,6 @@ enum TweenType {
 const WALL_ROTATION_DURATION = 2.0
 
 
-@export var _spawn_position_a: Node2D
-@export var _spawn_position_b: Node2D
 @export var _rotating_wall_a: Node2D
 @export var _rotating_wall_b: Node2D
 @export var _rush_nails_parent: Node2D
@@ -66,19 +64,6 @@ func _ready() -> void:
 	for node in _rush_holes_parent.get_children():
 		if node is Hole:
 			node.ball_entered.connect(_on_rush_hole_ball_entered)
-
-
-# 盤面上に Ball を移動する
-func spawn_ball(ball: Ball) -> void:
-	var spawn_posiiton = [
-		_spawn_position_a,
-		_spawn_position_b,
-	].pick_random()
-	ball.position = spawn_posiiton.position
-
-	# 初速をつける
-	var spawn_impulse = Vector2(0, randi_range(400, 500))
-	ball.apply_impulse(spawn_impulse)
 
 
 # ラッシュの抽選を開始する
