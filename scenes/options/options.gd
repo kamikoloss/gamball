@@ -1,6 +1,5 @@
 class_name Options
 extends Control
-# TODO: スライダーの初期値はどうする？
 
 
 signal exit_button_pressed
@@ -24,6 +23,11 @@ func _ready() -> void:
 	_audio_master_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.MASTER, v))
 	_audio_bgm_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.BGM, v))
 	_audio_se_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.SE, v))
+	# スライダー初期化
+	# NOTE: SaveManager の _ready() が実行済みである必要がある
+	_refresh_config_audio_slider(AudioManager.BusType.MASTER, SaveManager.audio_config.volume_master)
+	_refresh_config_audio_slider(AudioManager.BusType.BGM, SaveManager.audio_config.volume_bgm)
+	_refresh_config_audio_slider(AudioManager.BusType.SE, SaveManager.audio_config.volume_se)
 
 
 func _on_audio_slider_changed(bus_type: AudioManager.BusType, volume_level: int) -> void:

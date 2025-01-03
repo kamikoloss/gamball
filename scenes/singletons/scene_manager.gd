@@ -31,6 +31,12 @@ func _ready() -> void:
 	information.visible = false
 	options.visible = false
 
+	title.play_button_pressed.connect(func(): goto_scene(SceneType.GAME))
+	title.information_button_pressed.connect(func(): goto_scene(SceneType.INFORMATION))
+	title.options_button_pressed.connect(func(): goto_scene(SceneType.OPTIONS))
+	information.exit_button_pressed.connect(func(): goto_scene(_back_scene_type))
+	options.exit_button_pressed.connect(func(): goto_scene(_back_scene_type))
+
 
 # 初期化処理
 # Main シーンから呼ぶ想定
@@ -38,15 +44,6 @@ func initialize() -> void:
 	title.visible = true
 	information.visible = false
 	options.visible = false
-
-	# Title
-	title.play_button_pressed.connect(func(): goto_scene(SceneType.GAME))
-	title.information_button_pressed.connect(func(): goto_scene(SceneType.INFORMATION))
-	title.options_button_pressed.connect(func(): goto_scene(SceneType.OPTIONS))
-	# Information
-	information.exit_button_pressed.connect(func(): goto_scene(_back_scene_type))
-	# Option
-	options.exit_button_pressed.connect(func(): goto_scene(_back_scene_type))
 
 	# 目隠し
 	_curtain.visible = true
