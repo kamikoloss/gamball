@@ -190,64 +190,6 @@ grow_vertical = 2
 texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
-[node name="Top" type="Node2D" parent="Billiards/Points"]
-visible = false
-position = Vector2(280, 200)
-rotation = -3.14159
-
-[node name="TextureRect" type="TextureRect" parent="Billiards/Points/Top"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_qy33h")
-expand_mode = 1
-
-[node name="Center" type="Node2D" parent="Billiards/Points"]
-visible = false
-position = Vector2(280, 360)
-
-[node name="TextureRect" type="TextureRect" parent="Billiards/Points/Center"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Bottom" type="Node2D" parent="Billiards/Points"]
-visible = false
-position = Vector2(280, 520)
-
-[node name="TextureRect" type="TextureRect" parent="Billiards/Points/Bottom"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_qy33h")
-expand_mode = 1
-
 [node name="Walls" type="Node2D" parent="Billiards"]
 modulate = Color(0.8, 0.8, 0.8, 1)
 
@@ -345,26 +287,32 @@ expand_mode = 1
 [node name="Hole" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 60)
 hole_type = 0
+warp_group = 1
 
 [node name="Hole2" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 360)
 hole_type = 0
+warp_group = 1
 
 [node name="Hole3" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 660)
 hole_type = 0
+warp_group = 1
 
 [node name="Hole4" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 60)
 hole_type = 0
+warp_group = 2
 
 [node name="Hole5" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 360)
 hole_type = 0
+warp_group = 2
 
 [node name="Hole6" parent="Billiards/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 660)
 hole_type = 0
+warp_group = 2
 
 [node name="UI" type="Control" parent="Billiards"]
 layout_mode = 3
@@ -450,6 +398,7 @@ debug_color = Color(0, 0, 0, 0)
 modulate = Color(1, 1, 1, 0.1)
 
 [node name="SpawnHoleA" type="Node2D" parent="Pachinko/Points"]
+visible = false
 position = Vector2(800, 80)
 scale = Vector2(2, 2)
 
@@ -469,6 +418,7 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="SpawnHoleB" type="Node2D" parent="Pachinko/Points"]
+visible = false
 position = Vector2(1200, 80)
 scale = Vector2(2, 2)
 
@@ -485,64 +435,6 @@ offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Top" type="Node2D" parent="Pachinko/Points"]
-visible = false
-position = Vector2(1000, 200)
-rotation = 3.14159
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Points/Top"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_qy33h")
-expand_mode = 1
-
-[node name="Center" type="Node2D" parent="Pachinko/Points"]
-visible = false
-position = Vector2(1000, 360)
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Points/Center"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Bottom" type="Node2D" parent="Pachinko/Points"]
-visible = false
-position = Vector2(1000, 520)
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Points/Bottom"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_qy33h")
 expand_mode = 1
 
 [node name="Walls" type="Node2D" parent="Pachinko"]
@@ -859,50 +751,60 @@ position = Vector2(1000, 510)
 
 [node name="Hole" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(800, 660)
-hole_type = 2
+hole_type = 3
 gain_ratio = 2
 
 [node name="Hole2" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(880, 660)
-hole_type = 2
+hole_type = 3
 gain_ratio = 1
 
 [node name="Hole3" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(960, 660)
-hole_type = 2
+hole_type = 3
 
 [node name="Hole4" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1040, 660)
-hole_type = 2
+hole_type = 3
 
 [node name="Hole5" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1120, 660)
-hole_type = 2
+hole_type = 3
 gain_ratio = 1
 
 [node name="Hole6" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1200, 660)
-hole_type = 2
+hole_type = 3
 gain_ratio = 2
 
 [node name="Hole7" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1000, 360)
-hole_type = 1
+hole_type = 2
 
 [node name="Hole8" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1000, 480)
-hole_type = 2
+hole_type = 3
 gain_ratio = 5
 
 [node name="Hole9" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(920, 440)
-hole_type = 2
+hole_type = 3
 gain_ratio = 3
 
 [node name="Hole10" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1080, 440)
-hole_type = 2
+hole_type = 3
 gain_ratio = 3
+
+[node name="Hole11" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
+position = Vector2(800, 80)
+hole_type = 1
+warp_group = 1
+
+[node name="Hole12" parent="Pachinko/Holes" instance=ExtResource("7_71f2d")]
+position = Vector2(1200, 80)
+hole_type = 1
+warp_group = 2
 
 [node name="Rush" type="Node2D" parent="Pachinko"]
 position = Vector2(1000, 120)
@@ -937,12 +839,12 @@ position = Vector2(120, 60)
 
 [node name="Hole" parent="Pachinko/Rush/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(-80, 40)
-hole_type = 2
+hole_type = 3
 gain_ratio = 10
 
 [node name="Hole2" parent="Pachinko/Rush/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(80, 40)
-hole_type = 2
+hole_type = 3
 gain_ratio = 10
 
 [node name="UI" type="Control" parent="Pachinko"]
@@ -1240,7 +1142,7 @@ expand_mode = 1
 
 [node name="Hole" parent="Stack/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(700, 660)
-hole_type = 4
+hole_type = 5
 
 [node name="Balls" type="Node2D" parent="."]
 

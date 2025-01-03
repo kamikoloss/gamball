@@ -300,7 +300,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
 
-		Hole.HoleType.BILLIARDS:
+		Hole.HoleType.WARP_TO:
 			# Ball が有効化されていない場合: 何もしない (Ball は消失する)
 			if not ball.is_active:
 				return
@@ -309,7 +309,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				if effect_data[0] == BallEffect.EffectType.MONEY_UP_ON_FALL:
 					money += effect_data[1]
 					print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
-			# パチンコ盤面上に同じ Ball を出現させる
+			# 同じ GroupType の Hole に Ball を移動する
 			var new_ball = _create_new_ball(ball.level, ball.rarity)
 			new_ball.is_on_billiards = false
 			_pachinko.spawn_ball(new_ball)
@@ -493,7 +493,7 @@ func _apply_extra_ball_effects() -> void:
 	print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size: %s, gravity_size: %s" % [hole_size, gravity_size])
 	for node in get_tree().get_nodes_in_group("hole"):
 		if node is Hole:
-			if node.hole_type == Hole.HoleType.BILLIARDS:
+			if node.hole_type == Hole.HoleType.WARP_TO:
 				node.set_hole_size(hole_size)
 				node.set_gravity_size(gravity_size)
 

@@ -8,12 +8,13 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_okw7p"]
 
-[node name="Hole" type="Area2D" node_paths=PackedStringArray("_label", "_gravity_area", "_gravity_texture") groups=["hole"]]
+[node name="Hole" type="Area2D" node_paths=PackedStringArray("_gravity_area", "_gravity_texture", "_body_texture", "_label") groups=["hole"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_226au")
-_label = NodePath("View/Label")
 _gravity_area = NodePath("Gravity")
 _gravity_texture = NodePath("View/Gravity")
+_body_texture = NodePath("View/Body")
+_label = NodePath("View/Label")
 
 [node name="View" type="Node2D" parent="."]
 

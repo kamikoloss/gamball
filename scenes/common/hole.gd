@@ -6,32 +6,36 @@ extends Area2D
 signal ball_entered
 
 
-const HOLE_SCALE_STEP = 0.5
-const GRAVITY_SCALE_STEP = 0.25
+const HOLE_SCALE_STEP: float = 0.5
+const GRAVITY_SCALE_STEP: float = 0.25
 
 
 enum HoleType {
-	BILLIARDS, # (ビリヤード用) パチンコ盤面上に転送する
+	WARP_TO, # WARP_FROM にワープする
+	WARP_FROM, # WARP_TO からワープする
 	EXTRA, # (パチンコ用) EXTRA を1個ビリヤード盤面上に出す + 抽選を行う
-	GAIN, # (パチンコ用) 何倍かにして PAYOUT に加算する
+	GAIN, # (パチンコ用) Ball を gain_ratio 倍にして PAYOUT に加算する
 	LOST, # 通常使わない 何もしない (失う)
 	STACK, # (払い出し用) そのまま BALLS に加算する
 }
+enum WarpGroup { NONE, A, B, C, D }
 
 
 # 有効かどうか
 var is_enabled = true
 
 
-# 
+# Hole の種類
 @export var hole_type: HoleType = HoleType.LOST
 # (HoleType.GAIN 用) 増加する倍率
 @export var gain_ratio: int = 0
+# (HoleType.WARP_XXXX 用) ワープが通じるグループ
+@export var warp_group: WarpGroup = WarpGroup.NONE
 
-
-@export var _label: Label
 @export var _gravity_area: Area2D
 @export var _gravity_texture: TextureRect
+@export var _body_texture: TextureRect
+@export var _label: Label
 
 
 func _ready() -> void:
@@ -46,7 +50,7 @@ func enable() -> void:
 	modulate = Color(1, 1, 1, 1)
 
 	# 吸引力を有効化するかどうか
-	var gravity_hole_types = [HoleType.BILLIARDS, HoleType.STACK]
+	var gravity_hole_types = [HoleType.WARP_TO, HoleType.STACK]
 	if hole_type in gravity_hole_types:
 		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_COMBINE_REPLACE
 		_gravity_texture.visible = true
@@ -64,8 +68,14 @@ func disable() -> void:
 # 自身の見た目を更新する
 func refresh_view() -> void:
 	match hole_type:
-		Hole.HoleType.BILLIARDS:
-			pass
+		Hole.HoleType.WARP_TO:
+			_label.text = "%s>" % [WarpGroup.keys()[warp_group]]
+			return
+		Hole.HoleType.WARP_FROM:
+			_label.text = ">%s" % [WarpGroup.keys()[warp_group]]
+			_body_texture.self_modulate = Color(0.9, 0.9, 0.9)
+			_label.self_modulate = Color.BLACK
+			return
 		Hole.HoleType.EXTRA:
 			_label.text = "EX"
 			_label.self_modulate = Color.GREEN
@@ -81,7 +91,7 @@ func refresh_view() -> void:
 			_label.text = "＋"
 			return
 
-	# return しなかった場合:
+	# return しなかった場合: Label を非表示にする
 	_label.visible = false
 
 
@@ -96,6 +106,8 @@ func set_gravity_size(level: int = 0) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if not is_enabled:
+		return
+	if hole_type == HoleType.WARP_FROM:
 		return
 
 	var maybe_ball = area.get_parent()
