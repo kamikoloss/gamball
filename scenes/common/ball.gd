@@ -20,9 +20,9 @@ const Z_INDEX_SLOT: int = 3
 
 # Tween
 const WARP_DURATION: float = 1.0
-const SHRINK_DURATION: float = 1.4
+const SHRINK_DURATION: float = 0.2
 const SHRINK_SCALE: Vector2 = Vector2(0.4, 0.4)
-const HIDE_DURATION: float = 1.2
+const HIDE_DURATION: float = 0.2
 
 
 # 残像の頂点数
@@ -68,8 +68,6 @@ const BALL_RARITY_COLORS = {
 # NOTE: ビリヤード盤面上の初期 Ball 用に export している
 @export var is_on_billiards: bool = false
 
-
-@export var _hole_area: Area2D
 
 # 見た目部分をまとめる親
 @export var _view_parent: Node2D
@@ -223,6 +221,7 @@ func hide_hover() -> void:
 
 # 移動する
 func warp(to: Vector2) -> void:
+	linear_damp = 1000
 	_disable_physics()
 	await _enable_shrink()
 
@@ -233,13 +232,13 @@ func warp(to: Vector2) -> void:
 
 	await _disable_shrink()
 	_enable_physics()
+	linear_damp = 0
 
 
 # 消える
 func die() -> void:
 	_disable_physics()
-	_enable_hide()
-	await _enable_shrink()
+	await _enable_shrink(true)
 	queue_free()
 
 
@@ -253,55 +252,44 @@ func _on_body_entered(body: Node) -> void:
 			refresh_view()
 
 
-# 自身の見た目を徐々に非表示にする
-func _enable_hide() -> Signal:
-	var tween = _get_tween(TweenType.HIDE)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "modulate", Color.TRANSPARENT, HIDE_DURATION)
-	return tween.finished
-
-# 自身の見た目を徐々に表示する (元に戻す)
-func _disable_hide() -> Signal:
-	var tween = _get_tween(TweenType.HIDE)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "modulate", Color.WHITE, HIDE_DURATION)
-	return tween.finished
-
-
 # 自身の見た目を徐々に縮小する
-func _enable_shrink() -> Signal:
+func _enable_shrink(hide: bool = false) -> Signal:
 	is_shrinked = true
 	refresh_view()
 	var tween = _get_tween(TweenType.SHRINK)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.set_parallel()
 	tween.tween_property(_view_parent, "scale", SHRINK_SCALE, SHRINK_DURATION)
 	tween.tween_property(_trail_line, "width", _trail_default_width * SHRINK_SCALE.x, SHRINK_DURATION)
+	if hide:
+		tween.tween_property(_view_parent, "modulate", Color.TRANSPARENT, HIDE_DURATION)
+		tween.tween_property(_trail_line, "modulate", Color.TRANSPARENT, HIDE_DURATION)
 	return tween.finished
 
 # 自身の見た目を徐々に拡大する (元に戻す)
-func _disable_shrink() -> Signal:
+func _disable_shrink(hide: bool = false) -> Signal:
 	is_shrinked = false
 	refresh_view()
 	var tween = _get_tween(TweenType.SHRINK)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.set_parallel()
 	tween.tween_property(_view_parent, "scale", Vector2.ONE, SHRINK_DURATION)
 	tween.tween_property(_trail_line, "width", _trail_default_width, SHRINK_DURATION)
+	if hide:
+		tween.tween_property(_view_parent, "modulate", Color.WHITE, HIDE_DURATION)
+		tween.tween_property(_trail_line, "modulate", Color.WHITE, HIDE_DURATION)
 	return tween.finished
 
 
-# 自身の物理判定を有効化する
+# 自身の物理を有効化する
 func _enable_physics() -> void:
 	freeze = false
 	collision_layer = 1
-	_hole_area.monitoring = true
 
-# 自身の物理判定を無効化する
+# 自身の物理を無効化する
 func _disable_physics() -> void:
 	freeze = true
 	collision_layer = 0
-	_hole_area.monitoring = false
 
 
 # 残像の頂点を記録する

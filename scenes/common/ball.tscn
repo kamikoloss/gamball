@@ -18,13 +18,12 @@ point_count = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 radius = 15.0
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_hole_area", "_view_parent", "_mask_texture", "_body_texture", "_body_stripe_texture", "_body_stripe_2_texture", "_inner_texture", "_inner_texture_2", "_level_label", "_hover_texture", "_trail_line", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_mask_texture", "_body_texture", "_body_stripe_texture", "_body_stripe_2_texture", "_inner_texture", "_inner_texture_2", "_level_label", "_hover_texture", "_trail_line", "_touch_button")]
 z_index = 4
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
-_hole_area = NodePath("Hole")
 _view_parent = NodePath("View")
 _mask_texture = NodePath("View/Mask/Control/Active")
 _body_texture = NodePath("View/Mask/Control/Body")

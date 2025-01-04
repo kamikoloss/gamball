@@ -114,10 +114,11 @@ func _on_area_entered(area: Area2D) -> void:
 	var maybe_ball = area.get_parent()
 	if maybe_ball is Ball:
 		if not maybe_ball.is_active:
-			return maybe_ball.die()
+			await maybe_ball.die()
+			return 
 		if maybe_ball.is_shrinked:
 			return
 		ball_entered.emit(self, maybe_ball)
-		var free_hole_types = [HoleType.STACK, HoleType.GAIN, HoleType.EXTRA] # TODO: GAIN は warp させる
+		var free_hole_types = [HoleType.STACK, HoleType.GAIN, HoleType.EXTRA, HoleType.LOST] # TODO: GAIN は warp させる
 		if hole_type in free_hole_types:
 			maybe_ball.die()
