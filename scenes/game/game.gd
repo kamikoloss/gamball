@@ -307,7 +307,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				if effect_data[0] == BallEffect.EffectType.MONEY_UP_ON_FALL:
 					money += effect_data[1]
 					print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
-			# 同じ GroupType の Hole に Ball を移動する
+			# 同じ GroupType の Hole に Ball をワープさせる
 			ball.is_on_billiards = false
 			for node in get_tree().get_nodes_in_group("hole"):
 				if node is Hole:

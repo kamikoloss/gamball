@@ -17,8 +17,6 @@ const FONT_SIZE_BASE = 64
 
 
 var _size_x: float = 0
-
-# { TweenType: Tween, ... } 
 var _tweens: Dictionary = {}
 
 

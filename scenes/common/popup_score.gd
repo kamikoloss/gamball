@@ -1,5 +1,6 @@
 class_name PopupScore
 extends Control
+# TODO: Manager に管理させる
 
 
 const MOVE_SPEED_FROM: float = 320.0 # 初速度 (px/s)
@@ -18,7 +19,7 @@ var _move_speed: float = MOVE_SPEED_FROM
 
 
 func _ready() -> void:
-	popup(Vector2(640, 360), "+9999") # debug
+	#popup(Vector2(640, 360), "+9999") # debug
 	pass
 
 
@@ -35,7 +36,7 @@ func set_font_size(ratio: float) -> void:
 
 
 func popup(from: Vector2, text: String) -> void:
-	print("[PopupScore] position: %s, text: %s" % [from, text])
+	#print("[PopupScore] position: %s, text: %s" % [from, text])
 	self.position = from
 	self.modulate = Color.TRANSPARENT
 	_label.text = text
