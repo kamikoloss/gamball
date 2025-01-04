@@ -1096,10 +1096,6 @@ gain_ratio = 3
 position = Vector2(700, 660)
 hole_type = 5
 
-[node name="HoleStack2" parent="Holes" instance=ExtResource("7_71f2d")]
-position = Vector2(640, 800)
-scale = Vector2(200, 2)
-
 [node name="Balls" type="Node2D" parent="."]
 
 [node name="Ball" parent="Balls" instance=ExtResource("2_ma10n")]
