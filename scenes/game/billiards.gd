@@ -3,10 +3,7 @@ extends Node2D
 
 
 @export var _spawn_position: Node2D
-@export var _spawn_extra_position_a: Node2D
-@export var _spawn_extra_position_b: Node2D
-@export var _spawn_extra_position_c: Node2D
-@export var _spawn_extra_position_d: Node2D
+@export var _spawn_extra_positions: Array[Node2D]
 
 @export var _balls_count_label: Label
 
@@ -32,13 +29,11 @@ func rollback_spawn_ball() -> bool:
 
 # 盤面上に Extra Ball を移動する
 func spawn_extra_ball(ball: Ball) -> void:
-	var spawn_posiiton = [
-		_spawn_extra_position_a,
-		_spawn_extra_position_b,
-		_spawn_extra_position_c,
-		_spawn_extra_position_d,
-	].pick_random()
-	ball.position = spawn_posiiton.position
+	if _spawn_extra_positions.is_empty():
+		return
+
+	var spawn_position = _spawn_extra_positions.pick_random()
+	ball.position = spawn_position.position
 
 	# 初速をつける
 	var spawn_impulse = Vector2(randi_range(0, 100), randi_range(0, 100))
