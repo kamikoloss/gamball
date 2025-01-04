@@ -10,12 +10,15 @@ const PHASE_2_DURATION: float = 0.4 # 等速で移動する秒数
 const PHASE_3_DURATION: float = 0.4 # 等速で消えていく秒数
 
 const FONT_SIZE_BASE: int = 16
+const OUTLINE_SIZE_BASE: int = 4
 
 
 @export var _label: Label
 
 
 var _move_speed: float = MOVE_SPEED_FROM
+var _font_size_base: float = 0
+var _outline_size_base: float = 0
 
 
 func _ready() -> void:
@@ -33,6 +36,7 @@ func set_font_color(color: Color) -> void:
 
 func set_font_size(ratio: float) -> void:
 	_label.add_theme_font_size_override("font_size", FONT_SIZE_BASE * ratio)
+	_label.add_theme_constant_override("outline_size", OUTLINE_SIZE_BASE * ratio)
 
 
 func popup(from: Vector2, text: String) -> void:
