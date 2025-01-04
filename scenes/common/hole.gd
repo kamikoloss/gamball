@@ -32,6 +32,7 @@ var is_enabled = true
 # (HoleType.WARP_XXXX 用) ワープが通じるグループ
 @export var warp_group: WarpGroup = WarpGroup.NONE
 
+@export var _one_way_walls_parent: Node2D
 @export var _gravity_area: Area2D
 @export var _gravity_texture: TextureRect
 @export var _body_texture: TextureRect
@@ -42,6 +43,7 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	enable()
 	refresh_view()
+	refresh_physics()
 
 
 # 有効化する
@@ -95,6 +97,15 @@ func refresh_view() -> void:
 	_label.visible = false
 
 
+# 自身の物理判定を更新する
+func refresh_physics() -> void:
+	# WARP_FROM: 一方壁を無効化する
+	if hole_type == HoleType.WARP_FROM:
+		for wall in _one_way_walls_parent.get_children():
+			if wall is StaticBody2D:
+				wall.collision_layer = 0
+
+
 func set_hole_size(level: int = 0) -> void:
 	var ratio: float = 1 + HOLE_SCALE_STEP * (level + 1)
 	self.scale = Vector2(ratio , ratio)
@@ -119,6 +130,7 @@ func _on_area_entered(area: Area2D) -> void:
 		if maybe_ball.is_shrinked:
 			return
 		ball_entered.emit(self, maybe_ball)
+		maybe_ball.collision_layer = 2 # Hole 内部で跳ね返るようにする
 		var free_hole_types = [HoleType.STACK, HoleType.GAIN, HoleType.EXTRA, HoleType.LOST] # TODO: GAIN は warp させる
 		if hole_type in free_hole_types:
 			maybe_ball.die()

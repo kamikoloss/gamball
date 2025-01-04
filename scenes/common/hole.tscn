@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0im3e50587p1"]
+[gd_scene load_steps=7 format=3 uid="uid://d0im3e50587p1"]
 
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="1_3kxer"]
 [ext_resource type="Script" path="res://scenes/common/hole.gd" id="1_226au"]
@@ -6,11 +6,14 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i0j7q"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pe00r"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_okw7p"]
 
-[node name="Hole" type="Area2D" node_paths=PackedStringArray("_gravity_area", "_gravity_texture", "_body_texture", "_label") groups=["hole"]]
+[node name="Hole" type="Area2D" node_paths=PackedStringArray("_one_way_walls_parent", "_gravity_area", "_gravity_texture", "_body_texture", "_label") groups=["hole"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_226au")
+_one_way_walls_parent = NodePath("Walls")
 _gravity_area = NodePath("Gravity")
 _gravity_texture = NodePath("View/Gravity")
 _body_texture = NodePath("View/Body")
@@ -67,6 +70,51 @@ vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_i0j7q")
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, -20)
+scale = Vector2(2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_pe00r")
+one_way_collision = true
+debug_color = Color(0.4, 0, 0, 0.4)
+
+[node name="Wall2" type="StaticBody2D" parent="Walls"]
+position = Vector2(0, 20)
+rotation = 3.14159
+scale = Vector2(2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_pe00r")
+one_way_collision = true
+debug_color = Color(0.4, 0, 0, 0.4)
+
+[node name="Wall3" type="StaticBody2D" parent="Walls"]
+position = Vector2(-20, 0)
+rotation = -1.5708
+scale = Vector2(2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_pe00r")
+one_way_collision = true
+debug_color = Color(0.4, 0, 0, 0.4)
+
+[node name="Wall4" type="StaticBody2D" parent="Walls"]
+position = Vector2(20, 0)
+rotation = 1.5708
+scale = Vector2(2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_pe00r")
+one_way_collision = true
+debug_color = Color(0.4, 0, 0, 0.4)
 
 [node name="Gravity" type="Area2D" parent="."]
 scale = Vector2(1.5, 1.5)

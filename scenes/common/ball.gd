@@ -20,9 +20,9 @@ const Z_INDEX_SLOT: int = 3
 
 # Tween
 const WARP_DURATION: float = 1.0
-const SHRINK_DURATION: float = 0.2
+const SHRINK_DURATION: float = 2.2
 const SHRINK_SCALE: Vector2 = Vector2(0.4, 0.4)
-const HIDE_DURATION: float = 0.2
+const HIDE_DURATION: float = 2.2
 
 
 # 残像の頂点数
@@ -196,9 +196,9 @@ func refresh_view() -> void:
 	_trail_line.gradient = gradient
 
 	# 縮小
-	_inner_texture.visible = not is_shrinked
-	_level_label.visible = not is_shrinked
 	if is_shrinked:
+		_inner_texture.visible = false
+		_level_label.visible = false
 		_body_stripe_texture.visible = false
 		_body_stripe_2_texture.visible = false
 
@@ -221,7 +221,6 @@ func hide_hover() -> void:
 
 # 移動する
 func warp(to: Vector2) -> void:
-	linear_damp = 1000
 	_disable_physics()
 	await _enable_shrink()
 
@@ -232,7 +231,6 @@ func warp(to: Vector2) -> void:
 
 	await _disable_shrink()
 	_enable_physics()
-	linear_damp = 0
 
 
 # 消える

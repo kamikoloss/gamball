@@ -36,9 +36,6 @@ _hover_texture = NodePath("View/Hover")
 _trail_line = NodePath("Trail")
 _touch_button = NodePath("Touch")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_rn34c")
-
 [node name="View" type="Node2D" parent="."]
 
 [node name="Mask" type="TextureRect" parent="View"]
@@ -170,6 +167,9 @@ scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rn34c")
 
 [node name="Trail" type="Line2D" parent="."]
 top_level = true
