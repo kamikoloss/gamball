@@ -104,16 +104,20 @@ func set_gravity_size(level: int = 0) -> void:
 	_gravity_area.scale = Vector2(ratio, ratio)
 
 
-func die() -> void:
-	queue_free()
-
-
 func _on_area_entered(area: Area2D) -> void:
 	if not is_enabled:
 		return
 	if hole_type == HoleType.WARP_FROM:
 		return
 
+	# Ball への作用
 	var maybe_ball = area.get_parent()
 	if maybe_ball is Ball:
+		if not maybe_ball.is_active:
+			return maybe_ball.die()
+		if maybe_ball.is_shrinked:
+			return
 		ball_entered.emit(self, maybe_ball)
+		var free_hole_types = [HoleType.STACK, HoleType.GAIN, HoleType.EXTRA] # TODO: GAIN は warp させる
+		if hole_type in free_hole_types:
+			maybe_ball.die()

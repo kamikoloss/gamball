@@ -11,29 +11,29 @@ bounce = 0.8
 [sub_resource type="CircleShape2D" id="CircleShape2D_rn34c"]
 radius = 15.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
-radius = 15.0
-
 [sub_resource type="Curve" id="Curve_pexpb"]
 _data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 1, 0]
 point_count = 2
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_hover_texture", "_body_texture", "_body_stripe_texture", "_body_stripe_2_texture", "_inner_texture", "_inner_texture_2", "_mask_texture", "_level_label", "_hole_area", "_trail_line", "_touch_button")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
+radius = 15.0
+
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_hole_area", "_view_parent", "_mask_texture", "_body_texture", "_body_stripe_texture", "_body_stripe_2_texture", "_inner_texture", "_inner_texture_2", "_level_label", "_hover_texture", "_trail_line", "_touch_button")]
 z_index = 4
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
+_hole_area = NodePath("Hole")
 _view_parent = NodePath("View")
-_hover_texture = NodePath("View/Hover")
+_mask_texture = NodePath("View/Mask/Control/Active")
 _body_texture = NodePath("View/Mask/Control/Body")
 _body_stripe_texture = NodePath("View/Mask/Control/BodyStripe")
 _body_stripe_2_texture = NodePath("View/Mask/Control/BodyStripe2")
 _inner_texture = NodePath("View/Mask/Control/Inner")
 _inner_texture_2 = NodePath("View/Mask/Control/Inner2")
-_mask_texture = NodePath("View/Mask/Control/Active")
 _level_label = NodePath("View/Level")
-_hole_area = NodePath("Hole")
+_hover_texture = NodePath("View/Hover")
 _trail_line = NodePath("Trail")
 _touch_button = NodePath("Touch")
 
@@ -172,16 +172,16 @@ pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
+[node name="Trail" type="Line2D" parent="."]
+top_level = true
+width = 30.0
+width_curve = SubResource("Curve_pexpb")
+
 [node name="Hole" type="Area2D" parent="."]
 scale = Vector2(0.25, 0.25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
 shape = SubResource("CircleShape2D_awq4m")
-
-[node name="Trail" type="Line2D" parent="."]
-top_level = true
-width = 30.0
-width_curve = SubResource("Curve_pexpb")
 
 [node name="Touch" type="TextureButton" parent="."]
 offset_left = -10.0
