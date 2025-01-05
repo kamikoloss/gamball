@@ -11,9 +11,8 @@ radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_okw7p"]
 
-[node name="Hole" type="Area2D" node_paths=PackedStringArray("_one_way_walls_parent", "_gravity_area", "_gravity_texture", "_body_texture", "_label") groups=["hole"]]
+[node name="Hole" type="Area2D" node_paths=PackedStringArray("_gravity_area", "_gravity_texture", "_body_texture", "_label") groups=["hole"]]
 script = ExtResource("1_226au")
-_one_way_walls_parent = NodePath("Walls")
 _gravity_area = NodePath("Gravity")
 _gravity_texture = NodePath("View/Gravity")
 _body_texture = NodePath("View/Body")
@@ -76,7 +75,7 @@ shape = SubResource("CircleShape2D_i0j7q")
 [node name="Wall" type="StaticBody2D" parent="Walls"]
 position = Vector2(0, -40)
 scale = Vector2(4, 1)
-collision_layer = 0
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
 rotation = 3.14159
@@ -87,7 +86,7 @@ debug_color = Color(0.4, 0, 0, 0.4)
 position = Vector2(0, 40)
 rotation = 3.14159
 scale = Vector2(4, 1)
-collision_layer = 0
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
 rotation = 3.14159
@@ -98,7 +97,7 @@ debug_color = Color(0.4, 0, 0, 0.4)
 position = Vector2(-40, 0)
 rotation = -1.5708
 scale = Vector2(4, 1)
-collision_layer = 0
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
 rotation = 3.14159
@@ -109,7 +108,7 @@ debug_color = Color(0.4, 0, 0, 0.4)
 position = Vector2(40, 0)
 rotation = 1.5708
 scale = Vector2(4, 1)
-collision_layer = 0
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4"]
 rotation = 3.14159

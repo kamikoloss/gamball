@@ -29,7 +29,6 @@ enum WarpGroup { NONE, A, B, C, D }
 @export var warp_group: WarpGroup = WarpGroup.NONE
 
 
-@export var _one_way_walls_parent: Node2D
 @export var _gravity_area: Area2D
 @export var _gravity_texture: TextureRect
 @export var _body_texture: TextureRect
@@ -100,14 +99,6 @@ func refresh_view() -> void:
 func refresh_physics() -> void:
 	# 衝突
 	set_collision_layer_value(Collision.Layer.BASE, is_enabled)
-
-	# Hole 壁
-	var through_types = [HoleType.WARP_FROM]
-	if is_enabled and hole_type in through_types:
-		for wall in _one_way_walls_parent.get_children():
-			if wall is StaticBody2D:
-				#wall.set_collision_layer_value(Collision.Layer.HOLE_WALL, false)
-				pass
 
 	# 重力
 	var gravity_types = [HoleType.WARP_TO, HoleType.STACK]

@@ -142,7 +142,6 @@ func _ready() -> void:
 	_trail_default_width = _trail_line.width
 
 	refresh_view()
-	refresh_physics()
 	hide_hover()
 
 
@@ -210,11 +209,6 @@ func refresh_view() -> void:
 		_level_label.visible = false
 
 
-# 自身の物理判定を更新する
-func refresh_physics() -> void:
-	pass
-
-
 func show_hover() -> void:
 	_hover_texture.visible = true
 
@@ -222,27 +216,40 @@ func hide_hover() -> void:
 	_hover_texture.visible = false
 
 
-# 移動する
+# ワープする
 func warp(to: Vector2) -> void:
+	# ワープの途中で WARP_TO に乗ったときにワープしないようにする
 	if is_warping:
 		return
 	is_warping = true
 
+	# NOTE: 縮小している間に BASE Layer を外すと
+	# ビリヤード盤面のポケットに落ちるときの見え方が微妙になる
+	# (無重力が効かなくなる)
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink()
+	set_collision_layer_value(Collision.Layer.BASE, false)
 
 	var tween = _get_tween(TweenType.WARP)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "position", to, WARP_DURATION)
 	await tween.finished
 
+	# TODO: await の前におかないとボールが勢いよく出てしまうのでここに書いている
+	# できれば _disable_shrink() が終わってからボールをゆっくり射出したい
 	linear_velocity = Vector2.ZERO
+
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
 	await _disable_shrink()
+	set_collision_layer_value(Collision.Layer.BASE, true)
 
 	is_warping = false
 
 
 # 消える
 func die() -> void:
+	set_collision_layer_value(Collision.Layer.BASE, false)
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink(true)
 	queue_free()
 

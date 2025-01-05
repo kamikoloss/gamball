@@ -41,8 +41,7 @@ hole=""
 
 2d_physics/layer_1="BASE"
 2d_physics/layer_2="BALL"
-2d_physics/layer_3="HOLE"
-2d_physics/layer_4="HOLE_WALL"
+2d_physics/layer_3="HOLE_WALL"
 
 [rendering]
 
