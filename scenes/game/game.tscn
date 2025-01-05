@@ -72,10 +72,10 @@ _balls_count_label = NodePath("UI/Labels/BallsB")
 [node name="Board" type="Area2D" parent="Billiards"]
 position = Vector2(280, 360)
 scale = Vector2(24, 32)
-collision_mask = 2
 priority = 10
 gravity_space_override = 3
-gravity = 0.0
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
 linear_damp_space_override = 3
 linear_damp = 1.0
 
@@ -323,7 +323,6 @@ _rush_lamps_parent = NodePath("UI/Lamps")
 [node name="Board" type="Area2D" parent="Pachinko"]
 position = Vector2(280, 360)
 scale = Vector2(24, 32)
-collision_mask = 2
 priority = 10
 gravity_space_override = 3
 gravity_point_center = Vector2(0, 2)
@@ -662,7 +661,6 @@ _spawn_position = NodePath("Points/SpawnHole")
 [node name="Board" type="Area2D" parent="Stack"]
 position = Vector2(640, 520)
 scale = Vector2(8, 16)
-collision_mask = 2
 gravity_space_override = 3
 linear_damp = 1.0
 
@@ -2080,66 +2078,82 @@ expand_mode = 1
 position = Vector2(10, 40)
 
 [node name="Ball" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
+freeze = true
 is_display = true
 
 [node name="Ball2" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(20, 0)
+freeze = true
 is_display = true
 
 [node name="Ball3" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(40, 0)
+freeze = true
 is_display = true
 
 [node name="Ball4" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(60, 0)
+freeze = true
 is_display = true
 
 [node name="Ball5" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(80, 0)
+freeze = true
 is_display = true
 
 [node name="Ball6" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(100, 0)
+freeze = true
 is_display = true
 
 [node name="Ball7" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(120, 0)
+freeze = true
 is_display = true
 
 [node name="Ball8" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(140, 0)
+freeze = true
 is_display = true
 
 [node name="Ball9" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(0, 20)
+freeze = true
 is_display = true
 
 [node name="Ball10" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(20, 20)
+freeze = true
 is_display = true
 
 [node name="Ball11" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(40, 20)
+freeze = true
 is_display = true
 
 [node name="Ball12" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(60, 20)
+freeze = true
 is_display = true
 
 [node name="Ball13" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(80, 20)
+freeze = true
 is_display = true
 
 [node name="Ball14" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(100, 20)
+freeze = true
 is_display = true
 
 [node name="Ball15" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(120, 20)
+freeze = true
 is_display = true
 
 [node name="Ball16" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(140, 20)
+freeze = true
 is_display = true
 
 [node name="ExtraBalls" type="Control" parent="UI/Main"]
@@ -2348,66 +2362,82 @@ expand_mode = 1
 position = Vector2(10, 40)
 
 [node name="Ball" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
+freeze = true
 is_display = true
 
 [node name="Ball2" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(20, 0)
+freeze = true
 is_display = true
 
 [node name="Ball3" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(40, 0)
+freeze = true
 is_display = true
 
 [node name="Ball4" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(60, 0)
+freeze = true
 is_display = true
 
 [node name="Ball5" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(80, 0)
+freeze = true
 is_display = true
 
 [node name="Ball6" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(100, 0)
+freeze = true
 is_display = true
 
 [node name="Ball7" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(120, 0)
+freeze = true
 is_display = true
 
 [node name="Ball8" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(140, 0)
+freeze = true
 is_display = true
 
 [node name="Ball9" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(0, 20)
+freeze = true
 is_display = true
 
 [node name="Ball10" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(20, 20)
+freeze = true
 is_display = true
 
 [node name="Ball11" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(40, 20)
+freeze = true
 is_display = true
 
 [node name="Ball12" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(60, 20)
+freeze = true
 is_display = true
 
 [node name="Ball13" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(80, 20)
+freeze = true
 is_display = true
 
 [node name="Ball14" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(100, 20)
+freeze = true
 is_display = true
 
 [node name="Ball15" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(120, 20)
+freeze = true
 is_display = true
 
 [node name="Ball16" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_ma10n")]
 position = Vector2(140, 20)
+freeze = true
 is_display = true
 
 [node name="Buttons" type="Control" parent="UI/Main"]

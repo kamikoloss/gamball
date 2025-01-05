@@ -8,10 +8,10 @@ func _ready() -> void:
 
 # 有効化する
 func enable() -> void:
-	set_collision_layer_value(Collision.Layer.BASE, true)
 	modulate = Color(1, 1, 1, 1)
+	set_collision_layer_value(Collision.Layer.BASE, true)
 
 # 無効化する
 func disable() -> void:
-	set_collision_layer_value(Collision.Layer.BASE, false)
 	modulate = Color(1, 1, 1, 0.1)
+	set_collision_layer_value(Collision.Layer.BASE, false)

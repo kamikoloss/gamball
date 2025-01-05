@@ -203,19 +203,16 @@ func refresh_view() -> void:
 
 	# 縮小
 	if is_shrinked:
-		_inner_texture.visible = false
-		_level_label.visible = false
 		_body_stripe_texture.visible = false
 		_body_stripe_2_texture.visible = false
+		_inner_texture.visible = false
+		_inner_texture_2.visible = false
+		_level_label.visible = false
 
 
 # 自身の物理判定を更新する
 func refresh_physics() -> void:
-	if is_display:
-		return _disable_physics()
-	if is_shrinked:
-		return _disable_physics()
-	_enable_physics()
+	pass
 
 
 func show_hover() -> void:
@@ -231,9 +228,6 @@ func warp(to: Vector2) -> void:
 		return
 	is_warping = true
 
-	_disable_physics()
-	set_collision_mask_value(Collision.Layer.BALL, false)
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink()
 
 	var tween = _get_tween(TweenType.WARP)
@@ -241,9 +235,7 @@ func warp(to: Vector2) -> void:
 	tween.tween_property(self, "position", to, WARP_DURATION)
 	await tween.finished
 
-	_enable_physics()
-	set_collision_mask_value(Collision.Layer.BALL, true)
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
+	linear_velocity = Vector2.ZERO
 	await _disable_shrink()
 
 	is_warping = false
@@ -251,8 +243,6 @@ func warp(to: Vector2) -> void:
 
 # 消える
 func die() -> void:
-	_disable_physics()
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink(true)
 	queue_free()
 
@@ -294,22 +284,6 @@ func _disable_shrink(hide: bool = false) -> void:
 		tween.tween_property(_view_parent, "modulate", Color.WHITE, HIDE_DURATION / 2)
 		tween.tween_property(_trail_line, "modulate", Color.WHITE, HIDE_DURATION / 2)
 	await tween.finished
-
-
-# 自身の物理を有効化する
-func _enable_physics() -> void:
-	freeze = false
-	linear_velocity = Vector2.ZERO
-	Collision.Layer.values().map(func(v): set_collision_mask_value(v, true))
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, false) # これだけ false
-	_hole_area.set_collision_mask_value(Collision.Layer.HOLE, true)
-
-# 自身の物理を無効化する
-func _disable_physics() -> void:
-	freeze = true
-	linear_velocity = Vector2.ZERO
-	Collision.Layer.values().map(func(v): set_collision_mask_value(v, false))
-	_hole_area.set_collision_mask_value(Collision.Layer.HOLE, false)
 
 
 # 残像の頂点を記録する

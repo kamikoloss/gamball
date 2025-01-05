@@ -99,14 +99,15 @@ func refresh_view() -> void:
 # 自身の物理判定を更新する
 func refresh_physics() -> void:
 	# 衝突
-	set_collision_layer_value(Collision.Layer.HOLE, is_enabled)
+	set_collision_layer_value(Collision.Layer.BASE, is_enabled)
 
-	# 一通壁
+	# Hole 壁
 	var through_types = [HoleType.WARP_FROM]
 	if is_enabled and hole_type in through_types:
 		for wall in _one_way_walls_parent.get_children():
 			if wall is StaticBody2D:
-				wall.set_collision_layer_value(Collision.Layer.HOLE_WALL, false)
+				#wall.set_collision_layer_value(Collision.Layer.HOLE_WALL, false)
+				pass
 
 	# 重力
 	var gravity_types = [HoleType.WARP_TO, HoleType.STACK]

@@ -151,6 +151,7 @@ offset_bottom = -40.0
 _parts_1_textures = Array[Texture]([ExtResource("4_vn1v7"), ExtResource("5_351k0")])
 
 [node name="Reset" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 120.0
 offset_top = 540.0
