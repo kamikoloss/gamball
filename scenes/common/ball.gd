@@ -301,6 +301,19 @@ func _refresh_trail_points() -> void:
 		_trail_line.add_point(point)
 
 
+func _on_area_entered(area: Area2D) -> void:
+	# Hole 突入時
+	if area is Hole:
+		if not is_active:
+			await die()
+			return 
+		if is_shrinked:
+			return
+		var not_die_types = [Hole.HoleType.WARP_FROM, Hole.HoleType.WARP_TO]
+		if not area.hole_type in not_die_types:
+			await die()
+
+
 func _get_tween(type: TweenType) -> Tween:
 	if _tweens.has(type):
 		_tweens[type].kill()
