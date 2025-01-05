@@ -35,7 +35,7 @@ func _ready() -> void:
 	title.information_button_pressed.connect(func(): goto_scene(SceneType.INFORMATION))
 	title.options_button_pressed.connect(func(): goto_scene(SceneType.OPTIONS))
 	information.exit_button_pressed.connect(func(): goto_scene(_back_scene_type))
-	options.exit_button_pressed.connect(func(): goto_scene(_back_scene_type))
+	options.exit_button_pressed.connect(_on_options_exit)
 
 
 # 初期化処理
@@ -101,6 +101,11 @@ func _hide_curtain(speed_ratio: float = 1.0) -> void:
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_curtain, "modulate", Color.TRANSPARENT, CURTAIN_FADE_DURATION / speed_ratio)
 	await tween.finished
+
+
+func _on_options_exit() -> void:
+	goto_scene(_back_scene_type)
+	SaveManager.save_config()
 
 
 func _get_tween(type: TweenType) -> Tween:

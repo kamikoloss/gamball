@@ -37,7 +37,7 @@ func save_config() -> void:
 		CONFIG_KEY_AUDIO: audio_config.serialize(),
 	})
 	config_file.store_line(config_data)
-	#print("[SaveManager] save_config() config_data: %s" % [config_data])
+	print("[SaveManager] save_config() config_data: %s" % [config_data])
 
 
 class SaveDataBase:
@@ -60,3 +60,11 @@ class AudioConfig extends SaveDataBase:
 		return [
 			"volume_master", "volume_bgm", "volume_se",
 		]
+	func set_volume(bus_type: AudioManager.BusType, volume: int) -> void:
+		match bus_type:
+			AudioManager.BusType.MASTER:
+				volume_master = volume
+			AudioManager.BusType.BGM:
+				volume_bgm = volume
+			AudioManager.BusType.SE:
+				volume_se = volume

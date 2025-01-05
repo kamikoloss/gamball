@@ -32,6 +32,7 @@ func _ready() -> void:
 
 func _on_audio_slider_changed(bus_type: AudioManager.BusType, volume_level: int) -> void:
 	#print("[Options] _on_audio_slider_changed(bus_type: %s, volume_level: %s)" % [bus_type, volume_level])
+	SaveManager.audio_config.set_volume(bus_type, volume_level)
 	AudioManager.set_volume(bus_type, volume_level)
 	_refresh_config_audio_slider(bus_type, volume_level)
 
