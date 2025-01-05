@@ -96,6 +96,8 @@ var is_active: bool = true
 # Gain/Stack に触れたかどうか
 var is_gained: bool = false
 var is_stacked: bool = false
+# 現在ワープ中かどうか
+var is_warping: bool = false
 # 見た目が縮小されているか
 var is_shrinked: bool = false
 # ボールのレア度
@@ -226,6 +228,10 @@ func hide_hover() -> void:
 
 # 移動する
 func warp(to: Vector2) -> void:
+	if is_warping:
+		return
+	is_warping = true
+
 	_disable_physics()
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink()
@@ -238,6 +244,8 @@ func warp(to: Vector2) -> void:
 	_enable_physics()
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
 	await _disable_shrink()
+
+	is_warping = false
 
 
 # 消える

@@ -311,7 +311,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			ball.is_on_billiards = false
 			for node in get_tree().get_nodes_in_group("hole"):
 				if node is Hole:
-					if node.warp_group == hole.warp_group:
+					if node.hole_type == Hole.HoleType.WARP_FROM and node.warp_group == hole.warp_group:
 						ball.warp(node.global_position)
 
 		Hole.HoleType.EXTRA:
