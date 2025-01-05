@@ -18,9 +18,12 @@ point_count = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 radius = 15.0
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_mask_texture", "_body_texture", "_body_stripe_texture", "_body_stripe_2_texture", "_inner_texture", "_inner_texture_2", "_level_label", "_hover_texture", "_trail_line", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_mask_texture", "_body_texture", "_body_stripe_texture", "_body_stripe_2_texture", "_inner_texture", "_inner_texture_2", "_level_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
 z_index = 4
+collision_layer = 2
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
+can_sleep = false
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
@@ -34,6 +37,7 @@ _inner_texture_2 = NodePath("View/Mask/Control/Inner2")
 _level_label = NodePath("View/Level")
 _hover_texture = NodePath("View/Hover")
 _trail_line = NodePath("Trail")
+_hole_area = NodePath("Hole")
 _touch_button = NodePath("Touch")
 
 [node name="View" type="Node2D" parent="."]
@@ -178,6 +182,8 @@ width_curve = SubResource("Curve_pexpb")
 
 [node name="Hole" type="Area2D" parent="."]
 scale = Vector2(0.25, 0.25)
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
 shape = SubResource("CircleShape2D_awq4m")

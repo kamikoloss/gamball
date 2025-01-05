@@ -293,7 +293,7 @@ func _on_options_button_pressed() -> void:
 
 
 # Ball が Hole に落ちたときの処理
-# TODO: hole_type ごとにメソッド分ける？
+# TODO: hole_type ごとにメソッド分ける？ HoleManager 作る？
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
 	match hole.hole_type:
@@ -324,6 +324,10 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			_pachinko.start_lottery()
 
 		Hole.HoleType.GAIN:
+			if ball.is_gained:
+				return
+			ball.is_gained = true
+
 			var gain_plus: int = 0
 			var gain_times: int = 1
 			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP, 50, 1]
@@ -375,6 +379,9 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			pass
 
 		Hole.HoleType.STACK:
+			if ball.is_stacked:
+				return
+			ball.is_stacked = true
 			# Ball の数をカウントする
 			balls += 1
 
@@ -585,6 +592,7 @@ func _push_payout(level: int, amount: int) -> void:
 	_game_ui.refresh_payout_label(_payout_level_list.size())
 
 # 払い出しキューを実行する
+# TODO: Hole ごとにキューを持つ
 func _pop_payout() -> void:
 	if _payout_level_list.is_empty():
 		return

@@ -7,6 +7,7 @@ size = Vector2(20, 40)
 
 [node name="Wall" type="StaticBody2D"]
 scale = Vector2(24, 1)
+collision_mask = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8

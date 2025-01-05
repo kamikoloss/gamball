@@ -98,7 +98,17 @@ func refresh_view() -> void:
 
 # 自身の物理判定を更新する
 func refresh_physics() -> void:
-	# 吸引力
+	# 衝突
+	set_collision_layer_value(Collision.Layer.HOLE, is_enabled)
+
+	# 一通壁
+	var through_types = [HoleType.WARP_FROM]
+	if is_enabled and hole_type in through_types:
+		for wall in _one_way_walls_parent.get_children():
+			if wall is StaticBody2D:
+				wall.set_collision_layer_value(Collision.Layer.HOLE_WALL, false)
+
+	# 重力
 	var gravity_types = [HoleType.WARP_TO, HoleType.STACK]
 	if is_enabled and hole_type in gravity_types:
 		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_COMBINE_REPLACE
@@ -121,7 +131,8 @@ func set_gravity_size(level: int = 0) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if not is_enabled:
 		return
-	if hole_type == HoleType.WARP_FROM:
+	var white_types = [HoleType.WARP_FROM]
+	if hole_type in white_types:
 		return
 
 	# Ball

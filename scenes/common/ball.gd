@@ -20,9 +20,9 @@ const Z_INDEX_SLOT: int = 3
 
 # Tween
 const WARP_DURATION: float = 1.0
-const SHRINK_DURATION: float = 2.2
+const SHRINK_DURATION: float = 0.4
 const SHRINK_SCALE: Vector2 = Vector2(0.4, 0.4)
-const HIDE_DURATION: float = 2.2
+const HIDE_DURATION: float = 0.4
 
 
 # 残像の頂点数
@@ -84,14 +84,20 @@ const BALL_RARITY_COLORS = {
 @export var _level_label: Label
 # ボールの選択を示す周辺部分
 @export var _hover_texture: TextureRect
+
 # 残像
 @export var _trail_line: Line2D
+# Hole 用の当たり判定
+@export var _hole_area: Area2D
 # pressed, hovered 用
 @export var _touch_button: TextureButton
 
 
 # 他のボールにぶつかって有効化されたかどうか
-var is_active: bool = true 
+var is_active: bool = true
+# Gain/Stack に触れたかどうか
+var is_gained: bool = false
+var is_stacked: bool = false
 # 見た目が縮小されているか
 var is_shrinked: bool = false
 # ボールのレア度
@@ -128,6 +134,7 @@ func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+	_hole_area.area_entered.connect(_on_hole_area_entered)
 	_touch_button.pressed.connect(func(): pressed.emit())
 	_touch_button.mouse_entered.connect(func(): hovered.emit(true))
 	_touch_button.mouse_exited.connect(func(): hovered.emit(false))
@@ -222,6 +229,7 @@ func hide_hover() -> void:
 # 移動する
 func warp(to: Vector2) -> void:
 	_disable_physics()
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink()
 
 	var tween = _get_tween(TweenType.WARP)
@@ -230,12 +238,14 @@ func warp(to: Vector2) -> void:
 	await tween.finished
 
 	await _disable_shrink()
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
 	_enable_physics()
 
 
 # 消える
 func die() -> void:
 	_disable_physics()
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink(true)
 	queue_free()
 
@@ -282,12 +292,15 @@ func _disable_shrink(hide: bool = false) -> Signal:
 # 自身の物理を有効化する
 func _enable_physics() -> void:
 	freeze = false
-	collision_layer = Collision.Layer.BALL
+	Collision.Layer.values().map(func(v): set_collision_mask_value(v, true))
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
+	_hole_area.set_collision_mask_value(Collision.Layer.HOLE, true)
 
 # 自身の物理を無効化する
 func _disable_physics() -> void:
 	freeze = true
-	collision_layer = Collision.Layer.NONE
+	Collision.Layer.values().map(func(v): set_collision_mask_value(v, false))
+	_hole_area.set_collision_mask_value(Collision.Layer.HOLE, false)
 
 
 # 残像の頂点を記録する
@@ -301,14 +314,16 @@ func _refresh_trail_points() -> void:
 		_trail_line.add_point(point)
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_hole_area_entered(area: Area2D) -> void:
 	# Hole 突入時
 	if area is Hole:
+		if is_shrinked:
+			return
+		if not area.is_enabled:
+			return
 		if not is_active:
 			await die()
 			return 
-		if is_shrinked:
-			return
 		var not_die_types = [Hole.HoleType.WARP_FROM, Hole.HoleType.WARP_TO]
 		if not area.hole_type in not_die_types:
 			await die()

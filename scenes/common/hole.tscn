@@ -11,7 +11,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_okw7p"]
 
 [node name="Hole" type="Area2D" node_paths=PackedStringArray("_one_way_walls_parent", "_gravity_area", "_gravity_texture", "_body_texture", "_label") groups=["hole"]]
-scale = Vector2(2, 2)
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_226au")
 _one_way_walls_parent = NodePath("Walls")
 _gravity_area = NodePath("Gravity")
@@ -34,7 +35,7 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5, 1.5)
+scale = Vector2(3, 3)
 pivot_offset = Vector2(10, 10)
 texture = ExtResource("1_3kxer")
 expand_mode = 1
@@ -52,18 +53,18 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
 texture = ExtResource("1_3kxer")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="View"]
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.125, 0.125)
-pivot_offset = Vector2(40, 40)
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+pivot_offset = Vector2(20, 20)
 theme_override_fonts/font = ExtResource("3_l76vn")
-theme_override_font_sizes/font_size = 64
 text = "x9"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -74,53 +75,60 @@ shape = SubResource("CircleShape2D_i0j7q")
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="Wall" type="StaticBody2D" parent="Walls"]
-position = Vector2(0, -20)
-scale = Vector2(2, 1)
+position = Vector2(0, -40)
+scale = Vector2(4, 1)
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_pe00r")
-one_way_collision = true
 debug_color = Color(0.4, 0, 0, 0.4)
 
 [node name="Wall2" type="StaticBody2D" parent="Walls"]
-position = Vector2(0, 20)
+position = Vector2(0, 40)
 rotation = 3.14159
-scale = Vector2(2, 1)
+scale = Vector2(4, 1)
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_pe00r")
-one_way_collision = true
 debug_color = Color(0.4, 0, 0, 0.4)
 
 [node name="Wall3" type="StaticBody2D" parent="Walls"]
-position = Vector2(-20, 0)
+position = Vector2(-40, 0)
 rotation = -1.5708
-scale = Vector2(2, 1)
+scale = Vector2(4, 1)
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_pe00r")
-one_way_collision = true
 debug_color = Color(0.4, 0, 0, 0.4)
 
 [node name="Wall4" type="StaticBody2D" parent="Walls"]
-position = Vector2(20, 0)
+position = Vector2(40, 0)
 rotation = 1.5708
-scale = Vector2(2, 1)
+scale = Vector2(4, 1)
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4"]
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_pe00r")
-one_way_collision = true
 debug_color = Color(0.4, 0, 0, 0.4)
 
 [node name="Gravity" type="Area2D" parent="."]
-scale = Vector2(1.5, 1.5)
-priority = 20
+scale = Vector2(3, 3)
+collision_layer = 4
+collision_mask = 2
+priority = 10
 gravity_space_override = 2
 gravity_point = true
+gravity = 1960.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gravity"]
 shape = SubResource("CircleShape2D_okw7p")

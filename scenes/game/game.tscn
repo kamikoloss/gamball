@@ -72,6 +72,7 @@ _balls_count_label = NodePath("UI/Labels/BallsB")
 [node name="Board" type="Area2D" parent="Billiards"]
 position = Vector2(280, 360)
 scale = Vector2(24, 32)
+collision_mask = 2
 priority = 10
 gravity_space_override = 3
 gravity = 0.0
@@ -321,6 +322,7 @@ _rush_lamps_parent = NodePath("UI/Lamps")
 [node name="Board" type="Area2D" parent="Pachinko"]
 position = Vector2(280, 360)
 scale = Vector2(24, 32)
+collision_mask = 2
 priority = 10
 gravity_space_override = 3
 gravity_point_center = Vector2(0, 2)
@@ -374,12 +376,12 @@ position = Vector2(120, 60)
 
 [node name="Hole" parent="Pachinko/Rush/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(-80, 40)
-hole_type = 3
+hole_type = 1
 gain_ratio = 10
 
 [node name="Hole2" parent="Pachinko/Rush/Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(80, 40)
-hole_type = 3
+hole_type = 1
 gain_ratio = 10
 
 [node name="View" type="Node2D" parent="Pachinko"]
@@ -1007,94 +1009,95 @@ position = Vector2(1000, 510)
 
 [node name="HoleWarpToA" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 60)
-hole_type = 0
+hole_type = 5
 warp_group = 1
 
 [node name="HoleWarpToA2" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 360)
-hole_type = 0
+hole_type = 5
 warp_group = 1
 
 [node name="HoleWarpToA3" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 660)
-hole_type = 0
+hole_type = 5
 warp_group = 1
 
 [node name="HoleWarpToB" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 60)
-hole_type = 0
+hole_type = 5
 warp_group = 2
 
 [node name="HoleWarpToB2" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 360)
-hole_type = 0
+hole_type = 5
 warp_group = 2
 
 [node name="HoleWarpToB3" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 660)
-hole_type = 0
+hole_type = 5
 warp_group = 2
 
 [node name="HoleWarpFromA" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(800, 80)
-hole_type = 1
+hole_type = 4
 warp_group = 1
 
 [node name="HoleWarpFromB" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1200, 80)
-hole_type = 1
+hole_type = 4
 warp_group = 2
 
 [node name="HoleGain" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(800, 660)
-hole_type = 3
+hole_type = 1
 gain_ratio = 2
 
 [node name="HoleGain2" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(880, 660)
-hole_type = 3
+hole_type = 1
 gain_ratio = 1
 
 [node name="HoleGain3" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(960, 660)
-hole_type = 3
+hole_type = 1
 
 [node name="HoleGain4" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1040, 660)
-hole_type = 3
+hole_type = 1
 
 [node name="HoleGain5" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1120, 660)
-hole_type = 3
+hole_type = 1
 gain_ratio = 1
 
 [node name="HoleGain6" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1200, 660)
-hole_type = 3
+hole_type = 1
 gain_ratio = 2
 
 [node name="HoleGain7" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1000, 360)
-hole_type = 2
+hole_type = 1
 
 [node name="HoleGain8" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1000, 480)
-hole_type = 3
+hole_type = 1
 gain_ratio = 5
 
 [node name="HoleGain9" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(920, 440)
-hole_type = 3
+hole_type = 1
 gain_ratio = 3
 
 [node name="HoleGain10" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1080, 440)
-hole_type = 3
+hole_type = 1
 gain_ratio = 3
 
 [node name="HoleStack" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(700, 660)
-hole_type = 5
+scale = Vector2(1.5, 1.5)
+hole_type = 3
 
 [node name="Balls" type="Node2D" parent="."]
 
