@@ -1077,26 +1077,26 @@ hole_type = 1
 gain_ratio = 2
 
 [node name="HoleGain7" parent="Holes" instance=ExtResource("7_71f2d")]
-position = Vector2(1000, 360)
-hole_type = 1
-
-[node name="HoleGain8" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1000, 480)
 hole_type = 1
 gain_ratio = 5
 
-[node name="HoleGain9" parent="Holes" instance=ExtResource("7_71f2d")]
+[node name="HoleGain8" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(920, 440)
 hole_type = 1
 gain_ratio = 3
 
-[node name="HoleGain10" parent="Holes" instance=ExtResource("7_71f2d")]
+[node name="HoleGain9" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1080, 440)
 hole_type = 1
 gain_ratio = 3
 
+[node name="HoleExtra" parent="Holes" instance=ExtResource("7_71f2d")]
+position = Vector2(1000, 360)
+hole_type = 0
+
 [node name="HoleStack" parent="Holes" instance=ExtResource("7_71f2d")]
-position = Vector2(700, 660)
+position = Vector2(680, 660)
 scale = Vector2(1.5, 1.5)
 hole_type = 3
 
@@ -1288,6 +1288,7 @@ offset_right = 120.0
 offset_bottom = 120.0
 
 [node name="Product2" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
+visible = false
 offset_left = 280.0
 offset_top = 120.0
 offset_right = 280.0
@@ -1308,6 +1309,7 @@ offset_bottom = 320.0
 product_type = 2
 
 [node name="Product5" parent="UI/Shop/Products" instance=ExtResource("13_232xx")]
+visible = false
 offset_left = 280.0
 offset_top = 320.0
 offset_right = 280.0

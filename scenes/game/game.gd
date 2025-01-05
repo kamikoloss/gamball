@@ -225,6 +225,7 @@ func _input(event: InputEvent) -> void:
 			if DRAG_LENGTH_MIN < clamped_length:
 				var impulse = drag_vector.normalized() * clamped_length
 				_billiards.shoot_ball(impulse * _impulse_ratio)
+				_billiards.refresh_balls_count(billiards_balls)
 			# ドラッグの距離が充分でない場合: Ball 生成をなかったことにする
 			else:
 				if _billiards.rollback_spawn_ball():
@@ -296,11 +297,23 @@ func _on_options_button_pressed() -> void:
 # TODO: hole_type ごとにメソッド分ける？ HoleManager 作る？
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
+	# Hole が無効の場合: 何もしない (通り抜ける)
+	if not hole.is_enabled:
+		return
+	# Ball が縮小中の場合: 何もしない (通り抜ける)
+	if ball.is_shrinked:
+		return
+
 	match hole.hole_type:
 
+		Hole.HoleType.WARP_FROM:
+			return
+
 		Hole.HoleType.WARP_TO:
-			# Ball が有効化されていない場合: 何もしない (Ball は消失する)
+			# Ball が有効化されていない場合: 消す
 			if not ball.is_active:
+				await ball.die()
+				_billiards.refresh_balls_count(billiards_balls)
 				return
 			# ex: [EffectType.MONEY_UP_ON_FALL, 10]
 			for effect_data in ball.effects:
@@ -365,7 +378,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# 払い出しリストに追加する
 			var amount = (hole.gain_ratio + gain_plus) * gain_times * ball.level
 			_push_payout(ball.level, amount)
-			# スコアを表示する
+			# PopupScore を表示する
 			var popup_text = "+%s" % [amount]
 			var popup_color = Color.WHITE
 			var popup_size = clamp(amount / 10, 1.0, 4.0) # TODO: const
@@ -375,15 +388,20 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			_game_ui.popup_score(hole.global_position, popup_text, popup_color, popup_size)
 
 		Hole.HoleType.LOST:
-			# 何もしない (Ball は消失する)
+			await ball.die()
+			_billiards.refresh_balls_count(billiards_balls)
 			pass
 
 		Hole.HoleType.STACK:
 			if ball.is_stacked:
 				return
 			ball.is_stacked = true
-			# Ball の数をカウントする
 			balls += 1
+
+	# Ball 消去処理
+	var not_die_types = [Hole.HoleType.WARP_FROM, Hole.HoleType.WARP_TO]
+	if not hole.hole_type in not_die_types:
+		await ball.die()
 
 	_billiards.refresh_balls_count(billiards_balls)
 

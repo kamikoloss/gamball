@@ -20,9 +20,9 @@ const Z_INDEX_SLOT: int = 3
 
 # Tween
 const WARP_DURATION: float = 1.0
-const SHRINK_DURATION: float = 0.4
+const SHRINK_DURATION: float = 1.0
 const SHRINK_SCALE: Vector2 = Vector2(0.4, 0.4)
-const HIDE_DURATION: float = 0.4
+const HIDE_DURATION: float = 1.0
 
 # 残像の頂点数
 const TRAIL_MAX_LENGTH: int = 10
@@ -125,19 +125,18 @@ func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 	if Rarity.COMMON < rarity:
 		self.effects.append(BallEffect.EFFECTS_POOL_1[level][rarity])
 
+
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+	_touch_button.pressed.connect(func(): pressed.emit())
+	_touch_button.mouse_entered.connect(func(): hovered.emit(true))
+	_touch_button.mouse_exited.connect(func(): hovered.emit(false))
+
 	# 残像の頂点の記録を開始する
 	var tween = _get_tween(TweenType.TRAIL)
 	tween.set_loops()
 	tween.tween_interval(TRAIL_INTERVAL)
 	tween.tween_callback(_refresh_trail_points)
-
-
-func _ready() -> void:
-	body_entered.connect(_on_body_entered)
-	_hole_area.area_entered.connect(_on_hole_area_entered)
-	_touch_button.pressed.connect(func(): pressed.emit())
-	_touch_button.mouse_entered.connect(func(): hovered.emit(true))
-	_touch_button.mouse_exited.connect(func(): hovered.emit(false))
 
 	# 残像の太さを保持しておく
 	_trail_default_width = _trail_line.width
@@ -233,6 +232,7 @@ func warp(to: Vector2) -> void:
 	is_warping = true
 
 	_disable_physics()
+	set_collision_mask_value(Collision.Layer.BALL, false)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink()
 
@@ -242,6 +242,7 @@ func warp(to: Vector2) -> void:
 	await tween.finished
 
 	_enable_physics()
+	set_collision_mask_value(Collision.Layer.BALL, true)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
 	await _disable_shrink()
 
@@ -267,7 +268,7 @@ func _on_body_entered(body: Node) -> void:
 
 
 # 自身の見た目を徐々に縮小する
-func _enable_shrink(hide: bool = false) -> Signal:
+func _enable_shrink(hide: bool = false) -> void:
 	is_shrinked = true
 	refresh_view()
 	var tween = _get_tween(TweenType.SHRINK)
@@ -278,10 +279,10 @@ func _enable_shrink(hide: bool = false) -> Signal:
 	if hide:
 		tween.tween_property(_view_parent, "modulate", Color.TRANSPARENT, HIDE_DURATION)
 		tween.tween_property(_trail_line, "modulate", Color.TRANSPARENT, HIDE_DURATION)
-	return tween.finished
+	await tween.finished
 
 # 自身の見た目を徐々に拡大する (元に戻す)
-func _disable_shrink(hide: bool = false) -> Signal:
+func _disable_shrink(hide: bool = false) -> void:
 	is_shrinked = false
 	refresh_view()
 	var tween = _get_tween(TweenType.SHRINK)
@@ -292,7 +293,7 @@ func _disable_shrink(hide: bool = false) -> Signal:
 	if hide:
 		tween.tween_property(_view_parent, "modulate", Color.WHITE, HIDE_DURATION)
 		tween.tween_property(_trail_line, "modulate", Color.WHITE, HIDE_DURATION)
-	return tween.finished
+	await tween.finished
 
 
 # 自身の物理を有効化する
@@ -300,7 +301,7 @@ func _enable_physics() -> void:
 	freeze = false
 	linear_velocity = Vector2.ZERO
 	Collision.Layer.values().map(func(v): set_collision_mask_value(v, true))
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, false) # これだけ false
 	_hole_area.set_collision_mask_value(Collision.Layer.HOLE, true)
 
 # 自身の物理を無効化する
@@ -320,21 +321,6 @@ func _refresh_trail_points() -> void:
 	_trail_line.rotation = 0.0
 	for point in _trail_points:
 		_trail_line.add_point(point)
-
-
-func _on_hole_area_entered(area: Area2D) -> void:
-	# Hole 突入時
-	if area is Hole:
-		if is_shrinked:
-			return
-		if not area.is_enabled:
-			return
-		if not is_active:
-			await die()
-			return 
-		var not_die_types = [Hole.HoleType.WARP_FROM, Hole.HoleType.WARP_TO]
-		if not area.hole_type in not_die_types:
-			await die()
 
 
 func _get_tween(type: TweenType) -> Tween:
