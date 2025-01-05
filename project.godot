@@ -37,6 +37,13 @@ window/stretch/mode="canvas_items"
 
 hole=""
 
+[layer_names]
+
+2d_physics/layer_1="BASE"
+2d_physics/layer_2="BALL"
+2d_physics/layer_3="HOLE"
+2d_physics/layer_4="HOLE_WALL"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -282,12 +282,12 @@ func _disable_shrink(hide: bool = false) -> Signal:
 # 自身の物理を有効化する
 func _enable_physics() -> void:
 	freeze = false
-	collision_layer = 1
+	collision_layer = Collision.Layer.BALL
 
 # 自身の物理を無効化する
 func _disable_physics() -> void:
 	freeze = true
-	collision_layer = 0
+	collision_layer = Collision.Layer.NONE
 
 
 # 残像の頂点を記録する
