@@ -229,7 +229,6 @@ func _start_rusn_lamps(index_list: Array[int]) -> void:
 	tween.chain()
 	tween.tween_callback(func(): _flash_lamp(index_list[2] % size))
 	tween.tween_callback(func(): _stop_lamp_se_loop())
-
 	await tween.finished
 
 # NOTE: set_loops は chain で切れないので Tween を分ける
