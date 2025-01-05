@@ -142,6 +142,7 @@ func _ready() -> void:
 	_trail_default_width = _trail_line.width
 
 	refresh_view()
+	refresh_physics()
 	hide_hover()
 
 
@@ -207,6 +208,12 @@ func refresh_view() -> void:
 		_inner_texture.visible = false
 		_inner_texture_2.visible = false
 		_level_label.visible = false
+
+
+# 自身の物理判定を更新する
+func refresh_physics() -> void:
+	freeze = is_display
+	set_collision_layer_value(Collision.Layer.BASE, not is_display)
 
 
 func show_hover() -> void:
