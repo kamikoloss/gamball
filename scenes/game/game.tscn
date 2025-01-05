@@ -662,6 +662,7 @@ _spawn_position = NodePath("Points/SpawnHole")
 [node name="Board" type="Area2D" parent="Stack"]
 position = Vector2(640, 520)
 scale = Vector2(8, 16)
+collision_mask = 2
 gravity_space_override = 3
 gravity_point_center = Vector2(0, 2)
 gravity_direction = Vector2(0, 2)
@@ -1147,7 +1148,7 @@ position = Vector2(280, 160)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_deck_slots_parent", "_extra_balls_parent", "_extra_slots_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_money_label", "_next_balls_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_shop_window", "_shop_exit_button", "_people_window")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_deck_slots_parent", "_extra_balls_parent", "_extra_slots_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_money_label", "_next_balls_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_people_window")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -1178,6 +1179,7 @@ _arrow_square = NodePath("Main/Arrow/Square")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")
 _tax_give_up_button = NodePath("Tax/GiveUp")
+_tax_table_parent = NodePath("Tax/PriceTable")
 _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
@@ -1193,7 +1195,6 @@ texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Tax" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 720.0
@@ -1202,9 +1203,9 @@ offset_bottom = 720.0
 [node name="Panel" type="Panel" parent="UI/Tax"]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 20.0
+offset_top = 25.0
 offset_right = 1260.0
-offset_bottom = 700.0
+offset_bottom = 705.0
 theme = ExtResource("25_qsn7e")
 
 [node name="Label" type="Label" parent="UI/Tax"]
@@ -1217,6 +1218,528 @@ theme = ExtResource("25_qsn7e")
 theme_type_variation = &"LabelHeader"
 theme_override_font_sizes/font_size = 32
 text = "TAX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="Panel" parent="UI/Tax"]
+offset_left = 150.0
+offset_top = 150.0
+offset_right = 410.0
+offset_bottom = 490.0
+theme = ExtResource("25_qsn7e")
+
+[node name="PriceTable" type="VBoxContainer" parent="UI/Tax"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 160.0
+offset_right = 400.0
+offset_bottom = 480.0
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer5"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer6"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer7"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer8"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer9"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer9"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer9"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer10"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer10"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer10"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer11" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer11"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer11"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer11"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer12" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer12"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer12"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer12"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer13" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer13"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer13"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer13"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer14" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer14"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer14"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer14"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer15" type="HBoxContainer" parent="UI/Tax/PriceTable"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UI/Tax/PriceTable/HBoxContainer15"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Tax/PriceTable/HBoxContainer15"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Tax/PriceTable/HBoxContainer15"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("25_qsn7e")
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1250,6 +1773,7 @@ disabled = true
 text = "Give Up"
 
 [node name="Shop" type="Control" parent="UI"]
+visible = false
 clip_children = 1
 layout_mode = 3
 anchors_preset = 0
@@ -1323,6 +1847,7 @@ offset_bottom = 320.0
 product_type = 3
 
 [node name="Buy" type="Button" parent="UI/Shop"]
+visible = false
 layout_mode = 0
 offset_left = 120.0
 offset_top = 540.0

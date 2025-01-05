@@ -186,6 +186,7 @@ func _ready() -> void:
 	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
 	_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
 	_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
+	_game_ui._refresh_tax_table(TAX_LIST)
 	_bunny.visible = false
 	_refresh_next()
 	# UI (Billiards)
