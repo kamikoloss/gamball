@@ -664,8 +664,6 @@ position = Vector2(640, 520)
 scale = Vector2(8, 16)
 collision_mask = 2
 gravity_space_override = 3
-gravity_point_center = Vector2(0, 2)
-gravity_direction = Vector2(0, 2)
 linear_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Board"]
@@ -1195,6 +1193,7 @@ texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
 [node name="Tax" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 720.0
@@ -1222,6 +1221,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Panel2" type="Panel" parent="UI/Tax"]
+layout_mode = 0
 offset_left = 150.0
 offset_top = 150.0
 offset_right = 410.0
@@ -1743,16 +1743,6 @@ text = "BALLS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Debt" type="Button" parent="UI/Tax"]
-visible = false
-layout_mode = 0
-offset_left = 120.0
-offset_top = 480.0
-offset_right = 440.0
-offset_bottom = 520.0
-theme = ExtResource("25_qsn7e")
-text = "Debt Money"
-
 [node name="Pay" type="Button" parent="UI/Tax"]
 layout_mode = 0
 offset_left = 120.0
@@ -1773,7 +1763,6 @@ disabled = true
 text = "Give Up"
 
 [node name="Shop" type="Control" parent="UI"]
-visible = false
 clip_children = 1
 layout_mode = 3
 anchors_preset = 0

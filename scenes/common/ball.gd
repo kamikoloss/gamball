@@ -288,11 +288,11 @@ func _disable_shrink(hide: bool = false) -> void:
 	var tween = _get_tween(TweenType.SHRINK)
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween.set_parallel()
-	tween.tween_property(_view_parent, "scale", Vector2.ONE, SHRINK_DURATION)
-	tween.tween_property(_trail_line, "width", _trail_default_width, SHRINK_DURATION)
+	tween.tween_property(_view_parent, "scale", Vector2.ONE, SHRINK_DURATION / 2)
+	tween.tween_property(_trail_line, "width", _trail_default_width, SHRINK_DURATION / 2)
 	if hide:
-		tween.tween_property(_view_parent, "modulate", Color.WHITE, HIDE_DURATION)
-		tween.tween_property(_trail_line, "modulate", Color.WHITE, HIDE_DURATION)
+		tween.tween_property(_view_parent, "modulate", Color.WHITE, HIDE_DURATION / 2)
+		tween.tween_property(_trail_line, "modulate", Color.WHITE, HIDE_DURATION / 2)
 	await tween.finished
 
 

@@ -326,7 +326,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for node in get_tree().get_nodes_in_group("hole"):
 				if node is Hole:
 					if node.hole_type == Hole.HoleType.WARP_FROM and node.warp_group == hole.warp_group:
-						ball.warp(node.global_position)
+						await ball.warp(node.global_position)
 
 		Hole.HoleType.EXTRA:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
