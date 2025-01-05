@@ -1,5 +1,5 @@
 class_name BallEffect
-extends Node
+extends Object
 # Ball の効果に関する enum, const, static func をまとめたクラス
 
 
