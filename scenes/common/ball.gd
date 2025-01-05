@@ -24,7 +24,6 @@ const SHRINK_DURATION: float = 0.4
 const SHRINK_SCALE: Vector2 = Vector2(0.4, 0.4)
 const HIDE_DURATION: float = 0.4
 
-
 # 残像の頂点数
 const TRAIL_MAX_LENGTH: int = 10
 # 残像の頂点の更新インターバル (秒)
@@ -34,7 +33,6 @@ const TRAIL_INTERVAL: float = 0.02
 const BALL_LEVEL_OPTIONAL_SLOT = -1 # 空きスロット用
 const BALL_LEVEL_DISABLED_SLOT = -2 # 使用不可スロット用
 
-# TODO: 色系まとめた const に移す？
 # ボールの本体の色の定義 { <Level>: Color } 
 const BALL_BODY_COLORS = {
 	BALL_LEVEL_OPTIONAL_SLOT: Color(0.2, 0.2, 0.2),
@@ -237,9 +235,9 @@ func warp(to: Vector2) -> void:
 	tween.tween_property(self, "position", to, WARP_DURATION)
 	await tween.finished
 
-	await _disable_shrink()
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
 	_enable_physics()
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
+	await _disable_shrink()
 
 
 # 消える
@@ -292,6 +290,7 @@ func _disable_shrink(hide: bool = false) -> Signal:
 # 自身の物理を有効化する
 func _enable_physics() -> void:
 	freeze = false
+	linear_velocity = Vector2.ZERO
 	Collision.Layer.values().map(func(v): set_collision_mask_value(v, true))
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
 	_hole_area.set_collision_mask_value(Collision.Layer.HOLE, true)
@@ -299,6 +298,7 @@ func _enable_physics() -> void:
 # 自身の物理を無効化する
 func _disable_physics() -> void:
 	freeze = true
+	linear_velocity = Vector2.ZERO
 	Collision.Layer.values().map(func(v): set_collision_mask_value(v, false))
 	_hole_area.set_collision_mask_value(Collision.Layer.HOLE, false)
 

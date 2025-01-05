@@ -23,7 +23,6 @@ z_index = 4
 collision_layer = 2
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
-can_sleep = false
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
@@ -39,6 +38,9 @@ _hover_texture = NodePath("View/Hover")
 _trail_line = NodePath("Trail")
 _hole_area = NodePath("Hole")
 _touch_button = NodePath("Touch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rn34c")
 
 [node name="View" type="Node2D" parent="."]
 
@@ -172,16 +174,13 @@ pivot_offset = Vector2(10, 10)
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_rn34c")
-
 [node name="Trail" type="Line2D" parent="."]
 top_level = true
 width = 30.0
 width_curve = SubResource("Curve_pexpb")
 
 [node name="Hole" type="Area2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 4
 

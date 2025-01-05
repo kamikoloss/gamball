@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/fonts/PixelMplus12-Regular.ttf" id="3_l76vn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i0j7q"]
+radius = 20.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pe00r"]
 
@@ -19,6 +20,9 @@ _gravity_area = NodePath("Gravity")
 _gravity_texture = NodePath("View/Gravity")
 _body_texture = NodePath("View/Body")
 _label = NodePath("View/Label")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i0j7q")
 
 [node name="View" type="Node2D" parent="."]
 
@@ -68,9 +72,6 @@ theme_override_fonts/font = ExtResource("3_l76vn")
 text = "x9"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_i0j7q")
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -128,7 +129,6 @@ collision_mask = 2
 priority = 10
 gravity_space_override = 2
 gravity_point = true
-gravity = 1960.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gravity"]
 shape = SubResource("CircleShape2D_okw7p")
