@@ -10,6 +10,7 @@
 [node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_audio_master_slider", "_audio_master_ball", "_audio_bgm_slider", "_audio_bgm_ball", "_audio_se_slider", "_audio_se_ball")]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("3_6sgbf")
 script = ExtResource("1_oy0wl")
 _reset_button = NodePath("Reset")
 _exit_button = NodePath("Exit")
@@ -26,14 +27,12 @@ offset_left = 40.0
 offset_top = 40.0
 offset_right = 520.0
 offset_bottom = 680.0
-theme = ExtResource("3_6sgbf")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
 offset_top = -40.0
 offset_right = 640.0
 offset_bottom = 120.0
-theme = ExtResource("3_6sgbf")
 theme_type_variation = &"LabelHeader"
 theme_override_font_sizes/font_size = 64
 text = "OPTIONS"
@@ -52,7 +51,6 @@ offset_left = 20.0
 offset_top = -10.0
 offset_right = 180.0
 offset_bottom = 30.0
-theme = ExtResource("3_6sgbf")
 theme_type_variation = &"LabelBold"
 text = "AUDIO"
 vertical_alignment = 1
@@ -69,7 +67,6 @@ layout_mode = 0
 offset_top = -10.0
 offset_right = 160.0
 offset_bottom = 30.0
-theme = ExtResource("3_6sgbf")
 text = "Master"
 vertical_alignment = 1
 
@@ -98,7 +95,6 @@ layout_mode = 0
 offset_top = -10.0
 offset_right = 160.0
 offset_bottom = 30.0
-theme = ExtResource("3_6sgbf")
 text = "BGM"
 vertical_alignment = 1
 
@@ -127,7 +123,6 @@ layout_mode = 0
 offset_top = -10.0
 offset_right = 160.0
 offset_bottom = 30.0
-theme = ExtResource("3_6sgbf")
 text = "SE"
 vertical_alignment = 1
 
@@ -157,7 +152,6 @@ offset_left = 120.0
 offset_top = 540.0
 offset_right = 440.0
 offset_bottom = 580.0
-theme = ExtResource("3_6sgbf")
 text = "Reset to default"
 
 [node name="Exit" type="Button" parent="."]
@@ -166,5 +160,4 @@ offset_left = 120.0
 offset_top = 600.0
 offset_right = 440.0
 offset_bottom = 640.0
-theme = ExtResource("3_6sgbf")
 text = "Exit"

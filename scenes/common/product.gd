@@ -21,8 +21,8 @@ const PRODUCT_PRICES = {
 	ProductType.EXTRA_CLEANER: 100,
 }
 
-const BUY_COLOR_ACTIVE = Color(0.25, 0.5, 0.25)
-const BUY_COLOR_DEACTIVE = Color(0.5, 0.25, 0.25)
+const BUY_COLOR_ACTIVE = Color(0.2, 0.6, 0.2)
+const BUY_COLOR_DEACTIVE = Color(0.6, 0.2, 0.2)
 
 
 # 商品の [<名称>, <説明分>]

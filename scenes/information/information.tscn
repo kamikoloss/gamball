@@ -10,6 +10,7 @@
 [node name="Information" type="Control" node_paths=PackedStringArray("_exit_button", "_balls_parent", "_ball_popup_title", "_ball_popup_description")]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("4_wugw1")
 script = ExtResource("1_5baeu")
 _exit_button = NodePath("Exit")
 _balls_parent = NodePath("Balls")
@@ -22,14 +23,12 @@ offset_left = 40.0
 offset_top = 40.0
 offset_right = 520.0
 offset_bottom = 680.0
-theme = ExtResource("4_wugw1")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
 offset_top = -40.0
 offset_right = 640.0
 offset_bottom = 120.0
-theme = ExtResource("4_wugw1")
 theme_type_variation = &"LabelHeader"
 theme_override_font_sizes/font_size = 64
 text = "INFORMATION"
@@ -38,11 +37,10 @@ vertical_alignment = 1
 [node name="PoolA" type="Label" parent="."]
 layout_mode = 0
 offset_left = 80.0
-offset_top = 100.0
-offset_right = 400.0
-offset_bottom = 180.0
-theme = ExtResource("4_wugw1")
-theme_type_variation = &"LabelHeader"
+offset_top = 130.0
+offset_right = 240.0
+offset_bottom = 170.0
+theme_type_variation = &"LabelBold"
 text = "Pool A"
 vertical_alignment = 1
 
@@ -116,30 +114,6 @@ is_display = true
 position = Vector2(280, 40)
 is_display = true
 
-[node name="PoolB" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 80.0
-offset_top = 260.0
-offset_right = 400.0
-offset_bottom = 340.0
-theme = ExtResource("4_wugw1")
-theme_type_variation = &"LabelHeader"
-text = "POOL 02"
-vertical_alignment = 1
-
-[node name="PoolC" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 80.0
-offset_top = 420.0
-offset_right = 400.0
-offset_bottom = 500.0
-theme = ExtResource("4_wugw1")
-theme_type_variation = &"LabelHeader"
-text = "POOL 03"
-vertical_alignment = 1
-
 [node name="BallPopup" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -152,14 +126,12 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 640.0
-theme = ExtResource("4_wugw1")
 
 [node name="Title" type="Label" parent="BallPopup"]
 layout_mode = 0
 offset_left = 10.0
-offset_right = 190.0
+offset_right = 170.0
 offset_bottom = 40.0
-theme = ExtResource("4_wugw1")
 theme_type_variation = &"LabelBold"
 theme_override_font_sizes/font_size = 24
 text = "A-99"
@@ -171,7 +143,6 @@ offset_left = 10.0
 offset_top = 40.0
 offset_right = 190.0
 offset_bottom = 630.0
-theme = ExtResource("4_wugw1")
 bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 autowrap_mode = 1
@@ -182,7 +153,6 @@ offset_left = 120.0
 offset_top = 600.0
 offset_right = 440.0
 offset_bottom = 640.0
-theme = ExtResource("4_wugw1")
 text = "Exit"
 
 [node name="Bunny" parent="." instance=ExtResource("5_7wbwg")]

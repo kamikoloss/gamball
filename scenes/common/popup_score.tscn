@@ -6,6 +6,7 @@
 [node name="PopupScore" type="Control" node_paths=PackedStringArray("_label")]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("1_asfrc")
 script = ExtResource("1_f6l6k")
 _label = NodePath("Label")
 
@@ -15,7 +16,6 @@ offset_left = -80.0
 offset_top = -40.0
 offset_right = 80.0
 offset_bottom = 40.0
-theme = ExtResource("1_asfrc")
 theme_type_variation = &"LabelScore"
 text = "+9999"
 horizontal_alignment = 1

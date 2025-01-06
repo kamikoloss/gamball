@@ -12,6 +12,7 @@
 [node name="Bunny" type="Control" node_paths=PackedStringArray("_human", "_base_parts", "_touch_button", "_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4", "_dialogue_label")]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("8_oo1t5")
 script = ExtResource("1_lr22c")
 _human = NodePath("Human")
 _base_parts = NodePath("Human/Base")
@@ -131,10 +132,8 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 400.0
 offset_bottom = 100.0
-theme = ExtResource("8_oo1t5")
 bbcode_enabled = true
 text = "[color=BLACK]あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。[/color]"
-autowrap_mode = 1
 
 [node name="Touch" type="TextureButton" parent="."]
 layout_mode = 0
