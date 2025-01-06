@@ -2796,7 +2796,7 @@ bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 autowrap_mode = 1
 
-[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_game_state_label", "_restart_game_button", "_turn_plus_button", "_turn_minus_button", "_money_plus_button", "_money_minus_button", "_balls_plus_button", "_balls_minus_button", "_pachinko_start_lottery_button", "_pachinko_start_rush_button", "_pachinko_finish_rush_button", "_show_tax_button", "_hide_tax_button", "_show_shop_button", "_hide_shop_button", "_show_people_button", "_hide_people_button", "_refresh_dialogue_button", "_shuffle_pose_button")]
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_debug_buttons_parent", "_balls_parent", "_balls_lv1_button", "_balls_lv2_button", "_balls_lv3_button", "_balls_lv4_button", "_balls_lv5_button", "_balls_deck_add_button", "_balls_deck_remove_button", "_balls_extra_add_button", "_balls_extra_remove_button", "_game_state_label")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -2809,25 +2809,18 @@ _game_ui = NodePath("../UI")
 _bunny = NodePath("../UI/People/Bunny")
 _debug_button = NodePath("Debug")
 _debug_window = NodePath("DebugWindow")
-_game_state_label = NodePath("DebugWindow/GameState")
-_restart_game_button = NodePath("DebugWindow/Game/RestartGame")
-_turn_plus_button = NodePath("DebugWindow/Game/TurnPlus")
-_turn_minus_button = NodePath("DebugWindow/Game/TurnMinus")
-_money_plus_button = NodePath("DebugWindow/Game/MoneyPlus")
-_money_minus_button = NodePath("DebugWindow/Game/MoneyMinus")
-_balls_plus_button = NodePath("DebugWindow/Game/BallsPlus")
-_balls_minus_button = NodePath("DebugWindow/Game/BallsMinus")
-_pachinko_start_lottery_button = NodePath("DebugWindow/Pachinko/StartLottery")
-_pachinko_start_rush_button = NodePath("DebugWindow/Pachinko/StartRush")
-_pachinko_finish_rush_button = NodePath("DebugWindow/Pachinko/FinishRush")
-_show_tax_button = NodePath("DebugWindow/Window/ShowTax")
-_hide_tax_button = NodePath("DebugWindow/Window/HideTax")
-_show_shop_button = NodePath("DebugWindow/Window/ShowShop")
-_hide_shop_button = NodePath("DebugWindow/Window/HideShop")
-_show_people_button = NodePath("DebugWindow/People/ShowPeople")
-_hide_people_button = NodePath("DebugWindow/People/HidePeople")
-_refresh_dialogue_button = NodePath("DebugWindow/People/RefreshDialogue")
-_shuffle_pose_button = NodePath("DebugWindow/People/ShufflePose")
+_debug_buttons_parent = NodePath("DebugWindow/Buttons")
+_balls_parent = NodePath("DebugWindow/Balls/Balls")
+_balls_lv1_button = NodePath("DebugWindow/Balls/Lv1")
+_balls_lv2_button = NodePath("DebugWindow/Balls/Lv2")
+_balls_lv3_button = NodePath("DebugWindow/Balls/Lv3")
+_balls_lv4_button = NodePath("DebugWindow/Balls/Lv4")
+_balls_lv5_button = NodePath("DebugWindow/Balls/Lv5")
+_balls_deck_add_button = NodePath("DebugWindow/Balls/DeckAdd")
+_balls_deck_remove_button = NodePath("DebugWindow/Balls/DeckRemove")
+_balls_extra_add_button = NodePath("DebugWindow/Balls/ExtraAdd")
+_balls_extra_remove_button = NodePath("DebugWindow/Balls/ExtraRemove")
+_game_state_label = NodePath("DebugWindow/Labels/GameState")
 
 [node name="Debug" type="Button" parent="UIDebug"]
 layout_mode = 0
@@ -2838,223 +2831,431 @@ text = "Debug"
 
 [node name="DebugWindow" type="Control" parent="UIDebug"]
 anchors_preset = 0
+offset_left = 15.0
+offset_top = 30.0
+offset_right = 15.0
+offset_bottom = 30.0
 
-[node name="GameState" type="Label" parent="UIDebug/DebugWindow"]
-visible = false
+[node name="Panel" type="Panel" parent="UIDebug/DebugWindow"]
+offset_left = 5.0
+offset_top = -10.0
+offset_right = 525.0
+offset_bottom = 670.0
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow"]
 layout_mode = 0
-offset_left = 80.0
-offset_right = 240.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
-text = "State: XXXX"
-vertical_alignment = 1
-
-[node name="Game" type="Control" parent="UIDebug/DebugWindow"]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 20.0
-offset_bottom = 20.0
-
-[node name="Game" type="Label" parent="UIDebug/DebugWindow/Game"]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 40.0
+offset_left = 5.0
+offset_top = -10.0
+offset_right = 165.0
+offset_bottom = 30.0
 scale = Vector2(0.5, 0.5)
 text = "Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RestartGame" type="Button" parent="UIDebug/DebugWindow/Game"]
+[node name="Buttons" type="Control" parent="UIDebug/DebugWindow"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 5.0
+offset_bottom = 10.0
+
+[node name="Button" type="Button" parent="UIDebug/DebugWindow/Buttons"]
 layout_mode = 0
+offset_right = 160.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button2" type="Button" parent="UIDebug/DebugWindow/Buttons"]
 offset_top = 20.0
 offset_right = 160.0
 offset_bottom = 60.0
 scale = Vector2(0.5, 0.5)
-text = "RestartGame"
+text = "----"
 
-[node name="TurnPlus" type="Button" parent="UIDebug/DebugWindow/Game"]
-layout_mode = 0
+[node name="Button3" type="Button" parent="UIDebug/DebugWindow/Buttons"]
 offset_top = 40.0
 offset_right = 160.0
-offset_bottom = 81.0
+offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
-text = "TURN  +10"
+text = "----"
 
-[node name="TurnMinus" type="Button" parent="UIDebug/DebugWindow/Game"]
-layout_mode = 0
+[node name="Button4" type="Button" parent="UIDebug/DebugWindow/Buttons"]
 offset_top = 60.0
 offset_right = 160.0
 offset_bottom = 100.0
 scale = Vector2(0.5, 0.5)
-text = "TURN  -10"
+text = "----"
 
-[node name="MoneyPlus" type="Button" parent="UIDebug/DebugWindow/Game"]
-layout_mode = 0
+[node name="Button5" type="Button" parent="UIDebug/DebugWindow/Buttons"]
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
-text = "MONEY +100"
+text = "----"
 
-[node name="MoneyMinus" type="Button" parent="UIDebug/DebugWindow/Game"]
-layout_mode = 0
+[node name="Button6" type="Button" parent="UIDebug/DebugWindow/Buttons"]
 offset_top = 100.0
 offset_right = 160.0
 offset_bottom = 140.0
 scale = Vector2(0.5, 0.5)
-text = "MONEY -100"
+text = "----"
 
-[node name="BallsPlus" type="Button" parent="UIDebug/DebugWindow/Game"]
-layout_mode = 0
+[node name="Button7" type="Button" parent="UIDebug/DebugWindow/Buttons"]
 offset_top = 120.0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.5, 0.5)
-text = "BALLS +100"
+text = "----"
 
-[node name="BallsMinus" type="Button" parent="UIDebug/DebugWindow/Game"]
-layout_mode = 0
+[node name="Button8" type="Button" parent="UIDebug/DebugWindow/Buttons"]
 offset_top = 140.0
 offset_right = 160.0
 offset_bottom = 180.0
 scale = Vector2(0.5, 0.5)
-text = "BALLS -100"
+text = "----"
 
-[node name="Pachinko" type="Control" parent="UIDebug/DebugWindow"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Button9" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_top = 160.0
+offset_right = 160.0
+offset_bottom = 200.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button10" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_top = 180.0
+offset_right = 160.0
+offset_bottom = 220.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button11" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_top = 200.0
+offset_right = 160.0
+offset_bottom = 240.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button12" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_top = 220.0
+offset_right = 160.0
+offset_bottom = 260.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button13" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_top = 240.0
+offset_right = 160.0
+offset_bottom = 280.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button14" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_top = 260.0
+offset_right = 160.0
+offset_bottom = 300.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button15" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_top = 280.0
+offset_right = 160.0
+offset_bottom = 320.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button16" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_top = 300.0
+offset_right = 160.0
+offset_bottom = 340.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button17" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_right = 240.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button18" type="Button" parent="UIDebug/DebugWindow/Buttons"]
 offset_left = 80.0
 offset_top = 20.0
-offset_right = 80.0
-offset_bottom = 20.0
-
-[node name="Pachinko" type="Label" parent="UIDebug/DebugWindow/Pachinko"]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
-text = "Pachinko"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StartLottery" type="Button" parent="UIDebug/DebugWindow/Pachinko"]
-layout_mode = 0
-offset_top = 20.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 60.0
 scale = Vector2(0.5, 0.5)
-text = "StartLottery"
+text = "----"
 
-[node name="StartRush" type="Button" parent="UIDebug/DebugWindow/Pachinko"]
-layout_mode = 0
+[node name="Button19" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
 offset_top = 40.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 80.0
 scale = Vector2(0.5, 0.5)
-text = "StartRush"
+text = "----"
 
-[node name="FinishRush" type="Button" parent="UIDebug/DebugWindow/Pachinko"]
-layout_mode = 0
+[node name="Button20" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
 offset_top = 60.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 100.0
 scale = Vector2(0.5, 0.5)
-text = "FinishRush"
+text = "----"
 
-[node name="Window" type="Control" parent="UIDebug/DebugWindow"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 160.0
-offset_top = 20.0
-offset_right = 160.0
-offset_bottom = 20.0
-
-[node name="Window" type="Label" parent="UIDebug/DebugWindow/Window"]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 40.0
-scale = Vector2(0.5, 0.5)
-text = "Window"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ShowTax" type="Button" parent="UIDebug/DebugWindow/Window"]
-layout_mode = 0
-offset_top = 20.0
-offset_right = 160.0
-offset_bottom = 60.0
-scale = Vector2(0.5, 0.5)
-text = "ShowTax"
-
-[node name="HideTax" type="Button" parent="UIDebug/DebugWindow/Window"]
-layout_mode = 0
-offset_top = 40.0
-offset_right = 160.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-text = "HideTax"
-
-[node name="ShowShop" type="Button" parent="UIDebug/DebugWindow/Window"]
-layout_mode = 0
-offset_top = 60.0
-offset_right = 160.0
-offset_bottom = 100.0
-scale = Vector2(0.5, 0.5)
-text = "ShowShop"
-
-[node name="HideShop" type="Button" parent="UIDebug/DebugWindow/Window"]
-layout_mode = 0
+[node name="Button21" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
 offset_top = 80.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
-text = "HideShop"
+text = "----"
 
-[node name="People" type="Control" parent="UIDebug/DebugWindow"]
+[node name="Button22" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 100.0
+offset_right = 240.0
+offset_bottom = 140.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button23" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 120.0
+offset_right = 240.0
+offset_bottom = 160.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button24" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 140.0
+offset_right = 240.0
+offset_bottom = 180.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button25" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 160.0
+offset_right = 240.0
+offset_bottom = 200.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button26" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 180.0
+offset_right = 240.0
+offset_bottom = 220.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button27" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 200.0
+offset_right = 240.0
+offset_bottom = 240.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button28" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 220.0
+offset_right = 240.0
+offset_bottom = 260.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button29" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 240.0
+offset_right = 240.0
+offset_bottom = 280.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button30" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 260.0
+offset_right = 240.0
+offset_bottom = 300.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button31" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 280.0
+offset_right = 240.0
+offset_bottom = 320.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Button32" type="Button" parent="UIDebug/DebugWindow/Buttons"]
+offset_left = 80.0
+offset_top = 300.0
+offset_right = 240.0
+offset_bottom = 340.0
+scale = Vector2(0.5, 0.5)
+text = "----"
+
+[node name="Balls" type="Control" parent="UIDebug/DebugWindow"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 160.0
+offset_left = 185.0
+offset_top = -10.0
+offset_right = 185.0
+offset_bottom = -10.0
+
+[node name="Label" type="Label" parent="UIDebug/DebugWindow/Balls"]
+offset_right = 160.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+text = "Balls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Balls" type="Node2D" parent="UIDebug/DebugWindow/Balls"]
+position = Vector2(10, 40)
+
+[node name="Ball" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+is_display = true
+
+[node name="Ball2" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(20, 0)
+is_display = true
+
+[node name="Ball3" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(40, 0)
+is_display = true
+
+[node name="Ball4" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(60, 0)
+is_display = true
+
+[node name="Ball5" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(0, 20)
+is_display = true
+
+[node name="Ball6" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(20, 20)
+is_display = true
+
+[node name="Ball7" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(40, 20)
+is_display = true
+
+[node name="Ball8" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(60, 20)
+is_display = true
+
+[node name="Ball9" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(0, 40)
+is_display = true
+
+[node name="Ball10" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(20, 40)
+is_display = true
+
+[node name="Ball11" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(40, 40)
+is_display = true
+
+[node name="Ball12" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(60, 40)
+is_display = true
+
+[node name="Ball13" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(0, 60)
+is_display = true
+
+[node name="Ball14" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(20, 60)
+is_display = true
+
+[node name="Ball15" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(40, 60)
+is_display = true
+
+[node name="Ball16" parent="UIDebug/DebugWindow/Balls/Balls" instance=ExtResource("2_ma10n")]
+position = Vector2(60, 60)
+is_display = true
+
+[node name="Lv1" type="Button" parent="UIDebug/DebugWindow/Balls"]
 offset_top = 120.0
 offset_right = 160.0
-offset_bottom = 120.0
+offset_bottom = 160.0
+scale = Vector2(0.5, 0.5)
+text = "LV.1"
 
-[node name="People" type="Label" parent="UIDebug/DebugWindow/People"]
+[node name="Lv2" type="Button" parent="UIDebug/DebugWindow/Balls"]
+offset_top = 140.0
+offset_right = 160.0
+offset_bottom = 180.0
+scale = Vector2(0.5, 0.5)
+text = "LV.2"
+
+[node name="Lv3" type="Button" parent="UIDebug/DebugWindow/Balls"]
+offset_top = 160.0
+offset_right = 160.0
+offset_bottom = 200.0
+scale = Vector2(0.5, 0.5)
+text = "LV.3"
+
+[node name="Lv4" type="Button" parent="UIDebug/DebugWindow/Balls"]
+offset_top = 180.0
+offset_right = 160.0
+offset_bottom = 220.0
+scale = Vector2(0.5, 0.5)
+text = "LV.4"
+
+[node name="Lv5" type="Button" parent="UIDebug/DebugWindow/Balls"]
+offset_top = 200.0
+offset_right = 160.0
+offset_bottom = 240.0
+scale = Vector2(0.5, 0.5)
+text = "LV.5"
+
+[node name="DeckAdd" type="Button" parent="UIDebug/DebugWindow/Balls"]
+offset_top = 220.0
+offset_right = 160.0
+offset_bottom = 260.0
+scale = Vector2(0.5, 0.5)
+text = "DECK+"
+
+[node name="DeckRemove" type="Button" parent="UIDebug/DebugWindow/Balls"]
+offset_top = 240.0
+offset_right = 160.0
+offset_bottom = 280.0
+scale = Vector2(0.5, 0.5)
+text = "DECK-"
+
+[node name="ExtraAdd" type="Button" parent="UIDebug/DebugWindow/Balls"]
+offset_top = 260.0
+offset_right = 160.0
+offset_bottom = 300.0
+scale = Vector2(0.5, 0.5)
+text = "EXTRA+"
+
+[node name="ExtraRemove" type="Button" parent="UIDebug/DebugWindow/Balls"]
+offset_top = 280.0
+offset_right = 160.0
+offset_bottom = 320.0
+scale = Vector2(0.5, 0.5)
+text = "EXTRA-"
+
+[node name="Labels" type="Control" parent="UIDebug/DebugWindow"]
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 330.0
+offset_right = 5.0
+offset_bottom = 330.0
+
+[node name="GameState" type="Label" parent="UIDebug/DebugWindow/Labels"]
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
-text = "People"
-horizontal_alignment = 1
+text = "State: XXXX"
 vertical_alignment = 1
-
-[node name="ShowPeople" type="Button" parent="UIDebug/DebugWindow/People"]
-layout_mode = 0
-offset_top = 20.0
-offset_right = 160.0
-offset_bottom = 60.0
-scale = Vector2(0.5, 0.5)
-text = "ShowPeople"
-
-[node name="HidePeople" type="Button" parent="UIDebug/DebugWindow/People"]
-layout_mode = 0
-offset_top = 40.0
-offset_right = 160.0
-offset_bottom = 80.0
-scale = Vector2(0.5, 0.5)
-text = "HidePeople"
-
-[node name="RefreshDialogue" type="Button" parent="UIDebug/DebugWindow/People"]
-layout_mode = 0
-offset_top = 60.0
-offset_right = 160.0
-offset_bottom = 100.0
-scale = Vector2(0.5, 0.5)
-text = "RefreshDialogue"
-
-[node name="ShufflePose" type="Button" parent="UIDebug/DebugWindow/People"]
-layout_mode = 0
-offset_top = 80.0
-offset_right = 160.0
-offset_bottom = 120.0
-scale = Vector2(0.5, 0.5)
-text = "ShufflePose"
