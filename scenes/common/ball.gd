@@ -132,14 +132,14 @@ func _ready() -> void:
 	_touch_button.mouse_entered.connect(func(): hovered.emit(true))
 	_touch_button.mouse_exited.connect(func(): hovered.emit(false))
 
-	# 残像の頂点の記録を開始する
-	var tween = _get_tween(TweenType.TRAIL)
-	tween.set_loops()
-	tween.tween_interval(TRAIL_INTERVAL)
-	tween.tween_callback(_refresh_trail_points)
-
-	# 残像の太さを保持しておく
-	_trail_default_width = _trail_line.width
+	if not is_display:
+		# 残像の頂点の記録を開始する
+		var tween = _get_tween(TweenType.TRAIL)
+		tween.set_loops()
+		tween.tween_interval(TRAIL_INTERVAL)
+		tween.tween_callback(_refresh_trail_points)
+		# 残像の太さを保持しておく
+		_trail_default_width = _trail_line.width
 
 	refresh_view()
 	refresh_physics()
@@ -213,7 +213,10 @@ func refresh_view() -> void:
 # 自身の物理判定を更新する
 func refresh_physics() -> void:
 	freeze = is_display
-	set_collision_layer_value(Collision.Layer.BASE, not is_display)
+
+	if is_display:
+		collision_layer = 0
+		collision_mask = 0
 
 
 func show_hover() -> void:
