@@ -182,12 +182,10 @@ func _ready() -> void:
 			node.icon_pressed.connect(_on_product_icon_pressed)
 
 	# UI (GameUi)
-	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
-	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
-	_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
-	_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
 	_game_ui._refresh_tax_table(TAX_LIST)
 	_bunny.visible = false
+	_refresh_deck()
+	_refresh_extra()
 	_refresh_next()
 	# UI (Billiards)
 	_billiards.refresh_balls_count(billiards_balls)
@@ -475,6 +473,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 				var rarity = _pick_random_rarity()
 				_extra_ball_list.push_back(Ball.new(level, rarity))
 				print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
+			_apply_extra_ball_effects()
 
 		Product.ProductType.EXTRA_CLEANER:
 			if _extra_ball_list.size() == 0:
@@ -619,6 +618,19 @@ func _pop_payout() -> void:
 	var new_ball = _create_new_ball(level)
 	_stack.spawn_ball(new_ball)
 	_game_ui.refresh_payout_label(_payout_level_list.size())
+
+
+# DECK の見た目を更新する
+func _refresh_deck() -> void:
+	_apply_extra_ball_effects()
+	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
+	_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
+
+# EXTRA の見た目を更新する
+func _refresh_extra() -> void:
+	_apply_extra_ball_effects()
+	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
+	_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
 
 
 # Next 関連の見た目を更新する
