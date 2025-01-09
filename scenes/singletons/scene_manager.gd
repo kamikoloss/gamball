@@ -16,6 +16,7 @@ const CURTAIN_FADE_DURATION: float = 1.0
 
 @export var _game_scene: PackedScene
 @export var _curtain: Control
+@export var _version_label: Label
 
 
 var _is_loading_now: bool = false
@@ -36,6 +37,8 @@ func _ready() -> void:
 	title.options_button_pressed.connect(func(): goto_scene(SceneType.OPTIONS))
 	information.exit_button_pressed.connect(func(): goto_scene(_back_scene_type))
 	options.exit_button_pressed.connect(_on_options_exit)
+
+	_refresh_version_label()
 
 
 # 初期化処理
@@ -101,6 +104,12 @@ func _hide_curtain(speed_ratio: float = 1.0) -> void:
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_curtain, "modulate", Color.TRANSPARENT, CURTAIN_FADE_DURATION / speed_ratio)
 	await tween.finished
+
+
+func _refresh_version_label() -> void:
+	var version = ProjectSettings.get_setting("application/config/version")
+	_version_label.text = version
+	print("[SceneManager] version: %s" % [version])
 
 
 func _on_options_exit() -> void:

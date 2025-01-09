@@ -8,13 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://b572sr4hn8ps8" path="res://scenes/title/title.tscn" id="3_oyfl5"]
 [ext_resource type="PackedScene" uid="uid://dt4t8h3rfr8gk" path="res://scenes/options/options.tscn" id="4_gqtso"]
 
-[node name="SceneManager" type="Node" node_paths=PackedStringArray("title", "information", "options", "_curtain")]
+[node name="SceneManager" type="Node" node_paths=PackedStringArray("title", "information", "options", "_curtain", "_version_label")]
 script = ExtResource("1_axwg5")
 title = NodePath("LoadedScenes/Title")
 information = NodePath("LoadedScenes/Information")
 options = NodePath("LoadedScenes/Options")
 _game_scene = ExtResource("2_k43e2")
 _curtain = NodePath("Curtain")
+_version_label = NodePath("Version")
 
 [node name="LoadedScenes" type="Node" parent="."]
 
@@ -52,6 +53,6 @@ offset_top = 690.0
 offset_right = 1280.0
 offset_bottom = 730.0
 theme_override_fonts/font = ExtResource("3_i67e3")
-text = "v0.6.1"
+text = "v0.0.0"
 horizontal_alignment = 2
 vertical_alignment = 1

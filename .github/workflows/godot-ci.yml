@@ -27,7 +27,8 @@ jobs:
           mkdir -v -p build/web
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html" -- --version=${{ github.ref_name }}
+          sed -e "s/v0.0.0/${{ github.ref_name }}/" -i project.godot
+          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
       - name: Retrieve the secret and decode it to a file
         env:
           RCLONE_CONFIG_BASE64: ${{ secrets.RCLONE_CONFIG_BASE64 }}
