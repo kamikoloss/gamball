@@ -26,8 +26,8 @@ const DRAG_LENGTH_MAX: float = 160
 var enabled: bool = true:
 	set(value):
 		enabled = value
-		# ドラッグ中の場合: キャンセル扱いにする
-		if _is_dragging:
+		# ドラッグ中に無効になった場合: キャンセル扱いにする
+		if not enabled and _is_dragging:
 			_is_dragging = false
 			_hide_drag_point()
 			_hide_arrow()
@@ -68,11 +68,11 @@ func _input(event: InputEvent) -> void:
 		# ドラッグの距離が充分な場合
 		if DRAG_LENGTH_MIN < clamped_length:
 			released.emit(drag_vector_clamped)
-			print("[DragShooter] released.")
+			#print("[DragShooter] released.")
 		# ドラッグの距離が充分でない場合
 		else:
 			canceled.emit()
-			print("[DragShooter] canceled.")
+			#print("[DragShooter] canceled.")
 
 	# マウス動作
 	if event is InputEventMouseMotion:
@@ -99,7 +99,7 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 		_show_drag_point(_drag_position_from)
 		_show_arrow()
 		pressed.emit()
-		print("[DragShooter] pressed.")
+		#print("[DragShooter] pressed.")
 
 
 func _show_arrow() -> void:

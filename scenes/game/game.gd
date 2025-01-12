@@ -10,11 +10,13 @@ signal exited
 
 enum GameState { GAME, COUNT_DOWN, TAX, SHOP }
 enum TaxType { MONEY, BALLS }
-enum TweenType { TAX_COUNT_DOWN }
+enum TweenType { PAYOUT, TAX_COUNT_DOWN }
 
 
 # Ball を発射する強さ
 const IMPULSE_RATIO: float = 10
+# 何秒ごとに 1 Ball を払い出すか
+const PAYOUT_INTERVAL_BASE: float = 0.1
 
 # DECK の 最小数/最大数 の 絶対値/初期値
 const DECK_SIZE_MIN: int = 4
@@ -130,9 +132,6 @@ var _extra_size_max: int = EXTRA_SIZE_MAX_DEFAULT
 
 # 払い出しキューが残っている Ball level のリスト
 var _payout_level_list: Array[int] = []
-# 何秒ごとに 1 Ball を払い出すか
-# NOTE: Stack の排出速度を見ていい感じに調整する
-var _payout_interval: float = 0.1
 
 # Ball の購入レート
 # [x, y] x money = y balls
@@ -540,16 +539,27 @@ func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 
 
 # 払い出しキューの実行ループを開始する
-func _start_payout() -> void:
-	var tween = create_tween()
+func _start_payout(payout_speed_ratio: float = 1.0) -> void:
+	var delay = PAYOUT_INTERVAL_BASE / payout_speed_ratio
+	var tween = _get_tween(TweenType.PAYOUT)
 	tween.set_loops()
-	tween.tween_callback(_pop_payout).set_delay(_payout_interval)
+	tween.tween_callback(_pop_payout).set_delay(delay)
 
 # 払い出しキューに追加する
 func _push_payout(level: int, amount: int) -> void:
 	for i in amount:
 		_payout_level_list.push_back(level)
 	_game_ui.refresh_payout_label(_payout_level_list.size())
+
+	var payout_size = _payout_level_list.size()
+	if payout_size < 100:
+		_start_payout(1.0)
+	elif payout_size < 1000:
+		_start_payout(2.0)
+	elif payout_size < 10000:
+		_start_payout(3.0)
+	else:
+		_start_payout(4.0)
 
 # 払い出しキューを実行する
 # TODO: Hole ごとにキューを持つ

@@ -1096,7 +1096,7 @@ position = Vector2(1000, 360)
 hole_type = 0
 
 [node name="HoleStack" parent="Holes" instance=ExtResource("7_71f2d")]
-position = Vector2(680, 660)
+position = Vector2(685, 645)
 scale = Vector2(1.5, 1.5)
 hole_type = 3
 
