@@ -55,11 +55,6 @@ const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 @export var _next_turn_label: Label
 @export var _next_money_label: Label
 @export var _next_balls_label: Label
-@export_category("Main/DragPoint")
-@export var _drag_point: Control
-@export_category("Main/Arrow")
-@export var _arrow: Control
-@export var _arrow_square: TextureRect
 
 @export_category("Tax")
 @export var _tax_window: Control
@@ -97,12 +92,6 @@ func _ready() -> void:
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
 	# Shop
 	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
-
-	# Main/DragPoint
-	hide_drag_point()
-
-	# Main/Arrow
-	hide_arrow()
 
 
 func show_tax_window() -> void:
@@ -186,29 +175,6 @@ func refresh_next_clear() -> void:
 	_next_turn_label.text = "CLEAR!!"
 	_next_money_label.text = "CLEAR!!"
 	_next_balls_label.text = "CLEAR!!"
-
-
-# Main/DragPoint
-func show_drag_point(position: Vector2) -> void:
-	_drag_point.visible = true
-	_drag_point.position = position
-
-func hide_drag_point() -> void:
-	_drag_point.visible = false
-
-
-# Main/Arrow
-func show_arrow() -> void:
-	_arrow.visible = true
-
-func hide_arrow() -> void:
-	_arrow.visible = false
-	_arrow_square.scale.y = 0
-	_drag_point.visible = false
-
-func refresh_arrow(deg: int, scale: float) -> void:
-	_arrow.rotation_degrees = deg
-	_arrow_square.scale.y = scale
 
 
 func popup_score(from: Vector2, text: String, color: Color = Color.WHITE, ratio: float = 1.0) -> void:

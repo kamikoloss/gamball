@@ -1,7 +1,6 @@
 class_name Game
 extends Node2D
 # TODO: Ball 移動の処理を切り分ける
-# TODO: 引っ張りの処理を切り分ける
 # TODO: 料金所の処理を切り分ける
 # TODO: Shop の処理を切り分ける
 
@@ -14,6 +13,9 @@ enum TaxType { MONEY, BALLS }
 enum TweenType { TAX_COUNT_DOWN }
 
 
+# Ball を発射する強さ
+const IMPULSE_RATIO: float = 10
+
 # DECK の 最小数/最大数 の 絶対値/初期値
 const DECK_SIZE_MIN: int = 4
 const DECK_SIZE_MIN_DEFAULT: int = 8
@@ -22,10 +24,6 @@ const DECK_SIZE_MAX: int = 16
 const EXTRA_SIZE_MIN: int = 0
 const EXTRA_SIZE_MAX: int = 16
 const EXTRA_SIZE_MAX_DEFAULT: int = 8
-# Ball が発射される最低のドラッグの距離 (px)
-const DRAG_LENGTH_MIN: float = 10
-# 引っ張りが最大になるドラッグの距離 (px)
-const DRAG_LENGTH_MAX: float = 160
 
 # Tax (ノルマ) のリスト
 # [<turn>, TaxType, <amount>]
@@ -69,10 +67,10 @@ const EXTRA_BALL_LEVEL_RARITY = {
 
 # Nodes
 @export var _billiards: Billiards
-@export var _billiards_board: Area2D
 @export var _pachinko: Pachinko
 @export var _stack: Stack
 @export var _balls_parent: Node2D
+@export var _drag_shooter: DragShooter
 
 # UI
 @export var _game_ui: GameUi
@@ -96,6 +94,7 @@ var balls: int = 0:
 	set(value):
 		balls = value
 		_game_ui.refresh_balls_label(value)
+		_drag_shooter.enabled = 0 < balls
 
 # ビリヤード盤面上の Ball の数
 var billiards_balls: int = 0:
@@ -105,16 +104,6 @@ var billiards_balls: int = 0:
 
 # 次に訪れる TAX_LIST の index
 var _next_tax_index: int = 0
-
-# 現在ドラッグ中かどうか
-var _is_dragging: bool = false
-# ドラッグを開始した座標
-var _drag_position_from: Vector2
-# 現在ドラッグしている座標
-var _drag_position_to: Vector2
-# 引っ張りで Ball が吹き飛ぶ強さ
-# NOTE: DRAG_LENGTH_MAX と反比例させる
-var _impulse_ratio: float = 10
 
 # 出現する Deck Ball のリストの初期値
 var _deck_ball_list: Array[Ball] = [
@@ -162,9 +151,10 @@ func _ready() -> void:
 	money = 1000
 	balls = 0
 
-	# Input
-	_billiards_board.input_event.connect(_on_billiards_board_input)
-
+	# Signal (DragShooter)
+	_drag_shooter.pressed.connect(_on_drag_shooter_pressed)
+	_drag_shooter.released.connect(_on_drag_shooter_released)
+	_drag_shooter.canceled.connect(_on_drag_shooter_canceled)
 	# Signal (GameUi)
 	_game_ui.buy_balls_button_pressed.connect(_on_buy_balls_button_pressed)
 	_game_ui.sell_balls_button_pressed.connect(_on_sell_balls_button_pressed)
@@ -200,46 +190,25 @@ func restart_game() -> void:
 	get_tree().reload_current_scene()
 
 
-# 左クリックを押したとき: Billiards Board 上に限定する
-# see. _on_billiards_board_input()
-func _input(event: InputEvent) -> void:
-	# マウスボタン
-	if event is InputEventMouseButton:
-		# 左クリックを離したとき
-		if not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			_is_dragging = false
+func _on_drag_shooter_pressed() -> void:
+	# ビリヤード盤面上に Ball を生成する
+	balls -= 1
+	var ball: Ball = _deck_ball_list.pick_random()
+	var new_ball = _create_new_ball(ball.level, ball.rarity, false) # 最初の出現時には有効化されていない
+	new_ball.is_on_billiards = true
+	_billiards.spawn_ball(new_ball)
+	# 1ターン進める
+	# NOTE: キャンセル時に Ball 生成をなかったことにしてもこれはなかったことにはしない
+	_go_to_next_turn()
 
-			# GameUi
-			_game_ui.hide_drag_point()
-			_game_ui.hide_arrow()
+func _on_drag_shooter_released(drag_vector: Vector2) -> void:
+	_billiards.shoot_ball(drag_vector * IMPULSE_RATIO)
+	_billiards.refresh_balls_count(billiards_balls)
 
-			# ドラッグの距離を算出して丸める
-			var drag_vector = Vector2.ZERO
-			var clamped_length = 0
-			if _drag_position_to != Vector2.ZERO:
-				drag_vector = _drag_position_from - _drag_position_to
-				clamped_length = clampf(drag_vector.length(), 0, DRAG_LENGTH_MAX)
-
-			# ドラッグの距離が充分な場合: Ball を発射する
-			if DRAG_LENGTH_MIN < clamped_length:
-				var impulse = drag_vector.normalized() * clamped_length
-				_billiards.shoot_ball(impulse * _impulse_ratio)
-				_billiards.refresh_balls_count(billiards_balls)
-			# ドラッグの距離が充分でない場合: Ball 生成をなかったことにする
-			else:
-				if _billiards.rollback_spawn_ball():
-					balls += 1
-
-	# マウス動作
-	if event is InputEventMouseMotion:
-		# ドラッグしている間
-		if _is_dragging:
-			_drag_position_to = event.position
-			var drag_vector = _drag_position_from - _drag_position_to
-			var clamped_length =  clampf(drag_vector.length(), 0, DRAG_LENGTH_MAX)
-			var deg = rad_to_deg(drag_vector.angle()) + 90
-			var scale = (clamped_length / DRAG_LENGTH_MAX) * 10 # scale 10 が最大
-			_game_ui.refresh_arrow(deg, scale)
+func _on_drag_shooter_canceled() -> void:
+	# Ball 生成をなかったことにする
+	if _billiards.rollback_spawn_ball():
+		balls += 1
 
 
 func _on_buy_balls_button_pressed() -> void:
@@ -403,32 +372,6 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 		await ball.die()
 
 	_billiards.refresh_balls_count(billiards_balls)
-
-
-# ビリヤード盤面上で入力があったときの処理
-func _on_billiards_board_input(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	# マウスボタン
-	if event is InputEventMouseButton:
-		# 左クリックを押したとき
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if 0 < balls:
-				_is_dragging = true
-				_drag_position_from = event.position
-				_drag_position_to = Vector2.ZERO
-
-				# GameUi
-				_game_ui.show_drag_point(_drag_position_from)
-				_game_ui.show_arrow()
-
-				# ビリヤード盤面上に Ball を生成する
-				balls -= 1
-				var ball: Ball = _deck_ball_list.pick_random()
-				var new_ball = _create_new_ball(ball.level, ball.rarity, false) # 最初の出現時には有効化されていない
-				new_ball.is_on_billiards = true
-				_billiards.spawn_ball(new_ball)
-				# 1ターン進める
-				# Ball 生成をなかったことにしてもこれはなかったことにはしない
-				_go_to_next_turn()
 
 
 # 商品のアイコンがクリックされたときの処理

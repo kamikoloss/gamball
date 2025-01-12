@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckhia507jl74p"]
+
+[ext_resource type="Script" path="res://scenes/common/drag_shooter.gd" id="1_rneqr"]
+[ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="2_ws4q3"]
+[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="3_j0o5j"]
+[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="4_q7jwr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvupa"]
+size = Vector2(480, 640)
+
+[node name="DragShooter" type="Area2D" node_paths=PackedStringArray("_arrow", "_arrow_square", "_drag_point")]
+script = ExtResource("1_rneqr")
+_arrow = NodePath("Arrow")
+_arrow_square = NodePath("Arrow/Square")
+_drag_point = NodePath("DragPoint")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dvupa")
+
+[node name="Arrow" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.6)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Triangle" type="TextureRect" parent="Arrow"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -70.0
+offset_right = 10.0
+offset_bottom = -50.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("2_ws4q3")
+expand_mode = 1
+
+[node name="Square" type="TextureRect" parent="Arrow"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -50.0
+offset_right = 5.0
+offset_bottom = -40.0
+scale = Vector2(1, 10)
+pivot_offset = Vector2(5, 0)
+texture = ExtResource("3_j0o5j")
+expand_mode = 1
+
+[node name="DragPoint" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="DragPoint"]
+self_modulate = Color(0, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(5, 5)
+texture = ExtResource("4_q7jwr")
+expand_mode = 1

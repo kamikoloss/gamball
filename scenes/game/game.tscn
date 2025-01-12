@@ -6,7 +6,6 @@
 [ext_resource type="Shader" path="res://shaders/neuronal_network_waves.gdshader" id="3_cdybq"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="4_b0m3n"]
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="5_j1dyl"]
-[ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="6_qy33h"]
 [ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/common/hole.tscn" id="7_71f2d"]
 [ext_resource type="PackedScene" uid="uid://b0bdf1eipkyus" path="res://scenes/common/wall.tscn" id="8_hgooo"]
 [ext_resource type="Script" path="res://scenes/game/pachinko.gd" id="8_ud1qg"]
@@ -16,6 +15,7 @@
 [ext_resource type="Script" path="res://scenes/game/stack.gd" id="12_7kfse"]
 [ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/common/product.tscn" id="13_232xx"]
 [ext_resource type="Script" path="res://scenes/game/game_ui.gd" id="13_aavli"]
+[ext_resource type="PackedScene" uid="uid://ckhia507jl74p" path="res://scenes/common/drag_shooter.tscn" id="14_r73fj"]
 [ext_resource type="PackedScene" uid="uid://dn3emqhpy7fbt" path="res://scenes/common/popup_score.tscn" id="15_6t2kd"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="15_jt5ld"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/people/bunny/base.png" id="16_bxvmb"]
@@ -39,26 +39,26 @@ shader_parameter/wave_transparency = 0.8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_billiards", "_billiards_board", "_pachinko", "_stack", "_balls_parent", "_game_ui", "_products_parent", "_bunny")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_billiards", "_pachinko", "_stack", "_balls_parent", "_drag_shooter", "_game_ui", "_products_parent", "_bunny")]
 script = ExtResource("1_w7c5l")
 _ball_scene = ExtResource("2_ma10n")
 _billiards = NodePath("Billiards")
-_billiards_board = NodePath("Billiards/Board")
 _pachinko = NodePath("Pachinko")
 _stack = NodePath("Stack")
 _balls_parent = NodePath("Balls")
+_drag_shooter = NodePath("DragShooter")
 _game_ui = NodePath("UI")
 _products_parent = NodePath("UI/Shop/Products")
 _bunny = NodePath("UI/People/Bunny")
 
-[node name="BG" type="Node2D" parent="."]
+[node name="Bg" type="Node2D" parent="."]
 
-[node name="BgBase" type="ColorRect" parent="BG"]
+[node name="BgBase" type="ColorRect" parent="Bg"]
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0, 0, 0, 1)
 
-[node name="BgShader" type="ColorRect" parent="BG"]
+[node name="BgShader" type="ColorRect" parent="Bg"]
 material = SubResource("ShaderMaterial_abgdr")
 offset_right = 1280.0
 offset_bottom = 720.0
@@ -69,7 +69,7 @@ _spawn_position = NodePath("Points/SpawnHoleMain")
 _spawn_extra_positions = [NodePath("Points/SpawnHoleExtra"), NodePath("Points/SpawnHoleExtra2"), NodePath("Points/SpawnHoleExtra3"), NodePath("Points/SpawnHoleExtra4")]
 _balls_count_label = NodePath("UI/Labels/BallsB")
 
-[node name="Board" type="Area2D" parent="Billiards"]
+[node name="Gravity" type="Area2D" parent="Billiards"]
 position = Vector2(280, 360)
 scale = Vector2(24, 32)
 priority = 10
@@ -79,7 +79,7 @@ gravity_direction = Vector2(0, 0)
 linear_damp_space_override = 3
 linear_damp = 1.0
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Board"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Gravity"]
 self_modulate = Color(0.2, 0.2, 0.2, 0.9)
 offset_left = -10.0
 offset_top = -10.0
@@ -88,7 +88,7 @@ offset_bottom = 10.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Board"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Gravity"]
 shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
@@ -320,7 +320,7 @@ _rush_label_a = NodePath("UI/Labels/RushA")
 _rush_label_b = NodePath("UI/Labels/RushB")
 _rush_lamps_parent = NodePath("UI/Lamps")
 
-[node name="Board" type="Area2D" parent="Pachinko"]
+[node name="Gravity" type="Area2D" parent="Pachinko"]
 position = Vector2(280, 360)
 scale = Vector2(24, 32)
 priority = 10
@@ -329,7 +329,7 @@ gravity_point_center = Vector2(0, 2)
 gravity_direction = Vector2(0, 2)
 linear_damp = 1.0
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Board"]
+[node name="TextureRect" type="TextureRect" parent="Pachinko/Gravity"]
 self_modulate = Color(0.2, 0.2, 0.2, 0.9)
 offset_left = 20.0
 offset_top = -10.0
@@ -338,7 +338,7 @@ offset_bottom = 10.0
 texture = ExtResource("4_b0m3n")
 expand_mode = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Board"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Gravity"]
 position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
@@ -658,13 +658,13 @@ offset_bottom = -30.0
 script = ExtResource("12_7kfse")
 _spawn_position = NodePath("Points/SpawnHole")
 
-[node name="Board" type="Area2D" parent="Stack"]
+[node name="Gravity" type="Area2D" parent="Stack"]
 position = Vector2(640, 520)
 scale = Vector2(8, 16)
 gravity_space_override = 3
 linear_damp = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Board"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Gravity"]
 shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
@@ -728,6 +728,9 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_j1dyl")
 expand_mode = 1
+
+[node name="DragShooter" parent="." instance=ExtResource("14_r73fj")]
+position = Vector2(280, 360)
 
 [node name="Walls" type="Node2D" parent="."]
 modulate = Color(0.8, 0.8, 0.8, 1)
@@ -1144,7 +1147,7 @@ position = Vector2(280, 160)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_deck_slots_parent", "_extra_balls_parent", "_extra_slots_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_money_label", "_next_balls_label", "_drag_point", "_arrow", "_arrow_square", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_people_window")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_deck_slots_parent", "_extra_balls_parent", "_extra_slots_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_money_label", "_next_balls_label", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_people_window")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -1170,9 +1173,6 @@ _balls_label = NodePath("Main/Score/Balls/Balls")
 _next_turn_label = NodePath("Main/Score/Turn2/Turn")
 _next_money_label = NodePath("Main/Score/Money2/Money")
 _next_balls_label = NodePath("Main/Score/Balls2/Balls")
-_drag_point = NodePath("Main/DragPoint")
-_arrow = NodePath("Main/Arrow")
-_arrow_square = NodePath("Main/Arrow/Square")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")
 _tax_give_up_button = NodePath("Tax/GiveUp")
@@ -2707,57 +2707,6 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="DragPoint" type="Control" parent="UI/Main"]
-anchors_preset = 0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/DragPoint"]
-self_modulate = Color(0, 1, 0, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(5, 5)
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Arrow" type="Control" parent="UI/Main"]
-modulate = Color(1, 1, 1, 0.501961)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 280.0
-offset_top = 360.0
-offset_right = 280.0
-offset_bottom = 360.0
-
-[node name="Triangle" type="TextureRect" parent="UI/Main/Arrow"]
-layout_mode = 0
-offset_left = -10.0
-offset_top = -70.0
-offset_right = 10.0
-offset_bottom = -50.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("6_qy33h")
-expand_mode = 1
-
-[node name="Square" type="TextureRect" parent="UI/Main/Arrow"]
-layout_mode = 0
-offset_left = -5.0
-offset_top = -50.0
-offset_right = 5.0
-offset_bottom = -40.0
-scale = Vector2(1, 10)
-pivot_offset = Vector2(5, 0)
-texture = ExtResource("4_b0m3n")
-expand_mode = 1
-
 [node name="BallPopup" type="Control" parent="UI/Main"]
 visible = false
 z_index = 4
@@ -3428,6 +3377,7 @@ scale = Vector2(0.5, 0.5)
 text = "----"
 
 [node name="Button6" type="Button" parent="UIDebug/DebugWindow/BallsButtons"]
+layout_mode = 0
 offset_left = 80.0
 offset_right = 240.0
 offset_bottom = 40.0
@@ -3435,6 +3385,7 @@ scale = Vector2(0.5, 0.5)
 text = "----"
 
 [node name="Button7" type="Button" parent="UIDebug/DebugWindow/BallsButtons"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 20.0
 offset_right = 240.0
@@ -3443,6 +3394,7 @@ scale = Vector2(0.5, 0.5)
 text = "----"
 
 [node name="Button8" type="Button" parent="UIDebug/DebugWindow/BallsButtons"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 40.0
 offset_right = 240.0
@@ -3451,6 +3403,7 @@ scale = Vector2(0.5, 0.5)
 text = "----"
 
 [node name="Button9" type="Button" parent="UIDebug/DebugWindow/BallsButtons"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 60.0
 offset_right = 240.0
@@ -3459,6 +3412,7 @@ scale = Vector2(0.5, 0.5)
 text = "----"
 
 [node name="Button10" type="Button" parent="UIDebug/DebugWindow/BallsButtons"]
+layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 240.0
@@ -3482,6 +3436,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_top = 20.0
 offset_right = 320.0
 offset_bottom = 60.0
@@ -3490,6 +3445,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 320.0
 offset_bottom = 80.0
@@ -3498,6 +3454,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label4" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_top = 60.0
 offset_right = 320.0
 offset_bottom = 100.0
@@ -3506,6 +3463,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label5" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_top = 80.0
 offset_right = 320.0
 offset_bottom = 120.0
@@ -3514,6 +3472,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label6" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_top = 100.0
 offset_right = 320.0
 offset_bottom = 140.0
@@ -3522,6 +3481,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label7" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_top = 120.0
 offset_right = 320.0
 offset_bottom = 160.0
@@ -3530,6 +3490,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label8" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_top = 140.0
 offset_right = 320.0
 offset_bottom = 180.0
@@ -3538,6 +3499,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label9" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_left = 160.0
 offset_right = 480.0
 offset_bottom = 40.0
@@ -3546,6 +3508,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label10" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 20.0
 offset_right = 480.0
@@ -3555,6 +3518,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label11" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 40.0
 offset_right = 480.0
@@ -3564,6 +3528,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label12" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 60.0
 offset_right = 480.0
@@ -3573,6 +3538,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label13" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 80.0
 offset_right = 480.0
@@ -3582,6 +3548,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label14" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 100.0
 offset_right = 480.0
@@ -3591,6 +3558,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label15" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 120.0
 offset_right = 480.0
@@ -3600,6 +3568,7 @@ text = "----"
 vertical_alignment = 1
 
 [node name="Label16" type="Label" parent="UIDebug/DebugWindow/MainLabels"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 140.0
 offset_right = 480.0
