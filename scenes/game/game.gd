@@ -323,7 +323,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_COMPLETE_GAIN_UP):
 				var complete_list = range(effect_data[1] + 1) # 3 以下 => [0, 1, 2, 3]
 				for deck_ball in _deck_ball_list:
-					complete_list = complete_list.filter(func(v): return v != deck_ball.level) # LV 以外を絞り込む = LV を消す
+					complete_list = complete_list.filter(func(v): return v != deck_ball.level) # LV 以外に絞り込む = LV を消す
 				if complete_list.is_empty():
 					gain_times += effect_data[2]
 			# ex: [EffectType.DECK_COUNT_GAIN_UP, 50, 1]
@@ -451,32 +451,31 @@ func _apply_extra_ball_effects() -> void:
 	print("[Game/BallEffect] EXTRA_SIZE_MAX_UP _extra_size_max: %s" % [_extra_size_max])
 
 	# ex: [EffectType.HOLE_SIZE_UP, 1]
-	var hole_size = 0
+	var hole_size_level = 0
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_SIZE_UP):
-		hole_size += effect_data[1]
+		hole_size_level += effect_data[1]
 	# ex: [EffectType.HOLE_GRAVITY_SIZE_UP, 1]
-	var gravity_size = 0
+	var gravity_size_level = 0
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_GRAVITY_SIZE_UP):
-		gravity_size += effect_data[1]
-	print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size: %s, gravity_size: %s" % [hole_size, gravity_size])
+		gravity_size_level += effect_data[1]
 	for node in get_tree().get_nodes_in_group("hole"):
 		if node is Hole:
 			if node.hole_type == Hole.HoleType.WARP_TO:
-				node.set_hole_size(hole_size)
-				node.set_gravity_size(gravity_size)
+				node.set_hole_size(hole_size_level)
+				node.set_gravity_size(gravity_size_level)
+	print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size_level: %s, gravity_size_level: %s" % [hole_size_level, gravity_size_level])
 
 	# ex: [EffectType.PACHINKO_START_TOP_UP, 1]
 	var start_level = 0
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_START_TOP_UP):
 		start_level += effect_data[1]
 	_pachinko.set_rush_start_top(start_level)
-
 	# ex: [EffectType.PACHINKO_CONTINUE_TOP_UP, 1]
 	var continue_level = 0
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_CONTINUE_TOP_UP):
 		continue_level += effect_data[1]
-	print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
 	_pachinko.set_rush_continue_top(continue_level)
+	print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
 
 
 # EXTRA Ball 内の特定の効果をまとめて取得する
@@ -486,7 +485,7 @@ func _get_extra_ball_effects(target_effect_type: BallEffect.EffectType) -> Array
 		for effect_data in ball.effects:
 			if target_effect_type == effect_data[0]:
 				effects.append(effect_data)
-	print("[Game] _get_extra_ball_effects(%s) -> %s" % [BallEffect.EffectType.keys()[target_effect_type], effects])
+	#print("[Game] _get_extra_ball_effects(%s) -> %s" % [BallEffect.EffectType.keys()[target_effect_type], effects])
 	return effects
 
 

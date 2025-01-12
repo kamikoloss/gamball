@@ -1,5 +1,6 @@
 class_name Pachinko
 extends Node2D
+# TODO: 機種のバリエーションを出せるようにする
 
 
 enum TweenType {

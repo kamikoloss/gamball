@@ -6,10 +6,6 @@ extends Area2D
 signal ball_entered
 
 
-const HOLE_SCALE_STEP: float = 0.25
-const GRAVITY_SCALE_STEP: float = 0.25
-
-
 enum HoleType {
 	EXTRA, # EXTRA を1個ビリヤード盤面上に出す + 抽選を行う
 	GAIN, # Ball を gain_ratio 倍にして PAYOUT に加算する
@@ -19,6 +15,12 @@ enum HoleType {
 	WARP_TO, # WARP_FROM にワープする
 }
 enum WarpGroup { NONE, A, B, C, D }
+
+
+const HOLE_SIZE_LEVEL_MAX: int = 4
+const GRAVITY_SIZE_LEVEL_MAX: int = 4
+const HOLE_SCALE_STEP: float = 0.25
+const GRAVITY_SCALE_STEP: float = 0.25
 
 
 # Hole の種類
@@ -111,13 +113,16 @@ func refresh_physics() -> void:
 
 
 func set_hole_size(level: int = 0) -> void:
-	var ratio: float = 1.0 + HOLE_SCALE_STEP * (level + 1)
+	var clamped_level = clampi(level, 0, HOLE_SIZE_LEVEL_MAX)
+	var ratio: float = 1.0 + HOLE_SCALE_STEP * clamped_level
 	self.scale = _hole_scale_base * ratio
 
 
 func set_gravity_size(level: int = 0) -> void:
-	var ratio: float = 1.0 + GRAVITY_SCALE_STEP * (level + 1)
+	var clamped_level = clampi(level, 0, GRAVITY_SIZE_LEVEL_MAX)
+	var ratio: float = 1.0 + GRAVITY_SCALE_STEP * clamped_level
 	_gravity_area.scale = _gravity_scale_base * ratio
+	_gravity_texture.scale = _gravity_scale_base * ratio
 
 
 func _on_area_entered(area: Area2D) -> void:
