@@ -233,12 +233,9 @@ func warp(to: Vector2) -> void:
 		return
 	is_warping = true
 
-	# NOTE: 縮小している間に BASE Layer を外すと
-	# ビリヤード盤面のポケットに落ちるときの見え方が微妙になる
-	# (無重力が効かなくなる)
+	set_collision_layer_value(Collision.Layer.BASE, false)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink()
-	set_collision_layer_value(Collision.Layer.BASE, false)
 
 	var tween = _get_tween(TweenType.WARP)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
@@ -249,9 +246,9 @@ func warp(to: Vector2) -> void:
 	# できれば _disable_shrink() が終わってからボールをゆっくり射出したい
 	linear_velocity = Vector2.ZERO
 
+	set_collision_layer_value(Collision.Layer.BASE, true)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
 	await _disable_shrink()
-	set_collision_layer_value(Collision.Layer.BASE, true)
 
 	is_warping = false
 

@@ -21,7 +21,7 @@ _label = NodePath("View/Label")
 [node name="View" type="Node2D" parent="."]
 
 [node name="Gravity" type="TextureRect" parent="View"]
-self_modulate = Color(1, 1, 1, 0.2)
+self_modulate = Color(1, 1, 1, 0.4)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -117,6 +117,7 @@ debug_color = Color(0.4, 0, 0, 0.4)
 
 [node name="Gravity" type="Area2D" parent="."]
 scale = Vector2(3, 3)
+collision_mask = 3
 priority = 20
 gravity_space_override = 2
 gravity_point = true

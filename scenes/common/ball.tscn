@@ -20,6 +20,7 @@ radius = 15.0
 
 [node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_mask_texture", "_body_texture", "_body_stripe_texture", "_body_stripe_2_texture", "_inner_texture", "_inner_texture_2", "_level_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
 z_index = 4
+collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
 contact_monitor = true
 max_contacts_reported = 4
