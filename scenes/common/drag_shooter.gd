@@ -23,7 +23,15 @@ const DRAG_LENGTH_MAX: float = 160
 
 
 # 現在有効かどうか
-var enabled: bool = true
+var enabled: bool = true:
+	set(value):
+		enabled = value
+		# ドラッグ中の場合: キャンセル扱いにする
+		if _is_dragging:
+			_is_dragging = false
+			_hide_drag_point()
+			_hide_arrow()
+			canceled.emit()
 
 
 # 現在ドラッグ中かどうか
