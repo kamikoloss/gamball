@@ -96,6 +96,7 @@ var balls: int = 0:
 	set(value):
 		balls = value
 		_game_ui.refresh_balls_label(value)
+		# ボールがない場合: DragShoter を無効化する
 		_drag_shooter.enabled = 0 < balls
 
 # ビリヤード盤面上の Ball の数
@@ -125,6 +126,7 @@ var _extra_ball_list: Array[Ball] = [
 	Ball.new(4, Ball.Rarity.COMMON),
 	Ball.new(5, Ball.Rarity.COMMON),
 ]
+# DECK/EXTRA の 最小/最大 数
 var _deck_size_min: int = DECK_SIZE_MIN_DEFAULT
 var _deck_size_max: int = DECK_SIZE_MAX
 var _extra_size_min: int = EXTRA_SIZE_MIN
@@ -173,6 +175,7 @@ func _ready() -> void:
 	# UI (GameUi)
 	_game_ui._refresh_tax_table(TAX_LIST)
 	_bunny.visible = false
+	_apply_extra_ball_effects()
 	_refresh_deck()
 	_refresh_extra()
 	_refresh_next()
@@ -263,14 +266,14 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	# Hole が無効の場合: 何もしない (通り抜ける)
 	if not hole.is_enabled:
 		return
+	# Hole が落ちるタイプでない場合: 何もしない
+	if Hole.HoleType.WARP_FROM:
+		return
 	# Ball が縮小中の場合: 何もしない (通り抜ける)
 	if ball.is_shrinked:
 		return
 
 	match hole.hole_type:
-
-		Hole.HoleType.WARP_FROM:
-			return
 
 		Hole.HoleType.WARP_TO:
 			# Ball が有効化されていない場合: 消す
@@ -353,7 +356,6 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 		Hole.HoleType.LOST:
 			await ball.die()
 			_billiards.refresh_balls_count(billiards_balls)
-			pass
 
 		Hole.HoleType.STACK:
 			if ball.is_stacked:
@@ -423,8 +425,8 @@ func _on_product_icon_pressed(product: Product) -> void:
 	money -= product.price
 
 	# DECK, EXTRA の見た目を更新する
-	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
-	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
+	_refresh_deck()
+	_refresh_extra()
 
 
 # EXTRA Ball の効果をまとめて反映する
@@ -570,13 +572,11 @@ func _pop_payout() -> void:
 
 # DECK の見た目を更新する
 func _refresh_deck() -> void:
-	_apply_extra_ball_effects()
 	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
 	_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
 
 # EXTRA の見た目を更新する
 func _refresh_extra() -> void:
-	_apply_extra_ball_effects()
 	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
 	_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
 
