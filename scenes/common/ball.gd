@@ -245,7 +245,7 @@ func warp_for_warp_to(to: Vector2) -> void:
 
 
 # ワープする (GAIN 用)
-func warp_for_gain(from: Vector2, to: Vector2):
+func warp_for_gain(from: Vector2, to: Vector2) -> void:
 	position = from
 	set_collision_layer_value(Collision.Layer.BASE, false)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)

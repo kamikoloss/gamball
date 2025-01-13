@@ -129,6 +129,9 @@ func set_rush_continue_top(level: int = 0) -> void:
 
 # Ball が ラッシュ用 Hole に落ちたときの処理
 func _on_rush_hole_ball_entered(hole: Hole, ball: Ball) -> void:
+	#
+	if ball.is_shrinked:
+		return
 	# 入れられる最大数に達している場合: 何もしない
 	if _rush_balls_max <= _rush_balls_count:
 		return

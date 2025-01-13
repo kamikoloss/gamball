@@ -1068,6 +1068,11 @@ position = Vector2(680, 640)
 scale = Vector2(1.5, 1.5)
 hole_type = 3
 
+[node name="HoleStack2" parent="Holes" instance=ExtResource("7_71f2d")]
+position = Vector2(680, 400)
+scale = Vector2(1.5, 1.5)
+hole_type = 3
+
 [node name="Balls" type="Node2D" parent="."]
 
 [node name="Ball" parent="Balls" instance=ExtResource("2_ma10n")]

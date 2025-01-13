@@ -310,6 +310,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 		Hole.HoleType.GAIN:
 			if not ball:
 				return
+
 			if ball.is_gained:
 				return
 			ball.is_gained = true
@@ -348,7 +349,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				gain_plus += effect_data[1]
 			print("[Game/BallEffect] XXXX_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
 
-			# 払い出しリストに追加する
+			# ボールを増加させてワープさせる
 			var level = ball.level # NOTE: ここで控えとかないと参照できないことがある
 			var amount = (hole.gain_ratio + gain_plus) * gain_times * level
 			if 0 < amount:
@@ -356,10 +357,12 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				tween.set_loops(amount)
 				tween.tween_interval(1.0 / 20)
 				tween.tween_callback(func():
-					var new_ball = _create_new_ball(level)
+					var new_ball: Ball = _ball_scene.instantiate()
+					new_ball.level = level
+					new_ball.is_shrinked = true
+					_balls_parent.add_child(new_ball)
 					await new_ball.warp_for_gain(hole.global_position, _payout_hole.global_position)
 				)
-			#_push_payout(ball.level, amount)
 			# PopupScore を表示する
 			var popup_text = "+%s" % [amount]
 			var popup_color = Color.WHITE
