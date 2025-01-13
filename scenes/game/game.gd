@@ -266,14 +266,14 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	# Hole が無効の場合: 何もしない (通り抜ける)
 	if not hole.is_enabled:
 		return
-	# Hole が落ちるタイプでない場合: 何もしない
-	if Hole.HoleType.WARP_FROM:
-		return
 	# Ball が縮小中の場合: 何もしない (通り抜ける)
 	if ball.is_shrinked:
 		return
 
 	match hole.hole_type:
+
+		Hole.HoleType.WARP_FROM:
+			pass
 
 		Hole.HoleType.WARP_TO:
 			# Ball が有効化されていない場合: 消す
@@ -343,6 +343,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 
 			# 払い出しリストに追加する
 			var amount = (hole.gain_ratio + gain_plus) * gain_times * ball.level
+			#var tween = create_tween()
 			_push_payout(ball.level, amount)
 			# PopupScore を表示する
 			var popup_text = "+%s" % [amount]
@@ -560,7 +561,6 @@ func _push_payout(level: int, amount: int) -> void:
 		_start_payout(4.0)
 
 # 払い出しキューを実行する
-# TODO: Hole ごとにキューを持つ
 func _pop_payout() -> void:
 	if _payout_level_list.is_empty():
 		return

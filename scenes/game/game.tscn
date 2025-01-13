@@ -28,8 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://c17m6dsrq78ov" path="res://images/people/bunny/hand_left_2.png" id="20_r8nov"]
 [ext_resource type="Texture2D" uid="uid://uk0q0it6ta74" path="res://images/people/bunny/hand_right_2.png" id="22_am1vr"]
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="25_qsn7e"]
-[ext_resource type="Texture2D" uid="uid://cg10xkxv5pj4y" path="res://images/icons/settings.png" id="26_7xc11"]
-[ext_resource type="Texture2D" uid="uid://dgu210g062myp" path="res://images/icons/info.png" id="27_k84dy"]
+[ext_resource type="Texture2D" uid="uid://bho0g835q1uhf" path="res://images/icons/settings.png" id="26_7xc11"]
+[ext_resource type="Texture2D" uid="uid://cmdugoyo8pdg1" path="res://images/icons/info.png" id="27_k84dy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_abgdr"]
 shader = ExtResource("3_cdybq")
@@ -672,7 +672,7 @@ debug_color = Color(0, 0, 0, 0)
 modulate = Color(0.6, 0.6, 0.6, 0.2)
 
 [node name="SpawnHole" type="Node2D" parent="Stack/Points"]
-position = Vector2(600, 520)
+position = Vector2(600, 360)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Stack/Points/SpawnHole"]
@@ -934,10 +934,6 @@ position = Vector2(1000, 280)
 [node name="Nail2" parent="Nails/x3a" instance=ExtResource("9_8yiuy")]
 position = Vector2(890, 420)
 
-[node name="Nail3" parent="Nails/x3a" instance=ExtResource("9_8yiuy")]
-visible = false
-position = Vector2(950, 420)
-
 [node name="Nail4" parent="Nails/x3a" instance=ExtResource("9_8yiuy")]
 position = Vector2(890, 440)
 
@@ -957,10 +953,6 @@ position = Vector2(920, 470)
 position = Vector2(900, 360)
 
 [node name="x3b" type="Node2D" parent="Nails"]
-
-[node name="Nail2" parent="Nails/x3b" instance=ExtResource("9_8yiuy")]
-visible = false
-position = Vector2(1050, 420)
 
 [node name="Nail3" parent="Nails/x3b" instance=ExtResource("9_8yiuy")]
 position = Vector2(1110, 420)
@@ -1162,17 +1154,17 @@ _ball_popup = NodePath("Main/BallPopup")
 _ball_popup_level = NodePath("Main/BallPopup/Level")
 _ball_popup_rarity = NodePath("Main/BallPopup/Rarity")
 _ball_popup_description = NodePath("Main/BallPopup/Description")
-_buy_balls_button = NodePath("Main/Buttons/Buy")
-_sell_balls_button = NodePath("Main/Buttons/Sell")
-_info_button = NodePath("Main/Buttons/Icon")
-_options_button = NodePath("Main/Buttons/Icon2")
+_buy_balls_button = NodePath("Main/Buttons/BuyBalls")
+_sell_balls_button = NodePath("Main/Buttons/SellBalls")
+_info_button = NodePath("Main/Buttons/Information")
+_options_button = NodePath("Main/Buttons/Options")
 _turn_label = NodePath("Main/Score/Turn/Turn")
 _money_label = NodePath("Main/Score/Money/Money")
-_payout_label = NodePath("Main/Score/Payout/Payout")
+_payout_label = NodePath("Main/Score/Balls/Payout")
 _balls_label = NodePath("Main/Score/Balls/Balls")
-_next_turn_label = NodePath("Main/Score/Turn2/Turn")
-_next_money_label = NodePath("Main/Score/Money2/Money")
-_next_balls_label = NodePath("Main/Score/Balls2/Balls")
+_next_turn_label = NodePath("Main/Score/Turn/Turn2")
+_next_money_label = NodePath("Main/Score/Money/Money2")
+_next_balls_label = NodePath("Main/Score/Balls/Balls2")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")
 _tax_give_up_button = NodePath("Tax/GiveUp")
@@ -2358,64 +2350,44 @@ is_display = true
 
 [node name="Buttons" type="Control" parent="UI/Main"]
 anchors_preset = 0
-offset_left = 560.0
-offset_top = 240.0
-offset_right = 560.0
-offset_bottom = 240.0
 
-[node name="Buy" type="Button" parent="UI/Main/Buttons"]
+[node name="BuyBalls" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_left = 5.0
-offset_right = 75.0
-offset_bottom = 40.0
-text = "Buy"
+offset_left = 640.0
+offset_top = 460.0
+offset_right = 800.0
+offset_bottom = 500.0
+scale = Vector2(0.5, 0.5)
+text = "To BALL"
 
-[node name="Sell" type="Button" parent="UI/Main/Buttons"]
+[node name="SellBalls" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_left = 85.0
-offset_right = 155.0
-offset_bottom = 40.0
-text = "Sell"
+offset_left = 640.0
+offset_top = 530.0
+offset_right = 800.0
+offset_bottom = 570.0
+scale = Vector2(0.5, 0.5)
+text = "To MONEY"
 
-[node name="Icon" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 50.0
-offset_right = 45.0
-offset_bottom = 90.0
-scale = Vector2(0.75, 0.75)
-icon = ExtResource("27_k84dy")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Icon2" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 50.0
-offset_right = 85.0
-offset_bottom = 90.0
+[node name="Options" type="Button" parent="UI/Main/Buttons"]
+offset_left = 1245.0
+offset_top = 5.0
+offset_right = 1285.0
+offset_bottom = 45.0
 scale = Vector2(0.75, 0.75)
 icon = ExtResource("26_7xc11")
+flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Icon3" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = 85.0
-offset_top = 50.0
-offset_right = 125.0
-offset_bottom = 90.0
+[node name="Information" type="Button" parent="UI/Main/Buttons"]
+offset_left = 1215.0
+offset_top = 5.0
+offset_right = 1255.0
+offset_bottom = 45.0
 scale = Vector2(0.75, 0.75)
-icon_alignment = 1
-expand_icon = true
-
-[node name="Icon4" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = 125.0
-offset_top = 50.0
-offset_right = 165.0
-offset_bottom = 90.0
-scale = Vector2(0.75, 0.75)
+icon = ExtResource("27_k84dy")
+flat = true
 icon_alignment = 1
 expand_icon = true
 
@@ -2426,50 +2398,32 @@ offset_top = 380.0
 offset_right = 560.0
 offset_bottom = 380.0
 
-[node name="Textures" type="Control" parent="UI/Main/Score"]
+[node name="Turn" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 20.0
-offset_bottom = 20.0
+offset_top = 10.0
+offset_bottom = 10.0
 
-[node name="Panel" type="Panel" parent="UI/Main/Score/Textures"]
+[node name="Panel" type="Panel" parent="UI/Main/Score/Turn"]
 layout_mode = 0
 offset_left = -5.0
-offset_top = 15.0
+offset_top = 25.0
 offset_right = 165.0
-offset_bottom = 45.0
+offset_bottom = 55.0
 
-[node name="Panel2" type="Panel" parent="UI/Main/Score/Textures"]
+[node name="Header" type="Label" parent="UI/Main/Score/Turn"]
 layout_mode = 0
-offset_left = -5.0
-offset_top = 75.0
-offset_right = 165.0
-offset_bottom = 105.0
-
-[node name="Panel3" type="Panel" parent="UI/Main/Score/Textures"]
-layout_mode = 0
-offset_left = -5.0
-offset_top = 135.0
-offset_right = 165.0
-offset_bottom = 185.0
-
-[node name="TitleTurn" type="Label" parent="UI/Main/Score"]
-layout_mode = 0
+offset_top = -10.0
 offset_right = 160.0
-offset_bottom = 40.0
+offset_bottom = 30.0
 theme_type_variation = &"LabelHeader"
 text = "TURN"
 vertical_alignment = 1
 
-[node name="Turn" type="Control" parent="UI/Main/Score"]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 40.0
-offset_bottom = 40.0
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Turn"]
+[node name="Label" type="Label" parent="UI/Main/Score/Turn"]
 layout_mode = 0
+offset_top = 30.0
 offset_right = 320.0
-offset_bottom = 80.0
+offset_bottom = 110.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2478,8 +2432,9 @@ vertical_alignment = 1
 
 [node name="Turn" type="Label" parent="UI/Main/Score/Turn"]
 layout_mode = 0
+offset_top = 30.0
 offset_right = 320.0
-offset_bottom = 80.0
+offset_bottom = 110.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2487,30 +2442,26 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Turn2" type="Control" parent="UI/Main/Score"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 80.0
-offset_top = 40.0
-offset_right = 80.0
-offset_bottom = 40.0
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Turn2"]
+[node name="Label2" type="Label" parent="UI/Main/Score/Turn"]
 visible = false
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
+offset_left = 80.0
+offset_top = 30.0
+offset_right = 400.0
+offset_bottom = 110.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "〒"
 vertical_alignment = 1
 
-[node name="Turn" type="Label" parent="UI/Main/Score/Turn2"]
+[node name="Turn2" type="Label" parent="UI/Main/Score/Turn"]
 self_modulate = Color(1, 0.25098, 0.25098, 1)
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
+offset_left = 80.0
+offset_top = 30.0
+offset_right = 400.0
+offset_bottom = 110.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2518,24 +2469,32 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TitleMoney" type="Label" parent="UI/Main/Score"]
+[node name="Money" type="Control" parent="UI/Main/Score"]
+anchors_preset = 0
+offset_top = 80.0
+offset_bottom = 80.0
+
+[node name="Panel" type="Panel" parent="UI/Main/Score/Money"]
 layout_mode = 0
-offset_top = 60.0
+offset_left = -5.0
+offset_top = 25.0
+offset_right = 165.0
+offset_bottom = 55.0
+
+[node name="Header" type="Label" parent="UI/Main/Score/Money"]
+layout_mode = 0
+offset_top = -10.0
 offset_right = 160.0
-offset_bottom = 100.0
+offset_bottom = 30.0
 theme_type_variation = &"LabelHeader"
 text = "MONEY"
 vertical_alignment = 1
 
-[node name="Money" type="Control" parent="UI/Main/Score"]
-anchors_preset = 0
-offset_top = 100.0
-offset_bottom = 100.0
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Money"]
+[node name="Label" type="Label" parent="UI/Main/Score/Money"]
 layout_mode = 0
+offset_top = 30.0
 offset_right = 320.0
-offset_bottom = 80.0
+offset_bottom = 110.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2544,8 +2503,9 @@ vertical_alignment = 1
 
 [node name="Money" type="Label" parent="UI/Main/Score/Money"]
 layout_mode = 0
+offset_top = 30.0
 offset_right = 320.0
-offset_bottom = 80.0
+offset_bottom = 110.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2553,96 +2513,26 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Money2" type="Control" parent="UI/Main/Score"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 80.0
-offset_top = 100.0
-offset_right = 80.0
-offset_bottom = 100.0
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Money2"]
+[node name="Label2" type="Label" parent="UI/Main/Score/Money"]
 visible = false
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
+offset_left = 80.0
+offset_top = 110.0
+offset_right = 400.0
+offset_bottom = 190.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "＄"
 vertical_alignment = 1
 
-[node name="Money" type="Label" parent="UI/Main/Score/Money2"]
+[node name="Money2" type="Label" parent="UI/Main/Score/Money"]
 self_modulate = Color(1, 0.25098, 0.25098, 1)
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="TitleBalls" type="Label" parent="UI/Main/Score"]
-layout_mode = 0
-offset_top = 120.0
-offset_right = 160.0
-offset_bottom = 160.0
-theme_type_variation = &"LabelHeader"
-text = "BALLS"
-vertical_alignment = 1
-
-[node name="Payout" type="Control" parent="UI/Main/Score"]
-anchors_preset = 0
-offset_top = 160.0
-offset_bottom = 160.0
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Payout"]
-visible = false
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "●"
-vertical_alignment = 1
-
-[node name="Payout" type="Label" parent="UI/Main/Score/Payout"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Payout2" type="Control" parent="UI/Main/Score"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
 offset_left = 80.0
-offset_top = 160.0
-offset_right = 80.0
-offset_bottom = 160.0
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Payout2"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("10_w3wxc")
-theme_override_font_sizes/font_size = 64
-text = "●"
-vertical_alignment = 1
-
-[node name="Payout" type="Label" parent="UI/Main/Score/Payout2"]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
+offset_top = 30.0
+offset_right = 400.0
+offset_bottom = 110.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2652,13 +2542,81 @@ vertical_alignment = 1
 
 [node name="Balls" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 180.0
-offset_bottom = 180.0
+offset_top = 150.0
+offset_bottom = 150.0
+
+[node name="Panel" type="Panel" parent="UI/Main/Score/Balls"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 25.0
+offset_right = 165.0
+offset_bottom = 75.0
+
+[node name="Header" type="Label" parent="UI/Main/Score/Balls"]
+layout_mode = 0
+offset_top = -10.0
+offset_right = 160.0
+offset_bottom = 30.0
+theme_type_variation = &"LabelHeader"
+text = "BALLS"
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="UI/Main/Score/Balls"]
+visible = false
+layout_mode = 0
+offset_top = 30.0
+offset_right = 320.0
+offset_bottom = 110.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "●"
+vertical_alignment = 1
+
+[node name="Payout" type="Label" parent="UI/Main/Score/Balls"]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 320.0
+offset_bottom = 110.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "999999"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="UI/Main/Score/Balls"]
+visible = false
 layout_mode = 0
+offset_left = 80.0
+offset_top = 30.0
+offset_right = 400.0
+offset_bottom = 110.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "●"
+vertical_alignment = 1
+
+[node name="Payout2" type="Label" parent="UI/Main/Score/Balls"]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_top = 30.0
+offset_right = 400.0
+offset_bottom = 110.0
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("10_w3wxc")
+theme_override_font_sizes/font_size = 64
+text = "999999"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/Main/Score/Balls"]
+layout_mode = 0
+offset_top = 50.0
 offset_right = 320.0
-offset_bottom = 80.0
+offset_bottom = 130.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2667,8 +2625,9 @@ vertical_alignment = 1
 
 [node name="Balls" type="Label" parent="UI/Main/Score/Balls"]
 layout_mode = 0
+offset_top = 50.0
 offset_right = 320.0
-offset_bottom = 80.0
+offset_bottom = 130.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
@@ -2676,30 +2635,26 @@ text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Balls2" type="Control" parent="UI/Main/Score"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 80.0
-offset_top = 180.0
-offset_right = 80.0
-offset_bottom = 180.0
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Balls2"]
+[node name="Label4" type="Label" parent="UI/Main/Score/Balls"]
 visible = false
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
+offset_left = 80.0
+offset_top = 50.0
+offset_right = 400.0
+offset_bottom = 130.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
 text = "●"
 vertical_alignment = 1
 
-[node name="Balls" type="Label" parent="UI/Main/Score/Balls2"]
+[node name="Balls2" type="Label" parent="UI/Main/Score/Balls"]
 self_modulate = Color(1, 0.25098, 0.25098, 1)
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 80.0
+offset_left = 80.0
+offset_top = 50.0
+offset_right = 400.0
+offset_bottom = 130.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("10_w3wxc")
 theme_override_font_sizes/font_size = 64
