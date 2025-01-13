@@ -101,7 +101,6 @@ offset_bottom = 1600.0
 texture = ExtResource("7_subrs")
 
 [node name="Bubble" type="Control" parent="."]
-modulate = Color(1, 1, 1, 0.752941)
 layout_mode = 3
 anchors_preset = 0
 offset_left = -200.0
@@ -110,6 +109,7 @@ offset_right = -200.0
 offset_bottom = 60.0
 
 [node name="TextureRect" type="TextureRect" parent="Bubble"]
+self_modulate = Color(1, 1, 1, 0.8)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -119,6 +119,7 @@ texture = ExtResource("6_ex8u5")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Bubble"]
+self_modulate = Color(1, 1, 1, 0.8)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 150.0
