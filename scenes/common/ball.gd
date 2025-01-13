@@ -253,6 +253,36 @@ func warp(to: Vector2) -> void:
 	is_warping = false
 
 
+func warp_for_gain(from: Vector2, to: Vector2):
+	if is_warping:
+		return
+	is_warping = true
+	
+	position = from
+
+	set_collision_layer_value(Collision.Layer.BASE, false)
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
+	# 即座に縮小する
+	_view_parent.scale = SHRINK_SCALE
+	_trail_line.width = _trail_default_width * SHRINK_SCALE.x
+	is_shrinked = true
+	refresh_view()
+
+	var tween = _get_tween(TweenType.WARP)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "position", to, WARP_DURATION)
+	await tween.finished
+
+	linear_velocity = Vector2.ZERO
+
+	set_collision_layer_value(Collision.Layer.BASE, true)
+	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
+	await _disable_shrink()
+
+	is_warping = false
+	apply_impulse(Vector2(0, randi_range(400, 500))) 
+
+
 # 消える
 func die() -> void:
 	set_collision_layer_value(Collision.Layer.BASE, false)

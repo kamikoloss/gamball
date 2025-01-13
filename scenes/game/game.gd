@@ -308,6 +308,8 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			_pachinko.start_lottery()
 
 		Hole.HoleType.GAIN:
+			if not ball:
+				return
 			if ball.is_gained:
 				return
 			ball.is_gained = true
@@ -347,9 +349,14 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			print("[Game/BallEffect] XXXX_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
 
 			# 払い出しリストに追加する
-			var amount = (hole.gain_ratio + gain_plus) * gain_times * ball.level
-			#var tween = create_tween()
-			_push_payout(ball.level, amount)
+			var level = ball.level # NOTE: ここで控えとかないと参照できないことがある
+			var amount = (hole.gain_ratio + gain_plus) * gain_times * level
+			if 0 < amount:
+				var tween = create_tween()
+				tween.set_loops(amount)
+				tween.tween_interval(1.0 / 20)
+				tween.tween_callback(func(): _create_new_ball(level).warp_for_gain(hole.global_position, _payout_hole.global_position))
+			#_push_payout(ball.level, amount)
 			# PopupScore を表示する
 			var popup_text = "+%s" % [amount]
 			var popup_color = Color.WHITE
