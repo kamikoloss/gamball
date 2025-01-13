@@ -393,7 +393,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 		Product.ProductType.DECK_PACK:
 			if _deck_size_max <= _deck_ball_list.size():
 				return
-			for i in 3:
+			for i in 2:
 				if _deck_size_max <= _deck_ball_list.size():
 					continue
 				var level_rarity = _pick_random_rarity(true) # COMMON 抜き
@@ -410,7 +410,7 @@ func _on_product_icon_pressed(product: Product) -> void:
 		Product.ProductType.EXTRA_PACK:
 			if _extra_size_max <= _extra_ball_list.size():
 				return
-				# TODO: あふれるとき注意出す
+				# TODO: あふれるとき注意出す？
 			for i in 2:
 				if _extra_size_max <= _extra_ball_list.size():
 					continue

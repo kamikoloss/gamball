@@ -15,8 +15,8 @@ enum ProductType {
 
 
 const PRODUCT_PRICES = {
-	ProductType.DECK_PACK: 100,
-	ProductType.DECK_CLEANER: 50,
+	ProductType.DECK_PACK: 200,
+	ProductType.DECK_CLEANER: 100,
 	ProductType.EXTRA_PACK: 200,
 	ProductType.EXTRA_CLEANER: 100,
 }
@@ -28,10 +28,10 @@ const BUY_COLOR_DEACTIVE = Color(0.6, 0.2, 0.2)
 # 商品の [<名称>, <説明分>]
 # TODO: JSON に逃がす
 const PRODUCT_DATA = {
-	ProductType.DECK_PACK: ["DECK Pack", "Add random BALL x3\nto DECK"],
-	ProductType.DECK_CLEANER: ["DECK Cleaner", "Remove the lowest\nBALL from DECK"],
-	ProductType.EXTRA_PACK: ["EXTRA Pack", "Add random BALL x2\nto EXTRA"],
-	ProductType.EXTRA_CLEANER: ["EXTRA Cleaner", "Remove the lowest\nBALL from EXTRA"],
+	ProductType.DECK_PACK: ["DECK Pack", "DECK にランダムな\nボール x2 を追加する"],
+	ProductType.DECK_CLEANER: ["DECK Cleaner", "DECK から最も低い No. の\nボール x1 を削除する"],
+	ProductType.EXTRA_PACK: ["EXTRA Pack", "EXTRA にランダムな\nボール x2 を追加する"],
+	ProductType.EXTRA_CLEANER: ["EXTRA Cleaner", "EXTRA から最も低い No. の\nボール x1を削除する"],
 }
 
 
