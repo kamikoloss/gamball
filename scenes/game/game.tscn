@@ -274,38 +274,38 @@ position = Vector2(1000, 120)
 [node name="Nails" type="Node2D" parent="Pachinko/Rush"]
 
 [node name="Nail4" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
-position = Vector2(-120, 60)
+position = Vector2(-140, 60)
 
 [node name="Nail5" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
-position = Vector2(-100, 80)
+position = Vector2(-120, 80)
 
 [node name="Nail6" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
-position = Vector2(-60, 80)
+position = Vector2(-80, 80)
 
 [node name="Nail7" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
-position = Vector2(-40, 60)
+position = Vector2(-60, 60)
 
 [node name="Nail10" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
-position = Vector2(40, 60)
+position = Vector2(60, 60)
 
 [node name="Nail11" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
-position = Vector2(60, 80)
+position = Vector2(80, 80)
 
 [node name="Nail12" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
-position = Vector2(100, 80)
+position = Vector2(120, 80)
 
 [node name="Nail13" parent="Pachinko/Rush/Nails" instance=ExtResource("9_8yiuy")]
-position = Vector2(120, 60)
+position = Vector2(140, 60)
 
 [node name="Holes" type="Node2D" parent="Pachinko/Rush"]
 
 [node name="Hole" parent="Pachinko/Rush/Holes" instance=ExtResource("7_71f2d")]
-position = Vector2(-80, 40)
+position = Vector2(-100, 40)
 hole_type = 1
 gain_ratio = 10
 
 [node name="Hole2" parent="Pachinko/Rush/Holes" instance=ExtResource("7_71f2d")]
-position = Vector2(80, 40)
+position = Vector2(100, 40)
 hole_type = 1
 gain_ratio = 10
 
