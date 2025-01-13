@@ -132,6 +132,8 @@ var _deck_size_max: int = DECK_SIZE_MAX
 var _extra_size_min: int = EXTRA_SIZE_MIN
 var _extra_size_max: int = EXTRA_SIZE_MAX_DEFAULT
 
+# 払い出しを行う Hole
+var _payout_hole: Hole
 # 払い出しキューが残っている Ball level のリスト
 var _payout_level_list: Array[int] = []
 
@@ -163,11 +165,14 @@ func _ready() -> void:
 	_game_ui.shop_exit_button_pressed.connect(_on_shop_exit_button_pressed)
 	_game_ui.info_button_pressed.connect(_on_info_button_pressed)
 	_game_ui.options_button_pressed.connect(_on_options_button_pressed)
-	# Signal (Hole)
+
+	# Hole
 	for node in get_tree().get_nodes_in_group("hole"):
 		if node is Hole:
 			node.ball_entered.connect(_on_hole_ball_entered)
-	# Signal (Product)
+			if node.hole_type == Hole.HoleType.WARP_FROM and node.warp_group == Hole.WarpGroup.PAYOUT:
+				_payout_hole = node
+	# Product
 	for node in _products_parent.get_children():
 		if node is Product:
 			node.icon_pressed.connect(_on_product_icon_pressed)
@@ -544,6 +549,16 @@ func _start_payout(payout_speed_ratio: float = 1.0) -> void:
 	tween.set_loops()
 	tween.tween_callback(_pop_payout).set_delay(delay)
 
+# 払い出しキューを実行する
+func _pop_payout() -> void:
+	if _payout_level_list.is_empty():
+		return
+	var level = _payout_level_list.pop_front()
+	var new_ball = _create_new_ball(level)
+	new_ball.position = _payout_hole.position
+	new_ball.apply_impulse(Vector2(0, randi_range(400, 500))) 
+	_game_ui.refresh_payout_label(_payout_level_list.size())
+
 # 払い出しキューに追加する
 func _push_payout(level: int, amount: int) -> void:
 	for i in amount:
@@ -559,15 +574,6 @@ func _push_payout(level: int, amount: int) -> void:
 		_start_payout(3.0)
 	else:
 		_start_payout(4.0)
-
-# 払い出しキューを実行する
-func _pop_payout() -> void:
-	if _payout_level_list.is_empty():
-		return
-	var level = _payout_level_list.pop_front()
-	var new_ball = _create_new_ball(level)
-	_stack.spawn_ball(new_ball)
-	_game_ui.refresh_payout_label(_payout_level_list.size())
 
 
 # DECK の見た目を更新する

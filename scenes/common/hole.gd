@@ -14,7 +14,7 @@ enum HoleType {
 	WARP_FROM, # WARP_TO からワープする
 	WARP_TO, # WARP_FROM にワープする
 }
-enum WarpGroup { NONE, A, B, C, D }
+enum WarpGroup { NONE, PAYOUT, A, B, C, D }
 
 
 const HOLE_SIZE_LEVEL_MAX: int = 4
@@ -75,23 +75,26 @@ func refresh_view() -> void:
 			_label.text = "%s>" % [WarpGroup.keys()[warp_group]]
 			return
 		Hole.HoleType.WARP_FROM:
-			_label.text = ">%s" % [WarpGroup.keys()[warp_group]]
+			if warp_group == WarpGroup.PAYOUT:
+				_label.text = ">X"
+			else:
+				_label.text = ">%s" % [WarpGroup.keys()[warp_group]]
 			_body_texture.self_modulate = Color(0.9, 0.9, 0.9)
 			_label.self_modulate = Color.BLACK
 			return
 		Hole.HoleType.EXTRA:
-			_label.text = "EX"
+			_label.text = "EXT"
 			_label.self_modulate = Color.GREEN
 			return
 		Hole.HoleType.GAIN:
-			_label.text = "×%s" % [gain_ratio]
+			_label.text = "X%s" % [gain_ratio]
 			if gain_ratio <= 0:
 				_label.self_modulate = Color.RED
 			return
 		Hole.HoleType.LOST:
 			pass
 		Hole.HoleType.STACK:
-			_label.text = "＋"
+			_label.text = "+"
 			return
 	# return しなかった場合: Label を非表示にする
 	_label.visible = false

@@ -65,8 +65,8 @@ offset_bottom = 720.0
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_positions", "_balls_count_label")]
 script = ExtResource("3_0s1kj")
-_spawn_position = NodePath("Points/SpawnHoleMain")
-_spawn_extra_positions = [NodePath("Points/SpawnHoleExtra"), NodePath("Points/SpawnHoleExtra2"), NodePath("Points/SpawnHoleExtra3"), NodePath("Points/SpawnHoleExtra4")]
+_spawn_position = NodePath("Points/SpawnMain")
+_spawn_extra_positions = [NodePath("Points/SpawnExtra"), NodePath("Points/SpawnExtra2"), NodePath("Points/SpawnExtra3"), NodePath("Points/SpawnExtra4")]
 _balls_count_label = NodePath("UI/Labels/BallsB")
 
 [node name="Gravity" type="Area2D" parent="Billiards"]
@@ -95,11 +95,11 @@ debug_color = Color(0, 0, 0, 0)
 [node name="Points" type="Node2D" parent="Billiards"]
 modulate = Color(1, 1, 1, 0.1)
 
-[node name="SpawnHoleMain" type="Node2D" parent="Billiards/Points"]
+[node name="SpawnMain" type="Node2D" parent="Billiards/Points"]
 position = Vector2(280, 360)
 scale = Vector2(2, 2)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHoleMain"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnMain"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -114,11 +114,11 @@ grow_vertical = 2
 texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
-[node name="SpawnHoleExtra" type="Node2D" parent="Billiards/Points"]
+[node name="SpawnExtra" type="Node2D" parent="Billiards/Points"]
 position = Vector2(160, 200)
 scale = Vector2(2, 2)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHoleExtra"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnExtra"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -133,11 +133,11 @@ grow_vertical = 2
 texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
-[node name="SpawnHoleExtra2" type="Node2D" parent="Billiards/Points"]
+[node name="SpawnExtra2" type="Node2D" parent="Billiards/Points"]
 position = Vector2(160, 520)
 scale = Vector2(2, 2)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHoleExtra2"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnExtra2"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -152,11 +152,11 @@ grow_vertical = 2
 texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
-[node name="SpawnHoleExtra3" type="Node2D" parent="Billiards/Points"]
+[node name="SpawnExtra3" type="Node2D" parent="Billiards/Points"]
 position = Vector2(400, 200)
 scale = Vector2(2, 2)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHoleExtra3"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnExtra3"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -171,86 +171,11 @@ grow_vertical = 2
 texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
-[node name="SpawnHoleExtra4" type="Node2D" parent="Billiards/Points"]
+[node name="SpawnExtra4" type="Node2D" parent="Billiards/Points"]
 position = Vector2(400, 520)
 scale = Vector2(2, 2)
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnHoleExtra4"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="View" type="Node2D" parent="Billiards"]
-modulate = Color(0.8, 0.8, 0.8, 1)
-
-[node name="Corner" type="Node2D" parent="Billiards/View"]
-position = Vector2(40, 40)
-
-[node name="TextureRect" type="TextureRect" parent="Billiards/View/Corner"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Corner2" type="Node2D" parent="Billiards/View"]
-position = Vector2(40, 680)
-
-[node name="TextureRect" type="TextureRect" parent="Billiards/View/Corner2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Corner3" type="Node2D" parent="Billiards/View"]
-position = Vector2(520, 40)
-
-[node name="TextureRect" type="TextureRect" parent="Billiards/View/Corner3"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Corner4" type="Node2D" parent="Billiards/View"]
-position = Vector2(520, 680)
-
-[node name="TextureRect" type="TextureRect" parent="Billiards/View/Corner4"]
+[node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnExtra4"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -383,81 +308,6 @@ gain_ratio = 10
 position = Vector2(80, 40)
 hole_type = 1
 gain_ratio = 10
-
-[node name="View" type="Node2D" parent="Pachinko"]
-modulate = Color(0.8, 0.8, 0.8, 1)
-
-[node name="Corner" type="Node2D" parent="Pachinko/View"]
-position = Vector2(760, 40)
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/View/Corner"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Corner2" type="Node2D" parent="Pachinko/View"]
-position = Vector2(760, 680)
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/View/Corner2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Corner3" type="Node2D" parent="Pachinko/View"]
-position = Vector2(1240, 40)
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/View/Corner3"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Corner4" type="Node2D" parent="Pachinko/View"]
-position = Vector2(1240, 680)
-
-[node name="TextureRect" type="TextureRect" parent="Pachinko/View/Corner4"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
 
 [node name="UI" type="Control" parent="Pachinko"]
 layout_mode = 3
@@ -654,9 +504,8 @@ offset_top = -30.0
 offset_right = -15.0
 offset_bottom = -30.0
 
-[node name="Stack" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position")]
+[node name="Stack" type="Node2D" parent="."]
 script = ExtResource("12_7kfse")
-_spawn_position = NodePath("Points/SpawnHole")
 
 [node name="Gravity" type="Area2D" parent="Stack"]
 position = Vector2(640, 520)
@@ -667,67 +516,6 @@ linear_damp = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Gravity"]
 shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
-
-[node name="Points" type="Node2D" parent="Stack"]
-modulate = Color(0.6, 0.6, 0.6, 0.2)
-
-[node name="SpawnHole" type="Node2D" parent="Stack/Points"]
-position = Vector2(600, 360)
-scale = Vector2(2, 2)
-
-[node name="TextureRect" type="TextureRect" parent="Stack/Points/SpawnHole"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="View" type="Node2D" parent="Stack"]
-modulate = Color(0.8, 0.8, 0.8, 1)
-
-[node name="Corner" type="Node2D" parent="Stack/View"]
-position = Vector2(560, 680)
-
-[node name="TextureRect" type="TextureRect" parent="Stack/View/Corner"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
-
-[node name="Corner2" type="Node2D" parent="Stack/View"]
-position = Vector2(720, 680)
-
-[node name="TextureRect" type="TextureRect" parent="Stack/View/Corner2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_j1dyl")
-expand_mode = 1
 
 [node name="DragShooter" parent="." instance=ExtResource("14_r73fj")]
 position = Vector2(280, 360)
@@ -795,6 +583,189 @@ scale = Vector2(16, 1)
 position = Vector2(600, 660)
 rotation = 0.523599
 scale = Vector2(4, 1)
+
+[node name="WallsView" type="Node2D" parent="."]
+modulate = Color(0.8, 0.8, 0.8, 1)
+
+[node name="Corner" type="Node2D" parent="WallsView"]
+position = Vector2(40, 40)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
+
+[node name="Corner2" type="Node2D" parent="WallsView"]
+position = Vector2(40, 680)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
+
+[node name="Corner3" type="Node2D" parent="WallsView"]
+position = Vector2(520, 40)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
+
+[node name="Corner4" type="Node2D" parent="WallsView"]
+position = Vector2(520, 680)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner4"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
+
+[node name="Corner5" type="Node2D" parent="WallsView"]
+position = Vector2(760, 40)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner5"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
+
+[node name="Corner6" type="Node2D" parent="WallsView"]
+position = Vector2(760, 680)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner6"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
+
+[node name="Corner7" type="Node2D" parent="WallsView"]
+position = Vector2(1240, 40)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner7"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
+
+[node name="Corner8" type="Node2D" parent="WallsView"]
+position = Vector2(1240, 680)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner8"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
+
+[node name="Corner9" type="Node2D" parent="WallsView"]
+position = Vector2(560, 680)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner9"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
+
+[node name="Corner10" type="Node2D" parent="WallsView"]
+position = Vector2(720, 680)
+
+[node name="TextureRect" type="TextureRect" parent="WallsView/Corner10"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_j1dyl")
+expand_mode = 1
 
 [node name="Nails" type="Node2D" parent="."]
 
@@ -1003,42 +974,47 @@ position = Vector2(1000, 510)
 [node name="HoleWarpToA" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 60)
 hole_type = 5
-warp_group = 1
+warp_group = 2
 
 [node name="HoleWarpToA2" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 360)
 hole_type = 5
-warp_group = 1
+warp_group = 2
 
 [node name="HoleWarpToA3" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(60, 660)
 hole_type = 5
-warp_group = 1
+warp_group = 2
 
 [node name="HoleWarpToB" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 60)
 hole_type = 5
-warp_group = 2
+warp_group = 3
 
 [node name="HoleWarpToB2" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 360)
 hole_type = 5
-warp_group = 2
+warp_group = 3
 
 [node name="HoleWarpToB3" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(500, 660)
 hole_type = 5
-warp_group = 2
+warp_group = 3
 
 [node name="HoleWarpFromA" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(800, 80)
 hole_type = 4
-warp_group = 1
+warp_group = 2
 
 [node name="HoleWarpFromB" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(1200, 80)
 hole_type = 4
-warp_group = 2
+warp_group = 3
+
+[node name="HoleWarpFromGain" parent="Holes" instance=ExtResource("7_71f2d")]
+position = Vector2(600, 360)
+hole_type = 4
+warp_group = 1
 
 [node name="HoleGainx0a" parent="Holes" instance=ExtResource("7_71f2d")]
 position = Vector2(960, 660)
@@ -2370,10 +2346,10 @@ scale = Vector2(0.5, 0.5)
 text = "To MONEY"
 
 [node name="Options" type="Button" parent="UI/Main/Buttons"]
-offset_left = 1245.0
-offset_top = 5.0
-offset_right = 1285.0
-offset_bottom = 45.0
+offset_left = 1250.0
+offset_top = 10.0
+offset_right = 1290.0
+offset_bottom = 50.0
 scale = Vector2(0.75, 0.75)
 icon = ExtResource("26_7xc11")
 flat = true
@@ -2381,10 +2357,10 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Information" type="Button" parent="UI/Main/Buttons"]
-offset_left = 1215.0
-offset_top = 5.0
-offset_right = 1255.0
-offset_bottom = 45.0
+offset_left = 1250.0
+offset_top = 40.0
+offset_right = 1290.0
+offset_bottom = 80.0
 scale = Vector2(0.75, 0.75)
 icon = ExtResource("27_k84dy")
 flat = true
