@@ -30,7 +30,6 @@ var _main_functions: Dictionary = {
 	"MONEY -100": func(): _game.money -= 100,
 	"BALLS +100": func(): _game.balls += 100,
 	"BALLS -100": func(): _game.balls -= 100,
-	#"restart_game": func(): _game.restart_game(),
 	"PAYOUT +100": func(): _game._push_payout(0, 100),
 	"payout speed x1": func(): _game._start_payout(1.0),
 	"payout speed x2": func(): _game._start_payout(2.0),

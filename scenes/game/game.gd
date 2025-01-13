@@ -185,10 +185,6 @@ func _ready() -> void:
 	_start_payout()
 
 
-func restart_game() -> void:
-	get_tree().reload_current_scene()
-
-
 func _on_drag_shooter_pressed() -> void:
 	# ビリヤード盤面上に Ball を生成する
 	balls -= 1
