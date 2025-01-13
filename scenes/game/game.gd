@@ -296,7 +296,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for node in get_tree().get_nodes_in_group("hole"):
 				if node is Hole:
 					if node.hole_type == Hole.HoleType.WARP_FROM and node.warp_group == hole.warp_group:
-						ball.warp(node.global_position)
+						ball.warp_for_warp_to(node.global_position)
 
 		Hole.HoleType.EXTRA:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
@@ -355,7 +355,10 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				var tween = create_tween()
 				tween.set_loops(amount)
 				tween.tween_interval(1.0 / 20)
-				tween.tween_callback(func(): _create_new_ball(level).warp_for_gain(hole.global_position, _payout_hole.global_position))
+				tween.tween_callback(func():
+					var new_ball = _create_new_ball(level)
+					await new_ball.warp_for_gain(hole.global_position, _payout_hole.global_position)
+				)
 			#_push_payout(ball.level, amount)
 			# PopupScore を表示する
 			var popup_text = "+%s" % [amount]

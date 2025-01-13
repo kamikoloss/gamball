@@ -226,61 +226,44 @@ func hide_hover() -> void:
 	_hover_texture.visible = false
 
 
-# ワープする
-func warp(to: Vector2) -> void:
-	# ワープの途中で WARP_TO に乗ったときにワープしないようにする
-	if is_warping:
-		return
-	is_warping = true
-
+# ワープする (WARP_TO 用)
+func warp_for_warp_to(to: Vector2) -> void:
 	set_collision_layer_value(Collision.Layer.BASE, false)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
+
 	await _enable_shrink()
-
-	var tween = _get_tween(TweenType.WARP)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "position", to, WARP_DURATION)
-	await tween.finished
-
-	# TODO: await の前におかないとボールが勢いよく出てしまうのでここに書いている
-	# できれば _disable_shrink() が終わってからボールをゆっくり射出したい
-	linear_velocity = Vector2.ZERO
+	await _warp(to)
 
 	set_collision_layer_value(Collision.Layer.BASE, true)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
+
+	# TODO: await の前におかないとボールが勢いよく出てしまうのでここに書いている
+	# できれば _disable_shrink() が終わってからボールを射出したい
+	linear_velocity = Vector2.ZERO
+
 	await _disable_shrink()
 
-	is_warping = false
 
-
+# ワープする (GAIN 用)
 func warp_for_gain(from: Vector2, to: Vector2):
-	if is_warping:
-		return
-	is_warping = true
-	
 	position = from
-
 	set_collision_layer_value(Collision.Layer.BASE, false)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
+
 	# 即座に縮小する
 	_view_parent.scale = SHRINK_SCALE
 	_trail_line.width = _trail_default_width * SHRINK_SCALE.x
 	is_shrinked = true
 	refresh_view()
 
-	var tween = _get_tween(TweenType.WARP)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "position", to, WARP_DURATION)
-	await tween.finished
+	position = from
+	await _warp(to)
 
 	linear_velocity = Vector2.ZERO
 
 	set_collision_layer_value(Collision.Layer.BASE, true)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
 	await _disable_shrink()
-
-	is_warping = false
-	apply_impulse(Vector2(0, randi_range(400, 500))) 
 
 
 # 消える
@@ -299,6 +282,28 @@ func _on_body_entered(body: Node) -> void:
 		if not is_active:
 			is_active = true
 			refresh_view()
+
+
+func _warp(to: Vector2) -> void:
+	# ワープの途中で WARP_TO に乗ったときにワープしないようにする
+	if is_warping:
+		return
+	is_warping = true
+
+	var tween_warp = _get_tween(TweenType.WARP)
+	tween_warp.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween_warp.tween_property(self, "position", to, WARP_DURATION)
+
+	var tween_warp_curve = _get_tween(TweenType.WARP_CURVE)
+	var view_from = _view_parent.position
+	var view_to = view_from + Vector2(0, randi_range(-80, 80))
+	tween_warp_curve.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween_warp_curve.tween_property(_view_parent, "position", view_to, WARP_DURATION / 4.0)
+	tween_warp_curve.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tween_warp_curve.tween_property(_view_parent, "position", view_from, WARP_DURATION / 2.0)
+
+	await tween_warp.finished
+	is_warping = false
 
 
 # 自身の見た目を徐々に縮小する
@@ -332,7 +337,7 @@ func _disable_shrink(hide: bool = false) -> void:
 
 # 残像の頂点を記録する
 func _refresh_trail_points() -> void:
-	_trail_points.push_front(self.position)
+	_trail_points.push_front(_view_parent.global_position)
 	if TRAIL_MAX_LENGTH < _trail_points.size():
 		_trail_points.pop_back()
 	_trail_line.clear_points()
