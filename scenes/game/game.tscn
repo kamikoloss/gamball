@@ -1012,7 +1012,7 @@ hole_type = 4
 warp_group = 3
 
 [node name="HoleWarpFromGain" parent="Holes" instance=ExtResource("7_71f2d")]
-position = Vector2(600, 360)
+position = Vector2(600, 400)
 hole_type = 4
 warp_group = 1
 
@@ -1064,7 +1064,7 @@ position = Vector2(1000, 360)
 hole_type = 0
 
 [node name="HoleStack" parent="Holes" instance=ExtResource("7_71f2d")]
-position = Vector2(685, 645)
+position = Vector2(680, 640)
 scale = Vector2(1.5, 1.5)
 hole_type = 3
 
@@ -2330,18 +2330,18 @@ anchors_preset = 0
 [node name="BuyBalls" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
 offset_left = 640.0
-offset_top = 460.0
+offset_top = 480.0
 offset_right = 800.0
-offset_bottom = 500.0
+offset_bottom = 520.0
 scale = Vector2(0.5, 0.5)
 text = "To BALLS"
 
 [node name="SellBalls" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
 offset_left = 640.0
-offset_top = 530.0
+offset_top = 550.0
 offset_right = 800.0
-offset_bottom = 570.0
+offset_bottom = 590.0
 scale = Vector2(0.5, 0.5)
 text = "To MONEY"
 
@@ -2352,8 +2352,8 @@ offset_top = 10.0
 offset_right = 1280.0
 offset_bottom = 50.0
 scale = Vector2(0.75, 0.75)
+theme_type_variation = &"ButtonFlatIcon"
 icon = ExtResource("26_7xc11")
-flat = true
 icon_alignment = 1
 expand_icon = true
 
@@ -2364,8 +2364,8 @@ offset_top = 40.0
 offset_right = 1280.0
 offset_bottom = 80.0
 scale = Vector2(0.75, 0.75)
+theme_type_variation = &"ButtonFlatIcon"
 icon = ExtResource("27_k84dy")
-flat = true
 icon_alignment = 1
 expand_icon = true
 
@@ -2378,8 +2378,8 @@ offset_bottom = 380.0
 
 [node name="Turn" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 10.0
-offset_bottom = 10.0
+offset_top = 30.0
+offset_bottom = 30.0
 
 [node name="Panel" type="Panel" parent="UI/Main/Score/Turn"]
 layout_mode = 0
@@ -2449,8 +2449,8 @@ vertical_alignment = 1
 
 [node name="Money" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 80.0
-offset_bottom = 80.0
+offset_top = 100.0
+offset_bottom = 100.0
 
 [node name="Panel" type="Panel" parent="UI/Main/Score/Money"]
 layout_mode = 0
@@ -2520,8 +2520,8 @@ vertical_alignment = 1
 
 [node name="Balls" type="Control" parent="UI/Main/Score"]
 anchors_preset = 0
-offset_top = 150.0
-offset_bottom = 150.0
+offset_top = 170.0
+offset_bottom = 170.0
 
 [node name="Panel" type="Panel" parent="UI/Main/Score/Balls"]
 layout_mode = 0

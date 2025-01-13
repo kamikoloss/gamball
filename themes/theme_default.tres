@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://bula4jj133y50"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://bula4jj133y50"]
 
 [ext_resource type="FontVariation" uid="uid://dnjsv11k857r7" path="res://themes/fonts/noto_sans_jp_bold.tres" id="1_ecnqh"]
 [ext_resource type="FontVariation" uid="uid://cd3htl35cu6uk" path="res://themes/fonts/noto_sans_jp_regular.tres" id="3_adjwb"]
@@ -14,8 +14,7 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qncj"]
-bg_color = Color(0, 0, 0, 0)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1n21"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8ete"]
 bg_color = Color(1, 0.85, 0.4, 1)
@@ -44,6 +43,24 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y5275"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0exq"]
+bg_color = Color(1, 1, 1, 0.2)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d6i8u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nn3ak"]
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuf28"]
 bg_color = Color(0, 0, 0, 0.8)
 border_width_left = 2
@@ -67,10 +84,15 @@ Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/font_sizes/font_size = 24
 Button/fonts/font = ExtResource("1_ecnqh")
 Button/styles/disabled = SubResource("StyleBoxFlat_j7kb0")
-Button/styles/focus = SubResource("StyleBoxFlat_1qncj")
+Button/styles/focus = SubResource("StyleBoxEmpty_f1n21")
 Button/styles/hover = SubResource("StyleBoxFlat_v8ete")
 Button/styles/normal = SubResource("StyleBoxFlat_mtqi8")
 Button/styles/pressed = SubResource("StyleBoxFlat_jp75q")
+ButtonFlatIcon/base_type = &"Button"
+ButtonFlatIcon/styles/focus = SubResource("StyleBoxEmpty_y5275")
+ButtonFlatIcon/styles/hover = SubResource("StyleBoxFlat_f0exq")
+ButtonFlatIcon/styles/normal = SubResource("StyleBoxEmpty_d6i8u")
+ButtonFlatIcon/styles/pressed = SubResource("StyleBoxFlat_nn3ak")
 Label/fonts/font = ExtResource("3_adjwb")
 LabelBold/base_type = &"Label"
 LabelBold/fonts/font = ExtResource("1_ecnqh")

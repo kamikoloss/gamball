@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://6c1drvddwas0"]
+[gd_scene load_steps=3 format=3 uid="uid://6c1drvddwas0"]
 
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_fekh7"]
+[ext_resource type="Texture2D" uid="uid://bho0g835q1uhf" path="res://images/icons/settings.png" id="2_r7cml"]
 
 [node name="ThemeDefaultPreview" type="Control"]
 layout_mode = 3
@@ -84,3 +85,15 @@ offset_bottom = 80.0
 theme = ExtResource("1_fekh7")
 disabled = true
 text = "Button"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 80.0
+offset_right = 200.0
+offset_bottom = 120.0
+theme = ExtResource("1_fekh7")
+theme_type_variation = &"ButtonFlatIcon"
+icon = ExtResource("2_r7cml")
+icon_alignment = 1
+expand_icon = true
