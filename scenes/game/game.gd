@@ -107,6 +107,8 @@ var billiards_balls: int = 0:
 
 # 次に訪れる TAX_LIST の index
 var _next_tax_index: int = 0
+# 現在の TAX の割引後のレート
+var _current_tax_rate: float = 0.0
 
 # 出現する Deck Ball のリストの初期値
 var _deck_ball_list: Array[Ball] = [
@@ -234,7 +236,7 @@ func _on_sell_balls_button_pressed() -> void:
 func _on_tax_pay_button_pressed() -> void:
 	var next_turn = TAX_LIST[_next_tax_index][0]
 	var next_type = TAX_LIST[_next_tax_index][1]
-	var next_amount = TAX_LIST[_next_tax_index][2]
+	var next_amount = int(TAX_LIST[_next_tax_index][2] * _current_tax_rate)
 
 	if next_type == TaxType.MONEY:
 		money -= next_amount
@@ -455,7 +457,6 @@ func _apply_extra_ball_effects() -> void:
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_SIZE_MIN_DOWN):
 		new_deck_size_min -= effect_data[1]
 	_deck_size_min = clampi(new_deck_size_min, DECK_SIZE_MIN, new_deck_size_min)
-	_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
 	print("[Game/BallEffect] DECK_SIZE_MIN_DOWN _deck_size_min: %s" % [_deck_size_min])
 
 	# ex: [EffectType.EXTRA_SIZE_MAX_UP, 2]
@@ -463,7 +464,6 @@ func _apply_extra_ball_effects() -> void:
 	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.EXTRA_SIZE_MAX_UP):
 		new_extra_size_max += effect_data[1]
 	_extra_size_max = clampi(new_extra_size_max, new_extra_size_max, EXTRA_SIZE_MAX)
-	_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
 	print("[Game/BallEffect] EXTRA_SIZE_MAX_UP _extra_size_max: %s" % [_extra_size_max])
 
 	# ex: [EffectType.HOLE_SIZE_UP, 1]
@@ -492,6 +492,17 @@ func _apply_extra_ball_effects() -> void:
 		continue_level += effect_data[1]
 	_pachinko.set_rush_continue_top(continue_level)
 	print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
+
+	# ex. [EffectType.TAX_DOWN, 10]
+	var tax_off_rate = 0
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.TAX_DOWN):
+		tax_off_rate += effect_data[1]
+	_current_tax_rate = 1 - clampi(tax_off_rate, 0, 50) / 100.0 # TODO: const
+	print("[Game/BallEffect] TAX_DOWN _current_tax_off_rate: %s" % [_current_tax_rate])
+
+	_refresh_deck()
+	_refresh_extra()
+	_refresh_next()
 
 
 # EXTRA Ball 内の特定の効果をまとめて取得する
@@ -605,7 +616,7 @@ func _refresh_next() -> void:
 	if _next_tax_index < TAX_LIST.size():
 		var turn = TAX_LIST[_next_tax_index][0]
 		var type = TAX_LIST[_next_tax_index][1]
-		var amount = TAX_LIST[_next_tax_index][2]
+		var amount = int(TAX_LIST[_next_tax_index][2] * _current_tax_rate)
 		_game_ui.refresh_next(turn, type, amount)
 	else:
 		_game_ui.refresh_next_clear()

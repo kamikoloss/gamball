@@ -146,14 +146,10 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.PACHINKO_START_TOP_UP, 2],
 	},
 	11: {
-		#Ball.Rarity.UNCOMMON:	[EffectType.TAX_DOWN, 10],
-		#Ball.Rarity.RARE:		[EffectType.TAX_DOWN, 20],
-		#Ball.Rarity.EPIC:		[EffectType.TAX_DOWN, 30],
-		#Ball.Rarity.LEGENDARY:	[EffectType.TAX_DOWN, 50],
-		Ball.Rarity.UNCOMMON:	[EffectType.NONE],
-		Ball.Rarity.RARE:		[EffectType.NONE],
-		Ball.Rarity.EPIC:		[EffectType.NONE],
-		Ball.Rarity.LEGENDARY:	[EffectType.NONE],
+		Ball.Rarity.UNCOMMON:	[EffectType.TAX_DOWN, 10],
+		Ball.Rarity.RARE:		[EffectType.TAX_DOWN, 20],
+		Ball.Rarity.EPIC:		[EffectType.TAX_DOWN, 30],
+		Ball.Rarity.LEGENDARY:	[EffectType.TAX_DOWN, 50],
 	},
 	12: {
 		Ball.Rarity.UNCOMMON:	[EffectType.HOLE_SIZE_UP, 1],

@@ -137,6 +137,7 @@ func _on_balls_deck_pressed(add: bool) -> void:
 		_game._deck_ball_list.push_back(Ball.new(_current_ball_level, _current_ball_rarity))
 	else:
 		_game._deck_ball_list.pop_front()
+	_game._apply_extra_ball_effects()
 	_game._refresh_deck()
 
 func _on_balls_extra_pressed(add: bool) -> void:
@@ -144,7 +145,9 @@ func _on_balls_extra_pressed(add: bool) -> void:
 		_game._extra_ball_list.push_back(Ball.new(_current_ball_level, _current_ball_rarity))
 	else:
 		_game._extra_ball_list.pop_front()
+	_game._apply_extra_ball_effects()
 	_game._refresh_extra()
+	_game._refresh_next()
 
 
 func _refresh_labels() -> void:
