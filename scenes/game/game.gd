@@ -292,7 +292,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for effect_data in ball.effects:
 				if effect_data[0] == BallEffect.EffectType.MONEY_UP_ON_FALL:
 					money += effect_data[1]
-					print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
+				print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
 			# 同じ GroupType の Hole に Ball をワープさせる
 			ball.is_on_billiards = false
 			for node in get_tree().get_nodes_in_group("hole"):
@@ -440,7 +440,15 @@ func _on_product_icon_pressed(product: Product) -> void:
 			if _extra_ball_list.size() == 0:
 				return
 			_extra_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
-			_extra_ball_list.pop_front()
+			var popped_ball: Ball = _extra_ball_list.pop_front()
+			# ex: [EffectType.MONEY_UP_ON_BREAK, 2]
+			var money_times = 1
+			for effect_data in popped_ball.effects:
+				if effect_data[0] == BallEffect.EffectType.MONEY_UP_ON_BREAK:
+					money_times *= effect_data[1]
+				print("[Game/BallEffect] MONEY_UP_ON_BREAK x%s" % [money_times])
+			if 1 < money_times:
+				money *= money_times
 
 	# return しなかった場合: Money を減らす
 	money -= product.price

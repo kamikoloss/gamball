@@ -68,14 +68,10 @@ const EFFECT_DESCRIPTIONS = {
 # TODO: 表っぽいデータなので Google Sheets とかに外出しする？
 const EFFECTS_POOL_1 = {
 	0: {
-		#Ball.Rarity.UNCOMMON:	[EffectType.MONEY_UP_ON_BREAK, 2],
-		#Ball.Rarity.RARE:		[EffectType.MONEY_UP_ON_BREAK, 3],
-		#Ball.Rarity.EPIC:		[EffectType.MONEY_UP_ON_BREAK, 5],
-		#Ball.Rarity.LEGENDARY:	[EffectType.MONEY_UP_ON_BREAK, 10],
-		Ball.Rarity.UNCOMMON:	[EffectType.NONE],
-		Ball.Rarity.RARE:		[EffectType.NONE],
-		Ball.Rarity.EPIC:		[EffectType.NONE],
-		Ball.Rarity.LEGENDARY:	[EffectType.NONE],
+		Ball.Rarity.UNCOMMON:	[EffectType.MONEY_UP_ON_BREAK, 2],
+		Ball.Rarity.RARE:		[EffectType.MONEY_UP_ON_BREAK, 3],
+		Ball.Rarity.EPIC:		[EffectType.MONEY_UP_ON_BREAK, 5],
+		Ball.Rarity.LEGENDARY:	[EffectType.MONEY_UP_ON_BREAK, 10],
 	},
 	1: {
 		Ball.Rarity.UNCOMMON:	[EffectType.MONEY_UP_ON_FALL, 10],
