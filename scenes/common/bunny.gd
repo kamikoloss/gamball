@@ -4,7 +4,7 @@ extends Control
 # TODO: 表情ポーズセットを指定して一括変更する
 
 
-enum TweenType { POSE, DIALOGUE }
+enum TweenType { POSE, DIALOGUE, COUNTDOWN }
 
 
 # A/B のフェードの秒数
@@ -133,6 +133,29 @@ func enable_touch() -> void:
 
 func disable_touch() -> void:
 	_touch_button.disabled = true
+
+
+func countdown() -> void:
+	disable_touch() # バニーのタッチを無効にする
+	refresh_dialogue_label("[font_size=32][color=DARK_RED]延長[/color]のお時間で～す[/font_size]")
+
+	var tween = _get_tween(TweenType.COUNTDOWN)
+	tween.tween_interval(2.0)
+	tween.tween_callback(func(): refresh_dialogue_label("[font_size=32]さ～～ん[/font_size]"))
+	tween.tween_callback(func(): shuffle_pose())
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): refresh_dialogue_label("[font_size=32]に～～い[/font_size]"))
+	tween.tween_callback(func(): shuffle_pose())
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): refresh_dialogue_label("[font_size=32]い～～ち[/font_size]"))
+	tween.tween_callback(func(): shuffle_pose())
+	tween.tween_interval(1.0)
+	# Tax Window を表示する
+	tween.tween_callback(func(): refresh_dialogue_label("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
+	tween.tween_callback(func(): shuffle_pose())
+	tween.tween_callback(func(): enable_touch()) # バニーのタッチを有効に戻す
+
+	await tween.finished
 
 
 func _on_touch_button_pressed() -> void:
