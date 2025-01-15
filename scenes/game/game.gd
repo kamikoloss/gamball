@@ -302,6 +302,8 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				if node is Hole:
 					if node.hole_type == Hole.HoleType.WARP_FROM and node.warp_group == hole.warp_group:
 						ball.warp_for_warp_to(node.global_position)
+			# Hole を点滅させる
+			hole.flash(1, Color.WHITE, 2)
 
 		Hole.HoleType.EXTRA:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
@@ -320,6 +322,8 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			_billiards.spawn_extra_ball(new_ball)
 			# パチンコのラッシュ抽選を開始する
 			_pachinko.start_lottery()
+			# Hole を点滅させる
+			hole.flash(1, Color.GREEN, 2)
 
 		Hole.HoleType.GAIN:
 			if not ball:
@@ -329,8 +333,9 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				return
 			ball.is_gained = true
 
-			var gain_plus: int = 0
-			var gain_times: int = 1
+			# Gain 増加系の BallEffect を確認する
+			var gain_plus: int = 0 # Gain がいくつ増えるか
+			var gain_times: int = 1 # Gain が何倍になるか
 			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP, 50, 1]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
 				if billiards_balls <= effect_data[1]:
@@ -361,11 +366,14 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# ex: [EffectType.HOLE_GAIN_UP, 1]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_GAIN_UP):
 				gain_plus += effect_data[1]
-			print("[Game/BallEffect] XXXX_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
+			if gain_plus != 0 and gain_times != 1:
+				print("[Game/BallEffect] XXXX_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
 
-			# ボールを増加させてワープさせる
+			# Ball を増加させてワープさせる
 			var level = ball.level # NOTE: ここで控えとかないと参照できないことがある
 			var amount = (hole.gain_ratio + gain_plus) * gain_times * level
+			# TODO: ログ出す？
+			print("[Game] ball gain: (%s + %s) x %s x %s = %s" % [level, gain_plus, hole.gain_ratio, gain_times, amount])
 			if 0 < amount:
 				var tween = create_tween()
 				tween.set_loops(amount)
@@ -388,6 +396,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				popup_text = "%s" % [amount]
 				popup_color = Color.RED
 			_game_ui.popup_score(hole.global_position, popup_text, popup_color, popup_size)
+			# Hole を点滅させる
+			if hole.gain_ratio == 0:
+				hole.flash(1, Color.RED, 2)
+			else:
+				hole.flash(hole.gain_ratio, Color.WHITE)
 
 		Hole.HoleType.LOST:
 			await ball.die()

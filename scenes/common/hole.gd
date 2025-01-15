@@ -6,6 +6,7 @@ extends Area2D
 signal ball_entered
 
 
+# Hole のタイプ
 enum HoleType {
 	EXTRA, # EXTRA を1個ビリヤード盤面上に出す + 抽選を行う
 	GAIN, # Ball を gain_ratio 倍にして PAYOUT に加算する
@@ -14,8 +15,10 @@ enum HoleType {
 	WARP_FROM, # WARP_TO からワープする
 	WARP_TO, # WARP_FROM にワープする
 }
+# ワープ元/ワープ先 のグループ
 enum WarpGroup { NONE, PAYOUT, A, B, C, D }
-
+# Tween
+enum TweenType { FLASH }
 
 const HOLE_SIZE_LEVEL_MAX: int = 4
 const GRAVITY_SIZE_LEVEL_MAX: int = 4
@@ -43,6 +46,7 @@ var is_enabled = true
 
 var _hole_scale_base: Vector2
 var _gravity_scale_base: Vector2
+var _tweens: Dictionary = {}
 
 
 func _ready() -> void:
@@ -66,6 +70,16 @@ func disable() -> void:
 	is_enabled = false
 	modulate = Color(1, 1, 1, 0.1)
 	refresh_physics()
+
+
+# 点滅する
+func flash(count: int, color: Color, duration_ratio: int = 1) -> void:
+	var duration = 0.2 * duration_ratio # TODO: const
+	var original_color = _body_texture.self_modulate
+	var tween = _get_tween(TweenType.FLASH)
+	tween.set_loops(count)
+	tween.tween_property(_body_texture, "self_modulate", color, 0.0)
+	tween.tween_property(_body_texture, "self_modulate", original_color, duration)
 
 
 # 自身の見た目を更新する
@@ -139,3 +153,10 @@ func _on_area_entered(area: Area2D) -> void:
 	var maybe_ball = area.get_parent()
 	if maybe_ball is Ball:
 		ball_entered.emit(self, maybe_ball)
+
+
+func _get_tween(type: TweenType) -> Tween:
+	if _tweens.has(type):
+		_tweens[type].kill()
+	_tweens[type] = create_tween()
+	return _tweens[type]
