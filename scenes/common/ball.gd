@@ -264,12 +264,6 @@ func warp_for_gain(from: Vector2, to: Vector2) -> void:
 	position = from
 	await _warp(to)
 
-	linear_velocity = Vector2.ZERO
-
-	set_collision_layer_value(Collision.Layer.BASE, true)
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
-	await _disable_shrink()
-
 
 # 消える
 func die() -> void:

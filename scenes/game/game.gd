@@ -371,11 +371,14 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				tween.set_loops(amount)
 				tween.tween_interval(1.0 / 20)
 				tween.tween_callback(func():
+					# TODO: すごい数になるので Ball じゃなくて画像にした方がいい？
 					var new_ball: Ball = _ball_scene.instantiate()
 					new_ball.level = level
 					new_ball.is_shrinked = true
 					_balls_parent.add_child(new_ball)
 					await new_ball.warp_for_gain(hole.global_position, _payout_hole.global_position)
+					_push_payout(level, 1)
+					new_ball.queue_free()
 				)
 			# PopupScore を表示する
 			var popup_text = "+%s" % [amount]
