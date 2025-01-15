@@ -107,8 +107,9 @@ var billiards_balls: int = 0:
 
 # 次に訪れる TAX_LIST の index
 var _next_tax_index: int = 0
-# 現在の TAX の割引後のレート
-var _current_tax_rate: float = 0.0
+# TAX (MONEY/BALLS) の割引後のレート
+var _tax_money_rate: float = 0.0
+var _tax_balls_rate: float = 0.0
 
 # 出現する Deck Ball のリストの初期値
 var _deck_ball_list: Array[Ball] = [
@@ -236,11 +237,13 @@ func _on_sell_balls_button_pressed() -> void:
 func _on_tax_pay_button_pressed() -> void:
 	var next_turn = TAX_LIST[_next_tax_index][0]
 	var next_type = TAX_LIST[_next_tax_index][1]
-	var next_amount = int(TAX_LIST[_next_tax_index][2] * _current_tax_rate)
+	var next_amount = TAX_LIST[_next_tax_index][2]
 
 	if next_type == TaxType.MONEY:
+		next_amount = int(next_amount * _tax_money_rate)
 		money -= next_amount
 	elif next_type == TaxType.BALLS:
+		next_amount = int(next_amount * _tax_balls_rate)
 		balls -= next_amount
 
 	_next_tax_index += 1
@@ -501,12 +504,17 @@ func _apply_extra_ball_effects() -> void:
 	_pachinko.set_rush_continue_top(continue_level)
 	print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
 
-	# ex. [EffectType.TAX_DOWN, 10]
-	var tax_off_rate = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.TAX_DOWN):
-		tax_off_rate += effect_data[1]
-	_current_tax_rate = 1 - clampi(tax_off_rate, 0, 50) / 100.0 # TODO: const
-	print("[Game/BallEffect] TAX_DOWN _current_tax_off_rate: %s" % [_current_tax_rate])
+	# ex. [EffectType.TAX_MONEY_DOWN, 10]
+	var tax_money_off_per: int = 0
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.TAX_MONEY_DOWN):
+		tax_money_off_per += effect_data[1]
+	_tax_money_rate = 1 - clampi(tax_money_off_per, 0, 50) / 100.0 # TODO: const
+	# ex. [EffectType.TAX_BALLS_DOWN, 10]
+	var tax_balls_off_per: int = 0
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.TAX_BALLS_DOWN):
+		tax_balls_off_per += effect_data[1]
+	_tax_balls_rate = 1 - clampi(tax_balls_off_per, 0, 50) / 100.0 # TODO: const
+	print("[Game/BallEffect] TAX_(MONEY/BALLS)_DOWN _tax_money_rate: %s, _tax_balls_rate" % [_tax_money_rate, _tax_balls_rate])
 
 	_refresh_deck()
 	_refresh_extra()
@@ -624,7 +632,11 @@ func _refresh_next() -> void:
 	if _next_tax_index < TAX_LIST.size():
 		var turn = TAX_LIST[_next_tax_index][0]
 		var type = TAX_LIST[_next_tax_index][1]
-		var amount = int(TAX_LIST[_next_tax_index][2] * _current_tax_rate)
+		var amount = TAX_LIST[_next_tax_index][2]
+		if type == TaxType.MONEY:
+			amount = int(amount * _tax_money_rate)
+		elif type == TaxType.BALLS:
+			amount = int(amount * _tax_balls_rate)
 		_game_ui.refresh_next(turn, type, amount)
 	else:
 		_game_ui.refresh_next_clear()

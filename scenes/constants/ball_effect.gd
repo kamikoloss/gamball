@@ -23,7 +23,7 @@ enum EffectType {
 	PACHINKO_START_TOP_UP,
 	PACHINKO_CONTINUE_TOP_UP,
 	RARITY_TOP_UP, RARITY_TOP_DOWN,
-	TAX_DOWN,
+	TAX_BALLS_DOWN, TAX_MONEY_DOWN
 }
 
 
@@ -37,8 +37,7 @@ const RARITY_TEXT = {
 	Ball.Rarity.LEGENDARY:	"★★★★★",
 }
 
-# 効果の説明文 (BBCode)
-# TODO: color は replace 処理側に入れていい
+# 効果の説明文
 const EFFECT_DESCRIPTIONS = {
 	EffectType.NONE: "",
 	EffectType.BILLIARDS_COUNT_GAIN_UP: "ビリヤード盤面上のボールが {a} 個以下のとき Gain +{b}",
@@ -60,7 +59,8 @@ const EFFECT_DESCRIPTIONS = {
 	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続ランプ数 +{a} (最大 +6)",
 	EffectType.RARITY_TOP_UP: "{a} の出現確率 +1",
 	EffectType.RARITY_TOP_DOWN: "{a} の出現確率 -1 (最小 -2)",
-	EffectType.TAX_DOWN: "延長料 -{a}% (複数の効果は足し算になる, 最大 -50%)",
+	EffectType.TAX_BALLS_DOWN: "BALLS で支払う延長料 {a}% オフ (複数の効果は足される, 最大 -50%)",
+	EffectType.TAX_MONEY_DOWN: "MONEY で支払う延長料 {a}% オフ (複数の効果は足される, 最大 -50%)",
 }
 
 # Ball LV/Rarity ごとの初期効果
@@ -142,10 +142,10 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.PACHINKO_START_TOP_UP, 2],
 	},
 	11: {
-		Ball.Rarity.UNCOMMON:	[EffectType.TAX_DOWN, 10],
-		Ball.Rarity.RARE:		[EffectType.TAX_DOWN, 20],
-		Ball.Rarity.EPIC:		[EffectType.TAX_DOWN, 30],
-		Ball.Rarity.LEGENDARY:	[EffectType.TAX_DOWN, 50],
+		Ball.Rarity.UNCOMMON:	[EffectType.TAX_BALLS_DOWN, 10],
+		Ball.Rarity.RARE:		[EffectType.TAX_BALLS_DOWN, 20],
+		Ball.Rarity.EPIC:		[EffectType.TAX_MONEY_DOWN, 10],
+		Ball.Rarity.LEGENDARY:	[EffectType.TAX_MONEY_DOWN, 20],
 	},
 	12: {
 		Ball.Rarity.UNCOMMON:	[EffectType.HOLE_SIZE_UP, 1],
