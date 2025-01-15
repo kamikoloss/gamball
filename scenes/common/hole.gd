@@ -46,6 +46,7 @@ var is_enabled = true
 
 var _hole_scale_base: Vector2
 var _gravity_scale_base: Vector2
+var _body_color_base: Color
 var _tweens: Dictionary = {}
 
 
@@ -53,6 +54,7 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	_hole_scale_base = self.scale
 	_gravity_scale_base = _gravity_area.scale
+	_body_color_base = _body_texture.self_modulate
 
 	enable()
 	refresh_view()
@@ -75,11 +77,10 @@ func disable() -> void:
 # 点滅する
 func flash(count: int, color: Color, duration_ratio: int = 1) -> void:
 	var duration = 0.2 * duration_ratio # TODO: const
-	var original_color = _body_texture.self_modulate
 	var tween = _get_tween(TweenType.FLASH)
 	tween.set_loops(count)
 	tween.tween_property(_body_texture, "self_modulate", color, 0.0)
-	tween.tween_property(_body_texture, "self_modulate", original_color, duration)
+	tween.tween_property(_body_texture, "self_modulate", _body_color_base, duration)
 
 
 # 自身の見た目を更新する
