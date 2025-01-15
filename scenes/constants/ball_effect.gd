@@ -98,14 +98,10 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 5],
 	},
 	5: {
-		#Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 50],
-		#Ball.Rarity.RARE:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 30],
-		#Ball.Rarity.EPIC:		[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 20],
-		#Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 10],
-		Ball.Rarity.UNCOMMON:	[EffectType.NONE],
-		Ball.Rarity.RARE:		[EffectType.NONE],
-		Ball.Rarity.EPIC:		[EffectType.NONE],
-		Ball.Rarity.LEGENDARY:	[EffectType.NONE],
+		Ball.Rarity.UNCOMMON:	[EffectType.PACHINKO_CONTINUE_TOP_UP, 1],
+		Ball.Rarity.RARE:		[EffectType.PACHINKO_CONTINUE_TOP_UP, 2],
+		Ball.Rarity.EPIC:		[EffectType.PACHINKO_START_TOP_UP, 1],
+		Ball.Rarity.LEGENDARY:	[EffectType.PACHINKO_START_TOP_UP, 2],
 	},
 	6: {
 		Ball.Rarity.UNCOMMON:	[EffectType.GAIN_UP, 3, 1],
@@ -132,16 +128,16 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.HOLE_GAIN_UP, 5],
 	},
 	10: {
-		Ball.Rarity.UNCOMMON:	[EffectType.PACHINKO_CONTINUE_TOP_UP, 1],
-		Ball.Rarity.RARE:		[EffectType.PACHINKO_CONTINUE_TOP_UP, 2],
-		Ball.Rarity.EPIC:		[EffectType.PACHINKO_START_TOP_UP, 1],
-		Ball.Rarity.LEGENDARY:	[EffectType.PACHINKO_START_TOP_UP, 2],
-	},
-	11: {
 		Ball.Rarity.UNCOMMON:	[EffectType.TAX_BALLS_DOWN, 10],
 		Ball.Rarity.RARE:		[EffectType.TAX_BALLS_DOWN, 20],
-		Ball.Rarity.EPIC:		[EffectType.TAX_MONEY_DOWN, 10],
-		Ball.Rarity.LEGENDARY:	[EffectType.TAX_MONEY_DOWN, 20],
+		Ball.Rarity.EPIC:		[EffectType.TAX_BALLS_DOWN, 30],
+		Ball.Rarity.LEGENDARY:	[EffectType.TAX_BALLS_DOWN, 50],
+	},
+	11: {
+		Ball.Rarity.UNCOMMON:	[EffectType.TAX_MONEY_DOWN, 10],
+		Ball.Rarity.RARE:		[EffectType.TAX_MONEY_DOWN, 20],
+		Ball.Rarity.EPIC:		[EffectType.TAX_MONEY_DOWN, 30],
+		Ball.Rarity.LEGENDARY:	[EffectType.TAX_MONEY_DOWN, 50],
 	},
 	12: {
 		Ball.Rarity.UNCOMMON:	[EffectType.HOLE_SIZE_UP, 1],
@@ -168,7 +164,8 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.RARITY_TOP_DOWN, Ball.Rarity.COMMON],
 	},
 }
-
+const EFFECTS_POOL_2 = {
+}
 
 # 効果の説明文 (RichTextLabel 用) を取得する
 static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
