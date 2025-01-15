@@ -295,7 +295,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for effect_data in ball.effects:
 				if effect_data[0] == BallEffect.EffectType.MONEY_UP_ON_FALL:
 					money += effect_data[1]
-				print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
+					print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
 			# 同じ GroupType の Hole に Ball をワープさせる
 			ball.is_on_billiards = false
 			for node in get_tree().get_nodes_in_group("hole"):
@@ -307,6 +307,15 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
 			var random_ball: Ball = _extra_ball_list.pick_random()
 			var new_ball = _create_new_ball(random_ball.level, random_ball.rarity)
+			# ex: [EffectType.BILLIARDS_LV_UP_ON_SPAWN, 1]
+			for effect_data in new_ball.effects:
+				if effect_data[0] == BallEffect.EffectType.BILLIARDS_LV_UP_ON_SPAWN:
+					var gain_level = effect_data[1]
+					for target_ball: Ball in _balls_parent.get_children().filter(func(ball: Ball): return ball.is_on_billiards):
+						target_ball.level += gain_level
+						target_ball.refresh_view()
+					print("[Game/BallEffect] BILLIARDS_LV_UP_ON_SPAWN +%s" % [gain_level])
+
 			new_ball.is_on_billiards = true
 			_billiards.spawn_extra_ball(new_ball)
 			# パチンコのラッシュ抽選を開始する

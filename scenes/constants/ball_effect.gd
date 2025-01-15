@@ -40,10 +40,10 @@ const RARITY_TEXT = {
 # 効果の説明文
 const EFFECT_DESCRIPTIONS = {
 	EffectType.NONE: "",
-	EffectType.BILLIARDS_COUNT_GAIN_UP: "ビリヤード盤面上のボールが {a} 個以下のとき Gain +{b}",
-	EffectType.BILLIARDS_COUNT_GAIN_UP_2: "ビリヤード盤面上のボールが {a} 個以下のとき Gain x{b}",
-	EffectType.BILLIARDS_LV_UP_ON_SPAWN: "出現時にビリヤード盤面上のボールの LV +{a}",
-	EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN: "出現時にビリヤード顔面上のボールLV0 x{a} を LV15 x1 に変換する",
+	EffectType.BILLIARDS_COUNT_GAIN_UP: "ビリヤード上のボールが {a} 個以下のとき Gain +{b}",
+	EffectType.BILLIARDS_COUNT_GAIN_UP_2: "ビリヤード上のボールが {a} 個以下のとき Gain x{b}",
+	EffectType.BILLIARDS_LV_UP_ON_SPAWN: "出現時にビリヤード上のすべてのボール LV. +{a}",
+	EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN: "出現時にビリヤード上のボール LV.0 x{a} を LV15 x1 に変換する",
 	EffectType.DECK_SIZE_MIN_DOWN: "DECK の最小サイズ -{a}",
 	EffectType.DECK_COMPLETE_GAIN_UP: "DECK に LV.0 から LV.{a} まで揃っているとき Gain x{b}",
 	EffectType.DECK_COUNT_GAIN_UP: "DECK のボールが {a} 個以下のとき Gain +{b}",
@@ -59,8 +59,8 @@ const EFFECT_DESCRIPTIONS = {
 	EffectType.PACHINKO_CONTINUE_TOP_UP: "パチンコの継続ランプ数 +{a} (最大 +6)",
 	EffectType.RARITY_TOP_UP: "{a} の出現確率 +1",
 	EffectType.RARITY_TOP_DOWN: "{a} の出現確率 -1 (最小 -2)",
-	EffectType.TAX_BALLS_DOWN: "BALLS で支払う延長料 {a}% オフ (複数の効果は足される, 最大 -50%)",
-	EffectType.TAX_MONEY_DOWN: "MONEY で支払う延長料 {a}% オフ (複数の効果は足される, 最大 -50%)",
+	EffectType.TAX_BALLS_DOWN: "BALLS で支払う延長料 -{a}% (最大 -50%)",
+	EffectType.TAX_MONEY_DOWN: "MONEY で支払う延長料 -{a}% (最大 -50%)",
 }
 
 # Ball LV/Rarity ごとの初期効果
@@ -92,14 +92,10 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_COUNT_GAIN_UP_2, 1, 10],
 	},
 	4: {
-		#Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 1],
-		#Ball.Rarity.RARE:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 2],
-		#Ball.Rarity.EPIC:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 3],
-		#Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 5],
-		Ball.Rarity.UNCOMMON:	[EffectType.NONE],
-		Ball.Rarity.RARE:		[EffectType.NONE],
-		Ball.Rarity.EPIC:		[EffectType.NONE],
-		Ball.Rarity.LEGENDARY:	[EffectType.NONE],
+		Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 1],
+		Ball.Rarity.RARE:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 2],
+		Ball.Rarity.EPIC:		[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 3],
+		Ball.Rarity.LEGENDARY:	[EffectType.BILLIARDS_LV_UP_ON_SPAWN, 5],
 	},
 	5: {
 		#Ball.Rarity.UNCOMMON:	[EffectType.BILLIARDS_MERGE_BALLS_ON_SPAWN, 50],

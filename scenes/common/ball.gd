@@ -122,11 +122,11 @@ var _tweens: Dictionary = {}
 func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 	self.level = level
 	self.rarity = rarity
+
+func _ready() -> void:
 	if Rarity.COMMON < rarity:
 		self.effects.append(BallEffect.EFFECTS_POOL_1[level][rarity])
 
-
-func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	_touch_button.pressed.connect(func(): pressed.emit())
 	_touch_button.mouse_entered.connect(func(): hovered.emit(true))
@@ -155,12 +155,30 @@ func refresh_view() -> void:
 		z_index = Z_INDEX_DEFAULT
 
 	# 本体色
-	_body_texture.self_modulate = BALL_BODY_COLORS[level]
-	if 0 < level:
-		_body_texture.self_modulate = BALL_BODY_COLORS[5] # オレンジ固定
+	if level <= 15:
+		_body_texture.self_modulate = BALL_BODY_COLORS[level]
+		if 0 < level:
+			_body_texture.self_modulate = BALL_BODY_COLORS[5] # オレンジ固定
+	else:
+		_body_texture.self_modulate = BALL_BODY_COLORS[8] # 黒
+
 	var show_stripe = 9 <= level and level <= 15
 	_body_stripe_texture.visible = show_stripe
 	_body_stripe_2_texture.visible = show_stripe
+	# 残像色
+	var gradient = Gradient.new()
+	if is_active:
+		if level <= 15:
+			gradient.set_color(0, Color(BALL_BODY_COLORS[level], 0.5))
+			gradient.set_color(1, Color(BALL_BODY_COLORS[level], 0))
+			if 0 < level:
+				gradient.set_color(0, Color(BALL_BODY_COLORS[5], 0.5)) # オレンジ固定
+				gradient.set_color(1, Color(BALL_BODY_COLORS[5], 0)) # オレンジ固定
+		else:
+			gradient.set_color(0, Color(BALL_BODY_COLORS[8], 0.5)) # 黒
+			gradient.set_color(1, Color(BALL_BODY_COLORS[8], 0)) # 黒
+	_trail_line.gradient = gradient
+
 	# レア度
 	if rarity == Rarity.COMMON:
 		_inner_texture.self_modulate = Color.WHITE
@@ -187,19 +205,6 @@ func refresh_view() -> void:
 		_inner_texture.visible = true
 		_level_label.visible = true
 		_level_label.text = str(level)
-
-	# 残像
-	var gradient = Gradient.new()
-	if is_active:
-		gradient.set_color(0, Color(BALL_BODY_COLORS[level], 0.5))
-		gradient.set_color(1, Color(BALL_BODY_COLORS[level], 0))
-		if 0 < level:
-			gradient.set_color(0, Color(BALL_BODY_COLORS[5], 0.5)) # オレンジ固定
-			gradient.set_color(1, Color(BALL_BODY_COLORS[5], 0)) # オレンジ固定
-	else:
-		gradient.set_color(0, Color(BALL_BODY_COLORS[0], 0.5))
-		gradient.set_color(1, Color(BALL_BODY_COLORS[0], 0))
-	_trail_line.gradient = gradient
 
 	# 縮小
 	if is_shrinked:
