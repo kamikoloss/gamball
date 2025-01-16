@@ -1,9 +1,10 @@
 class_name Product
 extends Control
 
-
-# アイコンがクリックされたとき (Product)
-signal icon_pressed
+# ホバーしたとき
+signal hovered # (Product, <bool>)
+# クリックしたとき
+signal pressed # (Product)
 
 
 enum ProductType {
@@ -54,14 +55,10 @@ const PRODUCT_DATA = {
 var price: int:
 	get:
 		return PRODUCT_PRICES[product_type]
-# 所持金
-# TODO: ここで持つのか？変な気がする
-var main_money: int = 0:
-	set (value):
-		main_money = value
-		refresh_view()
 
 
+# 購入可能かどうか
+var _enabled: bool = false
 # アイコン画像にカーソルが載っているか
 var _is_icon_hovered: bool = false
 
@@ -73,11 +70,16 @@ func _ready() -> void:
 	refresh_view()
 
 
+func enable() -> void:
+	_enabled = true
+
+func disable() -> void:
+	_enabled = false
+
+
 # 自身の見た目を更新する
 func refresh_view() -> void:
-	if not product_type in ProductType.values():
-		print("[Product] ERROR: invalid product type")
-
+	# アイコン
 	match product_type:
 		ProductType.DECK_PACK:
 			_icon_texture.texture = _icon_pack
@@ -88,34 +90,33 @@ func refresh_view() -> void:
 		ProductType.EXTRA_CLEANER:
 			_icon_texture.texture = _icon_cleaner
 
+	# テキスト
 	_name_label.text = PRODUCT_DATA[product_type][0]
 	_desc_label.text = PRODUCT_DATA[product_type][1]
 	_price_label.text = "＄%s" % str(price)
 
 	# 購入ボタン
-	# TODO: 買えないときは Deacive な色にする
-	if _is_icon_hovered:
-		_buy_texture.visible = true
-		if main_money < price:
-			_buy_texture.self_modulate = BUY_COLOR_DEACTIVE
-			_buy_label.text = "NO MONEY"
-		else:
-			_buy_texture.self_modulate = BUY_COLOR_ACTIVE
-			_buy_label.text = "BUY"
+	_buy_texture.visible = _is_icon_hovered
+	if _enabled:
+		_buy_texture.self_modulate = BUY_COLOR_ACTIVE
+		_buy_label.text = "BUY"
 	else:
-		_buy_texture.visible = false
+		_buy_texture.self_modulate = BUY_COLOR_DEACTIVE
+		_buy_label.text = "CANNOT BUY"
 
 
 func _on_icon_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			icon_pressed.emit(self)
+			pressed.emit(self)
 
 
 func _on_icon_mouse_entered() -> void:
 	_is_icon_hovered = true
 	refresh_view()
+	hovered.emit(self, _is_icon_hovered)
 
 func _on_icon_mouse_exited() -> void:
 	_is_icon_hovered = false
 	refresh_view()
+	hovered.emit(self, _is_icon_hovered)

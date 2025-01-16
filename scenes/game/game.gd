@@ -91,7 +91,6 @@ var money: int = 0:
 	set(value):
 		money = value
 		_game_ui.refresh_money_label(value)
-		_set_money_to_products()
 var balls: int = 0:
 	set(value):
 		balls = value
@@ -178,14 +177,14 @@ func _ready() -> void:
 	# Product
 	for node in _products_parent.get_children():
 		if node is Product:
-			node.icon_pressed.connect(_on_product_icon_pressed)
+			node.hovered.connect(_on_product_hovered)
+			node.pressed.connect(_on_product_pressed)
 
 	# UI (GameUi)
 	_game_ui._refresh_tax_table(TAX_LIST)
 	_bunny.visible = false
 	_apply_extra_ball_effects()
-	_refresh_deck()
-	_refresh_extra()
+	_refresh_deck_extra()
 	_refresh_next()
 	# UI (Billiards)
 	_billiards.refresh_balls_count(billiards_balls)
@@ -420,11 +419,20 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	_billiards.refresh_balls_count(billiards_balls)
 
 
-# 商品のアイコンがクリックされたときの処理
-# TODO: shop 的なのに切り分ける
-func _on_product_icon_pressed(product: Product) -> void:
+# 商品をホバーしたときの処理
+func _on_product_hovered(product: Product, hover: bool) -> void:
+	print("money: %s, price: %s" % [money, product.price])
+	if money < product.price:
+		product.disable()
+	else:
+		product.enable()
+	product.refresh_view()
+
+# 商品をクリックしたときの処理
+func _on_product_pressed(product: Product) -> void:
 	# Money が足りない場合: 何もしない
 	if money < product.price:
+		# TODO: 購入できない理由がいくつかあるときラベルを分ける？
 		_bunny.shuffle_pose()
 		_bunny.refresh_dialogue_label("お金が足りないよ～")
 		return
@@ -480,10 +488,11 @@ func _on_product_icon_pressed(product: Product) -> void:
 
 	# return しなかった場合: Money を減らす
 	money -= product.price
+	# Money が減ったのでホバー時処理をやり直す
+	_on_product_hovered(product, true)
 
-	# DECK, EXTRA の見た目を更新する
-	_refresh_deck()
-	_refresh_extra()
+	# DECK/EXTRA の見た目を更新する
+	_refresh_deck_extra()
 
 
 # EXTRA Ball の効果をまとめて反映する
@@ -541,8 +550,7 @@ func _apply_extra_ball_effects() -> void:
 	_tax_balls_rate = 1 - clampi(tax_balls_off_per, 0, 50) / 100.0 # TODO: const
 	print("[Game/BallEffect] TAX_(MONEY/BALLS)_DOWN _tax_money_rate: %s, _tax_balls_rate" % [_tax_money_rate, _tax_balls_rate])
 
-	_refresh_deck()
-	_refresh_extra()
+	_refresh_deck_extra()
 	_refresh_next()
 
 
@@ -641,13 +649,10 @@ func _push_payout(level: int, amount: int) -> void:
 		_start_payout(4.0)
 
 
-# DECK の見た目を更新する
-func _refresh_deck() -> void:
+# DECK/EXTRA の見た目を更新する
+func _refresh_deck_extra() -> void:
 	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
 	_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
-
-# EXTRA の見た目を更新する
-func _refresh_extra() -> void:
 	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
 	_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
 
@@ -687,14 +692,6 @@ func _start_tax_count_down() -> void:
 	_game_ui.show_tax_window()
 
 	game_state = GameState.TAX
-
-
-# Product に MONEY を伝達する
-# TODO: Product ホバー時に値段もらってそこで比較する
-func _set_money_to_products() -> void:
-	for node in _products_parent.get_children():
-		if node is Product:
-			node.main_money = money
 
 
 func _get_tween(type: TweenType) -> Tween:
