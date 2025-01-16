@@ -16,28 +16,28 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1n21"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8ete"]
-bg_color = Color(1, 0.85, 0.4, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwnsj"]
+bg_color = Color(0.960784, 0.968627, 0.34902, 1)
 border_width_bottom = 4
-border_color = Color(0.6, 0.48, 0.12, 1)
+border_color = Color(0.6, 0.6, 0.6, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtqi8"]
-bg_color = Color(1, 0.8, 0.2, 1)
+bg_color = Color(0.960784, 0.968627, 0.34902, 1)
 border_width_bottom = 4
-border_color = Color(0.6, 0.48, 0.12, 1)
+border_color = Color(0.6, 0.6, 0.6, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp75q"]
-bg_color = Color(1, 0.8, 0.2, 1)
+bg_color = Color(0.960784, 0.968627, 0.34902, 1)
 border_width_top = 4
-border_color = Color(0.6, 0.48, 0.12, 1)
+border_color = Color(0.6, 0.6, 0.6, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -85,7 +85,7 @@ Button/font_sizes/font_size = 24
 Button/fonts/font = ExtResource("1_ecnqh")
 Button/styles/disabled = SubResource("StyleBoxFlat_j7kb0")
 Button/styles/focus = SubResource("StyleBoxEmpty_f1n21")
-Button/styles/hover = SubResource("StyleBoxFlat_v8ete")
+Button/styles/hover = SubResource("StyleBoxFlat_vwnsj")
 Button/styles/normal = SubResource("StyleBoxFlat_mtqi8")
 Button/styles/pressed = SubResource("StyleBoxFlat_jp75q")
 ButtonFlatIcon/base_type = &"Button"
@@ -100,10 +100,15 @@ LabelHeader/base_type = &"Label"
 LabelHeader/fonts/font = ExtResource("3_auwpw")
 LabelScore/base_type = &"Label"
 LabelScore/colors/font_color = Color(1, 1, 1, 1)
-LabelScore/colors/font_outline_color = Color(0, 0, 0, 1)
-LabelScore/constants/line_spacing = -2
-LabelScore/constants/outline_size = 4
 LabelScore/fonts/font = ExtResource("4_rir7g")
+LabelScoreDanger/base_type = &"Label"
+LabelScoreDanger/colors/font_color = Color(0.960784, 0.223529, 0.129412, 1)
+LabelScoreDanger/fonts/font = ExtResource("4_rir7g")
+LabelScoreOutline/base_type = &"Label"
+LabelScoreOutline/colors/font_color = Color(1, 1, 1, 1)
+LabelScoreOutline/colors/font_outline_color = Color(0, 0, 0, 1)
+LabelScoreOutline/constants/outline_size = 4
+LabelScoreOutline/fonts/font = ExtResource("4_rir7g")
 Panel/styles/panel = SubResource("StyleBoxFlat_fuf28")
 RichTextLabel/font_sizes/bold_font_size = 16
 RichTextLabel/font_sizes/normal_font_size = 16

@@ -131,7 +131,7 @@ expand_mode = 1
 
 [node name="Active" type="TextureRect" parent="View/Mask/Control"]
 visible = false
-self_modulate = Color(0, 1, 0, 1)
+self_modulate = Color(0.960784, 0.968627, 0.34902, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0

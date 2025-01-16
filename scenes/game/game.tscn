@@ -34,8 +34,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_abgdr"]
 shader = ExtResource("3_cdybq")
 shader_parameter/mouse_position = Vector2(0.5, 0.5)
-shader_parameter/wave_color = Color(1, 0.4, 0, 1)
-shader_parameter/wave_transparency = 0.8
+shader_parameter/wave_color = Color(0.921569, 0.239216, 0, 1)
+shader_parameter/wave_transparency = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -1821,7 +1821,6 @@ offset_right = 10.0
 offset_bottom = 40.0
 
 [node name="BallSlot" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = -17.0
 offset_top = -17.0
@@ -1832,7 +1831,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot2" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 3.0
 offset_top = -17.0
@@ -1843,7 +1841,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot3" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 23.0
 offset_top = -17.0
@@ -1854,7 +1851,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot4" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 43.0
 offset_top = -17.0
@@ -1865,7 +1861,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot5" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 63.0
 offset_top = -17.0
@@ -1876,7 +1871,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot6" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 83.0
 offset_top = -17.0
@@ -1887,7 +1881,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot7" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 103.0
 offset_top = -17.0
@@ -1898,7 +1891,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot8" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 123.0
 offset_top = -17.0
@@ -1909,7 +1901,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot9" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = -17.0
 offset_top = 3.0
@@ -1920,7 +1911,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot10" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 3.0
 offset_top = 3.0
@@ -1931,7 +1921,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot11" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 23.0
 offset_top = 3.0
@@ -1942,7 +1931,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot12" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 43.0
 offset_top = 3.0
@@ -1953,7 +1941,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot13" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 63.0
 offset_top = 3.0
@@ -1964,7 +1951,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot14" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 83.0
 offset_top = 3.0
@@ -1975,7 +1961,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot15" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 103.0
 offset_top = 3.0
@@ -1986,7 +1971,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot16" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 123.0
 offset_top = 3.0
@@ -2088,7 +2072,6 @@ offset_right = 10.0
 offset_bottom = 40.0
 
 [node name="BallSlot" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = -17.0
 offset_top = -17.0
@@ -2099,7 +2082,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot2" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 3.0
 offset_top = -17.0
@@ -2110,7 +2092,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot3" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 23.0
 offset_top = -17.0
@@ -2121,7 +2102,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot4" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 43.0
 offset_top = -17.0
@@ -2132,7 +2112,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot5" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 63.0
 offset_top = -17.0
@@ -2143,7 +2122,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot6" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 83.0
 offset_top = -17.0
@@ -2154,7 +2132,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot7" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 103.0
 offset_top = -17.0
@@ -2165,7 +2142,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot8" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 123.0
 offset_top = -17.0
@@ -2176,7 +2152,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot9" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = -17.0
 offset_top = 3.0
@@ -2187,7 +2162,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot10" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 3.0
 offset_top = 3.0
@@ -2198,7 +2172,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot11" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 23.0
 offset_top = 3.0
@@ -2209,7 +2182,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot12" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 43.0
 offset_top = 3.0
@@ -2220,7 +2192,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot13" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 63.0
 offset_top = 3.0
@@ -2231,7 +2202,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot14" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 83.0
 offset_top = 3.0
@@ -2242,7 +2212,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot15" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 103.0
 offset_top = 3.0
@@ -2253,7 +2222,6 @@ texture = ExtResource("5_j1dyl")
 expand_mode = 1
 
 [node name="BallSlot16" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 0
 offset_left = 123.0
 offset_top = 3.0

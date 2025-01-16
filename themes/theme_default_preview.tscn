@@ -27,42 +27,64 @@ text = "LabelBold"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LabelScore" type="Label" parent="."]
+[node name="LabelHeader" type="Label" parent="."]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 120.0
-theme = ExtResource("1_fekh7")
-theme_type_variation = &"LabelScore"
-text = "LabelScore"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelHeader" type="Label" parent="."]
-layout_mode = 0
-offset_top = 120.0
-offset_right = 160.0
-offset_bottom = 160.0
 theme = ExtResource("1_fekh7")
 theme_type_variation = &"LabelHeader"
 text = "LabelHeader"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LabelScore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 320.0
+offset_bottom = 40.0
+theme = ExtResource("1_fekh7")
+theme_type_variation = &"LabelScore"
+text = "LabelScore"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelScoreOutline" type="Label" parent="."]
+offset_left = 160.0
+offset_top = 40.0
+offset_right = 320.0
+offset_bottom = 80.0
+theme = ExtResource("1_fekh7")
+theme_type_variation = &"LabelScoreOutline"
+text = "LabelScoreOutline"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelScoreDanger" type="Label" parent="."]
+offset_left = 160.0
+offset_top = 80.0
+offset_right = 320.0
+offset_bottom = 120.0
+theme = ExtResource("1_fekh7")
+theme_type_variation = &"LabelScoreDanger"
+text = "LabelScoreDanger"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 35.0
-offset_top = 195.0
+offset_top = 275.0
 offset_right = 365.0
-offset_bottom = 365.0
+offset_bottom = 445.0
 theme = ExtResource("1_fekh7")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 200.0
+offset_top = 280.0
 offset_right = 360.0
-offset_bottom = 360.0
+offset_bottom = 440.0
 theme = ExtResource("1_fekh7")
 bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]の[b]すきとおった[/b]風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
@@ -70,30 +92,42 @@ autowrap_mode = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 160.0
-offset_right = 320.0
+offset_left = 320.0
+offset_right = 480.0
 offset_bottom = 40.0
 theme = ExtResource("1_fekh7")
 text = "Button"
 
-[node name="Button2" type="Button" parent="."]
+[node name="ButtonDisabled" type="Button" parent="."]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 40.0
-offset_right = 320.0
+offset_right = 480.0
 offset_bottom = 80.0
 theme = ExtResource("1_fekh7")
 disabled = true
 text = "Button"
 
-[node name="Button3" type="Button" parent="."]
+[node name="ButtonFlatIcon" type="Button" parent="."]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 320.0
 offset_top = 80.0
-offset_right = 200.0
+offset_right = 360.0
 offset_bottom = 120.0
 theme = ExtResource("1_fekh7")
 theme_type_variation = &"ButtonFlatIcon"
+icon = ExtResource("2_r7cml")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonFlatIconDisabled" type="Button" parent="."]
+offset_left = 360.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 120.0
+theme = ExtResource("1_fekh7")
+theme_type_variation = &"ButtonFlatIcon"
+disabled = true
 icon = ExtResource("2_r7cml")
 icon_alignment = 1
 expand_icon = true

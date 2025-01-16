@@ -22,11 +22,6 @@ const WINDOW_POSITION_RIGHT_TO: Vector2 = Vector2(720, 0)
 const WINDOW_POSITION_TO: Vector2 = Vector2(0, 0)
 const WINDOW_MOVE_DURATION: float = 1.0
 
-# DECK/EXTRA Slot の背景色
-const BALL_SLOT_COLOR_REQUIRED: Color = Color(0.2, 0.6, 0.2) # 必須 (min より下)
-const BALL_SLOT_COLOR_OPTIONAL: Color = Color(0.6, 0.6, 0.6) # 任意 (min と max の間)
-const BALL_SLOT_COLOR_DISABLED: Color = Color(0.6, 0.2, 0.2) # 不可 (max より上)
-
 const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 
 
@@ -205,7 +200,7 @@ func _show_ball_popup(ball: Ball) -> void:
 	else:
 		_ball_popup_level.text = "%s-%s" % [Ball.Pool.keys()[ball.pool], ball.level]
 		_ball_popup_rarity.text = BallEffect.RARITY_TEXT[ball.rarity]
-		_ball_popup_rarity.self_modulate = Ball.BALL_RARITY_COLORS[ball.rarity]
+		_ball_popup_rarity.self_modulate = ColorData.BALL_RARITY_COLORS[ball.rarity]
 	_ball_popup_description.text = BallEffect.get_effect_description(ball.level, ball.rarity)
 
 func _hide_ball_popup() -> void:
@@ -234,11 +229,11 @@ func _refresh_slots(parent_node: Control, min: int, max: int) -> void:
 	for node in parent_node.get_children():
 		if node is TextureRect:
 			if index < min:
-				node.self_modulate = BALL_SLOT_COLOR_REQUIRED
+				node.self_modulate = ColorData.PRIMARY
 			elif max <= index:
-				node.self_modulate = BALL_SLOT_COLOR_DISABLED
+				node.self_modulate = ColorData.SECONDARY
 			else:
-				node.self_modulate = BALL_SLOT_COLOR_OPTIONAL
+				node.self_modulate = ColorData.GRAY_40
 			index += 1
 
 

@@ -45,6 +45,8 @@ var _drag_position_to: Vector2
 func _ready() -> void:
 	_hide_arrow()
 	_hide_drag_point()
+	
+	_drag_point.modulate = ColorData.PRIMARY
 
 
 func _input(event: InputEvent) -> void:

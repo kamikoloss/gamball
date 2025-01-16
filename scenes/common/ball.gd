@@ -33,28 +33,6 @@ const TRAIL_INTERVAL: float = 0.02
 const BALL_LEVEL_OPTIONAL_SLOT = -1 # 空きスロット用
 const BALL_LEVEL_DISABLED_SLOT = -2 # 使用不可スロット用
 
-# ボールの本体の色の定義 { <Level>: Color } 
-const BALL_BODY_COLORS = {
-	BALL_LEVEL_OPTIONAL_SLOT: Color(0.2, 0.2, 0.2),
-	BALL_LEVEL_DISABLED_SLOT: Color(0.4, 0.2, 0.2),
-	0: Color(0.8, 0.8, 0.8), 8: Color(0.2, 0.2, 0.2), # White/Black
-	1: Color(1.0, 0.8, 0.0), 9: Color(1.0, 0.8, 0.0), # Yellow
-	2: Color(0.0, 0.0, 0.8), 10: Color(0.0, 0.0, 0.8), # Blue
-	3: Color(0.8, 0.0, 0.0), 11: Color(0.8, 0.0, 0.0), # Red
-	4: Color(0.6, 0.0, 0.6), 12: Color(0.6, 0.0, 0.6), # Purple
-	5: Color(1.0, 0.4, 0.0), 13: Color(1.0, 0.4, 0.0), # Orange
-	6: Color(0.0, 0.4, 0.0), 14: Color(0.0, 0.4, 0.0), # Green
-	7: Color(0.6, 0.2, 0.0), 15: Color(0.6, 0.2, 0.0), # Brown
-}
-# ボールのレア度の色の定義  { <Rarity>: Color } 
-const BALL_RARITY_COLORS = {
-	Rarity.COMMON: Color.WHITE,
-	Rarity.UNCOMMON: Color.GREEN,
-	Rarity.RARE: Color.CYAN,
-	Rarity.EPIC: Color.MAGENTA,
-	Rarity.LEGENDARY: Color.YELLOW,
-}
-
 
 # ボール番号
 # TODO: number の方がいい
@@ -155,29 +133,29 @@ func refresh_view() -> void:
 		z_index = Z_INDEX_DEFAULT
 
 	# 本体色
-	if level <= 15:
-		_body_texture.self_modulate = BALL_BODY_COLORS[level]
-		if 0 < level:
-			_body_texture.self_modulate = BALL_BODY_COLORS[5] # オレンジ固定
+	var body_color: Color
+	if level < 0:
+		body_color = ColorData.GRAY_80
+	elif level == 0:
+		body_color = ColorData.GRAY_20
+	elif level <= 15:
+		body_color = ColorData.SECONDARY
 	else:
-		_body_texture.self_modulate = BALL_BODY_COLORS[8] # 黒
+		body_color = ColorData.PRIMARY
+	_body_texture.self_modulate = body_color
+	# 残像色
+	var trail_color = body_color
+	if not is_active:
+		trail_color = ColorData.GRAY_20
+	var gradient = Gradient.new()
+	gradient.set_color(0, Color(trail_color, 0.5))
+	gradient.set_color(1, Color(trail_color, 0))
+	_trail_line.gradient = gradient
 
+	# 模様
 	var show_stripe = 9 <= level and level <= 15
 	_body_stripe_texture.visible = show_stripe
 	_body_stripe_2_texture.visible = show_stripe
-	# 残像色
-	var gradient = Gradient.new()
-	if is_active:
-		if level <= 15:
-			gradient.set_color(0, Color(BALL_BODY_COLORS[level], 0.5))
-			gradient.set_color(1, Color(BALL_BODY_COLORS[level], 0))
-			if 0 < level:
-				gradient.set_color(0, Color(BALL_BODY_COLORS[5], 0.5)) # オレンジ固定
-				gradient.set_color(1, Color(BALL_BODY_COLORS[5], 0)) # オレンジ固定
-		else:
-			gradient.set_color(0, Color(BALL_BODY_COLORS[8], 0.5)) # 黒
-			gradient.set_color(1, Color(BALL_BODY_COLORS[8], 0)) # 黒
-	_trail_line.gradient = gradient
 
 	# レア度
 	if rarity == Rarity.COMMON:
@@ -187,8 +165,8 @@ func refresh_view() -> void:
 	else:
 		_inner_texture.self_modulate = Color.BLACK
 		_inner_texture_2.visible = true
-		_inner_texture_2.self_modulate = BALL_RARITY_COLORS[rarity]
-		_level_label.self_modulate = BALL_RARITY_COLORS[rarity]
+		_inner_texture_2.self_modulate = ColorData.BALL_RARITY_COLORS[rarity]
+		_level_label.self_modulate = ColorData.BALL_RARITY_COLORS[rarity]
 
 	# マスク
 	_mask_texture.visible = not is_active # 有効なら表示しない

@@ -21,11 +21,6 @@ const PRODUCT_PRICES = {
 	ProductType.EXTRA_PACK: 200,
 	ProductType.EXTRA_CLEANER: 100,
 }
-
-const BUY_COLOR_ACTIVE = Color(0.2, 0.6, 0.2)
-const BUY_COLOR_DEACTIVE = Color(0.6, 0.2, 0.2)
-
-
 # 商品の [<名称>, <説明分>]
 # TODO: JSON に逃がす
 const PRODUCT_DATA = {
@@ -98,10 +93,10 @@ func refresh_view() -> void:
 	# 購入ボタン
 	_buy_texture.visible = _is_icon_hovered
 	if _enabled:
-		_buy_texture.self_modulate = BUY_COLOR_ACTIVE
+		_buy_texture.self_modulate = ColorData.SUCCESS
 		_buy_label.text = "BUY"
 	else:
-		_buy_texture.self_modulate = BUY_COLOR_DEACTIVE
+		_buy_texture.self_modulate = ColorData.DANGER
 		_buy_label.text = "CANNOT BUY"
 
 
