@@ -421,7 +421,6 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 
 # 商品をホバーしたときの処理
 func _on_product_hovered(product: Product, hover: bool) -> void:
-	print("money: %s, price: %s" % [money, product.price])
 	if money < product.price:
 		product.disable()
 	else:

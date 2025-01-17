@@ -146,7 +146,7 @@ func _on_balls_extra_pressed(add: bool) -> void:
 	else:
 		_game._extra_ball_list.pop_front()
 	_game._apply_extra_ball_effects()
-	_game._refresh_extra()
+	_game._refresh_deck_extra()
 	_game._refresh_next()
 
 
