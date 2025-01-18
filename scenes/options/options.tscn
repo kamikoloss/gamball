@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bqsd33phabvi6" path="res://scenes/common/ui/bar_slider.tscn" id="5_0qug4"]
 [ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="5_351k0"]
 
-[node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_audio_master_slider", "_audio_master_label", "_audio_bgm_slider", "_audio_bgm_label", "_audio_se_slider", "_audio_se_label")]
+[node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_audio_master_slider", "_audio_master_label", "_audio_master_mute_button", "_audio_bgm_slider", "_audio_bgm_label", "_audio_bgm_mute_button", "_audio_se_slider", "_audio_se_label", "_audio_se_mute_button")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("3_6sgbf")
@@ -18,10 +18,13 @@ _reset_button = NodePath("Reset")
 _exit_button = NodePath("Exit")
 _audio_master_slider = NodePath("Audio/Master/BarSlider")
 _audio_master_label = NodePath("Audio/Master/Value")
+_audio_master_mute_button = NodePath("Audio/Master/Mute")
 _audio_bgm_slider = NodePath("Audio/BGM/BarSlider")
 _audio_bgm_label = NodePath("Audio/BGM/Value")
+_audio_bgm_mute_button = NodePath("Audio/BGM/Mute")
 _audio_se_slider = NodePath("Audio/SE/BarSlider")
 _audio_se_label = NodePath("Audio/SE/Value")
+_audio_se_mute_button = NodePath("Audio/SE/Mute")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0

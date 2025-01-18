@@ -11,10 +11,13 @@ signal exit_button_pressed
 @export_category("Audio")
 @export var _audio_master_slider: BarSlider
 @export var _audio_master_label: Label
+@export var _audio_master_mute_button: Button
 @export var _audio_bgm_slider: BarSlider
 @export var _audio_bgm_label: Label
+@export var _audio_bgm_mute_button: Button
 @export var _audio_se_slider: BarSlider
 @export var _audio_se_label: Label
+@export var _audio_se_mute_button: Button
 
 
 func _ready() -> void:
@@ -23,6 +26,10 @@ func _ready() -> void:
 	_audio_master_slider.changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.MASTER, v))
 	_audio_bgm_slider.changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.BGM, v))
 	_audio_se_slider.changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.SE, v))
+	_audio_master_mute_button.pressed.connect(func(): _on_audio_slider_changed(AudioManager.BusType.MASTER, 0))
+	_audio_bgm_mute_button.pressed.connect(func(): _on_audio_slider_changed(AudioManager.BusType.BGM, 0))
+	_audio_se_mute_button.pressed.connect(func(): _on_audio_slider_changed(AudioManager.BusType.SE, 0))
+
 	# スライダー初期化
 	# NOTE: SaveManager の _ready() が実行済みである必要がある
 	_refresh_config_audio_slider(AudioManager.BusType.MASTER, SaveManager.audio_config.volume_master)
