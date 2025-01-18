@@ -10,11 +10,11 @@ signal exit_button_pressed
 
 @export_category("Audio")
 @export var _audio_master_slider: HSlider
-@export var _audio_master_ball: Ball
+@export var _audio_master_label: Label
 @export var _audio_bgm_slider: HSlider
-@export var _audio_bgm_ball: Ball
+@export var _audio_bgm_label: Label
 @export var _audio_se_slider: HSlider
-@export var _audio_se_ball: Ball
+@export var _audio_se_label: Label
 
 
 func _ready() -> void:
@@ -41,13 +41,10 @@ func _refresh_config_audio_slider(bus_type: AudioManager.BusType, volume_level: 
 	match bus_type:
 		AudioManager.BusType.MASTER:
 			_audio_master_slider.value = volume_level
-			_audio_master_ball.level = volume_level
-			_audio_master_ball.refresh_view()
+			_audio_master_label.text = str(volume_level)
 		AudioManager.BusType.BGM:
 			_audio_bgm_slider.value = volume_level
-			_audio_bgm_ball.level = volume_level
-			_audio_bgm_ball.refresh_view()
+			_audio_bgm_label.text = str(volume_level)
 		AudioManager.BusType.SE:
 			_audio_se_slider.value = volume_level
-			_audio_se_ball.level = volume_level
-			_audio_se_ball.refresh_view()
+			_audio_se_label.text = str(volume_level)

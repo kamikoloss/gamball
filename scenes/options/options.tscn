@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt4t8h3rfr8gk"]
+[gd_scene load_steps=8 format=3 uid="uid://dt4t8h3rfr8gk"]
 
 [ext_resource type="Script" path="res://scenes/options/options.gd" id="1_oy0wl"]
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="3_6sgbf"]
+[ext_resource type="PackedScene" uid="uid://b27wfweeshboa" path="res://scenes/common/ui/selector.tscn" id="3_df3y0"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="3_hpxrg"]
-[ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="4_e65cg"]
+[ext_resource type="Texture2D" uid="uid://blc6225fj24g1" path="res://images/icons/volume_off_b.png" id="4_6ii2n"]
 [ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/people/bunny2/bunny2a.png" id="4_vn1v7"]
 [ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="5_351k0"]
 
-[node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_audio_master_slider", "_audio_master_ball", "_audio_bgm_slider", "_audio_bgm_ball", "_audio_se_slider", "_audio_se_ball")]
+[node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_audio_master_slider", "_audio_master_label", "_audio_bgm_slider", "_audio_bgm_label", "_audio_se_slider", "_audio_se_label")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("3_6sgbf")
@@ -15,18 +16,18 @@ script = ExtResource("1_oy0wl")
 _reset_button = NodePath("Reset")
 _exit_button = NodePath("Exit")
 _audio_master_slider = NodePath("Audio/Master/HSlider")
-_audio_master_ball = NodePath("Audio/Master/Ball")
+_audio_master_label = NodePath("Audio/Master/Value")
 _audio_bgm_slider = NodePath("Audio/BGM/HSlider")
-_audio_bgm_ball = NodePath("Audio/BGM/Ball")
+_audio_bgm_label = NodePath("Audio/BGM/Value")
 _audio_se_slider = NodePath("Audio/SE/HSlider")
-_audio_se_ball = NodePath("Audio/SE/Ball")
+_audio_se_label = NodePath("Audio/SE/Value")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 40.0
-offset_top = 40.0
+offset_top = 50.0
 offset_right = 520.0
-offset_bottom = 680.0
+offset_bottom = 690.0
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
@@ -38,105 +39,181 @@ theme_override_font_sizes/font_size = 64
 text = "OPTIONS"
 vertical_alignment = 1
 
+[node name="Game" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 160.0
+offset_right = 60.0
+offset_bottom = 160.0
+
+[node name="Label" type="Label" parent="Game"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 40.0
+theme_type_variation = &"LabelBold"
+text = "GAME"
+vertical_alignment = 1
+
+[node name="Language" type="Control" parent="Game"]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 30.0
+offset_right = 20.0
+offset_bottom = 30.0
+
+[node name="Header" type="Label" parent="Game/Language"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 40.0
+text = "Language"
+vertical_alignment = 1
+
+[node name="Selector" parent="Game/Language" instance=ExtResource("3_df3y0")]
+offset_left = 160.0
+offset_right = 400.0
+
 [node name="Audio" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 40.0
-offset_top = 120.0
-offset_right = 40.0
-offset_bottom = 120.0
+offset_left = 60.0
+offset_top = 320.0
+offset_right = 60.0
+offset_bottom = 320.0
 
 [node name="Label" type="Label" parent="Audio"]
 layout_mode = 0
-offset_left = 20.0
-offset_top = -10.0
-offset_right = 180.0
-offset_bottom = 30.0
+offset_right = 160.0
+offset_bottom = 40.0
 theme_type_variation = &"LabelBold"
 text = "AUDIO"
 vertical_alignment = 1
 
 [node name="Master" type="Control" parent="Audio"]
 anchors_preset = 0
-offset_left = 40.0
-offset_top = 20.0
-offset_right = 40.0
-offset_bottom = 20.0
-
-[node name="Label" type="Label" parent="Audio/Master"]
-layout_mode = 0
-offset_top = -10.0
-offset_right = 160.0
+offset_left = 20.0
+offset_top = 30.0
+offset_right = 20.0
 offset_bottom = 30.0
+
+[node name="Header" type="Label" parent="Audio/Master"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 40.0
 text = "Master"
 vertical_alignment = 1
 
+[node name="Button" type="Button" parent="Audio/Master"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 10.0
+offset_right = 200.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("4_6ii2n")
+icon_alignment = 1
+expand_icon = true
+
 [node name="HSlider" type="HSlider" parent="Audio/Master"]
 layout_mode = 0
-offset_left = 80.0
-offset_right = 320.0
-offset_bottom = 20.0
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 360.0
+offset_bottom = 30.0
 max_value = 10.0
 value = 10.0
 
-[node name="Ball" parent="Audio/Master" instance=ExtResource("4_e65cg")]
-position = Vector2(340, 10)
-is_display = true
+[node name="Value" type="Label" parent="Audio/Master"]
+offset_left = 370.0
+offset_right = 410.0
+offset_bottom = 40.0
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BGM" type="Control" parent="Audio"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 20.0
+offset_bottom = 60.0
 
-[node name="Label" type="Label" parent="Audio/BGM"]
+[node name="Header" type="Label" parent="Audio/BGM"]
 layout_mode = 0
-offset_top = -10.0
 offset_right = 160.0
-offset_bottom = 30.0
+offset_bottom = 40.0
 text = "BGM"
 vertical_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="Audio/BGM"]
 layout_mode = 0
-offset_left = 80.0
-offset_right = 320.0
-offset_bottom = 20.0
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 360.0
+offset_bottom = 30.0
 max_value = 10.0
 value = 10.0
 
-[node name="Ball" parent="Audio/BGM" instance=ExtResource("4_e65cg")]
-position = Vector2(340, 10)
-is_display = true
+[node name="Button" type="Button" parent="Audio/BGM"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 10.0
+offset_right = 200.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("4_6ii2n")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Value" type="Label" parent="Audio/BGM"]
+offset_left = 370.0
+offset_right = 410.0
+offset_bottom = 40.0
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SE" type="Control" parent="Audio"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 40.0
-offset_top = 60.0
-offset_right = 40.0
-offset_bottom = 60.0
+offset_left = 20.0
+offset_top = 90.0
+offset_right = 20.0
+offset_bottom = 90.0
 
-[node name="Label" type="Label" parent="Audio/SE"]
+[node name="Header" type="Label" parent="Audio/SE"]
 layout_mode = 0
-offset_top = -10.0
 offset_right = 160.0
-offset_bottom = 30.0
+offset_bottom = 40.0
 text = "SE"
 vertical_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="Audio/SE"]
 layout_mode = 0
-offset_left = 80.0
-offset_right = 320.0
-offset_bottom = 20.0
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 360.0
+offset_bottom = 30.0
 max_value = 10.0
 value = 10.0
 
-[node name="Ball" parent="Audio/SE" instance=ExtResource("4_e65cg")]
-position = Vector2(340, 10)
-is_display = true
+[node name="Button" type="Button" parent="Audio/SE"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 10.0
+offset_right = 200.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("4_6ii2n")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Value" type="Label" parent="Audio/SE"]
+offset_left = 370.0
+offset_right = 410.0
+offset_bottom = 40.0
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Bunny" parent="." instance=ExtResource("3_hpxrg")]
 offset_left = 1000.0

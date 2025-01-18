@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://bula4jj133y50"]
+[gd_resource type="Theme" load_steps=21 format=3 uid="uid://bula4jj133y50"]
 
 [ext_resource type="FontVariation" uid="uid://dnjsv11k857r7" path="res://themes/fonts/noto_sans_jp_bold.tres" id="1_ecnqh"]
 [ext_resource type="FontVariation" uid="uid://cd3htl35cu6uk" path="res://themes/fonts/noto_sans_jp_regular.tres" id="3_adjwb"]
@@ -19,7 +19,7 @@ corner_radius_bottom_left = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwnsj"]
 bg_color = Color(0.960784, 0.968627, 0.34902, 1)
 border_width_bottom = 4
-border_color = Color(0.6, 0.6, 0.6, 1)
+border_color = Color(0.4, 0.4, 0.4, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -28,7 +28,7 @@ corner_radius_bottom_left = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtqi8"]
 bg_color = Color(0.960784, 0.968627, 0.34902, 1)
 border_width_bottom = 4
-border_color = Color(0.6, 0.6, 0.6, 1)
+border_color = Color(0.4, 0.4, 0.4, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -37,7 +37,7 @@ corner_radius_bottom_left = 2
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jp75q"]
 bg_color = Color(0.960784, 0.968627, 0.34902, 1)
 border_width_top = 4
-border_color = Color(0.6, 0.6, 0.6, 1)
+border_color = Color(1, 1, 1, 0)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -61,6 +61,16 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="ImageTexture" id="ImageTexture_00lts"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_jlmik"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rsdpk"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x47cs"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuf28"]
 bg_color = Color(0, 0, 0, 0.8)
 border_width_left = 2
@@ -72,6 +82,12 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhqtv"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ptac"]
+bg_color = Color(1, 11, 1, 1)
 
 [resource]
 default_font = ExtResource("3_adjwb")
@@ -93,13 +109,17 @@ ButtonFlatIcon/styles/focus = SubResource("StyleBoxEmpty_y5275")
 ButtonFlatIcon/styles/hover = SubResource("StyleBoxFlat_f0exq")
 ButtonFlatIcon/styles/normal = SubResource("StyleBoxEmpty_d6i8u")
 ButtonFlatIcon/styles/pressed = SubResource("StyleBoxFlat_nn3ak")
+HSlider/constants/center_grabber = 1
+HSlider/icons/grabber = SubResource("ImageTexture_00lts")
+HSlider/icons/grabber_highlight = SubResource("ImageTexture_jlmik")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_rsdpk")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_x47cs")
 Label/fonts/font = ExtResource("3_adjwb")
 LabelBold/base_type = &"Label"
 LabelBold/fonts/font = ExtResource("1_ecnqh")
 LabelHeader/base_type = &"Label"
 LabelHeader/fonts/font = ExtResource("3_auwpw")
 LabelScore/base_type = &"Label"
-LabelScore/colors/font_color = Color(1, 1, 1, 1)
 LabelScore/fonts/font = ExtResource("4_rir7g")
 LabelScoreDanger/base_type = &"Label"
 LabelScoreDanger/colors/font_color = Color(0.960784, 0.223529, 0.129412, 1)
@@ -110,6 +130,8 @@ LabelScoreOutline/colors/font_outline_color = Color(0, 0, 0, 1)
 LabelScoreOutline/constants/outline_size = 4
 LabelScoreOutline/fonts/font = ExtResource("4_rir7g")
 Panel/styles/panel = SubResource("StyleBoxFlat_fuf28")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_lhqtv")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_7ptac")
 RichTextLabel/font_sizes/bold_font_size = 16
 RichTextLabel/font_sizes/normal_font_size = 16
 RichTextLabel/fonts/bold_font = ExtResource("1_ecnqh")

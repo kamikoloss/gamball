@@ -1,0 +1,106 @@
+[gd_scene load_steps=4 format=3 uid="uid://b27wfweeshboa"]
+
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_o6qm3"]
+[ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/common/lamp.tscn" id="1_uiwnr"]
+[ext_resource type="Script" path="res://scenes/common/ui/selector.gd" id="2_ulhtf"]
+
+[node name="Selector" type="Control" node_paths=PackedStringArray("_left_button", "_right_button", "_value_label", "_lamps_parent")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 240.0
+offset_bottom = 40.0
+theme = ExtResource("1_o6qm3")
+script = ExtResource("2_ulhtf")
+_left_button = NodePath("Left")
+_right_button = NodePath("Right")
+_value_label = NodePath("Value")
+_lamps_parent = NodePath("Lamps")
+
+[node name="Left" type="Button" parent="."]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
+text = "<"
+
+[node name="Right" type="Button" parent="."]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 10.0
+offset_right = 260.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
+text = ">"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 30.0
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 200.0
+offset_bottom = 40.0
+text = "SelectedValue"
+vertical_alignment = 1
+
+[node name="Lamps" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 35.0
+offset_right = 200.0
+offset_bottom = 35.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Lamp" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp2" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp3" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp4" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp5" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp6" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp7" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp8" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp9" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp10" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp11" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp12" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp13" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp14" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp15" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2
+
+[node name="Lamp16" parent="Lamps" instance=ExtResource("1_uiwnr")]
+layout_mode = 2

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://6c1drvddwas0"]
+[gd_scene load_steps=4 format=3 uid="uid://6c1drvddwas0"]
 
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_fekh7"]
 [ext_resource type="Texture2D" uid="uid://bho0g835q1uhf" path="res://images/icons/settings.png" id="2_r7cml"]
+[ext_resource type="Texture2D" uid="uid://blc6225fj24g1" path="res://images/icons/volume_off_b.png" id="2_y7yn6"]
 
 [node name="ThemeDefaultPreview" type="Control"]
 layout_mode = 3
@@ -110,11 +111,32 @@ theme = ExtResource("1_fekh7")
 disabled = true
 text = "Button"
 
-[node name="ButtonFlatIcon" type="Button" parent="."]
-layout_mode = 0
+[node name="ButtonIcon" type="Button" parent="."]
 offset_left = 320.0
 offset_top = 80.0
 offset_right = 360.0
+offset_bottom = 120.0
+theme = ExtResource("1_fekh7")
+icon = ExtResource("2_y7yn6")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonIconDisabled" type="Button" parent="."]
+offset_left = 360.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 120.0
+theme = ExtResource("1_fekh7")
+disabled = true
+icon = ExtResource("2_y7yn6")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonFlatIcon" type="Button" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 80.0
+offset_right = 440.0
 offset_bottom = 120.0
 theme = ExtResource("1_fekh7")
 theme_type_variation = &"ButtonFlatIcon"
@@ -124,9 +146,9 @@ expand_icon = true
 
 [node name="ButtonFlatIconDisabled" type="Button" parent="."]
 layout_mode = 0
-offset_left = 360.0
+offset_left = 440.0
 offset_top = 80.0
-offset_right = 400.0
+offset_right = 480.0
 offset_bottom = 120.0
 theme = ExtResource("1_fekh7")
 theme_type_variation = &"ButtonFlatIcon"
@@ -134,3 +156,37 @@ disabled = true
 icon = ExtResource("2_r7cml")
 icon_alignment = 1
 expand_icon = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 160.0
+offset_right = 480.0
+offset_bottom = 180.0
+theme = ExtResource("1_fekh7")
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="."]
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 480.0
+offset_bottom = 200.0
+theme = ExtResource("1_fekh7")
+value = 100.0
+show_percentage = false
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 200.0
+offset_right = 480.0
+offset_bottom = 220.0
+theme = ExtResource("1_fekh7")
+
+[node name="HSlider2" type="HSlider" parent="."]
+offset_left = 320.0
+offset_top = 220.0
+offset_right = 480.0
+offset_bottom = 240.0
+theme = ExtResource("1_fekh7")
+value = 100.0
