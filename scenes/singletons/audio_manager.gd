@@ -50,7 +50,7 @@ func initialize() -> void:
 
 # 0: -40db, 5: -20db, 10: 0db, 
 func set_volume(bus_type: BusType, volume_level: int) -> void:
-	print("[AudioManager] set_volume(bus_type: %s, volume_level: %s)" % [bus_type, volume_level])
+	#print("[AudioManager] set_volume(bus_type: %s, volume_level: %s)" % [bus_type, volume_level])
 	var volume_level_clamped = clampi(volume_level, 0, 10)
 	var volume_db = -40 + volume_level_clamped * 4
 	var is_mute = volume_level_clamped == 0

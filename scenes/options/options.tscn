@@ -9,13 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://bqsd33phabvi6" path="res://scenes/common/ui/bar_slider.tscn" id="5_0qug4"]
 [ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="5_351k0"]
 
-[node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_audio_master_slider", "_audio_master_label", "_audio_master_mute_button", "_audio_bgm_slider", "_audio_bgm_label", "_audio_bgm_mute_button", "_audio_se_slider", "_audio_se_label", "_audio_se_mute_button")]
+[node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_language_selector", "_window_mode_selector", "_window_size_selector", "_audio_master_slider", "_audio_master_label", "_audio_master_mute_button", "_audio_bgm_slider", "_audio_bgm_label", "_audio_bgm_mute_button", "_audio_se_slider", "_audio_se_label", "_audio_se_mute_button")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("3_6sgbf")
 script = ExtResource("1_oy0wl")
 _reset_button = NodePath("Reset")
 _exit_button = NodePath("Exit")
+_language_selector = NodePath("Game/Language/Selector")
+_window_mode_selector = NodePath("Video/WindowMode/Selector")
+_window_size_selector = NodePath("Video/WindowSize/Selector")
 _audio_master_slider = NodePath("Audio/Master/BarSlider")
 _audio_master_label = NodePath("Audio/Master/Value")
 _audio_master_mute_button = NodePath("Audio/Master/Mute")
@@ -92,36 +95,36 @@ theme_type_variation = &"LabelBold"
 text = "VIDEO"
 vertical_alignment = 1
 
-[node name="Window" type="Control" parent="Video"]
+[node name="WindowMode" type="Control" parent="Video"]
 anchors_preset = 0
 offset_top = 30.0
 offset_bottom = 30.0
 
-[node name="Header" type="Label" parent="Video/Window"]
+[node name="Header" type="Label" parent="Video/WindowMode"]
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 40.0
-text = "Window"
+text = "Window Mode"
 vertical_alignment = 1
 
-[node name="Selector" parent="Video/Window" instance=ExtResource("3_df3y0")]
+[node name="Selector" parent="Video/WindowMode" instance=ExtResource("3_df3y0")]
 offset_left = 160.0
 offset_right = 400.0
 
-[node name="Resolution" type="Control" parent="Video"]
+[node name="WindowSize" type="Control" parent="Video"]
 layout_mode = 3
 anchors_preset = 0
 offset_top = 60.0
 offset_bottom = 60.0
 
-[node name="Header" type="Label" parent="Video/Resolution"]
+[node name="Header" type="Label" parent="Video/WindowSize"]
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 40.0
-text = "Resolution"
+text = "Window Size"
 vertical_alignment = 1
 
-[node name="Selector" parent="Video/Resolution" instance=ExtResource("3_df3y0")]
+[node name="Selector" parent="Video/WindowSize" instance=ExtResource("3_df3y0")]
 offset_left = 160.0
 offset_right = 400.0
 

@@ -8,6 +8,13 @@ signal exit_button_pressed
 @export var _reset_button: Button
 @export var _exit_button: Button
 
+@export_category("Game")
+@export var _language_selector: Selector
+
+@export_category("Video")
+@export var _window_mode_selector: Selector
+@export var _window_size_selector: Selector
+
 @export_category("Audio")
 @export var _audio_master_slider: BarSlider
 @export var _audio_master_label: Label
@@ -30,8 +37,12 @@ func _ready() -> void:
 	_audio_bgm_mute_button.pressed.connect(func(): _on_audio_slider_changed(AudioManager.BusType.BGM, 0))
 	_audio_se_mute_button.pressed.connect(func(): _on_audio_slider_changed(AudioManager.BusType.SE, 0))
 
-	# スライダー初期化
+	#  UI 初期化
 	# NOTE: SaveManager の _ready() が実行済みである必要がある
+	_window_mode_selector.options = SaveManager.video_config.WINDOW_MODE_LABELS
+	_window_mode_selector.value = SaveManager.video_config.window_mode
+	_window_size_selector.options = SaveManager.video_config.WINDOW_SIZE_LABELS
+	_window_size_selector.value = SaveManager.video_config.window_size
 	_refresh_config_audio_slider(AudioManager.BusType.MASTER, SaveManager.audio_config.volume_master)
 	_refresh_config_audio_slider(AudioManager.BusType.BGM, SaveManager.audio_config.volume_bgm)
 	_refresh_config_audio_slider(AudioManager.BusType.SE, SaveManager.audio_config.volume_se)
