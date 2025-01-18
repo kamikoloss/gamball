@@ -9,20 +9,20 @@ signal exit_button_pressed
 @export var _exit_button: Button
 
 @export_category("Audio")
-@export var _audio_master_slider: HSlider
+@export var _audio_master_slider: BarSlider
 @export var _audio_master_label: Label
-@export var _audio_bgm_slider: HSlider
+@export var _audio_bgm_slider: BarSlider
 @export var _audio_bgm_label: Label
-@export var _audio_se_slider: HSlider
+@export var _audio_se_slider: BarSlider
 @export var _audio_se_label: Label
 
 
 func _ready() -> void:
 	# Signal
 	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
-	_audio_master_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.MASTER, v))
-	_audio_bgm_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.BGM, v))
-	_audio_se_slider.value_changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.SE, v))
+	_audio_master_slider.changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.MASTER, v))
+	_audio_bgm_slider.changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.BGM, v))
+	_audio_se_slider.changed.connect(func(v): _on_audio_slider_changed(AudioManager.BusType.SE, v))
 	# スライダー初期化
 	# NOTE: SaveManager の _ready() が実行済みである必要がある
 	_refresh_config_audio_slider(AudioManager.BusType.MASTER, SaveManager.audio_config.volume_master)

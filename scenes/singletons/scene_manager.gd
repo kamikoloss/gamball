@@ -27,6 +27,9 @@ var _game: Game
 var _tweens: Dictionary = {}
 
 
+# TODO: title, information, options のインスタンス化をここでやる
+
+
 func _ready() -> void:
 	title.visible = false
 	information.visible = false

@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqsd33phabvi6"]
+
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_1gu2j"]
+[ext_resource type="Script" path="res://scenes/common/ui/bar_slider.gd" id="2_24a5e"]
+
+[node name="BarSlider" type="Control" node_paths=PackedStringArray("_bar", "_slider")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 20.0
+theme = ExtResource("1_1gu2j")
+script = ExtResource("2_24a5e")
+_bar = NodePath("ProgressBar")
+_slider = NodePath("HSlider")
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 10.0
+value = 10.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+min_value = 1.0
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"PanelClear"

@@ -42,6 +42,11 @@ func _ready() -> void:
 func initialize() -> void:
 	_bgm_player.play()
 
+	if SaveManager.audio_config:
+		set_volume(AudioManager.BusType.MASTER, SaveManager.audio_config.volume_master)
+		set_volume(AudioManager.BusType.BGM, SaveManager.audio_config.volume_bgm)
+		set_volume(AudioManager.BusType.SE, SaveManager.audio_config.volume_se)
+
 
 # 0: -40db, 5: -20db, 10: 0db, 
 func set_volume(bus_type: BusType, volume_level: int) -> void:

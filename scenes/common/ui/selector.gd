@@ -24,8 +24,8 @@ var _selected_option_index: int = 0
 
 
 func _ready() -> void:
-	options = { "k1": "v1", "k2": "v2", "k3": "v3" } # Debug
-	default_option_key = "k2" # Debug
+	#options = { "k1": "v1", "k2": "v2", "k3": "v3" } # Debug
+	#default_option_key = "k2" # Debug
 
 	_left_button.pressed.connect(func(): _shift_option(-1))
 	_right_button.pressed.connect(func(): _shift_option(1))
