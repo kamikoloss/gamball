@@ -162,9 +162,9 @@ expand_icon = true
 
 [node name="HSlider" type="HSlider" parent="Audio/Master"]
 layout_mode = 0
-offset_left = 200.0
+offset_left = 190.0
 offset_top = 10.0
-offset_right = 360.0
+offset_right = 370.0
 offset_bottom = 30.0
 max_value = 10.0
 value = 10.0

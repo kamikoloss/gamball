@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://b27wfweeshboa"]
 
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_o6qm3"]
-[ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/common/lamp.tscn" id="1_uiwnr"]
 [ext_resource type="Script" path="res://scenes/common/ui/selector.gd" id="2_ulhtf"]
 [ext_resource type="Texture2D" uid="uid://p4to2jwqcee3" path="res://images/icons/chevron_left.png" id="3_b8ae3"]
 [ext_resource type="Texture2D" uid="uid://n5jp67s2y4lj" path="res://images/icons/chevron_right.png" id="4_yobyp"]
+[ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="5_hdy6r"]
 
-[node name="Selector" type="Control" node_paths=PackedStringArray("_left_button", "_right_button", "_value_label", "_lamps_parent")]
+[node name="Selector" type="Control" node_paths=PackedStringArray("_left_button", "_right_button", "_value_label", "_points_parent")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 240.0
@@ -16,7 +16,7 @@ script = ExtResource("2_ulhtf")
 _left_button = NodePath("Left")
 _right_button = NodePath("Right")
 _value_label = NodePath("Value")
-_lamps_parent = NodePath("Lamps")
+_points_parent = NodePath("Points")
 
 [node name="Left" type="Button" parent="."]
 layout_mode = 0
@@ -53,9 +53,10 @@ offset_right = 200.0
 offset_bottom = 40.0
 theme_override_font_sizes/font_size = 14
 text = "SelectedValue"
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Lamps" type="HBoxContainer" parent="."]
+[node name="Points" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 35.0
@@ -64,50 +65,122 @@ offset_bottom = 35.0
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Lamp" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="Control" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp2" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="TextureRect" type="TextureRect" parent="Points/Control"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
+
+[node name="Control2" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp3" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="TextureRect" type="TextureRect" parent="Points/Control2"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
+
+[node name="Control3" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp4" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="TextureRect" type="TextureRect" parent="Points/Control3"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
+
+[node name="Control4" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp5" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="TextureRect" type="TextureRect" parent="Points/Control4"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
+
+[node name="Control5" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp6" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="TextureRect" type="TextureRect" parent="Points/Control5"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
+
+[node name="Control6" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp7" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="TextureRect" type="TextureRect" parent="Points/Control6"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
+
+[node name="Control7" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp8" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="TextureRect" type="TextureRect" parent="Points/Control7"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
+
+[node name="Control8" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp9" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="TextureRect" type="TextureRect" parent="Points/Control8"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
+
+[node name="Control9" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp10" parent="Lamps" instance=ExtResource("1_uiwnr")]
+[node name="TextureRect" type="TextureRect" parent="Points/Control9"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
+
+[node name="Control10" type="Control" parent="Points"]
 layout_mode = 2
 
-[node name="Lamp11" parent="Lamps" instance=ExtResource("1_uiwnr")]
-layout_mode = 2
-
-[node name="Lamp12" parent="Lamps" instance=ExtResource("1_uiwnr")]
-layout_mode = 2
-
-[node name="Lamp13" parent="Lamps" instance=ExtResource("1_uiwnr")]
-layout_mode = 2
-
-[node name="Lamp14" parent="Lamps" instance=ExtResource("1_uiwnr")]
-layout_mode = 2
-
-[node name="Lamp15" parent="Lamps" instance=ExtResource("1_uiwnr")]
-layout_mode = 2
-
-[node name="Lamp16" parent="Lamps" instance=ExtResource("1_uiwnr")]
-layout_mode = 2
+[node name="TextureRect" type="TextureRect" parent="Points/Control10"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+texture = ExtResource("5_hdy6r")
+expand_mode = 1
