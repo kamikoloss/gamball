@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_fekh7"]
 [ext_resource type="Texture2D" uid="uid://bho0g835q1uhf" path="res://images/icons/settings.png" id="2_r7cml"]
-[ext_resource type="Texture2D" uid="uid://blc6225fj24g1" path="res://images/icons/volume_off_b.png" id="2_y7yn6"]
+[ext_resource type="Texture2D" uid="uid://blc6225fj24g1" path="res://images/icons/volume_off.png" id="2_y7yn6"]
 
 [node name="ThemeDefaultPreview" type="Control"]
 layout_mode = 3
@@ -112,6 +112,7 @@ disabled = true
 text = "Button"
 
 [node name="ButtonIcon" type="Button" parent="."]
+layout_mode = 0
 offset_left = 320.0
 offset_top = 80.0
 offset_right = 360.0
@@ -122,6 +123,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="ButtonIconDisabled" type="Button" parent="."]
+layout_mode = 0
 offset_left = 360.0
 offset_top = 80.0
 offset_right = 400.0
@@ -167,6 +169,7 @@ theme = ExtResource("1_fekh7")
 show_percentage = false
 
 [node name="ProgressBar2" type="ProgressBar" parent="."]
+layout_mode = 0
 offset_left = 320.0
 offset_top = 180.0
 offset_right = 480.0
@@ -184,6 +187,7 @@ offset_bottom = 220.0
 theme = ExtResource("1_fekh7")
 
 [node name="HSlider2" type="HSlider" parent="."]
+layout_mode = 0
 offset_left = 320.0
 offset_top = 220.0
 offset_right = 480.0

@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="3_6sgbf"]
 [ext_resource type="PackedScene" uid="uid://b27wfweeshboa" path="res://scenes/common/ui/selector.tscn" id="3_df3y0"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="3_hpxrg"]
-[ext_resource type="Texture2D" uid="uid://blc6225fj24g1" path="res://images/icons/volume_off_b.png" id="4_6ii2n"]
+[ext_resource type="Texture2D" uid="uid://blc6225fj24g1" path="res://images/icons/volume_off.png" id="4_6ii2n"]
 [ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/people/bunny2/bunny2a.png" id="4_vn1v7"]
 [ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="5_351k0"]
 
@@ -41,14 +41,15 @@ vertical_alignment = 1
 
 [node name="Game" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 60.0
-offset_top = 160.0
-offset_right = 60.0
-offset_bottom = 160.0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 80.0
 
 [node name="Label" type="Label" parent="Game"]
 layout_mode = 0
-offset_right = 160.0
+offset_left = -20.0
+offset_right = 140.0
 offset_bottom = 40.0
 theme_type_variation = &"LabelBold"
 text = "GAME"
@@ -56,9 +57,7 @@ vertical_alignment = 1
 
 [node name="Language" type="Control" parent="Game"]
 anchors_preset = 0
-offset_left = 20.0
 offset_top = 30.0
-offset_right = 20.0
 offset_bottom = 30.0
 
 [node name="Header" type="Label" parent="Game/Language"]
@@ -72,16 +71,67 @@ vertical_alignment = 1
 offset_left = 160.0
 offset_right = 400.0
 
+[node name="Video" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 240.0
+offset_right = 80.0
+offset_bottom = 240.0
+
+[node name="Label" type="Label" parent="Video"]
+layout_mode = 0
+offset_left = -20.0
+offset_right = 140.0
+offset_bottom = 40.0
+theme_type_variation = &"LabelBold"
+text = "VIDEO"
+vertical_alignment = 1
+
+[node name="Window" type="Control" parent="Video"]
+anchors_preset = 0
+offset_top = 30.0
+offset_bottom = 30.0
+
+[node name="Header" type="Label" parent="Video/Window"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 40.0
+text = "Window"
+vertical_alignment = 1
+
+[node name="Selector" parent="Video/Window" instance=ExtResource("3_df3y0")]
+offset_left = 160.0
+offset_right = 400.0
+
+[node name="Resolution" type="Control" parent="Video"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 60.0
+offset_bottom = 60.0
+
+[node name="Header" type="Label" parent="Video/Resolution"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 40.0
+text = "Resolution"
+vertical_alignment = 1
+
+[node name="Selector" parent="Video/Resolution" instance=ExtResource("3_df3y0")]
+offset_left = 160.0
+offset_right = 400.0
+
 [node name="Audio" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 60.0
-offset_top = 320.0
-offset_right = 60.0
-offset_bottom = 320.0
+offset_left = 80.0
+offset_top = 400.0
+offset_right = 80.0
+offset_bottom = 400.0
 
 [node name="Label" type="Label" parent="Audio"]
 layout_mode = 0
-offset_right = 160.0
+offset_left = -20.0
+offset_right = 140.0
 offset_bottom = 40.0
 theme_type_variation = &"LabelBold"
 text = "AUDIO"
@@ -89,9 +139,7 @@ vertical_alignment = 1
 
 [node name="Master" type="Control" parent="Audio"]
 anchors_preset = 0
-offset_left = 20.0
 offset_top = 30.0
-offset_right = 20.0
 offset_bottom = 30.0
 
 [node name="Header" type="Label" parent="Audio/Master"]
@@ -122,6 +170,7 @@ max_value = 10.0
 value = 10.0
 
 [node name="Value" type="Label" parent="Audio/Master"]
+layout_mode = 0
 offset_left = 370.0
 offset_right = 410.0
 offset_bottom = 40.0
@@ -132,9 +181,7 @@ vertical_alignment = 1
 [node name="BGM" type="Control" parent="Audio"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 20.0
 offset_top = 60.0
-offset_right = 20.0
 offset_bottom = 60.0
 
 [node name="Header" type="Label" parent="Audio/BGM"]
@@ -165,6 +212,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Value" type="Label" parent="Audio/BGM"]
+layout_mode = 0
 offset_left = 370.0
 offset_right = 410.0
 offset_bottom = 40.0
@@ -175,9 +223,7 @@ vertical_alignment = 1
 [node name="SE" type="Control" parent="Audio"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 20.0
 offset_top = 90.0
-offset_right = 20.0
 offset_bottom = 90.0
 
 [node name="Header" type="Label" parent="Audio/SE"]
@@ -208,6 +254,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Value" type="Label" parent="Audio/SE"]
+layout_mode = 0
 offset_left = 370.0
 offset_right = 410.0
 offset_bottom = 40.0
