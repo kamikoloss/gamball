@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://l2y3sq1ikgmx"]
+[gd_scene load_steps=36 format=3 uid="uid://l2y3sq1ikgmx"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_w7c5l"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_ma10n"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://cmdugoyo8pdg1" path="res://images/icons/info.png" id="27_k84dy"]
 [ext_resource type="Texture2D" uid="uid://dkcqj2bnwtcfx" path="res://images/icons/refresh.png" id="30_hmras"]
 [ext_resource type="Texture2D" uid="uid://cs6iwstf8idpu" path="res://images/icons/monitoring.png" id="31_20lsb"]
+[ext_resource type="Texture2D" uid="uid://c30d2k1hmhmry" path="res://images/icons/logout.png" id="32_wkrrw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_abgdr"]
 shader = ExtResource("3_cdybq")
@@ -2308,7 +2309,7 @@ offset_top = 480.0
 offset_right = 800.0
 offset_bottom = 520.0
 scale = Vector2(0.5, 0.5)
-text = "To BALLS"
+text = "Buy BALLS"
 
 [node name="SellBalls" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
@@ -2317,7 +2318,7 @@ offset_top = 560.0
 offset_right = 800.0
 offset_bottom = 600.0
 scale = Vector2(0.5, 0.5)
-text = "To MONEY"
+text = "Sell BALLS"
 
 [node name="Options" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
@@ -2364,6 +2365,17 @@ offset_bottom = 170.0
 scale = Vector2(0.75, 0.75)
 theme_type_variation = &"ButtonFlatIcon"
 icon = ExtResource("30_hmras")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Exit" type="Button" parent="UI/Main/Buttons"]
+offset_left = 1240.0
+offset_top = 170.0
+offset_right = 1280.0
+offset_bottom = 210.0
+scale = Vector2(0.75, 0.75)
+theme_type_variation = &"ButtonFlatIcon"
+icon = ExtResource("32_wkrrw")
 icon_alignment = 1
 expand_icon = true
 

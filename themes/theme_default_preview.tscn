@@ -50,6 +50,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelScoreOutline" type="Label" parent="."]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 40.0
 offset_right = 320.0
@@ -61,6 +62,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelScoreDanger" type="Label" parent="."]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 80.0
 offset_right = 320.0
@@ -121,6 +123,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="ButtonFlatIconDisabled" type="Button" parent="."]
+layout_mode = 0
 offset_left = 360.0
 offset_top = 80.0
 offset_right = 400.0
