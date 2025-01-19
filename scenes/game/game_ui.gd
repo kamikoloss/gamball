@@ -193,6 +193,36 @@ func popup_score(from: Vector2, text: String, color: Color = Color.WHITE, ratio:
 	popup_score.popup(from, text)
 
 
+# tax_list: [ <turn>, TaxType, <amount> ]
+func refresh_tax_table(tax_list: Array) -> void:
+	var row_index = -1
+	var col_index = 0
+
+	for row in _tax_table_parent.get_children():
+		col_index = 0
+		# ヘッダー行はスキップする
+		if row_index == -1:
+			row_index += 1
+			continue
+		for col in row.get_children():
+			if col is Label:
+				col.text = "----"
+				if tax_list.size() <= row_index:
+					col_index += 1
+					continue
+				var turn = tax_list[row_index][0]
+				var tax_type = tax_list[row_index][1]
+				var amount = tax_list[row_index][2]
+				if col_index == 0:
+					col.text = str(turn)
+				elif col_index == 1 and tax_type == Game.TaxType.MONEY:
+					col.text = str(amount)
+				elif col_index == 2 and tax_type == Game.TaxType.BALLS:
+					col.text = str(amount)
+				col_index += 1
+		row_index += 1
+
+
 func _on_deck_extra_balls_hovered(ball: Ball, entered: bool) -> void:
 	if entered:
 		_show_ball_popup(ball)
@@ -248,36 +278,6 @@ func _refresh_slots(parent_node: Control, min: int, max: int) -> void:
 			else:
 				node.self_modulate = ColorData.GRAY_40
 			index += 1
-
-
-# tax_list: [ <turn>, TaxType, <amount> ]
-func _refresh_tax_table(tax_list: Array) -> void:
-	var row_index = -1
-	var col_index = 0
-
-	for row in _tax_table_parent.get_children():
-		col_index = 0
-		# ヘッダー行はスキップする
-		if row_index == -1:
-			row_index += 1
-			continue
-		for col in row.get_children():
-			if col is Label:
-				col.text = "----"
-				if tax_list.size() <= row_index:
-					col_index += 1
-					continue
-				var turn = tax_list[row_index][0]
-				var tax_type = tax_list[row_index][1]
-				var amount = tax_list[row_index][2]
-				if col_index == 0:
-					col.text = str(turn)
-				elif col_index == 1 and tax_type == Game.TaxType.MONEY:
-					col.text = str(amount)
-				elif col_index == 2 and tax_type == Game.TaxType.BALLS:
-					col.text = str(amount)
-				col_index += 1
-		row_index += 1
 
 
 func _get_tween(type: TweenType) -> Tween:

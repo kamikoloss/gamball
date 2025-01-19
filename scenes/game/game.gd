@@ -181,8 +181,8 @@ func _ready() -> void:
 			node.pressed.connect(_on_product_pressed)
 
 	# UI
-	_game_ui._refresh_tax_table(TAX_LIST)
-	_game_ui.add_log("---- Game Start! ----")
+	_game_ui.refresh_tax_table(TAX_LIST)
+	_game_ui.add_log("---- Start!! ----")
 	_apply_extra_ball_effects()
 	_refresh_deck_extra()
 	_refresh_next()

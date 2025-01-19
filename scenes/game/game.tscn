@@ -2672,7 +2672,7 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 80.0
 theme_override_fonts/normal_font = ExtResource("10_w3wxc")
-theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 scroll_following = true
 
