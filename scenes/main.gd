@@ -6,10 +6,13 @@ extends Node
 # ゲーム起動時にだけ必要な Singletons の初期化処理はここで実行する
 # 例: BGM はゲーム起動時にだけ鳴る -> AudioManager.initialize() 経由で鳴らす
 func _ready() -> void:
-	SceneManager.initialize()
-	SceneManager.title.exit_button_pressed.connect(_exit_game)
+	print("[Main] ready.")
 
+	SceneManager.initialize()
+	VideoManager.initialize()
 	AudioManager.initialize()
+
+	SceneManager.title.exit_button_pressed.connect(_exit_game)
 
 
 func _exit_game() -> void:

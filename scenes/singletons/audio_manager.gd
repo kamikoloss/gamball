@@ -35,11 +35,15 @@ enum SeType {
 
 
 func _ready() -> void:
+	print("[AudioManager] ready.")
+
 	# BGM はループ再生する
 	_bgm_player.finished.connect(func(): _bgm_player.play())
 
 
 func initialize() -> void:
+	print("[AudioManager] initialized.")
+
 	_bgm_player.play()
 
 	if SaveManager.audio_config:

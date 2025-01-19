@@ -31,6 +31,8 @@ var _tweens: Dictionary = {}
 
 
 func _ready() -> void:
+	print("[SceneManager] ready.")
+
 	title.visible = false
 	information.visible = false
 	options.visible = false
@@ -47,6 +49,8 @@ func _ready() -> void:
 # 初期化処理
 # Main シーンから呼ぶ想定
 func initialize() -> void:
+	print("[SceneManager] initialized.")
+
 	title.visible = true
 	information.visible = false
 	options.visible = false
@@ -57,7 +61,7 @@ func initialize() -> void:
 
 
 func goto_scene(scene_type: SceneType) -> void:
-	print("[SceneManager] _load_scene(%s)" % [SceneType.keys()[scene_type]])
+	print("[SceneManager] goto_scene(%s)" % [SceneType.keys()[scene_type]])
 
 	if _is_loading_now:
 		return

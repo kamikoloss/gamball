@@ -14,6 +14,7 @@ var audio_config: AudioConfig
 
 
 func _ready() -> void:
+	print("[SaveManager] ready.")
 	init_save_data()
 	load_config()
 
@@ -74,28 +75,10 @@ class GameConfig extends SaveDataBase:
 
 
 class VideoConfig extends SaveDataBase:
-	var window_mode := DisplayServer.WindowMode.WINDOW_MODE_WINDOWED
-	var window_size := WindowSize.W1280
+	var window_mode := VideoManager.WindowMode.WINDOW
+	var window_size := VideoManager.WindowSize.W1280
 	func get_peroperty_names() -> Array[String]:
 		return ["window_mode", "window_size"]
-
-	enum WindowSize { W640, W1280, W1920, W2560 }
-	const WINDOW_MODE_LABELS = {
-		DisplayServer.WindowMode.WINDOW_MODE_WINDOWED: "Window",
-		DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN: "Fullscreen",
-	}
-	const WINDOW_SIZE_LABELS = {
-		WindowSize.W640: "640 x 360",
-		WindowSize.W1280: "1280 x 720",
-		WindowSize.W1920: "1920 x 1080",
-		WindowSize.W2560: "2560 x 1440",
-	}
-	var window_mode_label: String:
-		get():
-			return WINDOW_MODE_LABELS[window_mode]
-	var window_size_label: String:
-		get():
-			return WINDOW_SIZE_LABELS[window_size]
 
 
 class AudioConfig extends SaveDataBase:

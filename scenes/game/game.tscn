@@ -2345,6 +2345,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Stats" type="Button" parent="UI/Main/Buttons"]
+visible = false
 layout_mode = 0
 offset_left = 1240.0
 offset_top = 90.0
@@ -2357,6 +2358,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Rerun" type="Button" parent="UI/Main/Buttons"]
+visible = false
 layout_mode = 0
 offset_left = 1240.0
 offset_top = 130.0
@@ -2369,6 +2371,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Exit" type="Button" parent="UI/Main/Buttons"]
+visible = false
 layout_mode = 0
 offset_left = 1240.0
 offset_top = 170.0

@@ -3,7 +3,7 @@ class_name Selector
 
 
 # 値を変更したとき
-signal changed # (option_key: String)
+signal changed # (option_key)
 
 
 @export var _left_button: Button

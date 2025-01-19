@@ -26,6 +26,7 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 
 SaveManager="*res://scenes/singletons/save_manager.gd"
 SceneManager="*res://scenes/singletons/scene_manager.tscn"
+VideoManager="*res://scenes/singletons/video_manager.gd"
 AudioManager="*res://scenes/singletons/audio_manager.tscn"
 
 [display]

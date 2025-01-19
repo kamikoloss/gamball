@@ -235,7 +235,7 @@ func _start_rusn_lamps(index_list: Array[int]) -> void:
 	tween.tween_callback(func(): _stop_lamp_se_loop())
 	await tween.finished
 
-# NOTE: set_loops は chain で切れないので Tween を分ける
+# NOTE: set_loops は chain で切れないので Tween を分けている
 func _flash_lamp(index: int) -> void:
 	var tween2 = _get_tween(TweenType.RUSH_LAMP_FLASH)
 	tween2.set_loops(4)
