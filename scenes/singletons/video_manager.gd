@@ -8,7 +8,7 @@ enum WindowSize { W640, W1280, W1920, W2560 }
 
 const WINDOW_MODE = {
 	WindowMode.WINDOW: DisplayServer.WindowMode.WINDOW_MODE_WINDOWED,
-	WindowMode.FULLSCREEN: DisplayServer.WindowMode.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
+	WindowMode.FULLSCREEN: DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN,
 }
 const WINDOW_SIZE = {
 	WindowSize.W640: [640, 360],
@@ -40,6 +40,9 @@ func initialize() -> void:
 func set_window_mode(mode: WindowMode) -> void:
 	var m = WINDOW_MODE[mode]
 	DisplayServer.window_set_mode(m)
+
+	if SaveManager.video_config:
+		set_window_size(SaveManager.video_config.window_size)
 
 
 func set_window_size(size: WindowSize) -> void:
