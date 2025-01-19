@@ -56,10 +56,8 @@ var _balls_functions: Dictionary = {
 	"Lv.3": func(): _on_balls_rarity_pressed(Ball.Rarity.RARE),
 	"Lv.4": func(): _on_balls_rarity_pressed(Ball.Rarity.EPIC),
 	"Lv.5": func(): _on_balls_rarity_pressed(Ball.Rarity.LEGENDARY),
-	"DECK+": func(): _on_balls_deck_pressed(true),
-	"DECK-": func(): _on_balls_deck_pressed(false),
-	"EXTRA+": func(): _on_balls_extra_pressed(true),
-	"EXTRA-": func(): _on_balls_extra_pressed(false),
+	"DECK-": func(): _on_balls_remove_pressed(false),
+	"EXTRA-": func(): _on_balls_remove_pressed(true),
 }
 # { <ラベル文字列 Key: string>: <ラベル文字列 Value: Callable>, ... }
 var _main_texts: Dictionary = {
@@ -76,9 +74,6 @@ var _sample_dialogue_big_list = [
 	"セリフサンプルだよ～！",
 	"セリフサンプルだよ～！\nセリフサンプルだよ～！",
 ]
-
-var _current_ball_level: int = 0
-var _current_ball_rarity: Ball.Rarity = Ball.Rarity.COMMON
 
 
 func _ready() -> void:
@@ -121,30 +116,21 @@ func _ready() -> void:
 
 
 func _on_ball_pressed(ball: Ball) -> void:
-	_current_ball_level = ball.level
-	for b: Ball in _balls_parent.get_children():
-		b.hide_hover()
-	ball.show_hover()
+	_game._extra_ball_list.push_back(Ball.new(ball.level, ball.rarity))
+	_game._apply_extra_ball_effects()
+	_game._refresh_deck_extra()
+	_game._refresh_next()
 
 func _on_balls_rarity_pressed(rarity: Ball.Rarity) -> void:
-	_current_ball_rarity = rarity
 	for ball: Ball in _balls_parent.get_children():
 		ball.rarity = rarity
 		ball.refresh_view()
 
-func _on_balls_deck_pressed(add: bool) -> void:
-	if add:
-		_game._deck_ball_list.push_back(Ball.new(_current_ball_level, _current_ball_rarity))
+func _on_balls_remove_pressed(is_extra: bool) -> void:
+	if is_extra:
+		_game._extra_ball_list.pop_front()
 	else:
 		_game._deck_ball_list.pop_front()
-	_game._apply_extra_ball_effects()
-	_game._refresh_deck()
-
-func _on_balls_extra_pressed(add: bool) -> void:
-	if add:
-		_game._extra_ball_list.push_back(Ball.new(_current_ball_level, _current_ball_rarity))
-	else:
-		_game._extra_ball_list.pop_front()
 	_game._apply_extra_ball_effects()
 	_game._refresh_deck_extra()
 	_game._refresh_next()

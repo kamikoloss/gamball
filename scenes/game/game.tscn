@@ -2717,7 +2717,6 @@ scale = Vector2(0.5, 0.5)
 text = "Debug"
 
 [node name="DebugWindow" type="Control" parent="UIDebug"]
-visible = false
 anchors_preset = 0
 offset_left = 20.0
 offset_top = 20.0
