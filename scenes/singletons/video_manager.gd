@@ -38,6 +38,9 @@ func initialize() -> void:
 
 
 func set_window_mode(mode: WindowMode) -> void:
+	if OS.has_feature("web"):
+		return
+
 	var m = WINDOW_MODE[mode]
 	DisplayServer.window_set_mode(m)
 
@@ -46,6 +49,9 @@ func set_window_mode(mode: WindowMode) -> void:
 
 
 func set_window_size(size: WindowSize) -> void:
+	if OS.has_feature("web"):
+		return
+
 	var x = WINDOW_SIZE[size][0]
 	var y = WINDOW_SIZE[size][1]
 	get_window().size = Vector2i(x, y)
