@@ -180,13 +180,13 @@ func _ready() -> void:
 			node.hovered.connect(_on_product_hovered)
 			node.pressed.connect(_on_product_pressed)
 
-	# UI (GameUi)
+	# UI
 	_game_ui._refresh_tax_table(TAX_LIST)
-	_bunny.visible = false
+	_game_ui.add_log("---- Game Start! ----")
 	_apply_extra_ball_effects()
 	_refresh_deck_extra()
 	_refresh_next()
-	# UI (Billiards)
+	_bunny.visible = false
 	_billiards.refresh_balls_count(billiards_balls)
 
 	# ボール購入ボタンを1プッシュする
@@ -371,8 +371,6 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# Ball を増加させてワープさせる
 			var level = ball.level # NOTE: ここで控えとかないと参照できないことがある
 			var amount = (hole.gain_ratio + gain_plus) * gain_times * level
-			# TODO: ログ出す？
-			print("[Game] ball gain: (%s + %s) x %s x %s = %s" % [level, gain_plus, hole.gain_ratio, gain_times, amount])
 			if 0 < amount:
 				var tween = create_tween()
 				tween.set_loops(amount)
@@ -395,6 +393,9 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				popup_text = "%s" % [amount]
 				popup_color = Color.RED
 			_game_ui.popup_score(hole.global_position, popup_text, popup_color, popup_size)
+			# ログを出す
+			var log = "(%s + %s) x %s x %s = %s" % [level, gain_plus, hole.gain_ratio, gain_times, amount]
+			_game_ui.add_log(log)
 			# Hole を点滅させる
 			if hole.gain_ratio == 0:
 				hole.flash(1, Color.RED, 2)

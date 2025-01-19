@@ -1122,7 +1122,7 @@ position = Vector2(280, 160)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_deck_slots_parent", "_extra_balls_parent", "_extra_slots_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_money_label", "_next_balls_label", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_people_window")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_deck_slots_parent", "_extra_balls_parent", "_extra_slots_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_money_label", "_next_balls_label", "_log_label", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_people_window")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -1148,6 +1148,7 @@ _balls_label = NodePath("Main/Score/Balls/Balls")
 _next_turn_label = NodePath("Main/Score/Turn/Turn2")
 _next_money_label = NodePath("Main/Score/Money/Money2")
 _next_balls_label = NodePath("Main/Score/Balls/Balls2")
+_log_label = NodePath("Main/Score/Log/RichTextLabel")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")
 _tax_give_up_button = NodePath("Tax/GiveUp")
@@ -2653,6 +2654,27 @@ theme_override_font_sizes/font_size = 64
 text = "999999"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Log" type="Control" parent="UI/Main/Score"]
+anchors_preset = 0
+offset_top = -140.0
+offset_bottom = -140.0
+
+[node name="Panel" type="Panel" parent="UI/Main/Score/Log"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 165.0
+offset_bottom = 85.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/Score/Log"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 80.0
+theme_override_fonts/normal_font = ExtResource("10_w3wxc")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_following = true
 
 [node name="BallPopup" type="Control" parent="UI/Main"]
 visible = false

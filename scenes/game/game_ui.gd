@@ -24,6 +24,8 @@ const WINDOW_MOVE_DURATION: float = 1.0
 
 const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 
+const LOG_LINES_MAX: int = 100
+
 
 @export_category("Scenes")
 @export var _popup_score_scene: PackedScene
@@ -50,6 +52,7 @@ const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 @export var _next_turn_label: Label
 @export var _next_money_label: Label
 @export var _next_balls_label: Label
+@export var _log_label: RichTextLabel
 
 @export_category("Tax")
 @export var _tax_window: Control
@@ -65,6 +68,7 @@ const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 @export var _people_window: Control
 
 
+var _log_lines: Array[String] = []
 var _tweens: Dictionary = {}
 
 
@@ -170,6 +174,15 @@ func refresh_next_clear() -> void:
 	_next_turn_label.text = "CLEAR!!"
 	_next_money_label.text = "CLEAR!!"
 	_next_balls_label.text = "CLEAR!!"
+
+
+func add_log(text: String) -> void:
+	_log_lines.push_back(text)
+	if LOG_LINES_MAX < _log_lines.size():
+		_log_lines.pop_front()
+
+	_log_label.clear()
+	_log_label.text = "\n".join(_log_lines)
 
 
 func popup_score(from: Vector2, text: String, color: Color = Color.WHITE, ratio: float = 1.0) -> void:
