@@ -101,10 +101,11 @@ func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 	self.level = level
 	self.rarity = rarity
 
-func _ready() -> void:
 	if Rarity.COMMON < rarity:
 		self.effects.append(BallEffect.EFFECTS_POOL_1[level][rarity])
 
+
+func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	_touch_button.pressed.connect(func(): pressed.emit())
 	_touch_button.mouse_entered.connect(func(): hovered.emit(true))
