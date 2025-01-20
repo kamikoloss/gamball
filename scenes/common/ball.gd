@@ -1,5 +1,6 @@
 class_name Ball
 extends RigidBody2D
+# TODO: 見た目部分を分割する
 
 
 signal pressed # ()
@@ -48,7 +49,7 @@ const BALL_LEVEL_DISABLED_SLOT = -2 # 使用不可スロット用
 # 見た目部分をまとめる親
 @export var _view_parent: Node2D
 # ボールが有効化されるまで全体を覆う部分
-@export var _mask_texture: TextureRect
+@export var _inactive_texture: TextureRect
 # ボールの本体色部分
 @export var _body_texture: TextureRect
 @export var _body_stripe_texture: TextureRect
@@ -76,7 +77,7 @@ var is_gained: bool = false
 var is_stacked: bool = false
 # 現在ワープ中かどうか
 var is_warping: bool = false
-# 見た目が縮小されているか
+# 現在縮小中かどうか
 var is_shrinked: bool = false
 # ボールのレア度
 # TODO: level の方がいい
@@ -169,8 +170,8 @@ func refresh_view() -> void:
 		_inner_texture_2.self_modulate = ColorData.BALL_RARITY_COLORS[rarity]
 		_level_label.self_modulate = ColorData.BALL_RARITY_COLORS[rarity]
 
-	# マスク
-	_mask_texture.visible = not is_active # 有効なら表示しない
+	# 有効
+	_inactive_texture.visible = not is_active
 
 	# ボール番号
 	if not is_active:
@@ -232,6 +233,7 @@ func warp_for_warp_to(to: Vector2) -> void:
 func warp_for_gain(from: Vector2, to: Vector2) -> void:
 	position = from
 	set_collision_layer_value(Collision.Layer.BASE, false)
+	set_collision_mask_value(Collision.Layer.BASE, false)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 
 	# 即座に縮小する
@@ -247,6 +249,7 @@ func warp_for_gain(from: Vector2, to: Vector2) -> void:
 # 消える
 func die() -> void:
 	set_collision_layer_value(Collision.Layer.BASE, false)
+	set_collision_mask_value(Collision.Layer.BASE, false)
 	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
 	await _enable_shrink(true)
 	queue_free()
@@ -258,6 +261,7 @@ func _on_body_entered(body: Node) -> void:
 	if body is Ball:
 		# 有効化されていない場合: 有効化する
 		if not is_active:
+			print("%s, %s" % [collision_layer, collision_mask])
 			is_active = true
 			refresh_view()
 
@@ -268,10 +272,12 @@ func _warp(to: Vector2) -> void:
 		return
 	is_warping = true
 
+	# 座標移動
 	var tween_warp = _get_tween(TweenType.WARP)
 	tween_warp.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween_warp.tween_property(self, "position", to, WARP_DURATION)
 
+	# カーブを描く
 	var tween_warp_curve = _get_tween(TweenType.WARP_CURVE)
 	var view_from = _view_parent.position
 	var view_to = view_from + Vector2(0, randi_range(-80, 80))

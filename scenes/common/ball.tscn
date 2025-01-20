@@ -18,7 +18,7 @@ point_count = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 radius = 15.0
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_mask_texture", "_body_texture", "_body_stripe_texture", "_body_stripe_2_texture", "_inner_texture", "_inner_texture_2", "_level_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_inactive_texture", "_body_texture", "_body_stripe_texture", "_body_stripe_2_texture", "_inner_texture", "_inner_texture_2", "_level_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
 z_index = 4
 collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
@@ -26,7 +26,7 @@ contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
 _view_parent = NodePath("View")
-_mask_texture = NodePath("View/Mask/Control/Active")
+_inactive_texture = NodePath("View/Mask/Control/Inactive")
 _body_texture = NodePath("View/Mask/Control/Body")
 _body_stripe_texture = NodePath("View/Mask/Control/BodyStripe")
 _body_stripe_2_texture = NodePath("View/Mask/Control/BodyStripe2")
@@ -129,7 +129,7 @@ mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Active" type="TextureRect" parent="View/Mask/Control"]
+[node name="Inactive" type="TextureRect" parent="View/Mask/Control"]
 visible = false
 self_modulate = Color(0.960784, 0.968627, 0.34902, 1)
 layout_mode = 0
