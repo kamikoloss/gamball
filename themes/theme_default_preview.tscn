@@ -184,7 +184,7 @@ offset_top = 180.0
 offset_right = 480.0
 offset_bottom = 200.0
 theme = ExtResource("1_fekh7")
-value = 50.0
+value = 25.0
 show_percentage = false
 
 [node name="ProgressBar3" type="ProgressBar" parent="."]
@@ -193,6 +193,23 @@ offset_left = 320.0
 offset_top = 200.0
 offset_right = 480.0
 offset_bottom = 220.0
+theme = ExtResource("1_fekh7")
+value = 50.0
+show_percentage = false
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 155.0
+offset_right = 560.0
+offset_bottom = 245.0
+theme = ExtResource("1_fekh7")
+
+[node name="ProgressBar4" type="ProgressBar" parent="."]
+offset_left = 320.0
+offset_top = 220.0
+offset_right = 480.0
+offset_bottom = 240.0
 theme = ExtResource("1_fekh7")
 value = 100.0
 show_percentage = false

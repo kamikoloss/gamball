@@ -72,6 +72,7 @@ func goto_scene(scene_type: SceneType) -> void:
 
 	# シーンを読み込む
 	if scene_type == SceneType.GAME:
+		# TODO: パス文字列で読み込む
 		if not _game:
 			_game = _game_scene.instantiate()
 			add_child(_game)

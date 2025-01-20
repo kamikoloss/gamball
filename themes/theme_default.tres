@@ -1,8 +1,10 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://bula4jj133y50"]
+[gd_resource type="Theme" load_steps=24 format=3 uid="uid://bula4jj133y50"]
 
 [ext_resource type="FontVariation" uid="uid://dnjsv11k857r7" path="res://themes/fonts/noto_sans_jp_bold.tres" id="1_ecnqh"]
+[ext_resource type="Texture2D" uid="uid://djwdeb0tm2tcv" path="res://images/icons/check_box.png" id="2_3wn6i"]
 [ext_resource type="FontVariation" uid="uid://cd3htl35cu6uk" path="res://themes/fonts/noto_sans_jp_regular.tres" id="3_adjwb"]
 [ext_resource type="FontFile" uid="uid://braqe561majhb" path="res://themes/fonts/RedHatDisplayBold.ttf" id="3_auwpw"]
+[ext_resource type="Texture2D" uid="uid://pg00ys46loyx" path="res://images/icons/check_box_outline_blank.png" id="3_mg32g"]
 [ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/fonts/PixelMplus12-Regular.ttf" id="4_rir7g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7kb0"]
@@ -60,6 +62,14 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s0h8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qtpy8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjwjs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kp55o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuf28"]
 bg_color = Color(0, 0, 0, 0.8)
@@ -124,6 +134,12 @@ ButtonFlatIcon/styles/focus = SubResource("StyleBoxEmpty_y5275")
 ButtonFlatIcon/styles/hover = SubResource("StyleBoxFlat_f0exq")
 ButtonFlatIcon/styles/normal = SubResource("StyleBoxEmpty_d6i8u")
 ButtonFlatIcon/styles/pressed = SubResource("StyleBoxFlat_nn3ak")
+CheckBox/icons/checked = ExtResource("2_3wn6i")
+CheckBox/icons/unchecked = ExtResource("3_mg32g")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_8s0h8")
+CheckBox/styles/hover = SubResource("StyleBoxEmpty_qtpy8")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_rjwjs")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_kp55o")
 Label/fonts/font = ExtResource("3_adjwb")
 LabelBold/base_type = &"Label"
 LabelBold/fonts/font = ExtResource("1_ecnqh")

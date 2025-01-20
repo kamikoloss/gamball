@@ -96,6 +96,7 @@ var balls: int = 0:
 		balls = value
 		_game_ui.refresh_balls_label(value)
 		# ボールがない場合: DragShoter を無効化する
+		# TODO: バグる
 		_drag_shooter.enabled = 0 < balls
 
 # ビリヤード盤面上の Ball の数
