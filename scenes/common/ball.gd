@@ -261,7 +261,6 @@ func _on_body_entered(body: Node) -> void:
 	if body is Ball:
 		# 有効化されていない場合: 有効化する
 		if not is_active:
-			print("%s, %s" % [collision_layer, collision_mask])
 			is_active = true
 			refresh_view()
 
