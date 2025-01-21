@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://b6wnlncndy3of"]
+
+[ext_resource type="FontFile" uid="uid://di02nkgyf7xut" path="res://themes/fonts/RedHatDisplayVF.ttf" id="1_idnfw"]
+
+[resource]
+base_font = ExtResource("1_idnfw")
+variation_opentype = {
+2003265652: 700
+}

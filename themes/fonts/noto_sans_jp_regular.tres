@@ -1,9 +1,0 @@
-[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cd3htl35cu6uk"]
-
-[ext_resource type="FontFile" uid="uid://h0c4o6txwib" path="res://themes/fonts/NotoSansJP-VariableFont_wght.ttf" id="1_ntsvp"]
-
-[resource]
-base_font = ExtResource("1_ntsvp")
-variation_opentype = {
-2003265652: 500
-}
