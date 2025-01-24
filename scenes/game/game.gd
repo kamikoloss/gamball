@@ -14,7 +14,7 @@ enum TweenType { PAYOUT, TAX_COUNT_DOWN }
 
 
 # Ball を発射する強さ
-const IMPULSE_RATIO: float = 10
+const IMPULSE_RATIO: float = 16
 # 何秒ごとに 1 Ball を払い出すか
 const PAYOUT_INTERVAL_BASE: float = 0.1
 
@@ -187,7 +187,6 @@ func _ready() -> void:
 	_apply_extra_ball_effects()
 	_refresh_deck_extra()
 	_refresh_next()
-	_bunny.visible = false
 	_billiards.refresh_balls_count(billiards_balls)
 
 	# ボール購入ボタンを1プッシュする

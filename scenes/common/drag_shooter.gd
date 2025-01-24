@@ -14,7 +14,7 @@ signal canceled
 # これ未満の場合はキャンセル扱いになる
 const DRAG_LENGTH_MIN: float = 10
 # ドラッグの最大距離 (px)
-const DRAG_LENGTH_MAX: float = 160
+const DRAG_LENGTH_MAX: float = 100
 
 
 @export var _arrow: Control

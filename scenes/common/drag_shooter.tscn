@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="4_q7jwr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dvupa"]
-size = Vector2(480, 640)
+size = Vector2(480, 480)
 
 [node name="DragShooter" type="Area2D" node_paths=PackedStringArray("_arrow", "_arrow_square", "_drag_point")]
 script = ExtResource("1_rneqr")
