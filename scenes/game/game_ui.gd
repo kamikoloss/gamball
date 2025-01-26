@@ -2,7 +2,7 @@ class_name GameUi
 extends Control
 
 
-enum TweenType { TAX, SHOP, PEOPLE }
+enum TweenType { TAX, SHOP, PEOPLE, DIALOGUE, COUNT_DOWN }
 
 
 # Signal
@@ -24,17 +24,18 @@ const WINDOW_MOVE_DURATION: float = 1.0
 
 const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
 
+# セリフのフェードの秒数
+const DIALOGUE_FADE_DURATION: float = 0.2
+
 const LOG_LINES_MAX: int = 100
 
 
 @export_category("Scenes")
 @export var _popup_score_scene: PackedScene
 
-@export_category("Main/Ball")
+@export_category("Main/Balls")
 @export var _deck_balls_parent: Node2D
-@export var _deck_slots_parent: Control
 @export var _extra_balls_parent: Node2D
-@export var _extra_slots_parent: Control
 @export var _ball_popup: Control
 @export var _ball_popup_level: Label
 @export var _ball_popup_rarity: Label
@@ -46,18 +47,16 @@ const LOG_LINES_MAX: int = 100
 @export var _options_button: Button
 @export_category("Main/Score")
 @export var _turn_label: Label
-@export var _money_label: Label
-@export var _payout_label: Label
-@export var _balls_label: Label
 @export var _next_turn_label: Label
+@export var _money_label: Label
 @export var _next_money_label: Label
+@export var _balls_label: Label
 @export var _next_balls_label: Label
 @export var _log_label: RichTextLabel
 
 @export_category("Tax")
 @export var _tax_window: Control
 @export var _tax_pay_button: Button
-@export var _tax_give_up_button: Button
 @export var _tax_table_parent: BoxContainer
 
 @export_category("Shop")
@@ -66,6 +65,11 @@ const LOG_LINES_MAX: int = 100
 
 @export_category("People")
 @export var _people_window: Control
+@export var _bunny: Bunny
+@export var _bubble_top: Control
+@export var _dialogue_top: RichTextLabel
+@export var _bubble_bottom: Control
+@export var _dialogue_bottom: RichTextLabel
 
 
 var _log_lines: Array[String] = []
@@ -91,6 +95,9 @@ func _ready() -> void:
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
 	# Shop
 	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
+	# People
+	_bunny.pressed.connect(func(): _on_bunny_pressed())
+	set_dialogue("...")
 
 
 func show_tax_window() -> void:
@@ -140,34 +147,33 @@ func refresh_extra_balls(extra_ball_list: Array[Ball], min: int, max: int) -> vo
 	_refresh_balls(_extra_balls_parent, extra_ball_list, min, max)
 
 func refresh_deck_slots(min: int, max: int) -> void:
-	_refresh_slots(_deck_slots_parent, min, max)
+	pass
 
 func refresh_extra_slots(min: int, max: int) -> void:
-	_refresh_slots(_extra_slots_parent, min, max)
+	pass
 
 
 # Main/Score
 func refresh_turn_label(turn: int) -> void:
-	_turn_label.text = str(turn)
-	
-func refresh_money_label(money: int) -> void:
-	_money_label.text = str(money)
+	_turn_label.text = _get_seg_text(turn)
 
-func refresh_payout_label(payout: int) -> void:
-	_payout_label.text = str(payout)
+func refresh_money_label(money: int) -> void:
+	_money_label.text = _get_seg_text(money)
 
 func refresh_balls_label(balls: int) -> void:
-	_balls_label.text = str(balls)
-
+	_balls_label.text = _get_seg_text(balls)
 
 func refresh_next(turn: int, type: Game.TaxType, amount: int) -> void:
-	_next_turn_label.text = str(turn)
+	_next_turn_label.text = _get_seg_text(turn)
 	if type == Game.TaxType.MONEY:
-		_next_money_label.text = str(amount)
-		_next_balls_label.text = ""
+		_next_money_label.text = _get_seg_text(amount)
+		_next_balls_label.text = "!!!!"
 	else:
-		_next_money_label.text = ""
-		_next_balls_label.text = str(amount)
+		_next_money_label.text = "!!!!"
+		_next_balls_label.text = _get_seg_text(amount)
+
+func _get_seg_text(value: int) -> String:
+	return ("%4d" % value).replace(" ", "!")
 
 
 func refresh_next_clear() -> void:
@@ -267,17 +273,55 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 			node.refresh_view()
 			index += 1
 
-func _refresh_slots(parent_node: Control, min: int, max: int) -> void:
-	var index = 0
-	for node in parent_node.get_children():
-		if node is TextureRect:
-			if index < min:
-				node.self_modulate = ColorData.PRIMARY
-			elif max <= index:
-				node.self_modulate = ColorData.SECONDARY
-			else:
-				node.self_modulate = ColorData.GRAY_40
-			index += 1
+
+func _on_bunny_pressed() -> void:
+	shuffle_dialogue()
+	_bunny.shuffle_pose()
+
+
+# NOTE: バニーではなく GameUI 側が持っていることに注意する
+func set_dialogue(dialogue: String) -> void:
+	var tween = _get_tween(TweenType.DIALOGUE)
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_dialogue_top, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION / 2) # 表示を消す
+	tween.chain()
+	tween.tween_callback(func(): _dialogue_top.text = "[color=BLACK]%s[/color]" % [dialogue]) # セリフを変える
+	tween.tween_property(_dialogue_top, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION) # 表示を戻す
+
+
+func shuffle_dialogue() -> void:
+	# セリフをランダムに変更する
+	# TODO: JSON に逃がす
+	var dialogue_list = [
+		"GAMBALL は近未来のバーチャルハイリスクハイリターンギャンブルだよ！",
+		"ビリヤードポケットに入った玉はパチンコ盤面上に出現するよ。",
+		"水色の??玉が他の玉にぶつかる前にビリヤードポケットに落ちるとなくなるから気をつけてね！",
+	]
+	set_dialogue(dialogue_list.pick_random())
+
+
+func count_down() -> void:
+	_bunny.disable_touch() # バニーのタッチを無効にする
+	set_dialogue("[font_size=32][color=DARK_RED]延長[/color]のお時間で～す[/font_size]")
+
+	var tween = _get_tween(TweenType.COUNT_DOWN)
+	tween.tween_interval(2.0)
+	tween.tween_callback(func(): set_dialogue("[font_size=32]さ～～ん[/font_size]"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): set_dialogue("[font_size=32]に～～い[/font_size]"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): set_dialogue("[font_size=32]い～～ち[/font_size]"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.tween_interval(1.0)
+	# Tax Window を表示する
+	tween.tween_callback(func(): set_dialogue("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す
+
+	await tween.finished
 
 
 func _get_tween(type: TweenType) -> Tween:

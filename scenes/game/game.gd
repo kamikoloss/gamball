@@ -77,7 +77,6 @@ const EXTRA_BALL_LEVEL_RARITY = {
 # UI
 @export var _game_ui: GameUi
 @export var _products_parent: Control
-@export var _bunny: Bunny
 
 
 # ゲームの状態
@@ -433,8 +432,8 @@ func _on_product_pressed(product: Product) -> void:
 	# Money が足りない場合: 何もしない
 	if money < product.price:
 		# TODO: 購入できない理由がいくつかあるときラベルを分ける？
-		_bunny.shuffle_pose()
-		_bunny.refresh_dialogue_label("お金が足りないよ～")
+		_game_ui.shuffle_bunny_pose()
+		_game_ui.set_dialogue("お金が足りないよ～")
 		return
 
 	# Product の効果を発動する
@@ -686,9 +685,8 @@ func _go_to_next_turn() -> void:
 func _start_tax_count_down() -> void:
 	game_state = GameState.COUNT_DOWN
 
-	_bunny.visible = true
 	_game_ui.show_people_window()
-	await _bunny.countdown()
+	await _game_ui.count_down()
 	_game_ui.show_tax_window()
 
 	game_state = GameState.TAX

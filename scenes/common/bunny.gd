@@ -4,7 +4,10 @@ extends Control
 # TODO: 表情ポーズセットを指定して一括変更する
 
 
-enum TweenType { POSE, DIALOGUE, COUNTDOWN }
+signal pressed
+
+
+enum TweenType { POSE }
 
 
 # A/B のフェードの秒数
@@ -15,8 +18,6 @@ const POSE_MOVE_DURATION_UP: float = 0.1
 const POSE_MOVE_DURATION_DOWN: float = 0.3
 # どれぐらい跳ねるか
 const POSE_MOVE_POSITION_DIFF: Vector2 = Vector2(0, -20)
-# セリフのフェードの秒数
-const DIALOGUE_FADE_DURATION: float = 0.2
 
 
 @export var _human: Control
@@ -34,9 +35,6 @@ const DIALOGUE_FADE_DURATION: float = 0.2
 @export var _pose_b_parts_2: TextureRect
 @export var _pose_b_parts_3: TextureRect
 @export var _pose_b_parts_4: TextureRect
-
-@export_category("Bubble")
-@export var _dialogue_label: RichTextLabel
 
 @export_category("Texutres")
 @export var _base_texture: Texture
@@ -58,7 +56,7 @@ var _tweens: Dictionary = {}
 
 
 func _ready() -> void:
-	_touch_button.pressed.connect(_on_touch_button_pressed)
+	_touch_button.pressed.connect(func(): pressed.emit())
 
 	_human_move_position_from = _human.position
 	_human_move_position_to = _human.position + POSE_MOVE_POSITION_DIFF
@@ -75,7 +73,6 @@ func _ready() -> void:
 	_pose_b.modulate = Color.TRANSPARENT
 
 	reset_pose()
-	refresh_dialogue_label("")
 
 
 # ポーズをデフォルトに変更する
@@ -89,7 +86,6 @@ func reset_pose() -> void:
 # ポーズをランダムなものに変更する
 # 前と同じポーズが選択されたときは変わっていないように見えることもある
 # TODO: 必ず変える？
-# TODO: 跳ねる処理を切り分ける？
 func shuffle_pose() -> void:
 	var tween = _get_tween(TweenType.POSE)
 	tween.set_parallel(true)
@@ -118,58 +114,11 @@ func shuffle_pose() -> void:
 	tween.tween_callback(func(): _is_human_pose_a = not _is_human_pose_a)
 
 
-func refresh_dialogue_label(dialogue: String) -> void:
-	var tween = _get_tween(TweenType.DIALOGUE)
-	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_dialogue_label, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION / 2) # 表示を消す
-	tween.chain()
-	tween.tween_callback(func(): _dialogue_label.text = "[color=BLACK]%s[/color]" % [dialogue]) # セリフを変える
-	tween.tween_property(_dialogue_label, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION) # 表示を戻す
-
-
 func enable_touch() -> void:
 	_touch_button.disabled = false
 
 func disable_touch() -> void:
 	_touch_button.disabled = true
-
-
-func countdown() -> void:
-	disable_touch() # バニーのタッチを無効にする
-	refresh_dialogue_label("[font_size=32][color=DARK_RED]延長[/color]のお時間で～す[/font_size]")
-
-	var tween = _get_tween(TweenType.COUNTDOWN)
-	tween.tween_interval(2.0)
-	tween.tween_callback(func(): refresh_dialogue_label("[font_size=32]さ～～ん[/font_size]"))
-	tween.tween_callback(func(): shuffle_pose())
-	tween.tween_interval(1.0)
-	tween.tween_callback(func(): refresh_dialogue_label("[font_size=32]に～～い[/font_size]"))
-	tween.tween_callback(func(): shuffle_pose())
-	tween.tween_interval(1.0)
-	tween.tween_callback(func(): refresh_dialogue_label("[font_size=32]い～～ち[/font_size]"))
-	tween.tween_callback(func(): shuffle_pose())
-	tween.tween_interval(1.0)
-	# Tax Window を表示する
-	tween.tween_callback(func(): refresh_dialogue_label("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
-	tween.tween_callback(func(): shuffle_pose())
-	tween.tween_callback(func(): enable_touch()) # バニーのタッチを有効に戻す
-
-	await tween.finished
-
-
-func _on_touch_button_pressed() -> void:
-	# セリフをランダムに変更する
-	# TODO: JSON に逃がす
-	var dialogue_list = [
-		"GAMBALL は近未来のバーチャルハイリスクハイリターンギャンブルだよ！",
-		"ビリヤードポケットに入った玉はパチンコ盤面上に出現するよ。",
-		"水色の??玉が他の玉にぶつかる前にビリヤードポケットに落ちるとなくなるから気をつけてね！",
-	]
-	refresh_dialogue_label(dialogue_list.pick_random())
-
-	# ポーズをランダムに変更する
-	shuffle_pose()
 
 
 func _refresh_textures(parts_index_list: Array[int]) -> void:

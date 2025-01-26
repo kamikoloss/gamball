@@ -1,15 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bjd632ntwegwj"]
+[gd_scene load_steps=7 format=3 uid="uid://bjd632ntwegwj"]
 
 [ext_resource type="Script" path="res://scenes/common/bunny.gd" id="1_lr22c"]
 [ext_resource type="Texture2D" uid="uid://cuwiiq1yrw76c" path="res://images/people/bunny/face_1.png" id="2_kbxbx"]
 [ext_resource type="Texture2D" uid="uid://cscmqneywp778" path="res://images/people/bunny/hand_left_1.png" id="5_qlree"]
-[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="6_ex8u5"]
-[ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="7_k78g3"]
 [ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/people/bunny/hand_right_1.png" id="7_subrs"]
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="8_oo1t5"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/people/bunny/base.png" id="9_yblo7"]
 
-[node name="Bunny" type="Control" node_paths=PackedStringArray("_human", "_base_parts", "_touch_button", "_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4", "_dialogue_label")]
+[node name="Bunny" type="Control" node_paths=PackedStringArray("_human", "_base_parts", "_touch_button", "_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("8_oo1t5")
@@ -27,7 +25,6 @@ _pose_b_parts_1 = NodePath("Human/PoseB/Parts1")
 _pose_b_parts_2 = NodePath("Human/PoseB/Parts2")
 _pose_b_parts_3 = NodePath("Human/PoseB/Parts3")
 _pose_b_parts_4 = NodePath("Human/PoseB/Parts4")
-_dialogue_label = NodePath("Bubble/Dialogue")
 
 [node name="Human" type="Control" parent="."]
 anchors_preset = 0
@@ -38,6 +35,7 @@ layout_mode = 0
 offset_left = -600.0
 offset_right = 600.0
 offset_bottom = 1600.0
+mouse_filter = 2
 texture = ExtResource("9_yblo7")
 
 [node name="PoseA" type="Control" parent="Human"]
@@ -49,24 +47,28 @@ offset_right = -600.0
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
+mouse_filter = 2
 texture = ExtResource("2_kbxbx")
 
 [node name="Parts2" type="TextureRect" parent="Human/PoseA"]
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
+mouse_filter = 2
 texture = ExtResource("5_qlree")
 
 [node name="Parts3" type="TextureRect" parent="Human/PoseA"]
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
+mouse_filter = 2
 texture = ExtResource("7_subrs")
 
 [node name="Parts4" type="TextureRect" parent="Human/PoseA"]
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
+mouse_filter = 2
 texture = ExtResource("7_subrs")
 
 [node name="PoseB" type="Control" parent="Human"]
@@ -80,61 +82,29 @@ offset_right = -600.0
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
+mouse_filter = 2
 texture = ExtResource("2_kbxbx")
 
 [node name="Parts2" type="TextureRect" parent="Human/PoseB"]
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
+mouse_filter = 2
 texture = ExtResource("5_qlree")
 
 [node name="Parts3" type="TextureRect" parent="Human/PoseB"]
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
+mouse_filter = 2
 texture = ExtResource("7_subrs")
 
 [node name="Parts4" type="TextureRect" parent="Human/PoseB"]
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 1600.0
+mouse_filter = 2
 texture = ExtResource("7_subrs")
-
-[node name="Bubble" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -120.0
-offset_top = 80.0
-offset_right = -120.0
-offset_bottom = 80.0
-
-[node name="TextureRect" type="TextureRect" parent="Bubble"]
-self_modulate = Color(1, 1, 1, 0.8)
-layout_mode = 0
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 245.0
-offset_bottom = 125.0
-texture = ExtResource("6_ex8u5")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="Bubble"]
-self_modulate = Color(1, 1, 1, 0.8)
-layout_mode = 0
-offset_left = 200.0
-offset_top = 155.0
-offset_right = 220.0
-offset_bottom = 185.0
-rotation = 3.14159
-texture = ExtResource("7_k78g3")
-expand_mode = 1
-
-[node name="Dialogue" type="RichTextLabel" parent="Bubble"]
-layout_mode = 0
-offset_right = 240.0
-offset_bottom = 120.0
-bbcode_enabled = true
-text = "[color=BLACK]あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。[/color]"
 
 [node name="Touch" type="TextureButton" parent="."]
 layout_mode = 0
