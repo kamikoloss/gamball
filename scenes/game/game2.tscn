@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bi5oapulw3837"]
+[gd_scene load_steps=37 format=3 uid="uid://bi5oapulw3837"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_mqtms"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_javdm"]
@@ -32,12 +32,30 @@
 [ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="29_22y37"]
 [ext_resource type="Texture2D" uid="uid://cmdugoyo8pdg1" path="res://images/icons/info.png" id="29_k6x4s"]
 [ext_resource type="Script" path="res://scenes/game/game_ui_debug.gd" id="33_5f41o"]
+[ext_resource type="Shader" path="res://shaders/realistic_crt_shader.gdshader" id="33_i078r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_re584"]
 shader = ExtResource("3_pukwh")
 shader_parameter/mouse_position = Vector2(0.5, 0.5)
 shader_parameter/wave_color = Color(0.921569, 0.239216, 0, 1)
 shader_parameter/wave_transparency = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q4tfs"]
+shader = ExtResource("33_i078r")
+shader_parameter/resolution = Vector2(1280, 720)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.3
+shader_parameter/roll_speed = 3.8e-07
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
@@ -64,6 +82,16 @@ offset_top = 20.0
 offset_right = 1280.0
 offset_bottom = 200.0
 color = Color(0.05, 0.05, 0.05, 1)
+
+[node name="Foregroud" type="Node2D" parent="."]
+visible = false
+z_index = 999
+
+[node name="ColorRect" type="ColorRect" parent="Foregroud"]
+material = SubResource("ShaderMaterial_q4tfs")
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_positions", "_balls_count_label")]
 position = Vector2(40, 220)
@@ -117,7 +145,7 @@ shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
 [node name="DragShooter" parent="Billiards" instance=ExtResource("14_np1si")]
-z_index = 10
+z_index = 20
 position = Vector2(240, 240)
 
 [node name="Walls" type="Node2D" parent="Billiards"]
@@ -367,6 +395,7 @@ shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
 [node name="Walls" type="Node2D" parent="Pachinko"]
+modulate = Color(0, 0, 0, 0.4)
 position = Vector2(-560, -220)
 
 [node name="Wall5" parent="Pachinko/Walls" instance=ExtResource("15_okamy")]
@@ -2007,6 +2036,7 @@ text = "NEXT"
 vertical_alignment = 1
 
 [node name="MoneyNext2" type="Label" parent="UI/Main/Score"]
+visible = false
 self_modulate = Color(0.921569, 0.239216, 0, 1)
 layout_mode = 0
 offset_left = 80.0
@@ -2090,13 +2120,12 @@ text = "NEXT"
 vertical_alignment = 1
 
 [node name="BallsNext2" type="Label" parent="UI/Main/Score"]
-visible = false
 self_modulate = Color(0.921569, 0.239216, 0, 1)
 layout_mode = 0
 offset_left = 80.0
-offset_top = 100.0
+offset_top = 120.0
 offset_right = 160.0
-offset_bottom = 120.0
+offset_bottom = 140.0
 theme_type_variation = &"LabelHeader"
 theme_override_font_sizes/font_size = 12
 text = "NEXT"
@@ -3702,6 +3731,3 @@ offset_right = 240.0
 offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
 text = "----"
-
-[node name="Foregroud" type="Node2D" parent="."]
-z_index = 999
