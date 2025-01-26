@@ -99,12 +99,12 @@ func refresh_view() -> void:
 			return
 		Hole.HoleType.EXTRA:
 			_label.text = "EX"
-			_label.self_modulate = Color.GREEN
+			_label.self_modulate = ColorData.SUCCESS
 			return
 		Hole.HoleType.GAIN:
 			_label.text = "x%s" % [gain_ratio]
 			if gain_ratio <= 0:
-				_label.self_modulate = Color.RED
+				_label.self_modulate = ColorData.DANGER
 			return
 		Hole.HoleType.LOST:
 			pass

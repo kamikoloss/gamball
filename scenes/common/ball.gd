@@ -132,11 +132,13 @@ func refresh_view() -> void:
 	else:
 		z_index = Z_INDEX_DEFAULT
 
+	if level < 0:
+		_view_parent.visible = false
+		return
+
 	# 本体色
 	var body_color: Color
-	if level < 0:
-		body_color = ColorData.GRAY_80
-	elif level == 0:
+	if level == 0:
 		body_color = ColorData.GRAY_20
 	elif level <= 15:
 		body_color = ColorData.SECONDARY
