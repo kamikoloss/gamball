@@ -22,7 +22,7 @@ const Z_INDEX_SLOT: int = 3
 # Tween
 const WARP_DURATION: float = 1.0
 const SHRINK_DURATION: float = 1.0
-const SHRINK_SCALE: Vector2 = Vector2(0.4, 0.4)
+const SHRINK_SCALE: Vector2 = Vector2(0.6, 0.6)
 const HIDE_DURATION: float = 1.0
 
 # 残像の頂点数
@@ -52,8 +52,6 @@ const BALL_LEVEL_DISABLED_SLOT = -2 # 使用不可スロット用
 @export var _inactive_texture: TextureRect
 # ボールの本体色部分
 @export var _body_texture: TextureRect
-@export var _body_stripe_texture: TextureRect
-@export var _body_stripe_2_texture: TextureRect
 # ボール番号の背景部分
 @export var _inner_texture: TextureRect
 @export var _inner_texture_2: TextureRect
@@ -154,11 +152,6 @@ func refresh_view() -> void:
 	gradient.set_color(1, Color(trail_color, 0))
 	_trail_line.gradient = gradient
 
-	# 模様
-	var show_stripe = 9 <= level and level <= 15
-	_body_stripe_texture.visible = show_stripe
-	_body_stripe_2_texture.visible = show_stripe
-
 	# レア度
 	if rarity == Rarity.COMMON:
 		_inner_texture.self_modulate = Color.WHITE
@@ -188,8 +181,6 @@ func refresh_view() -> void:
 
 	# 縮小
 	if is_shrinked:
-		_body_stripe_texture.visible = false
-		_body_stripe_2_texture.visible = false
 		_inner_texture.visible = false
 		_inner_texture_2.visible = false
 		_level_label.visible = false
@@ -279,7 +270,7 @@ func _warp(to: Vector2) -> void:
 	# カーブを描く
 	var tween_warp_curve = _get_tween(TweenType.WARP_CURVE)
 	var view_from = _view_parent.position
-	var view_to = view_from + Vector2(0, randi_range(-80, 80))
+	var view_to = view_from + Vector2(randi_range(-320, 320), 0)
 	tween_warp_curve.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	tween_warp_curve.tween_property(_view_parent, "position", view_to, WARP_DURATION / 4.0)
 	tween_warp_curve.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
