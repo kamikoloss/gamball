@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="1_3kxer"]
 [ext_resource type="Script" path="res://scenes/common/hole.gd" id="1_226au"]
-[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/fonts/PixelMplus12-Regular.ttf" id="3_l76vn"]
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="3_p7q3u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i0j7q"]
 radius = 20.0
@@ -35,6 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
 pivot_offset = Vector2(10, 10)
+mouse_filter = 2
 texture = ExtResource("1_3kxer")
 expand_mode = 1
 
@@ -53,16 +54,19 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 pivot_offset = Vector2(10, 10)
+mouse_filter = 2
 texture = ExtResource("1_3kxer")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="View"]
-offset_left = -20.0
+offset_left = -40.0
 offset_top = -20.0
-offset_right = 20.0
+offset_right = 40.0
 offset_bottom = 20.0
 pivot_offset = Vector2(20, 20)
-theme_override_fonts/font = ExtResource("3_l76vn")
+theme = ExtResource("3_p7q3u")
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 24
 text = "x9"
 horizontal_alignment = 1
 vertical_alignment = 1

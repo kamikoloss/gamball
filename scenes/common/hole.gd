@@ -87,22 +87,22 @@ func flash(count: int, color: Color, duration_ratio: int = 1) -> void:
 func refresh_view() -> void:
 	match hole_type:
 		Hole.HoleType.WARP_TO:
-			_label.text = "%s>" % [WarpGroup.keys()[warp_group]]
+			_label.text = WarpGroup.keys()[warp_group]
 			return
 		Hole.HoleType.WARP_FROM:
 			if warp_group == WarpGroup.PAYOUT:
-				_label.text = ">X"
+				_label.text = "X"
 			else:
-				_label.text = ">%s" % [WarpGroup.keys()[warp_group]]
+				_label.text = WarpGroup.keys()[warp_group]
 			_body_texture.self_modulate = Color(0.9, 0.9, 0.9)
 			_label.self_modulate = Color.BLACK
 			return
 		Hole.HoleType.EXTRA:
-			_label.text = "EXT"
+			_label.text = "EX"
 			_label.self_modulate = Color.GREEN
 			return
 		Hole.HoleType.GAIN:
-			_label.text = "X%s" % [gain_ratio]
+			_label.text = "x%s" % [gain_ratio]
 			if gain_ratio <= 0:
 				_label.self_modulate = Color.RED
 			return
