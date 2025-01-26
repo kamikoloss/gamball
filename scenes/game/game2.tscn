@@ -1,10 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://bi5oapulw3837"]
+[gd_scene load_steps=35 format=3 uid="uid://bi5oapulw3837"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_mqtms"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_javdm"]
 [ext_resource type="Shader" path="res://shaders/neuronal_network_waves.gdshader" id="3_pukwh"]
 [ext_resource type="Script" path="res://scenes/game/billiards.gd" id="4_ivyxe"]
-[ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="5_tu1rq"]
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="6_1dqto"]
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="7_m16gi"]
 [ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/fonts/PixelMplus12-Regular.ttf" id="8_sucdk"]
@@ -12,29 +11,29 @@
 [ext_resource type="PackedScene" uid="uid://dli5r028n6byb" path="res://scenes/common/nail.tscn" id="10_wq884"]
 [ext_resource type="PackedScene" uid="uid://d0im3e50587p1" path="res://scenes/common/hole.tscn" id="11_j5iaq"]
 [ext_resource type="PackedScene" uid="uid://d4j3v3c068tcf" path="res://scenes/common/lamp.tscn" id="12_vy6ao"]
-[ext_resource type="Script" path="res://scenes/game/stack.gd" id="13_6klgl"]
 [ext_resource type="PackedScene" uid="uid://ckhia507jl74p" path="res://scenes/common/drag_shooter.tscn" id="14_np1si"]
 [ext_resource type="PackedScene" uid="uid://b0bdf1eipkyus" path="res://scenes/common/wall.tscn" id="15_okamy"]
+[ext_resource type="Texture2D" uid="uid://dy6gxsockohck" path="res://images/icons/play_arrow.png" id="16_fjf78"]
 [ext_resource type="Script" path="res://scenes/game/game_ui.gd" id="16_qduhm"]
 [ext_resource type="PackedScene" uid="uid://dn3emqhpy7fbt" path="res://scenes/common/popup_score.tscn" id="17_k13dc"]
 [ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/common/product.tscn" id="18_gfb7h"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="19_tsuuh"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/people/bunny/base.png" id="20_udj73"]
+[ext_resource type="Texture2D" uid="uid://bho0g835q1uhf" path="res://images/icons/settings.png" id="21_bilys"]
 [ext_resource type="Texture2D" uid="uid://cuwiiq1yrw76c" path="res://images/people/bunny/face_1.png" id="21_uj2w0"]
 [ext_resource type="Texture2D" uid="uid://bh4gotw50hou6" path="res://images/people/bunny/face_2.png" id="22_2014m"]
 [ext_resource type="Texture2D" uid="uid://cmx70egbmx0sa" path="res://images/people/bunny/face_3.png" id="23_nafxy"]
 [ext_resource type="Texture2D" uid="uid://cscmqneywp778" path="res://images/people/bunny/hand_left_1.png" id="24_qdik2"]
 [ext_resource type="Texture2D" uid="uid://c17m6dsrq78ov" path="res://images/people/bunny/hand_left_2.png" id="25_atlcj"]
 [ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/people/bunny/hand_right_1.png" id="26_jh16u"]
+[ext_resource type="Texture2D" uid="uid://s5raj8sjgcka" path="res://images/icons/shopping_cart.png" id="27_et20a"]
 [ext_resource type="Texture2D" uid="uid://uk0q0it6ta74" path="res://images/people/bunny/hand_right_2.png" id="27_l85vb"]
-[ext_resource type="Texture2D" uid="uid://bho0g835q1uhf" path="res://images/icons/settings.png" id="28_ostir"]
+[ext_resource type="Texture2D" uid="uid://bqmtnjse8snmy" path="res://images/icons/currency_exchange.png" id="28_fhmm7"]
+[ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="29_22y37"]
 [ext_resource type="Texture2D" uid="uid://cmdugoyo8pdg1" path="res://images/icons/info.png" id="29_k6x4s"]
-[ext_resource type="Texture2D" uid="uid://cs6iwstf8idpu" path="res://images/icons/monitoring.png" id="30_6cb7n"]
-[ext_resource type="Texture2D" uid="uid://dkcqj2bnwtcfx" path="res://images/icons/refresh.png" id="31_5ckxk"]
-[ext_resource type="Texture2D" uid="uid://c30d2k1hmhmry" path="res://images/icons/logout.png" id="32_3q1un"]
 [ext_resource type="Script" path="res://scenes/game/game_ui_debug.gd" id="33_5f41o"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_abgdr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_re584"]
 shader = ExtResource("3_pukwh")
 shader_parameter/mouse_position = Vector2(0.5, 0.5)
 shader_parameter/wave_color = Color(0.921569, 0.239216, 0, 1)
@@ -42,39 +41,70 @@ shader_parameter/wave_transparency = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_billiards", "_pachinko", "_stack", "_balls_parent", "_drag_shooter", "_game_ui", "_products_parent", "_bunny")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_billiards", "_pachinko", "_balls_parent", "_drag_shooter", "_game_ui", "_products_parent")]
 script = ExtResource("1_mqtms")
 _ball_scene = ExtResource("2_javdm")
 _billiards = NodePath("Billiards")
 _pachinko = NodePath("Pachinko")
-_stack = NodePath("Stack")
 _balls_parent = NodePath("Balls")
-_drag_shooter = NodePath("DragShooter")
+_drag_shooter = NodePath("Billiards/DragShooter")
 _game_ui = NodePath("UI")
 _products_parent = NodePath("UI/Shop/Products")
-_bunny = NodePath("UI/People/Bunny")
 
-[node name="Bg" type="Node2D" parent="."]
+[node name="Background" type="Node2D" parent="."]
+z_index = -100
 
-[node name="BgBase" type="ColorRect" parent="Bg"]
+[node name="ColorRect" type="ColorRect" parent="Background"]
+material = SubResource("ShaderMaterial_re584")
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0, 0, 0, 1)
 
-[node name="BgShader" type="ColorRect" parent="Bg"]
-material = SubResource("ShaderMaterial_abgdr")
+[node name="ColorRect2" type="ColorRect" parent="Background"]
+offset_top = 20.0
 offset_right = 1280.0
-offset_bottom = 720.0
+offset_bottom = 200.0
+color = Color(0.05, 0.05, 0.05, 1)
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_positions", "_balls_count_label")]
+position = Vector2(40, 220)
 script = ExtResource("4_ivyxe")
 _spawn_position = NodePath("Points/SpawnMain")
 _spawn_extra_positions = [NodePath("Points/SpawnExtra"), NodePath("Points/SpawnExtra2"), NodePath("Points/SpawnExtra3"), NodePath("Points/SpawnExtra4")]
-_balls_count_label = NodePath("UI/Labels/BallsB")
+_balls_count_label = NodePath("UI/BallsB")
+
+[node name="View" type="Node2D" parent="Billiards"]
+position = Vector2(-40, -220)
+
+[node name="Panel" type="Panel" parent="Billiards/View"]
+self_modulate = Color(0.0117647, 0.262745, 0.176471, 1)
+offset_left = 40.0
+offset_top = 220.0
+offset_right = 520.0
+offset_bottom = 700.0
+mouse_filter = 2
+theme = ExtResource("7_m16gi")
+
+[node name="Panel2" type="Panel" parent="Billiards/View"]
+self_modulate = Color(0, 0, 0, 0.4)
+offset_left = 40.0
+offset_top = 220.0
+offset_right = 520.0
+offset_bottom = 700.0
+mouse_filter = 2
+theme = ExtResource("7_m16gi")
+
+[node name="Panel3" type="Panel" parent="Billiards/View"]
+self_modulate = Color(0.0117647, 0.262745, 0.176471, 1)
+offset_left = 60.0
+offset_top = 240.0
+offset_right = 500.0
+offset_bottom = 680.0
+mouse_filter = 2
+theme = ExtResource("7_m16gi")
 
 [node name="Gravity" type="Area2D" parent="Billiards"]
-position = Vector2(280, 360)
-scale = Vector2(24, 32)
+position = Vector2(240, 240)
+scale = Vector2(24, 24)
 priority = 10
 gravity_space_override = 3
 gravity_point_center = Vector2(0, 0)
@@ -82,24 +112,65 @@ gravity_direction = Vector2(0, 0)
 linear_damp_space_override = 3
 linear_damp = 1.0
 
-[node name="TextureRect" type="TextureRect" parent="Billiards/Gravity"]
-self_modulate = Color(0.2, 0.2, 0.2, 0.9)
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-texture = ExtResource("5_tu1rq")
-expand_mode = 1
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Gravity"]
 shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
+[node name="DragShooter" parent="Billiards" instance=ExtResource("14_np1si")]
+z_index = 10
+position = Vector2(240, 240)
+
+[node name="Walls" type="Node2D" parent="Billiards"]
+position = Vector2(-40, -220)
+
+[node name="Wall" parent="Billiards/Walls" instance=ExtResource("15_okamy")]
+visible = false
+position = Vector2(280, 230)
+rotation = 3.14159
+
+[node name="Wall2" parent="Billiards/Walls" instance=ExtResource("15_okamy")]
+visible = false
+position = Vector2(280, 690)
+
+[node name="Wall3" parent="Billiards/Walls" instance=ExtResource("15_okamy")]
+visible = false
+position = Vector2(50, 460)
+rotation = 1.5708
+
+[node name="Wall4" parent="Billiards/Walls" instance=ExtResource("15_okamy")]
+visible = false
+position = Vector2(510, 460)
+rotation = -1.5708
+
+[node name="Holes" type="Node2D" parent="Billiards"]
+position = Vector2(-40, -220)
+
+[node name="HoleWarpToA1" parent="Billiards/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(80, 260)
+hole_type = 5
+warp_group = 2
+
+[node name="HoleWarpToA2" parent="Billiards/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(80, 660)
+hole_type = 5
+warp_group = 2
+
+[node name="HoleWarpToB1" parent="Billiards/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(480, 260)
+hole_type = 5
+warp_group = 3
+
+[node name="HoleWarpToB2" parent="Billiards/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(480, 660)
+hole_type = 5
+warp_group = 3
+
 [node name="Points" type="Node2D" parent="Billiards"]
 modulate = Color(1, 1, 1, 0.1)
+position = Vector2(-40, -220)
 
 [node name="SpawnMain" type="Node2D" parent="Billiards/Points"]
-position = Vector2(280, 360)
+position = Vector2(280, 460)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnMain"]
@@ -114,11 +185,12 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("6_1dqto")
 expand_mode = 1
 
 [node name="SpawnExtra" type="Node2D" parent="Billiards/Points"]
-position = Vector2(160, 200)
+position = Vector2(160, 340)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnExtra"]
@@ -133,11 +205,12 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("6_1dqto")
 expand_mode = 1
 
 [node name="SpawnExtra2" type="Node2D" parent="Billiards/Points"]
-position = Vector2(160, 520)
+position = Vector2(160, 580)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnExtra2"]
@@ -152,11 +225,12 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("6_1dqto")
 expand_mode = 1
 
 [node name="SpawnExtra3" type="Node2D" parent="Billiards/Points"]
-position = Vector2(400, 200)
+position = Vector2(400, 340)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnExtra3"]
@@ -171,11 +245,12 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("6_1dqto")
 expand_mode = 1
 
 [node name="SpawnExtra4" type="Node2D" parent="Billiards/Points"]
-position = Vector2(400, 520)
+position = Vector2(400, 580)
 scale = Vector2(2, 2)
 
 [node name="TextureRect" type="TextureRect" parent="Billiards/Points/SpawnExtra4"]
@@ -190,35 +265,33 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("6_1dqto")
 expand_mode = 1
 
 [node name="UI" type="Control" parent="Billiards"]
 layout_mode = 3
 anchors_preset = 0
+offset_left = -40.0
+offset_top = -220.0
+offset_right = -40.0
+offset_bottom = -220.0
 
 [node name="Panel" type="Panel" parent="Billiards/UI"]
+visible = false
 layout_mode = 0
 offset_left = 235.0
-offset_top = 95.0
+offset_top = 255.0
 offset_right = 325.0
-offset_bottom = 145.0
+offset_bottom = 305.0
 theme = ExtResource("7_m16gi")
 
-[node name="Labels" type="Control" parent="Billiards/UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 280.0
-offset_top = 120.0
-offset_right = 280.0
-offset_bottom = 120.0
-
-[node name="BallsA" type="Label" parent="Billiards/UI/Labels"]
+[node name="BallsA" type="Label" parent="Billiards/UI"]
 layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 280.0
-offset_bottom = 60.0
+offset_left = 240.0
+offset_top = 260.0
+offset_right = 560.0
+offset_bottom = 340.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("8_sucdk")
 theme_override_font_sizes/font_size = 64
@@ -226,11 +299,12 @@ text = "BALLS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BallsB" type="Label" parent="Billiards/UI/Labels"]
+[node name="BallsB" type="Label" parent="Billiards/UI"]
 layout_mode = 0
-offset_left = -40.0
-offset_right = 280.0
-offset_bottom = 80.0
+offset_left = 240.0
+offset_top = 280.0
+offset_right = 560.0
+offset_bottom = 360.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("8_sucdk")
 theme_override_font_sizes/font_size = 64
@@ -239,107 +313,313 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Pachinko" type="Node2D" parent="." node_paths=PackedStringArray("_rotating_wall_a", "_rotating_wall_b", "_rush_nails_parent", "_rush_holes_parent", "_rush_label_a", "_rush_label_b", "_rush_lamps_parent")]
+position = Vector2(560, 220)
 script = ExtResource("9_814td")
-_rotating_wall_a = NodePath("../Walls/Wall9")
-_rotating_wall_b = NodePath("../Walls/Wall10")
-_rush_nails_parent = NodePath("Rush/Nails")
-_rush_holes_parent = NodePath("Rush/Holes")
-_rush_label_a = NodePath("UI/Labels/RushA")
-_rush_label_b = NodePath("UI/Labels/RushB")
+_rotating_wall_a = NodePath("Walls/WallRotateA")
+_rotating_wall_b = NodePath("Walls/WallRotateB")
+_rush_nails_parent = NodePath("RushNails")
+_rush_holes_parent = NodePath("RushHoles")
+_rush_label_a = NodePath("UI/RushA")
+_rush_label_b = NodePath("UI/RushB")
 _rush_lamps_parent = NodePath("UI/Lamps")
 
+[node name="View" type="Node2D" parent="Pachinko"]
+position = Vector2(-560, -220)
+
+[node name="Panel" type="Panel" parent="Pachinko/View"]
+self_modulate = Color(0.960784, 0.223529, 0.129412, 1)
+offset_left = 560.0
+offset_top = 220.0
+offset_right = 1040.0
+offset_bottom = 700.0
+mouse_filter = 2
+theme = ExtResource("7_m16gi")
+
+[node name="Panel2" type="Panel" parent="Pachinko/View"]
+self_modulate = Color(0, 0, 0, 0.4)
+offset_left = 560.0
+offset_top = 220.0
+offset_right = 1040.0
+offset_bottom = 700.0
+mouse_filter = 2
+theme = ExtResource("7_m16gi")
+
+[node name="Panel3" type="Panel" parent="Pachinko/View"]
+self_modulate = Color(0.960784, 0.223529, 0.129412, 1)
+offset_left = 580.0
+offset_top = 240.0
+offset_right = 1020.0
+offset_bottom = 680.0
+mouse_filter = 2
+theme = ExtResource("7_m16gi")
+
 [node name="Gravity" type="Area2D" parent="Pachinko"]
-position = Vector2(280, 360)
-scale = Vector2(24, 32)
+position = Vector2(240, 240)
+scale = Vector2(24, 24)
 priority = 10
 gravity_space_override = 3
 gravity_point_center = Vector2(0, 2)
 gravity_direction = Vector2(0, 2)
 linear_damp = 1.0
 
-[node name="TextureRect" type="TextureRect" parent="Pachinko/Gravity"]
-self_modulate = Color(0.2, 0.2, 0.2, 0.9)
-offset_left = 20.0
-offset_top = -10.0
-offset_right = 40.0
-offset_bottom = 10.0
-texture = ExtResource("5_tu1rq")
-expand_mode = 1
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pachinko/Gravity"]
-position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
 
-[node name="Rush" type="Node2D" parent="Pachinko"]
-position = Vector2(1000, 120)
+[node name="Walls" type="Node2D" parent="Pachinko"]
+position = Vector2(-560, -220)
 
-[node name="Nails" type="Node2D" parent="Pachinko/Rush"]
+[node name="Wall5" parent="Pachinko/Walls" instance=ExtResource("15_okamy")]
+visible = false
+position = Vector2(800, 230)
+rotation = 3.14159
 
-[node name="Nail4" parent="Pachinko/Rush/Nails" instance=ExtResource("10_wq884")]
-position = Vector2(-140, 60)
+[node name="Wall6" parent="Pachinko/Walls" instance=ExtResource("15_okamy")]
+visible = false
+position = Vector2(800, 690)
 
-[node name="Nail5" parent="Pachinko/Rush/Nails" instance=ExtResource("10_wq884")]
-position = Vector2(-120, 80)
+[node name="Wall7" parent="Pachinko/Walls" instance=ExtResource("15_okamy")]
+visible = false
+position = Vector2(570, 460)
+rotation = 1.5708
 
-[node name="Nail6" parent="Pachinko/Rush/Nails" instance=ExtResource("10_wq884")]
-position = Vector2(-80, 80)
+[node name="Wall8" parent="Pachinko/Walls" instance=ExtResource("15_okamy")]
+visible = false
+position = Vector2(1030, 460)
+rotation = -1.5708
 
-[node name="Nail7" parent="Pachinko/Rush/Nails" instance=ExtResource("10_wq884")]
-position = Vector2(-60, 60)
+[node name="WallRotateA" parent="Pachinko/Walls" instance=ExtResource("15_okamy")]
+position = Vector2(620, 340)
+scale = Vector2(2, 1)
 
-[node name="Nail10" parent="Pachinko/Rush/Nails" instance=ExtResource("10_wq884")]
-position = Vector2(60, 60)
+[node name="WallRotateB" parent="Pachinko/Walls" instance=ExtResource("15_okamy")]
+position = Vector2(980, 340)
+scale = Vector2(2, 1)
 
-[node name="Nail11" parent="Pachinko/Rush/Nails" instance=ExtResource("10_wq884")]
-position = Vector2(80, 80)
+[node name="Nails" type="Node2D" parent="Pachinko"]
+position = Vector2(-560, -220)
 
-[node name="Nail12" parent="Pachinko/Rush/Nails" instance=ExtResource("10_wq884")]
-position = Vector2(120, 80)
+[node name="Bottom" type="Node2D" parent="Pachinko/Nails"]
 
-[node name="Nail13" parent="Pachinko/Rush/Nails" instance=ExtResource("10_wq884")]
-position = Vector2(140, 60)
+[node name="Nail10" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(755, 640)
 
-[node name="Holes" type="Node2D" parent="Pachinko/Rush"]
+[node name="Nail11" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(755, 660)
 
-[node name="Hole" parent="Pachinko/Rush/Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(-100, 40)
+[node name="Nail12" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(845, 640)
+
+[node name="Nail13" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(845, 660)
+
+[node name="Nail14" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(665, 640)
+
+[node name="Nail15" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(665, 660)
+
+[node name="Nail16" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(935, 640)
+
+[node name="Nail17" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(935, 660)
+
+[node name="Nail20" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(680, 580)
+
+[node name="Nail21" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(920, 580)
+
+[node name="Nail22" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(800, 600)
+
+[node name="Nail23" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(600, 520)
+
+[node name="Nail24" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
+position = Vector2(1000, 520)
+
+[node name="Ex" type="Node2D" parent="Pachinko/Nails"]
+
+[node name="Nail4" parent="Pachinko/Nails/Ex" instance=ExtResource("10_wq884")]
+position = Vector2(770, 420)
+
+[node name="Nail5" parent="Pachinko/Nails/Ex" instance=ExtResource("10_wq884")]
+position = Vector2(830, 420)
+
+[node name="Nail6" parent="Pachinko/Nails/Ex" instance=ExtResource("10_wq884")]
+position = Vector2(770, 440)
+
+[node name="Nail7" parent="Pachinko/Nails/Ex" instance=ExtResource("10_wq884")]
+position = Vector2(830, 440)
+
+[node name="Nail8" parent="Pachinko/Nails/Ex" instance=ExtResource("10_wq884")]
+position = Vector2(800, 450)
+
+[node name="Nail9" parent="Pachinko/Nails/Ex" instance=ExtResource("10_wq884")]
+position = Vector2(680, 400)
+
+[node name="Nail10" parent="Pachinko/Nails/Ex" instance=ExtResource("10_wq884")]
+position = Vector2(920, 400)
+
+[node name="Nail11" parent="Pachinko/Nails/Ex" instance=ExtResource("10_wq884")]
+position = Vector2(800, 380)
+
+[node name="x3a" type="Node2D" parent="Pachinko/Nails"]
+position = Vector2(0, 20)
+
+[node name="Nail4" parent="Pachinko/Nails/x3a" instance=ExtResource("10_wq884")]
+position = Vector2(710, 480)
+
+[node name="Nail5" parent="Pachinko/Nails/x3a" instance=ExtResource("10_wq884")]
+position = Vector2(770, 480)
+
+[node name="Nail6" parent="Pachinko/Nails/x3a" instance=ExtResource("10_wq884")]
+position = Vector2(710, 500)
+
+[node name="Nail7" parent="Pachinko/Nails/x3a" instance=ExtResource("10_wq884")]
+position = Vector2(770, 500)
+
+[node name="Nail8" parent="Pachinko/Nails/x3a" instance=ExtResource("10_wq884")]
+position = Vector2(740, 510)
+
+[node name="Nail9" parent="Pachinko/Nails/x3a" instance=ExtResource("10_wq884")]
+position = Vector2(740, 440)
+
+[node name="x3b" type="Node2D" parent="Pachinko/Nails"]
+
+[node name="Nail4" parent="Pachinko/Nails/x3b" instance=ExtResource("10_wq884")]
+position = Vector2(830, 500)
+
+[node name="Nail5" parent="Pachinko/Nails/x3b" instance=ExtResource("10_wq884")]
+position = Vector2(890, 500)
+
+[node name="Nail6" parent="Pachinko/Nails/x3b" instance=ExtResource("10_wq884")]
+position = Vector2(830, 520)
+
+[node name="Nail7" parent="Pachinko/Nails/x3b" instance=ExtResource("10_wq884")]
+position = Vector2(890, 520)
+
+[node name="Nail8" parent="Pachinko/Nails/x3b" instance=ExtResource("10_wq884")]
+position = Vector2(860, 530)
+
+[node name="Nail9" parent="Pachinko/Nails/x3b" instance=ExtResource("10_wq884")]
+position = Vector2(860, 460)
+
+[node name="Holes" type="Node2D" parent="Pachinko"]
+position = Vector2(-560, -220)
+
+[node name="HoleWarpFromA" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(620, 280)
+hole_type = 4
+warp_group = 2
+
+[node name="HoleWarpFromB" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(980, 280)
+hole_type = 4
+warp_group = 3
+
+[node name="HoleGainx0a" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(620, 660)
+hole_type = 1
+
+[node name="HoleGainx0b" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(980, 660)
+hole_type = 1
+
+[node name="HoleGainx1a" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(710, 660)
+hole_type = 1
+gain_ratio = 1
+
+[node name="HoleGainx1b" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(890, 660)
+hole_type = 1
+gain_ratio = 1
+
+[node name="HoleGainx2a" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(800, 660)
+hole_type = 1
+gain_ratio = 2
+
+[node name="HoleGainx3a" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(740, 500)
+hole_type = 1
+gain_ratio = 3
+
+[node name="HoleGainx3b" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(860, 500)
+hole_type = 1
+gain_ratio = 3
+
+[node name="HoleExtra" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(800, 420)
+hole_type = 0
+
+[node name="RushNails" type="Node2D" parent="Pachinko"]
+position = Vector2(240, 80)
+
+[node name="Nail4" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
+position = Vector2(-120, 60)
+
+[node name="Nail5" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
+position = Vector2(-100, 80)
+
+[node name="Nail6" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
+position = Vector2(-60, 80)
+
+[node name="Nail7" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
+position = Vector2(-40, 60)
+
+[node name="Nail10" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
+position = Vector2(40, 60)
+
+[node name="Nail11" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
+position = Vector2(60, 80)
+
+[node name="Nail12" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
+position = Vector2(100, 80)
+
+[node name="Nail13" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
+position = Vector2(120, 60)
+
+[node name="RushHoles" type="Node2D" parent="Pachinko"]
+position = Vector2(240, 80)
+
+[node name="Hole" parent="Pachinko/RushHoles" instance=ExtResource("11_j5iaq")]
+position = Vector2(-80, 40)
 hole_type = 1
 gain_ratio = 10
 
-[node name="Hole2" parent="Pachinko/Rush/Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(100, 40)
+[node name="Hole2" parent="Pachinko/RushHoles" instance=ExtResource("11_j5iaq")]
+position = Vector2(80, 40)
 hole_type = 1
 gain_ratio = 10
 
 [node name="UI" type="Control" parent="Pachinko"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -560.0
+offset_top = -200.0
+offset_right = -560.0
+offset_bottom = -200.0
 
 [node name="Panel" type="Panel" parent="Pachinko/UI"]
+visible = false
 layout_mode = 0
-offset_left = 955.0
-offset_top = 95.0
-offset_right = 1045.0
-offset_bottom = 145.0
+offset_left = 755.0
+offset_top = 235.0
+offset_right = 845.0
+offset_bottom = 285.0
 theme = ExtResource("7_m16gi")
 
-[node name="Labels" type="Control" parent="Pachinko/UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1000.0
-offset_top = 120.0
-offset_right = 1000.0
-offset_bottom = 120.0
-
-[node name="RushA" type="Label" parent="Pachinko/UI/Labels"]
+[node name="RushA" type="Label" parent="Pachinko/UI"]
 layout_mode = 0
-offset_left = -40.0
-offset_top = -20.0
-offset_right = 280.0
-offset_bottom = 60.0
+offset_left = 760.0
+offset_top = 240.0
+offset_right = 1080.0
+offset_bottom = 320.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("8_sucdk")
 theme_override_font_sizes/font_size = 64
@@ -347,11 +627,12 @@ text = "RUSH 00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RushB" type="Label" parent="Pachinko/UI/Labels"]
+[node name="RushB" type="Label" parent="Pachinko/UI"]
 layout_mode = 0
-offset_left = -40.0
-offset_right = 280.0
-offset_bottom = 80.0
+offset_left = 760.0
+offset_top = 260.0
+offset_right = 1080.0
+offset_bottom = 340.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/font = ExtResource("8_sucdk")
 theme_override_font_sizes/font_size = 64
@@ -362,10 +643,10 @@ vertical_alignment = 1
 [node name="Lamps" type="Control" parent="Pachinko/UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1000.0
-offset_top = 120.0
-offset_right = 1000.0
-offset_bottom = 120.0
+offset_left = 800.0
+offset_top = 260.0
+offset_right = 800.0
+offset_bottom = 260.0
 
 [node name="Lamp" parent="Pachinko/UI/Lamps" instance=ExtResource("12_vy6ao")]
 offset_top = -30.0
@@ -507,632 +788,62 @@ offset_top = -30.0
 offset_right = -15.0
 offset_bottom = -30.0
 
-[node name="Stack" type="Node2D" parent="."]
-script = ExtResource("13_6klgl")
-
-[node name="Gravity" type="Area2D" parent="Stack"]
-position = Vector2(640, 520)
-scale = Vector2(8, 16)
-gravity_space_override = 3
-linear_damp = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stack/Gravity"]
-shape = SubResource("RectangleShape2D_uhuas")
-debug_color = Color(0, 0, 0, 0)
-
-[node name="DragShooter" parent="." instance=ExtResource("14_np1si")]
-position = Vector2(280, 360)
-
-[node name="Walls" type="Node2D" parent="."]
-modulate = Color(0.8, 0.8, 0.8, 1)
-
-[node name="Wall" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(280, 40)
-rotation = 3.14159
-
-[node name="Wall2" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(280, 680)
-
-[node name="Wall3" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(40, 360)
-rotation = 1.5708
-scale = Vector2(32, 1)
-
-[node name="Wall4" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(520, 360)
-rotation = -1.5708
-scale = Vector2(32, 1)
-
-[node name="Wall5" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(1000, 40)
-rotation = 3.14159
-
-[node name="Wall6" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(1000, 680)
-
-[node name="Wall7" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(760, 360)
-rotation = 1.5708
-scale = Vector2(32, 1)
-
-[node name="Wall8" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(1240, 360)
-rotation = -1.5708
-scale = Vector2(32, 1)
-
-[node name="Wall9" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(800, 160)
-scale = Vector2(4, 1)
-
-[node name="Wall10" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(1200, 160)
-scale = Vector2(4, 1)
-
-[node name="Wall11" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(640, 680)
-scale = Vector2(8, 1)
-
-[node name="Wall12" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(560, 520)
-rotation = 1.5708
-scale = Vector2(16, 1)
-
-[node name="Wall13" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(720, 520)
-rotation = -1.5708
-scale = Vector2(16, 1)
-
-[node name="Wall14" parent="Walls" instance=ExtResource("15_okamy")]
-position = Vector2(600, 660)
-rotation = 0.523599
-scale = Vector2(4, 1)
-
-[node name="WallsView" type="Node2D" parent="."]
-modulate = Color(0.8, 0.8, 0.8, 1)
-
-[node name="Corner" type="Node2D" parent="WallsView"]
-position = Vector2(40, 40)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Corner2" type="Node2D" parent="WallsView"]
-position = Vector2(40, 680)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Corner3" type="Node2D" parent="WallsView"]
-position = Vector2(520, 40)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner3"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Corner4" type="Node2D" parent="WallsView"]
-position = Vector2(520, 680)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner4"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Corner5" type="Node2D" parent="WallsView"]
-position = Vector2(760, 40)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner5"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Corner6" type="Node2D" parent="WallsView"]
-position = Vector2(760, 680)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner6"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Corner7" type="Node2D" parent="WallsView"]
-position = Vector2(1240, 40)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner7"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Corner8" type="Node2D" parent="WallsView"]
-position = Vector2(1240, 680)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner8"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Corner9" type="Node2D" parent="WallsView"]
-position = Vector2(560, 680)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner9"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Corner10" type="Node2D" parent="WallsView"]
-position = Vector2(720, 680)
-
-[node name="TextureRect" type="TextureRect" parent="WallsView/Corner10"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Nails" type="Node2D" parent="."]
-
-[node name="Top" type="Node2D" parent="Nails"]
-
-[node name="Nail7" parent="Nails/Top" instance=ExtResource("10_wq884")]
-position = Vector2(980, 220)
-
-[node name="Nail8" parent="Nails/Top" instance=ExtResource("10_wq884")]
-position = Vector2(1020, 220)
-
-[node name="Nail9" parent="Nails/Top" instance=ExtResource("10_wq884")]
-position = Vector2(920, 240)
-
-[node name="Nail10" parent="Nails/Top" instance=ExtResource("10_wq884")]
-position = Vector2(1080, 240)
-
-[node name="Nail11" parent="Nails/Top" instance=ExtResource("10_wq884")]
-position = Vector2(880, 280)
-
-[node name="Nail12" parent="Nails/Top" instance=ExtResource("10_wq884")]
-position = Vector2(1120, 280)
-
-[node name="Side" type="Node2D" parent="Nails"]
-
-[node name="Nail11" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(800, 240)
-
-[node name="Nail12" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(1200, 240)
-
-[node name="Nail13" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(790, 320)
-
-[node name="Nail14" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(1210, 320)
-
-[node name="Nail15" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(780, 400)
-
-[node name="Nail16" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(1220, 400)
-
-[node name="Nail17" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(790, 480)
-
-[node name="Nail18" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(1210, 480)
-
-[node name="Nail19" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(800, 560)
-
-[node name="Nail20" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(1200, 560)
-
-[node name="Nail21" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(780, 240)
-
-[node name="Nail22" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(780, 560)
-
-[node name="Nail23" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(1220, 240)
-
-[node name="Nail24" parent="Nails/Side" instance=ExtResource("10_wq884")]
-position = Vector2(1220, 560)
-
-[node name="Bottom" type="Node2D" parent="Nails"]
-
-[node name="Nail10" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(1000, 640)
-
-[node name="Nail11" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(840, 640)
-
-[node name="Nail12" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(920, 640)
-
-[node name="Nail13" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(1080, 640)
-
-[node name="Nail14" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(1160, 640)
-
-[node name="Nail15" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(1000, 660)
-
-[node name="Nail16" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(840, 660)
-
-[node name="Nail17" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(920, 660)
-
-[node name="Nail18" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(1080, 660)
-
-[node name="Nail19" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(1160, 660)
-
-[node name="Nail20" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(880, 580)
-
-[node name="Nail21" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(1120, 580)
-
-[node name="Nail22" parent="Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(1000, 590)
-
-[node name="Ex" type="Node2D" parent="Nails"]
-
-[node name="Nail2" parent="Nails/Ex" instance=ExtResource("10_wq884")]
-position = Vector2(970, 340)
-
-[node name="Nail3" parent="Nails/Ex" instance=ExtResource("10_wq884")]
-position = Vector2(1030, 340)
-
-[node name="Nail4" parent="Nails/Ex" instance=ExtResource("10_wq884")]
-position = Vector2(970, 360)
-
-[node name="Nail5" parent="Nails/Ex" instance=ExtResource("10_wq884")]
-position = Vector2(1030, 360)
-
-[node name="Nail6" parent="Nails/Ex" instance=ExtResource("10_wq884")]
-position = Vector2(970, 380)
-
-[node name="Nail7" parent="Nails/Ex" instance=ExtResource("10_wq884")]
-position = Vector2(1030, 380)
-
-[node name="Nail8" parent="Nails/Ex" instance=ExtResource("10_wq884")]
-position = Vector2(1000, 390)
-
-[node name="Nail10" parent="Nails/Ex" instance=ExtResource("10_wq884")]
-position = Vector2(1000, 280)
-
-[node name="x3a" type="Node2D" parent="Nails"]
-
-[node name="Nail2" parent="Nails/x3a" instance=ExtResource("10_wq884")]
-position = Vector2(890, 420)
-
-[node name="Nail4" parent="Nails/x3a" instance=ExtResource("10_wq884")]
-position = Vector2(890, 440)
-
-[node name="Nail5" parent="Nails/x3a" instance=ExtResource("10_wq884")]
-position = Vector2(950, 440)
-
-[node name="Nail6" parent="Nails/x3a" instance=ExtResource("10_wq884")]
-position = Vector2(890, 460)
-
-[node name="Nail7" parent="Nails/x3a" instance=ExtResource("10_wq884")]
-position = Vector2(950, 460)
-
-[node name="Nail8" parent="Nails/x3a" instance=ExtResource("10_wq884")]
-position = Vector2(920, 470)
-
-[node name="Nail9" parent="Nails/x3a" instance=ExtResource("10_wq884")]
-position = Vector2(900, 360)
-
-[node name="x3b" type="Node2D" parent="Nails"]
-
-[node name="Nail3" parent="Nails/x3b" instance=ExtResource("10_wq884")]
-position = Vector2(1110, 420)
-
-[node name="Nail4" parent="Nails/x3b" instance=ExtResource("10_wq884")]
-position = Vector2(1050, 440)
-
-[node name="Nail5" parent="Nails/x3b" instance=ExtResource("10_wq884")]
-position = Vector2(1110, 440)
-
-[node name="Nail6" parent="Nails/x3b" instance=ExtResource("10_wq884")]
-position = Vector2(1050, 460)
-
-[node name="Nail7" parent="Nails/x3b" instance=ExtResource("10_wq884")]
-position = Vector2(1110, 460)
-
-[node name="Nail8" parent="Nails/x3b" instance=ExtResource("10_wq884")]
-position = Vector2(1080, 470)
-
-[node name="Nail9" parent="Nails/x3b" instance=ExtResource("10_wq884")]
-position = Vector2(1100, 360)
-
-[node name="x5" type="Node2D" parent="Nails"]
-
-[node name="Nail2" parent="Nails/x5" instance=ExtResource("10_wq884")]
-position = Vector2(970, 460)
-
-[node name="Nail3" parent="Nails/x5" instance=ExtResource("10_wq884")]
-position = Vector2(1030, 460)
-
-[node name="Nail4" parent="Nails/x5" instance=ExtResource("10_wq884")]
-position = Vector2(970, 480)
-
-[node name="Nail5" parent="Nails/x5" instance=ExtResource("10_wq884")]
-position = Vector2(1030, 480)
-
-[node name="Nail6" parent="Nails/x5" instance=ExtResource("10_wq884")]
-position = Vector2(970, 500)
-
-[node name="Nail7" parent="Nails/x5" instance=ExtResource("10_wq884")]
-position = Vector2(1030, 500)
-
-[node name="Nail8" parent="Nails/x5" instance=ExtResource("10_wq884")]
-position = Vector2(1000, 510)
-
-[node name="Holes" type="Node2D" parent="."]
-
-[node name="HoleWarpToA" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(60, 60)
-hole_type = 5
-warp_group = 2
-
-[node name="HoleWarpToA2" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(60, 360)
-hole_type = 5
-warp_group = 2
-
-[node name="HoleWarpToA3" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(60, 660)
-hole_type = 5
-warp_group = 2
-
-[node name="HoleWarpToB" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(500, 60)
-hole_type = 5
-warp_group = 3
-
-[node name="HoleWarpToB2" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(500, 360)
-hole_type = 5
-warp_group = 3
-
-[node name="HoleWarpToB3" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(500, 660)
-hole_type = 5
-warp_group = 3
-
-[node name="HoleWarpFromA" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(800, 80)
-hole_type = 4
-warp_group = 2
-
-[node name="HoleWarpFromB" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(1200, 80)
-hole_type = 4
-warp_group = 3
-
-[node name="HoleWarpFromGain" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(600, 400)
-hole_type = 4
-warp_group = 1
-
-[node name="HoleGainx0a" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(960, 660)
-hole_type = 1
-
-[node name="HoleGainx0b" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(1040, 660)
-hole_type = 1
-
-[node name="HoleGainx1a" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(880, 660)
-hole_type = 1
-gain_ratio = 1
-
-[node name="HoleGainx1b" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(1120, 660)
-hole_type = 1
-gain_ratio = 1
-
-[node name="HoleGainx2a" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(800, 660)
-hole_type = 1
-gain_ratio = 2
-
-[node name="HoleGainx2b" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(1200, 660)
-hole_type = 1
-gain_ratio = 2
-
-[node name="HoleGainx3a" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(920, 440)
-hole_type = 1
-gain_ratio = 3
-
-[node name="HoleGainx3b" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(1080, 440)
-hole_type = 1
-gain_ratio = 3
-
-[node name="HoleGainx5" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(1000, 480)
-hole_type = 1
-gain_ratio = 5
-
-[node name="HoleExtra" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(1000, 360)
-hole_type = 0
-
-[node name="HoleStack" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(680, 640)
-scale = Vector2(1.5, 1.5)
-hole_type = 3
-
-[node name="HoleStack2" parent="Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(680, 400)
-hole_type = 3
-
 [node name="Balls" type="Node2D" parent="."]
 
 [node name="Ball" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(280, 240)
+position = Vector2(280, 380)
 level = 1
 is_on_billiards = true
 
 [node name="Ball2" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(260, 220)
+position = Vector2(260, 360)
 level = 8
 is_on_billiards = true
 
 [node name="Ball3" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(300, 220)
+position = Vector2(300, 360)
 level = 2
 is_on_billiards = true
 
 [node name="Ball4" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(240, 200)
+position = Vector2(240, 340)
 level = 7
 is_on_billiards = true
 
 [node name="Ball5" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(280, 200)
+position = Vector2(280, 340)
 level = 9
 is_on_billiards = true
 
 [node name="Ball6" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(320, 200)
+position = Vector2(320, 340)
 level = 3
 is_on_billiards = true
 
 [node name="Ball7" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(260, 180)
+position = Vector2(260, 320)
 level = 6
 is_on_billiards = true
 
 [node name="Ball8" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(300, 180)
+position = Vector2(300, 320)
 level = 4
 is_on_billiards = true
 
 [node name="Ball9" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(280, 160)
+position = Vector2(280, 300)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_deck_slots_parent", "_extra_balls_parent", "_extra_slots_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_money_label", "_payout_label", "_balls_label", "_next_turn_label", "_next_money_label", "_next_balls_label", "_log_label", "_tax_window", "_tax_pay_button", "_tax_give_up_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_people_window")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_extra_balls_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_balls_label", "_next_balls_label", "_log_label", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_people_window", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("7_m16gi")
 script = ExtResource("16_qduhm")
 _popup_score_scene = ExtResource("17_k13dc")
-_deck_balls_parent = NodePath("Main/DeckBalls/Balls")
-_deck_slots_parent = NodePath("Main/DeckBalls/Slots")
-_extra_balls_parent = NodePath("Main/ExtraBalls/Balls")
-_extra_slots_parent = NodePath("Main/ExtraBalls/Slots")
+_deck_balls_parent = NodePath("Main/Balls/DeckBalls")
+_extra_balls_parent = NodePath("Main/Balls/ExtraBalls")
 _ball_popup = NodePath("Main/BallPopup")
 _ball_popup_level = NodePath("Main/BallPopup/Level")
 _ball_popup_rarity = NodePath("Main/BallPopup/Rarity")
@@ -1141,66 +852,1448 @@ _buy_balls_button = NodePath("Main/Buttons/BuyBalls")
 _sell_balls_button = NodePath("Main/Buttons/SellBalls")
 _info_button = NodePath("Main/Buttons/Information")
 _options_button = NodePath("Main/Buttons/Options")
-_turn_label = NodePath("Main/Score/Turn/Turn")
-_money_label = NodePath("Main/Score/Money/Money")
-_payout_label = NodePath("Main/Score/Balls/Payout")
-_balls_label = NodePath("Main/Score/Balls/Balls")
-_next_turn_label = NodePath("Main/Score/Turn/Turn2")
-_next_money_label = NodePath("Main/Score/Money/Money2")
-_next_balls_label = NodePath("Main/Score/Balls/Balls2")
-_log_label = NodePath("Main/Score/Log/RichTextLabel")
+_turn_label = NodePath("Main/Score/TurnValue")
+_next_turn_label = NodePath("Main/Score/TurnValue2")
+_money_label = NodePath("Main/Score/MoneyValue")
+_next_money_label = NodePath("Main/Score/MoneyValue2")
+_balls_label = NodePath("Main/Score/BallsValue")
+_next_balls_label = NodePath("Main/Score/BallsValue2")
+_log_label = NodePath("Main/Log/RichTextLabel")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")
-_tax_give_up_button = NodePath("Tax/GiveUp")
 _tax_table_parent = NodePath("Tax/PriceTable")
 _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
+_bunny = NodePath("People/Bunny")
+_bubble_top = NodePath("People/BubbleTop")
+_dialogue_top = NodePath("People/BubbleTop/Dialogue")
+_bubble_bottom = NodePath("People/BubbleBottom")
+_dialogue_bottom = NodePath("People/BubbleBottom/Dialogue")
 
-[node name="StackGlass" type="TextureRect" parent="UI"]
-self_modulate = Color(0.2, 0.2, 0.2, 0.8)
+[node name="Main" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="Balls" type="Control" parent="UI/Main"]
+anchors_preset = 0
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="DeckHeader" type="Label" parent="UI/Main/Balls"]
 layout_mode = 0
-offset_left = 550.0
-offset_top = 360.0
-offset_right = 730.0
-offset_bottom = 690.0
-texture = ExtResource("5_tu1rq")
+offset_right = 80.0
+offset_bottom = 20.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "DECK"
+vertical_alignment = 1
+
+[node name="DeckLamps" type="Control" parent="UI/Main/Balls"]
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
 expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 70.0
+offset_right = 90.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 100.0
+offset_right = 120.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 130.0
+offset_right = 150.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 160.0
+offset_right = 180.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect6" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+offset_left = 190.0
+offset_right = 210.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect7" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+offset_left = 220.0
+offset_right = 240.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect8" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+offset_left = 250.0
+offset_right = 270.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect_" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+layout_mode = 0
+offset_left = 130.0
+offset_right = 150.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="DeckBalls" type="Node2D" parent="UI/Main/Balls"]
+position = Vector2(0, 20)
+
+[node name="Ball" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(20, 20)
+is_display = true
+
+[node name="Ball2" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(50, 20)
+is_display = true
+
+[node name="Ball3" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(80, 20)
+is_display = true
+
+[node name="Ball4" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(110, 20)
+is_display = true
+
+[node name="Ball5" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(140, 20)
+is_display = true
+
+[node name="Ball6" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(170, 20)
+is_display = true
+
+[node name="Ball7" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(200, 20)
+is_display = true
+
+[node name="Ball8" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(230, 20)
+is_display = true
+
+[node name="Ball9" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(260, 20)
+is_display = true
+
+[node name="ExtraHeader" type="Label" parent="UI/Main/Balls"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 80.0
+offset_bottom = 80.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "EXTRA"
+vertical_alignment = 1
+
+[node name="ExtraLamps" type="Control" parent="UI/Main/Balls"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 60.0
+offset_bottom = 60.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 70.0
+offset_right = 90.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 100.0
+offset_right = 120.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 130.0
+offset_right = 150.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 160.0
+offset_right = 180.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect6" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+offset_left = 190.0
+offset_right = 210.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect7" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+offset_left = 220.0
+offset_right = 240.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect8" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+offset_left = 250.0
+offset_right = 270.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect_" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+layout_mode = 0
+offset_left = 130.0
+offset_right = 150.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="ExtraBalls" type="Node2D" parent="UI/Main/Balls"]
+position = Vector2(0, 80)
+
+[node name="Ball" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(20, 20)
+is_display = true
+
+[node name="Ball2" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(50, 20)
+is_display = true
+
+[node name="Ball3" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(80, 20)
+is_display = true
+
+[node name="Ball4" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(110, 20)
+is_display = true
+
+[node name="Ball5" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(140, 20)
+is_display = true
+
+[node name="Ball6" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(170, 20)
+is_display = true
+
+[node name="Ball7" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(200, 20)
+is_display = true
+
+[node name="Ball8" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(230, 20)
+is_display = true
+
+[node name="Ball9" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(260, 20)
+is_display = true
+
+[node name="Slots" type="Control" parent="UI/Main/Balls"]
+anchors_preset = 0
+
+[node name="Control" type="Control" parent="UI/Main/Balls/Slots"]
+visible = false
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 20.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control2" type="Control" parent="UI/Main/Balls/Slots"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 50.0
+offset_top = 40.0
+offset_right = 50.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control2"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control2"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control3" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control3"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control3"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control4" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 110.0
+offset_top = 40.0
+offset_right = 110.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control4"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control4"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control5" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 140.0
+offset_top = 40.0
+offset_right = 140.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control5"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control5"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control6" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 170.0
+offset_top = 40.0
+offset_right = 170.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control6"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control6"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control7" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 200.0
+offset_top = 40.0
+offset_right = 200.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control7"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control7"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control8" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 230.0
+offset_top = 40.0
+offset_right = 230.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control8"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control8"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control9" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 260.0
+offset_top = 40.0
+offset_right = 260.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control9"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control9"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control10" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 20.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control10"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control10"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control11" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 50.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control11"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control11"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control12" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 100.0
+offset_right = 80.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control12"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control12"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control13" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 110.0
+offset_top = 100.0
+offset_right = 110.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control13"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control13"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control14" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 140.0
+offset_top = 100.0
+offset_right = 140.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control14"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control14"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control15" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 170.0
+offset_top = 100.0
+offset_right = 170.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control15"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control15"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control16" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 200.0
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control16"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control16"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control17" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 230.0
+offset_top = 100.0
+offset_right = 230.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control17"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control17"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Control18" type="Control" parent="UI/Main/Balls/Slots"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 260.0
+offset_top = 100.0
+offset_right = 260.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control18"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/Slots/Control18"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("6_1dqto")
+expand_mode = 1
+
+[node name="Score" type="Control" parent="UI/Main"]
+anchors_preset = 0
+offset_left = 360.0
+offset_top = 20.0
+offset_right = 360.0
+offset_bottom = 20.0
+
+[node name="TurnHeader" type="Label" parent="UI/Main/Score"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 20.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "TURN"
+vertical_alignment = 1
+
+[node name="TurnBg" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_top = 20.0
+offset_right = 80.0
+offset_bottom = 60.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "8888"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TurnBg2" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 20.0
+offset_right = 160.0
+offset_bottom = 60.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "8888"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TurnValue" type="Label" parent="UI/Main/Score"]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 80.0
+offset_bottom = 60.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "1234"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TurnValue2" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 20.0
+offset_right = 160.0
+offset_bottom = 60.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "1234"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyHeader" type="Label" parent="UI/Main/Score"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 80.0
+offset_bottom = 80.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "MONEY"
+vertical_alignment = 1
+
+[node name="MoneyNext" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 60.0
+offset_right = 160.0
+offset_bottom = 80.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "NEXT"
+vertical_alignment = 1
+
+[node name="MoneyNext2" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 60.0
+offset_right = 160.0
+offset_bottom = 80.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "NEXT"
+vertical_alignment = 1
+
+[node name="MoneyBg" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 120.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "8888"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyBg2" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 160.0
+offset_bottom = 120.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "8888"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyValue" type="Label" parent="UI/Main/Score"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 120.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "1234"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyValue2" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 160.0
+offset_bottom = 120.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "1234"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallsHeader" type="Label" parent="UI/Main/Score"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 80.0
+offset_bottom = 140.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "BALLS"
+vertical_alignment = 1
+
+[node name="BallsNext" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 120.0
+offset_right = 160.0
+offset_bottom = 140.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "NEXT"
+vertical_alignment = 1
+
+[node name="BallsNext2" type="Label" parent="UI/Main/Score"]
+visible = false
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 100.0
+offset_right = 160.0
+offset_bottom = 120.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "NEXT"
+vertical_alignment = 1
+
+[node name="BallsBg" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_top = 140.0
+offset_right = 80.0
+offset_bottom = 180.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "8888"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallsBg2" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 140.0
+offset_right = 160.0
+offset_bottom = 180.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "8888"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallsValue" type="Label" parent="UI/Main/Score"]
+layout_mode = 0
+offset_top = 140.0
+offset_right = 80.0
+offset_bottom = 180.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "1234"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BallsValue2" type="Label" parent="UI/Main/Score"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 140.0
+offset_right = 160.0
+offset_bottom = 180.0
+theme_type_variation = &"LabelSeg"
+theme_override_font_sizes/font_size = 24
+text = "1234"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Log" type="Control" parent="UI/Main"]
+visible = false
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 40.0
+offset_right = 560.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UI/Main/Log"]
+layout_mode = 0
+offset_top = -30.0
+offset_right = 160.0
+offset_bottom = 10.0
+theme_type_variation = &"LabelHeader"
+text = "LOG"
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="UI/Main/Log"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 160.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/Log"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 160.0
+theme_override_fonts/normal_font = ExtResource("8_sucdk")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+scroll_following = true
+
+[node name="Buttons" type="Control" parent="UI/Main"]
+anchors_preset = 0
+offset_left = 880.0
+offset_top = 40.0
+offset_right = 880.0
+offset_bottom = 40.0
+
+[node name="BuyBalls" type="Button" parent="UI/Main/Buttons"]
+layout_mode = 0
+offset_left = -320.0
+offset_right = -280.0
+offset_bottom = 40.0
+icon = ExtResource("27_et20a")
+icon_alignment = 1
+expand_icon = true
+
+[node name="SellBalls" type="Button" parent="UI/Main/Buttons"]
+layout_mode = 0
+offset_left = -270.0
+offset_right = -230.0
+offset_bottom = 40.0
+icon = ExtResource("28_fhmm7")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Information" type="Button" parent="UI/Main/Buttons"]
+layout_mode = 0
+offset_left = -220.0
+offset_right = -180.0
+offset_bottom = 40.0
+theme_type_variation = &"ButtonGray"
+icon = ExtResource("29_k6x4s")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Options" type="Button" parent="UI/Main/Buttons"]
+layout_mode = 0
+offset_left = -170.0
+offset_right = -130.0
+offset_bottom = 40.0
+theme_type_variation = &"ButtonGray"
+icon = ExtResource("21_bilys")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BallPopup" type="Control" parent="UI/Main"]
+visible = false
+z_index = 4
+anchors_preset = 0
+
+[node name="Panel" type="Panel" parent="UI/Main/BallPopup"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 160.0
+
+[node name="Level" type="Label" parent="UI/Main/BallPopup"]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 240.0
+offset_bottom = 40.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "A-99"
+vertical_alignment = 1
+
+[node name="Rarity" type="Label" parent="UI/Main/BallPopup"]
+self_modulate = Color(1, 1, 0, 1)
+layout_mode = 0
+offset_right = 230.0
+offset_bottom = 40.0
+text = "★★★★★"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UI/Main/BallPopup"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 230.0
+offset_bottom = 150.0
+bbcode_enabled = true
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+autowrap_mode = 1
 
 [node name="Tax" type="Control" parent="UI"]
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_top = 720.0
-offset_bottom = 720.0
 
-[node name="Panel" type="Panel" parent="UI/Tax"]
+[node name="Bg" type="ColorRect" parent="UI/Tax"]
+editor_description = "- DragShooter の操作を禁止するために Control/Mouse/Filter は Stop のままにしてある"
 layout_mode = 0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 1260.0
+offset_top = 220.0
+offset_right = 1280.0
 offset_bottom = 700.0
+color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="UI/Tax"]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 40.0
-offset_right = 440.0
-offset_bottom = 120.0
+offset_left = 40.0
+offset_top = 230.0
+offset_right = 360.0
+offset_bottom = 330.0
 theme_type_variation = &"LabelHeader"
-theme_override_font_sizes/font_size = 32
-text = "TAX"
+theme_override_font_sizes/font_size = 64
+text = "Surcharge"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel2" type="Panel" parent="UI/Tax"]
-layout_mode = 0
-offset_left = 150.0
-offset_top = 150.0
-offset_right = 410.0
-offset_bottom = 490.0
-
 [node name="PriceTable" type="VBoxContainer" parent="UI/Tax"]
+visible = false
 layout_mode = 0
 offset_left = 160.0
 offset_top = 160.0
@@ -1675,44 +2768,37 @@ vertical_alignment = 1
 
 [node name="Pay" type="Button" parent="UI/Tax"]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 540.0
-offset_right = 440.0
-offset_bottom = 580.0
-text = "Pay Tax"
-
-[node name="GiveUp" type="Button" parent="UI/Tax"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 600.0
-offset_right = 440.0
+offset_left = 220.0
+offset_top = 520.0
+offset_right = 340.0
 offset_bottom = 640.0
-disabled = true
-text = "Give Up"
+text = "
+
+Pay"
 
 [node name="Shop" type="Control" parent="UI"]
+visible = false
 clip_children = 1
 layout_mode = 3
 anchors_preset = 0
-offset_top = 720.0
-offset_bottom = 720.0
 
-[node name="Panel" type="Panel" parent="UI/Shop"]
+[node name="Bg" type="ColorRect" parent="UI/Shop"]
+editor_description = "- DragShooter の操作を禁止するために Control/Mouse/Filter は Stop のままにしてある"
 layout_mode = 0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 1260.0
+offset_top = 220.0
+offset_right = 1280.0
 offset_bottom = 700.0
+color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="UI/Shop"]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 40.0
-offset_right = 440.0
-offset_bottom = 120.0
+offset_left = 40.0
+offset_top = 230.0
+offset_right = 360.0
+offset_bottom = 330.0
 theme_type_variation = &"LabelHeader"
-theme_override_font_sizes/font_size = 32
-text = "SHOP"
+theme_override_font_sizes/font_size = 64
+text = "Item Shop"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1722,1001 +2808,130 @@ anchors_preset = 0
 
 [node name="Product" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
 offset_left = 120.0
-offset_top = 120.0
+offset_top = 340.0
 offset_right = 120.0
-offset_bottom = 120.0
+offset_bottom = 340.0
 
 [node name="Product2" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
-visible = false
 offset_left = 280.0
-offset_top = 120.0
+offset_top = 340.0
 offset_right = 280.0
-offset_bottom = 120.0
+offset_bottom = 340.0
 
 [node name="Product3" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
 offset_left = 440.0
-offset_top = 120.0
+offset_top = 340.0
 offset_right = 440.0
-offset_bottom = 120.0
-product_type = 1
+offset_bottom = 340.0
 
 [node name="Product4" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
 offset_left = 120.0
-offset_top = 320.0
+offset_top = 520.0
 offset_right = 120.0
-offset_bottom = 320.0
-product_type = 2
+offset_bottom = 520.0
 
 [node name="Product5" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
-visible = false
 offset_left = 280.0
-offset_top = 320.0
+offset_top = 520.0
 offset_right = 280.0
-offset_bottom = 320.0
-
-[node name="Product6" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
-offset_left = 440.0
-offset_top = 320.0
-offset_right = 440.0
-offset_bottom = 320.0
-product_type = 3
-
-[node name="Buy" type="Button" parent="UI/Shop"]
-visible = false
-layout_mode = 0
-offset_left = 120.0
-offset_top = 540.0
-offset_right = 440.0
-offset_bottom = 580.0
-text = "Buy"
+offset_bottom = 520.0
 
 [node name="Exit" type="Button" parent="UI/Shop"]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 600.0
-offset_right = 440.0
+offset_left = 380.0
+offset_top = 520.0
+offset_right = 500.0
 offset_bottom = 640.0
-text = "Exit"
+text = "
+
+Exit"
 
 [node name="People" type="Control" parent="UI"]
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 0
-offset_top = 720.0
-offset_bottom = 720.0
 
 [node name="Bunny" parent="UI/People" instance=ExtResource("19_tsuuh")]
+z_index = -10
 layout_mode = 0
-offset_left = 1000.0
+offset_left = 1200.0
 offset_top = -40.0
-offset_right = 1000.0
+offset_right = 1200.0
 offset_bottom = -40.0
 _base_texture = ExtResource("20_udj73")
 _parts_1_textures = Array[Texture]([ExtResource("21_uj2w0"), ExtResource("22_2014m"), ExtResource("23_nafxy")])
 _parts_2_textures = Array[Texture]([ExtResource("24_qdik2"), ExtResource("25_atlcj")])
 _parts_3_textures = Array[Texture]([ExtResource("26_jh16u"), ExtResource("27_l85vb")])
 
-[node name="Main" type="Control" parent="UI"]
+[node name="BubbleTop" type="Control" parent="UI/People"]
 layout_mode = 3
 anchors_preset = 0
-mouse_filter = 1
-
-[node name="DeckBalls" type="Control" parent="UI/Main"]
-anchors_preset = 0
-offset_left = 560.0
+offset_left = 960.0
 offset_top = 40.0
-offset_right = 560.0
+offset_right = 960.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="UI/Main/DeckBalls"]
+[node name="TextureRect" type="TextureRect" parent="UI/People/BubbleTop"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
-offset_top = -10.0
+offset_left = 120.0
+offset_top = 130.0
 offset_right = 160.0
-offset_bottom = 30.0
-theme_type_variation = &"LabelHeader"
-text = "DECK"
-vertical_alignment = 1
-
-[node name="Slots" type="Control" parent="UI/Main/DeckBalls"]
-anchors_preset = 0
-offset_left = 10.0
-offset_top = 40.0
-offset_right = 10.0
-offset_bottom = 40.0
-
-[node name="BallSlot" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = -17.0
-offset_top = -17.0
-offset_right = 17.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
+offset_bottom = 190.0
+rotation = 2.61799
+texture = ExtResource("29_22y37")
 expand_mode = 1
 
-[node name="BallSlot2" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
+[node name="Panel" type="Panel" parent="UI/People/BubbleTop"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = -17.0
-offset_right = 37.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot3" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = -17.0
-offset_right = 57.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot4" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 43.0
-offset_top = -17.0
-offset_right = 77.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot5" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 63.0
-offset_top = -17.0
-offset_right = 97.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot6" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 83.0
-offset_top = -17.0
-offset_right = 117.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot7" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 103.0
-offset_top = -17.0
-offset_right = 137.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot8" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 123.0
-offset_top = -17.0
-offset_right = 157.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot9" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = -17.0
-offset_top = 3.0
-offset_right = 17.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot10" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 37.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot11" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 3.0
-offset_right = 57.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot12" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 3.0
-offset_right = 77.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot13" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 63.0
-offset_top = 3.0
-offset_right = 97.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot14" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 83.0
-offset_top = 3.0
-offset_right = 117.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot15" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 103.0
-offset_top = 3.0
-offset_right = 137.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot16" type="TextureRect" parent="UI/Main/DeckBalls/Slots"]
-layout_mode = 0
-offset_left = 123.0
-offset_top = 3.0
-offset_right = 157.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Balls" type="Node2D" parent="UI/Main/DeckBalls"]
-position = Vector2(10, 40)
-
-[node name="Ball" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-is_display = true
-
-[node name="Ball2" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(20, 0)
-is_display = true
-
-[node name="Ball3" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(40, 0)
-is_display = true
-
-[node name="Ball4" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(60, 0)
-is_display = true
-
-[node name="Ball5" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(80, 0)
-is_display = true
-
-[node name="Ball6" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(100, 0)
-is_display = true
-
-[node name="Ball7" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(120, 0)
-is_display = true
-
-[node name="Ball8" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(140, 0)
-is_display = true
-
-[node name="Ball9" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(0, 20)
-is_display = true
-
-[node name="Ball10" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(20, 20)
-is_display = true
-
-[node name="Ball11" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(40, 20)
-is_display = true
-
-[node name="Ball12" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(60, 20)
-is_display = true
-
-[node name="Ball13" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(80, 20)
-is_display = true
-
-[node name="Ball14" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(100, 20)
-is_display = true
-
-[node name="Ball15" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(120, 20)
-is_display = true
-
-[node name="Ball16" parent="UI/Main/DeckBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(140, 20)
-is_display = true
-
-[node name="ExtraBalls" type="Control" parent="UI/Main"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 560.0
-offset_top = 120.0
-offset_right = 560.0
+offset_right = 280.0
 offset_bottom = 120.0
 
-[node name="Label" type="Label" parent="UI/Main/ExtraBalls"]
+[node name="Dialogue" type="RichTextLabel" parent="UI/People/BubbleTop"]
 layout_mode = 0
-offset_top = -10.0
-offset_right = 160.0
-offset_bottom = 30.0
-theme_type_variation = &"LabelHeader"
-text = "EXTRA"
-vertical_alignment = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 270.0
+offset_bottom = 110.0
+bbcode_enabled = true
+text = "[color=BLACK]あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。[/color]"
 
-[node name="Slots" type="Control" parent="UI/Main/ExtraBalls"]
+[node name="BubbleBottom" type="Control" parent="UI/People"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_left = 10.0
-offset_top = 40.0
-offset_right = 10.0
-offset_bottom = 40.0
-
-[node name="BallSlot" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = -17.0
-offset_top = -17.0
-offset_right = 17.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot2" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = -17.0
-offset_right = 37.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot3" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = -17.0
-offset_right = 57.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot4" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 43.0
-offset_top = -17.0
-offset_right = 77.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot5" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 63.0
-offset_top = -17.0
-offset_right = 97.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot6" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 83.0
-offset_top = -17.0
-offset_right = 117.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot7" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 103.0
-offset_top = -17.0
-offset_right = 137.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot8" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 123.0
-offset_top = -17.0
-offset_right = 157.0
-offset_bottom = 17.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot9" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = -17.0
-offset_top = 3.0
-offset_right = 17.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot10" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 37.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot11" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 3.0
-offset_right = 57.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot12" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 43.0
-offset_top = 3.0
-offset_right = 77.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot13" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 63.0
-offset_top = 3.0
-offset_right = 97.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot14" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 83.0
-offset_top = 3.0
-offset_right = 117.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot15" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 103.0
-offset_top = 3.0
-offset_right = 137.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="BallSlot16" type="TextureRect" parent="UI/Main/ExtraBalls/Slots"]
-layout_mode = 0
-offset_left = 123.0
-offset_top = 3.0
-offset_right = 157.0
-offset_bottom = 37.0
-pivot_offset = Vector2(17, 17)
-texture = ExtResource("6_1dqto")
-expand_mode = 1
-
-[node name="Balls" type="Node2D" parent="UI/Main/ExtraBalls"]
-position = Vector2(10, 40)
-
-[node name="Ball" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-is_display = true
-
-[node name="Ball2" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(20, 0)
-is_display = true
-
-[node name="Ball3" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(40, 0)
-is_display = true
-
-[node name="Ball4" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(60, 0)
-is_display = true
-
-[node name="Ball5" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(80, 0)
-is_display = true
-
-[node name="Ball6" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(100, 0)
-is_display = true
-
-[node name="Ball7" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(120, 0)
-is_display = true
-
-[node name="Ball8" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(140, 0)
-is_display = true
-
-[node name="Ball9" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(0, 20)
-is_display = true
-
-[node name="Ball10" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(20, 20)
-is_display = true
-
-[node name="Ball11" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(40, 20)
-is_display = true
-
-[node name="Ball12" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(60, 20)
-is_display = true
-
-[node name="Ball13" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(80, 20)
-is_display = true
-
-[node name="Ball14" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(100, 20)
-is_display = true
-
-[node name="Ball15" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(120, 20)
-is_display = true
-
-[node name="Ball16" parent="UI/Main/ExtraBalls/Balls" instance=ExtResource("2_javdm")]
-position = Vector2(140, 20)
-is_display = true
-
-[node name="Buttons" type="Control" parent="UI/Main"]
-anchors_preset = 0
-
-[node name="BuyBalls" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = 640.0
-offset_top = 480.0
-offset_right = 800.0
-offset_bottom = 520.0
-scale = Vector2(0.5, 0.5)
-text = "Buy BALLS"
-
-[node name="SellBalls" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = 640.0
-offset_top = 560.0
-offset_right = 800.0
-offset_bottom = 600.0
-scale = Vector2(0.5, 0.5)
-text = "Sell BALLS"
-
-[node name="Options" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = 1240.0
-offset_top = 10.0
-offset_right = 1280.0
-offset_bottom = 50.0
-scale = Vector2(0.75, 0.75)
-theme_type_variation = &"ButtonFlatIcon"
-icon = ExtResource("28_ostir")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Information" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = 1240.0
-offset_top = 50.0
-offset_right = 1280.0
-offset_bottom = 90.0
-scale = Vector2(0.75, 0.75)
-theme_type_variation = &"ButtonFlatIcon"
-icon = ExtResource("29_k6x4s")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Stats" type="Button" parent="UI/Main/Buttons"]
-visible = false
-layout_mode = 0
-offset_left = 1240.0
-offset_top = 90.0
-offset_right = 1280.0
-offset_bottom = 130.0
-scale = Vector2(0.75, 0.75)
-theme_type_variation = &"ButtonFlatIcon"
-icon = ExtResource("30_6cb7n")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Rerun" type="Button" parent="UI/Main/Buttons"]
-visible = false
-layout_mode = 0
-offset_left = 1240.0
-offset_top = 130.0
-offset_right = 1280.0
-offset_bottom = 170.0
-scale = Vector2(0.75, 0.75)
-theme_type_variation = &"ButtonFlatIcon"
-icon = ExtResource("31_5ckxk")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Exit" type="Button" parent="UI/Main/Buttons"]
-visible = false
-layout_mode = 0
-offset_left = 1240.0
-offset_top = 170.0
-offset_right = 1280.0
-offset_bottom = 210.0
-scale = Vector2(0.75, 0.75)
-theme_type_variation = &"ButtonFlatIcon"
-icon = ExtResource("32_3q1un")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Score" type="Control" parent="UI/Main"]
-anchors_preset = 0
 offset_left = 560.0
-offset_top = 380.0
+offset_top = 520.0
 offset_right = 560.0
-offset_bottom = 380.0
+offset_bottom = 520.0
 
-[node name="Turn" type="Control" parent="UI/Main/Score"]
-anchors_preset = 0
-offset_top = 20.0
+[node name="TextureRect" type="TextureRect" parent="UI/People/BubbleBottom"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+layout_mode = 0
+offset_left = 120.0
+offset_top = -40.0
+offset_right = 160.0
 offset_bottom = 20.0
+rotation = 0.523599
+texture = ExtResource("29_22y37")
+expand_mode = 1
 
-[node name="Panel" type="Panel" parent="UI/Main/Score/Turn"]
+[node name="Panel" type="Panel" parent="UI/People/BubbleBottom"]
 layout_mode = 0
-offset_left = -5.0
-offset_top = 25.0
-offset_right = 165.0
-offset_bottom = 55.0
-
-[node name="Header" type="Label" parent="UI/Main/Score/Turn"]
-layout_mode = 0
-offset_top = -10.0
-offset_right = 160.0
-offset_bottom = 30.0
-theme_type_variation = &"LabelHeader"
-text = "TURN"
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="UI/Main/Score/Turn"]
-layout_mode = 0
-offset_top = 30.0
-offset_right = 320.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "〒"
-vertical_alignment = 1
-
-[node name="Turn" type="Label" parent="UI/Main/Score/Turn"]
-layout_mode = 0
-offset_top = 30.0
-offset_right = 320.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Turn"]
-visible = false
-layout_mode = 0
-offset_left = 80.0
-offset_top = 30.0
-offset_right = 400.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "〒"
-vertical_alignment = 1
-
-[node name="Turn2" type="Label" parent="UI/Main/Score/Turn"]
-self_modulate = Color(1, 0.25098, 0.25098, 1)
-layout_mode = 0
-offset_left = 80.0
-offset_top = 30.0
-offset_right = 400.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Money" type="Control" parent="UI/Main/Score"]
-anchors_preset = 0
-offset_top = 100.0
-offset_bottom = 100.0
-
-[node name="Panel" type="Panel" parent="UI/Main/Score/Money"]
-layout_mode = 0
-offset_left = -5.0
-offset_top = 25.0
-offset_right = 165.0
-offset_bottom = 55.0
-
-[node name="Header" type="Label" parent="UI/Main/Score/Money"]
-layout_mode = 0
-offset_top = -10.0
-offset_right = 160.0
-offset_bottom = 30.0
-theme_type_variation = &"LabelHeader"
-text = "MONEY"
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="UI/Main/Score/Money"]
-layout_mode = 0
-offset_top = 30.0
-offset_right = 320.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "＄"
-vertical_alignment = 1
-
-[node name="Money" type="Label" parent="UI/Main/Score/Money"]
-layout_mode = 0
-offset_top = 30.0
-offset_right = 320.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Money"]
-visible = false
-layout_mode = 0
-offset_left = 80.0
-offset_top = 110.0
-offset_right = 400.0
-offset_bottom = 190.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "＄"
-vertical_alignment = 1
-
-[node name="Money2" type="Label" parent="UI/Main/Score/Money"]
-self_modulate = Color(1, 0.25098, 0.25098, 1)
-layout_mode = 0
-offset_left = 80.0
-offset_top = 30.0
-offset_right = 400.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Balls" type="Control" parent="UI/Main/Score"]
-anchors_preset = 0
-offset_top = 180.0
-offset_bottom = 180.0
-
-[node name="Panel" type="Panel" parent="UI/Main/Score/Balls"]
-layout_mode = 0
-offset_left = -5.0
-offset_top = 25.0
-offset_right = 165.0
-offset_bottom = 75.0
-
-[node name="Header" type="Label" parent="UI/Main/Score/Balls"]
-layout_mode = 0
-offset_top = -10.0
-offset_right = 160.0
-offset_bottom = 30.0
-theme_type_variation = &"LabelHeader"
-text = "BALLS"
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="UI/Main/Score/Balls"]
-visible = false
-layout_mode = 0
-offset_top = 30.0
-offset_right = 320.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "●"
-vertical_alignment = 1
-
-[node name="Payout" type="Label" parent="UI/Main/Score/Balls"]
-layout_mode = 0
-offset_top = 30.0
-offset_right = 320.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/Main/Score/Balls"]
-visible = false
-layout_mode = 0
-offset_left = 80.0
-offset_top = 30.0
-offset_right = 400.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "●"
-vertical_alignment = 1
-
-[node name="Payout2" type="Label" parent="UI/Main/Score/Balls"]
-visible = false
-layout_mode = 0
-offset_left = 80.0
-offset_top = 30.0
-offset_right = 400.0
-offset_bottom = 110.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="UI/Main/Score/Balls"]
-layout_mode = 0
-offset_top = 50.0
-offset_right = 320.0
-offset_bottom = 130.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "●"
-vertical_alignment = 1
-
-[node name="Balls" type="Label" parent="UI/Main/Score/Balls"]
-layout_mode = 0
-offset_top = 50.0
-offset_right = 320.0
-offset_bottom = 130.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Label4" type="Label" parent="UI/Main/Score/Balls"]
-visible = false
-layout_mode = 0
-offset_left = 80.0
-offset_top = 50.0
-offset_right = 400.0
-offset_bottom = 130.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "●"
-vertical_alignment = 1
-
-[node name="Balls2" type="Label" parent="UI/Main/Score/Balls"]
-self_modulate = Color(1, 0.25098, 0.25098, 1)
-layout_mode = 0
-offset_left = 80.0
-offset_top = 50.0
-offset_right = 400.0
-offset_bottom = 130.0
-scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8_sucdk")
-theme_override_font_sizes/font_size = 64
-text = "999999"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Log" type="Control" parent="UI/Main/Score"]
-anchors_preset = 0
-offset_top = -140.0
-offset_bottom = -140.0
-
-[node name="Panel" type="Panel" parent="UI/Main/Score/Log"]
-layout_mode = 0
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 165.0
-offset_bottom = 85.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/Score/Log"]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 80.0
-theme_override_fonts/normal_font = ExtResource("8_sucdk")
-theme_override_font_sizes/normal_font_size = 12
-bbcode_enabled = true
-scroll_following = true
-
-[node name="BallPopup" type="Control" parent="UI/Main"]
-visible = false
-z_index = 4
-anchors_preset = 0
-
-[node name="Panel" type="Panel" parent="UI/Main/BallPopup"]
-layout_mode = 0
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 245.0
-offset_bottom = 165.0
-
-[node name="Level" type="Label" parent="UI/Main/BallPopup"]
-layout_mode = 0
-offset_right = 240.0
-offset_bottom = 40.0
-theme_type_variation = &"LabelBold"
-theme_override_font_sizes/font_size = 24
-text = "A-99"
-vertical_alignment = 1
-
-[node name="Rarity" type="Label" parent="UI/Main/BallPopup"]
-self_modulate = Color(1, 1, 0, 1)
-layout_mode = 0
-offset_right = 240.0
-offset_bottom = 40.0
-text = "★★★★★"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Description" type="RichTextLabel" parent="UI/Main/BallPopup"]
-layout_mode = 0
-offset_top = 40.0
-offset_right = 240.0
+offset_right = 360.0
 offset_bottom = 160.0
-bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
-autowrap_mode = 1
 
-[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_stack", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_main_buttons_parent", "_balls_parent", "_balls_buttons_parent", "_main_labels_parent")]
-z_index = 20
+[node name="Dialogue" type="RichTextLabel" parent="UI/People/BubbleBottom"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 350.0
+offset_bottom = 150.0
+bbcode_enabled = true
+text = "[color=BLACK]あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。[/color]"
+
+[node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_main_buttons_parent", "_balls_parent", "_balls_buttons_parent", "_main_labels_parent")]
+z_index = 100
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("33_5f41o")
@@ -2724,7 +2939,6 @@ _enable = true
 _game = NodePath("..")
 _billards = NodePath("../Billiards")
 _pachinko = NodePath("../Pachinko")
-_stack = NodePath("../Stack")
 _game_ui = NodePath("../UI")
 _bunny = NodePath("../UI/People/Bunny")
 _debug_button = NodePath("Debug")
@@ -2742,6 +2956,7 @@ scale = Vector2(0.5, 0.5)
 text = "Debug"
 
 [node name="DebugWindow" type="Control" parent="UIDebug"]
+visible = false
 anchors_preset = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -3487,3 +3702,6 @@ offset_right = 240.0
 offset_bottom = 120.0
 scale = Vector2(0.5, 0.5)
 text = "----"
+
+[node name="Foregroud" type="Node2D" parent="."]
+z_index = 999
