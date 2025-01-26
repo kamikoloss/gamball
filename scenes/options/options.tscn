@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt4t8h3rfr8gk"]
+[gd_scene load_steps=11 format=3 uid="uid://dt4t8h3rfr8gk"]
 
 [ext_resource type="Script" path="res://scenes/options/options.gd" id="1_oy0wl"]
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="3_6sgbf"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/people/bunny2/bunny2a.png" id="4_vn1v7"]
 [ext_resource type="PackedScene" uid="uid://bqsd33phabvi6" path="res://scenes/common/ui/bar_slider.tscn" id="5_0qug4"]
 [ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="5_351k0"]
+[ext_resource type="Texture2D" uid="uid://dkcqj2bnwtcfx" path="res://images/icons/refresh.png" id="9_kxqj6"]
+[ext_resource type="Texture2D" uid="uid://c30d2k1hmhmry" path="res://images/icons/logout.png" id="9_mqqht"]
 
 [node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_language_selector", "_window_mode_selector", "_window_size_selector", "_master_volume_slider", "_master_volume_label", "_master_mute_button", "_bgm_volume_slider", "_bgm_volume_label", "_bgm_mute_button", "_se_volume_slider", "_se_volume_label", "_se_mute_button")]
 layout_mode = 3
@@ -28,13 +30,6 @@ _bgm_mute_button = NodePath("Audio/BGM/Mute")
 _se_volume_slider = NodePath("Audio/SE/BarSlider")
 _se_volume_label = NodePath("Audio/SE/Value")
 _se_mute_button = NodePath("Audio/SE/Mute")
-
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 50.0
-offset_right = 520.0
-offset_bottom = 690.0
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
@@ -268,18 +263,42 @@ offset_bottom = -40.0
 _parts_1_textures = Array[Texture]([ExtResource("4_vn1v7"), ExtResource("5_351k0")])
 
 [node name="Reset" type="Button" parent="."]
-visible = false
 layout_mode = 0
-offset_left = 120.0
-offset_top = 540.0
-offset_right = 440.0
-offset_bottom = 580.0
-text = "Reset to default"
+offset_left = 200.0
+offset_top = 580.0
+offset_right = 320.0
+offset_bottom = 700.0
+theme_type_variation = &"ButtonCircle"
+text = "
+
+Reset"
+
+[node name="TextureRect" type="TextureRect" parent="Reset"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 90.0
+offset_bottom = 80.0
+texture = ExtResource("9_kxqj6")
+expand_mode = 1
 
 [node name="Exit" type="Button" parent="."]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 600.0
-offset_right = 440.0
-offset_bottom = 640.0
-text = "Exit"
+offset_left = 360.0
+offset_top = 580.0
+offset_right = 480.0
+offset_bottom = 700.0
+theme_type_variation = &"ButtonCircle"
+text = "
+
+Exit"
+
+[node name="TextureRect" type="TextureRect" parent="Exit"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 90.0
+offset_bottom = 80.0
+texture = ExtResource("9_mqqht")
+expand_mode = 1
