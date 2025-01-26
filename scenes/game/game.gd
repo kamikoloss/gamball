@@ -19,13 +19,13 @@ const IMPULSE_RATIO: float = 16
 const PAYOUT_INTERVAL_BASE: float = 0.1
 
 # DECK の 最小数/最大数 の 絶対値/初期値
-const DECK_SIZE_MIN: int = 4
-const DECK_SIZE_MIN_DEFAULT: int = 8
-const DECK_SIZE_MAX: int = 16
+const DECK_SIZE_MIN: int = 2
+const DECK_SIZE_MIN_DEFAULT: int = 5
+const DECK_SIZE_MAX: int = 9
 # EXTRA の 最小数/最大数の 絶対値/初期値
 const EXTRA_SIZE_MIN: int = 0
-const EXTRA_SIZE_MAX: int = 16
-const EXTRA_SIZE_MAX_DEFAULT: int = 8
+const EXTRA_SIZE_MAX: int = 9
+const EXTRA_SIZE_MAX_DEFAULT: int = 5
 
 # Tax (ノルマ) のリスト
 # [<turn>, TaxType, <amount>]
@@ -115,18 +115,14 @@ var _deck_ball_list: Array[Ball] = [
 	Ball.new(0, Ball.Rarity.COMMON),
 	Ball.new(0, Ball.Rarity.COMMON),
 	Ball.new(0, Ball.Rarity.COMMON),
-	Ball.new(0, Ball.Rarity.COMMON),
-	Ball.new(1, Ball.Rarity.COMMON),
-	Ball.new(1, Ball.Rarity.COMMON),
 	Ball.new(1, Ball.Rarity.COMMON),
 	Ball.new(1, Ball.Rarity.COMMON),
 ]
 # 出現する Extra Ball のリストの初期値
 var _extra_ball_list: Array[Ball] = [
+	Ball.new(1, Ball.Rarity.COMMON),
 	Ball.new(2, Ball.Rarity.COMMON),
 	Ball.new(3, Ball.Rarity.COMMON),
-	Ball.new(4, Ball.Rarity.COMMON),
-	Ball.new(5, Ball.Rarity.COMMON),
 ]
 # DECK/EXTRA の 最小/最大 数
 var _deck_size_min: int = DECK_SIZE_MIN_DEFAULT
@@ -633,9 +629,9 @@ func _pop_payout() -> void:
 
 # 払い出しキューに追加する
 func _push_payout(level: int, amount: int) -> void:
-	for i in amount:
-		_payout_level_list.push_back(level)
-	_game_ui.refresh_payout_label(_payout_level_list.size())
+	#for i in amount:
+	#	_payout_level_list.push_back(level)
+	#_game_ui.refresh_payout_label(_payout_level_list.size())
 
 	var payout_size = _payout_level_list.size()
 	if payout_size < 100:
