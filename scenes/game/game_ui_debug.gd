@@ -46,7 +46,7 @@ var _main_functions: Dictionary = {
 	"hide_shop_window": func(): _game_ui.hide_shop_window(),
 	"show_people_window": func(): _game_ui.show_people_window(),
 	"hide_people_window": func(): _game_ui.hide_people_window(),
-	"refresh_dialogue_label": func(): _bunny.refresh_dialogue_label(_sample_dialogue_list.pick_random()),
+	"refresh_dialogue_label": func(): _game_ui.set_dialogue(_sample_dialogue_list.pick_random()),
 	"shuffle_pose": func(): _bunny.shuffle_pose(),
 }
 # { <ボタン文字列: string>: <ボタン処理: Callable>, ... } 

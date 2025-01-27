@@ -120,9 +120,9 @@ var _deck_ball_list: Array[Ball] = [
 ]
 # 出現する Extra Ball のリストの初期値
 var _extra_ball_list: Array[Ball] = [
-	Ball.new(1, Ball.Rarity.COMMON),
-	Ball.new(2, Ball.Rarity.COMMON),
-	Ball.new(3, Ball.Rarity.COMMON),
+	Ball.new(1, Ball.Rarity.UNCOMMON),
+	Ball.new(2, Ball.Rarity.UNCOMMON),
+	Ball.new(3, Ball.Rarity.UNCOMMON),
 ]
 # DECK/EXTRA の 最小/最大 数
 var _deck_size_min: int = DECK_SIZE_MIN_DEFAULT
@@ -150,7 +150,7 @@ func _ready() -> void:
 	# 初期化 (ラベル用)
 	turn = 0
 	money = 1000
-	balls = 0
+	balls = 100
 
 	# Signal (DragShooter)
 	_drag_shooter.pressed.connect(_on_drag_shooter_pressed)

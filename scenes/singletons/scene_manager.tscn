@@ -1,19 +1,37 @@
-[gd_scene load_steps=8 format=3 uid="uid://byves5qpwewta"]
+[gd_scene load_steps=10 format=3 uid="uid://byves5qpwewta"]
 
 [ext_resource type="Script" path="res://scenes/singletons/scene_manager.gd" id="1_axwg5"]
-[ext_resource type="PackedScene" uid="uid://l2y3sq1ikgmx" path="res://scenes/game/game.tscn" id="2_k43e2"]
+[ext_resource type="PackedScene" uid="uid://bi5oapulw3837" path="res://scenes/game/game2.tscn" id="2_hosw5"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="2_xeacv"]
 [ext_resource type="PackedScene" uid="uid://0ajps5kdo6nb" path="res://scenes/information/information.tscn" id="3_aef2h"]
-[ext_resource type="FontFile" uid="uid://cddqcb7np26y8" path="res://themes/fonts/PixelMplus12-Regular.ttf" id="3_i67e3"]
 [ext_resource type="PackedScene" uid="uid://b572sr4hn8ps8" path="res://scenes/title/title.tscn" id="3_oyfl5"]
 [ext_resource type="PackedScene" uid="uid://dt4t8h3rfr8gk" path="res://scenes/options/options.tscn" id="4_gqtso"]
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="8_4w18u"]
+[ext_resource type="Shader" path="res://shaders/realistic_crt_shader.gdshader" id="8_b7n7g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hj4eo"]
+shader = ExtResource("8_b7n7g")
+shader_parameter/resolution = Vector2(1280, 1080)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 0.1
+shader_parameter/noise_amount = 0.03
+shader_parameter/interference_amount = 0.2
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.3
+shader_parameter/roll_speed = 3.8e-07
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
 
 [node name="SceneManager" type="Node" node_paths=PackedStringArray("title", "information", "options", "_curtain", "_version_label")]
 script = ExtResource("1_axwg5")
 title = NodePath("LoadedScenes/Title")
 information = NodePath("LoadedScenes/Information")
 options = NodePath("LoadedScenes/Options")
-_game_scene = ExtResource("2_k43e2")
+_game_scene = ExtResource("2_hosw5")
 _curtain = NodePath("Curtain")
 _version_label = NodePath("Version")
 
@@ -42,9 +60,16 @@ mouse_filter = 2
 texture = ExtResource("2_xeacv")
 expand_mode = 1
 
-[node name="Loading" type="Control" parent="."]
+[node name="Effects" type="Control" parent="."]
+z_index = 1000
 layout_mode = 3
 anchors_preset = 0
+
+[node name="CRT" type="ColorRect" parent="Effects"]
+material = SubResource("ShaderMaterial_hj4eo")
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
 
 [node name="Version" type="Label" parent="."]
 z_index = 99
@@ -52,7 +77,8 @@ offset_left = 1120.0
 offset_top = 690.0
 offset_right = 1280.0
 offset_bottom = 730.0
-theme_override_fonts/font = ExtResource("3_i67e3")
+theme = ExtResource("8_4w18u")
+theme_type_variation = &"LabelHeader"
 text = "v0.0.0"
 horizontal_alignment = 2
 vertical_alignment = 1
