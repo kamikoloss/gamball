@@ -12,12 +12,12 @@ bounce = 0.8
 radius = 20.0
 
 [sub_resource type="Curve" id="Curve_pexpb"]
-_data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 1, 0]
+_data = [Vector2(0, 1), 0.0, -0.5, 0, 1, Vector2(1, 0.5), -0.5, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_inactive_texture", "_body_texture", "_inner_texture", "_inner_texture_2", "_level_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_body_texture", "_inner_texture", "_inner_line_texture", "_inactive_texture", "_level_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
 z_index = 4
 collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
@@ -25,10 +25,10 @@ contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
 _view_parent = NodePath("View")
-_inactive_texture = NodePath("View/Mask/Control/Inactive")
 _body_texture = NodePath("View/Mask/Control/Body")
 _inner_texture = NodePath("View/Mask/Control/Inner")
-_inner_texture_2 = NodePath("View/Mask/Control/Inner2")
+_inner_line_texture = NodePath("View/Mask/Control/InnerLine")
+_inactive_texture = NodePath("View/Mask/Control/Inactive")
 _level_label = NodePath("View/Level")
 _hover_texture = NodePath("View/Hover")
 _trail_line = NodePath("Trail")
@@ -76,7 +76,7 @@ mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
 
-[node name="Inner2" type="TextureRect" parent="View/Mask/Control"]
+[node name="InnerLine" type="TextureRect" parent="View/Mask/Control"]
 self_modulate = Color(1, 0, 1, 1)
 layout_mode = 0
 offset_left = -10.0

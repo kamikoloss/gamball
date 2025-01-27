@@ -52,25 +52,26 @@ var _tweens: Dictionary = {}
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
-	_hole_scale_base = self.scale
-	_gravity_scale_base = _gravity_area.scale
-	_body_color_base = _body_texture.self_modulate
 
 	enable()
 	refresh_view()
 	refresh_physics()
 
+	_hole_scale_base = self.scale
+	_gravity_scale_base = _gravity_area.scale
+	_body_color_base = _body_texture.self_modulate
+
 
 # 有効化する
 func enable() -> void:
 	is_enabled = true
-	modulate = Color(1, 1, 1, 1)
+	modulate = Color(Color.WHITE, 1.0)
 	refresh_physics()
 
 # 無効化する
 func disable() -> void:
 	is_enabled = false
-	modulate = Color(1, 1, 1, 0.1)
+	modulate = Color(Color.WHITE, 0.1)
 	refresh_physics()
 
 
@@ -85,34 +86,28 @@ func flash(count: int, color: Color, duration_ratio: int = 1) -> void:
 
 # 自身の見た目を更新する
 func refresh_view() -> void:
+	# デフォルト
+	_body_texture.self_modulate = ColorPalette.BLACK
+	_label.self_modulate = ColorPalette.WHITE
+
 	match hole_type:
 		Hole.HoleType.WARP_TO:
 			_label.text = WarpGroup.keys()[warp_group]
-			return
 		Hole.HoleType.WARP_FROM:
-			if warp_group == WarpGroup.PAYOUT:
-				_label.text = "X"
-			else:
-				_label.text = WarpGroup.keys()[warp_group]
-			_body_texture.self_modulate = Color(0.9, 0.9, 0.9)
-			_label.self_modulate = Color.BLACK
-			return
+			_label.text = WarpGroup.keys()[warp_group]
+			_body_texture.self_modulate = ColorPalette.GRAY_20
+			_label.self_modulate = ColorPalette.BLACK
 		Hole.HoleType.EXTRA:
 			_label.text = "EX"
-			_label.self_modulate = ColorPalette.SUCCESS
-			return
+			_body_texture.self_modulate = ColorPalette.SUCCESS
 		Hole.HoleType.GAIN:
 			_label.text = "x%s" % [gain_ratio]
 			if gain_ratio <= 0:
 				_label.self_modulate = ColorPalette.DANGER
-			return
 		Hole.HoleType.LOST:
-			pass
+			_label.visible = false
 		Hole.HoleType.STACK:
 			_label.text = "+"
-			return
-	# return しなかった場合: Label を非表示にする
-	_label.visible = false
 
 
 # 自身の物理判定を更新する

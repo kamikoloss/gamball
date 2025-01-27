@@ -15,10 +15,6 @@ enum Pool { A }
 enum TweenType { TRAIL, SHRINK, HIDE, WARP, WARP_CURVE }
 
 
-# Z index
-const Z_INDEX_DEFAULT: int = 4
-const Z_INDEX_SLOT: int = 3
-
 # Tween
 const WARP_DURATION: float = 1.0
 const SHRINK_DURATION: float = 1.0
@@ -26,7 +22,7 @@ const SHRINK_SCALE: Vector2 = Vector2(0.6, 0.6)
 const HIDE_DURATION: float = 1.0
 
 # 残像の頂点数
-const TRAIL_MAX_LENGTH: int = 10
+const TRAIL_MAX_LENGTH: int = 20
 # 残像の頂点の更新インターバル (秒)
 const TRAIL_INTERVAL: float = 0.02
 
@@ -48,13 +44,13 @@ const BALL_LEVEL_DISABLED_SLOT = -2 # 使用不可スロット用
 
 # 見た目部分をまとめる親
 @export var _view_parent: Node2D
-# ボールが有効化されるまで全体を覆う部分
-@export var _inactive_texture: TextureRect
 # ボールの本体色部分
 @export var _body_texture: TextureRect
 # ボール番号の背景部分
 @export var _inner_texture: TextureRect
-@export var _inner_texture_2: TextureRect
+@export var _inner_line_texture: TextureRect
+# ボールが有効化されるまで全体を覆う部分
+@export var _inactive_texture: TextureRect
 # ボール番号
 @export var _level_label: Label
 # ボールの選択を示す周辺部分
@@ -126,66 +122,45 @@ func _ready() -> void:
 
 # 自身の見た目を更新する
 func refresh_view() -> void:
-	# Ordering
-	if level < 0:
-		z_index = Z_INDEX_SLOT
-	else:
-		z_index = Z_INDEX_DEFAULT
-
+	# スロットの場合: 見た目をすべて非表示にする
 	if level < 0:
 		_view_parent.visible = false
 		return
 
 	# 本体色
-	var body_color: Color
-	if level == 0:
-		body_color = ColorPalette.GRAY_20
-	elif level <= 15:
-		body_color = ColorPalette.SECONDARY
+	var rarity_color = ColorPalette.BALL_RARITY_COLORS[rarity]
+	_body_texture.self_modulate = rarity_color
+	_inner_texture.self_modulate = rarity_color
+	# レア度による本体色の変化
+	if rarity == Rarity.COMMON:
+		_inner_line_texture.self_modulate = ColorPalette.GRAY_60
+		_level_label.self_modulate = ColorPalette.GRAY_60
 	else:
-		body_color = ColorPalette.PRIMARY
-	_body_texture.self_modulate = body_color
-	# 残像色
-	var trail_color = body_color
+		_inner_line_texture.self_modulate = ColorPalette.WHITE
+		_level_label.self_modulate = ColorPalette.WHITE
+
+	# 残像色: 有効でない場合は固定する
+	var trail_color = _body_texture.self_modulate
 	if not is_active:
-		trail_color = ColorPalette.GRAY_20
+		trail_color = ColorPalette.WHITE
 	var gradient = Gradient.new()
 	gradient.set_color(0, Color(trail_color, 0.5))
 	gradient.set_color(1, Color(trail_color, 0))
 	_trail_line.gradient = gradient
 
-	# レア度
-	if rarity == Rarity.COMMON:
-		_inner_texture.self_modulate = Color.WHITE
-		_inner_texture_2.visible = false
-		_level_label.self_modulate = Color.BLACK
+	# ボール番号
+	if is_active:
+		_level_label.text = str(level)
 	else:
-		_inner_texture.self_modulate = Color.BLACK
-		_inner_texture_2.visible = true
-		_inner_texture_2.self_modulate = ColorPalette.BALL_RARITY_COLORS[rarity]
-		_level_label.self_modulate = ColorPalette.BALL_RARITY_COLORS[rarity]
+		_level_label.text = "??"
 
-	# 有効
+	# 有効化されている場合: 無効テクスチャを非表示にする
 	_inactive_texture.visible = not is_active
 
-	# ボール番号
-	if not is_active:
-		_inner_texture.visible = true
-		_level_label.visible = true
-		_level_label.text = "??"
-	elif level < 0:
-		_inner_texture.visible = false
-		_level_label.visible = false
-	else:
-		_inner_texture.visible = true
-		_level_label.visible = true
-		_level_label.text = str(level)
-
-	# 縮小
-	if is_shrinked:
-		_inner_texture.visible = false
-		_inner_texture_2.visible = false
-		_level_label.visible = false
+	# 縮小されている場合: 本体色のみ表示する
+	_inner_texture.visible = not is_shrinked
+	_inner_line_texture.visible = not is_shrinked
+	_level_label.visible = not is_shrinked
 
 
 # 自身の物理判定を更新する

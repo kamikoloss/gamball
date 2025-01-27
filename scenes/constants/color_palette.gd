@@ -1,15 +1,20 @@
 extends Node
 class_name ColorPalette
 
+# Util
+const WHITE :=		Color(0.95, 0.95, 0.95)
+const BLACK :=		Color(0.05, 0.05, 0.05)
+const GRAY_20 :=	Color(0.8, 0.8, 0.8)
+const GRAY_40 :=	Color(0.6, 0.6, 0.6)
+const GRAY_60 :=	Color(0.4, 0.4, 0.4)
+const GRAY_80 :=	Color(0.2, 0.2, 0.2)
+
 # Theme
 const PRIMARY := 	Color("#f5f759")
 const SECONDARY := 	Color("#eb3d00")
 const SUCCESS := 	Color("#03432d")
 const DANGER := 	Color("#f53921")
-const GRAY_20 :=	Color(0.8, 0.8, 0.8)
-const GRAY_40 :=	Color(0.6, 0.6, 0.6)
-const GRAY_60 :=	Color(0.4, 0.4, 0.4)
-const GRAY_80 :=	Color(0.2, 0.2, 0.2)
+
 # Rarity
 const COMMON := 	Color("#f4ffea")
 const UNCOMMON := 	Color("#4f7454")
