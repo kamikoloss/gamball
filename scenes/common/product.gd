@@ -93,10 +93,10 @@ func refresh_view() -> void:
 	# 購入ボタン
 	_buy_texture.visible = _is_icon_hovered
 	if _enabled:
-		_buy_texture.self_modulate = ColorData.SUCCESS
+		_buy_texture.self_modulate = ColorPalette.SUCCESS
 		_buy_label.text = "BUY"
 	else:
-		_buy_texture.self_modulate = ColorData.DANGER
+		_buy_texture.self_modulate = ColorPalette.DANGER
 		_buy_label.text = "CANNOT BUY"
 
 

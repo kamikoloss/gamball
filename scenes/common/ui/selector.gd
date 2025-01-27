@@ -50,9 +50,9 @@ func _refresh_view() -> void:
 	for point: Control in _points_parent.get_children():
 		if point_index < _option_keys.size():
 			if point_index == _selected_option_index:
-				point.modulate = ColorData.PRIMARY
+				point.modulate = ColorPalette.PRIMARY
 			else:
-				point.modulate = ColorData.GRAY_40
+				point.modulate = ColorPalette.GRAY_40
 		else:
 			point.visible = false
 		point_index += 1

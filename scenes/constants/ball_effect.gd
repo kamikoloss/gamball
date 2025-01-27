@@ -183,7 +183,7 @@ static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:
 		return "(TODO)"
 
 	var description_base = EFFECT_DESCRIPTIONS[effect_data[0]]
-	var rarity_color: Color = ColorData.BALL_RARITY_COLORS[rarity]
+	var rarity_color: Color = ColorPalette.BALL_RARITY_COLORS[rarity]
 	var rarity_color_code = rarity_color.to_html()
 	var get_variable_text = func(x) -> String:
 		return "[color={r}][b]{x}[/b][/color]".format({ "r": rarity_color_code, "x": x })

@@ -139,16 +139,16 @@ func refresh_view() -> void:
 	# 本体色
 	var body_color: Color
 	if level == 0:
-		body_color = ColorData.GRAY_20
+		body_color = ColorPalette.GRAY_20
 	elif level <= 15:
-		body_color = ColorData.SECONDARY
+		body_color = ColorPalette.SECONDARY
 	else:
-		body_color = ColorData.PRIMARY
+		body_color = ColorPalette.PRIMARY
 	_body_texture.self_modulate = body_color
 	# 残像色
 	var trail_color = body_color
 	if not is_active:
-		trail_color = ColorData.GRAY_20
+		trail_color = ColorPalette.GRAY_20
 	var gradient = Gradient.new()
 	gradient.set_color(0, Color(trail_color, 0.5))
 	gradient.set_color(1, Color(trail_color, 0))
@@ -162,8 +162,8 @@ func refresh_view() -> void:
 	else:
 		_inner_texture.self_modulate = Color.BLACK
 		_inner_texture_2.visible = true
-		_inner_texture_2.self_modulate = ColorData.BALL_RARITY_COLORS[rarity]
-		_level_label.self_modulate = ColorData.BALL_RARITY_COLORS[rarity]
+		_inner_texture_2.self_modulate = ColorPalette.BALL_RARITY_COLORS[rarity]
+		_level_label.self_modulate = ColorPalette.BALL_RARITY_COLORS[rarity]
 
 	# 有効
 	_inactive_texture.visible = not is_active

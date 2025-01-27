@@ -1,5 +1,5 @@
 extends Node
-class_name ColorData
+class_name ColorPalette
 
 # Theme
 const PRIMARY := 	Color("#f5f759")

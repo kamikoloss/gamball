@@ -40,7 +40,7 @@ func _show_ball_popup(ball: Ball) -> void:
 	var description = "[font_size=8] [/font_size]\n" # ハーフ改行
 	for rarity in Ball.Rarity.values():
 		var rarity_value = BallEffect.RARITY_TEXT[rarity]
-		var rarity_color: Color = ColorData.BALL_RARITY_COLORS[rarity]
+		var rarity_color: Color = ColorPalette.BALL_RARITY_COLORS[rarity]
 		var rarity_color_code = rarity_color.to_html()
 		description += "[color=%s][b]%s[/b][/color]\n" % [rarity_color_code, rarity_value]
 		description += "%s\n" % [BallEffect.get_effect_description(ball.level, rarity)]
