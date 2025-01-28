@@ -16,6 +16,7 @@ _drag_point = NodePath("DragPoint")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dvupa")
+debug_color = Color(0, 0.6, 0.7, 0)
 
 [node name="Arrow" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.6)
