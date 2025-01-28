@@ -20,8 +20,7 @@ const WALL_ROTATION_DURATION = 2.0
 @export var _rush_nails_parent: Node2D
 @export var _rush_holes_parent: Node2D
 
-@export var _rush_label_a: Label
-@export var _rush_label_b: Label
+@export var _rush_label: Label
 @export var _rush_lamps_parent: Control
 
 
@@ -54,8 +53,7 @@ var _tweens: Dictionary = {}
 
 func _ready() -> void:
 	_rush_lottery_count = 0
-	_rush_label_a.text = ""
-	_rush_label_b.text = ""
+	_rush_label.text = "!!!!!"
 
 	_finish_rush(true) # 初期化なので強制的に終了する
 	_refresh_rush_lamps(false)
@@ -83,8 +81,7 @@ func start_lottery(force: bool = false) -> void:
 	# 通常時の場合: ゲーム数をカウントする
 	if not _is_rush_now:
 		_rush_lottery_count += 1
-		_rush_label_a.text = "%03dG" % [_rush_lottery_count]
-		_rush_label_b.text = ""
+		_rush_label.text = "!!!%02d" % [_rush_lottery_count]
 
 	# 乱数を抽選する
 	var index_list: Array[int] = _pick_lamp_index_list()
@@ -138,7 +135,7 @@ func _on_rush_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 
 	# カウントする
 	_rush_balls_count += 1
-	_rush_label_b.text = "%02d/%02d" % [_rush_balls_count, _rush_balls_max]
+	_rush_label.text = "%02d!%02d" % [_rush_balls_count, _rush_balls_max]
 
 	# (カウントの結果) 入れられる最大数に達している場合: ラッシュ装置を無効化する
 	if _rush_balls_max <= _rush_balls_count:
@@ -154,8 +151,7 @@ func _start_rush() -> void:
 	_refresh_rush_lamps(true)
 	_enable_rush_devices()
 
-	_rush_label_a.text = "RUSH %02d" % [_rush_continue_count]
-	_rush_label_b.text = "%02d/%02d" % [_rush_balls_count, _rush_balls_max]
+	_rush_label.text = "%02d!%02d" % [_rush_balls_count, _rush_balls_max]
 
 # ラッシュを終了する
 func _finish_rush(force: bool = false) -> void:
@@ -172,8 +168,7 @@ func _finish_rush(force: bool = false) -> void:
 	_refresh_rush_lamps(false)
 	_disable_rush_devices()
 
-	_rush_label_a.text = "%03dG" % [_rush_lottery_count]
-	_rush_label_b.text = ""
+	_rush_label.text = "!!!%02d" % [_rush_lottery_count]
 
 
 # ラッシュ装置を有効化する

@@ -13,7 +13,7 @@ var _current_ball: Ball = null
 
 # 盤面上に Ball を移動する
 func spawn_ball(ball: Ball) -> void:
-	ball.position = _spawn_position.position
+	ball.global_position = _spawn_position.global_position
 	ball.freeze = true
 	_current_ball = ball
 
@@ -33,7 +33,7 @@ func spawn_extra_ball(ball: Ball) -> void:
 		return
 
 	var spawn_position = _spawn_extra_positions.pick_random()
-	ball.position = spawn_position.position
+	ball.global_position = spawn_position.global_position
 
 	# 初速をつける
 	var spawn_impulse = Vector2(randi_range(0, 100), randi_range(0, 100))
@@ -52,4 +52,4 @@ func shoot_ball(implulse: Vector2) -> void:
 
 
 func refresh_balls_count(count: int) -> void:
-	_balls_count_label.text = str(count)
+	_balls_count_label.text = "%04d" % [count]

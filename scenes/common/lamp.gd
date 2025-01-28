@@ -11,10 +11,10 @@ enum LightColor {
 
 # ランプの発光色 { LightColor: Color } 
 const LIGHT_COLORS = {
-	LightColor.DEFAULT_OFF: Color(0.1, 0.1, 0.1),
-	LightColor.DEFAULT_ON: Color(1, 1, 1),
-	LightColor.GREEN_OFF: Color(0.2, 0.6, 0.2),
-	LightColor.GREEN_ON: Color(0, 1, 0),
+	LightColor.DEFAULT_OFF: Color(ColorPalette.BLACK, 0.5),
+	LightColor.DEFAULT_ON: ColorPalette.WHITE,
+	LightColor.GREEN_OFF: ColorPalette.SUCCESS,
+	LightColor.GREEN_ON: Color.GREEN,
 }
 
 

@@ -100,7 +100,7 @@ func refresh_view() -> void:
 			_label.self_modulate = ColorPalette.GRAY_60
 		Hole.HoleType.EXTRA:
 			_body_texture.self_modulate = ColorPalette.SUCCESS
-			_label.text = "EX"
+			_label.text = "!!"
 		Hole.HoleType.GAIN:
 			_label.text = "x%s" % [gain_ratio]
 			if gain_ratio <= 0:
