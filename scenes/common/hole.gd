@@ -93,13 +93,14 @@ func refresh_view() -> void:
 	match hole_type:
 		Hole.HoleType.WARP_TO:
 			_label.text = WarpGroup.keys()[warp_group]
+			_label.self_modulate = ColorPalette.GRAY_60
 		Hole.HoleType.WARP_FROM:
-			_label.text = WarpGroup.keys()[warp_group]
 			_body_texture.self_modulate = ColorPalette.GRAY_20
-			_label.self_modulate = ColorPalette.BLACK
+			_label.text = WarpGroup.keys()[warp_group]
+			_label.self_modulate = ColorPalette.GRAY_60
 		Hole.HoleType.EXTRA:
-			_label.text = "EX"
 			_body_texture.self_modulate = ColorPalette.SUCCESS
+			_label.text = "EX"
 		Hole.HoleType.GAIN:
 			_label.text = "x%s" % [gain_ratio]
 			if gain_ratio <= 0:

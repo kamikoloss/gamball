@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bi5oapulw3837"]
+[gd_scene load_steps=36 format=3 uid="uid://bi5oapulw3837"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_mqtms"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_javdm"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://bqmtnjse8snmy" path="res://images/icons/currency_exchange.png" id="28_fhmm7"]
 [ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="29_22y37"]
 [ext_resource type="Texture2D" uid="uid://cmdugoyo8pdg1" path="res://images/icons/info.png" id="29_k6x4s"]
+[ext_resource type="FontFile" uid="uid://dq3uk1pcxdhrq" path="res://themes/fonts/MPLUSRounded1c-Bold.ttf" id="32_ubskw"]
 [ext_resource type="Script" path="res://scenes/game/game_ui_debug.gd" id="33_5f41o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_re584"]
@@ -530,41 +531,42 @@ position = Vector2(980, 280)
 hole_type = 4
 warp_group = 3
 
-[node name="HoleGainx0a" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+[node name="Hole" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(800, 420)
+hole_type = 1
+gain_ratio = 3
+
+[node name="Hole2" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(740, 500)
+hole_type = 1
+gain_ratio = 2
+
+[node name="Hole3" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+position = Vector2(860, 500)
+hole_type = 1
+gain_ratio = 2
+
+[node name="Hole4" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
 position = Vector2(620, 660)
 hole_type = 1
 
-[node name="HoleGainx0b" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+[node name="Hole5" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
 position = Vector2(980, 660)
 hole_type = 1
 
-[node name="HoleGainx1a" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+[node name="Hole6" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
 position = Vector2(710, 660)
 hole_type = 1
 gain_ratio = 1
 
-[node name="HoleGainx1b" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+[node name="Hole7" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
 position = Vector2(890, 660)
 hole_type = 1
 gain_ratio = 1
 
-[node name="HoleGainx2a" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
+[node name="Hole8" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
 position = Vector2(800, 660)
-hole_type = 1
-gain_ratio = 2
-
-[node name="HoleGainx3a" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(740, 500)
-hole_type = 1
-gain_ratio = 3
-
-[node name="HoleGainx3b" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(860, 500)
-hole_type = 1
-gain_ratio = 3
-
-[node name="HoleExtra" parent="Pachinko/Holes" instance=ExtResource("11_j5iaq")]
-position = Vector2(800, 420)
+scale = Vector2(1.5, 1.5)
 hole_type = 0
 
 [node name="RushNails" type="Node2D" parent="Pachinko"]
@@ -877,9 +879,9 @@ _shop_exit_button = NodePath("Shop/Exit")
 _people_window = NodePath("People")
 _bunny = NodePath("People/Bunny")
 _bubble_top = NodePath("People/BubbleTop")
-_dialogue_top = NodePath("People/BubbleTop/Dialogue")
+_dialogue_top = NodePath("People/BubbleTop/RichTextLabel")
 _bubble_bottom = NodePath("People/BubbleBottom")
-_dialogue_bottom = NodePath("People/BubbleBottom/Dialogue")
+_dialogue_bottom = NodePath("People/BubbleBottom/RichTextLabel")
 
 [node name="Main" type="Control" parent="UI"]
 layout_mode = 3
@@ -1197,7 +1199,6 @@ is_display = true
 anchors_preset = 0
 
 [node name="Control" type="Control" parent="UI/Main/Balls/Slots"]
-visible = false
 anchors_preset = 0
 offset_left = 20.0
 offset_top = 40.0
@@ -1205,7 +1206,7 @@ offset_right = 20.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1238,7 +1239,6 @@ texture = ExtResource("6_1dqto")
 expand_mode = 1
 
 [node name="Control2" type="Control" parent="UI/Main/Balls/Slots"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 50.0
@@ -1247,7 +1247,7 @@ offset_right = 50.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control2"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1288,7 +1288,7 @@ offset_right = 80.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control3"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1329,7 +1329,7 @@ offset_right = 110.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control4"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1370,7 +1370,7 @@ offset_right = 140.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control5"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1411,7 +1411,7 @@ offset_right = 170.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control6"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1452,7 +1452,7 @@ offset_right = 200.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control7"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1493,7 +1493,7 @@ offset_right = 230.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control8"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1534,7 +1534,7 @@ offset_right = 260.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control9"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1575,7 +1575,7 @@ offset_right = 20.0
 offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control10"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1616,7 +1616,7 @@ offset_right = 50.0
 offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control11"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1657,7 +1657,7 @@ offset_right = 80.0
 offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control12"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1698,7 +1698,7 @@ offset_right = 110.0
 offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control13"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1739,7 +1739,7 @@ offset_right = 140.0
 offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control14"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1780,7 +1780,7 @@ offset_right = 170.0
 offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control15"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1821,7 +1821,7 @@ offset_right = 200.0
 offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control16"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1862,7 +1862,7 @@ offset_right = 230.0
 offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control17"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -1903,7 +1903,7 @@ offset_right = 260.0
 offset_bottom = 100.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/Slots/Control18"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_left = -10.0
 offset_top = -10.0
@@ -2890,27 +2890,31 @@ offset_bottom = 40.0
 [node name="TextureRect" type="TextureRect" parent="UI/People/BubbleTop"]
 self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
-offset_left = 120.0
-offset_top = 130.0
-offset_right = 160.0
-offset_bottom = 190.0
+offset_left = 60.0
+offset_top = 80.0
+offset_right = 100.0
+offset_bottom = 140.0
 rotation = 2.61799
+pivot_offset = Vector2(20, 30)
 texture = ExtResource("29_22y37")
 expand_mode = 1
 
 [node name="Panel" type="Panel" parent="UI/People/BubbleTop"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_right = 280.0
 offset_bottom = 120.0
 
-[node name="Dialogue" type="RichTextLabel" parent="UI/People/BubbleTop"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/People/BubbleTop"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 270.0
 offset_bottom = 110.0
+theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_fonts/normal_font = ExtResource("32_ubskw")
 bbcode_enabled = true
-text = "[color=BLACK]あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。[/color]"
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 
 [node name="BubbleBottom" type="Control" parent="UI/People"]
 visible = false
@@ -2924,27 +2928,31 @@ offset_bottom = 520.0
 [node name="TextureRect" type="TextureRect" parent="UI/People/BubbleBottom"]
 self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
-offset_left = 120.0
-offset_top = -40.0
-offset_right = 160.0
-offset_bottom = 20.0
-rotation = 0.523599
+offset_left = 100.0
+offset_top = -30.0
+offset_right = 140.0
+offset_bottom = 30.0
+rotation = 0.523598
+pivot_offset = Vector2(20, 30)
 texture = ExtResource("29_22y37")
 expand_mode = 1
 
 [node name="Panel" type="Panel" parent="UI/People/BubbleBottom"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_right = 360.0
 offset_bottom = 160.0
 
-[node name="Dialogue" type="RichTextLabel" parent="UI/People/BubbleBottom"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/People/BubbleBottom"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 350.0
 offset_bottom = 150.0
+theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_fonts/normal_font = ExtResource("32_ubskw")
 bbcode_enabled = true
-text = "[color=BLACK]あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。[/color]"
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_main_buttons_parent", "_balls_parent", "_balls_buttons_parent", "_main_labels_parent")]
 z_index = 100
@@ -2972,6 +2980,7 @@ scale = Vector2(0.5, 0.5)
 text = "Debug"
 
 [node name="DebugWindow" type="Control" parent="UIDebug"]
+visible = false
 anchors_preset = 0
 offset_left = 20.0
 offset_top = 20.0
