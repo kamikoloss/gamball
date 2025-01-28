@@ -279,14 +279,14 @@ func _on_bunny_pressed() -> void:
 	_bunny.shuffle_pose()
 
 
-# NOTE: バニーではなく GameUI 側が持っていることに注意する
+# NOTE: Bunny ではなく GameUI 側が持っていることに注意する
 func set_dialogue(dialogue: String) -> void:
 	var tween = _get_tween(TweenType.DIALOGUE)
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_dialogue_top, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION / 2) # 表示を消す
 	tween.chain()
-	tween.tween_callback(func(): _dialogue_top.text = "[color=BLACK]%s[/color]" % [dialogue]) # セリフを変える
+	tween.tween_callback(func(): _dialogue_top.text = dialogue) # セリフを変える
 	tween.tween_property(_dialogue_top, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION) # 表示を戻す
 
 
@@ -294,9 +294,10 @@ func shuffle_dialogue() -> void:
 	# セリフをランダムに変更する
 	# TODO: JSON に逃がす
 	var dialogue_list = [
-		"GAMBALL は近未来のバーチャルハイリスクハイリターンギャンブルだよ！",
-		"ビリヤードポケットに入った玉はパチンコ盤面上に出現するよ。",
-		"水色の??玉が他の玉にぶつかる前にビリヤードポケットに落ちるとなくなるから気をつけてね！",
+		"いらっしゃ～い！調子どう？",
+		"[rainbow]GAMBALL[/rainbow] は近未来のバーチャルハイリスクハイリターンギャンブルだよ！",
+		"ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。",
+		"ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～",
 	]
 	set_dialogue(dialogue_list.pick_random())
 

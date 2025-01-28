@@ -22,7 +22,7 @@ const SHRINK_SCALE: Vector2 = Vector2(0.6, 0.6)
 const HIDE_DURATION: float = 1.0
 
 # 残像の頂点数
-const TRAIL_MAX_LENGTH: int = 20
+const TRAIL_MAX_LENGTH: int = 10
 # 残像の頂点の更新インターバル (秒)
 const TRAIL_INTERVAL: float = 0.02
 
@@ -153,6 +153,7 @@ func refresh_view() -> void:
 		_level_label.text = str(level)
 	else:
 		_level_label.text = "??"
+		_level_label.self_modulate = ColorPalette.BLACK
 
 	# 有効化されている場合: 無効テクスチャを非表示にする
 	_inactive_texture.visible = not is_active

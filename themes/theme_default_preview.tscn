@@ -28,6 +28,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelRounded" type="Label" parent="."]
+layout_mode = 0
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 120.0
