@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bi5oapulw3837"]
+[gd_scene load_steps=37 format=3 uid="uid://bi5oapulw3837"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_mqtms"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_javdm"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b8pf53q8cdbcj" path="res://scenes/common/product.tscn" id="18_gfb7h"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="19_tsuuh"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/people/bunny/base.png" id="20_udj73"]
+[ext_resource type="Texture2D" uid="uid://c30d2k1hmhmry" path="res://images/icons/logout.png" id="21_5hb3e"]
 [ext_resource type="Texture2D" uid="uid://bho0g835q1uhf" path="res://images/icons/settings.png" id="21_bilys"]
 [ext_resource type="Texture2D" uid="uid://cuwiiq1yrw76c" path="res://images/people/bunny/face_1.png" id="21_uj2w0"]
 [ext_resource type="Texture2D" uid="uid://bh4gotw50hou6" path="res://images/people/bunny/face_2.png" id="22_2014m"]
@@ -57,13 +58,16 @@ z_index = -100
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
 material = SubResource("ShaderMaterial_re584")
-offset_right = 1280.0
-offset_bottom = 720.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 1320.0
+offset_bottom = 760.0
 mouse_filter = 2
 
 [node name="ColorRect2" type="ColorRect" parent="Background"]
+offset_left = -40.0
 offset_top = 20.0
-offset_right = 1280.0
+offset_right = 1320.0
 offset_bottom = 200.0
 mouse_filter = 2
 color = Color(0.05, 0.05, 0.05, 1)
@@ -71,7 +75,7 @@ color = Color(0.05, 0.05, 0.05, 1)
 [node name="Main" type="Node2D" parent="."]
 
 [node name="HoleWarpFromPayout" parent="Main" instance=ExtResource("11_j5iaq")]
-position = Vector2(800, -160)
+position = Vector2(640, -160)
 hole_type = 4
 warp_group = 1
 
@@ -286,7 +290,6 @@ offset_bottom = 40.0
 theme = ExtResource("7_m16gi")
 
 [node name="Header" type="Label" parent="Billiards/UI"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 20.0
@@ -296,26 +299,34 @@ text = "BALLS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Bg" type="Label" parent="Billiards/UI"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
+[node name="ValueSlash" type="Label" parent="Billiards/UI"]
+offset_top = 20.0
+offset_right = 80.0
+offset_bottom = 40.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = " /"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ValueBg" type="Label" parent="Billiards/UI"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 80.0
 offset_bottom = 40.0
 theme_type_variation = &"LabelSeg"
-text = "8888
-"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+text = "88!88"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Value" type="Label" parent="Billiards/UI"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_top = 20.0
 offset_right = 80.0
 offset_bottom = 40.0
 theme_type_variation = &"LabelSeg"
-text = "1234"
+text = "12!34"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -425,13 +436,13 @@ position = Vector2(270, 220)
 position = Vector2(240, 230)
 
 [node name="Nail9" parent="Pachinko/Nails/Top1" instance=ExtResource("10_wq884")]
-position = Vector2(120, 180)
+position = Vector2(240, 160)
 
 [node name="Nail10" parent="Pachinko/Nails/Top1" instance=ExtResource("10_wq884")]
-position = Vector2(360, 180)
+position = Vector2(120, 160)
 
 [node name="Nail11" parent="Pachinko/Nails/Top1" instance=ExtResource("10_wq884")]
-position = Vector2(240, 160)
+position = Vector2(360, 160)
 
 [node name="Top2" type="Node2D" parent="Pachinko/Nails"]
 
@@ -507,10 +518,10 @@ position = Vector2(360, 360)
 position = Vector2(240, 380)
 
 [node name="Nail23" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(40, 300)
+position = Vector2(40, 320)
 
 [node name="Nail24" parent="Pachinko/Nails/Bottom" instance=ExtResource("10_wq884")]
-position = Vector2(440, 300)
+position = Vector2(440, 320)
 
 [node name="Holes" type="Node2D" parent="Pachinko"]
 
@@ -563,42 +574,42 @@ scale = Vector2(1.5, 1.5)
 hole_type = 0
 
 [node name="RushNails" type="Node2D" parent="Pachinko"]
-position = Vector2(240, 80)
+position = Vector2(240, 100)
 
 [node name="Nail4" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
-position = Vector2(-120, 60)
+position = Vector2(-120, 40)
 
 [node name="Nail5" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
-position = Vector2(-100, 80)
+position = Vector2(-100, 60)
 
 [node name="Nail6" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
-position = Vector2(-60, 80)
+position = Vector2(-60, 60)
 
 [node name="Nail7" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
-position = Vector2(-40, 60)
+position = Vector2(-40, 40)
 
 [node name="Nail10" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
-position = Vector2(40, 60)
+position = Vector2(40, 40)
 
 [node name="Nail11" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
-position = Vector2(60, 80)
+position = Vector2(60, 60)
 
 [node name="Nail12" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
-position = Vector2(100, 80)
+position = Vector2(100, 60)
 
 [node name="Nail13" parent="Pachinko/RushNails" instance=ExtResource("10_wq884")]
-position = Vector2(120, 60)
+position = Vector2(120, 40)
 
 [node name="RushHoles" type="Node2D" parent="Pachinko"]
-position = Vector2(240, 80)
+position = Vector2(240, 100)
 
 [node name="Hole" parent="Pachinko/RushHoles" instance=ExtResource("11_j5iaq")]
-position = Vector2(-80, 40)
+position = Vector2(-80, 20)
 hole_type = 1
 gain_ratio = 10
 
 [node name="Hole2" parent="Pachinko/RushHoles" instance=ExtResource("11_j5iaq")]
-position = Vector2(80, 40)
+position = Vector2(80, 20)
 hole_type = 1
 gain_ratio = 10
 
@@ -612,7 +623,6 @@ offset_bottom = 40.0
 theme = ExtResource("7_m16gi")
 
 [node name="Header" type="Label" parent="Pachinko/UI"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 20.0
@@ -623,7 +633,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ValueSlash" type="Label" parent="Pachinko/UI"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_top = 20.0
 offset_right = 80.0
@@ -634,19 +643,18 @@ text = " /"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Bg" type="Label" parent="Pachinko/UI"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
+[node name="ValueBg" type="Label" parent="Pachinko/UI"]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 80.0
 offset_bottom = 40.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 text = "88!88"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Value" type="Label" parent="Pachinko/UI"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_top = 20.0
 offset_right = 80.0
@@ -813,6 +821,7 @@ offset_right = 10.0
 offset_bottom = 80.0
 
 [node name="Balls" type="Node2D" parent="."]
+visible = false
 
 [node name="Ball" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(280, 380)
@@ -1964,25 +1973,25 @@ text = "TURN"
 vertical_alignment = 1
 
 [node name="TurnBg" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
 layout_mode = 0
 offset_top = 20.0
 offset_right = 80.0
 offset_bottom = 60.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
 text = "8888"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TurnBg2" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 20.0
 offset_right = 160.0
 offset_bottom = 60.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
 text = "8888"
 horizontal_alignment = 1
@@ -2000,13 +2009,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TurnValue2" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 20.0
 offset_right = 160.0
 offset_bottom = 60.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "1234"
 horizontal_alignment = 1
@@ -2023,50 +2032,50 @@ text = "MONEY"
 vertical_alignment = 1
 
 [node name="MoneyNext" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 60.0
 offset_right = 160.0
 offset_bottom = 80.0
 theme_type_variation = &"LabelHeader"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 12
 text = "NEXT"
 vertical_alignment = 1
 
 [node name="MoneyNext2" type="Label" parent="UI/Main/Score"]
 visible = false
-self_modulate = Color(0.921569, 0.239216, 0, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 60.0
 offset_right = 160.0
 offset_bottom = 80.0
 theme_type_variation = &"LabelHeader"
+theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "NEXT"
 vertical_alignment = 1
 
 [node name="MoneyBg" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
 layout_mode = 0
 offset_top = 80.0
 offset_right = 80.0
 offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
 text = "8888"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MoneyBg2" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
 text = "8888"
 horizontal_alignment = 1
@@ -2084,13 +2093,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MoneyValue2" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "1234"
 horizontal_alignment = 1
@@ -2107,49 +2116,49 @@ text = "BALLS"
 vertical_alignment = 1
 
 [node name="BallsNext" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 120.0
 offset_right = 160.0
 offset_bottom = 140.0
 theme_type_variation = &"LabelHeader"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 12
 text = "NEXT"
 vertical_alignment = 1
 
 [node name="BallsNext2" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 120.0
 offset_right = 160.0
 offset_bottom = 140.0
 theme_type_variation = &"LabelHeader"
+theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 12
 text = "NEXT"
 vertical_alignment = 1
 
 [node name="BallsBg" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
 layout_mode = 0
 offset_top = 140.0
 offset_right = 80.0
 offset_bottom = 180.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
 text = "8888"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BallsBg2" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 140.0
 offset_right = 160.0
 offset_bottom = 180.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
 text = "8888"
 horizontal_alignment = 1
@@ -2167,39 +2176,24 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BallsValue2" type="Label" parent="UI/Main/Score"]
-self_modulate = Color(0.921569, 0.239216, 0, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 140.0
 offset_right = 160.0
 offset_bottom = 180.0
 theme_type_variation = &"LabelSeg"
+theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "1234"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Log" type="Control" parent="UI/Main"]
-visible = false
 anchors_preset = 0
 offset_left = 560.0
 offset_top = 40.0
 offset_right = 560.0
 offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="UI/Main/Log"]
-layout_mode = 0
-offset_top = -30.0
-offset_right = 160.0
-offset_bottom = 10.0
-theme_type_variation = &"LabelHeader"
-text = "LOG"
-vertical_alignment = 1
-
-[node name="Panel" type="Panel" parent="UI/Main/Log"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 160.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/Log"]
 layout_mode = 0
@@ -2252,6 +2246,15 @@ offset_right = -130.0
 offset_bottom = 40.0
 theme_type_variation = &"ButtonGray"
 icon = ExtResource("21_bilys")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Exit" type="Button" parent="UI/Main/Buttons"]
+offset_left = -120.0
+offset_right = -80.0
+offset_bottom = 40.0
+theme_type_variation = &"ButtonGray"
+icon = ExtResource("21_5hb3e")
 icon_alignment = 1
 expand_icon = true
 
@@ -2760,13 +2763,13 @@ offset_left = 220.0
 offset_top = 520.0
 offset_right = 340.0
 offset_bottom = 640.0
+theme_type_variation = &"ButtonCircle"
 text = "
 
 Pay"
 
 [node name="Shop" type="Control" parent="UI"]
 visible = false
-clip_children = 1
 layout_mode = 3
 anchors_preset = 0
 
@@ -2830,12 +2833,12 @@ offset_left = 380.0
 offset_top = 520.0
 offset_right = 500.0
 offset_bottom = 640.0
+theme_type_variation = &"ButtonCircle"
 text = "
 
 Exit"
 
 [node name="People" type="Control" parent="UI"]
-z_as_relative = false
 layout_mode = 3
 anchors_preset = 0
 
@@ -2890,6 +2893,7 @@ text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風�
 
 [node name="BubbleBottom" type="Control" parent="UI/People"]
 visible = false
+z_index = 2
 layout_mode = 3
 anchors_preset = 0
 offset_left = 560.0
@@ -2927,7 +2931,6 @@ bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 
 [node name="BallPopup" type="Control" parent="UI"]
-visible = false
 z_index = 4
 anchors_preset = 0
 
@@ -2948,7 +2951,6 @@ text = "A-99"
 vertical_alignment = 1
 
 [node name="Rarity" type="Label" parent="UI/BallPopup"]
-self_modulate = Color(1, 1, 0, 1)
 layout_mode = 0
 offset_right = 230.0
 offset_bottom = 40.0
@@ -2967,7 +2969,7 @@ text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風�
 autowrap_mode = 1
 
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_main_buttons_parent", "_balls_parent", "_balls_buttons_parent", "_main_labels_parent")]
-z_index = 100
+z_index = 40
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("33_5f41o")
