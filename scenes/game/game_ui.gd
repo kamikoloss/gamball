@@ -177,9 +177,9 @@ func _get_seg_text(value: int) -> String:
 
 
 func refresh_next_clear() -> void:
-	_next_turn_label.text = "CLEAR!!"
-	_next_money_label.text = "CLEAR!!"
-	_next_balls_label.text = "CLEAR!!"
+	_next_turn_label.text = "----"
+	_next_money_label.text = "----"
+	_next_balls_label.text = "----"
 
 
 func add_log(text: String) -> void:

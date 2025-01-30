@@ -81,7 +81,7 @@ func start_lottery(force: bool = false) -> void:
 	# 通常時の場合: ゲーム数をカウントする
 	if not _is_rush_now:
 		_rush_lottery_count += 1
-		_rush_label.text = "!!!%02d" % [_rush_lottery_count]
+		_rush_label.text = "%02d!%02d" % [_rush_lottery_count, 30]
 
 	# 乱数を抽選する
 	var index_list: Array[int] = _pick_lamp_index_list()
@@ -168,7 +168,7 @@ func _finish_rush(force: bool = false) -> void:
 	_refresh_rush_lamps(false)
 	_disable_rush_devices()
 
-	_rush_label.text = "!!!%02d" % [_rush_lottery_count]
+	_rush_label.text = "%02d!%02d" % [_rush_lottery_count, 30] # TODO
 
 
 # ラッシュ装置を有効化する

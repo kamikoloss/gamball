@@ -52,4 +52,4 @@ func shoot_ball(implulse: Vector2) -> void:
 
 
 func refresh_balls_count(count: int) -> void:
-	_balls_count_label.text = "%04d" % [count]
+	_balls_count_label.text = "%02d!%02d" % [count, 30] # TODO
