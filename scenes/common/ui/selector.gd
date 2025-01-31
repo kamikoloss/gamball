@@ -52,7 +52,7 @@ func _refresh_view() -> void:
 			if point_index == _selected_option_index:
 				point.modulate = ColorPalette.PRIMARY
 			else:
-				point.modulate = ColorPalette.GRAY_40
+				point.modulate = ColorPalette.GRAY_60
 		else:
 			point.visible = false
 		point_index += 1

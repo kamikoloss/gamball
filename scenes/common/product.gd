@@ -21,6 +21,7 @@ const PRODUCT_PRICES = {
 	ProductType.EXTRA_PACK: 200,
 	ProductType.EXTRA_CLEANER: 100,
 }
+
 # 商品の [<名称>, <説明分>]
 # TODO: JSON に逃がす
 const PRODUCT_DATA = {
@@ -36,10 +37,8 @@ const PRODUCT_DATA = {
 # UI
 @export var _icon_texture: TextureRect
 @export var _name_label: Label
-@export var _desc_label: Label
 @export var _price_label: Label
-@export var _buy_texture: TextureRect
-@export var _buy_label: Label
+@export var _buy_button: Button
 
 # Resources
 @export var _icon_pack: Texture
@@ -50,6 +49,14 @@ const PRODUCT_DATA = {
 var price: int:
 	get:
 		return PRODUCT_PRICES[product_type]
+# 名前
+var title: String:
+	get:
+		return PRODUCT_DATA[product_type][0]
+# 説明文
+var description: String:
+	get:
+		return PRODUCT_DATA[product_type][1]
 
 
 # 購入可能かどうか
@@ -59,9 +66,10 @@ var _is_icon_hovered: bool = false
 
 
 func _ready() -> void:
-	_icon_texture.gui_input.connect(_on_icon_input)
-	_icon_texture.mouse_entered.connect(_on_icon_mouse_entered)
-	_icon_texture.mouse_exited.connect(_on_icon_mouse_exited)
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	_buy_button.pressed.connect(_on_buy_button_pressed)
+
 	refresh_view()
 
 
@@ -86,32 +94,31 @@ func refresh_view() -> void:
 			_icon_texture.texture = _icon_cleaner
 
 	# テキスト
-	_name_label.text = PRODUCT_DATA[product_type][0]
-	_desc_label.text = PRODUCT_DATA[product_type][1]
+	_name_label.text = title
 	_price_label.text = "＄%s" % str(price)
 
 	# 購入ボタン
-	_buy_texture.visible = _is_icon_hovered
+	_buy_button.visible = _is_icon_hovered
 	if _enabled:
-		_buy_texture.self_modulate = ColorPalette.SUCCESS
-		_buy_label.text = "BUY"
+		_buy_button.self_modulate = ColorPalette.SUCCESS
+		_buy_button.text = "Buy"
 	else:
-		_buy_texture.self_modulate = ColorPalette.DANGER
-		_buy_label.text = "CANNOT BUY"
+		_buy_button.self_modulate = ColorPalette.DANGER
+		_buy_button.text = "----"
 
 
-func _on_icon_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			pressed.emit(self)
-
-
-func _on_icon_mouse_entered() -> void:
+func _on_mouse_entered() -> void:
 	_is_icon_hovered = true
 	refresh_view()
 	hovered.emit(self, _is_icon_hovered)
 
-func _on_icon_mouse_exited() -> void:
+func _on_mouse_exited() -> void:
 	_is_icon_hovered = false
 	refresh_view()
 	hovered.emit(self, _is_icon_hovered)
+
+
+func _on_buy_button_pressed(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			pressed.emit(self)

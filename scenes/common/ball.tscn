@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/common/ball.gd" id="1_rcr8u"]
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="2_4bc8b"]
-[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="3_11qrs"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="3_rxati"]
+[ext_resource type="FontVariation" uid="uid://b6wnlncndy3of" path="res://themes/font_variations/red_hat_display_bold.tres" id="4_7pwlo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nh6hv"]
 bounce = 0.8
@@ -128,8 +128,7 @@ offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
-theme = ExtResource("3_11qrs")
-theme_type_variation = &"LabelHeader"
+theme_override_fonts/font = ExtResource("4_7pwlo")
 theme_override_font_sizes/font_size = 24
 text = "8"
 horizontal_alignment = 1
@@ -138,7 +137,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Hover" type="TextureRect" parent="View"]
 visible = false
-self_modulate = Color(1, 1, 1, 0.8)
+self_modulate = Color(1, 1, 1, 0.6)
 z_index = 1
 offset_left = -10.0
 offset_top = -10.0

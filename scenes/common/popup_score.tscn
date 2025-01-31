@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn3emqhpy7fbt"]
+[gd_scene load_steps=4 format=3 uid="uid://dn3emqhpy7fbt"]
 
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_asfrc"]
 [ext_resource type="Script" path="res://scenes/common/popup_score.gd" id="1_f6l6k"]
+[ext_resource type="FontVariation" uid="uid://b6wnlncndy3of" path="res://themes/font_variations/red_hat_display_bold.tres" id="3_ttgyu"]
 
 [node name="PopupScore" type="Control" node_paths=PackedStringArray("_label")]
 layout_mode = 3
@@ -12,11 +13,12 @@ _label = NodePath("Label")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = -80.0
-offset_top = -40.0
-offset_right = 80.0
-offset_bottom = 40.0
-theme_type_variation = &"LabelScore"
+offset_left = -160.0
+offset_top = -80.0
+offset_right = 160.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("3_ttgyu")
+theme_override_font_sizes/font_size = 32
 text = "+9999"
 horizontal_alignment = 1
 vertical_alignment = 1

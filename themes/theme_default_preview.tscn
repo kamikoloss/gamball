@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://6c1drvddwas0"]
 
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_fekh7"]
-[ext_resource type="Texture2D" uid="uid://bho0g835q1uhf" path="res://images/icons/settings.png" id="2_r7cml"]
 [ext_resource type="Texture2D" uid="uid://blc6225fj24g1" path="res://images/icons/volume_off.png" id="2_y7yn6"]
+[ext_resource type="Texture2D" uid="uid://c30d2k1hmhmry" path="res://images/icons/logout.png" id="3_1w8ru"]
 
 [node name="ThemeDefaultPreview" type="Control"]
 layout_mode = 3
@@ -27,53 +27,21 @@ text = "LabelBold"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LabelRounded" type="Label" parent="."]
+[node name="LabelHeader" type="Label" parent="."]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 120.0
-theme_type_variation = &"LabelRounded"
-text = "LabelRounded"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelHeader" type="Label" parent="."]
-layout_mode = 0
-offset_top = 120.0
-offset_right = 160.0
-offset_bottom = 160.0
 theme_type_variation = &"LabelHeader"
 text = "LabelHeader"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelScore" type="Label" parent="."]
-layout_mode = 0
-offset_left = 160.0
-offset_right = 320.0
-offset_bottom = 40.0
-theme_type_variation = &"LabelScore"
-text = "LabelScore"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelScoreOutline" type="Label" parent="."]
-layout_mode = 0
-offset_left = 160.0
-offset_top = 40.0
-offset_right = 320.0
-offset_bottom = 80.0
-theme_type_variation = &"LabelScoreOutline"
-text = "LabelScoreOutline"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelSeg" type="Label" parent="."]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 80.0
 offset_right = 320.0
-offset_bottom = 120.0
+offset_bottom = 40.0
 theme_type_variation = &"LabelSeg"
 text = "0123456789"
 horizontal_alignment = 1
@@ -152,35 +120,12 @@ icon = ExtResource("2_y7yn6")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Button_Disabled_Icon" type="Button" parent="."]
+[node name="Button_Icon_Disabled" type="Button" parent="."]
 layout_mode = 0
 offset_left = 520.0
 offset_top = 80.0
 offset_right = 560.0
 offset_bottom = 120.0
-disabled = true
-icon = ExtResource("2_y7yn6")
-icon_alignment = 1
-expand_icon = true
-
-[node name="ButtonGray_Icon" type="Button" parent="."]
-layout_mode = 0
-offset_left = 560.0
-offset_top = 80.0
-offset_right = 600.0
-offset_bottom = 120.0
-theme_type_variation = &"ButtonGray"
-icon = ExtResource("2_y7yn6")
-icon_alignment = 1
-expand_icon = true
-
-[node name="ButtonGray_Disabled_Icon" type="Button" parent="."]
-layout_mode = 0
-offset_left = 600.0
-offset_top = 80.0
-offset_right = 640.0
-offset_bottom = 120.0
-theme_type_variation = &"ButtonGray"
 disabled = true
 icon = ExtResource("2_y7yn6")
 icon_alignment = 1
@@ -192,29 +137,28 @@ offset_left = 640.0
 offset_right = 760.0
 offset_bottom = 120.0
 theme_type_variation = &"ButtonCircle"
-text = "
-
-Exit"
 
 [node name="TextureRect" type="TextureRect" parent="ButtonCircle"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
 layout_mode = 0
 offset_left = 30.0
 offset_top = 20.0
 offset_right = 90.0
 offset_bottom = 80.0
-texture = ExtResource("2_y7yn6")
+texture = ExtResource("3_1w8ru")
 expand_mode = 1
 
-[node name="ButtonFlatIcon" type="Button" parent="."]
+[node name="Label" type="Label" parent="ButtonCircle"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
 layout_mode = 0
-offset_left = 480.0
-offset_top = 120.0
-offset_right = 520.0
-offset_bottom = 160.0
-theme_type_variation = &"ButtonFlatIcon"
-icon = ExtResource("2_r7cml")
-icon_alignment = 1
-expand_icon = true
+offset_top = 70.0
+offset_right = 120.0
+offset_bottom = 110.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 0

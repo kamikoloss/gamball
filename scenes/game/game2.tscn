@@ -70,16 +70,13 @@ z_index = -100
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
 material = SubResource("ShaderMaterial_re584")
-offset_left = -40.0
-offset_top = -40.0
-offset_right = 1320.0
-offset_bottom = 760.0
+offset_right = 1280.0
+offset_bottom = 720.0
 mouse_filter = 2
 
 [node name="ColorRect2" type="ColorRect" parent="Background"]
-offset_left = -40.0
 offset_top = 20.0
-offset_right = 1320.0
+offset_right = 1280.0
 offset_bottom = 200.0
 mouse_filter = 2
 color = Color(0.05, 0.05, 0.05, 1)
@@ -521,10 +518,10 @@ position = Vector2(330, 380)
 position = Vector2(240, 380)
 
 [node name="Nail25" parent="Pachinko/Nails/Bottom2" instance=ExtResource("10_wq884")]
-position = Vector2(40, 380)
+position = Vector2(40, 320)
 
 [node name="Nail26" parent="Pachinko/Nails/Bottom2" instance=ExtResource("10_wq884")]
-position = Vector2(440, 380)
+position = Vector2(440, 320)
 
 [node name="Nail23" parent="Pachinko/Nails/Bottom2" instance=ExtResource("10_wq884")]
 position = Vector2(40, 240)
@@ -2194,6 +2191,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Log" type="Control" parent="UI/Main"]
+visible = false
 anchors_preset = 0
 offset_left = 560.0
 offset_top = 40.0
@@ -2212,15 +2210,14 @@ scroll_following = true
 
 [node name="Buttons" type="Control" parent="UI/Main"]
 anchors_preset = 0
-offset_left = 880.0
+offset_left = 560.0
 offset_top = 40.0
-offset_right = 880.0
+offset_right = 560.0
 offset_bottom = 40.0
 
 [node name="BuyBalls" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_left = -320.0
-offset_right = -280.0
+offset_right = 40.0
 offset_bottom = 40.0
 icon = ExtResource("27_et20a")
 icon_alignment = 1
@@ -2228,8 +2225,8 @@ expand_icon = true
 
 [node name="SellBalls" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_left = -270.0
-offset_right = -230.0
+offset_left = 50.0
+offset_right = 90.0
 offset_bottom = 40.0
 icon = ExtResource("28_fhmm7")
 icon_alignment = 1
@@ -2237,9 +2234,9 @@ expand_icon = true
 
 [node name="Information" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_left = -220.0
-offset_right = -180.0
-offset_bottom = 40.0
+offset_top = 60.0
+offset_right = 40.0
+offset_bottom = 100.0
 theme_type_variation = &"ButtonGray"
 icon = ExtResource("29_k6x4s")
 icon_alignment = 1
@@ -2247,9 +2244,10 @@ expand_icon = true
 
 [node name="Options" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_left = -170.0
-offset_right = -130.0
-offset_bottom = 40.0
+offset_left = 50.0
+offset_top = 60.0
+offset_right = 90.0
+offset_bottom = 100.0
 theme_type_variation = &"ButtonGray"
 icon = ExtResource("21_bilys")
 icon_alignment = 1
@@ -2257,9 +2255,10 @@ expand_icon = true
 
 [node name="Exit" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_left = -120.0
-offset_right = -80.0
-offset_bottom = 40.0
+offset_left = 100.0
+offset_top = 60.0
+offset_right = 140.0
+offset_bottom = 100.0
 theme_type_variation = &"ButtonGray"
 icon = ExtResource("21_5hb3e")
 icon_alignment = 1
@@ -2276,7 +2275,7 @@ layout_mode = 0
 offset_top = 220.0
 offset_right = 1280.0
 offset_bottom = 700.0
-color = Color(0, 0, 0, 1)
+color = Color(0.05, 0.05, 0.05, 1)
 
 [node name="Label" type="Label" parent="UI/Tax"]
 layout_mode = 0
@@ -2765,18 +2764,36 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Pay" type="Button" parent="UI/Tax"]
-layout_mode = 0
-offset_left = 220.0
-offset_top = 520.0
-offset_right = 340.0
-offset_bottom = 640.0
+self_modulate = Color(0.921569, 0.239216, 0, 1)
+offset_left = 380.0
+offset_top = 560.0
+offset_right = 500.0
+offset_bottom = 680.0
 theme_type_variation = &"ButtonCircle"
-text = "
 
-Pay"
+[node name="TextureRect" type="TextureRect" parent="UI/Tax/Pay"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 90.0
+offset_bottom = 80.0
+texture = ExtResource("21_5hb3e")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Tax/Pay"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 0
+offset_top = 70.0
+offset_right = 120.0
+offset_bottom = 110.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "Pay"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Shop" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 
@@ -2786,7 +2803,7 @@ layout_mode = 0
 offset_top = 220.0
 offset_right = 1280.0
 offset_bottom = 700.0
-color = Color(0, 0, 0, 1)
+color = Color(0.05, 0.05, 0.05, 1)
 
 [node name="Label" type="Label" parent="UI/Shop"]
 layout_mode = 0
@@ -2805,45 +2822,65 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="Product" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
-offset_left = 120.0
+offset_left = 60.0
 offset_top = 340.0
-offset_right = 120.0
+offset_right = 60.0
 offset_bottom = 340.0
 
 [node name="Product2" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
-offset_left = 280.0
+offset_left = 220.0
 offset_top = 340.0
-offset_right = 280.0
+offset_right = 220.0
 offset_bottom = 340.0
 
 [node name="Product3" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
-offset_left = 440.0
+offset_left = 380.0
 offset_top = 340.0
-offset_right = 440.0
+offset_right = 380.0
 offset_bottom = 340.0
 
 [node name="Product4" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
-offset_left = 120.0
+offset_left = 60.0
 offset_top = 520.0
-offset_right = 120.0
+offset_right = 60.0
 offset_bottom = 520.0
 
 [node name="Product5" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
-offset_left = 280.0
+offset_left = 220.0
 offset_top = 520.0
-offset_right = 280.0
+offset_right = 220.0
 offset_bottom = 520.0
 
 [node name="Exit" type="Button" parent="UI/Shop"]
+self_modulate = Color(0.921569, 0.239216, 0, 1)
 layout_mode = 0
 offset_left = 380.0
-offset_top = 520.0
+offset_top = 560.0
 offset_right = 500.0
-offset_bottom = 640.0
+offset_bottom = 680.0
 theme_type_variation = &"ButtonCircle"
-text = "
 
-Exit"
+[node name="TextureRect" type="TextureRect" parent="UI/Shop/Exit"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 90.0
+offset_bottom = 80.0
+texture = ExtResource("21_5hb3e")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Shop/Exit"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 0
+offset_top = 70.0
+offset_right = 120.0
+offset_bottom = 110.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="People" type="Control" parent="UI"]
 layout_mode = 3
@@ -2939,6 +2976,7 @@ bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 
 [node name="BallPopup" type="Control" parent="UI"]
+visible = false
 z_index = 4
 anchors_preset = 0
 
@@ -2951,7 +2989,7 @@ offset_bottom = 160.0
 [node name="Level" type="Label" parent="UI/BallPopup"]
 layout_mode = 0
 offset_left = 10.0
-offset_right = 240.0
+offset_right = 230.0
 offset_bottom = 40.0
 theme_type_variation = &"LabelBold"
 theme_override_font_sizes/font_size = 24
@@ -2960,6 +2998,7 @@ vertical_alignment = 1
 
 [node name="Rarity" type="Label" parent="UI/BallPopup"]
 layout_mode = 0
+offset_left = 10.0
 offset_right = 230.0
 offset_bottom = 40.0
 text = "★★★★★"

@@ -1,16 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjd632ntwegwj"]
+[gd_scene load_steps=6 format=3 uid="uid://bjd632ntwegwj"]
 
 [ext_resource type="Script" path="res://scenes/common/bunny.gd" id="1_lr22c"]
 [ext_resource type="Texture2D" uid="uid://cuwiiq1yrw76c" path="res://images/people/bunny/face_1.png" id="2_kbxbx"]
 [ext_resource type="Texture2D" uid="uid://cscmqneywp778" path="res://images/people/bunny/hand_left_1.png" id="5_qlree"]
 [ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/people/bunny/hand_right_1.png" id="7_subrs"]
-[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="8_oo1t5"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/people/bunny/base.png" id="9_yblo7"]
 
 [node name="Bunny" type="Control" node_paths=PackedStringArray("_human", "_base_parts", "_touch_button", "_pose_a", "_pose_a_parts_1", "_pose_a_parts_2", "_pose_a_parts_3", "_pose_a_parts_4", "_pose_b", "_pose_b_parts_1", "_pose_b_parts_2", "_pose_b_parts_3", "_pose_b_parts_4")]
 layout_mode = 3
 anchors_preset = 0
-theme = ExtResource("8_oo1t5")
 script = ExtResource("1_lr22c")
 _human = NodePath("Human")
 _base_parts = NodePath("Human/Base")
