@@ -7,10 +7,9 @@
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="5_kx241"]
 
 [node name="Product" type="Control" node_paths=PackedStringArray("_icon_texture", "_name_label", "_price_label", "_buy_button")]
+custom_minimum_size = Vector2(120, 160)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 120.0
-offset_bottom = 160.0
 theme = ExtResource("5_kx241")
 script = ExtResource("1_as6e1")
 _icon_texture = NodePath("Icon")
@@ -70,9 +69,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="."]
-self_modulate = Color(0.960784, 0.968627, 0.34902, 1)
+visible = false
 layout_mode = 0
 offset_top = 120.0
 offset_right = 120.0
 offset_bottom = 160.0
+mouse_filter = 1
 text = "Buy"

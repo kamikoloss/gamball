@@ -2765,6 +2765,7 @@ vertical_alignment = 1
 
 [node name="Pay" type="Button" parent="UI/Tax"]
 self_modulate = Color(0.921569, 0.239216, 0, 1)
+layout_mode = 0
 offset_left = 380.0
 offset_top = 560.0
 offset_right = 500.0
@@ -2794,6 +2795,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Shop" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 

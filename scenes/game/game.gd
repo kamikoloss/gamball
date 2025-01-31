@@ -173,6 +173,7 @@ func _ready() -> void:
 	# Product
 	for node in _products_parent.get_children():
 		if node is Product:
+			print(node)
 			node.hovered.connect(_on_product_hovered)
 			node.pressed.connect(_on_product_pressed)
 
@@ -417,7 +418,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 
 # 商品をホバーしたときの処理
 func _on_product_hovered(product: Product, hover: bool) -> void:
-	print("[Game] _on_product_hovered(%s, %s)" % [product, hover])
+	#print("[Game] _on_product_hovered(%s, %s)" % [product, hover])
 	if money < product.price:
 		product.disable()
 	else:
@@ -426,7 +427,7 @@ func _on_product_hovered(product: Product, hover: bool) -> void:
 
 # 商品をクリックしたときの処理
 func _on_product_pressed(product: Product) -> void:
-	print("[Game] _on_product_pressed(%s)" % [product])
+	#print("[Game] _on_product_pressed(%s)" % [product])
 	# Money が足りない場合: 何もしない
 	if money < product.price:
 		# TODO: 購入できない理由がいくつかあるときラベルを分ける？

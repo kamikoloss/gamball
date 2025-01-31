@@ -61,14 +61,14 @@ var description: String:
 
 # 購入可能かどうか
 var _enabled: bool = false
-# アイコン画像にカーソルが載っているか
-var _is_icon_hovered: bool = false
+# 現在ホバーしているかどうか
+var _is_hovered: bool = false
 
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-	_buy_button.pressed.connect(_on_buy_button_pressed)
+	_buy_button.pressed.connect(func(): pressed.emit(self))
 
 	refresh_view()
 
@@ -98,27 +98,21 @@ func refresh_view() -> void:
 	_price_label.text = "＄%s" % str(price)
 
 	# 購入ボタン
-	_buy_button.visible = _is_icon_hovered
+	_buy_button.visible = _is_hovered
 	if _enabled:
-		_buy_button.self_modulate = ColorPalette.SUCCESS
+		_buy_button.self_modulate = ColorPalette.PRIMARY
 		_buy_button.text = "Buy"
 	else:
-		_buy_button.self_modulate = ColorPalette.DANGER
+		_buy_button.self_modulate = ColorPalette.GRAY_40
 		_buy_button.text = "----"
 
 
 func _on_mouse_entered() -> void:
-	_is_icon_hovered = true
+	_is_hovered = true
 	refresh_view()
-	hovered.emit(self, _is_icon_hovered)
+	hovered.emit(self, _is_hovered)
 
 func _on_mouse_exited() -> void:
-	_is_icon_hovered = false
+	_is_hovered = false
 	refresh_view()
-	hovered.emit(self, _is_icon_hovered)
-
-
-func _on_buy_button_pressed(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			pressed.emit(self)
+	hovered.emit(self, _is_hovered)
