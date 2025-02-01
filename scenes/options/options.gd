@@ -58,6 +58,12 @@ func _on_window_mode_selector_changed(mode: VideoManager.WindowMode) -> void:
 	SaveManager.video_config.window_mode = mode
 	VideoManager.set_window_mode(mode)
 
+	# WindowMode をフルスクリーンにしたとき WindowSize は変更不可にする
+	if mode == VideoManager.WindowMode.FULLSCREEN:
+		_window_size_selector.disable()
+	else:
+		_window_size_selector.enable()
+
 
 func _on_window_size_selector_changed(size: VideoManager.WindowSize) -> void:
 	SaveManager.video_config.window_size = size
