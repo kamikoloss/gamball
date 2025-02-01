@@ -12,17 +12,20 @@ signal changed # (option_key)
 @export var _points_parent: Control
 
 
+var disabled: bool = false:
+	set(v):
+		_left_button.disabled = v
+		_right_button.disabled = v
+		_refresh_view()
 var value:
 	set(v):
 		value = v
 		_selected_option_index = options.keys().find(value)
 		_refresh_view()
-var options: Dictionary = {}:
-	set(v):
-		options = v
+
+var options: Dictionary = {}
 
 
-var _is_enabled = true
 var _selected_option_index: int = 0
 
 
@@ -34,21 +37,6 @@ func _ready() -> void:
 	_right_button.pressed.connect(func(): _shift_option(1))
 
 	_selected_option_index = options.keys().find(value)
-	enable()
-	_refresh_view()
-
-
-func enable() -> void:
-	_is_enabled = true
-	_left_button.disabled = not _is_enabled
-	_right_button.disabled = not _is_enabled
-	_refresh_view()
-
-
-func disable() -> void:
-	_is_enabled = false
-	_left_button.disabled = not _is_enabled
-	_right_button.disabled = not _is_enabled
 	_refresh_view()
 
 
@@ -72,10 +60,10 @@ func _refresh_view() -> void:
 		point_index += 1
 
 	# disabled
-	if _is_enabled:
-		_value_label.self_modulate = ColorPalette.WHITE
-	else:
+	if disabled:
 		_value_label.self_modulate = ColorPalette.GRAY_60
+	else:
+		_value_label.self_modulate = ColorPalette.WHITE
 
 
 func _shift_option(shift: int) -> void:
