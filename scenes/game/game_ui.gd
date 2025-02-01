@@ -2,7 +2,7 @@ class_name GameUi
 extends Control
 
 
-enum TweenType { TAX, SHOP, PEOPLE, DIALOGUE, COUNT_DOWN }
+enum TweenType { TAX, SHOP, BUNNY, DIALOGUE, COUNT_DOWN }
 
 
 # Signal
@@ -22,13 +22,23 @@ const WINDOW_POSITION_RIGHT_TO := Vector2(720, 0)
 const WINDOW_POSITION_TO := Vector2(0, 0)
 const WINDOW_MOVE_DURATION := 1.0
 
+# Bunny 移動系
+const BUNNY_POSITION_SMALL_IN := Vector2(1160, 0)
+const BUNNY_POSITION_SMALL_OUT := Vector2(1920, 0)
+const BUNNY_POSITION_LARGE_OUT := Vector2(1920, -240)
+const BUNNY_POSITION_LARGE_IN := Vector2(960, -240)
+const BUNNY_MOVE_DURATION := 1.0
+
+# BallPopup を表示するオブジェクトからの位置
 const BALL_POPUP_POSITION_DIFF := Vector2(0, 40)
 
 # セリフのフェードの秒数
-const DIALOGUE_FADE_DURATION := 0.2
-
+const DIALOGUE_FADE_DURATION := 0.4
+# ログの最大行数
 const LOG_LINES_MAX := 100
 
+
+@export var _log_label: RichTextLabel
 
 @export_category("Scenes")
 @export var _popup_score_scene: PackedScene
@@ -40,11 +50,6 @@ const LOG_LINES_MAX := 100
 @export var _ball_popup_level: Label
 @export var _ball_popup_rarity: Label
 @export var _ball_popup_description: RichTextLabel
-@export_category("Main/Buttons")
-@export var _buy_balls_button: Button
-@export var _sell_balls_button: Button
-@export var _info_button: Button
-@export var _options_button: Button
 @export_category("Main/Score")
 @export var _turn_label: Label
 @export var _next_turn_label: Label
@@ -52,7 +57,17 @@ const LOG_LINES_MAX := 100
 @export var _next_money_label: Label
 @export var _balls_label: Label
 @export var _next_balls_label: Label
-@export var _log_label: RichTextLabel
+@export_category("Main/Buttons")
+@export var _buy_balls_button: Button
+@export var _sell_balls_button: Button
+@export var _info_button: Button
+@export var _options_button: Button
+@export_category("Main/Bunny+")
+@export var _bunny: Bunny
+@export var _bubble_top: Control
+@export var _dialogue_top: RichTextLabel
+@export var _bubble_bottom: Control
+@export var _dialogue_bottom: RichTextLabel
 
 @export_category("Tax")
 @export var _tax_window: Control
@@ -63,14 +78,9 @@ const LOG_LINES_MAX := 100
 @export var _shop_window: Control
 @export var _shop_exit_button: Button
 
-@export_category("People")
-@export var _people_window: Control
-@export var _bunny: Bunny
-@export var _bubble_top: Control
-@export var _dialogue_top: RichTextLabel
-@export var _bubble_bottom: Control
-@export var _dialogue_bottom: RichTextLabel
 
+var _target_bubble: Control
+var _target_dialogue: RichTextLabel
 
 var _log_lines: Array[String] = []
 var _tweens := {}
@@ -95,9 +105,12 @@ func _ready() -> void:
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
 	# Shop
 	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
-	# People
+	# Bunny+
 	_bunny.pressed.connect(func(): _on_bunny_pressed())
 	set_dialogue("...")
+	_bubble_bottom.modulate = Color.TRANSPARENT
+	_target_bubble = _bubble_top
+	_target_dialogue = _dialogue_top
 
 
 func show_tax_window() -> void:
@@ -126,20 +139,7 @@ func hide_shop_window() -> void:
 	tween.tween_property(_shop_window, "position", WINDOW_POSITION_BOTTOM_TO, WINDOW_MOVE_DURATION)
 
 
-func show_people_window() -> void:
-	_people_window.visible = true
-	_people_window.position = WINDOW_POSITION_RIGHT_FROM
-	var tween = _get_tween(TweenType.PEOPLE)
-	tween.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(_people_window, "position", WINDOW_POSITION_TO, WINDOW_MOVE_DURATION)
-
-func hide_people_window() -> void:
-	var tween = _get_tween(TweenType.PEOPLE)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(_people_window, "position", WINDOW_POSITION_RIGHT_TO, WINDOW_MOVE_DURATION)
-
-
-#Main/BallsSlotXxxx
+#Main/Balls
 func refresh_deck_balls(deck_ball_list: Array[Ball], min: int, max: int) -> void:
 	_refresh_balls(_deck_balls_parent, deck_ball_list, min, max)
 
@@ -175,7 +175,6 @@ func refresh_next(turn: int, type: Game.TaxType, amount: int) -> void:
 func _get_seg_text(value: int) -> String:
 	return ("%4d" % value).replace(" ", "!")
 
-
 func refresh_next_clear() -> void:
 	_next_turn_label.text = "----"
 	_next_money_label.text = "----"
@@ -189,6 +188,89 @@ func add_log(text: String) -> void:
 
 	_log_label.clear()
 	_log_label.text = "\n".join(_log_lines)
+
+# Main/Score
+# NOTE: Bunny ではなく GameUI 側が持っていることに注意する
+func set_dialogue(dialogue: String) -> void:
+	_bunny.shuffle_pose()
+
+	var tween = _get_tween(TweenType.DIALOGUE)
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_target_bubble, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION / 2) # 表示を消す
+	tween.chain()
+	tween.tween_callback(func(): _target_dialogue.text = dialogue) # セリフを変える
+	tween.tween_property(_target_bubble, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION) # 表示を戻す
+
+
+# 画面外に出て大きくなって戻ってくる
+func move_bunny_large() -> void:
+	_bubble_top.modulate = Color.WHITE
+	_bubble_bottom.modulate = Color.TRANSPARENT
+	_target_bubble = _bubble_bottom
+	_target_dialogue = _dialogue_bottom
+
+	var tween = _get_tween(TweenType.BUNNY)
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(_bunny, "position", BUNNY_POSITION_SMALL_OUT, BUNNY_MOVE_DURATION)
+	tween.tween_property(_bubble_top, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION)
+	tween.chain()
+	tween.tween_callback(func(): _bunny.size_type = Bunny.SizeType.LARGE)
+	tween.tween_callback(func(): _bunny.position = BUNNY_POSITION_LARGE_OUT)
+	#tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.chain()
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_bunny, "position", BUNNY_POSITION_LARGE_IN, BUNNY_MOVE_DURATION)
+	tween.tween_property(_bubble_bottom, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION)
+
+	await tween.finished
+
+# 画面外に出て小さくなって戻ってくる
+func move_bunny_small() -> void:
+	_bubble_top.modulate = Color.TRANSPARENT
+	_bubble_bottom.modulate = Color.WHITE
+	_target_bubble = _bubble_top
+	_target_dialogue = _dialogue_top
+
+	var tween = _get_tween(TweenType.BUNNY)
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(_bunny, "position", BUNNY_POSITION_LARGE_OUT, BUNNY_MOVE_DURATION)
+	tween.tween_property(_bubble_bottom, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION)
+	tween.chain()
+	tween.tween_callback(func(): _bunny.size_type = Bunny.SizeType.SMALL)
+	tween.tween_callback(func(): _bunny.position = BUNNY_POSITION_SMALL_OUT)
+	#tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.chain()
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_bunny, "position", BUNNY_POSITION_SMALL_IN, BUNNY_MOVE_DURATION)
+	tween.tween_property(_bubble_top, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION)
+
+	await tween.finished
+
+
+func count_down() -> void:
+	_bunny.disable_touch() # バニーのタッチを無効にする
+	set_dialogue("[font_size=32][color=DARK_RED]延長[/color]のお時間\nで～す[/font_size]")
+
+	var tween = _get_tween(TweenType.COUNT_DOWN)
+	tween.tween_interval(2.0)
+	tween.tween_callback(func(): set_dialogue("[font_size=32]さ～～ん[/font_size]"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): set_dialogue("[font_size=32]に～～い[/font_size]"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): set_dialogue("[font_size=32]い～～ち[/font_size]"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.tween_interval(1.0)
+	# Tax Window を表示する
+	tween.tween_callback(func(): set_dialogue("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
+	tween.tween_callback(func(): _bunny.shuffle_pose())
+	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す
+
+	await tween.finished
 
 
 func popup_score(from: Vector2, text: String, color: Color = Color.WHITE, ratio: float = 1.0) -> void:
@@ -275,22 +357,6 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 
 
 func _on_bunny_pressed() -> void:
-	shuffle_dialogue()
-	_bunny.shuffle_pose()
-
-
-# NOTE: Bunny ではなく GameUI 側が持っていることに注意する
-func set_dialogue(dialogue: String) -> void:
-	var tween = _get_tween(TweenType.DIALOGUE)
-	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_dialogue_top, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION / 2) # 表示を消す
-	tween.chain()
-	tween.tween_callback(func(): _dialogue_top.text = dialogue) # セリフを変える
-	tween.tween_property(_dialogue_top, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION) # 表示を戻す
-
-
-func shuffle_dialogue() -> void:
 	# セリフをランダムに変更する
 	# TODO: JSON に逃がす
 	var dialogue_list = [
@@ -300,29 +366,6 @@ func shuffle_dialogue() -> void:
 		"ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～",
 	]
 	set_dialogue(dialogue_list.pick_random())
-
-
-func count_down() -> void:
-	_bunny.disable_touch() # バニーのタッチを無効にする
-	set_dialogue("[font_size=32][color=DARK_RED]延長[/color]のお時間で～す[/font_size]")
-
-	var tween = _get_tween(TweenType.COUNT_DOWN)
-	tween.tween_interval(2.0)
-	tween.tween_callback(func(): set_dialogue("[font_size=32]さ～～ん[/font_size]"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
-	tween.tween_interval(1.0)
-	tween.tween_callback(func(): set_dialogue("[font_size=32]に～～い[/font_size]"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
-	tween.tween_interval(1.0)
-	tween.tween_callback(func(): set_dialogue("[font_size=32]い～～ち[/font_size]"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
-	tween.tween_interval(1.0)
-	# Tax Window を表示する
-	tween.tween_callback(func(): set_dialogue("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
-	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す
-
-	await tween.finished
 
 
 func _get_tween(type: TweenType) -> Tween:

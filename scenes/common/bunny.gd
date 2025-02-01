@@ -8,23 +8,23 @@ signal pressed
 
 
 enum TweenType { POSE }
+enum SizeType { SMALL, LARGE }
 
 
 # A/B のフェードの秒数
 const POSE_CHANGE_DURATION := 0.0
-# 跳ねるときの上昇時の秒数
+# 跳ねるときの 上昇/下降 時の秒数
 const POSE_MOVE_DURATION_UP := 0.1
-# 跳ねるときの下降時の秒数
 const POSE_MOVE_DURATION_DOWN := 0.3
-# どれぐらい跳ねるか
+# 跳ねるときの最高座標の相対位置
 const POSE_MOVE_POSITION_DIFF := Vector2(0, -20)
 
 
-@export var _human: Control
-@export var _base_parts: TextureRect
 @export var _touch_button: TextureButton
 
 @export_category("Human")
+@export var _human: Control
+@export var _base_parts: TextureRect
 @export var _pose_a: Control
 @export var _pose_a_parts_1: TextureRect
 @export var _pose_a_parts_2: TextureRect
@@ -44,6 +44,16 @@ const POSE_MOVE_POSITION_DIFF := Vector2(0, -20)
 @export var _parts_4_textures: Array[Texture]
 
 
+var size_type := SizeType.SMALL:
+	set(v):
+		size_type = v
+		match size_type:
+			SizeType.SMALL:
+				_human.scale = Vector2(0.6, 0.6)
+			SizeType.LARGE:
+				_human.scale = Vector2(1.0, 1.0)
+
+
 # 現在どちらのポーズ表示を使用しているか 交互に切り替える
 var _is_human_pose_a := true
 
@@ -51,7 +61,6 @@ var _is_human_pose_a := true
 var _human_move_position_from: Vector2
 var _human_move_position_to: Vector2
 
-# { TweenType: Tween, ... } 
 var _tweens := {}
 
 

@@ -44,9 +44,9 @@ var _main_functions: Dictionary = {
 	"hide_tax_window": func(): _game_ui.hide_tax_window(),
 	"show_shop_window": func(): _game_ui.show_shop_window(),
 	"hide_shop_window": func(): _game_ui.hide_shop_window(),
-	"show_people_window": func(): _game_ui.show_people_window(),
-	"hide_people_window": func(): _game_ui.hide_people_window(),
 	"refresh_dialogue_label": func(): _game_ui.set_dialogue(_sample_dialogue_list.pick_random()),
+	"move_bunny_large": func(): _game_ui.move_bunny_large(),
+	"move_bunny_small": func(): _game_ui.move_bunny_small(),
 	"shuffle_pose": func(): _bunny.shuffle_pose(),
 }
 # { <ボタン文字列: string>: <ボタン処理: Callable>, ... } 

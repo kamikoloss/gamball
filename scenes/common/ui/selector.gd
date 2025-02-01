@@ -19,9 +19,10 @@ var disabled := false:
 		_refresh_view()
 var value:
 	set(v):
+		var is_changed = value != v
 		value = v
 		_refresh_view()
-		if value != v:
+		if is_changed:
 			changed.emit(value)
 
 # 設定項目 { "<Value>": <ラベル文字列>, ... } 

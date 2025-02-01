@@ -43,7 +43,7 @@ var _rush_probability_bottom := 24
 # ラッシュ初当たり抽選確率の分子のリスト
 var _rush_start_probability_top: Array[int] = [0, 12]
 # ラッシュ継続抽選確率の分子のリスト
-var _rush_continue_probability_top: Array[int] = range(12) # [0, 1, ..., 11]
+var _rush_continue_probability_top: Array = range(12) # [0, 1, ..., 11]
 # 最後に抽選した分子 (ランプの位置)
 var _rush_last_hit_number := -1
 

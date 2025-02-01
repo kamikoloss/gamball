@@ -78,24 +78,24 @@ const EXTRA_BALL_LEVEL_RARITY := {
 @export var _products_parent: Control
 
 
-# ゲームの状態
-var game_state := GameState.GAME
-
 var turn := 0:
-	set(value):
-		turn = value
-		_game_ui.refresh_turn_label(value)
+	set(v):
+		turn = v
+		_game_ui.refresh_turn_label(turn)
 var money := 0:
-	set(value):
-		money = value
-		_game_ui.refresh_money_label(value)
+	set(v):
+		money = v
+		_game_ui.refresh_money_label(money)
 var balls := 0:
-	set(value):
-		balls = value
-		_game_ui.refresh_balls_label(value)
+	set(v):
+		balls = v
+		_game_ui.refresh_balls_label(balls)
 		# ボールがない場合: DragShoter を無効化する
 		# TODO: バグる
 		_drag_shooter.enabled = 0 < balls
+
+# ゲームの状態
+var game_state := GameState.GAME
 
 
 # ビリヤード盤面上の Ball の数
@@ -427,7 +427,6 @@ func _on_product_pressed(product: Product) -> void:
 	# Money が足りない場合: 何もしない
 	if money < product.price:
 		# TODO: 購入できない理由がいくつかあるときラベルを分ける？
-		_game_ui.shuffle_bunny_pose()
 		_game_ui.set_dialogue("お金が足りないよ～")
 		return
 
@@ -680,7 +679,7 @@ func _go_to_next_turn() -> void:
 func _start_tax_count_down() -> void:
 	game_state = GameState.COUNT_DOWN
 
-	_game_ui.show_people_window()
+	_game_ui.move_bunny_large()
 	await _game_ui.count_down()
 	_game_ui.show_tax_window()
 
