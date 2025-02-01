@@ -41,7 +41,7 @@ const GRAVITY_SCALE_STEP: float = 0.25
 
 
 # 有効かどうか
-var disabled := true:
+var disabled := false:
 	set(v):
 		disabled = v
 		_refresh_view()

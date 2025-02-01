@@ -268,7 +268,7 @@ func _on_options_button_pressed() -> void:
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
 	# Hole が無効の場合: 何もしない (通り抜ける)
-	if not hole.is_enabled:
+	if hole.disabled:
 		return
 	# Ball が縮小中の場合: 何もしない (通り抜ける)
 	if ball.is_shrinked:
