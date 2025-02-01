@@ -13,22 +13,22 @@ enum TweenType { PAYOUT, TAX_COUNT_DOWN }
 
 
 # Ball を発射する強さ
-const IMPULSE_RATIO: float = 16
+const IMPULSE_RATIO : = 16.0
 # 何秒ごとに 1 Ball を払い出すか
-const PAYOUT_INTERVAL_BASE: float = 0.1
+const PAYOUT_INTERVAL_BASE := 0.1
 
 # DECK の 最小数/最大数 の 絶対値/初期値
-const DECK_SIZE_MIN: int = 2
-const DECK_SIZE_MIN_DEFAULT: int = 5
-const DECK_SIZE_MAX: int = 9
+const DECK_SIZE_MIN := 2
+const DECK_SIZE_MIN_DEFAULT = 5
+const DECK_SIZE_MAX := 9
 # EXTRA の 最小数/最大数の 絶対値/初期値
-const EXTRA_SIZE_MIN: int = 0
-const EXTRA_SIZE_MAX: int = 9
-const EXTRA_SIZE_MAX_DEFAULT: int = 5
+const EXTRA_SIZE_MIN := 0
+const EXTRA_SIZE_MAX := 9
+const EXTRA_SIZE_MAX_DEFAULT := 5
 
 # Tax (ノルマ) のリスト
 # [ <turn>, TaxType, <amount> ]
-const TAX_LIST = [
+const TAX_LIST := [
 	[25, TaxType.BALLS, 50],	# Balls 50
 	[50, TaxType.BALLS, 100],	# Balls 100
 	[75, TaxType.MONEY, 400],	# Balls 200
@@ -40,7 +40,7 @@ const TAX_LIST = [
 ]
 
 # レア度の分子の割合
-const RAIRTY_WEIGHT = {
+const RAIRTY_WEIGHT := {
 	Ball.Rarity.COMMON: 50,
 	Ball.Rarity.UNCOMMON: 40,
 	Ball.Rarity.RARE: 30,
@@ -48,14 +48,14 @@ const RAIRTY_WEIGHT = {
 	Ball.Rarity.LEGENDARY: 10,
 }
 # DECK Ball のレア度ごとの LV
-const DECK_BALL_LEVEL_RARITY = {
+const DECK_BALL_LEVEL_RARITY := {
 	Ball.Rarity.UNCOMMON: [0, 1, 2, 3],
 	Ball.Rarity.RARE: [4, 5, 6, 7],
 	Ball.Rarity.EPIC: [8, 9, 10, 11],
 	Ball.Rarity.LEGENDARY: [12, 13, 14, 15],
 }
 # EXTRA Ball のレア度ごとの LV
-const EXTRA_BALL_LEVEL_RARITY = {
+const EXTRA_BALL_LEVEL_RARITY := {
 	Ball.Rarity.UNCOMMON: [6, 7, 8, 9],
 	Ball.Rarity.RARE: [2, 3, 12, 13],
 	Ball.Rarity.EPIC: [4, 5, 10, 11],
@@ -79,17 +79,17 @@ const EXTRA_BALL_LEVEL_RARITY = {
 
 
 # ゲームの状態
-var game_state: GameState = GameState.GAME
+var game_state := GameState.GAME
 
-var turn: int = 0:
+var turn := 0:
 	set(value):
 		turn = value
 		_game_ui.refresh_turn_label(value)
-var money: int = 0:
+var money := 0:
 	set(value):
 		money = value
 		_game_ui.refresh_money_label(value)
-var balls: int = 0:
+var balls := 0:
 	set(value):
 		balls = value
 		_game_ui.refresh_balls_label(value)
@@ -97,17 +97,17 @@ var balls: int = 0:
 		# TODO: バグる
 		_drag_shooter.enabled = 0 < balls
 
+
 # ビリヤード盤面上の Ball の数
-var billiards_balls: int = 0:
+var _billiards_balls_count := 0:
 	get:
 		return _balls_parent.get_children().filter(func(ball: Ball): return ball.is_on_billiards).size()
 
-
 # 次に訪れる TAX_LIST の index
-var _next_tax_index: int = 0
+var _next_tax_index := 0
 # TAX (MONEY/BALLS) の割引後のレート
-var _tax_money_rate: float = 0.0
-var _tax_balls_rate: float = 0.0
+var _tax_money_rate := 0.0
+var _tax_balls_rate := 0.0
 
 # 出現する Deck Ball のリストの初期値
 var _deck_ball_list: Array[Ball] = [
@@ -124,10 +124,10 @@ var _extra_ball_list: Array[Ball] = [
 	Ball.new(3, Ball.Rarity.UNCOMMON),
 ]
 # DECK/EXTRA の 最小/最大 数
-var _deck_size_min: int = DECK_SIZE_MIN_DEFAULT
-var _deck_size_max: int = DECK_SIZE_MAX
-var _extra_size_min: int = EXTRA_SIZE_MIN
-var _extra_size_max: int = EXTRA_SIZE_MAX_DEFAULT
+var _deck_size_min := DECK_SIZE_MIN_DEFAULT
+var _deck_size_max := DECK_SIZE_MAX
+var _extra_size_min := EXTRA_SIZE_MIN
+var _extra_size_max := EXTRA_SIZE_MAX_DEFAULT
 
 # 払い出しを行う Hole
 var _payout_hole: Hole
@@ -142,7 +142,7 @@ var _buy_rate: Array[int] = [100, 25]
 var _sell_rate: Array[int] = [50, 100]
 
 # { TweenType: Tween, ... } 
-var _tweens: Dictionary = {}
+var _tweens := {}
 
 
 func _ready() -> void:
@@ -182,7 +182,7 @@ func _ready() -> void:
 	_apply_extra_ball_effects()
 	_refresh_deck_extra()
 	_refresh_next()
-	_billiards.refresh_balls_count(billiards_balls)
+	_billiards.refresh_balls_count(_billiards_balls_count)
 
 	# ボール購入ボタンを1プッシュする
 	_on_buy_balls_button_pressed()
@@ -203,7 +203,7 @@ func _on_drag_shooter_pressed() -> void:
 
 func _on_drag_shooter_released(drag_vector: Vector2) -> void:
 	_billiards.shoot_ball(drag_vector * IMPULSE_RATIO)
-	_billiards.refresh_balls_count(billiards_balls)
+	_billiards.refresh_balls_count(_billiards_balls_count)
 
 func _on_drag_shooter_canceled() -> void:
 	# Ball 生成をなかったことにする
@@ -283,7 +283,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# Ball が有効化されていない場合: 消す
 			if not ball.is_active:
 				await ball.die()
-				_billiards.refresh_balls_count(billiards_balls)
+				_billiards.refresh_balls_count(_billiards_balls_count)
 				return
 			# ex: [EffectType.MONEY_UP_ON_FALL, 10]
 			for effect_data in ball.effects:
@@ -332,11 +332,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			var gain_times: int = 1 # Gain が何倍になるか
 			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP, 50, 1]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
-				if billiards_balls <= effect_data[1]:
+				if _billiards_balls_count <= effect_data[1]:
 					gain_plus += effect_data[2]
 			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP_2, 5, 2]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
-				if billiards_balls <= effect_data[1]:
+				if _billiards_balls_count <= effect_data[1]:
 					gain_times += effect_data[2]
 			# ex: [EffectType.DECK_COMPLETE_GAIN_UP, 3, 2]
 			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_COMPLETE_GAIN_UP):
@@ -399,7 +399,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 
 		Hole.HoleType.LOST:
 			await ball.die()
-			_billiards.refresh_balls_count(billiards_balls)
+			_billiards.refresh_balls_count(_billiards_balls_count)
 
 		Hole.HoleType.STACK:
 			if ball.is_stacked:
@@ -412,7 +412,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	if not hole.hole_type in not_die_types:
 		await ball.die()
 
-	_billiards.refresh_balls_count(billiards_balls)
+	_billiards.refresh_balls_count(_billiards_balls_count)
 
 
 # 商品をホバーしたときの処理
@@ -566,7 +566,7 @@ func _create_new_ball(level: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, 
 	ball.rarity = rarity
 	ball.is_active = is_active
 	_balls_parent.add_child(ball)
-	_billiards.refresh_balls_count(billiards_balls)
+	_billiards.refresh_balls_count(_billiards_balls_count)
 	return ball
 
 

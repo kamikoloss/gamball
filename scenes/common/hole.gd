@@ -20,18 +20,19 @@ enum WarpGroup { NONE, PAYOUT, A, B, C, D }
 # Tween
 enum TweenType { FLASH }
 
-const HOLE_SIZE_LEVEL_MAX: int = 4
-const GRAVITY_SIZE_LEVEL_MAX: int = 4
-const HOLE_SCALE_STEP: float = 0.25
-const GRAVITY_SCALE_STEP: float = 0.25
+
+const HOLE_SIZE_LEVEL_MAX := 4
+const GRAVITY_SIZE_LEVEL_MAX := 4
+const HOLE_SCALE_STEP := 0.25
+const GRAVITY_SCALE_STEP := 0.25
 
 
 # Hole の種類
-@export var hole_type: HoleType = HoleType.LOST
+@export var hole_type := HoleType.LOST
 # (HoleType.GAIN 用) 増加する倍率
-@export var gain_ratio: int = 0
+@export var gain_ratio := 0
 # (HoleType.WARP_XXXX 用) ワープが通じるグループ
-@export var warp_group: WarpGroup = WarpGroup.NONE
+@export var warp_group := WarpGroup.NONE
 
 
 @export var _gravity_area: Area2D
@@ -51,7 +52,7 @@ var disabled := false:
 var _hole_scale_base: Vector2
 var _gravity_scale_base: Vector2
 var _body_color_base: Color
-var _tweens: Dictionary = {}
+var _tweens := {}
 
 
 func _ready() -> void:
@@ -67,13 +68,13 @@ func _ready() -> void:
 
 func set_hole_size(level: int = 0) -> void:
 	var clamped_level = clampi(level, 0, HOLE_SIZE_LEVEL_MAX)
-	var ratio: float = 1.0 + HOLE_SCALE_STEP * clamped_level
+	var ratio = 1.0 + HOLE_SCALE_STEP * clamped_level
 	self.scale = _hole_scale_base * ratio
 
 
 func set_gravity_size(level: int = 0) -> void:
 	var clamped_level = clampi(level, 0, GRAVITY_SIZE_LEVEL_MAX)
-	var ratio: float = 1.0 + GRAVITY_SCALE_STEP * clamped_level
+	var ratio = 1.0 + GRAVITY_SCALE_STEP * clamped_level
 	_gravity_area.scale = _gravity_scale_base * ratio
 	_gravity_texture.scale = _gravity_scale_base * ratio
 

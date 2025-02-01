@@ -2,10 +2,10 @@
 extends Node
 
 
-const CONFIG_FILE_PATH = "user://config"
-const CONFIG_KEY_GAME = "game"
-const CONFIG_KEY_VIDEO = "video"
-const CONFIG_KEY_AUDIO = "audio"
+const CONFIG_FILE_PATH := "user://config"
+const CONFIG_KEY_GAME := "game"
+const CONFIG_KEY_VIDEO := "video"
+const CONFIG_KEY_AUDIO := "audio"
 
 
 var game_config: GameConfig

@@ -11,10 +11,10 @@ signal exit_button_pressed
 enum TweenType { BUTTON, BUNNY }
 
 
-const BUTTON_MOVE_DURATION: float = 0.4
-const BUTTON_MOVE_DIFF: Vector2 = Vector2(640, 0)
-const BUNNY_MOVE_DURATION: float = 4.0
-const BUNNY_MOVE_DIFF: Vector2 = Vector2(0, 320)
+const BUTTON_MOVE_DURATION := 0.4
+const BUTTON_MOVE_DIFF := Vector2(640, 0)
+const BUNNY_MOVE_DURATION := 4.0
+const BUNNY_MOVE_DIFF := Vector2(0, 320)
 
 
 @export var _play_button: TitleButton
@@ -25,7 +25,7 @@ const BUNNY_MOVE_DIFF: Vector2 = Vector2(0, 320)
 @export var _bunny_texture: TextureRect
 
 
-var _tweens: Dictionary = {}
+var _tweens := {}
 
 
 func _ready() -> void:

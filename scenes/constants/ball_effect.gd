@@ -29,7 +29,7 @@ enum EffectType {
 
 # TODO: 居場所はここではない？
 # TODO: Rarity って言葉が変？
-const RARITY_TEXT = {
+const RARITY_TEXT := {
 	Ball.Rarity.COMMON: 	"★",
 	Ball.Rarity.UNCOMMON:	"★★",
 	Ball.Rarity.RARE:		"★★★",
@@ -38,7 +38,7 @@ const RARITY_TEXT = {
 }
 
 # 効果の説明文
-const EFFECT_DESCRIPTIONS = {
+const EFFECT_DESCRIPTIONS := {
 	EffectType.NONE: "",
 	EffectType.BILLIARDS_COUNT_GAIN_UP: "ビリヤード上のボールが {a} 個以下のとき Gain +{b}",
 	EffectType.BILLIARDS_COUNT_GAIN_UP_2: "ビリヤード上のボールが {a} 個以下のとき Gain x{b}",
@@ -66,7 +66,7 @@ const EFFECT_DESCRIPTIONS = {
 # Ball LV/Rarity ごとの初期効果
 # { <Ball LV>: { <Ball Rarity>: [ <EffectType>, param1, (param2) ], ... } }
 # TODO: 表っぽいデータなので Google Sheets とかに外出しする？
-const EFFECTS_POOL_1 = {
+const EFFECTS_POOL_1 := {
 	0: {
 		Ball.Rarity.UNCOMMON:	[EffectType.MONEY_UP_ON_BREAK, 2],
 		Ball.Rarity.RARE:		[EffectType.MONEY_UP_ON_BREAK, 3],
@@ -164,8 +164,9 @@ const EFFECTS_POOL_1 = {
 		Ball.Rarity.LEGENDARY:	[EffectType.RARITY_TOP_DOWN, Ball.Rarity.COMMON],
 	},
 }
-const EFFECTS_POOL_2 = {
+const EFFECTS_POOL_2 := {
 }
+
 
 # 効果の説明文 (RichTextLabel 用) を取得する
 static func get_effect_description(level: int, rarity: Ball.Rarity) -> String:

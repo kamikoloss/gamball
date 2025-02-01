@@ -6,21 +6,21 @@ enum WindowMode { WINDOW, FULLSCREEN }
 enum WindowSize { W1280, W1920, W2560 }
 
 
-const WINDOW_MODE = {
+const WINDOW_MODE := {
 	WindowMode.WINDOW: DisplayServer.WindowMode.WINDOW_MODE_WINDOWED,
 	WindowMode.FULLSCREEN: DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN,
 }
-const WINDOW_SIZE = {
+const WINDOW_SIZE := {
 	WindowSize.W1280: [1280, 720],
 	WindowSize.W1920: [1920, 1080],
 	WindowSize.W2560: [2560, 1440],
 }
 
-const WINDOW_MODE_LABELS = {
+const WINDOW_MODE_LABELS := {
 	WindowMode.WINDOW: "Window",
 	WindowMode.FULLSCREEN: "Fullscreen",
 }
-const WINDOW_SIZE_LABELS = {
+const WINDOW_SIZE_LABELS := {
 	WindowSize.W1280: "1280 x 720",
 	WindowSize.W1920: "1920 x 1080",
 	WindowSize.W2560: "2560 x 1440",

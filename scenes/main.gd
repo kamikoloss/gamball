@@ -1,6 +1,6 @@
+# ゲーム起動時に最初に呼ばれるシーン
 class_name Main
 extends Node
-# ゲーム起動時に最初に呼ばれるシーン
 
 
 # ゲーム起動時にだけ必要な Singletons の初期化処理はここで実行する

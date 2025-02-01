@@ -13,7 +13,6 @@ signal exit_button_pressed
 
 
 func _ready() -> void:
-	# Signal
 	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
 
 	_init_display_balls()

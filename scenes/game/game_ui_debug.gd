@@ -2,7 +2,7 @@ class_name GameUiDebug
 extends Control
 
 
-@export var _enable: bool = false
+@export var _enable := false
 
 @export_category("Nodes")
 @export var _game: Game

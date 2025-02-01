@@ -3,22 +3,20 @@ extends Control
 # TODO: Manager に管理させる
 
 
-const MOVE_SPEED_FROM: float = 320.0 # 初速度 (px/s)
-const MOVE_SPEED_TO: float = 40.0 # 終端速度 (px/s)
-const PHASE_1_DURATION: float = 0.4 # 飛び上がって減速していく秒数
-const PHASE_2_DURATION: float = 0.8 # 等速で移動する秒数
-const PHASE_3_DURATION: float = 0.4 # 等速で消えていく秒数
+const MOVE_SPEED_FROM := 320.0 # 初速度 (px/s)
+const MOVE_SPEED_TO := 40.0 # 終端速度 (px/s)
+const PHASE_1_DURATION := 0.4 # 飛び上がって減速していく秒数
+const PHASE_2_DURATION := 0.8 # 等速で移動する秒数
+const PHASE_3_DURATION := 0.4 # 等速で消えていく秒数
 
-const FONT_SIZE_BASE: int = 32
-const OUTLINE_SIZE_BASE: int = 8
+const FONT_SIZE_BASE := 32
+const OUTLINE_SIZE_BASE := 8
 
 
 @export var _label: Label
 
 
-var _move_speed: float = MOVE_SPEED_FROM
-var _font_size_base: float = 0
-var _outline_size_base: float = 0
+var _move_speed := MOVE_SPEED_FROM
 
 
 func _ready() -> void:
@@ -27,7 +25,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	self.position.y -= _move_speed * delta
+	position.y -= _move_speed * delta
 
 
 func set_font_color(color: Color) -> void:
@@ -41,8 +39,8 @@ func set_font_size(ratio: float) -> void:
 
 func popup(from: Vector2, text: String) -> void:
 	#print("[PopupScore] position: %s, text: %s" % [from, text])
-	self.position = from
-	self.modulate = Color.TRANSPARENT
+	position = from
+	modulate = Color.TRANSPARENT
 	_label.text = text
 
 	var tween = create_tween()

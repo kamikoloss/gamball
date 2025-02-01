@@ -12,7 +12,7 @@ enum TweenType {
 }
 
 
-const WALL_ROTATION_DURATION = 2.0
+const WALL_ROTATION_DURATION := 2.0
 
 
 @export var _rotating_wall_a: Node2D
@@ -25,30 +25,30 @@ const WALL_ROTATION_DURATION = 2.0
 
 
 # 現在ラッシュ中かどうか
-var _is_rush_now: bool = false
+var _is_rush_now := false
 # 現在抽選中かどうか
-var _is_lottery_now: bool = false
+var _is_lottery_now := false
 
 # ラッシュの抽選数 (通常時のゲーム数)
-var _rush_lottery_count: int = 0
+var _rush_lottery_count := 0
 # ラッシュの継続数
-var _rush_continue_count: int = 0
+var _rush_continue_count := 0
 # ラッシュで入っている Ball の数
-var _rush_balls_count: int = 0
+var _rush_balls_count := 0
 # ラッシュで入れられる Ball の最大数
-var _rush_balls_max: int = 10
+var _rush_balls_max := 10
 
 # 抽選確率の分母 (ランプの数)
-var _rush_probability_bottom: int = 24
+var _rush_probability_bottom := 24
 # ラッシュ初当たり抽選確率の分子のリスト
-var _rush_start_probability_top: Array = [0, 12]
+var _rush_start_probability_top: Array[int] = [0, 12]
 # ラッシュ継続抽選確率の分子のリスト
-var _rush_continue_probability_top: Array = range(12) # [0, 1, ..., 11]
+var _rush_continue_probability_top: Array[int] = range(12) # [0, 1, ..., 11]
 # 最後に抽選した分子 (ランプの位置)
-var _rush_last_hit_number: int = -1
+var _rush_last_hit_number := -1
 
 # { TweenType: Tween, ... } 
-var _tweens: Dictionary = {}
+var _tweens := {}
 
 
 func _ready() -> void:
@@ -66,7 +66,6 @@ func _ready() -> void:
 
 
 # ラッシュの抽選を開始する
-# TODO: 保留
 func start_lottery(force: bool = false) -> void:
 	if not force:
 		# 抽選中の場合: 何もしない
@@ -190,8 +189,8 @@ func _disable_rush_devices() -> void:
 			node.disabled = true
 
 
-## 分母を元にランプ点灯用の番号を抽選する
-## @returns [ 点灯の初期位置, 周回点灯Aの終了位置, 周回点灯Bの終了位置 ]  
+# 分母を元にランプ点灯用の番号を抽選する
+# @returns [ 点灯の初期位置, 周回点灯Aの終了位置, 周回点灯Bの終了位置 ]  
 func _pick_lamp_index_list() -> Array[int]:
 	var size = _rush_probability_bottom
 

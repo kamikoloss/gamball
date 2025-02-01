@@ -6,7 +6,7 @@ enum TweenType { CURTAIN_SHOW, CURTAIN_HIDE }
 enum SceneType { TITLE, GAME, INFORMATION, OPTIONS }
 
 
-const CURTAIN_FADE_DURATION: float = 1.0
+const CURTAIN_FADE_DURATION: = 1.0
 
 
 @export var title: Title
@@ -19,12 +19,12 @@ const CURTAIN_FADE_DURATION: float = 1.0
 @export var _version_label: Label
 
 
-var _is_loading_now: bool = false
-var _current_scene_type: SceneType = SceneType.TITLE
-var _back_scene_type: SceneType = SceneType.TITLE
+var _is_loading_now := false
+var _current_scene_type := SceneType.TITLE
+var _back_scene_type := SceneType.TITLE
 var _game: Game
 
-var _tweens: Dictionary = {}
+var _tweens := {}
 
 
 # TODO: title, information, options のインスタンス化をここでやる

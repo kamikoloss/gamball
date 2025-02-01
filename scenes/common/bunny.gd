@@ -11,13 +11,13 @@ enum TweenType { POSE }
 
 
 # A/B のフェードの秒数
-const POSE_CHANGE_DURATION: float = 0.0
+const POSE_CHANGE_DURATION := 0.0
 # 跳ねるときの上昇時の秒数
-const POSE_MOVE_DURATION_UP: float = 0.1
+const POSE_MOVE_DURATION_UP := 0.1
 # 跳ねるときの下降時の秒数
-const POSE_MOVE_DURATION_DOWN: float = 0.3
+const POSE_MOVE_DURATION_DOWN := 0.3
 # どれぐらい跳ねるか
-const POSE_MOVE_POSITION_DIFF: Vector2 = Vector2(0, -20)
+const POSE_MOVE_POSITION_DIFF := Vector2(0, -20)
 
 
 @export var _human: Control
@@ -45,14 +45,14 @@ const POSE_MOVE_POSITION_DIFF: Vector2 = Vector2(0, -20)
 
 
 # 現在どちらのポーズ表示を使用しているか 交互に切り替える
-var _is_human_pose_a = true
+var _is_human_pose_a := true
 
 # 跳ねるときの 初期位置/頂点位置
 var _human_move_position_from: Vector2
 var _human_move_position_to: Vector2
 
 # { TweenType: Tween, ... } 
-var _tweens: Dictionary = {}
+var _tweens := {}
 
 
 func _ready() -> void:

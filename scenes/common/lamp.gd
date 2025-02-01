@@ -10,7 +10,7 @@ enum LightColor {
 
 
 # ランプの発光色 { LightColor: Color } 
-const LIGHT_COLORS = {
+const LIGHT_COLORS := {
 	LightColor.DEFAULT_OFF: Color(ColorPalette.BLACK, 0.5), # NOTE: フレーム上に置くため半透明にした
 	LightColor.DEFAULT_ON: ColorPalette.WHITE,
 	LightColor.GREEN_OFF: ColorPalette.SUCCESS,

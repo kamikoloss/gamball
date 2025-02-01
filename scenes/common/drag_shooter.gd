@@ -12,9 +12,9 @@ signal canceled
 
 # ドラッグの最小距離 (px)
 # これ未満の場合はキャンセル扱いになる
-const DRAG_LENGTH_MIN: float = 10
+const DRAG_LENGTH_MIN := 10.0
 # ドラッグの最大距離 (px)
-const DRAG_LENGTH_MAX: float = 100
+const DRAG_LENGTH_MAX := 100.0
 
 
 @export var _arrow: Control
@@ -23,7 +23,7 @@ const DRAG_LENGTH_MAX: float = 100
 
 
 # 現在有効かどうか
-var enabled: bool = true:
+var enabled := true:
 	set(value):
 		enabled = value
 		# ドラッグ中に無効になった場合: キャンセル扱いにする
@@ -35,7 +35,7 @@ var enabled: bool = true:
 
 
 # 現在ドラッグ中かどうか
-var _is_dragging: bool = false
+var _is_dragging := false
 # ドラッグを開始した座標
 var _drag_position_from: Vector2
 # 現在ドラッグしている座標

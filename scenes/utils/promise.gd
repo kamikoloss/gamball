@@ -10,7 +10,7 @@ signal completed_any
 
 
 # { <Signal>: { "emitted": bool <発火したかどうか>, "data": [ <返り値1>, ... ] } }
-var _signals: Dictionary = {}
+var _signals := {}
 
 
 func _init(signals: Array[Signal]) -> void:

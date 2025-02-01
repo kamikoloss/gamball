@@ -15,7 +15,7 @@ enum ProductType {
 }
 
 
-const PRODUCT_PRICES = {
+const PRODUCT_PRICES := {
 	ProductType.DECK_PACK: 200,
 	ProductType.DECK_CLEANER: 100,
 	ProductType.EXTRA_PACK: 200,
@@ -24,7 +24,7 @@ const PRODUCT_PRICES = {
 
 # 商品の [<名称>, <説明分>]
 # TODO: JSON に逃がす
-const PRODUCT_DATA = {
+const PRODUCT_DATA := {
 	ProductType.DECK_PACK: ["DECK Pack", "DECK にランダムな\nボール x2 を追加する"],
 	ProductType.DECK_CLEANER: ["DECK Cleaner", "DECK から最も低い No. の\nボール x1 を削除する"],
 	ProductType.EXTRA_PACK: ["EXTRA Pack", "EXTRA にランダムな\nボール x2 を追加する"],
@@ -32,7 +32,8 @@ const PRODUCT_DATA = {
 }
 
 
-@export var product_type: ProductType = ProductType.DECK_PACK
+@export var product_type := ProductType.DECK_PACK
+
 
 # UI
 @export var _icon_texture: TextureRect
@@ -46,7 +47,7 @@ const PRODUCT_DATA = {
 
 
 # 購入可能かどうか
-var disabled: bool = false:
+var disabled := false:
 	set(v):
 		disabled = v
 		_refresh_view()
@@ -65,7 +66,7 @@ var description: String:
 
 
 # 現在ホバーしているかどうか
-var _hovered: bool = false:
+var _hovered := false:
 	set(v):
 		_hovered = v
 		_refresh_view()

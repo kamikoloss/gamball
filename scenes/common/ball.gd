@@ -16,30 +16,30 @@ enum TweenType { TRAIL, SHRINK, HIDE, WARP, WARP_CURVE }
 
 
 # Tween
-const WARP_DURATION: float = 1.0
-const SHRINK_DURATION: float = 1.0
-const SHRINK_SCALE: Vector2 = Vector2(0.6, 0.6)
-const HIDE_DURATION: float = 1.0
+const WARP_DURATION := 1.0
+const SHRINK_DURATION := 1.0
+const SHRINK_SCALE := Vector2(0.6, 0.6)
+const HIDE_DURATION := 1.0
 
 # 残像の頂点数
-const TRAIL_MAX_LENGTH: int = 10
+const TRAIL_MAX_LENGTH := 10
 # 残像の頂点の更新インターバル (秒)
-const TRAIL_INTERVAL: float = 0.02
+const TRAIL_INTERVAL := 0.02
 
 # 特殊なボール番号
-const BALL_LEVEL_OPTIONAL_SLOT = -1 # 空きスロット用
-const BALL_LEVEL_DISABLED_SLOT = -2 # 使用不可スロット用
+const BALL_LEVEL_OPTIONAL_SLOT := -1 # 空きスロット用
+const BALL_LEVEL_DISABLED_SLOT := -2 # 使用不可スロット用
 
 
 # ボール番号
 # TODO: number の方がいい
-@export var level: int = 0
+@export var level := 0
 # 展示用かどうか
 # pressed は展示用のみ発火する
-@export var is_display: bool = false
+@export var is_display := false
 # ボールがビリヤード盤面上にあるかどうか
 # NOTE: ビリヤード盤面上の初期 Ball 用に export している
-@export var is_on_billiards: bool = false
+@export var is_on_billiards := false
 
 
 # 見た目部分をまとめる親
@@ -65,31 +65,31 @@ const BALL_LEVEL_DISABLED_SLOT = -2 # 使用不可スロット用
 
 
 # 他のボールにぶつかって有効化されたかどうか
-var is_active: bool = true
+var is_active := true
 # Gain/Stack に触れたかどうか
-var is_gained: bool = false
-var is_stacked: bool = false
+var is_gained := false
+var is_stacked := false
 # 現在ワープ中かどうか
-var is_warping: bool = false
+var is_warping := false
 # 現在縮小中かどうか
-var is_shrinked: bool = false
+var is_shrinked := false
 # ボールのレア度
 # TODO: level の方がいい
-var rarity: Rarity = Rarity.COMMON
+var rarity := Rarity.COMMON
 # ボールのプール
-var pool: Pool = Pool.A
+var pool := Pool.A
 # ボールの効果
 # NOTE: 効果移譲とかありそうなので配列で持つ
 # [ [ <BallEffect.EffectType>, param1, (param2) ], ... ]
-var effects: Array = []
+var effects := []
 
 
 # 残像の頂点座標
-var _trail_points: Array = []
+var _trail_points : = []
 # 残像の太さ (保持用)
-var _trail_default_width: float = 0
+var _trail_default_width := 0.0
 
-var _tweens: Dictionary = {}
+var _tweens := {}
 
 
 func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:

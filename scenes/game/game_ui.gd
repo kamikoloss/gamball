@@ -15,19 +15,19 @@ signal options_button_pressed
 
 
 # Window 移動系
-const WINDOW_POSITION_BOTTOM_FROM: Vector2 = Vector2(0, 720)
-const WINDOW_POSITION_BOTTOM_TO: Vector2 = Vector2(0, -720)
-const WINDOW_POSITION_RIGHT_FROM: Vector2 = Vector2(1280, 0)
-const WINDOW_POSITION_RIGHT_TO: Vector2 = Vector2(720, 0)
-const WINDOW_POSITION_TO: Vector2 = Vector2(0, 0)
-const WINDOW_MOVE_DURATION: float = 1.0
+const WINDOW_POSITION_BOTTOM_FROM := Vector2(0, 720)
+const WINDOW_POSITION_BOTTOM_TO := Vector2(0, -720)
+const WINDOW_POSITION_RIGHT_FROM := Vector2(1280, 0)
+const WINDOW_POSITION_RIGHT_TO := Vector2(720, 0)
+const WINDOW_POSITION_TO := Vector2(0, 0)
+const WINDOW_MOVE_DURATION := 1.0
 
-const BALL_POPUP_POSITION_DIFF: Vector2 = Vector2(0, 40)
+const BALL_POPUP_POSITION_DIFF := Vector2(0, 40)
 
 # セリフのフェードの秒数
-const DIALOGUE_FADE_DURATION: float = 0.2
+const DIALOGUE_FADE_DURATION := 0.2
 
-const LOG_LINES_MAX: int = 100
+const LOG_LINES_MAX := 100
 
 
 @export_category("Scenes")
@@ -73,7 +73,7 @@ const LOG_LINES_MAX: int = 100
 
 
 var _log_lines: Array[String] = []
-var _tweens: Dictionary = {}
+var _tweens := {}
 
 
 func _ready() -> void:
