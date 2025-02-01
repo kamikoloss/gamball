@@ -84,7 +84,7 @@ color = Color(0.05, 0.05, 0.05, 1)
 [node name="Main" type="Node2D" parent="."]
 
 [node name="HoleWarpFromPayout" parent="Main" instance=ExtResource("11_j5iaq")]
-position = Vector2(640, -160)
+position = Vector2(640, -40)
 hole_type = 4
 warp_group = 1
 
@@ -870,7 +870,7 @@ position = Vector2(280, 300)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_extra_balls_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_balls_label", "_next_balls_label", "_log_label", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_people_window", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_deck_balls_parent", "_extra_balls_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_balls_label", "_next_balls_label", "_log_label", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
@@ -899,12 +899,11 @@ _tax_pay_button = NodePath("Tax/Pay")
 _tax_table_parent = NodePath("Tax/PriceTable")
 _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
-_people_window = NodePath("People")
-_bunny = NodePath("People/Bunny")
-_bubble_top = NodePath("People/BubbleTop")
-_dialogue_top = NodePath("People/BubbleTop/RichTextLabel")
-_bubble_bottom = NodePath("People/BubbleBottom")
-_dialogue_bottom = NodePath("People/BubbleBottom/RichTextLabel")
+_bunny = NodePath("Bunny")
+_bubble_top = NodePath("Main/BubbleTop")
+_dialogue_top = NodePath("Main/BubbleTop/RichTextLabel")
+_bubble_bottom = NodePath("Main/BubbleBottom")
+_dialogue_bottom = NodePath("Main/BubbleBottom/RichTextLabel")
 
 [node name="Main" type="Control" parent="UI"]
 layout_mode = 3
@@ -2264,6 +2263,82 @@ icon = ExtResource("21_5hb3e")
 icon_alignment = 1
 expand_icon = true
 
+[node name="BubbleTop" type="Control" parent="UI/Main"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 960.0
+offset_top = 40.0
+offset_right = 960.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/BubbleTop"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+layout_mode = 0
+offset_left = 60.0
+offset_top = 80.0
+offset_right = 100.0
+offset_bottom = 140.0
+rotation = 2.61799
+pivot_offset = Vector2(20, 30)
+texture = ExtResource("29_22y37")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="UI/Main/BubbleTop"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 120.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/BubbleTop"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 270.0
+offset_bottom = 110.0
+theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_fonts/normal_font = ExtResource("32_ubskw")
+bbcode_enabled = true
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+
+[node name="BubbleBottom" type="Control" parent="UI/Main"]
+visible = false
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 520.0
+offset_right = 560.0
+offset_bottom = 520.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/BubbleBottom"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+layout_mode = 0
+offset_left = 100.0
+offset_top = -30.0
+offset_right = 140.0
+offset_bottom = 30.0
+rotation = 0.523598
+pivot_offset = Vector2(20, 30)
+texture = ExtResource("29_22y37")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="UI/Main/BubbleBottom"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+layout_mode = 0
+offset_right = 360.0
+offset_bottom = 160.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/BubbleBottom"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 350.0
+offset_bottom = 150.0
+theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_fonts/normal_font = ExtResource("32_ubskw")
+bbcode_enabled = true
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+
 [node name="Tax" type="Control" parent="UI"]
 visible = false
 layout_mode = 3
@@ -2884,11 +2959,7 @@ text = "Exit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="People" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="Bunny" parent="UI/People" instance=ExtResource("19_tsuuh")]
+[node name="Bunny" parent="UI" instance=ExtResource("19_tsuuh")]
 z_index = -10
 z_as_relative = false
 layout_mode = 0
@@ -2900,82 +2971,6 @@ _base_texture = ExtResource("20_udj73")
 _parts_1_textures = Array[Texture]([ExtResource("21_uj2w0"), ExtResource("22_2014m"), ExtResource("23_nafxy")])
 _parts_2_textures = Array[Texture]([ExtResource("24_qdik2"), ExtResource("25_atlcj")])
 _parts_3_textures = Array[Texture]([ExtResource("26_jh16u"), ExtResource("27_l85vb")])
-
-[node name="BubbleTop" type="Control" parent="UI/People"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 960.0
-offset_top = 40.0
-offset_right = 960.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/People/BubbleTop"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-layout_mode = 0
-offset_left = 60.0
-offset_top = 80.0
-offset_right = 100.0
-offset_bottom = 140.0
-rotation = 2.61799
-pivot_offset = Vector2(20, 30)
-texture = ExtResource("29_22y37")
-expand_mode = 1
-
-[node name="Panel" type="Panel" parent="UI/People/BubbleTop"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-layout_mode = 0
-offset_right = 280.0
-offset_bottom = 120.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/People/BubbleTop"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 270.0
-offset_bottom = 110.0
-theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
-theme_override_fonts/normal_font = ExtResource("32_ubskw")
-bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
-
-[node name="BubbleBottom" type="Control" parent="UI/People"]
-visible = false
-z_index = 2
-layout_mode = 3
-anchors_preset = 0
-offset_left = 560.0
-offset_top = 520.0
-offset_right = 560.0
-offset_bottom = 520.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/People/BubbleBottom"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-layout_mode = 0
-offset_left = 100.0
-offset_top = -30.0
-offset_right = 140.0
-offset_bottom = 30.0
-rotation = 0.523598
-pivot_offset = Vector2(20, 30)
-texture = ExtResource("29_22y37")
-expand_mode = 1
-
-[node name="Panel" type="Panel" parent="UI/People/BubbleBottom"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-layout_mode = 0
-offset_right = 360.0
-offset_bottom = 160.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/People/BubbleBottom"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 350.0
-offset_bottom = 150.0
-theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
-theme_override_fonts/normal_font = ExtResource("32_ubskw")
-bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 
 [node name="BallPopup" type="Control" parent="UI"]
 visible = false
@@ -3027,15 +3022,15 @@ _game = NodePath("..")
 _billards = NodePath("../Billiards")
 _pachinko = NodePath("../Pachinko")
 _game_ui = NodePath("../UI")
-_bunny = NodePath("../UI/People/Bunny")
-_debug_button = NodePath("Debug")
+_bunny = NodePath("../UI/Bunny")
+_debug_button = NodePath("Button")
 _debug_window = NodePath("DebugWindow")
 _main_buttons_parent = NodePath("DebugWindow/MainButtons")
 _balls_parent = NodePath("DebugWindow/BallsA")
 _balls_buttons_parent = NodePath("DebugWindow/BallsButtons")
 _main_labels_parent = NodePath("DebugWindow/MainLabels")
 
-[node name="Debug" type="Button" parent="UIDebug"]
+[node name="Button" type="Button" parent="UIDebug"]
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 40.0

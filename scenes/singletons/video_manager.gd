@@ -3,7 +3,7 @@ extends Node
 
 
 enum WindowMode { WINDOW, FULLSCREEN }
-enum WindowSize { W640, W1280, W1920, W2560 }
+enum WindowSize { W1280, W1920, W2560 }
 
 
 const WINDOW_MODE = {
@@ -11,7 +11,6 @@ const WINDOW_MODE = {
 	WindowMode.FULLSCREEN: DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN,
 }
 const WINDOW_SIZE = {
-	WindowSize.W640: [640, 360],
 	WindowSize.W1280: [1280, 720],
 	WindowSize.W1920: [1920, 1080],
 	WindowSize.W2560: [2560, 1440],
@@ -22,7 +21,6 @@ const WINDOW_MODE_LABELS = {
 	WindowMode.FULLSCREEN: "Fullscreen",
 }
 const WINDOW_SIZE_LABELS = {
-	WindowSize.W640: "640 x 360",
 	WindowSize.W1280: "1280 x 720",
 	WindowSize.W1920: "1920 x 1080",
 	WindowSize.W2560: "2560 x 1440",
@@ -54,4 +52,4 @@ func set_window_size(size: WindowSize) -> void:
 
 	var x = WINDOW_SIZE[size][0]
 	var y = WINDOW_SIZE[size][1]
-	get_window().size = Vector2i(x, y)
+	DisplayServer.window_set_size(Vector2i(x, y))
