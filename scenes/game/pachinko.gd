@@ -175,19 +175,19 @@ func _finish_rush(force: bool = false) -> void:
 func _enable_rush_devices() -> void:
 	for node in _rush_holes_parent.get_children():
 		if node is Hole:
-			node.enable()
+			node.disabled = false
 	for node in _rush_nails_parent.get_children():
 		if node is Nail:
-			node.enable()
+			node.disabled = false
 
 # ラッシュ装置を無効化する
 func _disable_rush_devices() -> void:
 	for node in _rush_holes_parent.get_children():
 		if node is Hole:
-			node.disable()
+			node.disabled = true
 	for node in _rush_nails_parent.get_children():
 		if node is Nail:
-			node.disable()
+			node.disabled = true
 
 
 ## 分母を元にランプ点灯用の番号を抽選する
@@ -261,7 +261,6 @@ func _refresh_rush_lamps(is_rush: bool) -> void:
 				node.set_light_colors(Lamp.LightColor.GREEN_ON, Lamp.LightColor.GREEN_OFF)
 			else:
 				node.set_light_colors(Lamp.LightColor.DEFAULT_ON, Lamp.LightColor.DEFAULT_OFF)
-			node.disable()
 		count += 1
 
 # 特定のランプを点灯させる
@@ -269,17 +268,14 @@ func _enable_rush_lamp(index: int) -> void:
 	var count = 0
 	for node in _rush_lamps_parent.get_children():
 		if node is Lamp:
-			if count == index:
-				node.enable()
-			else:
-				node.disable()
+			node.disabled = count != index
 		count += 1
 
 # すべてのランプを消灯する
 func _disable_rush_lamps() -> void:
 	for node in _rush_lamps_parent.get_children():
 		if node is Lamp:
-			node.disable()
+			node.disabled = true
 
 
 # 回転床の動作を開始する

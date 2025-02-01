@@ -2,8 +2,8 @@ class_name Hole
 extends Area2D
 
 
-# Ball が Hole に落ちたとき (Hole, Ball)
-signal ball_entered
+# Ball が Hole に落ちたとき
+signal ball_entered # (Hole, Ball)
 
 
 # Hole のタイプ
@@ -41,7 +41,11 @@ const GRAVITY_SCALE_STEP: float = 0.25
 
 
 # 有効かどうか
-var is_enabled = true
+var disabled := true:
+	set(v):
+		disabled = v
+		_refresh_view()
+		_refresh_physics()
 
 
 var _hole_scale_base: Vector2
@@ -53,26 +57,25 @@ var _tweens: Dictionary = {}
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 
-	enable()
-	refresh_view()
-	refresh_physics()
+	_refresh_view()
+	_refresh_physics()
 
 	_hole_scale_base = self.scale
 	_gravity_scale_base = _gravity_area.scale
 	_body_color_base = _body_texture.self_modulate
 
 
-# 有効化する
-func enable() -> void:
-	is_enabled = true
-	modulate = Color(Color.WHITE, 1.0)
-	refresh_physics()
+func set_hole_size(level: int = 0) -> void:
+	var clamped_level = clampi(level, 0, HOLE_SIZE_LEVEL_MAX)
+	var ratio: float = 1.0 + HOLE_SCALE_STEP * clamped_level
+	self.scale = _hole_scale_base * ratio
 
-# 無効化する
-func disable() -> void:
-	is_enabled = false
-	modulate = Color(Color.WHITE, 0.1)
-	refresh_physics()
+
+func set_gravity_size(level: int = 0) -> void:
+	var clamped_level = clampi(level, 0, GRAVITY_SIZE_LEVEL_MAX)
+	var ratio: float = 1.0 + GRAVITY_SCALE_STEP * clamped_level
+	_gravity_area.scale = _gravity_scale_base * ratio
+	_gravity_texture.scale = _gravity_scale_base * ratio
 
 
 # 点滅する
@@ -84,8 +87,21 @@ func flash(count: int, color: Color, duration_ratio: int = 1) -> void:
 	tween.tween_property(_body_texture, "self_modulate", _body_color_base, duration)
 
 
+func _on_area_entered(area: Area2D) -> void:
+	if disabled:
+		return
+	var white_types = [HoleType.WARP_FROM]
+	if hole_type in white_types:
+		return
+
+	# Ball
+	var maybe_ball = area.get_parent()
+	if maybe_ball is Ball:
+		ball_entered.emit(self, maybe_ball)
+
+
 # 自身の見た目を更新する
-func refresh_view() -> void:
+func _refresh_view() -> void:
 	# デフォルト
 	_body_texture.self_modulate = ColorPalette.BLACK
 	_label.self_modulate = ColorPalette.WHITE
@@ -110,46 +126,26 @@ func refresh_view() -> void:
 		Hole.HoleType.STACK:
 			_label.text = "+"
 
+	# disabled
+	if disabled:
+		modulate = Color(Color.WHITE, 0.2)
+	else:
+		modulate = Color(Color.WHITE, 1.0)
+
 
 # 自身の物理判定を更新する
-func refresh_physics() -> void:
+func _refresh_physics() -> void:
 	# 衝突
-	set_collision_layer_value(Collision.Layer.BASE, is_enabled)
+	set_collision_layer_value(Collision.Layer.BASE, not disabled)
 
 	# 重力
 	var gravity_types = [HoleType.WARP_TO, HoleType.STACK]
-	if is_enabled and hole_type in gravity_types:
+	if not disabled and hole_type in gravity_types:
 		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_COMBINE_REPLACE
 		_gravity_texture.visible = true
 	else:
 		_gravity_area.gravity_space_override = Area2D.SPACE_OVERRIDE_DISABLED
 		_gravity_texture.visible = false
-
-
-func set_hole_size(level: int = 0) -> void:
-	var clamped_level = clampi(level, 0, HOLE_SIZE_LEVEL_MAX)
-	var ratio: float = 1.0 + HOLE_SCALE_STEP * clamped_level
-	self.scale = _hole_scale_base * ratio
-
-
-func set_gravity_size(level: int = 0) -> void:
-	var clamped_level = clampi(level, 0, GRAVITY_SIZE_LEVEL_MAX)
-	var ratio: float = 1.0 + GRAVITY_SCALE_STEP * clamped_level
-	_gravity_area.scale = _gravity_scale_base * ratio
-	_gravity_texture.scale = _gravity_scale_base * ratio
-
-
-func _on_area_entered(area: Area2D) -> void:
-	if not is_enabled:
-		return
-	var white_types = [HoleType.WARP_FROM]
-	if hole_type in white_types:
-		return
-
-	# Ball
-	var maybe_ball = area.get_parent()
-	if maybe_ball is Ball:
-		ball_entered.emit(self, maybe_ball)
 
 
 func _get_tween(type: TweenType) -> Tween:

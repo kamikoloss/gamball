@@ -3,7 +3,7 @@ class_name Selector
 
 
 # 値を変更したとき
-signal changed # (option_key)
+signal changed # (value)
 
 
 @export var _left_button: Button
@@ -12,7 +12,7 @@ signal changed # (option_key)
 @export var _points_parent: Control
 
 
-var disabled: bool = false:
+var disabled := false:
 	set(v):
 		_left_button.disabled = v
 		_right_button.disabled = v
@@ -20,23 +20,26 @@ var disabled: bool = false:
 var value:
 	set(v):
 		value = v
-		_selected_option_index = options.keys().find(value)
 		_refresh_view()
+		if value != v:
+			changed.emit(value)
 
-var options: Dictionary = {}
+# 設定項目 { "<Value>": <ラベル文字列>, ... } 
+var options := {}
 
 
-var _selected_option_index: int = 0
+var _selected_option_index := -1:
+	get():
+		return options.keys().find(value)
 
 
 func _ready() -> void:
-	#options = { "k1": "v1", "k2": "v2", "k3": "v3" } # debug
-	#value = "k2" # debug
+	#options = { "v1": "value1", "v2": "value2", "v3": "value3" } # debug
+	#value = "v2" # debug
 
 	_left_button.pressed.connect(func(): _shift_option(-1))
 	_right_button.pressed.connect(func(): _shift_option(1))
 
-	_selected_option_index = options.keys().find(value)
 	_refresh_view()
 
 
@@ -45,18 +48,16 @@ func _refresh_view() -> void:
 		return
 
 	# Label
-	_value_label.text = options[options.keys()[_selected_option_index]]
+	_value_label.text = options[value]
 
 	# Point
-	var point_index: int = 0
+	var point_index := 0
 	for point: Control in _points_parent.get_children():
-		if point_index < options.size():
-			if point_index == _selected_option_index:
-				point.modulate = ColorPalette.PRIMARY
-			else:
-				point.modulate = ColorPalette.GRAY_60
+		point.visible = point_index < options.size()
+		if point_index == _selected_option_index:
+			point.modulate = ColorPalette.PRIMARY
 		else:
-			point.visible = false
+			point.modulate = ColorPalette.GRAY_60
 		point_index += 1
 
 	# disabled
@@ -70,7 +71,5 @@ func _shift_option(shift: int) -> void:
 	if options.is_empty():
 		return
 
-	_selected_option_index += (options.size() + shift)
-	_selected_option_index %= options.size()
-	_refresh_view()
-	changed.emit(options.keys()[_selected_option_index])
+	var index = (_selected_option_index + shift) % options.size()
+	value = options.keys()[index]
