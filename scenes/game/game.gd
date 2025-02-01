@@ -1,6 +1,5 @@
 class_name Game
 extends Node2D
-# TODO: Ball 移動の処理を切り分ける
 # TODO: 料金所の処理を切り分ける
 # TODO: Shop の処理を切り分ける
 
@@ -28,7 +27,7 @@ const EXTRA_SIZE_MAX: int = 9
 const EXTRA_SIZE_MAX_DEFAULT: int = 5
 
 # Tax (ノルマ) のリスト
-# [<turn>, TaxType, <amount>]
+# [ <turn>, TaxType, <amount> ]
 const TAX_LIST = [
 	[25, TaxType.BALLS, 50],	# Balls 50
 	[50, TaxType.BALLS, 100],	# Balls 100
@@ -419,11 +418,8 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 # 商品をホバーしたときの処理
 func _on_product_hovered(product: Product, hover: bool) -> void:
 	#print("[Game] _on_product_hovered(%s, %s)" % [product, hover])
-	if money < product.price:
-		product.disable()
-	else:
-		product.enable()
-	product.refresh_view()
+	product.disabled = money < product.price
+
 
 # 商品をクリックしたときの処理
 func _on_product_pressed(product: Product) -> void:

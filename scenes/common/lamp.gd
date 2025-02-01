@@ -21,30 +21,24 @@ const LIGHT_COLORS = {
 @export var _texture: TextureRect
 
 
-var _on_color: LightColor = LightColor.DEFAULT_ON # 点灯時の色
-var _off_color: LightColor = LightColor.DEFAULT_OFF # 消灯時の色
+var disabled: bool = true:
+	set(v):
+		disabled = v
+		_refresh_view()
 
 
-func _ready() -> void:
-	disable()
+var _on_color := LightColor.DEFAULT_ON # 点灯時の色
+var _off_color := LightColor.DEFAULT_OFF # 消灯時の色
 
 
-# ランプを点灯する
-func enable() -> void:
-	_change_light_color(_on_color)
-
-# ランプを消灯する
-func disable() -> void:
-	_change_light_color(_off_color)
-
-
-# ランプの 点灯色/消灯色 を設定する
 func set_light_colors(on_color: LightColor, off_color: LightColor) -> void:
 	#print("[Lamp] set_light_colors on/off: %s/%s" % [on_color, off_color])
 	_on_color = on_color
 	_off_color = off_color
 
 
-# ランプを 点灯/消灯 する
-func _change_light_color(color: LightColor) -> void:
-	_texture.self_modulate = LIGHT_COLORS[color]
+func _refresh_view() -> void:
+	if disabled:
+		_texture.self_modulate = LIGHT_COLORS[_off_color]
+	else:
+		_texture.self_modulate = LIGHT_COLORS[_on_color]

@@ -57,9 +57,8 @@ func set_volume(bus_type: BusType, volume_level: int) -> void:
 	#print("[AudioManager] set_volume(bus_type: %s, volume_level: %s)" % [bus_type, volume_level])
 	var volume_level_clamped = clampi(volume_level, 0, 10)
 	var volume_db = -40 + volume_level_clamped * 4
-	var is_mute = volume_level_clamped == 0
 	AudioServer.set_bus_volume_db(bus_type, volume_db)
-	AudioServer.set_bus_mute(bus_type, is_mute)
+	AudioServer.set_bus_mute(bus_type, volume_level_clamped == 0)
 
 
 func play_se(se_type: SeType) -> void:

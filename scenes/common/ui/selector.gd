@@ -25,8 +25,7 @@ var value:
 
 var options: Dictionary = {}
 
-
-var _selected_option_index: int = 0
+var _selected_option_index: int = -1
 
 
 func _ready() -> void:
@@ -72,5 +71,6 @@ func _shift_option(shift: int) -> void:
 
 	_selected_option_index += (options.size() + shift)
 	_selected_option_index %= options.size()
+
 	_refresh_view()
 	changed.emit(options.keys()[_selected_option_index])

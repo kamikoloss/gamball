@@ -178,7 +178,7 @@ func _enable_rush_devices() -> void:
 			node.enable()
 	for node in _rush_nails_parent.get_children():
 		if node is Nail:
-			node.enable()
+			node.disabled = false
 
 # ラッシュ装置を無効化する
 func _disable_rush_devices() -> void:
@@ -187,7 +187,7 @@ func _disable_rush_devices() -> void:
 			node.disable()
 	for node in _rush_nails_parent.get_children():
 		if node is Nail:
-			node.disable()
+			node.disabled = true
 
 
 ## 分母を元にランプ点灯用の番号を抽選する

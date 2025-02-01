@@ -39,8 +39,7 @@ func set_window_mode(mode: WindowMode) -> void:
 	if OS.has_feature("web"):
 		return
 
-	var m = WINDOW_MODE[mode]
-	DisplayServer.window_set_mode(m)
+	DisplayServer.window_set_mode(WINDOW_MODE[mode])
 
 	if SaveManager.video_config:
 		set_window_size(SaveManager.video_config.window_size)

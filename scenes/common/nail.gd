@@ -2,16 +2,15 @@ class_name Nail
 extends StaticBody2D
 
 
-func _ready() -> void:
-	enable()
+var disabled: bool = false:
+	set(v):
+		disabled = v
+		set_collision_layer_value(Collision.Layer.BASE, true)
+		_refresh_view()
 
 
-# 有効化する
-func enable() -> void:
-	modulate = Color(1, 1, 1, 1)
-	set_collision_layer_value(Collision.Layer.BASE, true)
-
-# 無効化する
-func disable() -> void:
-	modulate = Color(1, 1, 1, 0.1)
-	set_collision_layer_value(Collision.Layer.BASE, false)
+func _refresh_view() -> void:
+	if disabled:
+		modulate = Color(Color.WHITE, 0.2)
+	else:
+		modulate = Color(Color.WHITE, 1.0)

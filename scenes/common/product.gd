@@ -45,6 +45,11 @@ const PRODUCT_DATA = {
 @export var _icon_cleaner: Texture
 
 
+# 購入可能かどうか
+var disabled: bool = false:
+	set(v):
+		disabled = v
+		refresh_view()
 # 価格
 var price: int:
 	get:
@@ -59,25 +64,18 @@ var description: String:
 		return PRODUCT_DATA[product_type][1]
 
 
-# 購入可能かどうか
-var _enabled: bool = false
 # 現在ホバーしているかどうか
-var _is_hovered: bool = false
+var _hovered: bool = false:
+	set(v):
+		_hovered = v
+		refresh_view()
+		hovered.emit(self, _hovered)
 
 
 func _ready() -> void:
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
+	mouse_entered.connect(func(): _hovered = true)
+	mouse_exited.connect(func(): _hovered = false)
 	_buy_button.pressed.connect(func(): pressed.emit(self))
-
-	refresh_view()
-
-
-func enable() -> void:
-	_enabled = true
-
-func disable() -> void:
-	_enabled = false
 
 
 # 自身の見た目を更新する
@@ -98,21 +96,10 @@ func refresh_view() -> void:
 	_price_label.text = "＄%s" % str(price)
 
 	# 購入ボタン
-	_buy_button.visible = _is_hovered
-	if _enabled:
-		_buy_button.self_modulate = ColorPalette.PRIMARY
-		_buy_button.text = "Buy"
-	else:
+	_buy_button.visible = _hovered
+	if disabled:
 		_buy_button.self_modulate = ColorPalette.GRAY_40
 		_buy_button.text = "----"
-
-
-func _on_mouse_entered() -> void:
-	_is_hovered = true
-	refresh_view()
-	hovered.emit(self, _is_hovered)
-
-func _on_mouse_exited() -> void:
-	_is_hovered = false
-	refresh_view()
-	hovered.emit(self, _is_hovered)
+	else:
+		_buy_button.self_modulate = ColorPalette.PRIMARY
+		_buy_button.text = "Buy"
