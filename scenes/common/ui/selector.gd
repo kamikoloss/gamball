@@ -15,26 +15,40 @@ signal changed # (option_key)
 var value:
 	set(v):
 		value = v
-		_selected_option_index = _option_keys.find(value)
+		_selected_option_index = options.keys().find(value)
 		_refresh_view()
 var options: Dictionary = {}:
 	set(v):
 		options = v
-		_option_keys = options.keys()
 
 
-var _option_keys: Array = []
+var _is_enabled = true
 var _selected_option_index: int = 0
 
 
 func _ready() -> void:
-	#options = { "k1": "v1", "k2": "v2", "k3": "v3" } # Debug
-	#value = "k2" # Debug
+	#options = { "k1": "v1", "k2": "v2", "k3": "v3" } # debug
+	#value = "k2" # debug
 
 	_left_button.pressed.connect(func(): _shift_option(-1))
 	_right_button.pressed.connect(func(): _shift_option(1))
 
-	_selected_option_index = _option_keys.find(value)
+	_selected_option_index = options.keys().find(value)
+	enable()
+	_refresh_view()
+
+
+func enable() -> void:
+	_is_enabled = true
+	_left_button.disabled = not _is_enabled
+	_right_button.disabled = not _is_enabled
+	_refresh_view()
+
+
+func disable() -> void:
+	_is_enabled = false
+	_left_button.disabled = not _is_enabled
+	_right_button.disabled = not _is_enabled
 	_refresh_view()
 
 
@@ -43,12 +57,12 @@ func _refresh_view() -> void:
 		return
 
 	# Label
-	_value_label.text = options[_option_keys[_selected_option_index]]
+	_value_label.text = options[options.keys()[_selected_option_index]]
 
 	# Point
 	var point_index: int = 0
 	for point: Control in _points_parent.get_children():
-		if point_index < _option_keys.size():
+		if point_index < options.size():
 			if point_index == _selected_option_index:
 				point.modulate = ColorPalette.PRIMARY
 			else:
@@ -57,12 +71,18 @@ func _refresh_view() -> void:
 			point.visible = false
 		point_index += 1
 
+	# disabled
+	if _is_enabled:
+		_value_label.self_modulate = ColorPalette.WHITE
+	else:
+		_value_label.self_modulate = ColorPalette.GRAY_60
+
 
 func _shift_option(shift: int) -> void:
 	if options.is_empty():
 		return
 
-	_selected_option_index += (_option_keys.size() + shift)
-	_selected_option_index %= _option_keys.size()
+	_selected_option_index += (options.size() + shift)
+	_selected_option_index %= options.size()
 	_refresh_view()
-	changed.emit(_option_keys[_selected_option_index])
+	changed.emit(options.keys()[_selected_option_index])

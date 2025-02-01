@@ -50,6 +50,12 @@ func set_window_size(size: WindowSize) -> void:
 	if OS.has_feature("web"):
 		return
 
-	var x = WINDOW_SIZE[size][0]
-	var y = WINDOW_SIZE[size][1]
-	DisplayServer.window_set_size(Vector2i(x, y))
+	var old_size = DisplayServer.window_get_size()
+	var old_pos = DisplayServer.window_get_position()
+
+	var new_size = Vector2i(WINDOW_SIZE[size][0], WINDOW_SIZE[size][1])
+	DisplayServer.window_set_size(new_size)
+
+	# ウィンドウの中心をずらさないように調整する
+	var new_pos = old_pos - (new_size - old_size) / 2
+	DisplayServer.window_set_position(new_pos)
