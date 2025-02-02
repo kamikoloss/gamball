@@ -10,7 +10,7 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_lr22c")
-_touch_button = NodePath("Touch")
+_touch_button = NodePath("Human/Touch")
 _human = NodePath("Human")
 _base_parts = NodePath("Human/Base")
 _pose_a = NodePath("Human/PoseA")
@@ -26,7 +26,6 @@ _pose_b_parts_4 = NodePath("Human/PoseB/Parts4")
 
 [node name="Human" type="Control" parent="."]
 anchors_preset = 0
-scale = Vector2(0.6, 0.6)
 
 [node name="Base" type="TextureRect" parent="Human"]
 layout_mode = 0
@@ -104,11 +103,10 @@ offset_bottom = 1600.0
 mouse_filter = 2
 texture = ExtResource("7_subrs")
 
-[node name="Touch" type="TextureButton" parent="."]
+[node name="Touch" type="TextureButton" parent="Human"]
 layout_mode = 0
-offset_left = -160.0
-offset_top = 40.0
-offset_right = 160.0
-offset_bottom = 680.0
+offset_left = -240.0
+offset_right = 240.0
+offset_bottom = 1440.0
 ignore_texture_size = true
 stretch_mode = 0
