@@ -251,7 +251,7 @@ func _on_tax_pay_button_pressed() -> void:
 func _on_shop_exit_button_pressed() -> void:
 	_refresh_next()
 	_game_ui.hide_shop_window()
-	_game_ui.hide_people_window()
+	_game_ui.move_bunny_small()
 	game_state = GameState.GAME
 
 

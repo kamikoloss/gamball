@@ -50,8 +50,10 @@ var size_type := SizeType.SMALL:
 		match size_type:
 			SizeType.SMALL:
 				_human.scale = Vector2(0.6, 0.6)
+				z_index = -22
 			SizeType.LARGE:
 				_human.scale = Vector2(1.0, 1.0)
+				z_index = 0
 
 
 # 現在どちらのポーズ表示を使用しているか 交互に切り替える

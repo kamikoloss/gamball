@@ -106,8 +106,10 @@ func _ready() -> void:
 	# Shop
 	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
 	# Bunny+
+	_bunny.size_type = Bunny.SizeType.SMALL
 	_bunny.pressed.connect(func(): _on_bunny_pressed())
 	set_dialogue("...")
+	_bubble_top.modulate = Color.WHITE
 	_bubble_bottom.modulate = Color.TRANSPARENT
 	_target_bubble = _bubble_top
 	_target_dialogue = _dialogue_top
