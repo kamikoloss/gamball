@@ -250,8 +250,12 @@ func _on_tax_pay_button_pressed() -> void:
 
 func _on_shop_exit_button_pressed() -> void:
 	_refresh_next()
+
 	_game_ui.hide_shop_window()
-	_game_ui.move_bunny_small()
+	_game_ui.change_target_bubble(false)
+	await _game_ui.change_bunny_size(false)
+	_game_ui.set_dialogue("...")
+
 	game_state = GameState.GAME
 
 
@@ -679,7 +683,8 @@ func _go_to_next_turn() -> void:
 func _start_tax_count_down() -> void:
 	game_state = GameState.COUNT_DOWN
 
-	_game_ui.move_bunny_large()
+	_game_ui.change_target_bubble(true)
+	await _game_ui.change_bunny_size(true)
 	await _game_ui.count_down()
 	_game_ui.show_tax_window()
 

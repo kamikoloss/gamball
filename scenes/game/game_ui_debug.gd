@@ -44,10 +44,13 @@ var _main_functions: Dictionary = {
 	"hide_tax_window": func(): _game_ui.hide_tax_window(),
 	"show_shop_window": func(): _game_ui.show_shop_window(),
 	"hide_shop_window": func(): _game_ui.hide_shop_window(),
-	"refresh_dialogue_label": func(): _game_ui.set_dialogue(_sample_dialogue_list.pick_random()),
-	"move_bunny_large": func(): _game_ui.move_bunny_large(),
-	"move_bunny_small": func(): _game_ui.move_bunny_small(),
-	"shuffle_pose": func(): _bunny.shuffle_pose(),
+	"set_dialogue": func(): _game_ui.set_dialogue(_sample_dialogue_list.pick_random()),
+	"bubble Bottom": func(): _game_ui.change_target_bubble(true),
+	"bubble Top": func(): _game_ui.change_target_bubble(false),
+	"bunny Large": func(): _game_ui.change_bunny_size(true),
+	"bunny Small": func(): _game_ui.change_bunny_size(false),
+	"bunny shuffle_pose": func(): _bunny.shuffle_pose(),
+	"bunny jump": func(): _bunny.jump(),
 }
 # { <ボタン文字列: string>: <ボタン処理: Callable>, ... } 
 var _balls_functions: Dictionary = {
