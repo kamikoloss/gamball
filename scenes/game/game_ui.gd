@@ -224,6 +224,7 @@ func move_bunny_large() -> void:
 	tween.chain()
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_bunny, "position", BUNNY_POSITION_LARGE_IN, BUNNY_MOVE_DURATION)
+	tween.chain()
 	tween.tween_property(_bubble_bottom, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION)
 
 	await tween.finished
@@ -247,6 +248,7 @@ func move_bunny_small() -> void:
 	tween.chain()
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_bunny, "position", BUNNY_POSITION_SMALL_IN, BUNNY_MOVE_DURATION)
+	tween.chain()
 	tween.tween_property(_bubble_top, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION)
 
 	await tween.finished
@@ -259,17 +261,13 @@ func count_down() -> void:
 	var tween = _get_tween(TweenType.COUNT_DOWN)
 	tween.tween_interval(2.0)
 	tween.tween_callback(func(): set_dialogue("[font_size=32]さ～～ん[/font_size]"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): set_dialogue("[font_size=32]に～～い[/font_size]"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): set_dialogue("[font_size=32]い～～ち[/font_size]"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_interval(1.0)
 	# Tax Window を表示する
 	tween.tween_callback(func(): set_dialogue("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す
 
 	await tween.finished
