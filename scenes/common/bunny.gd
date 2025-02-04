@@ -7,17 +7,18 @@ extends Control
 signal pressed
 
 
-enum TweenType { POSE }
+enum TweenType { POSE, JUMP }
 enum SizeType { SMALL, LARGE }
 
 
 # A/B のフェードの秒数
 const POSE_CHANGE_DURATION := 0.0
+
 # 跳ねるときの 上昇/下降 時の秒数
-const POSE_MOVE_DURATION_UP := 0.1
-const POSE_MOVE_DURATION_DOWN := 0.3
+const JUMP_DURATION_UP := 0.1
+const JUMP_DURATION_DOWN := 0.3
 # 跳ねるときの最高座標の相対位置
-const POSE_MOVE_POSITION_DIFF := Vector2(0, -20)
+const JUMP_POSITION_DIFF := Vector2(0, -20)
 
 
 @export var _touch_button: TextureButton
@@ -50,7 +51,7 @@ var size_type := SizeType.SMALL:
 		match size_type:
 			SizeType.SMALL:
 				_human.scale = Vector2(0.6, 0.6)
-				z_index = -22
+				z_index = -22 # NOTE: UI が 20 なのでそれより少し後ろ
 			SizeType.LARGE:
 				_human.scale = Vector2(1.0, 1.0)
 				z_index = 0
@@ -70,7 +71,7 @@ func _ready() -> void:
 	_touch_button.pressed.connect(func(): pressed.emit())
 
 	_human_move_position_from = _human.position
-	_human_move_position_to = _human.position + POSE_MOVE_POSITION_DIFF
+	_human_move_position_to = _human.position + JUMP_POSITION_DIFF
 
 	if _base_texture:
 		_base_parts.texture = _base_texture
@@ -113,16 +114,18 @@ func shuffle_pose() -> void:
 		tween.tween_property(_pose_b, "modulate", Color.TRANSPARENT, POSE_CHANGE_DURATION) # B を透明にする
 		tween.tween_property(_pose_a, "modulate", Color.WHITE, POSE_CHANGE_DURATION) # A を表示する
 
-	# 全体を跳ねさせる
-	_human.position = _human_move_position_from
-	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	tween.tween_property(_human, "position", _human_move_position_to, POSE_MOVE_DURATION_UP)
-	tween.chain() # ここまでパラレル
-	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	tween.tween_property(_human, "position", _human_move_position_from, POSE_MOVE_DURATION_DOWN)
-
 	# 次回以降の A/B を切り替える
 	tween.tween_callback(func(): _is_human_pose_a = not _is_human_pose_a)
+
+
+# 全体を跳ねさせる
+func jump() -> void:
+	var tween = _get_tween(TweenType.JUMP)
+	_human.position = _human_move_position_from
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(_human, "position", _human_move_position_to, JUMP_DURATION_UP)
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tween.tween_property(_human, "position", _human_move_position_from, JUMP_DURATION_DOWN)
 
 
 func enable_touch() -> void:
