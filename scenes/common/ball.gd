@@ -39,7 +39,14 @@ const BALL_LEVEL_DISABLED_SLOT := -2 # 使用不可スロット用
 @export var is_display := false
 # ボールがビリヤード盤面上にあるかどうか
 # NOTE: ビリヤード盤面上の初期 Ball 用に export している
-@export var is_on_billiards := false
+@export var is_on_billiards := false:
+	set(v):
+		is_on_billiards = v
+		# ビリヤード盤面上にあるときは DragShooter 用に Touch の入力をスルーする
+		if is_on_billiards:
+			_touch_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		else:
+			_touch_button.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
 # 見た目部分をまとめる親
