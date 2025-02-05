@@ -2190,7 +2190,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Log" type="Control" parent="UI/Main"]
-visible = false
 anchors_preset = 0
 offset_left = 560.0
 offset_top = 40.0
@@ -2199,9 +2198,10 @@ offset_bottom = 40.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/Log"]
 layout_mode = 0
-offset_top = 40.0
-offset_right = 160.0
-offset_bottom = 160.0
+offset_left = 160.0
+offset_top = -10.0
+offset_right = 320.0
+offset_bottom = 150.0
 theme_override_fonts/normal_font = ExtResource("8_sucdk")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
@@ -2264,7 +2264,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="BubbleTop" type="Control" parent="UI/Main"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 960.0
@@ -2303,7 +2302,6 @@ bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 
 [node name="BubbleBottom" type="Control" parent="UI/Main"]
-visible = false
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
@@ -2963,7 +2961,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Bunny" parent="UI" instance=ExtResource("19_tsuuh")]
-visible = false
 layout_mode = 0
 offset_left = 1160.0
 offset_right = 1160.0
