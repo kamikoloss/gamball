@@ -70,6 +70,7 @@ var _tweens := {}
 func _ready() -> void:
 	_touch_button.pressed.connect(func(): pressed.emit())
 
+	size_type = SizeType.SMALL
 	_human_move_position_from = _human.position
 	_human_move_position_to = _human.position + JUMP_POSITION_DIFF
 
@@ -78,12 +79,10 @@ func _ready() -> void:
 		_base_parts.visible = true
 	else:
 		_base_parts.visible = false
-
 	_pose_a.visible = true
 	_pose_b.visible = true
 	_pose_a.modulate = Color.WHITE
 	_pose_b.modulate = Color.TRANSPARENT
-
 	reset_pose()
 
 
