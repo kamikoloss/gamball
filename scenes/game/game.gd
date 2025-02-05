@@ -369,13 +369,12 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 
 			# Ball を増加させてワープさせる
 			var level = ball.level # NOTE: ここで控えとかないと参照できないことがある
-			var amount = (hole.gain_ratio + gain_plus) * gain_times * level
+			var amount = level * (hole.gain_ratio + gain_plus) * gain_times
 			if 0 < amount:
 				var tween = create_tween()
 				tween.set_loops(amount)
-				tween.tween_interval(1.0 / 20)
+				tween.tween_interval(1.0 / 20) # TODO: const
 				tween.tween_callback(func():
-					# TODO: すごい数になるので Ball じゃなくて画像にした方がいい？
 					var new_ball: Ball = _ball_scene.instantiate()
 					new_ball.level = level
 					new_ball.is_shrinked = true
@@ -383,6 +382,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 					await new_ball.warp_for_gain(hole.global_position, _payout_hole.global_position)
 					_push_payout(level, 1)
 					new_ball.queue_free()
+					balls += 1
 				)
 			# PopupScore を表示する
 			var popup_text = "+%s" % [amount]
@@ -393,7 +393,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				popup_color = Color.RED
 			_game_ui.popup_score(hole.global_position, popup_text, popup_color, popup_size)
 			# ログを出す
-			var log = "(%s + %s) x %s x %s = %s" % [level, gain_plus, hole.gain_ratio, gain_times, amount]
+			var log = "%s x (%s + %s) x %s = %s" % [level, hole.gain_ratio, gain_plus, gain_times, amount]
 			_game_ui.add_log(log)
 			# Hole を点滅させる
 			if hole.gain_ratio == 0:
@@ -405,11 +405,6 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			await ball.die()
 			_billiards.refresh_balls_count(_billiards_balls_count)
 
-		Hole.HoleType.STACK:
-			if ball.is_stacked:
-				return
-			ball.is_stacked = true
-			balls += 1
 
 	# Ball 消去処理
 	var not_die_types = [Hole.HoleType.WARP_FROM, Hole.HoleType.WARP_TO]

@@ -4,7 +4,7 @@ extends Control
 
 
 const MOVE_SPEED_FROM := 320.0 # 初速度 (px/s)
-const MOVE_SPEED_TO := 40.0 # 終端速度 (px/s)
+const MOVE_SPEED_TO := 80.0 # 終端速度 (px/s)
 const PHASE_1_DURATION := 0.4 # 飛び上がって減速していく秒数
 const PHASE_2_DURATION := 0.8 # 等速で移動する秒数
 const PHASE_3_DURATION := 0.4 # 等速で消えていく秒数

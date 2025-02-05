@@ -11,7 +11,7 @@ enum HoleType {
 	EXTRA, # EXTRA を1個ビリヤード盤面上に出す + 抽選を行う
 	GAIN, # Ball を gain_ratio 倍にして PAYOUT に加算する
 	LOST, # 何もしない (Ball を失う)
-	STACK, # BALLS に加算する
+	STACK, # TODO: 消す
 	WARP_FROM, # WARP_TO からワープする
 	WARP_TO, # WARP_FROM にワープする
 }

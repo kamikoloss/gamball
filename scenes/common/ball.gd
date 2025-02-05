@@ -66,9 +66,8 @@ const BALL_LEVEL_DISABLED_SLOT := -2 # 使用不可スロット用
 
 # 他のボールにぶつかって有効化されたかどうか
 var is_active := true
-# Gain/Stack に触れたかどうか
+# Gain に触れたかどうか
 var is_gained := false
-var is_stacked := false
 # 現在ワープ中かどうか
 var is_warping := false
 # 現在縮小中かどうか
