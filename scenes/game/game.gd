@@ -88,11 +88,12 @@ var money := 0:
 		_game_ui.refresh_money_label(money)
 var balls := 0:
 	set(v):
+		# ボールの個数が 0 から回復したとき: DragShooter を有効化する
+		if balls <= 0 and 0 < v:
+			_drag_shooter.enabled = true
 		balls = v
 		_game_ui.refresh_balls_label(balls)
-		# ボールがない場合: DragShoter を無効化する
-		# TODO: バグる
-		_drag_shooter.enabled = 0 < balls
+
 
 # ゲームの状態
 var game_state := GameState.GAME
@@ -204,6 +205,9 @@ func _on_drag_shooter_pressed() -> void:
 func _on_drag_shooter_released(drag_vector: Vector2) -> void:
 	_billiards.shoot_ball(drag_vector * IMPULSE_RATIO)
 	_billiards.refresh_balls_count(_billiards_balls_count)
+	# リリースした結果ボールがなくなった場合: 無効化する
+	if balls <= 0:
+		_drag_shooter.enabled = false
 
 func _on_drag_shooter_canceled() -> void:
 	# Ball 生成をなかったことにする
@@ -271,6 +275,8 @@ func _on_options_button_pressed() -> void:
 # TODO: hole_type ごとにメソッド分ける？ HoleManager 作る？
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
+	if not hole or not ball:
+		return
 	# Hole が無効の場合: 何もしない (通り抜ける)
 	if hole.disabled:
 		return
@@ -324,9 +330,6 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			hole.flash(1, Color.GREEN, 2)
 
 		Hole.HoleType.GAIN:
-			if not ball:
-				return
-
 			if ball.is_gained:
 				return
 			ball.is_gained = true
@@ -381,7 +384,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 					_balls_parent.add_child(new_ball)
 					await new_ball.warp_for_gain(hole.global_position, _payout_hole.global_position)
 					_push_payout(level, 1)
-					new_ball.queue_free()
+					new_ball.queue_free() # TODO: バラまくなら死なさなくていい
 					balls += 1
 				)
 			# PopupScore を表示する

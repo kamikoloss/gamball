@@ -125,20 +125,18 @@ func set_rush_continue_top(level: int = 0) -> void:
 
 # Ball が ラッシュ用 Hole に落ちたときの処理
 func _on_rush_hole_ball_entered(hole: Hole, ball: Ball) -> void:
-	#
+	# Ball が縮小中の場合: 何もしない
 	if ball.is_shrinked:
 		return
-	# 入れられる最大数に達している場合: 何もしない
+
+	# 入れられる最大数に達している場合: ラッシュ装置を無効化する
 	if _rush_balls_max <= _rush_balls_count:
+		_disable_rush_devices()
 		return
 
 	# カウントする
 	_rush_balls_count += 1
 	_rush_label.text = "%02d!%02d" % [_rush_balls_count, _rush_balls_max]
-
-	# (カウントの結果) 入れられる最大数に達している場合: ラッシュ装置を無効化する
-	if _rush_balls_max <= _rush_balls_count:
-		_disable_rush_devices()
 
 
 # ラッシュを開始する (ラッシュを継続するときも含む)
@@ -280,15 +278,15 @@ func _disable_rush_lamps() -> void:
 # 回転床の動作を開始する
 func _start_rotating_wall() -> void:
 	var wall_settings = [
-		{ "type": TweenType.ROTATING_WALL_A, "obj": _rotating_wall_a, "deg1": 60, "deg2": 0 },
-		{ "type": TweenType.ROTATING_WALL_B, "obj": _rotating_wall_b, "deg1": 0, "deg2": -60 },
+		[TweenType.ROTATING_WALL_A, _rotating_wall_a, 60, 0],
+		[TweenType.ROTATING_WALL_B, _rotating_wall_b, 0, -60],
 	]
 	for setting in wall_settings:
-		var tween = _get_tween(setting["type"])
+		var tween = _get_tween(setting[0])
 		tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		tween.set_loops()
-		tween.tween_property(setting["obj"], "rotation_degrees", setting["deg1"], WALL_ROTATION_DURATION)
-		tween.tween_property(setting["obj"], "rotation_degrees", setting["deg2"], WALL_ROTATION_DURATION)
+		tween.tween_property(setting[1], "rotation_degrees", setting[2], WALL_ROTATION_DURATION)
+		tween.tween_property(setting[1], "rotation_degrees", setting[3], WALL_ROTATION_DURATION)
 
 
 func _get_tween(type: TweenType) -> Tween:

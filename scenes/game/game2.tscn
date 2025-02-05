@@ -406,21 +406,21 @@ rotation = -1.5708
 
 [node name="WallRotateA" parent="Pachinko/Walls" instance=ExtResource("15_okamy")]
 position = Vector2(60, 120)
-scale = Vector2(3, 1)
+scale = Vector2(2, 1)
 
 [node name="WallRotateB" parent="Pachinko/Walls" instance=ExtResource("15_okamy")]
 position = Vector2(420, 120)
-scale = Vector2(3, 1)
+scale = Vector2(2, 1)
 
 [node name="Nails" type="Node2D" parent="Pachinko"]
 
 [node name="Top" type="Node2D" parent="Pachinko/Nails"]
 
 [node name="Nail10" parent="Pachinko/Nails/Top" instance=ExtResource("10_wq884")]
-position = Vector2(120, 160)
+position = Vector2(160, 180)
 
 [node name="Nail11" parent="Pachinko/Nails/Top" instance=ExtResource("10_wq884")]
-position = Vector2(360, 160)
+position = Vector2(320, 180)
 
 [node name="Hole" type="Node2D" parent="Pachinko/Nails"]
 
@@ -518,16 +518,16 @@ position = Vector2(330, 380)
 position = Vector2(240, 380)
 
 [node name="Nail25" parent="Pachinko/Nails/Bottom2" instance=ExtResource("10_wq884")]
-position = Vector2(40, 320)
+position = Vector2(40, 340)
 
 [node name="Nail26" parent="Pachinko/Nails/Bottom2" instance=ExtResource("10_wq884")]
-position = Vector2(440, 320)
+position = Vector2(440, 340)
 
 [node name="Nail23" parent="Pachinko/Nails/Bottom2" instance=ExtResource("10_wq884")]
-position = Vector2(40, 240)
+position = Vector2(40, 260)
 
 [node name="Nail24" parent="Pachinko/Nails/Bottom2" instance=ExtResource("10_wq884")]
-position = Vector2(440, 240)
+position = Vector2(440, 260)
 
 [node name="Holes" type="Node2D" parent="Pachinko"]
 
@@ -2264,6 +2264,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="BubbleTop" type="Control" parent="UI/Main"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 960.0
@@ -2302,6 +2303,7 @@ bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 
 [node name="BubbleBottom" type="Control" parent="UI/Main"]
+visible = false
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
@@ -2961,6 +2963,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Bunny" parent="UI" instance=ExtResource("19_tsuuh")]
+visible = false
 layout_mode = 0
 offset_left = 1160.0
 offset_right = 1160.0
