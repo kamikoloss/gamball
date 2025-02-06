@@ -2271,24 +2271,19 @@ offset_top = 40.0
 offset_right = 960.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Main/BubbleTop"]
-visible = false
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-layout_mode = 0
-offset_left = 60.0
-offset_top = 80.0
-offset_right = 100.0
-offset_bottom = 140.0
-rotation = 2.61799
-pivot_offset = Vector2(20, 30)
-texture = ExtResource("29_22y37")
-expand_mode = 1
-
 [node name="Panel" type="Panel" parent="UI/Main/BubbleTop"]
 self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_right = 280.0
 offset_bottom = 120.0
+
+[node name="BaseTriangle" type="Sprite2D" parent="UI/Main/BubbleTop"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+position = Vector2(60, 130)
+rotation = 3.14159
+scale = Vector2(0.1, 0.1)
+skew = -0.663225
+texture = ExtResource("29_22y37")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/BubbleTop"]
 layout_mode = 0
@@ -2310,24 +2305,18 @@ offset_top = 520.0
 offset_right = 560.0
 offset_bottom = 520.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Main/BubbleBottom"]
-visible = false
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-layout_mode = 0
-offset_left = 100.0
-offset_top = -30.0
-offset_right = 140.0
-offset_bottom = 30.0
-rotation = 0.523598
-pivot_offset = Vector2(20, 30)
-texture = ExtResource("29_22y37")
-expand_mode = 1
-
 [node name="Panel" type="Panel" parent="UI/Main/BubbleBottom"]
 self_modulate = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 0
 offset_right = 360.0
 offset_bottom = 160.0
+
+[node name="BaseTriangle" type="Sprite2D" parent="UI/Main/BubbleBottom"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+position = Vector2(60, -10)
+scale = Vector2(0.1, 0.1)
+skew = 0.663225
+texture = ExtResource("29_22y37")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/BubbleBottom"]
 layout_mode = 0
