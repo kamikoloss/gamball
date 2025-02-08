@@ -38,6 +38,7 @@ const DIALOGUE_FADE_DURATION := 0.4
 const LOG_LINES_MAX := 100
 
 
+
 @export var _log_label: RichTextLabel
 
 @export_category("Scenes")
@@ -68,6 +69,8 @@ const LOG_LINES_MAX := 100
 @export var _dialogue_top: RichTextLabel
 @export var _bubble_bottom: Control
 @export var _dialogue_bottom: RichTextLabel
+@export_category("Main/Combo")
+@export var _combo_bar: ColorRect
 
 @export_category("Tax")
 @export var _tax_window: Control
@@ -77,6 +80,11 @@ const LOG_LINES_MAX := 100
 @export_category("Shop")
 @export var _shop_window: Control
 @export var _shop_exit_button: Button
+
+
+var combo_bar_progress := 1.0:
+	set(v):
+		_combo_bar.scale.x = v
 
 
 var _target_bubble: Control

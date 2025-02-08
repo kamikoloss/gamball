@@ -8,14 +8,13 @@ signal exited
 
 
 enum GameState { GAME, COUNT_DOWN, TAX, SHOP }
+enum ComboState { IDLE, CONTINUE, COOLTIME }
 enum TaxType { MONEY, BALLS }
-enum TweenType { PAYOUT, TAX_COUNT_DOWN }
+enum TweenType { COMBO, TAX_COUNT_DOWN }
 
 
 # Ball を発射する強さ
 const IMPULSE_RATIO : = 16.0
-# 何秒ごとに 1 Ball を払い出すか
-const PAYOUT_INTERVAL_BASE := 0.1
 
 # DECK の 最小数/最大数 の 絶対値/初期値
 const DECK_SIZE_MIN := 2
@@ -69,9 +68,9 @@ const EXTRA_BALL_LEVEL_RARITY := {
 # Nodes
 @export var _billiards: Billiards
 @export var _pachinko: Pachinko
-@export var _stack: Stack
 @export var _balls_parent: Node2D
 @export var _drag_shooter: DragShooter
+@export var _stack_wall_bottom: StaticBody2D
 
 # UI
 @export var _game_ui: GameUi
@@ -93,10 +92,14 @@ var balls := 0:
 			_drag_shooter.enabled = true
 		balls = v
 		_game_ui.refresh_balls_label(balls)
-
-
 # ゲームの状態
 var game_state := GameState.GAME
+# コンボの状態
+var combo_state := ComboState.IDLE:
+	set(v):
+		if combo_state != v:
+			combo_state = v
+			print("[Game] combo_state changed to %s" % [ComboState.keys()[v]])
 
 
 # ビリヤード盤面上の Ball の数
@@ -132,8 +135,6 @@ var _extra_size_max := EXTRA_SIZE_MAX_DEFAULT
 
 # 払い出しを行う Hole
 var _payout_hole: Hole
-# 払い出しキューが残っている Ball level のリスト
-var _payout_level_list: Array[int] = []
 
 # Ball の購入レート
 # [x, y] x money = y balls
@@ -173,11 +174,11 @@ func _ready() -> void:
 	# Product
 	for node in _products_parent.get_children():
 		if node is Product:
-			print(node)
 			node.hovered.connect(_on_product_hovered)
 			node.pressed.connect(_on_product_pressed)
 
 	# UI
+	_game_ui.combo_bar_progress = 0.0
 	_game_ui.refresh_tax_table(TAX_LIST)
 	_game_ui.add_log("---- Start!! ----")
 	_apply_extra_ball_effects()
@@ -187,8 +188,6 @@ func _ready() -> void:
 
 	# ボール購入ボタンを1プッシュする
 	_on_buy_balls_button_pressed()
-	# 払い出し処理を開始する
-	_start_payout()
 
 
 func _on_drag_shooter_pressed() -> void:
@@ -221,7 +220,7 @@ func _on_buy_balls_button_pressed() -> void:
 	if money < money_unit:
 		return
 	money -= money_unit
-	_push_payout(0, balls_unit)
+	balls += balls_unit
 
 func _on_sell_balls_button_pressed() -> void:
 	var balls_unit = _sell_rate[0]
@@ -380,12 +379,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				tween.tween_callback(func():
 					var new_ball: Ball = _ball_scene.instantiate()
 					new_ball.level = level
-					new_ball.is_shrinked = true
 					_balls_parent.add_child(new_ball)
 					await new_ball.warp_for_gain(hole.global_position, _payout_hole.global_position)
-					_push_payout(level, 1)
-					new_ball.queue_free() # TODO: バラまくなら死なさなくていい
 					balls += 1
+					_start_combo()
+					new_ball.queue_free() # TODO: バラまくなら死なさなくていい
 				)
 			# PopupScore を表示する
 			var popup_text = "+%s" % [amount]
@@ -610,38 +608,21 @@ func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 	return random_rarity
 
 
-# 払い出しキューの実行ループを開始する
-func _start_payout(payout_speed_ratio: float = 1.0) -> void:
-	var delay = PAYOUT_INTERVAL_BASE / payout_speed_ratio
-	var tween = _get_tween(TweenType.PAYOUT)
-	tween.set_loops()
-	tween.tween_callback(_pop_payout).set_delay(delay)
-
-# 払い出しキューを実行する
-func _pop_payout() -> void:
-	if _payout_level_list.is_empty():
+# GAIN コンボを開始 (継続) する
+func _start_combo() -> void:
+	if not _stack_wall_bottom:
 		return
-	var level = _payout_level_list.pop_front()
-	var new_ball = _create_new_ball(level)
-	new_ball.position = _payout_hole.position
-	new_ball.apply_impulse(Vector2(0, randi_range(400, 500))) 
-	_game_ui.refresh_payout_label(_payout_level_list.size())
-
-# 払い出しキューに追加する
-func _push_payout(level: int, amount: int) -> void:
-	#for i in amount:
-	#	_payout_level_list.push_back(level)
-	#_game_ui.refresh_payout_label(_payout_level_list.size())
-
-	var payout_size = _payout_level_list.size()
-	if payout_size < 100:
-		_start_payout(1.0)
-	elif payout_size < 1000:
-		_start_payout(2.0)
-	elif payout_size < 10000:
-		_start_payout(3.0)
-	else:
-		_start_payout(4.0)
+	if combo_state == ComboState.COOLTIME:
+		return
+	var tween = _get_tween(TweenType.COMBO)
+	tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_callback(func(): combo_state = ComboState.CONTINUE)
+	tween.tween_method(func(v): _game_ui.combo_bar_progress = v, 1.0, 0.0, 3.0)
+	tween.tween_callback(func(): combo_state = ComboState.COOLTIME)
+	tween.tween_callback(func(): _stack_wall_bottom.set_collision_layer_value(Collision.Layer.WALL_STACK, false))
+	tween.tween_interval(3.0)
+	tween.tween_callback(func(): _stack_wall_bottom.set_collision_layer_value(Collision.Layer.WALL_STACK, true))
+	tween.tween_callback(func(): combo_state = ComboState.IDLE)
 
 
 # DECK/EXTRA の見た目を更新する

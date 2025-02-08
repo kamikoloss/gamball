@@ -8,9 +8,9 @@ signal changed # (value: int)
 
 @export var value := 0:
 	set(v):
-		value = v
-		_refresh_view()
 		if value != v:
+			value = v
+			_refresh_view()
 			changed.emit(value)
 
 

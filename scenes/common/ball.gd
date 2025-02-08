@@ -189,14 +189,14 @@ func hide_hover() -> void:
 
 # ワープする (WARP_TO 用)
 func warp_for_warp_to(to: Vector2) -> void:
-	set_collision_layer_value(Collision.Layer.BASE, false)
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
+	set_collision_layer_value(Collision.Layer.BASE, false) # 他のボールと衝突しない
+	set_collision_mask_value(Collision.Layer.WALL_HOLE, true) # WALL_HOLE 内で跳ね返る
 
 	await _enable_shrink()
 	await _warp(to)
 
-	set_collision_layer_value(Collision.Layer.BASE, true)
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, false)
+	set_collision_layer_value(Collision.Layer.BASE, true) # 他のボールと衝突する
+	set_collision_mask_value(Collision.Layer.WALL_HOLE, false) # WALL_HOLE を通り抜ける
 
 	# TODO: await の前におかないとボールが勢いよく出てしまうのでここに書いている
 	# できれば _disable_shrink() が終わってからボールを射出したい
@@ -207,12 +207,7 @@ func warp_for_warp_to(to: Vector2) -> void:
 
 # ワープする (GAIN 用)
 func warp_for_gain(from: Vector2, to: Vector2) -> void:
-	position = from
-	set_collision_layer_value(Collision.Layer.BASE, false)
-	set_collision_mask_value(Collision.Layer.BASE, false)
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
-
-	# 即座に縮小する
+	# 即座に縮小する (縮小状態から開始する)
 	_view_parent.scale = SHRINK_SCALE
 	_trail_line.width = _trail_default_width * SHRINK_SCALE.x
 	is_shrinked = true
@@ -221,12 +216,29 @@ func warp_for_gain(from: Vector2, to: Vector2) -> void:
 	position = from
 	await _warp(to)
 
+	# バラケさせる
+	var spawn_impulse = Vector2(randi_range(0, 100), randi_range(0, 100))
+	apply_impulse(spawn_impulse)
+
+	# 即座に拡大する
+	_view_parent.scale = Vector2.ONE
+	_trail_line.width = _trail_default_width
+	is_shrinked = false
+	refresh_view()
+
+	is_shrinked = true
+	# 他のボールおよび WALL_STACK にのみ衝突するようにする
+	set_collision_layer_value(Collision.Layer.BASE, false)
+	set_collision_mask_value(Collision.Layer.BASE, false)
+	set_collision_layer_value(Collision.Layer.WALL_STACK, true)
+	set_collision_mask_value(Collision.Layer.WALL_STACK, true)
+
 
 # 消える
 func die() -> void:
 	set_collision_layer_value(Collision.Layer.BASE, false)
 	set_collision_mask_value(Collision.Layer.BASE, false)
-	set_collision_mask_value(Collision.Layer.HOLE_WALL, true)
+	set_collision_mask_value(Collision.Layer.WALL_HOLE, true)
 	await _enable_shrink(true)
 	queue_free()
 

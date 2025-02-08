@@ -55,13 +55,14 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhuas"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("_billiards", "_pachinko", "_balls_parent", "_drag_shooter", "_game_ui", "_products_parent")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("_billiards", "_pachinko", "_balls_parent", "_drag_shooter", "_stack_wall_bottom", "_game_ui", "_products_parent")]
 script = ExtResource("1_mqtms")
 _ball_scene = ExtResource("2_javdm")
 _billiards = NodePath("Billiards")
 _pachinko = NodePath("Pachinko")
 _balls_parent = NodePath("Balls")
 _drag_shooter = NodePath("DragShooter")
+_stack_wall_bottom = NodePath("Main/StackWalls/Wall")
 _game_ui = NodePath("UI")
 _products_parent = NodePath("UI/Shop/Products")
 
@@ -95,14 +96,15 @@ visible = false
 position = Vector2(640, 0)
 scale = Vector2(64, 1)
 collision_layer = 8
+collision_mask = 8
 
-[node name="Wall3" parent="Main/StackWalls" instance=ExtResource("15_okamy")]
+[node name="Wall2" parent="Main/StackWalls" instance=ExtResource("15_okamy")]
 position = Vector2(0, -360)
 rotation = 1.5708
 scale = Vector2(36, 1)
 collision_layer = 8
 
-[node name="Wall4" parent="Main/StackWalls" instance=ExtResource("15_okamy")]
+[node name="Wall3" parent="Main/StackWalls" instance=ExtResource("15_okamy")]
 position = Vector2(1280, -360)
 rotation = -1.5708
 scale = Vector2(36, 1)
@@ -890,7 +892,7 @@ position = Vector2(280, 300)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_balls_label", "_next_balls_label", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_balls_label", "_next_balls_label", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("7_m16gi")
@@ -918,6 +920,7 @@ _bubble_top = NodePath("Bubbles/BubbleTop")
 _dialogue_top = NodePath("Bubbles/BubbleTop/RichTextLabel")
 _bubble_bottom = NodePath("Bubbles/BubbleBottom")
 _dialogue_bottom = NodePath("Bubbles/BubbleBottom/RichTextLabel")
+_combo_bar = NodePath("Main/Combo/ComboBar")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")
 _tax_table_parent = NodePath("Tax/PriceTable")
@@ -2282,6 +2285,15 @@ icon = ExtResource("21_5hb3e")
 icon_alignment = 1
 expand_icon = true
 
+[node name="Combo" type="Control" parent="UI/Main"]
+visible = false
+anchors_preset = 0
+
+[node name="ComboBar" type="ColorRect" parent="UI/Main/Combo"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 10.0
+
 [node name="Tax" type="Control" parent="UI"]
 visible = false
 layout_mode = 3
@@ -3044,8 +3056,9 @@ _main_labels_parent = NodePath("DebugWindow/MainLabels")
 
 [node name="Button" type="Button" parent="UIDebug"]
 layout_mode = 0
+offset_top = 700.0
 offset_right = 160.0
-offset_bottom = 40.0
+offset_bottom = 740.0
 scale = Vector2(0.5, 0.5)
 text = "Debug"
 
