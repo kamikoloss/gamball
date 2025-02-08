@@ -356,6 +356,7 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 			else:
 				node.level = Ball.BALL_LEVEL_OPTIONAL_SLOT
 				node.rarity = Ball.Rarity.COMMON
+			#print("refresh ball %s, %s" % [node.level, node.rarity])
 			node.refresh_view()
 			index += 1
 

@@ -450,7 +450,7 @@ func _on_product_pressed(product: Product) -> void:
 		Product.ProductType.DECK_CLEANER:
 			if _deck_ball_list.size() <= _deck_size_min:
 				return
-			_deck_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
+			#_deck_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
 			_deck_ball_list.pop_front()
 
 		Product.ProductType.EXTRA_PACK:
@@ -470,7 +470,7 @@ func _on_product_pressed(product: Product) -> void:
 		Product.ProductType.EXTRA_CLEANER:
 			if _extra_ball_list.size() == 0:
 				return
-			_extra_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
+			#_extra_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
 			var popped_ball: Ball = _extra_ball_list.pop_front()
 			# ex: [EffectType.MONEY_UP_ON_BREAK, 2]
 			var money_times = 1

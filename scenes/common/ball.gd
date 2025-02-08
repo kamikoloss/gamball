@@ -132,6 +132,7 @@ func refresh_view() -> void:
 	if level < 0:
 		_view_parent.visible = false
 		return
+	_view_parent.visible = true
 
 	# 本体色
 	var rarity_color = ColorPalette.BALL_RARITY_COLORS[rarity]
