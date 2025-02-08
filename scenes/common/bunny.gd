@@ -51,7 +51,7 @@ var size_type := SizeType.SMALL:
 		match size_type:
 			SizeType.SMALL:
 				_human.scale = Vector2(0.6, 0.6)
-				z_index = -22 # NOTE: UI が 20 なのでそれより少し後ろ
+				z_index = -10
 			SizeType.LARGE:
 				_human.scale = Vector2(1.0, 1.0)
 				z_index = 0

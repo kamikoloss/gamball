@@ -61,7 +61,7 @@ _ball_scene = ExtResource("2_javdm")
 _billiards = NodePath("Billiards")
 _pachinko = NodePath("Pachinko")
 _balls_parent = NodePath("Balls")
-_drag_shooter = NodePath("Billiards/DragShooter")
+_drag_shooter = NodePath("DragShooter")
 _game_ui = NodePath("UI")
 _products_parent = NodePath("UI/Shop/Products")
 
@@ -84,9 +84,29 @@ color = Color(0.05, 0.05, 0.05, 1)
 [node name="Main" type="Node2D" parent="."]
 
 [node name="HoleWarpFromPayout" parent="Main" instance=ExtResource("11_j5iaq")]
-position = Vector2(640, -40)
+position = Vector2(640, -80)
 hole_type = 4
 warp_group = 1
+
+[node name="StackWalls" type="Node2D" parent="Main"]
+visible = false
+
+[node name="Wall" parent="Main/StackWalls" instance=ExtResource("15_okamy")]
+position = Vector2(640, 0)
+scale = Vector2(64, 1)
+collision_layer = 8
+
+[node name="Wall3" parent="Main/StackWalls" instance=ExtResource("15_okamy")]
+position = Vector2(0, -360)
+rotation = 1.5708
+scale = Vector2(36, 1)
+collision_layer = 8
+
+[node name="Wall4" parent="Main/StackWalls" instance=ExtResource("15_okamy")]
+position = Vector2(1280, -360)
+rotation = -1.5708
+scale = Vector2(36, 1)
+collision_layer = 8
 
 [node name="Billiards" type="Node2D" parent="." node_paths=PackedStringArray("_spawn_position", "_spawn_extra_positions", "_balls_count_label")]
 position = Vector2(40, 220)
@@ -134,10 +154,6 @@ linear_damp = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Billiards/Gravity"]
 shape = SubResource("RectangleShape2D_uhuas")
 debug_color = Color(0, 0, 0, 0)
-
-[node name="DragShooter" parent="Billiards" instance=ExtResource("14_np1si")]
-z_index = 20
-position = Vector2(240, 240)
 
 [node name="Walls" type="Node2D" parent="Billiards"]
 visible = false
@@ -823,6 +839,10 @@ offset_top = 80.0
 offset_right = 10.0
 offset_bottom = 80.0
 
+[node name="DragShooter" parent="." instance=ExtResource("14_np1si")]
+z_index = 20
+position = Vector2(280, 460)
+
 [node name="Balls" type="Node2D" parent="."]
 
 [node name="Ball" parent="Balls" instance=ExtResource("2_javdm")]
@@ -871,7 +891,6 @@ level = 5
 is_on_billiards = true
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_balls_label", "_next_balls_label", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button")]
-z_index = 20
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("7_m16gi")
@@ -895,10 +914,10 @@ _sell_balls_button = NodePath("Main/Buttons/SellBalls")
 _info_button = NodePath("Main/Buttons/Information")
 _options_button = NodePath("Main/Buttons/Options")
 _bunny = NodePath("Bunny")
-_bubble_top = NodePath("Main/BubbleTop")
-_dialogue_top = NodePath("Main/BubbleTop/RichTextLabel")
-_bubble_bottom = NodePath("Main/BubbleBottom")
-_dialogue_bottom = NodePath("Main/BubbleBottom/RichTextLabel")
+_bubble_top = NodePath("Bubbles/BubbleTop")
+_dialogue_top = NodePath("Bubbles/BubbleTop/RichTextLabel")
+_bubble_bottom = NodePath("Bubbles/BubbleBottom")
+_dialogue_bottom = NodePath("Bubbles/BubbleBottom/RichTextLabel")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")
 _tax_table_parent = NodePath("Tax/PriceTable")
@@ -916,306 +935,6 @@ offset_left = 40.0
 offset_top = 20.0
 offset_right = 40.0
 offset_bottom = 20.0
-
-[node name="DeckHeader" type="Label" parent="UI/Main/Balls"]
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 20.0
-theme_type_variation = &"LabelHeader"
-theme_override_font_sizes/font_size = 12
-text = "DECK"
-vertical_alignment = 1
-
-[node name="DeckLamps" type="Control" parent="UI/Main/Balls"]
-anchors_preset = 0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 40.0
-offset_right = 60.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 70.0
-offset_right = 90.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 100.0
-offset_right = 120.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect4" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 130.0
-offset_right = 150.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect5" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
-visible = false
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 160.0
-offset_right = 180.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect6" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
-visible = false
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 190.0
-offset_right = 210.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect7" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
-visible = false
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 220.0
-offset_right = 240.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect8" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
-visible = false
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 250.0
-offset_right = 270.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect_" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
-layout_mode = 0
-offset_left = 130.0
-offset_right = 150.0
-offset_bottom = 20.0
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="DeckBalls" type="Node2D" parent="UI/Main/Balls"]
-position = Vector2(0, 20)
-
-[node name="Ball" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
-position = Vector2(20, 20)
-is_display = true
-
-[node name="Ball2" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
-position = Vector2(50, 20)
-is_display = true
-
-[node name="Ball3" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
-position = Vector2(80, 20)
-is_display = true
-
-[node name="Ball4" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
-position = Vector2(110, 20)
-is_display = true
-
-[node name="Ball5" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
-position = Vector2(140, 20)
-is_display = true
-
-[node name="Ball6" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
-position = Vector2(170, 20)
-is_display = true
-
-[node name="Ball7" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
-position = Vector2(200, 20)
-is_display = true
-
-[node name="Ball8" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
-position = Vector2(230, 20)
-is_display = true
-
-[node name="Ball9" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
-position = Vector2(260, 20)
-is_display = true
-
-[node name="ExtraHeader" type="Label" parent="UI/Main/Balls"]
-layout_mode = 0
-offset_top = 60.0
-offset_right = 80.0
-offset_bottom = 80.0
-theme_type_variation = &"LabelHeader"
-theme_override_font_sizes/font_size = 12
-text = "EXTRA"
-vertical_alignment = 1
-
-[node name="ExtraLamps" type="Control" parent="UI/Main/Balls"]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 60.0
-offset_bottom = 60.0
-
-[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
-visible = false
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 40.0
-offset_right = 60.0
-offset_bottom = 20.0
-rotation = 3.14159
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
-visible = false
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 70.0
-offset_right = 90.0
-offset_bottom = 20.0
-rotation = 3.14159
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
-visible = false
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 100.0
-offset_right = 120.0
-offset_bottom = 20.0
-rotation = 3.14159
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect4" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 130.0
-offset_right = 150.0
-offset_bottom = 20.0
-rotation = 3.14159
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect5" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 160.0
-offset_right = 180.0
-offset_bottom = 20.0
-rotation = 3.14159
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect6" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 190.0
-offset_right = 210.0
-offset_bottom = 20.0
-rotation = 3.14159
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect7" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 220.0
-offset_right = 240.0
-offset_bottom = 20.0
-rotation = 3.14159
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect8" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
-self_modulate = Color(0.2, 0.2, 0.2, 1)
-layout_mode = 0
-offset_left = 250.0
-offset_right = 270.0
-offset_bottom = 20.0
-rotation = 3.14159
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="TextureRect_" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
-layout_mode = 0
-offset_left = 130.0
-offset_right = 150.0
-offset_bottom = 20.0
-rotation = 3.14159
-pivot_offset = Vector2(10, 10)
-texture = ExtResource("16_fjf78")
-expand_mode = 1
-
-[node name="ExtraBalls" type="Node2D" parent="UI/Main/Balls"]
-position = Vector2(0, 80)
-
-[node name="Ball" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
-position = Vector2(20, 20)
-is_display = true
-
-[node name="Ball2" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
-position = Vector2(50, 20)
-is_display = true
-
-[node name="Ball3" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
-position = Vector2(80, 20)
-is_display = true
-
-[node name="Ball4" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
-position = Vector2(110, 20)
-is_display = true
-
-[node name="Ball5" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
-position = Vector2(140, 20)
-is_display = true
-
-[node name="Ball6" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
-position = Vector2(170, 20)
-is_display = true
-
-[node name="Ball7" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
-position = Vector2(200, 20)
-is_display = true
-
-[node name="Ball8" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
-position = Vector2(230, 20)
-is_display = true
-
-[node name="Ball9" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
-position = Vector2(260, 20)
-is_display = true
 
 [node name="Slots" type="Control" parent="UI/Main/Balls"]
 anchors_preset = 0
@@ -1957,6 +1676,306 @@ mouse_filter = 2
 texture = ExtResource("6_1dqto")
 expand_mode = 1
 
+[node name="DeckHeader" type="Label" parent="UI/Main/Balls"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 20.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "DECK"
+vertical_alignment = 1
+
+[node name="DeckLamps" type="Control" parent="UI/Main/Balls"]
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 70.0
+offset_right = 90.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 100.0
+offset_right = 120.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 130.0
+offset_right = 150.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 160.0
+offset_right = 180.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect6" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 190.0
+offset_right = 210.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect7" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 220.0
+offset_right = 240.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect8" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 250.0
+offset_right = 270.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect_" type="TextureRect" parent="UI/Main/Balls/DeckLamps"]
+layout_mode = 0
+offset_left = 130.0
+offset_right = 150.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="DeckBalls" type="Node2D" parent="UI/Main/Balls"]
+position = Vector2(0, 20)
+
+[node name="Ball" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(20, 20)
+is_display = true
+
+[node name="Ball2" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(50, 20)
+is_display = true
+
+[node name="Ball3" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(80, 20)
+is_display = true
+
+[node name="Ball4" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(110, 20)
+is_display = true
+
+[node name="Ball5" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(140, 20)
+is_display = true
+
+[node name="Ball6" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(170, 20)
+is_display = true
+
+[node name="Ball7" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(200, 20)
+is_display = true
+
+[node name="Ball8" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(230, 20)
+is_display = true
+
+[node name="Ball9" parent="UI/Main/Balls/DeckBalls" instance=ExtResource("2_javdm")]
+position = Vector2(260, 20)
+is_display = true
+
+[node name="ExtraHeader" type="Label" parent="UI/Main/Balls"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 80.0
+offset_bottom = 80.0
+theme_type_variation = &"LabelHeader"
+theme_override_font_sizes/font_size = 12
+text = "EXTRA"
+vertical_alignment = 1
+
+[node name="ExtraLamps" type="Control" parent="UI/Main/Balls"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 60.0
+offset_bottom = 60.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 70.0
+offset_right = 90.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+visible = false
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 100.0
+offset_right = 120.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 130.0
+offset_right = 150.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect5" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 160.0
+offset_right = 180.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect6" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 190.0
+offset_right = 210.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect7" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 220.0
+offset_right = 240.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect8" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+self_modulate = Color(0.2, 0.2, 0.2, 1)
+layout_mode = 0
+offset_left = 250.0
+offset_right = 270.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="TextureRect_" type="TextureRect" parent="UI/Main/Balls/ExtraLamps"]
+layout_mode = 0
+offset_left = 130.0
+offset_right = 150.0
+offset_bottom = 20.0
+rotation = 3.14159
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("16_fjf78")
+expand_mode = 1
+
+[node name="ExtraBalls" type="Node2D" parent="UI/Main/Balls"]
+position = Vector2(0, 80)
+
+[node name="Ball" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(20, 20)
+is_display = true
+
+[node name="Ball2" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(50, 20)
+is_display = true
+
+[node name="Ball3" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(80, 20)
+is_display = true
+
+[node name="Ball4" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(110, 20)
+is_display = true
+
+[node name="Ball5" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(140, 20)
+is_display = true
+
+[node name="Ball6" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(170, 20)
+is_display = true
+
+[node name="Ball7" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(200, 20)
+is_display = true
+
+[node name="Ball8" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(230, 20)
+is_display = true
+
+[node name="Ball9" parent="UI/Main/Balls/ExtraBalls" instance=ExtResource("2_javdm")]
+position = Vector2(260, 20)
+is_display = true
+
 [node name="Score" type="Control" parent="UI/Main"]
 anchors_preset = 0
 offset_left = 360.0
@@ -2262,72 +2281,6 @@ theme_type_variation = &"ButtonGray"
 icon = ExtResource("21_5hb3e")
 icon_alignment = 1
 expand_icon = true
-
-[node name="BubbleTop" type="Control" parent="UI/Main"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 960.0
-offset_top = 40.0
-offset_right = 960.0
-offset_bottom = 40.0
-
-[node name="Panel" type="Panel" parent="UI/Main/BubbleTop"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-layout_mode = 0
-offset_right = 280.0
-offset_bottom = 120.0
-
-[node name="BaseTriangle" type="Sprite2D" parent="UI/Main/BubbleTop"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-position = Vector2(60, 130)
-rotation = 3.14159
-scale = Vector2(0.1, 0.1)
-skew = -0.663225
-texture = ExtResource("29_22y37")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/BubbleTop"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 270.0
-offset_bottom = 110.0
-theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
-theme_override_fonts/normal_font = ExtResource("32_ubskw")
-bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
-
-[node name="BubbleBottom" type="Control" parent="UI/Main"]
-z_index = 2
-layout_mode = 3
-anchors_preset = 0
-offset_left = 560.0
-offset_top = 520.0
-offset_right = 560.0
-offset_bottom = 520.0
-
-[node name="Panel" type="Panel" parent="UI/Main/BubbleBottom"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-layout_mode = 0
-offset_right = 360.0
-offset_bottom = 160.0
-
-[node name="BaseTriangle" type="Sprite2D" parent="UI/Main/BubbleBottom"]
-self_modulate = Color(0.95, 0.95, 0.95, 1)
-position = Vector2(60, -10)
-scale = Vector2(0.1, 0.1)
-skew = 0.663225
-texture = ExtResource("29_22y37")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/BubbleBottom"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 350.0
-offset_bottom = 150.0
-theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
-theme_override_fonts/normal_font = ExtResource("32_ubskw")
-bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 
 [node name="Tax" type="Control" parent="UI"]
 visible = false
@@ -2899,8 +2852,10 @@ offset_left = 220.0
 offset_top = 340.0
 offset_right = 220.0
 offset_bottom = 340.0
+product_type = 2
 
 [node name="Product3" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
+visible = false
 offset_left = 380.0
 offset_top = 340.0
 offset_right = 380.0
@@ -2911,12 +2866,14 @@ offset_left = 60.0
 offset_top = 520.0
 offset_right = 60.0
 offset_bottom = 520.0
+product_type = 1
 
 [node name="Product5" parent="UI/Shop/Products" instance=ExtResource("18_gfb7h")]
 offset_left = 220.0
 offset_top = 520.0
 offset_right = 220.0
 offset_bottom = 520.0
+product_type = 1
 
 [node name="Exit" type="Button" parent="UI/Shop"]
 self_modulate = Color(0.921569, 0.239216, 0, 1)
@@ -2950,6 +2907,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Bunny" parent="UI" instance=ExtResource("19_tsuuh")]
+z_index = -10
 layout_mode = 0
 offset_left = 1160.0
 offset_right = 1160.0
@@ -2958,9 +2916,77 @@ _parts_1_textures = Array[Texture]([ExtResource("21_uj2w0"), ExtResource("22_201
 _parts_2_textures = Array[Texture]([ExtResource("24_qdik2"), ExtResource("25_atlcj")])
 _parts_3_textures = Array[Texture]([ExtResource("26_jh16u"), ExtResource("27_l85vb")])
 
+[node name="Bubbles" type="Control" parent="UI"]
+anchors_preset = 0
+
+[node name="BubbleTop" type="Control" parent="UI/Bubbles"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 960.0
+offset_top = 40.0
+offset_right = 960.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="UI/Bubbles/BubbleTop"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 120.0
+
+[node name="BaseTriangle" type="Sprite2D" parent="UI/Bubbles/BubbleTop"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+position = Vector2(60, 130)
+rotation = 3.14159
+scale = Vector2(0.1, 0.1)
+skew = -0.663225
+texture = ExtResource("29_22y37")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Bubbles/BubbleTop"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 270.0
+offset_bottom = 110.0
+theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_fonts/normal_font = ExtResource("32_ubskw")
+bbcode_enabled = true
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+
+[node name="BubbleBottom" type="Control" parent="UI/Bubbles"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 560.0
+offset_top = 520.0
+offset_right = 560.0
+offset_bottom = 520.0
+
+[node name="Panel" type="Panel" parent="UI/Bubbles/BubbleBottom"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+layout_mode = 0
+offset_right = 360.0
+offset_bottom = 160.0
+
+[node name="BaseTriangle" type="Sprite2D" parent="UI/Bubbles/BubbleBottom"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+position = Vector2(60, -10)
+scale = Vector2(0.1, 0.1)
+skew = 0.663225
+texture = ExtResource("29_22y37")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Bubbles/BubbleBottom"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 350.0
+offset_bottom = 150.0
+theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_fonts/normal_font = ExtResource("32_ubskw")
+bbcode_enabled = true
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+
 [node name="BallPopup" type="Control" parent="UI"]
 visible = false
-z_index = 4
+z_index = 20
 anchors_preset = 0
 
 [node name="Panel" type="Panel" parent="UI/BallPopup"]
