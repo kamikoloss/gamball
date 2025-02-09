@@ -159,10 +159,10 @@ func refresh_extra_balls(extra_ball_list: Array[Ball], min: int, max: int) -> vo
 	_refresh_balls(_extra_balls_parent, extra_ball_list, min, max)
 
 func refresh_deck_slots(shift: int) -> void:
-	_deck_min_lamp.position = Vector2(130, 0) - Vector2(30, 0) * shift # TODO: 保持しておく
+	_deck_min_lamp.position = Vector2(130 - 30 * shift, 0)
 
 func refresh_extra_slots(shift: int) -> void:
-	_extra_max_lamp.position = Vector2(130, 0) + Vector2(30, 0) * shift # TODO: 保持しておく
+	_extra_max_lamp.position = Vector2(130 + 30 * shift, 0)
 
 
 # Main/Score
@@ -276,8 +276,6 @@ func count_down() -> void:
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): set_dialogue("[font_size=32]い～～ち[/font_size]", true))
 	tween.tween_interval(1.0)
-	# Tax Window を表示する
-	tween.tween_callback(func(): set_dialogue("ゲームを続けたいなら延長料を払ってね～。", true))
 	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す
 
 	await tween.finished
