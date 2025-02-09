@@ -56,8 +56,10 @@ const LOG_LINES_MAX := 100
 @export var _next_turn_label: Label
 @export var _money_label: Label
 @export var _next_money_label: Label
+@export var _next_money_lamp: Label
 @export var _balls_label: Label
 @export var _next_balls_label: Label
+@export var _next_balls_lamp: Label
 @export_category("Main/Buttons")
 @export var _buy_balls_button: Button
 @export var _sell_balls_button: Button
@@ -178,18 +180,22 @@ func refresh_next(turn: int, type: Game.TaxType, amount: int) -> void:
 	_next_turn_label.text = _get_seg_text(turn)
 	if type == Game.TaxType.MONEY:
 		_next_money_label.text = _get_seg_text(amount)
-		_next_balls_label.text = "!!!!"
+		_next_money_lamp.visible = true
+		_next_balls_label.text = "!!!---"
+		_next_balls_lamp.visible = false
 	else:
-		_next_money_label.text = "!!!!"
+		_next_money_label.text = "!!!---"
+		_next_money_lamp.visible = false
 		_next_balls_label.text = _get_seg_text(amount)
+		_next_balls_lamp.visible = true
 
 func _get_seg_text(value: int) -> String:
-	return ("%4d" % value).replace(" ", "!")
+	return ("%6d" % value).replace(" ", "!")
 
 func refresh_next_clear() -> void:
-	_next_turn_label.text = "----"
-	_next_money_label.text = "----"
-	_next_balls_label.text = "----"
+	_next_turn_label.text = "!!!---"
+	_next_money_label.text = "!!!---"
+	_next_balls_label.text = "!!!---"
 
 
 func add_log(text: String) -> void:

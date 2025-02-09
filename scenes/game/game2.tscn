@@ -892,7 +892,7 @@ position = Vector2(280, 300)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_balls_label", "_next_balls_label", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_next_money_lamp", "_balls_label", "_next_balls_label", "_next_balls_lamp", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("7_m16gi")
@@ -909,8 +909,10 @@ _turn_label = NodePath("Main/Score/TurnValue")
 _next_turn_label = NodePath("Main/Score/TurnValue2")
 _money_label = NodePath("Main/Score/MoneyValue")
 _next_money_label = NodePath("Main/Score/MoneyValue2")
+_next_money_lamp = NodePath("Main/Score/MoneyNextLamp")
 _balls_label = NodePath("Main/Score/BallsValue")
 _next_balls_label = NodePath("Main/Score/BallsValue2")
+_next_balls_lamp = NodePath("Main/Score/BallsNextLamp")
 _buy_balls_button = NodePath("Main/Buttons/BuyBalls")
 _sell_balls_button = NodePath("Main/Buttons/SellBalls")
 _info_button = NodePath("Main/Buttons/Information")
@@ -1998,49 +2000,49 @@ vertical_alignment = 1
 [node name="TurnBg" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_top = 20.0
-offset_right = 80.0
+offset_right = 120.0
 offset_bottom = 60.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
-text = "8888"
+text = "888888"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TurnBg2" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 20.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 60.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
-text = "8888"
+text = "888888"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TurnValue" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_top = 20.0
-offset_right = 80.0
+offset_right = 120.0
 offset_bottom = 60.0
 theme_type_variation = &"LabelSeg"
 theme_override_font_sizes/font_size = 24
-text = "1234"
+text = "123456"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TurnValue2" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 20.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 60.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 24
-text = "1234"
+text = "123456"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -2056,9 +2058,9 @@ vertical_alignment = 1
 
 [node name="MoneyNext" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 60.0
-offset_right = 160.0
+offset_right = 200.0
 offset_bottom = 80.0
 theme_type_variation = &"LabelHeader"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
@@ -2066,12 +2068,12 @@ theme_override_font_sizes/font_size = 12
 text = "NEXT"
 vertical_alignment = 1
 
-[node name="MoneyNext2" type="Label" parent="UI/Main/Score"]
+[node name="MoneyNextLamp" type="Label" parent="UI/Main/Score"]
 visible = false
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 60.0
-offset_right = 160.0
+offset_right = 200.0
 offset_bottom = 80.0
 theme_type_variation = &"LabelHeader"
 theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
@@ -2082,49 +2084,49 @@ vertical_alignment = 1
 [node name="MoneyBg" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_top = 80.0
-offset_right = 80.0
+offset_right = 120.0
 offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
-text = "8888"
+text = "888888"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MoneyBg2" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 80.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
-text = "8888"
+text = "888888"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MoneyValue" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_top = 80.0
-offset_right = 80.0
+offset_right = 120.0
 offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
 theme_override_font_sizes/font_size = 24
-text = "1234"
+text = "123456"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MoneyValue2" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 80.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 24
-text = "1234"
+text = "123456"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -2140,9 +2142,9 @@ vertical_alignment = 1
 
 [node name="BallsNext" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 120.0
-offset_right = 160.0
+offset_right = 200.0
 offset_bottom = 140.0
 theme_type_variation = &"LabelHeader"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
@@ -2150,11 +2152,12 @@ theme_override_font_sizes/font_size = 12
 text = "NEXT"
 vertical_alignment = 1
 
-[node name="BallsNext2" type="Label" parent="UI/Main/Score"]
+[node name="BallsNextLamp" type="Label" parent="UI/Main/Score"]
+visible = false
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 120.0
-offset_right = 160.0
+offset_right = 200.0
 offset_bottom = 140.0
 theme_type_variation = &"LabelHeader"
 theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
@@ -2165,65 +2168,64 @@ vertical_alignment = 1
 [node name="BallsBg" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_top = 140.0
-offset_right = 80.0
+offset_right = 120.0
 offset_bottom = 180.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
-text = "8888"
+text = "888888"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BallsBg2" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 140.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 180.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
-text = "8888"
+text = "888888"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BallsValue" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_top = 140.0
-offset_right = 80.0
+offset_right = 120.0
 offset_bottom = 180.0
 theme_type_variation = &"LabelSeg"
 theme_override_font_sizes/font_size = 24
-text = "1234"
+text = "123456"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BallsValue2" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 120.0
 offset_top = 140.0
-offset_right = 160.0
+offset_right = 240.0
 offset_bottom = 180.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 24
-text = "1234"
+text = "123456"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Log" type="Control" parent="UI/Main"]
 anchors_preset = 0
-offset_left = 560.0
-offset_top = 40.0
-offset_right = 560.0
-offset_bottom = 40.0
+offset_left = 800.0
+offset_top = 20.0
+offset_right = 800.0
+offset_bottom = 20.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/Main/Log"]
 layout_mode = 0
-offset_left = 160.0
-offset_top = -10.0
-offset_right = 320.0
-offset_bottom = 150.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 170.0
 theme_override_fonts/normal_font = ExtResource("8_sucdk")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
@@ -2231,9 +2233,9 @@ scroll_following = true
 
 [node name="Buttons" type="Control" parent="UI/Main"]
 anchors_preset = 0
-offset_left = 560.0
+offset_left = 640.0
 offset_top = 40.0
-offset_right = 560.0
+offset_right = 640.0
 offset_bottom = 40.0
 
 [node name="BuyBalls" type="Button" parent="UI/Main/Buttons"]
@@ -2286,7 +2288,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Combo" type="Control" parent="UI/Main"]
-visible = false
 anchors_preset = 0
 
 [node name="ComboBar" type="ColorRect" parent="UI/Main/Combo"]
