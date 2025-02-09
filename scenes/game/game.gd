@@ -427,7 +427,7 @@ func _on_product_pressed(product: Product) -> void:
 	# Money が足りない場合: 何もしない
 	if money < product.price:
 		# TODO: 購入できない理由がいくつかあるときラベルを分ける？
-		_game_ui.set_dialogue("お金が足りないよ～")
+		_game_ui.set_dialogue("お金が足りないよ～", true)
 		return
 
 	# Product の効果を発動する

@@ -210,7 +210,11 @@ func add_log(text: String) -> void:
 
 # Main/Score
 # NOTE: Bunny ではなく GameUI 側が持っていることに注意する
-func set_dialogue(dialogue: String) -> void:
+func set_dialogue(dialogue: String, pose_and_jump: bool = false) -> void:
+	if pose_and_jump:
+		_bunny.shuffle_pose()
+		_bunny.jump()
+
 	var tween = _get_tween(TweenType.DIALOGUE)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_target_bubble, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION / 2) # 表示を消す
@@ -265,29 +269,18 @@ func change_bunny_size(large: bool = true) -> void:
 
 func count_down() -> void:
 	_bunny.disable_touch() # バニーのタッチを無効にする
-
-	set_dialogue("[font_size=32][color=DARK_RED]延長[/color]のお時間\nで～す[/font_size]")
-	_bunny.shuffle_pose()
-	_bunny.jump()
+	set_dialogue("[font_size=32][color=DARK_RED]延長[/color]のお時間\nで～す[/font_size]", true)
 
 	var tween = _get_tween(TweenType.COUNT_DOWN)
 	tween.tween_interval(2.0)
-	tween.tween_callback(func(): set_dialogue("[font_size=32]さ～～ん[/font_size]"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
-	tween.tween_callback(func(): _bunny.jump())
+	tween.tween_callback(func(): set_dialogue("[font_size=32]さ～～ん[/font_size]", true))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): set_dialogue("[font_size=32]に～～い[/font_size]"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
-	tween.tween_callback(func(): _bunny.jump())
+	tween.tween_callback(func(): set_dialogue("[font_size=32]に～～い[/font_size]", true))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): set_dialogue("[font_size=32]い～～ち[/font_size]"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
-	tween.tween_callback(func(): _bunny.jump())
+	tween.tween_callback(func(): set_dialogue("[font_size=32]い～～ち[/font_size]", true))
 	tween.tween_interval(1.0)
 	# Tax Window を表示する
-	tween.tween_callback(func(): set_dialogue("ゲームを続けたいなら延長料を払ってね～。"))
-	tween.tween_callback(func(): _bunny.shuffle_pose())
-	tween.tween_callback(func(): _bunny.jump())
+	tween.tween_callback(func(): set_dialogue("ゲームを続けたいなら延長料を払ってね～。", true))
 	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す
 
 	await tween.finished
@@ -386,10 +379,7 @@ func _on_bunny_pressed() -> void:
 		"ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。",
 		"ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～",
 	]
-	set_dialogue(dialogue_list.pick_random())
-
-	_bunny.shuffle_pose()
-	_bunny.jump()
+	set_dialogue(dialogue_list.pick_random(), true)
 
 
 func _get_tween(type: TweenType) -> Tween:
