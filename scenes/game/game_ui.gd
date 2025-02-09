@@ -47,6 +47,8 @@ const LOG_LINES_MAX := 100
 @export_category("Main/Balls")
 @export var _deck_balls_parent: Node2D
 @export var _extra_balls_parent: Node2D
+@export var _deck_min_lamp: Control
+@export var _extra_max_lamp: Control
 @export var _ball_popup: Control
 @export var _ball_popup_level: Label
 @export var _ball_popup_rarity: Label
@@ -159,11 +161,11 @@ func refresh_deck_balls(deck_ball_list: Array[Ball], min: int, max: int) -> void
 func refresh_extra_balls(extra_ball_list: Array[Ball], min: int, max: int) -> void:
 	_refresh_balls(_extra_balls_parent, extra_ball_list, min, max)
 
-func refresh_deck_slots(min: int, max: int) -> void:
-	pass
+func refresh_deck_slots(shift: int) -> void:
+	_deck_min_lamp.position = Vector2(130, 0) - Vector2(30, 0) * shift # TODO: 保持しておく
 
-func refresh_extra_slots(min: int, max: int) -> void:
-	pass
+func refresh_extra_slots(shift: int) -> void:
+	_extra_max_lamp.position = Vector2(130, 0) + Vector2(30, 0) * shift # TODO: 保持しておく
 
 
 # Main/Score
@@ -283,7 +285,7 @@ func count_down() -> void:
 	tween.tween_callback(func(): _bunny.jump())
 	tween.tween_interval(1.0)
 	# Tax Window を表示する
-	tween.tween_callback(func(): set_dialogue("ゲームを続けたいなら延長料を払ってね～。\n真ん中の下らへんに出てるやつ。"))
+	tween.tween_callback(func(): set_dialogue("ゲームを続けたいなら延長料を払ってね～。"))
 	tween.tween_callback(func(): _bunny.shuffle_pose())
 	tween.tween_callback(func(): _bunny.jump())
 	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す

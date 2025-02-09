@@ -21,7 +21,7 @@ const DECK_SIZE_MIN := 2
 const DECK_SIZE_MIN_DEFAULT = 5
 const DECK_SIZE_MAX := 9
 # EXTRA の 最小数/最大数の 絶対値/初期値
-const EXTRA_SIZE_MIN := 0
+const EXTRA_SIZE_MIN := 2
 const EXTRA_SIZE_MAX := 9
 const EXTRA_SIZE_MAX_DEFAULT := 5
 
@@ -123,9 +123,9 @@ var _deck_ball_list: Array[Ball] = [
 ]
 # 出現する Extra Ball のリストの初期値
 var _extra_ball_list: Array[Ball] = [
-	Ball.new(1, Ball.Rarity.UNCOMMON),
-	Ball.new(2, Ball.Rarity.UNCOMMON),
-	Ball.new(3, Ball.Rarity.UNCOMMON),
+	Ball.new(1, Ball.Rarity.COMMON),
+	Ball.new(2, Ball.Rarity.COMMON),
+	Ball.new(3, Ball.Rarity.COMMON),
 ]
 # DECK/EXTRA の 最小/最大 数
 var _deck_size_min := DECK_SIZE_MIN_DEFAULT
@@ -628,9 +628,9 @@ func _start_combo() -> void:
 # DECK/EXTRA の見た目を更新する
 func _refresh_deck_extra() -> void:
 	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
-	_game_ui.refresh_deck_slots(_deck_size_min, _deck_size_max)
+	_game_ui.refresh_deck_slots(DECK_SIZE_MIN_DEFAULT - _deck_size_min)
 	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
-	_game_ui.refresh_extra_slots(_extra_size_min, _extra_size_max)
+	_game_ui.refresh_extra_slots(_extra_size_max - EXTRA_SIZE_MAX_DEFAULT)
 
 
 # Next 関連の見た目を更新する

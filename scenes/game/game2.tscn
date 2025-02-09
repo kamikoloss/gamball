@@ -892,7 +892,7 @@ position = Vector2(280, 300)
 level = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_next_money_lamp", "_balls_label", "_next_balls_label", "_next_balls_lamp", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_ball_popup", "_ball_popup_level", "_ball_popup_rarity", "_ball_popup_description", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_next_money_lamp", "_balls_label", "_next_balls_label", "_next_balls_lamp", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("7_m16gi")
@@ -901,6 +901,8 @@ _log_label = NodePath("Main/Log/RichTextLabel")
 _popup_score_scene = ExtResource("17_k13dc")
 _deck_balls_parent = NodePath("Main/Balls/DeckBalls")
 _extra_balls_parent = NodePath("Main/Balls/ExtraBalls")
+_deck_min_lamp = NodePath("Main/Balls/DeckLamps/TextureRect_")
+_extra_max_lamp = NodePath("Main/Balls/ExtraLamps/TextureRect_")
 _ball_popup = NodePath("BallPopup")
 _ball_popup_level = NodePath("BallPopup/Level")
 _ball_popup_rarity = NodePath("BallPopup/Rarity")
