@@ -258,7 +258,7 @@ func _on_shop_exit_button_pressed() -> void:
 	_game_ui.hide_shop_window()
 	_game_ui.change_target_bubble(false)
 	await _game_ui.change_bunny_size(false)
-	_game_ui.set_dialogue("...")
+	_game_ui.set_dialogue("よいしょっと")
 
 	game_state = GameState.GAME
 
