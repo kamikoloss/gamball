@@ -15,11 +15,8 @@ signal options_button_pressed
 
 
 # Window 移動系
-const WINDOW_POSITION_BOTTOM_FROM := Vector2(0, 720)
-const WINDOW_POSITION_BOTTOM_TO := Vector2(0, -720)
-const WINDOW_POSITION_RIGHT_FROM := Vector2(1280, 0)
-const WINDOW_POSITION_RIGHT_TO := Vector2(720, 0)
-const WINDOW_POSITION_TO := Vector2(0, 0)
+const WINDOW_POSITION_HORIZONTAL_FROM := Vector2(1280, 0)
+const WINDOW_POSITION_HORIZONTAL_TO := Vector2(-1280, 0)
 const WINDOW_MOVE_DURATION := 1.0
 
 # Bunny 移動系
@@ -130,28 +127,28 @@ func _ready() -> void:
 
 func show_tax_window() -> void:
 	_tax_window.visible = true
-	_tax_window.position = WINDOW_POSITION_BOTTOM_FROM
+	_tax_window.position = WINDOW_POSITION_HORIZONTAL_FROM
 	var tween = _get_tween(TweenType.TAX)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(_tax_window, "position", WINDOW_POSITION_TO, WINDOW_MOVE_DURATION)
+	tween.tween_property(_tax_window, "position", Vector2.ZERO, WINDOW_MOVE_DURATION)
 
 func hide_tax_window() -> void:
 	var tween = _get_tween(TweenType.TAX)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(_tax_window, "position", WINDOW_POSITION_BOTTOM_TO, WINDOW_MOVE_DURATION)
+	tween.tween_property(_tax_window, "position", WINDOW_POSITION_HORIZONTAL_TO, WINDOW_MOVE_DURATION)
 
 
 func show_shop_window() -> void:
 	_shop_window.visible = true
-	_shop_window.position = WINDOW_POSITION_BOTTOM_FROM
+	_shop_window.position = WINDOW_POSITION_HORIZONTAL_FROM
 	var tween = _get_tween(TweenType.SHOP)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(_shop_window, "position", WINDOW_POSITION_TO, WINDOW_MOVE_DURATION)
+	tween.tween_property(_shop_window, "position", Vector2.ZERO, WINDOW_MOVE_DURATION)
 
 func hide_shop_window() -> void:
 	var tween = _get_tween(TweenType.SHOP)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(_shop_window, "position", WINDOW_POSITION_BOTTOM_TO, WINDOW_MOVE_DURATION)
+	tween.tween_property(_shop_window, "position", WINDOW_POSITION_HORIZONTAL_TO, WINDOW_MOVE_DURATION)
 
 
 #Main/Balls
