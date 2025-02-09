@@ -375,7 +375,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			if 0 < amount:
 				var tween = create_tween()
 				tween.set_loops(amount)
-				tween.tween_interval(1.0 / 20) # TODO: const
+				tween.tween_interval(1.0 / 10) # TODO: const
 				tween.tween_callback(func():
 					var new_ball: Ball = _ball_scene.instantiate()
 					new_ball.level = level

@@ -22,9 +22,9 @@ const SHRINK_SCALE := Vector2(0.6, 0.6)
 const HIDE_DURATION := 1.0
 
 # 残像の頂点数
-const TRAIL_MAX_LENGTH := 10
+const TRAIL_MAX_LENGTH := 5
 # 残像の頂点の更新インターバル (秒)
-const TRAIL_INTERVAL := 0.02
+const TRAIL_INTERVAL := 1.0 / 30.0
 
 # 特殊なボール番号
 const BALL_LEVEL_OPTIONAL_SLOT := -1 # 空きスロット用
