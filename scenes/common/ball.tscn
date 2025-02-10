@@ -17,7 +17,7 @@ point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_body_texture", "_inner_texture", "_inner_line_texture", "_inactive_texture", "_level_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_view_slot", "_view_main", "_body_texture", "_inner_texture", "_inner_line_texture", "_inactive_texture", "_level_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
 z_index = 1
 collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
@@ -25,11 +25,13 @@ contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_rcr8u")
 _view_parent = NodePath("View")
-_body_texture = NodePath("View/Mask/Control/Body")
-_inner_texture = NodePath("View/Mask/Control/Inner")
-_inner_line_texture = NodePath("View/Mask/Control/InnerLine")
-_inactive_texture = NodePath("View/Mask/Control/Inactive")
-_level_label = NodePath("View/Level")
+_view_slot = NodePath("View/Mask/Slot")
+_view_main = NodePath("View/Mask/Main")
+_body_texture = NodePath("View/Mask/Main/Body")
+_inner_texture = NodePath("View/Mask/Main/Inner")
+_inner_line_texture = NodePath("View/Mask/Main/InnerLine")
+_inactive_texture = NodePath("View/Mask/Main/Inactive")
+_level_label = NodePath("View/Mask/Main/Level")
 _hover_texture = NodePath("View/Hover")
 _trail_line = NodePath("Trail")
 _hole_area = NodePath("Hole")
@@ -56,14 +58,55 @@ texture = ExtResource("2_4bc8b")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="View/Mask"]
+[node name="Slot" type="Control" parent="View/Mask"]
+layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 20.0
 offset_bottom = 20.0
 
-[node name="Body" type="TextureRect" parent="View/Mask/Control"]
+[node name="TextureRect" type="TextureRect" parent="View/Mask/Slot"]
+self_modulate = Color(0.95, 0.95, 0.95, 1)
+layout_mode = 0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("3_rxati")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="View/Mask/Slot"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("2_4bc8b")
+expand_mode = 1
+
+[node name="Main" type="Control" parent="View/Mask"]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="Body" type="TextureRect" parent="View/Mask/Main"]
 self_modulate = Color(0.501961, 0.501961, 0.501961, 1)
 layout_mode = 0
 offset_left = -10.0
@@ -76,7 +119,7 @@ mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
 
-[node name="InnerLine" type="TextureRect" parent="View/Mask/Control"]
+[node name="InnerLine" type="TextureRect" parent="View/Mask/Main"]
 self_modulate = Color(1, 0, 1, 1)
 layout_mode = 0
 offset_left = -10.0
@@ -89,7 +132,7 @@ mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Inner" type="TextureRect" parent="View/Mask/Control"]
+[node name="Inner" type="TextureRect" parent="View/Mask/Main"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -108,7 +151,7 @@ mouse_filter = 2
 texture = ExtResource("2_4bc8b")
 expand_mode = 1
 
-[node name="Inactive" type="TextureRect" parent="View/Mask/Control"]
+[node name="Inactive" type="TextureRect" parent="View/Mask/Main"]
 visible = false
 self_modulate = Color(0.960784, 0.968627, 0.34902, 1)
 layout_mode = 0
@@ -122,7 +165,7 @@ mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
 
-[node name="Level" type="Label" parent="View"]
+[node name="Level" type="Label" parent="View/Mask/Main"]
 self_modulate = Color(0, 0, 0, 1)
 offset_left = -20.0
 offset_top = -20.0
@@ -136,7 +179,6 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Hover" type="TextureRect" parent="View"]
-visible = false
 self_modulate = Color(1, 1, 1, 0.6)
 offset_left = -10.0
 offset_top = -10.0

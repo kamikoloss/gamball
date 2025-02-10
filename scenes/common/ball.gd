@@ -1,6 +1,5 @@
 class_name Ball
 extends RigidBody2D
-# TODO: 見た目部分を分割する
 
 
 signal pressed # ()
@@ -38,7 +37,6 @@ const BALL_LEVEL_DISABLED_SLOT := -2 # 使用不可スロット用
 # pressed は展示用のみ発火する
 @export var is_display := false
 # ボールがビリヤード盤面上にあるかどうか
-# NOTE: ビリヤード盤面上の初期 Ball 用に export している
 @export var is_on_billiards := false:
 	set(v):
 		is_on_billiards = v
@@ -51,6 +49,8 @@ const BALL_LEVEL_DISABLED_SLOT := -2 # 使用不可スロット用
 
 # 見た目部分をまとめる親
 @export var _view_parent: Node2D
+@export var _view_slot: Control
+@export var _view_main: Control
 # ボールの本体色部分
 @export var _body_texture: TextureRect
 # ボール番号の背景部分
@@ -128,11 +128,13 @@ func _ready() -> void:
 
 # 自身の見た目を更新する
 func refresh_view() -> void:
-	# スロットの場合: 見た目をすべて非表示にする
+	# スロットの場合
 	if level < 0:
-		_view_parent.visible = false
+		_view_slot.visible = true
+		_view_main.visible = false
 		return
-	_view_parent.visible = true
+	_view_slot.visible = false
+	_view_main.visible = true
 
 	# 本体色
 	var rarity_color = ColorPalette.BALL_RARITY_COLORS[rarity]

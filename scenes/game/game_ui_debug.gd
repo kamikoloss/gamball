@@ -30,11 +30,6 @@ var _main_functions: Dictionary = {
 	"MONEY -100": func(): _game.money -= 100,
 	"BALLS +100": func(): _game.balls += 100,
 	"BALLS -100": func(): _game.balls -= 100,
-	"PAYOUT +100": func(): _game._push_payout(0, 100),
-	"payout speed x1": func(): _game._start_payout(1.0),
-	"payout speed x2": func(): _game._start_payout(2.0),
-	"payout speed x3": func(): _game._start_payout(3.0),
-	"payout speed x4": func(): _game._start_payout(4.0),
 	# Pachinko
 	"start_lottery": func(): _pachinko.start_lottery(true),
 	"_start_rush": func(): _pachinko._start_rush(),
