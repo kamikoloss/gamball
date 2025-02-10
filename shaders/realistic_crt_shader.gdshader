@@ -41,7 +41,7 @@ uniform float scan_line_strength :hint_range(-12.0, -1.0) = -8.0;
 uniform float pixel_strength :hint_range(-4.0, 0.0) = -2.0;
 
 float random(vec2 uv){
-    return fract(cos(uv.x * 83.4827 + uv.y * 92.2842) * 43758.5453123);
+	return fract(cos(uv.x * 83.4827 + uv.y * 92.2842) * 43758.5453123);
 }
 
 vec3 fetch_pixel(vec2 uv, vec2 off){
@@ -75,13 +75,13 @@ vec3 Horz3(vec2 pos, float off){
 	vec3 c = fetch_pixel(pos, vec2( 0.0, off));
 	vec3 d = fetch_pixel(pos, vec2( 1.0, off));
 	float dst = Dist(pos).x;
-	
+
 	// Convert distance to weight.
 	float scale = pixel_strength;
 	float wb = Gaus(dst - 1.0, scale);
 	float wc = Gaus(dst + 0.0, scale);
 	float wd = Gaus(dst + 1.0, scale);
-	
+
 	// Return filtered sample.
 	return (b * wb + c * wc + d * wd) / (wb + wc + wd);
 }
@@ -89,7 +89,7 @@ vec3 Horz3(vec2 pos, float off){
 // Return scanline weight.
 float Scan(vec2 pos, float off){
 	float dst = Dist(pos).y;
-	
+
 	return Gaus(dst + off, scan_line_strength);
 }
 
@@ -151,7 +151,7 @@ float roll_line(vec2 uv){
 void fragment(){
 	vec2 pix = FRAGCOORD.xy;
 	vec2 pos = warp(SCREEN_UV);
-	
+
 	float line = 0.0;
 	if(roll_line_amount > 0.0){
 		line = roll_line(pos);
@@ -173,11 +173,11 @@ void fragment(){
 		float b = Tri(pos + chromatic_x).b;
 		clr = vec3(r,g,b);
 	}
-	
+
 	if(grille_amount > 0.0)clr *= grille(pix);
 	clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;
 	if(vignette_amount > 0.0)clr *= vignette(pos);
-	
+
 	COLOR.rgb = clr;
 	COLOR.a = 1.0;
 }
