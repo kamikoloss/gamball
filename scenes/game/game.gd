@@ -295,9 +295,9 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				await ball.die()
 				_billiards.refresh_balls_count(_billiards_balls_count)
 				return
-			# ex: [EffectType.MONEY_UP_FALL, 10]
+			# ex: [Type.MONEY_UP_FALL, 10]
 			for effect_data in ball.effects:
-				if effect_data[0] == BallEffect.EffectType.MONEY_UP_FALL:
+				if effect_data[0] == BallEffect.Type.MONEY_UP_FALL:
 					money += effect_data[1]
 					print("[Game/BallEffect] MONEY_UP_FALL +%s" % [effect_data[1]])
 			# 同じ GroupType の Hole に Ball をワープさせる
@@ -313,9 +313,9 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
 			var random_ball: Ball = _extra_ball_list.pick_random()
 			var new_ball = _create_new_ball(random_ball.level, random_ball.rarity)
-			# ex: [EffectType.NUMBER_UP_SPAWN, 1]
+			# ex: [Type.NUMBER_UP_SPAWN, 1]
 			for effect_data in new_ball.effects:
-				if effect_data[0] == BallEffect.EffectType.NUMBER_UP_SPAWN:
+				if effect_data[0] == BallEffect.Type.NUMBER_UP_SPAWN:
 					var gain_level = effect_data[1]
 					for target_ball: Ball in _balls_parent.get_children().filter(func(ball: Ball): return ball.is_on_billiards):
 						target_ball.level += gain_level
@@ -337,35 +337,35 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# Gain 増加系の BallEffect を確認する
 			var gain_plus: int = 0 # Gain がいくつ増えるか
 			var gain_times: int = 1 # Gain が何倍になるか
-			# ex: [EffectType.GAIN_UP_BL_COUNT, 50, 1]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_BL_COUNT):
+			# ex: [Type.GAIN_UP_BL_COUNT, 50, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_BL_COUNT):
 				if _billiards_balls_count <= effect_data[1]:
 					gain_plus += effect_data[2]
-			# ex: [EffectType.GAIN_UP_BL_COUNT_2, 5, 2]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_BL_COUNT):
+			# ex: [Type.GAIN_UP_BL_COUNT_2, 5, 2]
+			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_BL_COUNT):
 				if _billiards_balls_count <= effect_data[1]:
 					gain_times += effect_data[2]
-			# ex: [EffectType.GAIN_UP_DECK_COMPLETE, 3, 2]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_DECK_COMPLETE):
+			# ex: [Type.GAIN_UP_DECK_COMPLETE, 3, 2]
+			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_DECK_COMPLETE):
 				var complete_list = range(effect_data[1] + 1) # 3 以下 => [0, 1, 2, 3]
 				for deck_ball in _deck_ball_list:
 					complete_list = complete_list.filter(func(v): return v != deck_ball.level) # LV 以外に絞り込む = LV を消す
 				if complete_list.is_empty():
 					gain_times += effect_data[2]
-			# ex: [EffectType.GAIN_UP_DECK_COUNT, 50, 1]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_DECK_COUNT):
+			# ex: [Type.GAIN_UP_DECK_COUNT, 50, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_DECK_COUNT):
 				if _deck_ball_list.size() <= effect_data[1]:
 					gain_plus += effect_data[2]
-			# ex: [EffectType.GAIN_UP, 3, 1]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_BALL_NUMBER):
+			# ex: [Type.GAIN_UP, 3, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_BALL_NUMBER):
 				if ball.level <= effect_data[1]:
 					gain_plus += effect_data[2]
-			# ex: [EffectType.GAIN_UP_BALL_NUMBER_2, 1, 2]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_BALL_NUMBER_2):
+			# ex: [Type.GAIN_UP_BALL_NUMBER_2, 1, 2]
+			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_BALL_NUMBER_2):
 				if ball.level == effect_data[1]:
 					gain_times += effect_data[2]
-			# ex: [EffectType.GAIN_UP_HOLE, 1]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_HOLE):
+			# ex: [Type.GAIN_UP_HOLE, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_HOLE):
 				gain_plus += effect_data[1]
 			if gain_plus != 0 and gain_times != 1:
 				print("[Game/BallEffect] XXXX_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
@@ -471,10 +471,10 @@ func _on_product_pressed(product: Product) -> void:
 				return
 			#_extra_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
 			var popped_ball: Ball = _extra_ball_list.pop_front()
-			# ex: [EffectType.MONEY_UP_BREAK, 2]
+			# ex: [Type.MONEY_UP_BREAK, 2]
 			var money_times = 1
 			for effect_data in popped_ball.effects:
-				if effect_data[0] == BallEffect.EffectType.MONEY_UP_BREAK:
+				if effect_data[0] == BallEffect.Type.MONEY_UP_BREAK:
 					money_times *= effect_data[1]
 				print("[Game/BallEffect] MONEY_UP_BREAK x%s" % [money_times])
 			if 1 < money_times:
@@ -491,27 +491,27 @@ func _on_product_pressed(product: Product) -> void:
 
 # EXTRA Ball の効果をまとめて反映する
 func _apply_extra_ball_effects() -> void:
-	# ex: [EffectType.DECK_SIZE_MIN_DOWN, 1]
+	# ex: [Type.DECK_SIZE_MIN_DOWN, 1]
 	var new_deck_size_min = DECK_SIZE_MIN_DEFAULT
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_SIZE_MIN_DOWN):
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.DECK_SIZE_MIN_DOWN):
 		new_deck_size_min -= effect_data[1]
 	_deck_size_min = clampi(new_deck_size_min, DECK_SIZE_MIN, new_deck_size_min)
 	print("[Game/BallEffect] DECK_SIZE_MIN_DOWN _deck_size_min: %s" % [_deck_size_min])
 
-	# ex: [EffectType.EXTRA_SIZE_MAX_UP, 2]
+	# ex: [Type.EXTRA_SIZE_MAX_UP, 2]
 	var new_extra_size_max = EXTRA_SIZE_MAX_DEFAULT
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.EXTRA_SIZE_MAX_UP):
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.EXTRA_SIZE_MAX_UP):
 		new_extra_size_max += effect_data[1]
 	_extra_size_max = clampi(new_extra_size_max, new_extra_size_max, EXTRA_SIZE_MAX)
 	print("[Game/BallEffect] EXTRA_SIZE_MAX_UP _extra_size_max: %s" % [_extra_size_max])
 
-	# ex: [EffectType.HOLE_SIZE_UP, 1]
+	# ex: [Type.HOLE_SIZE_UP, 1]
 	var hole_size_level = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_SIZE_UP):
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.HOLE_SIZE_UP):
 		hole_size_level += effect_data[1]
-	# ex: [EffectType.HOLE_GRAVITY_SIZE_UP, 1]
+	# ex: [Type.HOLE_GRAVITY_SIZE_UP, 1]
 	var gravity_size_level = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_GRAVITY_SIZE_UP):
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.HOLE_GRAVITY_SIZE_UP):
 		gravity_size_level += effect_data[1]
 	for node in get_tree().get_nodes_in_group("hole"):
 		if node is Hole:
@@ -520,26 +520,26 @@ func _apply_extra_ball_effects() -> void:
 				node.set_gravity_size(gravity_size_level)
 	print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size_level: %s, gravity_size_level: %s" % [hole_size_level, gravity_size_level])
 
-	# ex: [EffectType.PC_START_TOP_UP, 1]
+	# ex: [Type.PC_START_TOP_UP, 1]
 	var start_level = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PC_START_TOP_UP):
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.PC_START_TOP_UP):
 		start_level += effect_data[1]
 	_pachinko.set_rush_start_top(start_level)
-	# ex: [EffectType.PC_CONTINUE_TOP_UP, 1]
+	# ex: [Type.PC_CONTINUE_TOP_UP, 1]
 	var continue_level = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PC_CONTINUE_TOP_UP):
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.PC_CONTINUE_TOP_UP):
 		continue_level += effect_data[1]
 	_pachinko.set_rush_continue_top(continue_level)
 	print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
 
-	# ex. [EffectType.TAX_MONEY_DOWN, 10]
+	# ex. [Type.TAX_MONEY_DOWN, 10]
 	var tax_money_off_per: int = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.TAX_MONEY_DOWN):
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.TAX_MONEY_DOWN):
 		tax_money_off_per += effect_data[1]
 	_tax_money_rate = 1 - clampi(tax_money_off_per, 0, 50) / 100.0 # TODO: const
-	# ex. [EffectType.TAX_BALLS_DOWN, 10]
+	# ex. [Type.TAX_BALLS_DOWN, 10]
 	var tax_balls_off_per: int = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.TAX_BALLS_DOWN):
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.TAX_BALLS_DOWN):
 		tax_balls_off_per += effect_data[1]
 	_tax_balls_rate = 1 - clampi(tax_balls_off_per, 0, 50) / 100.0 # TODO: const
 	print("[Game/BallEffect] TAX_(MONEY/BALLS)_DOWN _tax_money_rate: %s, _tax_balls_rate" % [_tax_money_rate, _tax_balls_rate])
@@ -549,13 +549,13 @@ func _apply_extra_ball_effects() -> void:
 
 
 # EXTRA Ball 内の特定の効果をまとめて取得する
-func _get_extra_ball_effects(target_effect_type: BallEffect.EffectType) -> Array:
+func _get_extra_ball_effects(target_effect_type: BallEffect.Type) -> Array:
 	var effects = []
 	for ball in _extra_ball_list:
 		for effect_data in ball.effects:
 			if target_effect_type == effect_data[0]:
 				effects.append(effect_data)
-	#print("[Game] _get_extra_ball_effects(%s) -> %s" % [BallEffect.EffectType.keys()[target_effect_type], effects])
+	#print("[Game] _get_extra_ball_effects(%s) -> %s" % [BallEffect.Type.keys()[target_effect_type], effects])
 	return effects
 
 
@@ -574,11 +574,11 @@ func _create_new_ball(level: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, 
 # exclude_common: COMMON 抜きの抽選を行う (Ball LV 用)
 func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 	var rarity_weight = RAIRTY_WEIGHT.duplicate()
-	# ex: [EffectType.RARITY_TOP_UP, Ball.Rarity.RARE]
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.RARITY_TOP_UP):
+	# ex: [Type.RARITY_TOP_UP, Ball.Rarity.RARE]
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.RARITY_TOP_UP):
 		rarity_weight[effect_data[1]] += RAIRTY_WEIGHT[effect_data[1]]
-	# ex: [EffectType.RARITY_TOP_DOWN, Ball.Rarity.COMMON]
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.RARITY_TOP_DOWN):
+	# ex: [Type.RARITY_TOP_DOWN, Ball.Rarity.COMMON]
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.RARITY_TOP_DOWN):
 		var rarity_top_down = rarity_weight[effect_data[1]] - RAIRTY_WEIGHT[effect_data[1]] / 2
 		rarity_weight[effect_data[1]] = clampi(rarity_top_down, 0, rarity_top_down)
 	print("[Game/BallEffect] RARITY_TOP_UP(/DOWN) rarity_weight: %s" % [rarity_weight])

@@ -86,7 +86,7 @@ var rarity := Rarity.COMMON
 var pool := Pool.A
 # ボールの効果
 # NOTE: 効果移譲とかありそうなので配列で持つ
-# [ [ <BallEffect.EffectType>, param1, (param2) ], ... ]
+# [ [ <BallEffect.Type>, param1, (param2) ], ... ]
 var effects := []
 
 
