@@ -46,10 +46,6 @@ const LOG_LINES_MAX := 100
 @export var _extra_balls_parent: Node2D
 @export var _deck_min_lamp: Control
 @export var _extra_max_lamp: Control
-@export var _ball_popup: Control
-@export var _ball_popup_level: Label
-@export var _ball_popup_rarity: Label
-@export var _ball_popup_description: RichTextLabel
 @export_category("Main/Score")
 @export var _turn_label: Label
 @export var _next_turn_label: Label
@@ -81,6 +77,12 @@ const LOG_LINES_MAX := 100
 @export_category("Shop")
 @export var _shop_window: Control
 @export var _shop_exit_button: Button
+
+@export_category("Popup")
+@export var _popup: Control
+@export var _popup_title: Label
+@export var _popup_title_sub: Label
+@export var _popup_description: RichTextLabel
 
 
 var combo_bar_progress := 1.0:
@@ -330,21 +332,21 @@ func _on_deck_extra_balls_hovered(ball: Ball, entered: bool) -> void:
 
 func _show_ball_popup(ball: Ball) -> void:
 	#print("[GameUi] _show_ball_popup(%s)" % [ball])
-	_ball_popup.visible = true
-	_ball_popup.position = ball.global_position + BALL_POPUP_POSITION_DIFF
+	_popup.visible = true
+	_popup.position = ball.global_position + BALL_POPUP_POSITION_DIFF
 	if ball.level < 0:
-		_ball_popup_level.text = "-"
-		_ball_popup_rarity.text = ""
-		_ball_popup_rarity.self_modulate = Color.WHITE
+		_popup_title.text = "-"
+		_popup_title_sub.text = ""
+		_popup_title_sub.self_modulate = Color.WHITE
 	else:
-		_ball_popup_level.text = "%s-%s" % [Ball.Pool.keys()[ball.pool], ball.level]
-		_ball_popup_rarity.text = BallEffect.RARITY_TEXT[ball.rarity]
-		_ball_popup_rarity.self_modulate = ColorPalette.BALL_RARITY_COLORS[ball.rarity]
-	_ball_popup_description.text = BallEffect.get_effect_description(ball.level, ball.rarity)
+		_popup_title.text = "%s-%s" % [Ball.Pool.keys()[ball.pool], ball.level]
+		_popup_title_sub.text = BallEffect.RARITY_TEXT[ball.rarity]
+		_popup_title_sub.self_modulate = ColorPalette.BALL_RARITY_COLORS[ball.rarity]
+	_popup_description.text = BallEffect.get_effect_description(ball.level, ball.rarity)
 
 func _hide_ball_popup() -> void:
 	#print("[GameUi] _hide_ball_popup()")
-	_ball_popup.visible = false
+	_popup.visible = false
 
 
 func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: int) -> void:
