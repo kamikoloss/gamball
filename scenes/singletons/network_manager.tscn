@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfa1c64tr1q8m"]
+
+[ext_resource type="Script" path="res://scenes/singletons/network_manager.gd" id="1_eb5qv"]
+
+[node name="NetworkManager" type="Node" node_paths=PackedStringArray("http")]
+script = ExtResource("1_eb5qv")
+http = NodePath("HTTPRequest")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

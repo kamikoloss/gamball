@@ -1256,6 +1256,7 @@ text = "TURN"
 vertical_alignment = 1
 
 [node name="TurnHeaderNext" type="Label" parent="UI/Main/Score"]
+layout_mode = 0
 offset_left = 120.0
 offset_right = 200.0
 offset_bottom = 20.0
