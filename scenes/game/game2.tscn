@@ -2318,7 +2318,6 @@ text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風�
 autowrap_mode = 1
 
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_main_buttons_parent", "_balls_parent", "_balls_buttons_parent", "_main_labels_parent")]
-visible = false
 z_index = 40
 layout_mode = 3
 anchors_preset = 0

@@ -295,11 +295,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				await ball.die()
 				_billiards.refresh_balls_count(_billiards_balls_count)
 				return
-			# ex: [EffectType.MONEY_UP_ON_FALL, 10]
+			# ex: [EffectType.MONEY_UP_FALL, 10]
 			for effect_data in ball.effects:
-				if effect_data[0] == BallEffect.EffectType.MONEY_UP_ON_FALL:
+				if effect_data[0] == BallEffect.EffectType.MONEY_UP_FALL:
 					money += effect_data[1]
-					print("[Game/BallEffect] MONEY_UP_ON_FALL +%s" % [effect_data[1]])
+					print("[Game/BallEffect] MONEY_UP_FALL +%s" % [effect_data[1]])
 			# 同じ GroupType の Hole に Ball をワープさせる
 			ball.is_on_billiards = false
 			for node in get_tree().get_nodes_in_group("hole"):
@@ -313,14 +313,14 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
 			var random_ball: Ball = _extra_ball_list.pick_random()
 			var new_ball = _create_new_ball(random_ball.level, random_ball.rarity)
-			# ex: [EffectType.BILLIARDS_LV_UP_ON_SPAWN, 1]
+			# ex: [EffectType.NUMBER_UP_SPAWN, 1]
 			for effect_data in new_ball.effects:
-				if effect_data[0] == BallEffect.EffectType.BILLIARDS_LV_UP_ON_SPAWN:
+				if effect_data[0] == BallEffect.EffectType.NUMBER_UP_SPAWN:
 					var gain_level = effect_data[1]
 					for target_ball: Ball in _balls_parent.get_children().filter(func(ball: Ball): return ball.is_on_billiards):
 						target_ball.level += gain_level
 						target_ball.refresh_view()
-					print("[Game/BallEffect] BILLIARDS_LV_UP_ON_SPAWN +%s" % [gain_level])
+					print("[Game/BallEffect] NUMBER_UP_SPAWN +%s" % [gain_level])
 
 			new_ball.is_on_billiards = true
 			_billiards.spawn_extra_ball(new_ball)
@@ -337,35 +337,35 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# Gain 増加系の BallEffect を確認する
 			var gain_plus: int = 0 # Gain がいくつ増えるか
 			var gain_times: int = 1 # Gain が何倍になるか
-			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP, 50, 1]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
+			# ex: [EffectType.GAIN_UP_BL_COUNT, 50, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_BL_COUNT):
 				if _billiards_balls_count <= effect_data[1]:
 					gain_plus += effect_data[2]
-			# ex: [EffectType.BILLIARDS_COUNT_GAIN_UP_2, 5, 2]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.BILLIARDS_COUNT_GAIN_UP):
+			# ex: [EffectType.GAIN_UP_BL_COUNT_2, 5, 2]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_BL_COUNT):
 				if _billiards_balls_count <= effect_data[1]:
 					gain_times += effect_data[2]
-			# ex: [EffectType.DECK_COMPLETE_GAIN_UP, 3, 2]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_COMPLETE_GAIN_UP):
+			# ex: [EffectType.GAIN_UP_DECK_COMPLETE, 3, 2]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_DECK_COMPLETE):
 				var complete_list = range(effect_data[1] + 1) # 3 以下 => [0, 1, 2, 3]
 				for deck_ball in _deck_ball_list:
 					complete_list = complete_list.filter(func(v): return v != deck_ball.level) # LV 以外に絞り込む = LV を消す
 				if complete_list.is_empty():
 					gain_times += effect_data[2]
-			# ex: [EffectType.DECK_COUNT_GAIN_UP, 50, 1]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.DECK_COUNT_GAIN_UP):
+			# ex: [EffectType.GAIN_UP_DECK_COUNT, 50, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_DECK_COUNT):
 				if _deck_ball_list.size() <= effect_data[1]:
 					gain_plus += effect_data[2]
 			# ex: [EffectType.GAIN_UP, 3, 1]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP):
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_BALL_NUMBER):
 				if ball.level <= effect_data[1]:
 					gain_plus += effect_data[2]
-			# ex: [EffectType.GAIN_UP_2, 1, 2]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_2):
+			# ex: [EffectType.GAIN_UP_BALL_NUMBER_2, 1, 2]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_BALL_NUMBER_2):
 				if ball.level == effect_data[1]:
 					gain_times += effect_data[2]
-			# ex: [EffectType.HOLE_GAIN_UP, 1]
-			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.HOLE_GAIN_UP):
+			# ex: [EffectType.GAIN_UP_HOLE, 1]
+			for effect_data in _get_extra_ball_effects(BallEffect.EffectType.GAIN_UP_HOLE):
 				gain_plus += effect_data[1]
 			if gain_plus != 0 and gain_times != 1:
 				print("[Game/BallEffect] XXXX_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
@@ -471,12 +471,12 @@ func _on_product_pressed(product: Product) -> void:
 				return
 			#_extra_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
 			var popped_ball: Ball = _extra_ball_list.pop_front()
-			# ex: [EffectType.MONEY_UP_ON_BREAK, 2]
+			# ex: [EffectType.MONEY_UP_BREAK, 2]
 			var money_times = 1
 			for effect_data in popped_ball.effects:
-				if effect_data[0] == BallEffect.EffectType.MONEY_UP_ON_BREAK:
+				if effect_data[0] == BallEffect.EffectType.MONEY_UP_BREAK:
 					money_times *= effect_data[1]
-				print("[Game/BallEffect] MONEY_UP_ON_BREAK x%s" % [money_times])
+				print("[Game/BallEffect] MONEY_UP_BREAK x%s" % [money_times])
 			if 1 < money_times:
 				money *= money_times
 
@@ -520,14 +520,14 @@ func _apply_extra_ball_effects() -> void:
 				node.set_gravity_size(gravity_size_level)
 	print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size_level: %s, gravity_size_level: %s" % [hole_size_level, gravity_size_level])
 
-	# ex: [EffectType.PACHINKO_START_TOP_UP, 1]
+	# ex: [EffectType.PC_START_TOP_UP, 1]
 	var start_level = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_START_TOP_UP):
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PC_START_TOP_UP):
 		start_level += effect_data[1]
 	_pachinko.set_rush_start_top(start_level)
-	# ex: [EffectType.PACHINKO_CONTINUE_TOP_UP, 1]
+	# ex: [EffectType.PC_CONTINUE_TOP_UP, 1]
 	var continue_level = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PACHINKO_CONTINUE_TOP_UP):
+	for effect_data in _get_extra_ball_effects(BallEffect.EffectType.PC_CONTINUE_TOP_UP):
 		continue_level += effect_data[1]
 	_pachinko.set_rush_continue_top(continue_level)
 	print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
