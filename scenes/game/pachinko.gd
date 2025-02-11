@@ -248,7 +248,7 @@ func _stop_lamp_se_loop() -> void:
 	var tween = _get_tween(TweenType.RUSH_LAMP_AUDIO)
 
 
-# ランプの色を初期化する
+# ランプの色を更新する
 func _refresh_rush_lamps(is_rush: bool) -> void:
 	var count = 0
 	var top = _rush_continue_probability_top if is_rush else _rush_start_probability_top

@@ -144,31 +144,31 @@ func hide_shop_window() -> void:
 
 
 #Main/Balls
-func refresh_deck_balls(deck_ball_list: Array[Ball], min: int, max: int) -> void:
+func update_deck_balls(deck_ball_list: Array[Ball], min: int, max: int) -> void:
 	_refresh_balls(_deck_balls_parent, deck_ball_list, min, max)
 
-func refresh_extra_balls(extra_ball_list: Array[Ball], min: int, max: int) -> void:
+func update_extra_balls(extra_ball_list: Array[Ball], min: int, max: int) -> void:
 	_refresh_balls(_extra_balls_parent, extra_ball_list, min, max)
 
-func refresh_deck_slots(shift: int) -> void:
+func update_deck_slots(shift: int) -> void:
 	_deck_min_lamp.position = Vector2(130 - 30 * shift, 0)
 
-func refresh_extra_slots(shift: int) -> void:
+func update_extra_slots(shift: int) -> void:
 	_extra_max_lamp.position = Vector2(130 + 30 * shift, 0)
 
 
 # Main/Score
-func refresh_turn_label(turn: int) -> void:
+func update_turn_label(turn: int) -> void:
 	_turn_label.text = _get_seg_text(turn)
 
-func refresh_balls_label(balls: int) -> void:
+func update_balls_label(balls: int) -> void:
 	_balls_label.text = _get_seg_text(balls)
 
-func refresh_next(turn: int, amount: int) -> void:
+func update_next(turn: int, amount: int) -> void:
 	_next_turn_label.text = _get_seg_text(turn)
 	_next_balls_label.text = _get_seg_text(amount)
 
-func refresh_next_clear() -> void:
+func update_next_clear() -> void:
 	_next_turn_label.text = "!!!---"
 	_next_balls_label.text = "!!!---"
 

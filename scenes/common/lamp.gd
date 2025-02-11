@@ -11,7 +11,7 @@ enum LightColor {
 
 # ランプの発光色 { LightColor: Color } 
 const LIGHT_COLORS := {
-	LightColor.DEFAULT_OFF: Color(ColorPalette.BLACK, 0.4), # NOTE: フレーム上に置くため半透明にしている
+	LightColor.DEFAULT_OFF: Color(ColorPalette.BLACK, 0.4), # NOTE: パチンコ盤面枠上に置くため半透明にしている
 	LightColor.DEFAULT_ON: ColorPalette.WHITE,
 	LightColor.GREEN_OFF: ColorPalette.SUCCESS,
 	LightColor.GREEN_ON: Color.GREEN,

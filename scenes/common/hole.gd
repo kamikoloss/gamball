@@ -12,7 +12,7 @@ enum HoleType {
 	GAIN, # Ball を gain_ratio 倍にして PAYOUT に加算する
 	LOST, # 何もしない (Ball を失う)
 	STACK, # TODO: 消す
-	WARP_FROM, # WARP_TO からワープする
+	WARP_FROM, # WARP_TO からワープしてくる
 	WARP_TO, # WARP_FROM にワープする
 }
 # ワープ元/ワープ先 のグループ
@@ -41,7 +41,6 @@ const GRAVITY_SCALE_STEP := 0.25
 @export var _label: Label
 
 
-# 有効かどうか
 var disabled := false:
 	set(v):
 		disabled = v
@@ -58,12 +57,12 @@ var _tweens := {}
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 
-	_refresh_view()
-	_refresh_physics()
-
 	_hole_scale_base = self.scale
 	_gravity_scale_base = _gravity_area.scale
 	_body_color_base = _body_texture.self_modulate
+
+	_refresh_view()
+	_refresh_physics()
 
 
 func set_hole_size(level: int = 0) -> void:

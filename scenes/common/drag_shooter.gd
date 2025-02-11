@@ -6,7 +6,7 @@ extends Area2D
 signal pressed
 # ドラッグを終了したときに発火する
 signal released # (drag_vector: Vector2)
-# ドラッグの距離が足りずにキャンセルされたときに派kkする
+# ドラッグの距離が足りずにキャンセルされたときに発火する
 signal canceled
 
 
@@ -22,12 +22,11 @@ const DRAG_LENGTH_MAX := 100.0
 @export var _drag_point: Control
 
 
-# 現在有効かどうか
-var enabled := true:
-	set(value):
-		enabled = value
+var disabled := true:
+	set(v):
+		disabled = v
 		# ドラッグ中に無効になった場合: キャンセル扱いにする
-		if not enabled and _is_dragging:
+		if disabled and _is_dragging:
 			_is_dragging = false
 			_hide_drag_point()
 			_hide_arrow()
@@ -50,7 +49,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not enabled or not _is_dragging:
+	if disabled or not _is_dragging:
 		return
 
 	# 左クリックを離したとき
@@ -85,11 +84,11 @@ func _input(event: InputEvent) -> void:
 			var clamped_length =  clampf(drag_vector.length(), 0, DRAG_LENGTH_MAX)
 			var deg = rad_to_deg(drag_vector.angle()) + 90
 			var scale = (clamped_length / DRAG_LENGTH_MAX) * 10 # scale 10 が最大
-			_refresh_arrow(deg, scale)
+			_update_arrow(deg, scale)
 
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	if not enabled or _is_dragging:
+	if disabled or _is_dragging:
 		return
 
 	# 左クリックを押したとき
@@ -112,7 +111,7 @@ func _hide_arrow() -> void:
 	_arrow_square.scale.y = 0
 	_drag_point.visible = false
 
-func _refresh_arrow(deg: int, scale: float) -> void:
+func _update_arrow(deg: int, scale: float) -> void:
 	_arrow.rotation_degrees = deg
 	_arrow_square.scale.y = scale
 

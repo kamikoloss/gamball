@@ -12,20 +12,19 @@ signal changed # (value)
 @export var _points_parent: Control
 
 
+var value:
+	set(v):
+		if value != v:
+			value = v
+			_refresh_view()
+			changed.emit(value)
 var disabled := false:
 	set(v):
 		_left_button.disabled = v
 		_right_button.disabled = v
 		_refresh_view()
-var value:
-	set(v):
-		var is_changed = value != v
-		value = v
-		_refresh_view()
-		if is_changed:
-			changed.emit(value)
 
-# 設定項目 { "<Value>": <ラベル文字列>, ... } 
+# 設定項目 { <Value>: <ラベル文字列>, ... } 
 var options := {}
 
 

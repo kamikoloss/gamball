@@ -88,9 +88,9 @@ func _ready() -> void:
 
 # ポーズをデフォルトに変更する
 func reset_pose() -> void:
-	_refresh_textures([0, 0, 0, 0])
+	_update_textures([0, 0, 0, 0])
 	_is_human_pose_a = not _is_human_pose_a
-	_refresh_textures([0, 0, 0, 0])
+	_update_textures([0, 0, 0, 0])
 	_is_human_pose_a = not _is_human_pose_a
 
 
@@ -103,7 +103,7 @@ func shuffle_pose() -> void:
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 
 	# A/B のポーズをランダムに変更する
-	_refresh_textures_random()
+	_update_textures_random()
 
 	# A/B の表示を切り替える
 	if _is_human_pose_a:
@@ -127,15 +127,15 @@ func jump() -> void:
 	tween.tween_property(_human, "position", _human_move_position_from, JUMP_DURATION_DOWN)
 
 
+# タッチ判定を 有効化/無効化 する
 func enable_touch() -> void:
 	_touch_button.disabled = false
-
 func disable_touch() -> void:
 	_touch_button.disabled = true
 
 
-func _refresh_textures(parts_index_list: Array[int]) -> void:
-	#print("[Bunny] _refresh_textures(parts_index_list: %s)" % [parts_index_list])
+func _update_textures(parts_index_list: Array[int]) -> void:
+	#print("[Bunny] _change_textures(parts_index_list: %s)" % [parts_index_list])
 	var pose_parts_list = []
 	if _is_human_pose_a:
 		pose_parts_list = [_pose_a_parts_1, _pose_a_parts_2, _pose_a_parts_3, _pose_a_parts_4]
@@ -158,12 +158,12 @@ func _refresh_textures(parts_index_list: Array[int]) -> void:
 		i += 1
 
 
-func _refresh_textures_random() -> void:
+func _update_textures_random() -> void:
 	var index_1 = clampi(randi_range(0, _parts_1_textures.size() - 1), 0, 9999)
 	var index_2 = clampi(randi_range(0, _parts_2_textures.size() - 1), 0, 9999)
 	var index_3 = clampi(randi_range(0, _parts_3_textures.size() - 1), 0, 9999)
 	var index_4 = clampi(randi_range(0, _parts_4_textures.size() - 1), 0, 9999)
-	_refresh_textures([index_1, index_2, index_3, index_4])
+	_update_textures([index_1, index_2, index_3, index_4])
 
 
 func _get_tween(type: TweenType) -> Tween:

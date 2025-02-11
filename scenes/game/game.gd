@@ -74,14 +74,14 @@ const EXTRA_BALL_NUMBER_RARITY := {
 var turn := 0:
 	set(v):
 		turn = v
-		_game_ui.refresh_turn_label(turn)
+		_game_ui.update_turn_label(turn)
 var balls := 0:
 	set(v):
 		# ボールの個数が 0 から回復したとき: DragShooter を有効化する
 		if balls <= 0 and 0 < v:
-			_drag_shooter.enabled = true
+			_drag_shooter.disabled = false
 		balls = v
-		_game_ui.refresh_balls_label(balls)
+		_game_ui.update_balls_label(balls)
 # ゲームの状態
 var game_state := GameState.GAME
 # コンボの状態
@@ -162,7 +162,7 @@ func _ready() -> void:
 	_apply_extra_ball_effects()
 	_refresh_deck_extra()
 	_refresh_next()
-	_billiards.refresh_balls_count(_billiards_balls_count)
+	_billiards.update_balls_count(_billiards_balls_count)
 
 
 func _on_drag_shooter_pressed() -> void:
@@ -178,10 +178,10 @@ func _on_drag_shooter_pressed() -> void:
 
 func _on_drag_shooter_released(drag_vector: Vector2) -> void:
 	_billiards.shoot_ball(drag_vector * IMPULSE_RATIO)
-	_billiards.refresh_balls_count(_billiards_balls_count)
-	# リリースした結果ボールがなくなった場合: 無効化する
+	_billiards.update_balls_count(_billiards_balls_count)
+	# 発射した結果ボールがなくなった場合: 発射できなくする
 	if balls <= 0:
-		_drag_shooter.enabled = false
+		_drag_shooter.disabled = true
 
 func _on_drag_shooter_canceled() -> void:
 	# Ball 生成をなかったことにする
@@ -244,7 +244,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# Ball が有効化されていない場合: 消す
 			if not ball.is_active:
 				await ball.die()
-				_billiards.refresh_balls_count(_billiards_balls_count)
+				_billiards.update_balls_count(_billiards_balls_count)
 				return
 			# ex: [Type.BALLS_UP_FALL, 10]
 			for effect_data in ball.effects:
@@ -356,7 +356,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 
 		Hole.HoleType.LOST:
 			await ball.die()
-			_billiards.refresh_balls_count(_billiards_balls_count)
+			_billiards.update_balls_count(_billiards_balls_count)
 
 
 	# Ball 消去処理
@@ -364,7 +364,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 	if not hole.hole_type in not_die_types:
 		await ball.die()
 
-	_billiards.refresh_balls_count(_billiards_balls_count)
+	_billiards.update_balls_count(_billiards_balls_count)
 
 
 # 商品をホバーしたときの処理
@@ -510,7 +510,7 @@ func _create_new_ball(number: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON,
 	ball.rarity = rarity
 	ball.is_active = is_active
 	_balls_parent.add_child(ball)
-	_billiards.refresh_balls_count(_billiards_balls_count)
+	_billiards.update_balls_count(_billiards_balls_count)
 	return ball
 
 
@@ -553,7 +553,7 @@ func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 	return random_rarity
 
 
-# GAIN コンボを開始 (継続) する
+# コンボを開始 (継続) する
 func _start_combo() -> void:
 	if not _stack_wall_bottom:
 		return
@@ -572,10 +572,10 @@ func _start_combo() -> void:
 
 # DECK/EXTRA の見た目を更新する
 func _refresh_deck_extra() -> void:
-	_game_ui.refresh_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
-	_game_ui.refresh_deck_slots(DECK_SIZE_MIN_DEFAULT - _deck_size_min)
-	_game_ui.refresh_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
-	_game_ui.refresh_extra_slots(_extra_size_max - EXTRA_SIZE_MAX_DEFAULT)
+	_game_ui.update_deck_balls(_deck_ball_list, _deck_size_min, _deck_size_max)
+	_game_ui.update_deck_slots(DECK_SIZE_MIN_DEFAULT - _deck_size_min)
+	_game_ui.update_extra_balls(_extra_ball_list, _extra_size_min, _extra_size_max)
+	_game_ui.update_extra_slots(_extra_size_max - EXTRA_SIZE_MAX_DEFAULT)
 
 
 # Next 関連の見た目を更新する
@@ -584,9 +584,9 @@ func _refresh_next() -> void:
 		var turn = TAX_LIST[_next_tax_index][0]
 		var amount = TAX_LIST[_next_tax_index][1]
 		amount = int(amount * _tax_rate)
-		_game_ui.refresh_next(turn, amount)
+		_game_ui.update_next(turn, amount)
 	else:
-		_game_ui.refresh_next_clear()
+		_game_ui.update_next_clear()
 
 
 # 1ターン進める

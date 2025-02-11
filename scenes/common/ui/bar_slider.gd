@@ -2,7 +2,7 @@ extends Control
 class_name BarSlider
 
 
-# スライダーの値が変わったとき
+# 値を変更したとき
 signal changed # (value: int)
 
 
@@ -23,14 +23,14 @@ signal changed # (value: int)
 
 
 func _ready() -> void:
+	_slider.value_changed.connect(func(v): value = int(v))
+
 	_bar.min_value = _min_value
 	_bar.max_value = _max_value
 	_bar.step = _step
 	_slider.min_value = _min_value
 	_slider.max_value = _max_value
 	_slider.step = _step
-
-	_slider.value_changed.connect(func(v): value = int(v))
 
 	_refresh_view()
 

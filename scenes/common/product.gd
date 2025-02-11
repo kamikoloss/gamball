@@ -15,6 +15,7 @@ enum ProductType {
 }
 
 
+# 商品の価格
 const PRODUCT_PRICES := {
 	ProductType.DECK_PACK: 200,
 	ProductType.DECK_CLEANER: 100,
@@ -22,7 +23,7 @@ const PRODUCT_PRICES := {
 	ProductType.EXTRA_CLEANER: 100,
 }
 
-# 商品の [<名称>, <説明分>]
+# 商品の [ <名称>, <説明分> ]
 # TODO: JSON に逃がす
 const PRODUCT_DATA := {
 	ProductType.DECK_PACK: ["DECK Pack", "DECK にランダムな\nボール x2 を追加する"],
@@ -46,11 +47,6 @@ const PRODUCT_DATA := {
 @export var _icon_cleaner: Texture
 
 
-# 購入可能かどうか
-var disabled := false:
-	set(v):
-		disabled = v
-		_refresh_view()
 # 価格
 var price: int:
 	get:
@@ -63,6 +59,11 @@ var title: String:
 var description: String:
 	get:
 		return PRODUCT_DATA[product_type][1]
+# 購入可能かどうか
+var disabled := false:
+	set(v):
+		disabled = v
+		_refresh_view()
 
 
 # 現在ホバーしているかどうか
@@ -96,7 +97,7 @@ func _refresh_view() -> void:
 
 	# テキスト
 	_name_label.text = title
-	_price_label.text = "＄%s" % str(price)
+	_price_label.text = "● %s" % str(price)
 
 	# 購入ボタン
 	_buy_button.visible = _hovered

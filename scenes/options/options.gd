@@ -49,9 +49,9 @@ func _ready() -> void:
 	_window_mode_selector.value = SaveManager.video_config.window_mode
 	_window_size_selector.options = VideoManager.WINDOW_SIZE_LABELS
 	_window_size_selector.value = SaveManager.video_config.window_size
-	_refresh_volume_slider(AudioManager.BusType.MASTER, SaveManager.audio_config.volume_master)
-	_refresh_volume_slider(AudioManager.BusType.BGM, SaveManager.audio_config.volume_bgm)
-	_refresh_volume_slider(AudioManager.BusType.SE, SaveManager.audio_config.volume_se)
+	_change_volume_slider(AudioManager.BusType.MASTER, SaveManager.audio_config.volume_master)
+	_change_volume_slider(AudioManager.BusType.BGM, SaveManager.audio_config.volume_bgm)
+	_change_volume_slider(AudioManager.BusType.SE, SaveManager.audio_config.volume_se)
 
 
 func _on_window_mode_selector_changed(mode: VideoManager.WindowMode) -> void:
@@ -70,10 +70,10 @@ func _on_window_size_selector_changed(size: VideoManager.WindowSize) -> void:
 func _on_volume_slider_changed(bus_type: AudioManager.BusType, volume_level: int) -> void:
 	SaveManager.audio_config.set_volume(bus_type, volume_level)
 	AudioManager.set_volume(bus_type, volume_level)
-	_refresh_volume_slider(bus_type, volume_level)
+	_change_volume_slider(bus_type, volume_level)
 
 
-func _refresh_volume_slider(bus_type: AudioManager.BusType, volume_level: int) -> void:
+func _change_volume_slider(bus_type: AudioManager.BusType, volume_level: int) -> void:
 	match bus_type:
 		AudioManager.BusType.MASTER:
 			_master_volume_slider.value = volume_level
