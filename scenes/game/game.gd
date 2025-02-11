@@ -38,7 +38,7 @@ const TAX_LIST := [
 	[300, TaxType.MONEY, 6400],	# Balls 6400
 ]
 
-# レア度の分子の割合
+# レア度の割合
 const RAIRTY_WEIGHT := {
 	Ball.Rarity.COMMON: 50,
 	Ball.Rarity.UNCOMMON: 40,
@@ -46,15 +46,15 @@ const RAIRTY_WEIGHT := {
 	Ball.Rarity.EPIC: 20,
 	Ball.Rarity.LEGENDARY: 10,
 }
-# DECK Ball のレア度ごとの LV
-const DECK_BALL_LEVEL_RARITY := {
+# DECK Ball の番号の排出率
+const DECK_BALL_NUMBER_RARITY := {
 	Ball.Rarity.UNCOMMON: [0, 1, 2, 3],
 	Ball.Rarity.RARE: [4, 5, 6, 7],
 	Ball.Rarity.EPIC: [8, 9, 10, 11],
 	Ball.Rarity.LEGENDARY: [12, 13, 14, 15],
 }
-# EXTRA Ball のレア度ごとの LV
-const EXTRA_BALL_LEVEL_RARITY := {
+# EXTRA Ball の番号の排出率
+const EXTRA_BALL_NUMBER_RARITY := {
 	Ball.Rarity.UNCOMMON: [6, 7, 8, 9],
 	Ball.Rarity.RARE: [2, 3, 12, 13],
 	Ball.Rarity.EPIC: [4, 5, 10, 11],
@@ -194,7 +194,7 @@ func _on_drag_shooter_pressed() -> void:
 	# ビリヤード盤面上に Ball を生成する
 	balls -= 1
 	var ball: Ball = _deck_ball_list.pick_random()
-	var new_ball = _create_new_ball(ball.level, ball.rarity, false) # 最初の出現時には有効化されていない
+	var new_ball = _create_new_ball(ball.number, ball.rarity, false) # 最初の出現時には有効化されていない
 	new_ball.is_on_billiards = true
 	_billiards.spawn_ball(new_ball)
 	# 1ターン進める
@@ -274,7 +274,7 @@ func _on_options_button_pressed() -> void:
 # Ball が Hole に落ちたときの処理
 # TODO: hole_type ごとにメソッド分ける？ HoleManager 作る？
 func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
-	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.level, hole.hole_type])
+	#print("[Game] _on_hole_ball_entered(hole: %s, ball: %s)" % [ball.number, hole.hole_type])
 	if not hole or not ball:
 		return
 	# Hole が無効の場合: 何もしない (通り抜ける)
@@ -312,15 +312,15 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 		Hole.HoleType.EXTRA:
 			# ビリヤード盤面上にランダムな Extra Ball を出現させる
 			var random_ball: Ball = _extra_ball_list.pick_random()
-			var new_ball = _create_new_ball(random_ball.level, random_ball.rarity)
+			var new_ball = _create_new_ball(random_ball.number, random_ball.rarity)
 			# ex: [Type.NUMBER_UP_SPAWN, 1]
 			for effect_data in new_ball.effects:
 				if effect_data[0] == BallEffect.Type.NUMBER_UP_SPAWN:
-					var gain_level = effect_data[1]
+					var gain_number = effect_data[1]
 					for target_ball: Ball in _balls_parent.get_children().filter(func(ball: Ball): return ball.is_on_billiards):
-						target_ball.level += gain_level
+						target_ball.number += gain_number
 						target_ball.refresh_view()
-					print("[Game/BallEffect] NUMBER_UP_SPAWN +%s" % [gain_level])
+					print("[Game/BallEffect] NUMBER_UP_SPAWN +%s" % [gain_number])
 
 			new_ball.is_on_billiards = true
 			_billiards.spawn_extra_ball(new_ball)
@@ -349,7 +349,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_DECK_COMPLETE):
 				var complete_list = range(effect_data[1] + 1) # 3 以下 => [0, 1, 2, 3]
 				for deck_ball in _deck_ball_list:
-					complete_list = complete_list.filter(func(v): return v != deck_ball.level) # LV 以外に絞り込む = LV を消す
+					complete_list = complete_list.filter(func(v): return v != deck_ball.number) # LV 以外に絞り込む = LV を消す
 				if complete_list.is_empty():
 					gain_times += effect_data[2]
 			# ex: [Type.GAIN_UP_DECK_COUNT, 50, 1]
@@ -358,11 +358,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 					gain_plus += effect_data[2]
 			# ex: [Type.GAIN_UP, 3, 1]
 			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_BALL_NUMBER):
-				if ball.level <= effect_data[1]:
+				if ball.number <= effect_data[1]:
 					gain_plus += effect_data[2]
 			# ex: [Type.GAIN_UP_BALL_NUMBER_2, 1, 2]
 			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_BALL_NUMBER_2):
-				if ball.level == effect_data[1]:
+				if ball.number == effect_data[1]:
 					gain_times += effect_data[2]
 			# ex: [Type.GAIN_UP_HOLE, 1]
 			for effect_data in _get_extra_ball_effects(BallEffect.Type.GAIN_UP_HOLE):
@@ -371,7 +371,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				print("[Game/BallEffect] XXXX_GAIN_UP(_2) +%s, x%s" % [gain_plus, gain_times])
 
 			# Ball を増加させてワープさせる
-			var level = ball.level # NOTE: ここで控えとかないと参照できないことがある
+			var level = ball.number # NOTE: ここで控えとかないと参照できないことがある
 			var amount = level * (hole.gain_ratio + gain_plus) * gain_times
 			if 0 < amount:
 				var tween = create_tween()
@@ -379,7 +379,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				tween.tween_interval(1.0 / 10) # TODO: const
 				tween.tween_callback(func():
 					var new_ball: Ball = _ball_scene.instantiate()
-					new_ball.level = level
+					new_ball.number = level
 					_balls_parent.add_child(new_ball)
 					await new_ball.warp_for_gain(hole.global_position, _payout_hole.global_position)
 					balls += 1
@@ -441,10 +441,10 @@ func _on_product_pressed(product: Product) -> void:
 			for i in 2:
 				if _deck_size_max <= _deck_ball_list.size():
 					continue
-				var level_rarity = _pick_random_rarity(true) # COMMON 抜き
-				var level = DECK_BALL_LEVEL_RARITY[level_rarity].pick_random()
-				_deck_ball_list.push_back(Ball.new(level))
-				print("[Game] DECK_PACK level: %s (%s)" % [level, Ball.Rarity.keys()[level_rarity]])
+				var number_rarity = _pick_random_rarity(true) # COMMON 抜き
+				var number = DECK_BALL_NUMBER_RARITY[number_rarity].pick_random()
+				_deck_ball_list.push_back(Ball.new(number))
+				print("[Game] DECK_PACK level: %s (%s)" % [number, Ball.Rarity.keys()[number_rarity]])
 
 		Product.ProductType.DECK_CLEANER:
 			if _deck_ball_list.size() <= _deck_size_min:
@@ -459,17 +459,16 @@ func _on_product_pressed(product: Product) -> void:
 			for i in 2:
 				if _extra_size_max <= _extra_ball_list.size():
 					continue
-				var level_rarity = _pick_random_rarity(true) # COMMON 抜き
-				var level = EXTRA_BALL_LEVEL_RARITY[level_rarity].pick_random()
+				var number_rarity = _pick_random_rarity(true) # COMMON 抜き
+				var number = EXTRA_BALL_NUMBER_RARITY[number_rarity].number_rarity()
 				var rarity = _pick_random_rarity()
-				_extra_ball_list.push_back(Ball.new(level, rarity))
-				print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [level, Ball.Rarity.keys()[level_rarity], Ball.Rarity.keys()[rarity]])
+				_extra_ball_list.push_back(Ball.new(number, rarity))
+				print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [number, Ball.Rarity.keys()[number_rarity], Ball.Rarity.keys()[rarity]])
 			_apply_extra_ball_effects()
 
 		Product.ProductType.EXTRA_CLEANER:
 			if _extra_ball_list.size() == 0:
 				return
-			#_extra_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
 			var popped_ball: Ball = _extra_ball_list.pop_front()
 			# ex: [Type.MONEY_UP_BREAK, 2]
 			var money_times = 1
@@ -560,9 +559,9 @@ func _get_extra_ball_effects(target_effect_type: BallEffect.Type) -> Array:
 
 
 # Ball instance を作成する
-func _create_new_ball(level: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, is_active = true) -> Ball:
+func _create_new_ball(number: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, is_active = true) -> Ball:
 	var ball: Ball = _ball_scene.instantiate()
-	ball.level = level
+	ball.number = number
 	ball.rarity = rarity
 	ball.is_active = is_active
 	_balls_parent.add_child(ball)

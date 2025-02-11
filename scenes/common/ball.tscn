@@ -17,7 +17,7 @@ point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_view_slot", "_view_main", "_body_texture", "_inner_texture", "_inner_line_texture", "_inactive_texture", "_level_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_view_slot", "_view_main", "_body_texture", "_inner_texture", "_inner_line_texture", "_inactive_texture", "_number_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
 z_index = 1
 collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
@@ -31,7 +31,7 @@ _body_texture = NodePath("View/Mask/Main/Body")
 _inner_texture = NodePath("View/Mask/Main/Inner")
 _inner_line_texture = NodePath("View/Mask/Main/InnerLine")
 _inactive_texture = NodePath("View/Mask/Main/Inactive")
-_level_label = NodePath("View/Mask/Main/Level")
+_number_label = NodePath("View/Mask/Main/Number")
 _hover_texture = NodePath("View/Hover")
 _trail_line = NodePath("Trail")
 _hole_area = NodePath("Hole")
@@ -165,8 +165,9 @@ mouse_filter = 2
 texture = ExtResource("3_rxati")
 expand_mode = 1
 
-[node name="Level" type="Label" parent="View/Mask/Main"]
+[node name="Number" type="Label" parent="View/Mask/Main"]
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0

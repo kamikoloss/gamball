@@ -334,15 +334,15 @@ func _show_ball_popup(ball: Ball) -> void:
 	#print("[GameUi] _show_ball_popup(%s)" % [ball])
 	_popup.visible = true
 	_popup.position = ball.global_position + BALL_POPUP_POSITION_DIFF
-	if ball.level < 0:
+	if ball.number < 0:
 		_popup_title.text = "-"
 		_popup_title_sub.text = ""
 		_popup_title_sub.self_modulate = Color.WHITE
 	else:
-		_popup_title.text = "%s-%s" % [Ball.Pool.keys()[ball.pool], ball.level]
+		_popup_title.text = "%s-%s" % [Ball.Pool.keys()[ball.pool], ball.number]
 		_popup_title_sub.text = BallEffect.RARITY_TEXT[ball.rarity]
 		_popup_title_sub.self_modulate = ColorPalette.BALL_RARITY_COLORS[ball.rarity]
-	_popup_description.text = BallEffect.get_effect_description(ball.level, ball.rarity)
+	_popup_description.text = BallEffect.get_effect_description(ball.number, ball.rarity)
 
 func _hide_ball_popup() -> void:
 	#print("[GameUi] _hide_ball_popup()")
@@ -354,15 +354,15 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 	for node in parent_node.get_children():
 		if node is Ball:
 			if index < ball_list.size():
-				node.level = ball_list[index].level
+				node.number = ball_list[index].number
 				node.rarity = ball_list[index].rarity
 			elif max <= index:
-				node.level = Ball.BALL_LEVEL_DISABLED_SLOT
+				node.number = Ball.BALL_NUMBER_DISABLED_SLOT
 				node.rarity = Ball.Rarity.COMMON
 			else:
-				node.level = Ball.BALL_LEVEL_OPTIONAL_SLOT
+				node.number = Ball.BALL_NUMBER_OPTIONAL_SLOT
 				node.rarity = Ball.Rarity.COMMON
-			#print("refresh ball %s, %s" % [node.level, node.rarity])
+			#print("refresh ball %s, %s" % [node.number, node.rarity])
 			node.refresh_view()
 			index += 1
 

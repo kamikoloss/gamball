@@ -26,15 +26,13 @@ const TRAIL_MAX_LENGTH := 5
 const TRAIL_INTERVAL := 1.0 / 30.0
 
 # 特殊なボール番号
-const BALL_LEVEL_OPTIONAL_SLOT := -1 # 空きスロット用
-const BALL_LEVEL_DISABLED_SLOT := -2 # 使用不可スロット用
+const BALL_NUMBER_OPTIONAL_SLOT := -1 # 空きスロット用
+const BALL_NUMBER_DISABLED_SLOT := -2 # 使用不可スロット用
 
 
 # ボール番号
-# TODO: number の方がいい
-@export var level := 0
+@export var number := 0
 # 展示用かどうか
-# pressed は展示用のみ発火する
 @export var is_display := false
 # ボールがビリヤード盤面上にあるかどうか
 @export var is_on_billiards := false:
@@ -59,7 +57,7 @@ const BALL_LEVEL_DISABLED_SLOT := -2 # 使用不可スロット用
 # ボールが有効化されるまで全体を覆う部分
 @export var _inactive_texture: TextureRect
 # ボール番号
-@export var _level_label: Label
+@export var _number_label: Label
 # ボールの選択を示す周辺部分
 @export var _hover_texture: TextureRect
 
@@ -80,7 +78,6 @@ var is_warping := false
 # 現在縮小中かどうか
 var is_shrinked := false
 # ボールのレア度
-# TODO: level の方がいい
 var rarity := Rarity.COMMON
 # ボールのプール
 var pool := Pool.A
@@ -98,12 +95,12 @@ var _trail_default_width := 0.0
 var _tweens := {}
 
 
-func _init(level: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
-	self.level = level
+func _init(number: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
+	self.number = number
 	self.rarity = rarity
 
 	if Rarity.COMMON < rarity:
-		self.effects.append(BallEffect.EFFECTS_POOL_1[level][rarity])
+		self.effects.append(BallEffect.EFFECTS_POOL_1[number][rarity])
 
 
 func _ready() -> void:
@@ -129,7 +126,7 @@ func _ready() -> void:
 # 自身の見た目を更新する
 func refresh_view() -> void:
 	# スロットの場合
-	if level < 0:
+	if number < 0:
 		_view_slot.visible = true
 		_view_main.visible = false
 		return
@@ -143,10 +140,10 @@ func refresh_view() -> void:
 	# レア度による本体色の変化
 	if rarity == Rarity.COMMON:
 		_inner_line_texture.self_modulate = ColorPalette.GRAY_60
-		_level_label.self_modulate = ColorPalette.GRAY_60
+		_number_label.self_modulate = ColorPalette.GRAY_60
 	else:
 		_inner_line_texture.self_modulate = ColorPalette.WHITE
-		_level_label.self_modulate = ColorPalette.WHITE
+		_number_label.self_modulate = ColorPalette.WHITE
 
 	# 残像色: 有効でない場合は固定する
 	var trail_color = _body_texture.self_modulate
@@ -159,18 +156,18 @@ func refresh_view() -> void:
 
 	# ボール番号
 	if is_active:
-		_level_label.text = str(level)
+		_number_label.text = str(number)
 	else:
-		_level_label.text = "??"
-		_level_label.self_modulate = ColorPalette.BLACK
+		_number_label.text = "??"
+		_number_label.self_modulate = ColorPalette.BLACK
 
 	# 有効化されている場合: 無効テクスチャを非表示にする
 	_inactive_texture.visible = not is_active
 
-	# 縮小されている場合: 本体色のみ表示する
+	# 縮小している場合: 本体色のみ表示する
 	_inner_texture.visible = not is_shrinked
 	_inner_line_texture.visible = not is_shrinked
-	_level_label.visible = not is_shrinked
+	_number_label.visible = not is_shrinked
 
 
 # 自身の物理判定を更新する

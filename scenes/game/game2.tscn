@@ -852,47 +852,47 @@ position = Vector2(280, 460)
 
 [node name="Ball" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(280, 380)
-level = 1
+number = 1
 is_on_billiards = true
 
 [node name="Ball2" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(260, 360)
-level = 8
+number = 8
 is_on_billiards = true
 
 [node name="Ball3" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(300, 360)
-level = 2
+number = 2
 is_on_billiards = true
 
 [node name="Ball4" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(240, 340)
-level = 7
+number = 7
 is_on_billiards = true
 
 [node name="Ball5" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(280, 340)
-level = 9
+number = 9
 is_on_billiards = true
 
 [node name="Ball6" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(320, 340)
-level = 3
+number = 3
 is_on_billiards = true
 
 [node name="Ball7" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(260, 320)
-level = 6
+number = 6
 is_on_billiards = true
 
 [node name="Ball8" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(300, 320)
-level = 4
+number = 4
 is_on_billiards = true
 
 [node name="Ball9" parent="Balls" instance=ExtResource("2_javdm")]
 position = Vector2(280, 300)
-level = 5
+number = 5
 is_on_billiards = true
 
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_next_money_lamp", "_balls_label", "_next_balls_label", "_next_balls_lamp", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_popup", "_popup_title", "_popup_title_sub", "_popup_description")]

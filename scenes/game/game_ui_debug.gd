@@ -99,12 +99,12 @@ func _ready() -> void:
 		balls_buttons[balls_buttons_index].text = key
 		balls_buttons[balls_buttons_index].pressed.connect(_balls_functions[key])
 		balls_buttons_index += 1
-	var ball_level = 0
+	var ball_number = 0
 	for ball: Ball in _balls_parent.get_children():
-		ball.level = ball_level
+		ball.number = ball_number
 		ball.refresh_view()
 		ball.pressed.connect(func(): _on_ball_pressed(ball))
-		ball_level += 1
+		ball_number += 1
 
 	# MainLabels
 	var labels_tween = create_tween()
@@ -114,7 +114,7 @@ func _ready() -> void:
 
 
 func _on_ball_pressed(ball: Ball) -> void:
-	_game._extra_ball_list.push_back(Ball.new(ball.level, ball.rarity))
+	_game._extra_ball_list.push_back(Ball.new(ball.number, ball.rarity))
 	_game._apply_extra_ball_effects()
 	_game._refresh_deck_extra()
 	_game._refresh_next()
