@@ -6,8 +6,6 @@ enum TweenType { TAX, SHOP, BUNNY, BUBBLE, DIALOGUE, COUNT_DOWN }
 
 
 # Signal
-signal buy_balls_button_pressed
-signal sell_balls_button_pressed
 signal tax_pay_button_pressed
 signal shop_exit_button_pressed
 signal info_button_pressed
@@ -49,15 +47,9 @@ const LOG_LINES_MAX := 100
 @export_category("Main/Score")
 @export var _turn_label: Label
 @export var _next_turn_label: Label
-@export var _money_label: Label
-@export var _next_money_label: Label
-@export var _next_money_lamp: Label
 @export var _balls_label: Label
 @export var _next_balls_label: Label
-@export var _next_balls_lamp: Label
 @export_category("Main/Buttons")
-@export var _buy_balls_button: Button
-@export var _sell_balls_button: Button
 @export var _info_button: Button
 @export var _options_button: Button
 @export_category("Main/Bunny+")
@@ -107,8 +99,6 @@ func _ready() -> void:
 			node.hovered.connect(func(entered): _on_deck_extra_balls_hovered(node, entered))
 	_hide_ball_popup()
 	# Main/Buttons
-	_buy_balls_button.pressed.connect(func(): buy_balls_button_pressed.emit())
-	_sell_balls_button.pressed.connect(func(): sell_balls_button_pressed.emit())
 	_info_button.pressed.connect(func(): info_button_pressed.emit())
 	_options_button.pressed.connect(func(): options_button_pressed.emit())
 
@@ -171,32 +161,19 @@ func refresh_extra_slots(shift: int) -> void:
 func refresh_turn_label(turn: int) -> void:
 	_turn_label.text = _get_seg_text(turn)
 
-func refresh_money_label(money: int) -> void:
-	_money_label.text = _get_seg_text(money)
-
 func refresh_balls_label(balls: int) -> void:
 	_balls_label.text = _get_seg_text(balls)
 
-func refresh_next(turn: int, type: Game.TaxType, amount: int) -> void:
+func refresh_next(turn: int, amount: int) -> void:
 	_next_turn_label.text = _get_seg_text(turn)
-	if type == Game.TaxType.MONEY:
-		_next_money_label.text = _get_seg_text(amount)
-		_next_money_lamp.visible = true
-		_next_balls_label.text = "!!!---"
-		_next_balls_lamp.visible = false
-	else:
-		_next_money_label.text = "!!!---"
-		_next_money_lamp.visible = false
-		_next_balls_label.text = _get_seg_text(amount)
-		_next_balls_lamp.visible = true
-
-func _get_seg_text(value: int) -> String:
-	return ("%6d" % value).replace(" ", "!")
+	_next_balls_label.text = _get_seg_text(amount)
 
 func refresh_next_clear() -> void:
 	_next_turn_label.text = "!!!---"
-	_next_money_label.text = "!!!---"
 	_next_balls_label.text = "!!!---"
+
+func _get_seg_text(value: int) -> String:
+	return ("%6d" % value).replace(" ", "!")
 
 
 func add_log(text: String) -> void:
@@ -289,36 +266,6 @@ func popup_score(from: Vector2, text: String, color: Color = Color.WHITE, ratio:
 	popup_score.set_font_size(ratio)
 	add_child(popup_score)
 	popup_score.popup(from, text)
-
-
-# tax_list: [ <turn>, TaxType, <amount> ]
-func refresh_tax_table(tax_list: Array) -> void:
-	var row_index = -1
-	var col_index = 0
-
-	for row in _tax_table_parent.get_children():
-		col_index = 0
-		# ヘッダー行はスキップする
-		if row_index == -1:
-			row_index += 1
-			continue
-		for col in row.get_children():
-			if col is Label:
-				col.text = "----"
-				if tax_list.size() <= row_index:
-					col_index += 1
-					continue
-				var turn = tax_list[row_index][0]
-				var tax_type = tax_list[row_index][1]
-				var amount = tax_list[row_index][2]
-				if col_index == 0:
-					col.text = str(turn)
-				elif col_index == 1 and tax_type == Game.TaxType.MONEY:
-					col.text = str(amount)
-				elif col_index == 2 and tax_type == Game.TaxType.BALLS:
-					col.text = str(amount)
-				col_index += 1
-		row_index += 1
 
 
 func _on_deck_extra_balls_hovered(ball: Ball, entered: bool) -> void:

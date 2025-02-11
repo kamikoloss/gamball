@@ -26,8 +26,8 @@ var _main_functions: Dictionary = {
 	# Game
 	"TURN +10": func(): _game.turn += 10,
 	"TURN -10": func(): _game.turn -= 10,
-	"MONEY +100": func(): _game.money += 100,
-	"MONEY -100": func(): _game.money -= 100,
+	"BALLS +10": func(): _game.balls += 10,
+	"BALLS -10": func(): _game.balls -= 10,
 	"BALLS +100": func(): _game.balls += 100,
 	"BALLS -100": func(): _game.balls -= 100,
 	# Pachinko

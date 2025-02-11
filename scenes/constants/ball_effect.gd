@@ -6,6 +6,8 @@ extends Object
 # ボール効果の種類
 enum Type {
 	NONE,
+	BALLS_UP_BREAK,
+	BALLS_UP_FALL,
 	DECK_SIZE_MIN_DOWN,
 	EXTRA_SIZE_MAX_UP,
 	GAIN_UP_BALL_NUMBER, GAIN_UP_BALL_NUMBER_2,
@@ -15,17 +17,14 @@ enum Type {
 	GAIN_UP_HOLE,
 	HOLE_SIZE_UP,
 	HOLE_GRAVITY_SIZE_UP,
-	MONEY_UP_BREAK,
-	MONEY_UP_FALL,
 	NUMBER_UP_SPAWN,
 	PC_START_TOP_UP, PC_CONTINUE_TOP_UP,
 	RARITY_TOP_UP, RARITY_TOP_DOWN,
-	TAX_BALLS_DOWN, TAX_MONEY_DOWN,
+	TAX_DOWN,
 }
 
 
 # TODO: 居場所はここではない？
-# TODO: Rarity って言葉が変？
 const RARITY_TEXT := {
 	Ball.Rarity.COMMON: 	"★",
 	Ball.Rarity.UNCOMMON:	"★★",
@@ -49,30 +48,29 @@ const EFFECT_DESCRIPTIONS := {
 	Type.EXTRA_SIZE_MAX_UP: "EXTRA の最大サイズ +{a}",
 	Type.HOLE_SIZE_UP: "ビリヤードポケットのサイズ +{a} (最大 +4)",
 	Type.HOLE_GRAVITY_SIZE_UP: "ビリヤードポケットの重力範囲サイズ +{a} (最大 +4)",
-	Type.MONEY_UP_BREAK: "破壊時に MONEY x{a}",
-	Type.MONEY_UP_FALL: "ビリヤードポケット落下時に MONEY +{a}",
+	Type.BALLS_UP_BREAK: "破壊時に BALLS x{a}",
+	Type.BALLS_UP_FALL: "ビリヤードポケット落下時に BALLS +{a}",
 	Type.PC_START_TOP_UP: "パチンコの初当たりランプ数 +{a} (最大 +2)",
 	Type.PC_CONTINUE_TOP_UP: "パチンコの継続ランプ数 +{a} (最大 +6)",
 	Type.RARITY_TOP_UP: "{a} の出現確率 +1",
 	Type.RARITY_TOP_DOWN: "{a} の出現確率 -1 (最小 -2)",
-	Type.TAX_BALLS_DOWN: "BALLS で支払う延長料 -{a}% (最大 -50%)",
-	Type.TAX_MONEY_DOWN: "MONEY で支払う延長料 -{a}% (最大 -50%)",
+	Type.TAX_DOWN: "延長料 -{a}% (最大 -50%)",
 }
 
 # Ball LV/Rarity ごとの初期効果
 # { <Ball LV>: { <Ball Rarity>: [ <EffectType>, param1, (param2) ], ... } }
 const EFFECTS_POOL_1 := {
 	0: {
-		Ball.Rarity.UNCOMMON:	[Type.MONEY_UP_BREAK, 2],
-		Ball.Rarity.RARE:		[Type.MONEY_UP_BREAK, 3],
-		Ball.Rarity.EPIC:		[Type.MONEY_UP_BREAK, 5],
-		Ball.Rarity.LEGENDARY:	[Type.MONEY_UP_BREAK, 10],
+		Ball.Rarity.UNCOMMON:	[Type.BALLS_UP_BREAK, 2],
+		Ball.Rarity.RARE:		[Type.BALLS_UP_BREAK, 3],
+		Ball.Rarity.EPIC:		[Type.BALLS_UP_BREAK, 5],
+		Ball.Rarity.LEGENDARY:	[Type.BALLS_UP_BREAK, 10],
 	},
 	1: {
-		Ball.Rarity.UNCOMMON:	[Type.MONEY_UP_FALL, 10],
-		Ball.Rarity.RARE:		[Type.MONEY_UP_FALL, 20],
-		Ball.Rarity.EPIC:		[Type.MONEY_UP_FALL, 30],
-		Ball.Rarity.LEGENDARY:	[Type.MONEY_UP_FALL, 50],
+		Ball.Rarity.UNCOMMON:	[Type.BALLS_UP_FALL, 10],
+		Ball.Rarity.RARE:		[Type.BALLS_UP_FALL, 20],
+		Ball.Rarity.EPIC:		[Type.BALLS_UP_FALL, 30],
+		Ball.Rarity.LEGENDARY:	[Type.BALLS_UP_FALL, 50],
 	},
 	2: {
 		Ball.Rarity.UNCOMMON:	[Type.GAIN_UP_BL_COUNT, 50, 1],
@@ -123,16 +121,16 @@ const EFFECTS_POOL_1 := {
 		Ball.Rarity.LEGENDARY:	[Type.GAIN_UP_HOLE, 5],
 	},
 	10: {
-		Ball.Rarity.UNCOMMON:	[Type.TAX_BALLS_DOWN, 10],
-		Ball.Rarity.RARE:		[Type.TAX_BALLS_DOWN, 20],
-		Ball.Rarity.EPIC:		[Type.TAX_BALLS_DOWN, 30],
-		Ball.Rarity.LEGENDARY:	[Type.TAX_BALLS_DOWN, 50],
+		Ball.Rarity.UNCOMMON:	[Type.TAX_DOWN, 10],
+		Ball.Rarity.RARE:		[Type.TAX_DOWN, 20],
+		Ball.Rarity.EPIC:		[Type.TAX_DOWN, 30],
+		Ball.Rarity.LEGENDARY:	[Type.TAX_DOWN, 50],
 	},
 	11: {
-		Ball.Rarity.UNCOMMON:	[Type.TAX_MONEY_DOWN, 10],
-		Ball.Rarity.RARE:		[Type.TAX_MONEY_DOWN, 20],
-		Ball.Rarity.EPIC:		[Type.TAX_MONEY_DOWN, 30],
-		Ball.Rarity.LEGENDARY:	[Type.TAX_MONEY_DOWN, 50],
+		Ball.Rarity.UNCOMMON:	[Type.NONE, 10],
+		Ball.Rarity.RARE:		[Type.NONE, 20],
+		Ball.Rarity.EPIC:		[Type.NONE, 30],
+		Ball.Rarity.LEGENDARY:	[Type.NONE, 50],
 	},
 	12: {
 		Ball.Rarity.UNCOMMON:	[Type.HOLE_SIZE_UP, 1],

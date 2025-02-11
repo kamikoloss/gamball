@@ -9,7 +9,6 @@ signal exited
 
 enum GameState { GAME, COUNT_DOWN, TAX, SHOP }
 enum ComboState { IDLE, CONTINUE, COOLTIME }
-enum TaxType { MONEY, BALLS }
 enum TweenType { COMBO, TAX_COUNT_DOWN }
 
 
@@ -26,16 +25,11 @@ const EXTRA_SIZE_MAX := 9
 const EXTRA_SIZE_MAX_DEFAULT := 5
 
 # Tax (ノルマ) のリスト
-# [ <turn>, TaxType, <amount> ]
+# [ <turn>, <amount> ]
 const TAX_LIST := [
-	[25, TaxType.BALLS, 50],	# Balls 50
-	[50, TaxType.BALLS, 100],	# Balls 100
-	[75, TaxType.MONEY, 400],	# Balls 200
-	[100, TaxType.MONEY, 800],	# Balls 400
-	[150, TaxType.BALLS, 800],	# Balls 800
-	[200, TaxType.BALLS, 1600],	# Balls 1600
-	[250, TaxType.MONEY, 3200],	# Balls 3200
-	[300, TaxType.MONEY, 6400],	# Balls 6400
+	[25, 50], [50, 100], [75, 200], [100, 400],
+	[150, 800], [200, 1600],
+	[250, 3200], [300, 6400],
 ]
 
 # レア度の割合
@@ -81,10 +75,6 @@ var turn := 0:
 	set(v):
 		turn = v
 		_game_ui.refresh_turn_label(turn)
-var money := 0:
-	set(v):
-		money = v
-		_game_ui.refresh_money_label(money)
 var balls := 0:
 	set(v):
 		# ボールの個数が 0 から回復したとき: DragShooter を有効化する
@@ -109,9 +99,8 @@ var _billiards_balls_count := 0:
 
 # 次に訪れる TAX_LIST の index
 var _next_tax_index := 0
-# TAX (MONEY/BALLS) の割引後のレート
-var _tax_money_rate := 0.0
-var _tax_balls_rate := 0.0
+# TAX の割引後のレート
+var _tax_rate := 0.0
 
 # 出現する Deck Ball のリストの初期値
 var _deck_ball_list: Array[Ball] = [
@@ -136,13 +125,6 @@ var _extra_size_max := EXTRA_SIZE_MAX_DEFAULT
 # 払い出しを行う Hole
 var _payout_hole: Hole
 
-# Ball の購入レート
-# [x, y] x money = y balls
-var _buy_rate: Array[int] = [100, 25]
-# Ball の売却レート
-# [x, y] x balls = y money
-var _sell_rate: Array[int] = [50, 100]
-
 # { TweenType: Tween, ... } 
 var _tweens := {}
 
@@ -150,7 +132,6 @@ var _tweens := {}
 func _ready() -> void:
 	# 初期化 (ラベル用)
 	turn = 0
-	money = 1000
 	balls = 100
 
 	# Signal (DragShooter)
@@ -158,8 +139,6 @@ func _ready() -> void:
 	_drag_shooter.released.connect(_on_drag_shooter_released)
 	_drag_shooter.canceled.connect(_on_drag_shooter_canceled)
 	# Signal (GameUi)
-	_game_ui.buy_balls_button_pressed.connect(_on_buy_balls_button_pressed)
-	_game_ui.sell_balls_button_pressed.connect(_on_sell_balls_button_pressed)
 	_game_ui.tax_pay_button_pressed.connect(_on_tax_pay_button_pressed)
 	_game_ui.shop_exit_button_pressed.connect(_on_shop_exit_button_pressed)
 	_game_ui.info_button_pressed.connect(_on_info_button_pressed)
@@ -179,15 +158,11 @@ func _ready() -> void:
 
 	# UI
 	_game_ui.combo_bar_progress = 0.0
-	_game_ui.refresh_tax_table(TAX_LIST)
 	_game_ui.add_log("---- Start!! ----")
 	_apply_extra_ball_effects()
 	_refresh_deck_extra()
 	_refresh_next()
 	_billiards.refresh_balls_count(_billiards_balls_count)
-
-	# ボール購入ボタンを1プッシュする
-	_on_buy_balls_button_pressed()
 
 
 func _on_drag_shooter_pressed() -> void:
@@ -214,38 +189,14 @@ func _on_drag_shooter_canceled() -> void:
 		balls += 1
 
 
-func _on_buy_balls_button_pressed() -> void:
-	var money_unit = _buy_rate[0]
-	var balls_unit = _buy_rate[1]
-	if money < money_unit:
-		return
-	money -= money_unit
-	balls += balls_unit
-
-func _on_sell_balls_button_pressed() -> void:
-	var balls_unit = _sell_rate[0]
-	var money_unit = _sell_rate[1]
-	if balls < balls_unit:
-		return
-	balls -= balls_unit
-	money += money_unit
-
-
 func _on_tax_pay_button_pressed() -> void:
 	var next_turn = TAX_LIST[_next_tax_index][0]
-	var next_type = TAX_LIST[_next_tax_index][1]
-	var next_amount = TAX_LIST[_next_tax_index][2]
-
-	if next_type == TaxType.MONEY:
-		next_amount = int(next_amount * _tax_money_rate)
-		money -= next_amount
-	elif next_type == TaxType.BALLS:
-		next_amount = int(next_amount * _tax_balls_rate)
-		balls -= next_amount
-
+	var next_amount = TAX_LIST[_next_tax_index][1]
+	balls -= int(next_amount * _tax_rate)
 	_next_tax_index += 1
 	_refresh_next()
 
+	# TODO: もろもろの処理を state 管理でやりたい
 	_game_ui.hide_tax_window()
 	_game_ui.show_shop_window()
 	_game_ui.set_dialogue("[font_size=24]なんか買ってく？[/font_size]", true)
@@ -295,11 +246,11 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 				await ball.die()
 				_billiards.refresh_balls_count(_billiards_balls_count)
 				return
-			# ex: [Type.MONEY_UP_FALL, 10]
+			# ex: [Type.BALLS_UP_FALL, 10]
 			for effect_data in ball.effects:
-				if effect_data[0] == BallEffect.Type.MONEY_UP_FALL:
-					money += effect_data[1]
-					print("[Game/BallEffect] MONEY_UP_FALL +%s" % [effect_data[1]])
+				if effect_data[0] == BallEffect.Type.BALLS_UP_FALL:
+					balls += effect_data[1]
+					print("[Game/BallEffect] BALLS_UP_FALL +%s" % [effect_data[1]])
 			# 同じ GroupType の Hole に Ball をワープさせる
 			ball.is_on_billiards = false
 			for node in get_tree().get_nodes_in_group("hole"):
@@ -419,14 +370,14 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 # 商品をホバーしたときの処理
 func _on_product_hovered(product: Product, hover: bool) -> void:
 	#print("[Game] _on_product_hovered(%s, %s)" % [product, hover])
-	product.disabled = money < product.price
+	product.disabled = balls < product.price
 
 
 # 商品をクリックしたときの処理
 func _on_product_pressed(product: Product) -> void:
 	#print("[Game] _on_product_pressed(%s)" % [product])
-	# Money が足りない場合: 何もしない
-	if money < product.price:
+	# BALLS が足りない場合: 何もしない
+	if balls < product.price:
 		# TODO: 購入できない理由がいくつかあるときラベルを分ける？
 		_game_ui.set_dialogue("[font_size=24]お金が足りないよ～[/font_size]", true)
 		return
@@ -470,20 +421,19 @@ func _on_product_pressed(product: Product) -> void:
 			if _extra_ball_list.size() == 0:
 				return
 			var popped_ball: Ball = _extra_ball_list.pop_front()
-			# ex: [Type.MONEY_UP_BREAK, 2]
-			var money_times = 1
+			# ex: [Type.BALLS_UP_BREAK, 2]
+			var balls_times = 1
 			for effect_data in popped_ball.effects:
-				if effect_data[0] == BallEffect.Type.MONEY_UP_BREAK:
-					money_times *= effect_data[1]
-				print("[Game/BallEffect] MONEY_UP_BREAK x%s" % [money_times])
-			if 1 < money_times:
-				money *= money_times
+				if effect_data[0] == BallEffect.Type.BALLS_UP_BREAK:
+					balls_times *= effect_data[1]
+				print("[Game/BallEffect] BALLS_UP_BREAK x%s" % [balls_times])
+			if 1 < balls_times:
+				balls *= balls_times
 
-	# return しなかった場合: Money を減らす
-	money -= product.price
-	# Money が減ったのでホバー時処理をやり直す
+	# return しなかった場合: Balls を減らす
+	balls -= product.price
+	# Balls が減ったのでホバー時処理をやり直す
 	_on_product_hovered(product, true)
-
 	# DECK/EXTRA の見た目を更新する
 	_refresh_deck_extra()
 
@@ -531,17 +481,12 @@ func _apply_extra_ball_effects() -> void:
 	_pachinko.set_rush_continue_top(continue_level)
 	print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
 
-	# ex. [Type.TAX_MONEY_DOWN, 10]
-	var tax_money_off_per: int = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.Type.TAX_MONEY_DOWN):
-		tax_money_off_per += effect_data[1]
-	_tax_money_rate = 1 - clampi(tax_money_off_per, 0, 50) / 100.0 # TODO: const
-	# ex. [Type.TAX_BALLS_DOWN, 10]
-	var tax_balls_off_per: int = 0
-	for effect_data in _get_extra_ball_effects(BallEffect.Type.TAX_BALLS_DOWN):
-		tax_balls_off_per += effect_data[1]
-	_tax_balls_rate = 1 - clampi(tax_balls_off_per, 0, 50) / 100.0 # TODO: const
-	print("[Game/BallEffect] TAX_(MONEY/BALLS)_DOWN _tax_money_rate: %s, _tax_balls_rate" % [_tax_money_rate, _tax_balls_rate])
+	# ex. [Type.TAX_DOWN, 10]
+	var tax_off_per: int = 0
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.TAX_DOWN):
+		tax_off_per += effect_data[1]
+	_tax_rate = 1 - clampi(tax_off_per, 0, 50) / 100.0 # TODO: const
+	print("[Game/BallEffect] TAX_DOWN _tax_rate: %s" % [_tax_rate])
 
 	_refresh_deck_extra()
 	_refresh_next()
@@ -637,13 +582,9 @@ func _refresh_deck_extra() -> void:
 func _refresh_next() -> void:
 	if _next_tax_index < TAX_LIST.size():
 		var turn = TAX_LIST[_next_tax_index][0]
-		var type = TAX_LIST[_next_tax_index][1]
-		var amount = TAX_LIST[_next_tax_index][2]
-		if type == TaxType.MONEY:
-			amount = int(amount * _tax_money_rate)
-		elif type == TaxType.BALLS:
-			amount = int(amount * _tax_balls_rate)
-		_game_ui.refresh_next(turn, type, amount)
+		var amount = TAX_LIST[_next_tax_index][1]
+		amount = int(amount * _tax_rate)
+		_game_ui.refresh_next(turn, amount)
 	else:
 		_game_ui.refresh_next_clear()
 
@@ -653,7 +594,7 @@ func _go_to_next_turn() -> void:
 	turn += 1
 
 	# 延長料支払いターンを超えている場合: カウントダウンを表示する
-	var in_next_tax_turn = _next_tax_index < TAX_LIST.size() and TAX_LIST[_next_tax_index][0] < turn
+	var in_next_tax_turn = _next_tax_index < TAX_LIST.size() and TAX_LIST[_next_tax_index][0] <= turn
 	if in_next_tax_turn and game_state == GameState.GAME:
 		_start_tax_count_down()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bi5oapulw3837"]
+[gd_scene load_steps=37 format=3 uid="uid://bi5oapulw3837"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_mqtms"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_javdm"]
@@ -28,9 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cscmqneywp778" path="res://images/people/bunny/hand_left_1.png" id="24_qdik2"]
 [ext_resource type="Texture2D" uid="uid://c17m6dsrq78ov" path="res://images/people/bunny/hand_left_2.png" id="25_atlcj"]
 [ext_resource type="Texture2D" uid="uid://fdhvh0vuhtge" path="res://images/people/bunny/hand_right_1.png" id="26_jh16u"]
-[ext_resource type="Texture2D" uid="uid://s5raj8sjgcka" path="res://images/icons/shopping_cart.png" id="27_et20a"]
 [ext_resource type="Texture2D" uid="uid://uk0q0it6ta74" path="res://images/people/bunny/hand_right_2.png" id="27_l85vb"]
-[ext_resource type="Texture2D" uid="uid://bqmtnjse8snmy" path="res://images/icons/currency_exchange.png" id="28_fhmm7"]
 [ext_resource type="Texture2D" uid="uid://dt3h4qyqg6tp6" path="res://images/common/base_triangle.png" id="29_22y37"]
 [ext_resource type="Texture2D" uid="uid://cmdugoyo8pdg1" path="res://images/icons/info.png" id="29_k6x4s"]
 [ext_resource type="FontFile" uid="uid://dq3uk1pcxdhrq" path="res://themes/fonts/MPLUSRounded1c-Bold.ttf" id="32_ubskw"]
@@ -895,7 +893,7 @@ position = Vector2(280, 300)
 number = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_money_label", "_next_money_label", "_next_money_lamp", "_balls_label", "_next_balls_label", "_next_balls_lamp", "_buy_balls_button", "_sell_balls_button", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_popup", "_popup_title", "_popup_title_sub", "_popup_description")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_balls_label", "_next_balls_label", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_popup", "_popup_title", "_popup_title_sub", "_popup_description")]
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
@@ -909,14 +907,8 @@ _deck_min_lamp = NodePath("Main/Balls/DeckLamps/TextureRect_")
 _extra_max_lamp = NodePath("Main/Balls/ExtraLamps/TextureRect_")
 _turn_label = NodePath("Main/Score/TurnValue")
 _next_turn_label = NodePath("Main/Score/TurnValue2")
-_money_label = NodePath("Main/Score/MoneyValue")
-_next_money_label = NodePath("Main/Score/MoneyValue2")
-_next_money_lamp = NodePath("Main/Score/MoneyNextLamp")
 _balls_label = NodePath("Main/Score/BallsValue")
 _next_balls_label = NodePath("Main/Score/BallsValue2")
-_next_balls_lamp = NodePath("Main/Score/BallsNextLamp")
-_buy_balls_button = NodePath("Main/Buttons/BuyBalls")
-_sell_balls_button = NodePath("Main/Buttons/SellBalls")
 _info_button = NodePath("Main/Buttons/Information")
 _options_button = NodePath("Main/Buttons/Options")
 _bunny = NodePath("Bunny")
@@ -1263,6 +1255,16 @@ theme_override_font_sizes/font_size = 12
 text = "TURN"
 vertical_alignment = 1
 
+[node name="TurnHeaderNext" type="Label" parent="UI/Main/Score"]
+offset_left = 120.0
+offset_right = 200.0
+offset_bottom = 20.0
+theme_type_variation = &"LabelHeader"
+theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "NEXT"
+vertical_alignment = 1
+
 [node name="TurnBg" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_top = 20.0
@@ -1312,119 +1314,22 @@ text = "123456"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MoneyHeader" type="Label" parent="UI/Main/Score"]
-layout_mode = 0
-offset_top = 60.0
-offset_right = 80.0
-offset_bottom = 80.0
-theme_type_variation = &"LabelHeader"
-theme_override_font_sizes/font_size = 12
-text = "MONEY"
-vertical_alignment = 1
-
-[node name="MoneyNext" type="Label" parent="UI/Main/Score"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 60.0
-offset_right = 200.0
-offset_bottom = 80.0
-theme_type_variation = &"LabelHeader"
-theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
-theme_override_font_sizes/font_size = 12
-text = "NEXT"
-vertical_alignment = 1
-
-[node name="MoneyNextLamp" type="Label" parent="UI/Main/Score"]
-visible = false
-layout_mode = 0
-offset_left = 120.0
-offset_top = 60.0
-offset_right = 200.0
-offset_bottom = 80.0
-theme_type_variation = &"LabelHeader"
-theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
-theme_override_font_sizes/font_size = 12
-text = "NEXT"
-vertical_alignment = 1
-
-[node name="MoneyBg" type="Label" parent="UI/Main/Score"]
-layout_mode = 0
-offset_top = 80.0
-offset_right = 120.0
-offset_bottom = 120.0
-theme_type_variation = &"LabelSeg"
-theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
-theme_override_font_sizes/font_size = 24
-text = "888888"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MoneyBg2" type="Label" parent="UI/Main/Score"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 80.0
-offset_right = 240.0
-offset_bottom = 120.0
-theme_type_variation = &"LabelSeg"
-theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
-theme_override_font_sizes/font_size = 24
-text = "888888"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MoneyValue" type="Label" parent="UI/Main/Score"]
-layout_mode = 0
-offset_top = 80.0
-offset_right = 120.0
-offset_bottom = 120.0
-theme_type_variation = &"LabelSeg"
-theme_override_font_sizes/font_size = 24
-text = "123456"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MoneyValue2" type="Label" parent="UI/Main/Score"]
-layout_mode = 0
-offset_left = 120.0
-offset_top = 80.0
-offset_right = 240.0
-offset_bottom = 120.0
-theme_type_variation = &"LabelSeg"
-theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
-theme_override_font_sizes/font_size = 24
-text = "123456"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="BallsHeader" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_top = 120.0
+offset_top = 60.0
 offset_right = 80.0
-offset_bottom = 140.0
+offset_bottom = 80.0
 theme_type_variation = &"LabelHeader"
 theme_override_font_sizes/font_size = 12
 text = "BALLS"
 vertical_alignment = 1
 
-[node name="BallsNext" type="Label" parent="UI/Main/Score"]
+[node name="BallsHeaderNext" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_left = 120.0
-offset_top = 120.0
+offset_top = 60.0
 offset_right = 200.0
-offset_bottom = 140.0
-theme_type_variation = &"LabelHeader"
-theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
-theme_override_font_sizes/font_size = 12
-text = "NEXT"
-vertical_alignment = 1
-
-[node name="BallsNextLamp" type="Label" parent="UI/Main/Score"]
-visible = false
-layout_mode = 0
-offset_left = 120.0
-offset_top = 120.0
-offset_right = 200.0
-offset_bottom = 140.0
+offset_bottom = 80.0
 theme_type_variation = &"LabelHeader"
 theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 12
@@ -1433,9 +1338,9 @@ vertical_alignment = 1
 
 [node name="BallsBg" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_top = 140.0
+offset_top = 80.0
 offset_right = 120.0
-offset_bottom = 180.0
+offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
@@ -1446,9 +1351,9 @@ vertical_alignment = 1
 [node name="BallsBg2" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_left = 120.0
-offset_top = 140.0
+offset_top = 80.0
 offset_right = 240.0
-offset_bottom = 180.0
+offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_font_sizes/font_size = 24
@@ -1458,9 +1363,9 @@ vertical_alignment = 1
 
 [node name="BallsValue" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
-offset_top = 140.0
+offset_top = 80.0
 offset_right = 120.0
-offset_bottom = 180.0
+offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
 theme_override_font_sizes/font_size = 24
 text = "123456"
@@ -1470,9 +1375,9 @@ vertical_alignment = 1
 [node name="BallsValue2" type="Label" parent="UI/Main/Score"]
 layout_mode = 0
 offset_left = 120.0
-offset_top = 140.0
+offset_top = 80.0
 offset_right = 240.0
-offset_bottom = 180.0
+offset_bottom = 120.0
 theme_type_variation = &"LabelSeg"
 theme_override_colors/font_color = Color(0.921569, 0.239216, 0, 1)
 theme_override_font_sizes/font_size = 24
@@ -1504,28 +1409,10 @@ offset_top = 40.0
 offset_right = 640.0
 offset_bottom = 40.0
 
-[node name="BuyBalls" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-icon = ExtResource("27_et20a")
-icon_alignment = 1
-expand_icon = true
-
-[node name="SellBalls" type="Button" parent="UI/Main/Buttons"]
-layout_mode = 0
-offset_left = 50.0
-offset_right = 90.0
-offset_bottom = 40.0
-icon = ExtResource("28_fhmm7")
-icon_alignment = 1
-expand_icon = true
-
 [node name="Information" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
-offset_top = 60.0
 offset_right = 40.0
-offset_bottom = 100.0
+offset_bottom = 40.0
 theme_type_variation = &"ButtonGray"
 icon = ExtResource("29_k6x4s")
 icon_alignment = 1
@@ -1534,9 +1421,8 @@ expand_icon = true
 [node name="Options" type="Button" parent="UI/Main/Buttons"]
 layout_mode = 0
 offset_left = 50.0
-offset_top = 60.0
 offset_right = 90.0
-offset_bottom = 100.0
+offset_bottom = 40.0
 theme_type_variation = &"ButtonGray"
 icon = ExtResource("21_bilys")
 icon_alignment = 1
