@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3 uid="uid://d5dtowptn2i8"]
+
+[ext_resource type="Script" path="res://addons/google_sheets_downloader/dock.gd" id="1_bpk8q"]
+
+[node name="Sheets" type="Control" node_paths=PackedStringArray("http_request", "_id_edit", "_gid_edit", "_file_path_edit", "_download_button")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bpk8q")
+http_request = NodePath("HTTPRequest")
+_id_edit = NodePath("LineEdit")
+_gid_edit = NodePath("LineEdit2")
+_file_path_edit = NodePath("LineEdit3")
+_download_button = NodePath("Button")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="Title" type="Label" parent="."]
+offset_right = 400.0
+offset_bottom = 40.0
+text = "Google Sheets Downloader"
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 80.0
+offset_bottom = 80.0
+text = "ID"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 40.0
+offset_right = 400.0
+offset_bottom = 80.0
+
+[node name="Label2" type="Label" parent="."]
+offset_top = 80.0
+offset_right = 80.0
+offset_bottom = 120.0
+text = "GID"
+vertical_alignment = 1
+
+[node name="LineEdit2" type="LineEdit" parent="."]
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 120.0
+
+[node name="Label3" type="Label" parent="."]
+offset_top = 120.0
+offset_right = 80.0
+offset_bottom = 160.0
+text = "File Path"
+vertical_alignment = 1
+
+[node name="LineEdit3" type="LineEdit" parent="."]
+offset_left = 80.0
+offset_top = 120.0
+offset_right = 400.0
+offset_bottom = 160.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 160.0
+offset_right = 240.0
+offset_bottom = 200.0
+text = "Download"
