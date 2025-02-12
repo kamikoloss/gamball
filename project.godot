@@ -39,6 +39,11 @@ window/stretch/mode="canvas_items"
 
 hole=""
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://resources/translations/tr.en.translation", "res://resources/translations/tr.ja.translation")
+locale/fallback="ja"
+
 [layer_names]
 
 2d_physics/layer_1="BASE"

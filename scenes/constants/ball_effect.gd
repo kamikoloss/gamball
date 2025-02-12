@@ -4,6 +4,7 @@ extends Object
 
 
 # ボール効果の種類
+# NOTE: 翻訳キーにも使用しているのでリネームするときは注意すること
 enum Type {
 	NONE,
 	BALLS_UP_BREAK,
@@ -24,6 +25,7 @@ enum Type {
 }
 
 
+# Ball のレア度のテキスト
 # TODO: 居場所はここではない？
 const RARITY_TEXT := {
 	Ball.Rarity.COMMON: 	"★",
@@ -33,32 +35,8 @@ const RARITY_TEXT := {
 	Ball.Rarity.LEGENDARY:	"★★★★★",
 }
 
-# 効果の説明文 (翻訳キー)
-const EFFECT_DESCRIPTIONS := {
-	Type.NONE: "",
-	Type.GAIN_UP_BALL_NUMBER: "LV.{a} 以下のボールの Gain +{b}",
-	Type.GAIN_UP_BALL_NUMBER_2: "LV.{a} のボールの Gain x{b}",
-	Type.GAIN_UP_BL_COUNT: "ビリヤード上のボールが {a} 個以下のとき Gain +{b}",
-	Type.GAIN_UP_BL_COUNT_2: "ビリヤード上のボールが {a} 個以下のとき Gain x{b}",
-	Type.GAIN_UP_DECK_COMPLETE: "DECK に LV.0 から LV.{a} まで揃っているとき Gain x{b}",
-	Type.GAIN_UP_DECK_COUNT: "DECK のボールが {a} 個以下のとき Gain +{b}",
-	Type.GAIN_UP_HOLE: "xn の Gain +{a}",
-	Type.NUMBER_UP_SPAWN: "出現時にビリヤード上のすべてのボール LV. +{a}",
-	Type.DECK_SIZE_MIN_DOWN: "DECK の最小サイズ -{a}",
-	Type.EXTRA_SIZE_MAX_UP: "EXTRA の最大サイズ +{a}",
-	Type.HOLE_SIZE_UP: "ビリヤードポケットのサイズ +{a} (最大 +4)",
-	Type.HOLE_GRAVITY_SIZE_UP: "ビリヤードポケットの重力範囲サイズ +{a} (最大 +4)",
-	Type.BALLS_UP_BREAK: "破壊時に BALLS x{a}",
-	Type.BALLS_UP_FALL: "ビリヤードポケット落下時に BALLS +{a}",
-	Type.PC_START_TOP_UP: "パチンコの初当たりランプ数 +{a} (最大 +2)",
-	Type.PC_CONTINUE_TOP_UP: "パチンコの継続ランプ数 +{a} (最大 +6)",
-	Type.RARITY_TOP_UP: "{a} の出現確率 +1",
-	Type.RARITY_TOP_DOWN: "{a} の出現確率 -1 (最小 -2)",
-	Type.TAX_DOWN: "延長料 -{a}% (最大 -50%)",
-}
-
-# Ball LV/Rarity ごとの初期効果
-# { <Ball LV>: { <Ball Rarity>: [ <EffectType>, param1, (param2) ], ... } }
+# 番号/レア度 ごとの初期効果
+# { number: { <Rarity>: [ <EffectType>, param1, (param2) ], ... } }
 const EFFECTS_POOL_1 := {
 	0: {
 		Ball.Rarity.UNCOMMON:	[Type.BALLS_UP_BREAK, 2],
@@ -170,13 +148,14 @@ static func get_effect_description(number: int, rarity: Ball.Rarity) -> String:
 	if rarity == Ball.Rarity.COMMON:
 		return "(効果なし)"
 
-	var effect_data = EFFECTS_POOL_1[number][rarity] # [ <EffectType>, param1, (param2) 
+	var effect_data = EFFECTS_POOL_1[number][rarity] # [ <EffectType>, param1, (param2) ]
 
 	# 効果なし
 	if effect_data[0] == Type.NONE:
 		return "(TODO)"
 
-	var description_base = EFFECT_DESCRIPTIONS[effect_data[0]]
+	var description_key = "ball_effect_%s" % [Type.keys()[effect_data[0]]]
+	var description_base = TranslationServer.translate(description_key)
 	var rarity_color: Color = ColorPalette.BALL_RARITY_COLORS[rarity]
 	var rarity_color_code = rarity_color.to_html()
 	var get_variable_text = func(x) -> String:
