@@ -1,13 +1,13 @@
 class_name Product
 extends Control
 
-# ホバーしたとき
-signal hovered # (Product, <bool>)
-# クリックしたとき
-signal pressed # (Product)
+
+signal hovered # (self, on: bool)
+signal pressed # (self)
 
 
-enum ProductType {
+enum Type {
+	TAX,
 	DECK_PACK,
 	DECK_CLEANER,
 	EXTRA_PACK,
@@ -15,25 +15,13 @@ enum ProductType {
 }
 
 
-# 商品の価格
+# 初期価格
 const PRODUCT_PRICES := {
-	ProductType.DECK_PACK: 200,
-	ProductType.DECK_CLEANER: 100,
-	ProductType.EXTRA_PACK: 200,
-	ProductType.EXTRA_CLEANER: 100,
+	Type.DECK_PACK: 100,
+	Type.DECK_CLEANER: 50,
+	Type.EXTRA_PACK: 100,
+	Type.EXTRA_CLEANER: 50,
 }
-
-# 商品の [ <名称>, <説明分> ]
-# TODO: JSON に逃がす
-const PRODUCT_DATA := {
-	ProductType.DECK_PACK: ["DECK Pack", "DECK にランダムな\nボール x2 を追加する"],
-	ProductType.DECK_CLEANER: ["DECK Cleaner", "DECK から最も低い No. の\nボール x1 を削除する"],
-	ProductType.EXTRA_PACK: ["EXTRA Pack", "EXTRA にランダムな\nボール x2 を追加する"],
-	ProductType.EXTRA_CLEANER: ["EXTRA Cleaner", "EXTRA から最も低い No. の\nボール x1を削除する"],
-}
-
-
-@export var product_type := ProductType.DECK_PACK
 
 
 # UI
@@ -47,18 +35,18 @@ const PRODUCT_DATA := {
 @export var _icon_cleaner: Texture
 
 
+# 種類
+var type := Type.DECK_PACK:
+	set(v):
+		type = v
+		title = tr("product_%s_title" % [Type.keys()[type]])
+		description = tr("product_%s_desc" % [Type.keys()[type]])
 # 価格
-var price: int:
-	get:
-		return PRODUCT_PRICES[product_type]
+var price := 0
 # 名前
-var title: String:
-	get:
-		return PRODUCT_DATA[product_type][0]
+var title := ""
 # 説明文
-var description: String:
-	get:
-		return PRODUCT_DATA[product_type][1]
+var description := ""
 # 購入可能かどうか
 var disabled := false:
 	set(v):
@@ -82,17 +70,25 @@ func _ready() -> void:
 	_refresh_view()
 
 
+# 価格を設定する
+func set_price(rate: float = 1.0) -> void:
+	if not PRODUCT_PRICES.has(type):
+		return
+	price = int(PRODUCT_PRICES[type] * rate)
+	_refresh_view()
+
+
 # 自身の見た目を更新する
 func _refresh_view() -> void:
 	# アイコン
-	match product_type:
-		ProductType.DECK_PACK:
+	match type:
+		Type.DECK_PACK:
 			_icon_texture.texture = _icon_pack
-		ProductType.DECK_CLEANER:
+		Type.DECK_CLEANER:
 			_icon_texture.texture = _icon_cleaner
-		ProductType.EXTRA_PACK:
+		Type.EXTRA_PACK:
 			_icon_texture.texture = _icon_pack
-		ProductType.EXTRA_CLEANER:
+		Type.EXTRA_CLEANER:
 			_icon_texture.texture = _icon_cleaner
 
 	# テキスト
