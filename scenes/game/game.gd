@@ -68,7 +68,6 @@ const EXTRA_BALL_NUMBER_RARITY := {
 
 # UI
 @export var _game_ui: GameUi
-@export var _products_parent: Control
 
 
 var turn := 0:
@@ -99,8 +98,10 @@ var _billiards_balls_count := 0:
 
 # 次に訪れる TAX_LIST の index
 var _next_tax_index := 0
-# TAX の割引後のレート
+# 延長料の割引後のレート
 var _tax_rate := 0.0
+# アイテム価格の割引後のレート
+var _product_price_rate := 0.0
 
 # 出現する Deck Ball のリストの初期値
 var _deck_ball_list: Array[Ball] = [
@@ -139,10 +140,12 @@ func _ready() -> void:
 	_drag_shooter.released.connect(_on_drag_shooter_released)
 	_drag_shooter.canceled.connect(_on_drag_shooter_canceled)
 	# Signal (GameUi)
-	_game_ui.tax_pay_button_pressed.connect(_on_tax_pay_button_pressed)
-	_game_ui.shop_exit_button_pressed.connect(_on_shop_exit_button_pressed)
 	_game_ui.info_button_pressed.connect(_on_info_button_pressed)
 	_game_ui.options_button_pressed.connect(_on_options_button_pressed)
+	_game_ui.tax_pay_button_pressed.connect(_on_tax_pay_button_pressed)
+	_game_ui.shop_exit_button_pressed.connect(_on_shop_exit_button_pressed)
+	_game_ui.product_hovered.connect(_on_product_hovered)
+	_game_ui.product_pressed.connect(_on_product_pressed)
 
 	# Hole
 	for node in get_tree().get_nodes_in_group("hole"):
@@ -150,11 +153,6 @@ func _ready() -> void:
 			node.ball_entered.connect(_on_hole_ball_entered)
 			if node.hole_type == Hole.HoleType.WARP_FROM and node.warp_group == Hole.WarpGroup.PAYOUT:
 				_payout_hole = node
-	# Product
-	for node in _products_parent.get_children():
-		if node is Product:
-			node.hovered.connect(_on_product_hovered)
-			node.pressed.connect(_on_product_pressed)
 
 	# UI
 	_game_ui.combo_bar_progress = 0.0
@@ -189,6 +187,14 @@ func _on_drag_shooter_canceled() -> void:
 		balls += 1
 
 
+func _on_info_button_pressed() -> void:
+	SceneManager.goto_scene(SceneManager.SceneType.INFORMATION)
+
+
+func _on_options_button_pressed() -> void:
+	SceneManager.goto_scene(SceneManager.SceneType.OPTIONS)
+
+
 func _on_tax_pay_button_pressed() -> void:
 	var next_turn = TAX_LIST[_next_tax_index][0]
 	var next_amount = TAX_LIST[_next_tax_index][1]
@@ -212,14 +218,6 @@ func _on_shop_exit_button_pressed() -> void:
 	_game_ui.set_dialogue("よいしょっと")
 
 	game_state = GameState.GAME
-
-
-func _on_info_button_pressed() -> void:
-	SceneManager.goto_scene(SceneManager.SceneType.INFORMATION)
-
-
-func _on_options_button_pressed() -> void:
-	SceneManager.goto_scene(SceneManager.SceneType.OPTIONS)
 
 
 # Ball が Hole に落ちたときの処理
@@ -384,9 +382,9 @@ func _on_product_pressed(product: Product) -> void:
 
 	# Product の効果を発動する
 	# TODO: マジックナンバーをなくす？
-	match product.product_type:
+	match product.type:
 
-		Product.ProductType.DECK_PACK:
+		Product.Type.DECK_PACK:
 			if _deck_size_max <= _deck_ball_list.size():
 				return
 			for i in 2:
@@ -397,13 +395,13 @@ func _on_product_pressed(product: Product) -> void:
 				_deck_ball_list.push_back(Ball.new(number))
 				print("[Game] DECK_PACK level: %s (%s)" % [number, Ball.Rarity.keys()[number_rarity]])
 
-		Product.ProductType.DECK_CLEANER:
+		Product.Type.DECK_CLEANER:
 			if _deck_ball_list.size() <= _deck_size_min:
 				return
 			#_deck_ball_list.sort_custom(func(a: Ball, b: Ball): return a.level < b.level)
 			_deck_ball_list.pop_front()
 
-		Product.ProductType.EXTRA_PACK:
+		Product.Type.EXTRA_PACK:
 			if _extra_size_max <= _extra_ball_list.size():
 				return
 				# TODO: あふれるとき注意出す？
@@ -417,7 +415,7 @@ func _on_product_pressed(product: Product) -> void:
 				print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [number, Ball.Rarity.keys()[number_rarity], Ball.Rarity.keys()[rarity]])
 			_apply_extra_ball_effects()
 
-		Product.ProductType.EXTRA_CLEANER:
+		Product.Type.EXTRA_CLEANER:
 			if _extra_ball_list.size() == 0:
 				return
 			var popped_ball: Ball = _extra_ball_list.pop_front()
@@ -441,25 +439,25 @@ func _on_product_pressed(product: Product) -> void:
 # EXTRA Ball の効果をまとめて反映する
 func _apply_extra_ball_effects() -> void:
 	# ex: [Type.DECK_SIZE_MIN_DOWN, 1]
-	var new_deck_size_min = DECK_SIZE_MIN_DEFAULT
+	var new_deck_size_min := DECK_SIZE_MIN_DEFAULT
 	for effect_data in _get_extra_ball_effects(BallEffect.Type.DECK_SIZE_MIN_DOWN):
 		new_deck_size_min -= effect_data[1]
 	_deck_size_min = clampi(new_deck_size_min, DECK_SIZE_MIN, new_deck_size_min)
 	print("[Game/BallEffect] DECK_SIZE_MIN_DOWN _deck_size_min: %s" % [_deck_size_min])
-
 	# ex: [Type.EXTRA_SIZE_MAX_UP, 2]
-	var new_extra_size_max = EXTRA_SIZE_MAX_DEFAULT
+	var new_extra_size_max := EXTRA_SIZE_MAX_DEFAULT
 	for effect_data in _get_extra_ball_effects(BallEffect.Type.EXTRA_SIZE_MAX_UP):
 		new_extra_size_max += effect_data[1]
 	_extra_size_max = clampi(new_extra_size_max, new_extra_size_max, EXTRA_SIZE_MAX)
 	print("[Game/BallEffect] EXTRA_SIZE_MAX_UP _extra_size_max: %s" % [_extra_size_max])
 
 	# ex: [Type.HOLE_SIZE_UP, 1]
-	var hole_size_level = 0
+	var hole_size_level := 0
 	for effect_data in _get_extra_ball_effects(BallEffect.Type.HOLE_SIZE_UP):
 		hole_size_level += effect_data[1]
+	print("[Game/BallEffect] HOLE_SIZE_UP hole_size_level: %s" % [hole_size_level])
 	# ex: [Type.HOLE_GRAVITY_SIZE_UP, 1]
-	var gravity_size_level = 0
+	var gravity_size_level := 0
 	for effect_data in _get_extra_ball_effects(BallEffect.Type.HOLE_GRAVITY_SIZE_UP):
 		gravity_size_level += effect_data[1]
 	for node in get_tree().get_nodes_in_group("hole"):
@@ -467,26 +465,33 @@ func _apply_extra_ball_effects() -> void:
 			if node.hole_type == Hole.HoleType.WARP_TO:
 				node.set_hole_size(hole_size_level)
 				node.set_gravity_size(gravity_size_level)
-	print("[Game/BallEffect] HOLE(_GRAVITY)_SIZE_UP hole_size_level: %s, gravity_size_level: %s" % [hole_size_level, gravity_size_level])
+	print("[Game/BallEffect] HOLE_GRAVITY_SIZE_UP gravity_size_level: %s" % [gravity_size_level])
 
 	# ex: [Type.PC_START_TOP_UP, 1]
-	var start_level = 0
+	var start_level := 0
 	for effect_data in _get_extra_ball_effects(BallEffect.Type.PC_START_TOP_UP):
 		start_level += effect_data[1]
 	_pachinko.set_rush_start_top(start_level)
+	print("[Game/BallEffect] PACHINKO_START_TOP_UP start_level: %s" % [start_level])
 	# ex: [Type.PC_CONTINUE_TOP_UP, 1]
-	var continue_level = 0
+	var continue_level := 0
 	for effect_data in _get_extra_ball_effects(BallEffect.Type.PC_CONTINUE_TOP_UP):
 		continue_level += effect_data[1]
 	_pachinko.set_rush_continue_top(continue_level)
-	print("[Game/BallEffect] PACHINKO_(START/CONTINUE)_TOP_UP start_level: %s, continue_level: %s" % [start_level, continue_level])
+	print("[Game/BallEffect] PACHINKO_CONTINUE_TOP_UP continue_level: %s" % [continue_level])
 
 	# ex. [Type.TAX_DOWN, 10]
-	var tax_off_per: int = 0
+	var tax_off_per := 0
 	for effect_data in _get_extra_ball_effects(BallEffect.Type.TAX_DOWN):
 		tax_off_per += effect_data[1]
 	_tax_rate = 1 - clampi(tax_off_per, 0, 50) / 100.0 # TODO: const
 	print("[Game/BallEffect] TAX_DOWN _tax_rate: %s" % [_tax_rate])
+	# ex. [Type.PRODUCT_PRICE_DOWN, 10]
+	var product_price_off_per := 0
+	for effect_data in _get_extra_ball_effects(BallEffect.Type.PRODUCT_PRICE_DOWN):
+		product_price_off_per += effect_data[1]
+	_product_price_rate = 1 - clampi(product_price_off_per, 0, 50) / 100.0 # TODO: const
+	print("[Game/BallEffect] PRODUCT_PRICE_DOWN _product_price_rate: %s" % [_product_price_rate])
 
 	_refresh_deck_extra()
 	_refresh_next()
