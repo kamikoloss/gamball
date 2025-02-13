@@ -1,1 +1,3 @@
-# gamball
+# GAMBALL
+
+![Icon](images/icon.png)
