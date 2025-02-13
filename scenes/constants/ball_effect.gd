@@ -1,6 +1,6 @@
+# ボール効果に関するデータをまとめたクラス
 class_name BallEffect
 extends Object
-# ボール効果に関するデータをまとめたクラス
 
 
 # ボール効果の種類
@@ -20,6 +20,7 @@ enum Type {
 	HOLE_GRAVITY_SIZE_UP,
 	NUMBER_UP_SPAWN,
 	PC_START_TOP_UP, PC_CONTINUE_TOP_UP,
+	PRICE_DOWN,
 	RARITY_TOP_UP, RARITY_TOP_DOWN,
 	TAX_DOWN,
 }
@@ -37,7 +38,7 @@ const RARITY_TEXT := {
 
 # 番号/レア度 ごとの初期効果
 # { number: { <Rarity>: [ <EffectType>, param1, (param2) ], ... } }
-const EFFECTS_POOL_1 := {
+const EFFECTS_POOL_A := {
 	0: {
 		Ball.Rarity.UNCOMMON:	[Type.BALLS_UP_BREAK, 2],
 		Ball.Rarity.RARE:		[Type.BALLS_UP_BREAK, 3],
@@ -105,10 +106,10 @@ const EFFECTS_POOL_1 := {
 		Ball.Rarity.LEGENDARY:	[Type.TAX_DOWN, 50],
 	},
 	11: {
-		Ball.Rarity.UNCOMMON:	[Type.NONE, 10],
-		Ball.Rarity.RARE:		[Type.NONE, 20],
-		Ball.Rarity.EPIC:		[Type.NONE, 30],
-		Ball.Rarity.LEGENDARY:	[Type.NONE, 50],
+		Ball.Rarity.UNCOMMON:	[Type.PRICE_DOWN, 10],
+		Ball.Rarity.RARE:		[Type.PRICE_DOWN, 20],
+		Ball.Rarity.EPIC:		[Type.PRICE_DOWN, 30],
+		Ball.Rarity.LEGENDARY:	[Type.PRICE_DOWN, 50],
 	},
 	12: {
 		Ball.Rarity.UNCOMMON:	[Type.HOLE_SIZE_UP, 1],
@@ -148,7 +149,7 @@ static func get_effect_description(number: int, rarity: Ball.Rarity) -> String:
 	if rarity == Ball.Rarity.COMMON:
 		return "(効果なし)"
 
-	var effect_data = EFFECTS_POOL_1[number][rarity] # [ <EffectType>, param1, (param2) ]
+	var effect_data = EFFECTS_POOL_A[number][rarity] # [ <EffectType>, param1, (param2) ]
 
 	# 効果なし
 	if effect_data[0] == Type.NONE:

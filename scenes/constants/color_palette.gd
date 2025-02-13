@@ -1,5 +1,6 @@
-extends Node
 class_name ColorPalette
+extends Object
+
 
 # Util
 const WHITE :=		Color(0.95, 0.95, 0.95)

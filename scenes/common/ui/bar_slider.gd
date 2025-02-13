@@ -1,5 +1,5 @@
-extends Control
 class_name BarSlider
+extends Control
 
 
 # 値を変更したとき

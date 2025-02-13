@@ -1,6 +1,6 @@
-extends Object
-class_name Promise
 # 複数の Signal を一斉に実行するクラス
+class_name Promise
+extends Object
 
 
 # すべての Signal が発火したときに発火する

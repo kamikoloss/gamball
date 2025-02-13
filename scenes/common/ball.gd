@@ -100,7 +100,7 @@ func _init(number: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 	self.rarity = rarity
 
 	if Rarity.COMMON < rarity:
-		self.effects.append(BallEffect.EFFECTS_POOL_1[number][rarity])
+		self.effects.append(BallEffect.EFFECTS_POOL_A[number][rarity])
 
 
 func _ready() -> void:

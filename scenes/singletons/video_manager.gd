@@ -1,5 +1,5 @@
-extends Node
 #class_name VideoManager
+extends Node
 
 
 enum WindowMode { WINDOW, FULLSCREEN }
