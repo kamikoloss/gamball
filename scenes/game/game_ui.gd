@@ -316,14 +316,10 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 
 func _on_bunny_pressed() -> void:
 	# セリフをランダムに変更する
-	# TODO: JSON に逃がす
-	var dialogue_list = [
-		"いらっしゃ～い！調子どう？",
-		"[rainbow]GAMBALL[/rainbow] は近未来のバーチャルハイリスクハイリターンギャンブルだよ！",
-		"ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。",
-		"ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～",
-	]
-	set_dialogue(dialogue_list.pick_random(), true)
+	# TODO: 状態に応じてランダムの取得元を変更する
+	var random := randi_range(0, 3) # TODO: const
+	var key := "bunny_line_normal_%s" % [random]
+	set_dialogue(tr(key), true)
 
 
 func _get_tween(type: TweenType) -> Tween:
