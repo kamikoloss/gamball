@@ -6,10 +6,12 @@ enum TweenType { TAX, SHOP, BUNNY, BUBBLE, DIALOGUE, COUNT_DOWN }
 
 
 # Signal
-signal tax_pay_button_pressed
-signal shop_exit_button_pressed
 signal info_button_pressed
 signal options_button_pressed
+signal tax_pay_button_pressed
+signal shop_exit_button_pressed
+signal product_hovered
+signal product_pressed
 
 
 # Window 移動系
@@ -69,6 +71,7 @@ const LOG_LINES_MAX := 100
 @export_category("Shop")
 @export var _shop_window: Control
 @export var _shop_exit_button: Button
+@export var _products_parent: Control
 
 @export_category("Popup")
 @export var _popup: Control
@@ -104,8 +107,13 @@ func _ready() -> void:
 
 	# Tax
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
+
 	# Shop
 	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
+	for node in _products_parent.get_children():
+		if node is Product:
+			node.hovered.connect(func(n, on): product_hovered.emit(node, on))
+			node.pressed.connect(func(n): product_pressed.emit(node))
 
 	# Bunny+
 	_bunny.pressed.connect(func(): _on_bunny_pressed())
