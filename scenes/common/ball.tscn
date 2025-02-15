@@ -17,7 +17,7 @@ point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_view_slot", "_view_main", "_body_texture", "_inner_texture", "_inner_line_texture", "_inactive_texture", "_number_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_view_slot", "_view_main", "_body_texture", "_inner_texture", "_inner_line_texture", "_stripe_top_texture", "_stripe_bottom_texture", "_inactive_texture", "_number_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
 z_index = 1
 collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
@@ -30,6 +30,8 @@ _view_main = NodePath("View/Mask/Main")
 _body_texture = NodePath("View/Mask/Main/Body")
 _inner_texture = NodePath("View/Mask/Main/Inner")
 _inner_line_texture = NodePath("View/Mask/Main/InnerLine")
+_stripe_top_texture = NodePath("View/Mask/Main/StripeTop")
+_stripe_bottom_texture = NodePath("View/Mask/Main/StripeBottom")
 _inactive_texture = NodePath("View/Mask/Main/Inactive")
 _number_label = NodePath("View/Mask/Main/Number")
 _hover_texture = NodePath("View/Hover")
@@ -149,6 +151,31 @@ scale = Vector2(1.2, 1.2)
 pivot_offset = Vector2(10, 10)
 mouse_filter = 2
 texture = ExtResource("2_4bc8b")
+expand_mode = 1
+
+[node name="StripeTop" type="TextureRect" parent="View/Mask/Main"]
+self_modulate = Color(1, 0, 1, 1)
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = -8.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("3_rxati")
+expand_mode = 1
+
+[node name="StripeBottom" type="TextureRect" parent="View/Mask/Main"]
+self_modulate = Color(1, 0, 1, 1)
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = -8.0
+rotation = 3.14159
+scale = Vector2(2, 2)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 2
+texture = ExtResource("3_rxati")
 expand_mode = 1
 
 [node name="Inactive" type="TextureRect" parent="View/Mask/Main"]

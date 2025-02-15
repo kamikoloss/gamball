@@ -1430,12 +1430,10 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Exit" type="Button" parent="UI/Main/Buttons"]
-visible = false
 layout_mode = 0
 offset_left = 100.0
-offset_top = 60.0
 offset_right = 140.0
-offset_bottom = 100.0
+offset_bottom = 40.0
 theme_type_variation = &"ButtonGray"
 icon = ExtResource("21_5hb3e")
 icon_alignment = 1

@@ -49,11 +49,12 @@ const BALL_NUMBER_DISABLED_SLOT := -2 # 使用不可スロット用
 @export var _view_parent: Node2D
 @export var _view_slot: Control
 @export var _view_main: Control
-# ボールの本体色部分
+# ボールの本体部分
 @export var _body_texture: TextureRect
-# ボール番号の背景部分
 @export var _inner_texture: TextureRect
 @export var _inner_line_texture: TextureRect
+@export var _stripe_top_texture: TextureRect
+@export var _stripe_bottom_texture: TextureRect
 # ボールが有効化されるまで全体を覆う部分
 @export var _inactive_texture: TextureRect
 # ボール番号
@@ -140,10 +141,18 @@ func refresh_view() -> void:
 	# レア度による本体色の変化
 	if rarity == Rarity.COMMON:
 		_inner_line_texture.self_modulate = ColorPalette.GRAY_60
+		_stripe_top_texture.self_modulate = ColorPalette.GRAY_60
+		_stripe_bottom_texture.self_modulate = ColorPalette.GRAY_60
 		_number_label.self_modulate = ColorPalette.GRAY_60
 	else:
 		_inner_line_texture.self_modulate = ColorPalette.WHITE
+		_stripe_top_texture.self_modulate = ColorPalette.WHITE
+		_stripe_bottom_texture.self_modulate = ColorPalette.WHITE
 		_number_label.self_modulate = ColorPalette.WHITE
+	# ストライプ
+	var show_stripe := 8 <= number
+	_stripe_top_texture.visible = show_stripe
+	_stripe_bottom_texture.visible = show_stripe
 
 	# 残像色: 有効でない場合は固定する
 	var trail_color = _body_texture.self_modulate
@@ -167,6 +176,8 @@ func refresh_view() -> void:
 	# 縮小している場合: 本体色のみ表示する
 	_inner_texture.visible = not is_shrinked
 	_inner_line_texture.visible = not is_shrinked
+	_stripe_top_texture.visible = _stripe_top_texture.visible and not is_shrinked
+	_stripe_bottom_texture.visible = _stripe_top_texture.visible and not is_shrinked
 	_number_label.visible = not is_shrinked
 
 
