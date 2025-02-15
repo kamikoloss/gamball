@@ -205,7 +205,7 @@ func _on_tax_pay_button_pressed() -> void:
 	# TODO: もろもろの処理を state 管理でやりたい
 	_game_ui.hide_tax_window()
 	_game_ui.show_shop_window()
-	_game_ui.set_dialogue("[font_size=24]なんか買ってく？[/font_size]", true)
+	_game_ui.set_dialogue(tr("bunny_shop_start"), true)
 	game_state = GameState.SHOP
 
 
@@ -215,7 +215,7 @@ func _on_shop_exit_button_pressed() -> void:
 	_game_ui.hide_shop_window()
 	_game_ui.change_target_bubble(false)
 	await _game_ui.change_bunny_size(false)
-	_game_ui.set_dialogue("よいしょっと")
+	_game_ui.set_dialogue(tr("bunny_move_finished"))
 
 	game_state = GameState.GAME
 
@@ -377,7 +377,7 @@ func _on_product_pressed(product: Product) -> void:
 	# BALLS が足りない場合: 何もしない
 	if balls < product.price:
 		# TODO: 購入できない理由がいくつかあるときラベルを分ける？
-		_game_ui.set_dialogue("[font_size=24]お金が足りないよ～[/font_size]", true)
+		_game_ui.set_dialogue(tr("bunny_no_money"), true)
 		return
 
 	# Product の効果を発動する
@@ -611,7 +611,7 @@ func _start_tax_count_down() -> void:
 	_game_ui.change_target_bubble(true)
 	await _game_ui.change_bunny_size(true)
 	await _game_ui.count_down()
-	_game_ui.set_dialogue("[font_size=24]ゲームを続けたいなら延長料を払ってね～。[/font_size]", true)
+	_game_ui.set_dialogue(tr("bunny_tax_start"), true)
 	_game_ui.show_tax_window()
 
 	game_state = GameState.TAX

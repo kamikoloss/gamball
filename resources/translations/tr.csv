@@ -1,33 +1,40 @@
 key,ja,en
-ball_effect_BALLS_UP_BREAK,破壊時に BALLS x{a},
-ball_effect_BALLS_UP_FALL,ビリヤードポケット落下時に BALLS +{a},
-ball_effect_DECK_SIZE_MIN_DOWN,DECK の最小サイズ -{a} (最大 -3),
-ball_effect_EXTRA_SIZE_MAX_UP,EXTRA の最大サイズ +{a} (最大 +4),
-ball_effect_GAIN_UP_BALL_NUMBER,No.{a} 以下のボールの Gain +{b},
-ball_effect_GAIN_UP_BALL_NUMBER_2,No.{a} のボールの Gain x{b},
-ball_effect_GAIN_UP_BL_COUNT,ビリヤード上のボールが {a} 個以下のとき Gain +{b},
-ball_effect_GAIN_UP_BL_COUNT_2,ビリヤード上のボールが {a} 個以下のとき Gain x{b},
-ball_effect_GAIN_UP_DECK_COMPLETE,DECK に No.0 から No.{a} まで揃っているとき Gain x{b},
-ball_effect_GAIN_UP_DECK_COUNT,DECK のボールが {a} 個以下のとき Gain +{b},
-ball_effect_GAIN_UP_HOLE,Gain +{a},
-ball_effect_HOLE_GRAVITY_SIZE_UP,ビリヤードポケットの重力サイズ +{a} (最大 +4),
-ball_effect_HOLE_SIZE_UP,ビリヤードポケットのサイズ +{a} (最大 +4),
-ball_effect_NUMBER_UP_SPAWN,出現時にビリヤード上のすべてのボール No. +{a},
-ball_effect_PC_CONTINUE_TOP_UP,パチンコの継続ランプ数 +{a} (最大 +6),
-ball_effect_PC_START_TOP_UP,パチンコの初当たりランプ数 +{a} (最大 +2),
-ball_effect_PRODUCT_PRICE_DOWN,アイテム価格 -{a}% (最大 -50%),
-ball_effect_RARITY_TOP_DOWN,{a} の出現確率 -1 (最大 -2),
-ball_effect_RARITY_TOP_UP,{a} の出現確率 +1,
-ball_effect_TAX_DOWN,延長料 -{a}% (最大 -50%),
-bunny_line_normal_0,いらっしゃ～い！調子どう？,
-bunny_line_normal_1,[rainbow]GAMBALL[/rainbow] は近未来のバーチャルハイリスクハイリターンギャンブルだよ！,
-bunny_line_normal_2,ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。,
-bunny_line_normal_3,ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～,
-product_DECK_CLEANER_desc,DECK の左端の\nボール x1 を削除する,
-product_DECK_CLEANER_title,DECK Cleaner,
-product_DECK_PACK_desc,DECK にランダムな\nボール x2 を追加する,
-product_DECK_PACK_title,DECK Pack,
-product_EXTRA_CLEANER_desc,EXTRA の左端の\nボール x1 を削除する,
-product_EXTRA_CLEANER_title,EXTRA Cleaner,
-product_EXTRA_PACK_desc,EXTRA にランダムな\nボール x2 を追加する,
-product_EXTRA_PACK_title,EXTRA Pack,
+ball_effect_BALLS_UP_BREAK,破壊時に BALLS x{a},BALLS x{a} upon destruction
+ball_effect_BALLS_UP_FALL,ビリヤードポケット落下時に BALLS +{a},BALLS +{a} when billiard pocket falls
+ball_effect_DECK_SIZE_MIN_DOWN,DECK の最小サイズ -{a} (最大 -3),DECK minimum size -{a} (maximum -3)
+ball_effect_EXTRA_SIZE_MAX_UP,EXTRA の最大サイズ +{a} (最大 +4),Maximum size of EXTRA +{a} (up to +4)
+ball_effect_GAIN_UP_BALL_NUMBER,No.{a} 以下のボールの Gain +{b},Gain +{b} of balls below No.{a}
+ball_effect_GAIN_UP_BALL_NUMBER_2,No.{a} のボールの Gain x{b},No.{a} ball Gain x{b}
+ball_effect_GAIN_UP_BL_COUNT,ビリヤード上のボールが {a} 個以下のとき Gain +{b},Gain +{b} when there are less than {a} balls on billiards
+ball_effect_GAIN_UP_BL_COUNT_2,ビリヤード上のボールが {a} 個以下のとき Gain x{b},Gain x{b} when there are less than {a} balls on billiards
+ball_effect_GAIN_UP_DECK_COMPLETE,DECK に No.0 から No.{a} まで揃っているとき Gain x{b},Gain x{b} when DECK has all numbers from No.0 to No.{a}
+ball_effect_GAIN_UP_DECK_COUNT,DECK のボールが {a} 個以下のとき Gain +{b},Gain +{b} when the number of balls in the DECK is {a} or less
+ball_effect_GAIN_UP_HOLE,Gain +{a},Gain +{a}
+ball_effect_HOLE_GRAVITY_SIZE_UP,ビリヤードポケットの重力サイズ +{a} (最大 +4),Billiard pocket gravity size +{a} (maximum +4)
+ball_effect_HOLE_SIZE_UP,ビリヤードポケットのサイズ +{a} (最大 +4),Billiard pocket size +{a} (maximum +4)
+ball_effect_NUMBER_UP_SPAWN,出現時にビリヤード上のすべてのボール No. +{a},All balls No. +{a} on billiards when appearing
+ball_effect_PC_CONTINUE_TOP_UP,パチンコの継続ランプ数 +{a} (最大 +6),Pachinko continuous lamp count +{a} (maximum +6)
+ball_effect_PC_START_TOP_UP,パチンコの初当たりランプ数 +{a} (最大 +2),Pachinko first hit lamp count +{a} (maximum +2)
+ball_effect_PRODUCT_PRICE_DOWN,アイテム価格 -{a}% (最大 -50%),Item price -{a}% (maximum -50%)
+ball_effect_RARITY_TOP_DOWN,{a} の出現確率 -1 (最大 -2),Probability of appearance of {a} -1 (maximum -2)
+ball_effect_RARITY_TOP_UP,{a} の出現確率 +1,{a} appearance probability +1
+ball_effect_TAX_DOWN,延長料 -{a}% (最大 -50%),Extension fee -{a}% (maximum -50%)
+bunny_countdown_0,ゼロ～～,Zero～～
+bunny_countdown_1,い～～ち,I~~chi
+bunny_countdown_2,に～～い,Nii~i
+bunny_countdown_3,さ～～ん,Sa~~n
+bunny_countdown_end,ゲームを続けたいなら延長料を払ってね～,"If you want to continue playing the game, pay the extension fee."
+bunny_countdown_start,[color=DARK_RED]延長[/color]のお時間で～す,It's [color=DARK_RED]extension[/color] time.
+bunny_line_normal_0,いらっしゃ～い！調子どう？,Welcome! how are you?
+bunny_line_normal_1,[rainbow]GAMBALL[/rainbow] は近未来のバーチャルハイリスクハイリターンギャンブルだよ！,"[rainbow]GAMBALL[/rainbow] is a virtual high-risk, high-return gamble in the near future!"
+bunny_line_normal_2,ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。,The ball that enters the billiard pocket will warp onto the pachinko board surface.
+bunny_line_normal_3,ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～,The ball launched in billiards is not activated unless it hits another ball.
+bunny_no_money,お金が足りないよ～,I don't have enough money
+product_DECK_CLEANER_desc,DECK の左端のボール x1 を削除する,Delete the leftmost ball x1 of the DECK
+product_DECK_CLEANER_title,DECK Cleaner,DECK Cleaner
+product_DECK_PACK_desc,DECK にランダムなボール x2 を追加する,Add random balls x2 to the DECK
+product_DECK_PACK_title,DECK Pack,DECK Pack
+product_EXTRA_CLEANER_desc,EXTRA の左端のボール x1 を削除する,Delete the leftmost ball x1 of EXTRA
+product_EXTRA_CLEANER_title,EXTRA Cleaner,EXTRA Cleaner
+product_EXTRA_PACK_desc,EXTRA にランダムなボール x2 を追加する,Add random balls x2 to EXTRA
+product_EXTRA_PACK_title,EXTRA Pack,EXTRA Pack

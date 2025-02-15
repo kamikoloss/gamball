@@ -3,7 +3,7 @@ extends Control
 
 
 enum TweenType { TAX, SHOP, BUNNY, BUBBLE, COUNT_DOWN }
-
+enum DialogueFontSize { BASE, MEDIUM, LARGE }
 
 # Signal
 signal info_button_pressed
@@ -31,6 +31,13 @@ const BALL_POPUP_POSITION_DIFF := Vector2(0, 40)
 
 # セリフのフェードの秒数
 const DIALOGUE_FADE_DURATION := 0.4
+# セリフのフォントサイズ
+const DIALOGUE_FONT_SIZE := {
+	DialogueSize.BASE: 16,
+	DialogueSize.MEDIUM: 24,
+	DialogueSize.LARGE: 32,
+}
+
 # ログの最大行数
 const LOG_LINES_MAX := 100
 
@@ -255,15 +262,17 @@ func change_bunny_size(large: bool = true) -> void:
 
 func count_down() -> void:
 	_bunny.disabled = true # バニーのタッチを無効にする
-	set_dialogue("[font_size=32][color=DARK_RED]延長[/color]のお時間\nで～す[/font_size]", true)
+	set_dialogue(tr("bunny_countdown_start"), true)
 
 	var tween = _get_tween(TweenType.COUNT_DOWN)
 	tween.tween_interval(2.0)
-	tween.tween_callback(func(): set_dialogue("[font_size=32]さ～～ん[/font_size]", true))
+	tween.tween_callback(func(): set_dialogue(tr("bunny_countdown_3"), true))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): set_dialogue("[font_size=32]に～～い[/font_size]", true))
+	tween.tween_callback(func(): set_dialogue(tr("bunny_countdown_2"), true))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): set_dialogue("[font_size=32]い～～ち[/font_size]", true))
+	tween.tween_callback(func(): set_dialogue(tr("bunny_countdown_1"), true))
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): set_dialogue(tr("bunny_countdown_0"), true))
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): _bunny.disabled = false) # バニーのタッチを有効に戻す
 
@@ -326,8 +335,8 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 
 func _on_bunny_pressed() -> void:
 	# セリフをランダムに変更する
-	var random := randi_range(0, 3) # TODO: const
-	var key := "bunny_line_normal_%s" % [random] # TODO: 状態に応じてランダムの取得元を変更する
+	# TODO: 状態に応じてランダムの取得元を変更する
+	var key := "bunny_normal_%s" % [randi_range(0, 3)]
 	set_dialogue(tr(key), true)
 
 
