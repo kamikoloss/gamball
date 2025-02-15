@@ -2,7 +2,7 @@ class_name GameUi
 extends Control
 
 
-enum TweenType { TAX, SHOP, BUNNY, BUBBLE, DIALOGUE, COUNT_DOWN }
+enum TweenType { TAX, SHOP, BUNNY, BUBBLE, COUNT_DOWN }
 
 
 # Signal
@@ -199,7 +199,7 @@ func set_dialogue(dialogue: String, pose_and_jump: bool = false) -> void:
 		_bunny.shuffle_pose()
 		_bunny.jump()
 
-	var tween = _get_tween(TweenType.DIALOGUE)
+	var tween = _get_tween(TweenType.BUBBLE)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_target_bubble, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION / 2) # 表示を消す
 	tween.tween_callback(func(): _target_dialogue.text = dialogue) # セリフを変える
@@ -227,6 +227,7 @@ func change_target_bubble(bottom: bool = true) -> void:
 
 # 画面外に出て 大きく/小さく なって戻ってくる
 func change_bunny_size(large: bool = true) -> void:
+	_bunny.disabled = true # バニーのタッチを無効にする
 	var tween = _get_tween(TweenType.BUNNY)
 
 	# Small -> Large
@@ -248,11 +249,12 @@ func change_bunny_size(large: bool = true) -> void:
 		tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 		tween.tween_property(_bunny, "position", BUNNY_POSITION_SMALL_IN, BUNNY_MOVE_DURATION)
 
+	tween.tween_callback(func(): _bunny.disabled = false) # バニーのタッチを有効に戻す
 	await tween.finished
 
 
 func count_down() -> void:
-	_bunny.disable_touch() # バニーのタッチを無効にする
+	_bunny.disabled = true # バニーのタッチを無効にする
 	set_dialogue("[font_size=32][color=DARK_RED]延長[/color]のお時間\nで～す[/font_size]", true)
 
 	var tween = _get_tween(TweenType.COUNT_DOWN)
@@ -263,7 +265,7 @@ func count_down() -> void:
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): set_dialogue("[font_size=32]い～～ち[/font_size]", true))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): _bunny.enable_touch()) # バニーのタッチを有効に戻す
+	tween.tween_callback(func(): _bunny.disabled = false) # バニーのタッチを有効に戻す
 
 	await tween.finished
 
@@ -324,9 +326,8 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 
 func _on_bunny_pressed() -> void:
 	# セリフをランダムに変更する
-	# TODO: 状態に応じてランダムの取得元を変更する
 	var random := randi_range(0, 3) # TODO: const
-	var key := "bunny_line_normal_%s" % [random]
+	var key := "bunny_line_normal_%s" % [random] # TODO: 状態に応じてランダムの取得元を変更する
 	set_dialogue(tr(key), true)
 
 

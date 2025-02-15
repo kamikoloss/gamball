@@ -55,6 +55,10 @@ var size_type := SizeType.SMALL:
 			SizeType.LARGE:
 				_human.scale = Vector2(1.0, 1.0)
 				z_index = 0
+var disabled = false:
+	set(v):
+		disabled = v
+		_touch_button.disabled = disabled
 
 
 # 現在どちらのポーズ表示を使用しているか 交互に切り替える
@@ -125,13 +129,6 @@ func jump() -> void:
 	tween.tween_property(_human, "position", _human_move_position_to, JUMP_DURATION_UP)
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	tween.tween_property(_human, "position", _human_move_position_from, JUMP_DURATION_DOWN)
-
-
-# タッチ判定を 有効化/無効化 する
-func enable_touch() -> void:
-	_touch_button.disabled = false
-func disable_touch() -> void:
-	_touch_button.disabled = true
 
 
 func _update_textures(parts_index_list: Array[int]) -> void:
