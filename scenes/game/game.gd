@@ -82,13 +82,18 @@ var balls := 0:
 		balls = v
 		_game_ui.update_balls_label(balls)
 # ゲームの状態
-var game_state := GameState.GAME
+var game_state := GameState.GAME:
+	set(v):
+		if game_state != v:
+			game_state = v
+			_on_change_game_state(v)
+			print("[Game] game_state changed to %s" % [GameState.keys()[v]])
 # コンボの状態
 var combo_state := ComboState.IDLE:
 	set(v):
 		if combo_state != v:
 			combo_state = v
-			print("[Game] combo_state changed to %s" % [ComboState.keys()[v]])
+			#print("[Game] combo_state changed to %s" % [ComboState.keys()[v]])
 
 
 # ビリヤード盤面上の Ball の数
@@ -163,6 +168,27 @@ func _ready() -> void:
 	_billiards.update_balls_count(_billiards_balls_count)
 
 
+func _on_change_game_state(state: GameState) -> void:
+	match state:
+		GameState.GAME:
+			_game_ui.hide_shop_window()
+			_game_ui.change_target_bubble(false)
+			await _game_ui.change_bunny_size(false)
+			_game_ui.set_dialogue(tr("bunny_move_finished"))
+		GameState.COUNT_DOWN:
+			_game_ui.change_target_bubble(true)
+			await _game_ui.change_bunny_size(true)
+			await _game_ui.count_down()
+			game_state = GameState.TAX # カウントダウンが終わったら自動で TAX まで移行する
+		GameState.TAX:
+			_game_ui.show_tax_window()
+			_game_ui.set_dialogue_with_bunny(tr("bunny_tax_start"))
+		GameState.SHOP:
+			_game_ui.hide_tax_window()
+			_game_ui.show_shop_window()
+			_game_ui.set_dialogue_with_bunny(tr("bunny_shop_start"))
+
+
 func _on_drag_shooter_pressed() -> void:
 	# ビリヤード盤面上に Ball を生成する
 	balls -= 1
@@ -172,7 +198,12 @@ func _on_drag_shooter_pressed() -> void:
 	_billiards.spawn_ball(new_ball)
 	# 1ターン進める
 	# NOTE: キャンセル時に Ball 生成をなかったことにしてもこれはなかったことにはしない
-	_go_to_next_turn()
+	turn += 1
+	# 延長料支払いターンを超えている場合: カウントダウンを表示する
+	var in_next_tax_turn = _next_tax_index < TAX_LIST.size() and TAX_LIST[_next_tax_index][0] <= turn
+	if in_next_tax_turn and game_state == GameState.GAME:
+		game_state = GameState.COUNT_DOWN
+
 
 func _on_drag_shooter_released(drag_vector: Vector2) -> void:
 	_billiards.shoot_ball(drag_vector * IMPULSE_RATIO)
@@ -196,27 +227,18 @@ func _on_options_button_pressed() -> void:
 
 
 func _on_tax_pay_button_pressed() -> void:
+	# Tax のフェーズを移行する
 	var next_turn = TAX_LIST[_next_tax_index][0]
 	var next_amount = TAX_LIST[_next_tax_index][1]
 	balls -= int(next_amount * _tax_rate)
 	_next_tax_index += 1
 	_refresh_next()
 
-	# TODO: もろもろの処理を state 管理でやりたい
-	_game_ui.hide_tax_window()
-	_game_ui.show_shop_window()
-	_game_ui.set_dialogue(tr("bunny_shop_start"), true)
 	game_state = GameState.SHOP
 
 
 func _on_shop_exit_button_pressed() -> void:
 	_refresh_next()
-
-	_game_ui.hide_shop_window()
-	_game_ui.change_target_bubble(false)
-	await _game_ui.change_bunny_size(false)
-	_game_ui.set_dialogue(tr("bunny_move_finished"))
-
 	game_state = GameState.GAME
 
 
@@ -377,7 +399,7 @@ func _on_product_pressed(product: Product) -> void:
 	# BALLS が足りない場合: 何もしない
 	if balls < product.price:
 		# TODO: 購入できない理由がいくつかあるときラベルを分ける？
-		_game_ui.set_dialogue(tr("bunny_no_money"), true)
+		_game_ui.set_dialogue_with_bunny(tr("bunny_no_money"))
 		return
 
 	# Product の効果を発動する
@@ -592,29 +614,6 @@ func _refresh_next() -> void:
 		_game_ui.update_next(turn, amount)
 	else:
 		_game_ui.update_next_clear()
-
-
-# 1ターン進める
-func _go_to_next_turn() -> void:
-	turn += 1
-
-	# 延長料支払いターンを超えている場合: カウントダウンを表示する
-	var in_next_tax_turn = _next_tax_index < TAX_LIST.size() and TAX_LIST[_next_tax_index][0] <= turn
-	if in_next_tax_turn and game_state == GameState.GAME:
-		_start_tax_count_down()
-
-
-# Tax Window 表示までのカウントダウンを開始する
-func _start_tax_count_down() -> void:
-	game_state = GameState.COUNT_DOWN
-
-	_game_ui.change_target_bubble(true)
-	await _game_ui.change_bunny_size(true)
-	await _game_ui.count_down()
-	_game_ui.set_dialogue(tr("bunny_tax_start"), true)
-	_game_ui.show_tax_window()
-
-	game_state = GameState.TAX
 
 
 func _get_tween(type: TweenType) -> Tween:

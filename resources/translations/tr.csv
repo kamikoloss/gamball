@@ -23,16 +23,18 @@ bunny_countdown_0,ゼロ～～,Zero～～
 bunny_countdown_1,い～～ち,I~~chi
 bunny_countdown_2,に～～い,Nii~i
 bunny_countdown_3,さ～～ん,Sa~~n
-bunny_countdown_end,ゲームを続けたいなら延長料を払ってね～,"If you want to continue playing the game, pay the extension fee."
 bunny_countdown_start,[color=DARK_RED]延長[/color]のお時間で～す,It's [color=DARK_RED]extension[/color] time.
-bunny_line_normal_0,いらっしゃ～い！調子どう？,Welcome! how are you?
-bunny_line_normal_1,[rainbow]GAMBALL[/rainbow] は近未来のバーチャルハイリスクハイリターンギャンブルだよ！,"[rainbow]GAMBALL[/rainbow] is a virtual high-risk, high-return gamble in the near future!"
-bunny_line_normal_2,ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。,The ball that enters the billiard pocket will warp onto the pachinko board surface.
-bunny_line_normal_3,ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～,The ball launched in billiards is not activated unless it hits another ball.
+bunny_move_finished,よいしょっと,Good shot
 bunny_no_money,お金が足りないよ～,I don't have enough money
+bunny_normal_0,いらっしゃ～い！調子どう？,Welcome! how are you?
+bunny_normal_1,[rainbow]GAMBALL[/rainbow] は近未来のバーチャルハイリスクハイリターンギャンブルだよ！,"[rainbow]GAMBALL[/rainbow] is a virtual high-risk, high-return gamble in the near future!"
+bunny_normal_2,ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。,The ball that enters the billiard pocket will warp onto the pachinko board surface.
+bunny_normal_3,ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～,The ball launched in billiards is not activated unless it hits another ball.
+bunny_shop_start,なんか買ってく？,Would you like to buy something?
+bunny_tax_start,ゲームを続けたいなら延長料を払ってね～,"If you want to continue playing the game, pay the extension fee."
 product_DECK_CLEANER_desc,DECK の左端のボール x1 を削除する,Delete the leftmost ball x1 of the DECK
 product_DECK_CLEANER_title,DECK Cleaner,DECK Cleaner
-product_DECK_PACK_desc,DECK にランダムなボール x2 を追加する,Add random balls x2 to the DECK
+product_DECK_PACK_desc,DECK にランダムなボール x2 を追加する,Add random balls x2 to DECK
 product_DECK_PACK_title,DECK Pack,DECK Pack
 product_EXTRA_CLEANER_desc,EXTRA の左端のボール x1 を削除する,Delete the leftmost ball x1 of EXTRA
 product_EXTRA_CLEANER_title,EXTRA Cleaner,EXTRA Cleaner

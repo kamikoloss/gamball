@@ -892,7 +892,7 @@ position = Vector2(280, 300)
 number = 5
 is_on_billiards = true
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_balls_label", "_next_balls_label", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_tax_table_parent", "_shop_window", "_shop_exit_button", "_products_parent", "_popup", "_popup_title", "_popup_title_sub", "_popup_description")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_balls_label", "_next_balls_label", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_shop_window", "_shop_exit_button", "_products_parent", "_popup", "_popup_title", "_popup_title_sub", "_popup_description")]
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
@@ -918,7 +918,6 @@ _dialogue_bottom = NodePath("Bubbles/BubbleBottom/RichTextLabel")
 _combo_bar = NodePath("Main/Combo/ComboBar")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")
-_tax_table_parent = NodePath("Tax/PriceTable")
 _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
 _products_parent = NodePath("Shop/Products")

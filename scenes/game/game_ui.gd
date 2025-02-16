@@ -3,7 +3,7 @@ extends Control
 
 
 enum TweenType { TAX, SHOP, BUNNY, BUBBLE, COUNT_DOWN }
-enum DialogueFontSize { BASE, MEDIUM, LARGE }
+enum DialogueSize { BASE, MEDIUM, LARGE }
 
 # Signal
 signal info_button_pressed
@@ -42,7 +42,6 @@ const DIALOGUE_FONT_SIZE := {
 const LOG_LINES_MAX := 100
 
 
-
 @export var _log_label: RichTextLabel
 
 @export_category("Scenes")
@@ -73,7 +72,6 @@ const LOG_LINES_MAX := 100
 @export_category("Tax")
 @export var _tax_window: Control
 @export var _tax_pay_button: Button
-@export var _tax_table_parent: BoxContainer
 
 @export_category("Shop")
 @export var _shop_window: Control
@@ -119,8 +117,8 @@ func _ready() -> void:
 	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
 	for node in _products_parent.get_children():
 		if node is Product:
-			node.hovered.connect(func(n, on): product_hovered.emit(node, on))
-			node.pressed.connect(func(n): product_pressed.emit(node))
+			node.hovered.connect(func(n, on): product_hovered.emit(n, on))
+			node.pressed.connect(func(n): product_pressed.emit(n))
 
 	# Bunny+
 	_bunny.pressed.connect(func(): _on_bunny_pressed())
@@ -158,7 +156,6 @@ func hide_shop_window() -> void:
 	tween.tween_property(_shop_window, "position", WINDOW_POSITION_HORIZONTAL_TO, WINDOW_MOVE_DURATION)
 
 
-#Main/Balls
 func update_deck_balls(deck_ball_list: Array[Ball], min: int, max: int) -> void:
 	_refresh_balls(_deck_balls_parent, deck_ball_list, min, max)
 
@@ -172,7 +169,6 @@ func update_extra_slots(shift: int) -> void:
 	_extra_max_lamp.position = Vector2(130 + 30 * shift, 0)
 
 
-# Main/Score
 func update_turn_label(turn: int) -> void:
 	_turn_label.text = _get_seg_text(turn)
 
@@ -199,18 +195,20 @@ func add_log(text: String) -> void:
 	_log_label.clear()
 	_log_label.text = "\n".join(_log_lines)
 
-# Main/Score
-# NOTE: Bunny ではなく GameUI 側が持っていることに注意する
-func set_dialogue(dialogue: String, pose_and_jump: bool = false) -> void:
-	if pose_and_jump:
-		_bunny.shuffle_pose()
-		_bunny.jump()
 
+# NOTE: Bunny ではなく GameUI 側が持っていることに注意する
+func set_dialogue(dialogue: String, font_size: DialogueSize = DialogueSize.BASE) -> void:
+	var text = "[font_size=%s]%s[/font_size]" % [DIALOGUE_FONT_SIZE[font_size], dialogue]
 	var tween = _get_tween(TweenType.BUBBLE)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.tween_property(_target_bubble, "modulate", Color.TRANSPARENT, DIALOGUE_FADE_DURATION / 2) # 表示を消す
-	tween.tween_callback(func(): _target_dialogue.text = dialogue) # セリフを変える
+	tween.tween_callback(func(): _target_dialogue.text = text) # セリフを変える
 	tween.tween_property(_target_bubble, "modulate", Color.WHITE, DIALOGUE_FADE_DURATION) # 表示を戻す
+
+func set_dialogue_with_bunny(dialogue: String, font_size: DialogueSize = DialogueSize.BASE) -> void:
+	_bunny.shuffle_pose()
+	_bunny.jump()
+	set_dialogue(dialogue, font_size)
 
 
 # NOTE: 消えたまま終わるので set_dialogue で表示させる
@@ -262,17 +260,17 @@ func change_bunny_size(large: bool = true) -> void:
 
 func count_down() -> void:
 	_bunny.disabled = true # バニーのタッチを無効にする
-	set_dialogue(tr("bunny_countdown_start"), true)
+	set_dialogue_with_bunny(tr("bunny_countdown_start"), DialogueSize.LARGE)
 
 	var tween = _get_tween(TweenType.COUNT_DOWN)
 	tween.tween_interval(2.0)
-	tween.tween_callback(func(): set_dialogue(tr("bunny_countdown_3"), true))
+	tween.tween_callback(func(): set_dialogue_with_bunny(tr("bunny_countdown_3"), DialogueSize.LARGE))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): set_dialogue(tr("bunny_countdown_2"), true))
+	tween.tween_callback(func(): set_dialogue_with_bunny(tr("bunny_countdown_2"), DialogueSize.LARGE))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): set_dialogue(tr("bunny_countdown_1"), true))
+	tween.tween_callback(func(): set_dialogue_with_bunny(tr("bunny_countdown_1"), DialogueSize.LARGE))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): set_dialogue(tr("bunny_countdown_0"), true))
+	tween.tween_callback(func(): set_dialogue_with_bunny(tr("bunny_countdown_0"), DialogueSize.LARGE))
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): _bunny.disabled = false) # バニーのタッチを有効に戻す
 
@@ -337,7 +335,7 @@ func _on_bunny_pressed() -> void:
 	# セリフをランダムに変更する
 	# TODO: 状態に応じてランダムの取得元を変更する
 	var key := "bunny_normal_%s" % [randi_range(0, 3)]
-	set_dialogue(tr(key), true)
+	set_dialogue_with_bunny(tr(key))
 
 
 func _get_tween(type: TweenType) -> Tween:
