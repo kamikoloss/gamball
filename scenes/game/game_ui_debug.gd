@@ -24,12 +24,12 @@ extends Control
 # { <ボタン文字列: string>: <ボタン処理: Callable>, ... } 
 var _main_functions: Dictionary = {
 	# Game
-	"TURN +10": func(): _game.turn += 10,
-	"TURN -10": func(): _game.turn -= 10,
-	"BALLS +10": func(): _game.balls += 10,
-	"BALLS -10": func(): _game.balls -= 10,
-	"BALLS +100": func(): _game.balls += 100,
-	"BALLS -100": func(): _game.balls -= 100,
+	"TURN +10": func(): _game._turn += 10,
+	"TURN -10": func(): _game._turn -= 10,
+	"BALLS +10": func(): _game._balls += 10,
+	"BALLS +100": func(): _game._balls += 100,
+	"BALLS -10": func(): _game._balls -= 10,
+	"BALLS -100": func(): _game._balls -= 100,
 	# Pachinko
 	"start_lottery": func(): _pachinko.start_lottery(true),
 	"_start_rush": func(): _pachinko._start_rush(),
@@ -59,7 +59,7 @@ var _balls_functions: Dictionary = {
 }
 # { <ラベル文字列 Key: string>: <ラベル文字列 Value: Callable>, ... }
 var _main_texts: Dictionary = {
-	"GameState": func(): return Game.GameState.keys()[_game.game_state],
+	"GameState": func(): return Game.GameState.keys()[_game._game_state],
 }
 
 var _sample_dialogue_list = [

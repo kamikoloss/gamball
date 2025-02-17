@@ -70,32 +70,32 @@ const EXTRA_BALL_NUMBER_RARITY := {
 @export var _game_ui: GameUi
 
 
-var turn := 0:
+# 経過ターン数
+var _turn := 0:
 	set(v):
-		turn = v
-		_game_ui.update_turn_label(turn)
-var balls := 0:
+		_turn = v
+		_game_ui.update_turn_label(_turn)
+# 所持ボール数
+var _balls := 0:
 	set(v):
 		# ボールの個数が 0 から回復したとき: DragShooter を有効化する
-		if balls <= 0 and 0 < v:
+		if _balls <= 0 and 0 < v:
 			_drag_shooter.disabled = false
-		balls = v
-		_game_ui.update_balls_label(balls)
+		_balls = v
+		_game_ui.update_balls_label(_balls)
 # ゲームの状態
-var game_state := GameState.GAME:
+var _game_state := GameState.GAME:
 	set(v):
-		if game_state != v:
-			game_state = v
-			_on_change_game_state(v)
-			print("[Game] game_state changed to %s" % [GameState.keys()[v]])
+		if _game_state != v:
+			_game_state = v
+			_on_change__game_state(v)
+			print("[Game] _game_state changed to %s" % [GameState.keys()[v]])
 # コンボの状態
-var combo_state := ComboState.IDLE:
+var _combo_state := ComboState.IDLE:
 	set(v):
-		if combo_state != v:
-			combo_state = v
-			#print("[Game] combo_state changed to %s" % [ComboState.keys()[v]])
-
-
+		if _combo_state != v:
+			_combo_state = v
+			#print("[Game] _combo_state changed to %s" % [ComboState.keys()[v]])
 # ビリヤード盤面上の Ball の数
 var _billiards_balls_count := 0:
 	get:
@@ -130,16 +130,16 @@ var _extra_size_max := EXTRA_SIZE_MAX_DEFAULT
 
 # 払い出しを行う Hole
 var _payout_hole: Hole
-
 # { TweenType: Tween, ... } 
 var _tweens := {}
 
 
-func _ready() -> void:
-	# 初期化 (ラベル用)
-	turn = 0
-	balls = 100
+func _init(game_run: SaveManager.GameRun) -> void:
+	_turn = game_run.turn
+	_balls = game_run.balls
 
+
+func _ready() -> void:
 	# Signal (DragShooter)
 	_drag_shooter.pressed.connect(_on_drag_shooter_pressed)
 	_drag_shooter.released.connect(_on_drag_shooter_released)
@@ -168,7 +168,7 @@ func _ready() -> void:
 	_billiards.update_balls_count(_billiards_balls_count)
 
 
-func _on_change_game_state(state: GameState) -> void:
+func _on_change__game_state(state: GameState) -> void:
 	match state:
 		GameState.GAME:
 			_game_ui.hide_shop_window()
@@ -179,7 +179,7 @@ func _on_change_game_state(state: GameState) -> void:
 			_game_ui.change_target_bubble(true)
 			await _game_ui.change_bunny_size(true)
 			await _game_ui.count_down()
-			game_state = GameState.TAX # カウントダウンが終わったら自動で TAX まで移行する
+			_game_state = GameState.TAX # カウントダウンが終わったら自動で TAX まで移行する
 		GameState.TAX:
 			_game_ui.show_tax_window()
 			_game_ui.set_dialogue_with_bunny(tr("bunny_tax_start"))
@@ -191,36 +191,34 @@ func _on_change_game_state(state: GameState) -> void:
 
 func _on_drag_shooter_pressed() -> void:
 	# ビリヤード盤面上に Ball を生成する
-	balls -= 1
+	_balls -= 1
 	var ball: Ball = _deck_ball_list.pick_random()
-	var new_ball = _create_new_ball(ball.number, ball.rarity, false) # 最初の出現時には有効化されていない
+	var new_ball: Ball = _create_new_ball(ball.number, ball.rarity, false) # 最初の出現時には有効化されていない
 	new_ball.is_on_billiards = true
 	_billiards.spawn_ball(new_ball)
 	# 1ターン進める
 	# NOTE: キャンセル時に Ball 生成をなかったことにしてもこれはなかったことにはしない
-	turn += 1
+	_turn += 1
 	# 延長料支払いターンを超えている場合: カウントダウンを表示する
-	var in_next_tax_turn = _next_tax_index < TAX_LIST.size() and TAX_LIST[_next_tax_index][0] <= turn
-	if in_next_tax_turn and game_state == GameState.GAME:
-		game_state = GameState.COUNT_DOWN
-
+	var in_next_tax_turn = _next_tax_index < TAX_LIST.size() and TAX_LIST[_next_tax_index][0] <= _turn
+	if in_next_tax_turn and _game_state == GameState.GAME:
+		_game_state = GameState.COUNT_DOWN
 
 func _on_drag_shooter_released(drag_vector: Vector2) -> void:
 	_billiards.shoot_ball(drag_vector * IMPULSE_RATIO)
 	_billiards.update_balls_count(_billiards_balls_count)
 	# 発射した結果ボールがなくなった場合: 発射できなくする
-	if balls <= 0:
+	if _balls <= 0:
 		_drag_shooter.disabled = true
 
 func _on_drag_shooter_canceled() -> void:
 	# Ball 生成をなかったことにする
 	if _billiards.rollback_spawn_ball():
-		balls += 1
+		_balls += 1
 
 
 func _on_info_button_pressed() -> void:
 	SceneManager.goto_scene(SceneManager.SceneType.INFORMATION)
-
 
 func _on_options_button_pressed() -> void:
 	SceneManager.goto_scene(SceneManager.SceneType.OPTIONS)
@@ -230,16 +228,15 @@ func _on_tax_pay_button_pressed() -> void:
 	# Tax のフェーズを移行する
 	var next_turn = TAX_LIST[_next_tax_index][0]
 	var next_amount = TAX_LIST[_next_tax_index][1]
-	balls -= int(next_amount * _tax_rate)
+	_balls -= int(next_amount * _tax_rate)
 	_next_tax_index += 1
 	_refresh_next()
-
-	game_state = GameState.SHOP
+	_game_state = GameState.SHOP
 
 
 func _on_shop_exit_button_pressed() -> void:
 	_refresh_next()
-	game_state = GameState.GAME
+	_game_state = GameState.GAME
 
 
 # Ball が Hole に落ちたときの処理
@@ -269,7 +266,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 			# ex: [Type.BALLS_UP_FALL, 10]
 			for effect_data in ball.effects:
 				if effect_data[0] == BallEffect.Type.BALLS_UP_FALL:
-					balls += effect_data[1]
+					_balls += effect_data[1]
 					print("[Game/BallEffect] BALLS_UP_FALL +%s" % [effect_data[1]])
 			# 同じ GroupType の Hole に Ball をワープさせる
 			ball.is_on_billiards = false
@@ -353,7 +350,7 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 					new_ball.number = level
 					_balls_parent.add_child(new_ball)
 					await new_ball.warp_for_gain(hole.global_position, _payout_hole.global_position)
-					balls += 1
+					_balls += 1
 					_start_combo()
 					new_ball.queue_free() # TODO: バラまくなら死なさなくていい
 				)
@@ -390,14 +387,14 @@ func _on_hole_ball_entered(hole: Hole, ball: Ball) -> void:
 # 商品をホバーしたときの処理
 func _on_product_hovered(product: Product, hover: bool) -> void:
 	#print("[Game] _on_product_hovered(%s, %s)" % [product, hover])
-	product.disabled = balls < product.price
+	product.disabled = _balls < product.price
 
 
 # 商品をクリックしたときの処理
 func _on_product_pressed(product: Product) -> void:
 	#print("[Game] _on_product_pressed(%s)" % [product])
 	# BALLS が足りない場合: 何もしない
-	if balls < product.price:
+	if _balls < product.price:
 		# TODO: 購入できない理由がいくつかあるときラベルを分ける？
 		_game_ui.set_dialogue_with_bunny(tr("bunny_no_money"))
 		return
@@ -448,10 +445,10 @@ func _on_product_pressed(product: Product) -> void:
 					balls_times *= effect_data[1]
 				print("[Game/BallEffect] BALLS_UP_BREAK x%s" % [balls_times])
 			if 1 < balls_times:
-				balls *= balls_times
+				_balls *= balls_times
 
 	# return しなかった場合: Balls を減らす
-	balls -= product.price
+	_balls -= product.price
 	# Balls が減ったのでホバー時処理をやり直す
 	_on_product_hovered(product, true)
 	# DECK/EXTRA の見た目を更新する
@@ -531,6 +528,7 @@ func _get_extra_ball_effects(target_effect_type: BallEffect.Type) -> Array:
 
 
 # Ball instance を作成する
+# TODO: init を充実させたらこれはいらない
 func _create_new_ball(number: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, is_active = true) -> Ball:
 	var ball: Ball = _ball_scene.instantiate()
 	ball.number = number
@@ -584,17 +582,17 @@ func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 func _start_combo() -> void:
 	if not _stack_wall_bottom:
 		return
-	if combo_state == ComboState.COOLTIME:
+	if _combo_state == ComboState.COOLTIME:
 		return
 	var tween = _get_tween(TweenType.COMBO)
 	tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_LINEAR)
-	tween.tween_callback(func(): combo_state = ComboState.CONTINUE)
+	tween.tween_callback(func(): _combo_state = ComboState.CONTINUE)
 	tween.tween_method(func(v): _game_ui.combo_bar_progress = v, 1.0, 0.0, 3.0)
-	tween.tween_callback(func(): combo_state = ComboState.COOLTIME)
+	tween.tween_callback(func(): _combo_state = ComboState.COOLTIME)
 	tween.tween_callback(func(): _stack_wall_bottom.set_collision_layer_value(Collision.Layer.WALL_STACK, false))
 	tween.tween_interval(3.0)
 	tween.tween_callback(func(): _stack_wall_bottom.set_collision_layer_value(Collision.Layer.WALL_STACK, true))
-	tween.tween_callback(func(): combo_state = ComboState.IDLE)
+	tween.tween_callback(func(): _combo_state = ComboState.IDLE)
 
 
 # DECK/EXTRA の見た目を更新する
