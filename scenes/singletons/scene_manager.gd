@@ -14,7 +14,6 @@ const CURTAIN_FADE_DURATION: = 1.0
 @export var options: Options
 
 
-@export var _game_scene: PackedScene
 @export var _curtain: Control
 @export var _version_label: Label
 
@@ -72,9 +71,9 @@ func goto_scene(scene_type: SceneType) -> void:
 
 	# シーンを読み込む
 	if scene_type == SceneType.GAME:
-		# TODO: パス文字列で読み込む
 		if not _game:
-			_game = _game_scene.instantiate()
+			_game = load("res://scenes/game/game2.tscn").instantiate()
+			_game.initialize(SaveManager.game_run)
 			add_child(_game)
 
 	# シーンの 表示/非表示を切り替える

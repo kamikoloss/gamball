@@ -108,20 +108,9 @@ var _tax_rate := 0.0
 # アイテム価格の割引後のレート
 var _product_price_rate := 0.0
 
-# 出現する Deck Ball のリストの初期値
-var _deck_ball_list: Array[Ball] = [
-	Ball.new(0, Ball.Rarity.COMMON),
-	Ball.new(0, Ball.Rarity.COMMON),
-	Ball.new(0, Ball.Rarity.COMMON),
-	Ball.new(1, Ball.Rarity.COMMON),
-	Ball.new(1, Ball.Rarity.COMMON),
-]
-# 出現する Extra Ball のリストの初期値
-var _extra_ball_list: Array[Ball] = [
-	Ball.new(1, Ball.Rarity.COMMON),
-	Ball.new(2, Ball.Rarity.COMMON),
-	Ball.new(3, Ball.Rarity.COMMON),
-]
+# DECK/EXTRA
+var _deck_ball_list: Array[Ball] = []
+var _extra_ball_list: Array[Ball] = []
 # DECK/EXTRA の 最小/最大 数
 var _deck_size_min := DECK_SIZE_MIN_DEFAULT
 var _deck_size_max := DECK_SIZE_MAX
@@ -132,11 +121,6 @@ var _extra_size_max := EXTRA_SIZE_MAX_DEFAULT
 var _payout_hole: Hole
 # { TweenType: Tween, ... } 
 var _tweens := {}
-
-
-func _init(game_run: SaveManager.GameRun) -> void:
-	_turn = game_run.turn
-	_balls = game_run.balls
 
 
 func _ready() -> void:
@@ -168,6 +152,42 @@ func _ready() -> void:
 	_billiards.update_balls_count(_billiards_balls_count)
 
 
+func initialize(game_run: SaveManager.GameRun) -> void:
+	print("[Game] initialize(%s)" % [game_run.serialize()])
+	_turn = game_run.turn
+	_balls = game_run.balls
+	_deck_ball_list = game_run.deck
+	_extra_ball_list = game_run.extra
+	if _turn == 0:
+		_deck_ball_list = [
+			Ball.new(0, Ball.Rarity.COMMON),
+			Ball.new(0, Ball.Rarity.COMMON),
+			Ball.new(0, Ball.Rarity.COMMON),
+			Ball.new(1, Ball.Rarity.COMMON),
+			Ball.new(1, Ball.Rarity.COMMON),
+		]
+		_extra_ball_list = [
+			Ball.new(1, Ball.Rarity.COMMON),
+			Ball.new(2, Ball.Rarity.COMMON),
+			Ball.new(3, Ball.Rarity.COMMON),
+		]
+	# TODO: Balls に配置する
+	var billiards_balls = game_run.billiards
+	_save_game()
+
+
+func _save_game() -> void:
+	var billiards: Array[Ball]
+	for ball: Ball in _balls_parent.get_children():
+		billiards.append(ball)
+	SaveManager.game_run.turn = _turn
+	SaveManager.game_run.balls = _balls
+	SaveManager.game_run.deck = _deck_ball_list
+	SaveManager.game_run.extra = _extra_ball_list
+	SaveManager.game_run.billiards = billiards
+	SaveManager.save_game()
+
+
 func _on_change__game_state(state: GameState) -> void:
 	match state:
 		GameState.GAME:
@@ -190,6 +210,8 @@ func _on_change__game_state(state: GameState) -> void:
 
 
 func _on_drag_shooter_pressed() -> void:
+	if _deck_ball_list.is_empty():
+		return
 	# ビリヤード盤面上に Ball を生成する
 	_balls -= 1
 	var ball: Ball = _deck_ball_list.pick_random()

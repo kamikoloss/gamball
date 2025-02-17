@@ -8,7 +8,6 @@ extends Control
 @export var _game: Game
 @export var _billards: Billiards
 @export var _pachinko: Pachinko
-@export var _stack: Stack
 @export var _game_ui: GameUi
 @export var _bunny: Bunny
 

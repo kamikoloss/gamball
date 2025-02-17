@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://byves5qpwewta"]
+[gd_scene load_steps=9 format=3 uid="uid://byves5qpwewta"]
 
 [ext_resource type="Script" path="res://scenes/singletons/scene_manager.gd" id="1_axwg5"]
-[ext_resource type="PackedScene" uid="uid://bi5oapulw3837" path="res://scenes/game/game2.tscn" id="2_hosw5"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="2_xeacv"]
 [ext_resource type="PackedScene" uid="uid://0ajps5kdo6nb" path="res://scenes/information/information.tscn" id="3_aef2h"]
 [ext_resource type="PackedScene" uid="uid://b572sr4hn8ps8" path="res://scenes/title/title.tscn" id="3_oyfl5"]
@@ -31,7 +30,6 @@ script = ExtResource("1_axwg5")
 title = NodePath("LoadedScenes/Title")
 information = NodePath("LoadedScenes/Information")
 options = NodePath("LoadedScenes/Options")
-_game_scene = ExtResource("2_hosw5")
 _curtain = NodePath("Curtain")
 _version_label = NodePath("Version")
 
