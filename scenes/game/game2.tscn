@@ -847,51 +847,6 @@ position = Vector2(280, 460)
 
 [node name="Balls" type="Node2D" parent="."]
 
-[node name="Ball" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(280, 380)
-number = 1
-is_on_billiards = true
-
-[node name="Ball2" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(260, 360)
-number = 8
-is_on_billiards = true
-
-[node name="Ball3" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(300, 360)
-number = 2
-is_on_billiards = true
-
-[node name="Ball4" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(240, 340)
-number = 7
-is_on_billiards = true
-
-[node name="Ball5" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(280, 340)
-number = 9
-is_on_billiards = true
-
-[node name="Ball6" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(320, 340)
-number = 3
-is_on_billiards = true
-
-[node name="Ball7" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(260, 320)
-number = 6
-is_on_billiards = true
-
-[node name="Ball8" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(300, 320)
-number = 4
-is_on_billiards = true
-
-[node name="Ball9" parent="Balls" instance=ExtResource("2_javdm")]
-position = Vector2(280, 300)
-number = 5
-is_on_billiards = true
-
 [node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_balls_label", "_next_balls_label", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_shop_window", "_shop_exit_button", "_products_parent", "_popup", "_popup_title", "_popup_title_sub", "_popup_description")]
 z_index = 2
 layout_mode = 3

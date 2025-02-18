@@ -24,7 +24,7 @@ const EXTRA_SIZE_MIN := 2
 const EXTRA_SIZE_MAX := 9
 const EXTRA_SIZE_MAX_DEFAULT := 5
 
-# Tax (ノルマ) のリスト
+# Tax のリスト
 # [ <turn>, <amount> ]
 const TAX_LIST := [
 	[25, 50], [50, 100], [75, 200], [100, 400],
@@ -124,6 +124,8 @@ var _tweens := {}
 
 
 func _ready() -> void:
+	print("[Game] ready.")
+
 	# Signal (DragShooter)
 	_drag_shooter.pressed.connect(_on_drag_shooter_pressed)
 	_drag_shooter.released.connect(_on_drag_shooter_released)
@@ -152,39 +154,58 @@ func _ready() -> void:
 	_billiards.update_balls_count(_billiards_balls_count)
 
 
-func initialize(game_run: SaveManager.GameRun) -> void:
-	print("[Game] initialize(%s)" % [game_run.serialize()])
-	_turn = game_run.turn
-	_balls = game_run.balls
-	_deck_ball_list = game_run.deck
-	_extra_ball_list = game_run.extra
-	if _turn == 0:
-		_deck_ball_list = [
-			Ball.new(0, Ball.Rarity.COMMON),
-			Ball.new(0, Ball.Rarity.COMMON),
-			Ball.new(0, Ball.Rarity.COMMON),
-			Ball.new(1, Ball.Rarity.COMMON),
-			Ball.new(1, Ball.Rarity.COMMON),
-		]
-		_extra_ball_list = [
-			Ball.new(1, Ball.Rarity.COMMON),
-			Ball.new(2, Ball.Rarity.COMMON),
-			Ball.new(3, Ball.Rarity.COMMON),
-		]
-	# TODO: Balls に配置する
-	var billiards_balls = game_run.billiards
-	_save_game()
+func initialize() -> void:
+	print("[Game] initialized.")
+	_turn = SaveManager.game_run.turn
+	_balls = SaveManager.game_run.balls
+	_deck_ball_list = SaveManager.game_run.deck
+	_extra_ball_list = SaveManager.game_run.extra
+	var billiards_balls := SaveManager.game_run.billiards
+
+	# 新規ゲーム用
+	if _turn < 0:
+		_turn = 0
+		_balls = 100
+		var deck_numbers := [0, 0, 0, 1, 1]
+		var extra_numbers := [1, 2, 3]
+		var billiards_numbers_postions := {
+			1: [280, 380],
+			8: [260, 360], 2: [300, 360],
+			7: [240, 340], 9: [280, 340], 3: [320, 340],
+			6: [260, 320], 4: [300, 320],
+			5: [280, 300],
+		}
+		for number in deck_numbers:
+			var ball := Ball.new(number, Ball.Rarity.COMMON)
+			_deck_ball_list.append(ball)
+		for number in extra_numbers:
+			var ball := Ball.new(number, Ball.Rarity.COMMON)
+			_extra_ball_list.append(ball)
+		for number in billiards_numbers_postions.keys():
+			var ball := Ball.new(number, Ball.Rarity.COMMON)
+			var pos = billiards_numbers_postions[number]
+			ball.global_position = Vector2(pos[0], pos[1])
+			billiards_balls.append(ball)
+
+	for ball_data: Ball in billiards_balls:
+		var ball: Ball = _ball_scene.instantiate()
+		ball.number = ball_data.number
+		ball.rarity = ball_data.rarity
+		ball.is_active = ball_data.is_active
+		ball.global_position = ball_data.global_position
+		_balls_parent.add_child(ball)
+	_billiards.update_balls_count(_billiards_balls_count)
 
 
-func _save_game() -> void:
-	var billiards: Array[Ball]
+func _save_run() -> void:
+	var billiards_balls: Array[Ball]
 	for ball: Ball in _balls_parent.get_children():
-		billiards.append(ball)
+		billiards_balls.append(ball)
 	SaveManager.game_run.turn = _turn
 	SaveManager.game_run.balls = _balls
 	SaveManager.game_run.deck = _deck_ball_list
 	SaveManager.game_run.extra = _extra_ball_list
-	SaveManager.game_run.billiards = billiards
+	SaveManager.game_run.billiards = billiards_balls
 	SaveManager.save_game()
 
 

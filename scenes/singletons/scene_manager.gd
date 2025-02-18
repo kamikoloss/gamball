@@ -73,7 +73,7 @@ func goto_scene(scene_type: SceneType) -> void:
 	if scene_type == SceneType.GAME:
 		if not _game:
 			_game = load("res://scenes/game/game2.tscn").instantiate()
-			_game.initialize(SaveManager.game_run)
+			_game.initialize()
 			add_child(_game)
 
 	# シーンの 表示/非表示を切り替える

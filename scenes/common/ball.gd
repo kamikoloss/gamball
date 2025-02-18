@@ -30,19 +30,8 @@ const BALL_NUMBER_OPTIONAL_SLOT := -1 # 空きスロット用
 const BALL_NUMBER_DISABLED_SLOT := -2 # 使用不可スロット用
 
 
-# ボール番号
-@export var number := 0
 # 展示用かどうか
 @export var is_display := false
-# ボールがビリヤード盤面上にあるかどうか
-@export var is_on_billiards := false:
-	set(v):
-		is_on_billiards = v
-		# ビリヤード盤面上にあるときは DragShooter 用に Touch の入力をスルーする
-		if is_on_billiards:
-			_touch_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		else:
-			_touch_button.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
 # 見た目部分をまとめる親
@@ -70,6 +59,15 @@ const BALL_NUMBER_DISABLED_SLOT := -2 # 使用不可スロット用
 @export var _touch_button: TextureButton
 
 
+# ボールがビリヤード盤面上にあるかどうか
+var is_on_billiards := false:
+	set(v):
+		is_on_billiards = v
+		# ビリヤード盤面上にあるときは DragShooter 用に Touch の入力をスルーする
+		if is_on_billiards:
+			_touch_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		else:
+			_touch_button.mouse_filter = Control.MOUSE_FILTER_STOP
 # 他のボールにぶつかって有効化されたかどうか
 var is_active := true
 # Gain に触れたかどうか
@@ -78,6 +76,9 @@ var is_gained := false
 var is_warping := false
 # 現在縮小中かどうか
 var is_shrinked := false
+
+# ボール番号
+var number := 0
 # ボールのレア度
 var rarity := Rarity.COMMON
 # ボールのプール
@@ -99,10 +100,7 @@ var _tweens := {}
 func _init(number: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 	self.number = number
 	self.rarity = rarity
-
-	if Rarity.COMMON < rarity:
-		# TODO
-		self.effects.append(BallEffect.EFFECTS_POOL_A[number][rarity])
+	_init_effects()
 
 
 func _ready() -> void:
@@ -123,6 +121,7 @@ func _ready() -> void:
 	refresh_view()
 	refresh_physics()
 	hide_hover()
+	_init_effects()
 
 
 # 自身の見た目を更新する
@@ -315,6 +314,18 @@ func _disable_shrink(hide: bool = false) -> void:
 		tween.tween_property(_view_parent, "modulate", Color.WHITE, HIDE_DURATION / 2)
 		tween.tween_property(_trail_line, "modulate", Color.WHITE, HIDE_DURATION / 2)
 	await tween.finished
+
+
+func _init_effects() -> void:
+	if effects.is_empty():
+		return
+	if rarity == Rarity.COMMON:
+		return
+
+	var effects_data := {
+		Pool.A: BallEffect.EFFECTS_POOL_A,
+	}
+	effects.append(effects_data[pool][number][rarity])
 
 
 # 残像の頂点を記録する
