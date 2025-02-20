@@ -96,8 +96,9 @@ class SaveDataBase:
 		return dict
 	func deserialize(dict: Dictionary) -> void:
 		for key in get_serializable_keys():
-			var data = dict[key]
-			set(key, data)
+			if dict.has(key):
+				var data = dict[key]
+				set(key, data)
 	func get_serializable_keys() -> Array[String]:
 		return []
 
@@ -111,8 +112,9 @@ class GameConfig extends SaveDataBase:
 class VideoConfig extends SaveDataBase:
 	var window_mode := VideoManager.WindowMode.WINDOW
 	var window_size := VideoManager.WindowSize.W1280
+	var crt_effect := VideoManager.CrtEffect.ON
 	func get_serializable_keys() -> Array[String]:
-		return ["window_mode", "window_size"]
+		return ["window_mode", "window_size", "crt_effect"]
 
 
 class AudioConfig extends SaveDataBase:

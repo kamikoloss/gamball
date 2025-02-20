@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dkcqj2bnwtcfx" path="res://images/icons/refresh.png" id="9_kxqj6"]
 [ext_resource type="Texture2D" uid="uid://c30d2k1hmhmry" path="res://images/icons/logout.png" id="9_mqqht"]
 
-[node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_language_selector", "_window_mode_selector", "_window_size_selector", "_master_volume_slider", "_master_volume_label", "_master_mute_button", "_bgm_volume_slider", "_bgm_volume_label", "_bgm_mute_button", "_se_volume_slider", "_se_volume_label", "_se_mute_button")]
+[node name="Options" type="Control" node_paths=PackedStringArray("_reset_button", "_exit_button", "_language_selector", "_window_mode_selector", "_window_size_selector", "_crt_effect_selector", "_master_volume_slider", "_master_volume_label", "_master_mute_button", "_bgm_volume_slider", "_bgm_volume_label", "_bgm_mute_button", "_se_volume_slider", "_se_volume_label", "_se_mute_button")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("3_6sgbf")
@@ -21,6 +21,7 @@ _exit_button = NodePath("Exit")
 _language_selector = NodePath("Game/Language/Selector")
 _window_mode_selector = NodePath("Video/WindowMode/Selector")
 _window_size_selector = NodePath("Video/WindowSize/Selector")
+_crt_effect_selector = NodePath("Video/CrtEffect/Selector")
 _master_volume_slider = NodePath("Audio/Master/BarSlider")
 _master_volume_label = NodePath("Audio/Master/Value")
 _master_mute_button = NodePath("Audio/Master/Mute")
@@ -120,6 +121,23 @@ text = "Window Size"
 vertical_alignment = 1
 
 [node name="Selector" parent="Video/WindowSize" instance=ExtResource("3_df3y0")]
+offset_left = 160.0
+offset_right = 400.0
+
+[node name="CrtEffect" type="Control" parent="Video"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 90.0
+offset_bottom = 90.0
+
+[node name="Header" type="Label" parent="Video/CrtEffect"]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 40.0
+text = "CRT Effect"
+vertical_alignment = 1
+
+[node name="Selector" parent="Video/CrtEffect" instance=ExtResource("3_df3y0")]
 offset_left = 160.0
 offset_right = 400.0
 
@@ -255,6 +273,36 @@ offset_left = 370.0
 offset_right = 410.0
 offset_bottom = 40.0
 text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="_" type="Button" parent="."]
+visible = false
+offset_left = 40.0
+offset_top = 580.0
+offset_right = 160.0
+offset_bottom = 700.0
+theme_type_variation = &"ButtonCircle"
+
+[node name="TextureRect" type="TextureRect" parent="_"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 90.0
+offset_bottom = 80.0
+texture = ExtResource("9_kxqj6")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="_"]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 0
+offset_top = 70.0
+offset_right = 120.0
+offset_bottom = 110.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "Xxxx"
 horizontal_alignment = 1
 vertical_alignment = 1
 

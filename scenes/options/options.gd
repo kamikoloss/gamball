@@ -14,6 +14,7 @@ signal exit_button_pressed
 @export_category("Video")
 @export var _window_mode_selector: Selector
 @export var _window_size_selector: Selector
+@export var _crt_effect_selector: Selector
 
 @export_category("Audio")
 @export var _master_volume_slider: BarSlider
@@ -30,11 +31,27 @@ signal exit_button_pressed
 func _ready() -> void:
 	print("[Options] ready.")
 
+	#  UI 初期化
+	# NOTE: SaveManager の _ready() が実行済みである必要がある
+	# NOTE: changed 系の Signal が発火するので Signal 接続より前に呼んでいる
+	_window_mode_selector.options = VideoManager.WINDOW_MODE_LABELS
+	_window_mode_selector.value = SaveManager.video_config.window_mode
+	_window_size_selector.options = VideoManager.WINDOW_SIZE_LABELS
+	_window_size_selector.value = SaveManager.video_config.window_size
+	_crt_effect_selector.options = VideoManager.CRT_EFFECT_LABELS
+	_crt_effect_selector.value = SaveManager.video_config.crt_effect
+	_change_volume_slider(AudioManager.BusType.MASTER, SaveManager.audio_config.volume_master)
+	_change_volume_slider(AudioManager.BusType.BGM, SaveManager.audio_config.volume_bgm)
+	_change_volume_slider(AudioManager.BusType.SE, SaveManager.audio_config.volume_se)
+
 	# Signal
 	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
-	# Sginal (Video)
+	# Signal (Game)
+	_language_selector.changed.connect(func(v): _on_language_selector_changed(v))
+	# Signal (Video)
 	_window_mode_selector.changed.connect(func(v): _on_window_mode_selector_changed(v))
 	_window_size_selector.changed.connect(func(v): _on_window_size_selector_changed(v))
+	_crt_effect_selector.changed.connect(func(v): _on_crt_effect_selector_changed(v))
 	# Signal (Audio)
 	_master_volume_slider.changed.connect(func(v): _on_volume_slider_changed(AudioManager.BusType.MASTER, v))
 	_bgm_volume_slider.changed.connect(func(v): _on_volume_slider_changed(AudioManager.BusType.BGM, v))
@@ -43,28 +60,26 @@ func _ready() -> void:
 	_bgm_mute_button.pressed.connect(func(): _on_volume_slider_changed(AudioManager.BusType.BGM, 0))
 	_se_mute_button.pressed.connect(func(): _on_volume_slider_changed(AudioManager.BusType.SE, 0))
 
-	#  UI 初期化
-	# NOTE: SaveManager の _ready() が実行済みである必要がある
-	_window_mode_selector.options = VideoManager.WINDOW_MODE_LABELS
-	_window_mode_selector.value = SaveManager.video_config.window_mode
-	_window_size_selector.options = VideoManager.WINDOW_SIZE_LABELS
-	_window_size_selector.value = SaveManager.video_config.window_size
-	_change_volume_slider(AudioManager.BusType.MASTER, SaveManager.audio_config.volume_master)
-	_change_volume_slider(AudioManager.BusType.BGM, SaveManager.audio_config.volume_bgm)
-	_change_volume_slider(AudioManager.BusType.SE, SaveManager.audio_config.volume_se)
+
+func _on_language_selector_changed(language: String) -> void:
+	pass
 
 
-func _on_window_mode_selector_changed(mode: VideoManager.WindowMode) -> void:
-	SaveManager.video_config.window_mode = mode
-	VideoManager.set_window_mode(mode)
-
+func _on_window_mode_selector_changed(value: VideoManager.WindowMode) -> void:
+	SaveManager.video_config.window_mode = value
+	VideoManager.set_window_mode(value)
 	# WindowMode をフルスクリーンにしたとき WindowSize は変更不可にする
-	_window_size_selector.disabled = mode == VideoManager.WindowMode.FULLSCREEN
+	_window_size_selector.disabled = value == VideoManager.WindowMode.FULLSCREEN
 
 
-func _on_window_size_selector_changed(size: VideoManager.WindowSize) -> void:
-	SaveManager.video_config.window_size = size
-	VideoManager.set_window_size(size)
+func _on_window_size_selector_changed(value: VideoManager.WindowSize) -> void:
+	SaveManager.video_config.window_size = value
+	VideoManager.set_window_size(value)
+
+
+func _on_crt_effect_selector_changed(value: VideoManager.CrtEffect) -> void:
+	SaveManager.video_config.crt_effect = value
+	VideoManager.set_crt_effect(value)
 
 
 func _on_volume_slider_changed(bus_type: AudioManager.BusType, volume_level: int) -> void:

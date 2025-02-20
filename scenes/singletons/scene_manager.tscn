@@ -25,11 +25,12 @@ shader_parameter/roll_speed = 3.8e-07
 shader_parameter/scan_line_strength = -8.0
 shader_parameter/pixel_strength = -2.0
 
-[node name="SceneManager" type="Node" node_paths=PackedStringArray("title", "information", "options", "_curtain", "_version_label")]
+[node name="SceneManager" type="Node" node_paths=PackedStringArray("title", "information", "options", "effects_crt", "_curtain", "_version_label")]
 script = ExtResource("1_axwg5")
 title = NodePath("LoadedScenes/Title")
 information = NodePath("LoadedScenes/Information")
 options = NodePath("LoadedScenes/Options")
+effects_crt = NodePath("Effects/CRT")
 _curtain = NodePath("Curtain")
 _version_label = NodePath("Version")
 

@@ -4,6 +4,7 @@ extends Node
 
 enum WindowMode { WINDOW, FULLSCREEN }
 enum WindowSize { W1280, W1920, W2560 }
+enum CrtEffect { ON, OFF }
 
 
 const WINDOW_MODE := {
@@ -25,6 +26,10 @@ const WINDOW_SIZE_LABELS := {
 	WindowSize.W1920: "1920 x 1080",
 	WindowSize.W2560: "2560 x 1440",
 }
+const CRT_EFFECT_LABELS := {
+	CrtEffect.ON: "ON",
+	CrtEffect.OFF: "OFF",
+}
 
 
 func initialize() -> void:
@@ -33,6 +38,7 @@ func initialize() -> void:
 	if SaveManager.video_config:
 		set_window_mode(SaveManager.video_config.window_mode)
 		set_window_size(SaveManager.video_config.window_size)
+		set_crt_effect(SaveManager.video_config.crt_effect)
 
 
 func set_window_mode(mode: WindowMode) -> void:
@@ -51,10 +57,13 @@ func set_window_size(size: WindowSize) -> void:
 
 	var old_size = DisplayServer.window_get_size()
 	var old_pos = DisplayServer.window_get_position()
-
 	var new_size = Vector2i(WINDOW_SIZE[size][0], WINDOW_SIZE[size][1])
 	DisplayServer.window_set_size(new_size)
 
 	# ウィンドウの中心をずらさないように調整する
 	var new_pos = old_pos - (new_size - old_size) / 2
 	DisplayServer.window_set_position(new_pos)
+
+
+func set_crt_effect(value: CrtEffect) -> void:
+	SceneManager.effects_crt.visible = value == CrtEffect.ON

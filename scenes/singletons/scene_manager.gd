@@ -12,6 +12,7 @@ const CURTAIN_FADE_DURATION: = 1.0
 @export var title: Title
 @export var information: Information
 @export var options: Options
+@export var effects_crt: Control
 
 
 @export var _curtain: Control
