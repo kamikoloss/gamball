@@ -11,6 +11,8 @@ func _ready() -> void:
 	SceneManager.initialize()
 	VideoManager.initialize()
 	AudioManager.initialize()
+	if SaveManager.game_config:
+		TranslationServer.set_locale(SaveManager.game_config.language)
 
 	SceneManager.title.exit_button_pressed.connect(_exit_game)
 
