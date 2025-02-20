@@ -12,7 +12,7 @@ enum SizeType { SMALL, LARGE }
 
 
 # A/B のフェードの秒数
-const POSE_CHANGE_DURATION := 0.0
+const POSE_CHANGE_DURATION := 0.2
 
 # 跳ねるときの 上昇/下降 時の秒数
 const JUMP_DURATION_UP := 0.1
@@ -25,7 +25,7 @@ const JUMP_POSITION_DIFF := Vector2(0, -20)
 
 @export_category("Human")
 @export var _human: Control
-@export var _base_parts: TextureRect
+@export var _pose_base: TextureRect
 @export var _pose_a: Control
 @export var _pose_a_parts_1: TextureRect
 @export var _pose_a_parts_2: TextureRect
@@ -61,8 +61,8 @@ var disabled = false:
 		_touch_button.disabled = disabled
 
 
-# 現在どちらのポーズ表示を使用しているか 交互に切り替える
-var _is_human_pose_a := true
+# 現在 A/B のどちらを表示しているか (A が表か)
+var _is_pose_a := true
 
 # 跳ねるときの 初期位置/頂点位置
 var _human_move_position_from: Vector2
@@ -78,47 +78,40 @@ func _ready() -> void:
 	_human_move_position_from = _human.position
 	_human_move_position_to = _human.position + JUMP_POSITION_DIFF
 
+	# TODO: 複数の _base_texture への対応
 	if _base_texture:
-		_base_parts.texture = _base_texture
-		_base_parts.visible = true
+		_pose_base.texture = _base_texture
+		_pose_base.visible = true
 	else:
-		_base_parts.visible = false
+		_pose_base.visible = false
 	_pose_a.visible = true
 	_pose_b.visible = true
 	_pose_a.modulate = Color.WHITE
 	_pose_b.modulate = Color.TRANSPARENT
-	reset_pose()
-
-
-# ポーズをデフォルトに変更する
-func reset_pose() -> void:
-	_update_textures([0, 0, 0, 0])
-	_is_human_pose_a = not _is_human_pose_a
-	_update_textures([0, 0, 0, 0])
-	_is_human_pose_a = not _is_human_pose_a
+	_reset_pose()
 
 
 # ポーズをランダムなものに変更する
 # 前と同じポーズが選択されたときは変わっていないように見えることもある
 # TODO: 必ず変える？
 func shuffle_pose() -> void:
+	# 裏のポーズをランダムに変更する
+	_is_pose_a = not _is_pose_a
+	_update_textures_random()
+	_is_pose_a = not _is_pose_a
+
+	# 表を透明にする + 裏を不透明にする
 	var tween = _get_tween(TweenType.POSE)
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-
-	# A/B のポーズをランダムに変更する
-	_update_textures_random()
-
-	# A/B の表示を切り替える
-	if _is_human_pose_a:
-		tween.tween_property(_pose_a, "modulate", Color.TRANSPARENT, POSE_CHANGE_DURATION) # A を透明にする
-		tween.tween_property(_pose_b, "modulate", Color.WHITE, POSE_CHANGE_DURATION) # B を表示する
+	if _is_pose_a:
+		tween.tween_property(_pose_a, "modulate", Color.TRANSPARENT, POSE_CHANGE_DURATION)
+		tween.tween_property(_pose_b, "modulate", Color.WHITE, POSE_CHANGE_DURATION)
 	else:
-		tween.tween_property(_pose_b, "modulate", Color.TRANSPARENT, POSE_CHANGE_DURATION) # B を透明にする
-		tween.tween_property(_pose_a, "modulate", Color.WHITE, POSE_CHANGE_DURATION) # A を表示する
-
-	# 次回以降の A/B を切り替える
-	tween.tween_callback(func(): _is_human_pose_a = not _is_human_pose_a)
+		tween.tween_property(_pose_b, "modulate", Color.TRANSPARENT, POSE_CHANGE_DURATION)
+		tween.tween_property(_pose_a, "modulate", Color.WHITE, POSE_CHANGE_DURATION)
+	# 次回以降の 表/裏 を切り替える
+	tween.tween_callback(func(): _is_pose_a = not _is_pose_a)
 
 
 # 全体を跳ねさせる
@@ -134,7 +127,7 @@ func jump() -> void:
 func _update_textures(parts_index_list: Array[int]) -> void:
 	#print("[Bunny] _change_textures(parts_index_list: %s)" % [parts_index_list])
 	var pose_parts_list = []
-	if _is_human_pose_a:
+	if _is_pose_a:
 		pose_parts_list = [_pose_a_parts_1, _pose_a_parts_2, _pose_a_parts_3, _pose_a_parts_4]
 	else:
 		pose_parts_list = [_pose_b_parts_1, _pose_b_parts_2, _pose_b_parts_3, _pose_b_parts_4]
@@ -156,11 +149,18 @@ func _update_textures(parts_index_list: Array[int]) -> void:
 
 
 func _update_textures_random() -> void:
-	var index_1 = clampi(randi_range(0, _parts_1_textures.size() - 1), 0, 9999)
-	var index_2 = clampi(randi_range(0, _parts_2_textures.size() - 1), 0, 9999)
-	var index_3 = clampi(randi_range(0, _parts_3_textures.size() - 1), 0, 9999)
-	var index_4 = clampi(randi_range(0, _parts_4_textures.size() - 1), 0, 9999)
+	var index_1 = clampi(randi_range(0, _parts_1_textures.size() - 1), 0, 99)
+	var index_2 = clampi(randi_range(0, _parts_2_textures.size() - 1), 0, 99)
+	var index_3 = clampi(randi_range(0, _parts_3_textures.size() - 1), 0, 99)
+	var index_4 = clampi(randi_range(0, _parts_4_textures.size() - 1), 0, 99)
 	_update_textures([index_1, index_2, index_3, index_4])
+
+
+func _reset_pose() -> void:
+	_is_pose_a = not _is_pose_a
+	_update_textures([0, 0, 0, 0])
+	_is_pose_a = not _is_pose_a
+	_update_textures([0, 0, 0, 0])
 
 
 func _get_tween(type: TweenType) -> Tween:
