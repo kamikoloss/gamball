@@ -1,4 +1,6 @@
 key,ja,en
+_en,英語,English
+_ja,日本語,Japanese
 ball_effect_BALLS_UP_BREAK,破壊時に BALLS x{a},BALLS x{a} upon destruction
 ball_effect_BALLS_UP_FALL,ビリヤードポケット落下時に BALLS +{a},BALLS +{a} when billiard pocket falls
 ball_effect_DECK_SIZE_MIN_DOWN,DECK の最小サイズ -{a} (最大 -3),DECK minimum size -{a} (maximum -3)
@@ -24,10 +26,10 @@ bunny_countdown_1,い～～ち,I~~chi
 bunny_countdown_2,に～～い,Nii~i
 bunny_countdown_3,さ～～ん,Sa~~n
 bunny_countdown_start,[color=DARK_RED]延長[/color]のお時間で～す,It's [color=DARK_RED]extension[/color] time.
-bunny_move_finished,よいしょっと,Good shot
+bunny_move_finished,よいしょっと,Good shots
 bunny_no_money,お金が足りないよ～,I don't have enough money
 bunny_normal_0,いらっしゃ～い！調子どう？,Welcome! how are you?
-bunny_normal_1,[rainbow]GAMBALL[/rainbow] は近未来のバーチャルハイリスクハイリターンギャンブルだよ！,"[rainbow]GAMBALL[/rainbow] is a virtual high-risk, high-return gamble in the near future!"
+bunny_normal_1,[rainbow]GAMBALL[/rainbow] は近未来のバーチャルハイリスクハイリターンギャンブルだよ！,"[rainbow]GAMBALL[/rainbow] is a virtual high-risk, high-reward gamble in the near future!"
 bunny_normal_2,ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。,The ball that enters the billiard pocket will warp onto the pachinko board surface.
 bunny_normal_3,ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～,The ball launched in billiards is not activated unless it hits another ball.
 bunny_shop_start,なんか買ってく？,Would you like to buy something?

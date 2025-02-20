@@ -34,6 +34,11 @@ func _ready() -> void:
 	#  UI 初期化
 	# NOTE: SaveManager の _ready() が実行済みである必要がある
 	# NOTE: changed 系の Signal が発火するので Signal 接続より前に呼んでいる
+	var language_options := {}
+	for locale in TranslationServer.get_loaded_locales():
+		language_options[locale] = tr("_%s" % [locale])
+	_language_selector.options = language_options
+	_language_selector.value = SaveManager.game_config.language
 	_window_mode_selector.options = VideoManager.WINDOW_MODE_LABELS
 	_window_mode_selector.value = SaveManager.video_config.window_mode
 	_window_size_selector.options = VideoManager.WINDOW_SIZE_LABELS
@@ -61,8 +66,9 @@ func _ready() -> void:
 	_se_mute_button.pressed.connect(func(): _on_volume_slider_changed(AudioManager.BusType.SE, 0))
 
 
-func _on_language_selector_changed(language: String) -> void:
-	pass
+func _on_language_selector_changed(value: String) -> void:
+	SaveManager.game_config.language = value
+	TranslationServer.set_locale(value)
 
 
 func _on_window_mode_selector_changed(value: VideoManager.WindowMode) -> void:

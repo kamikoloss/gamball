@@ -278,6 +278,7 @@ vertical_alignment = 1
 
 [node name="_" type="Button" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 40.0
 offset_top = 580.0
 offset_right = 160.0
