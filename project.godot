@@ -42,6 +42,7 @@ enabled=PackedStringArray("res://addons/google_sheets_downloader/plugin.cfg")
 [global_group]
 
 hole=""
+help_area=""
 
 [internationalization]
 

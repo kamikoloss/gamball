@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxgi8dji2yllp"]
+
+[ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_s4kpv"]
+[ext_resource type="Script" path="res://scenes/common/help_popup.gd" id="2_rjtf8"]
+
+[node name="HelpPopup" type="Control" node_paths=PackedStringArray("_help_popup_title", "_help_popup_title_sub", "_help_popup_description")]
+z_index = 20
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_s4kpv")
+script = ExtResource("2_rjtf8")
+_help_popup_title = NodePath("TitleMain")
+_help_popup_title_sub = NodePath("TitleSub")
+_help_popup_description = NodePath("Description")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(0.05, 0.05, 0.05, 1)
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 160.0
+mouse_filter = 2
+
+[node name="TitleMain" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 230.0
+offset_bottom = 40.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "A-99"
+vertical_alignment = 1
+
+[node name="TitleSub" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 230.0
+offset_bottom = 40.0
+text = "★★★★★"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 230.0
+offset_bottom = 150.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+autowrap_mode = 1
