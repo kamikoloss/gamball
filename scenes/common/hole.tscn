@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0im3e50587p1"]
+[gd_scene load_steps=8 format=3 uid="uid://d0im3e50587p1"]
 
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="1_3kxer"]
 [ext_resource type="Script" path="res://scenes/common/hole.gd" id="1_226au"]
 [ext_resource type="FontVariation" uid="uid://b6wnlncndy3of" path="res://themes/font_variations/red_hat_display_bold.tres" id="3_qou1j"]
+[ext_resource type="PackedScene" uid="uid://bu3eu3emjmtq8" path="res://scenes/common/help_area.tscn" id="4_oex1c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i0j7q"]
 radius = 20.0
@@ -128,3 +129,11 @@ gravity_point = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gravity"]
 shape = SubResource("CircleShape2D_okw7p")
+
+[node name="HelpArea" parent="." node_paths=PackedStringArray("related_object") instance=ExtResource("4_oex1c")]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+shape_type = 2
+related_object = NodePath("..")

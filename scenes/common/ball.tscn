@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://0yg37qutkxad"]
+[gd_scene load_steps=10 format=3 uid="uid://0yg37qutkxad"]
 
 [ext_resource type="Script" path="res://scenes/common/ball.gd" id="1_rcr8u"]
 [ext_resource type="Texture2D" uid="uid://68w2c4eh23er" path="res://images/common/base_circle.png" id="2_4bc8b"]
 [ext_resource type="Texture2D" uid="uid://cuhvjunofueei" path="res://images/common/base_square.png" id="3_rxati"]
 [ext_resource type="FontVariation" uid="uid://b6wnlncndy3of" path="res://themes/font_variations/red_hat_display_bold.tres" id="4_7pwlo"]
+[ext_resource type="PackedScene" uid="uid://bu3eu3emjmtq8" path="res://scenes/common/help_area.tscn" id="5_1ot2r"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nh6hv"]
 bounce = 0.8
@@ -17,7 +18,7 @@ point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_view_slot", "_view_main", "_body_texture", "_inner_texture", "_inner_line_texture", "_stripe_top_texture", "_stripe_bottom_texture", "_inactive_texture", "_number_label", "_hover_texture", "_trail_line", "_hole_area", "_touch_button")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_view_slot", "_view_main", "_body_texture", "_inner_texture", "_inner_line_texture", "_stripe_top_texture", "_stripe_bottom_texture", "_inactive_texture", "_number_label", "_hover_texture", "_trail_line", "_hole_area", "_help_area")]
 z_index = 1
 collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
@@ -37,7 +38,7 @@ _number_label = NodePath("View/Mask/Main/Number")
 _hover_texture = NodePath("View/Hover")
 _trail_line = NodePath("Trail")
 _hole_area = NodePath("Hole")
-_touch_button = NodePath("Touch")
+_help_area = NodePath("HelpArea")
 
 [node name="View" type="Node2D" parent="."]
 
@@ -233,9 +234,10 @@ width_curve = SubResource("Curve_pexpb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
 shape = SubResource("CircleShape2D_awq4m")
 
-[node name="Touch" type="TextureButton" parent="."]
+[node name="HelpArea" parent="." node_paths=PackedStringArray("related_object") instance=ExtResource("5_1ot2r")]
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
-metadata/_edit_use_anchors_ = true
+shape_type = 2
+related_object = NodePath("..")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bi5oapulw3837"]
+[gd_scene load_steps=38 format=3 uid="uid://bi5oapulw3837"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_mqtms"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="2_javdm"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="19_tsuuh"]
 [ext_resource type="Texture2D" uid="uid://bnttc1dj1f7aa" path="res://images/people/bunny/base.png" id="20_udj73"]
 [ext_resource type="Texture2D" uid="uid://c30d2k1hmhmry" path="res://images/icons/logout.png" id="21_5hb3e"]
+[ext_resource type="PackedScene" uid="uid://dxgi8dji2yllp" path="res://scenes/common/help_popup.tscn" id="21_75o20"]
 [ext_resource type="Texture2D" uid="uid://bho0g835q1uhf" path="res://images/icons/settings.png" id="21_bilys"]
 [ext_resource type="Texture2D" uid="uid://cuwiiq1yrw76c" path="res://images/people/bunny/face_1.png" id="21_uj2w0"]
 [ext_resource type="Texture2D" uid="uid://bh4gotw50hou6" path="res://images/people/bunny/face_2.png" id="22_2014m"]
@@ -695,6 +696,7 @@ offset_left = -200.0
 offset_top = -40.0
 offset_right = 280.0
 offset_bottom = 440.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_26bdn")
 
 [node name="Lamp" parent="Pachinko/UI/Lamps" instance=ExtResource("12_vy6ao")]
@@ -847,7 +849,7 @@ position = Vector2(280, 460)
 
 [node name="Balls" type="Node2D" parent="."]
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_balls_label", "_next_balls_label", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_tax_window", "_tax_pay_button", "_shop_window", "_shop_exit_button", "_products_parent", "_popup", "_popup_title", "_popup_title_sub", "_popup_description")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_balls_label", "_next_balls_label", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_help_popup", "_tax_window", "_tax_pay_button", "_shop_window", "_shop_exit_button", "_products_parent")]
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
@@ -871,15 +873,12 @@ _dialogue_top = NodePath("Bubbles/BubbleTop/RichTextLabel")
 _bubble_bottom = NodePath("Bubbles/BubbleBottom")
 _dialogue_bottom = NodePath("Bubbles/BubbleBottom/RichTextLabel")
 _combo_bar = NodePath("Main/Combo/ComboBar")
+_help_popup = NodePath("Main/Help/HelpPopup")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")
 _shop_window = NodePath("Shop")
 _shop_exit_button = NodePath("Shop/Exit")
 _products_parent = NodePath("Shop/Products")
-_popup = NodePath("Popup")
-_popup_title = NodePath("Popup/TitleMain")
-_popup_title_sub = NodePath("Popup/TitleSub")
-_popup_description = NodePath("Popup/Description")
 
 [node name="Main" type="Control" parent="UI"]
 layout_mode = 3
@@ -1404,11 +1403,61 @@ offset_bottom = 10.0
 [node name="Help" type="Control" parent="UI/Main"]
 anchors_preset = 0
 
-[node name="HelpArea" parent="UI/Main/Help" instance=ExtResource("23_c674a")]
+[node name="HelpAreas" type="Control" parent="UI/Main/Help"]
+anchors_preset = 0
+
+[node name="HelpAreaDeck" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 320.0
+
+[node name="HelpAreaExtra" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
+offset_left = 40.0
+offset_top = 80.0
+offset_right = 320.0
+offset_bottom = 100.0
+
+[node name="HelpAreaTurn" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
+offset_left = 360.0
+offset_top = 20.0
+offset_right = 480.0
+offset_bottom = 80.0
+
+[node name="HelpAreaTurnNext" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
+offset_left = 480.0
+offset_top = 20.0
+offset_right = 600.0
+offset_bottom = 80.0
+
+[node name="HelpAreaBalls" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
+offset_left = 360.0
+offset_top = 80.0
+offset_right = 480.0
+offset_bottom = 140.0
+
+[node name="HelpAreaBallsNext" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
+offset_left = 480.0
+offset_top = 80.0
+offset_right = 600.0
+offset_bottom = 140.0
+
+[node name="HelpAreaBilliardsBalls" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
 offset_left = 240.0
 offset_top = 260.0
 offset_right = 320.0
 offset_bottom = 300.0
+
+[node name="HelpAreaPachinkoRush" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
+offset_left = 760.0
+offset_top = 260.0
+offset_right = 840.0
+offset_bottom = 300.0
+
+[node name="HelpPopup" parent="UI/Main/Help" instance=ExtResource("21_75o20")]
+offset_left = 180.0
+offset_top = 170.0
+offset_right = 180.0
+offset_bottom = 170.0
 
 [node name="Tax" type="Control" parent="UI"]
 visible = false
@@ -2112,46 +2161,6 @@ theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
 theme_override_fonts/normal_font = ExtResource("32_ubskw")
 bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
-
-[node name="Popup" type="Control" parent="UI"]
-visible = false
-z_index = 20
-anchors_preset = 0
-
-[node name="Panel" type="Panel" parent="UI/Popup"]
-self_modulate = Color(0.05, 0.05, 0.05, 1)
-layout_mode = 0
-offset_right = 240.0
-offset_bottom = 160.0
-
-[node name="TitleMain" type="Label" parent="UI/Popup"]
-layout_mode = 0
-offset_left = 10.0
-offset_right = 230.0
-offset_bottom = 40.0
-theme_type_variation = &"LabelBold"
-theme_override_font_sizes/font_size = 24
-text = "A-99"
-vertical_alignment = 1
-
-[node name="TitleSub" type="Label" parent="UI/Popup"]
-layout_mode = 0
-offset_left = 10.0
-offset_right = 230.0
-offset_bottom = 40.0
-text = "★★★★★"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Description" type="RichTextLabel" parent="UI/Popup"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 40.0
-offset_right = 230.0
-offset_bottom = 150.0
-bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
-autowrap_mode = 1
 
 [node name="UIDebug" type="Control" parent="." node_paths=PackedStringArray("_game", "_billards", "_pachinko", "_game_ui", "_bunny", "_debug_button", "_debug_window", "_main_buttons_parent", "_balls_parent", "_balls_buttons_parent", "_main_labels_parent")]
 z_index = 40

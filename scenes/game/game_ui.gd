@@ -26,9 +26,6 @@ const BUNNY_POSITION_LARGE_OUT := Vector2(1920, -240)
 const BUNNY_POSITION_LARGE_IN := Vector2(960, -240)
 const BUNNY_MOVE_DURATION := 1.0
 
-# BallPopup を表示するオブジェクトからの位置
-const BALL_POPUP_POSITION_DIFF := Vector2(0, 40)
-
 # セリフのフェードの秒数
 const DIALOGUE_FADE_DURATION := 0.4
 # セリフのフォントサイズ
@@ -66,8 +63,10 @@ const LOG_LINES_MAX := 100
 @export var _dialogue_top: RichTextLabel
 @export var _bubble_bottom: Control
 @export var _dialogue_bottom: RichTextLabel
-@export_category("Main/Combo")
+@export_category("Main/Others")
 @export var _combo_bar: ColorRect
+@export var _help_popup: HelpPopup
+
 
 @export_category("Tax")
 @export var _tax_window: Control
@@ -77,12 +76,6 @@ const LOG_LINES_MAX := 100
 @export var _shop_window: Control
 @export var _shop_exit_button: Button
 @export var _products_parent: Control
-
-@export_category("Popup")
-@export var _popup: Control
-@export var _popup_title: Label
-@export var _popup_title_sub: Label
-@export var _popup_description: RichTextLabel
 
 
 var combo_bar_progress := 1.0:
@@ -98,17 +91,14 @@ var _tweens := {}
 
 
 func _ready() -> void:
-	# Main/Ball
-	for node in _deck_balls_parent.get_children():
-		if node is Ball:
-			node.hovered.connect(func(entered): _on_deck_extra_balls_hovered(node, entered))
-	for node in _extra_balls_parent.get_children():
-		if node is Ball:
-			node.hovered.connect(func(entered): _on_deck_extra_balls_hovered(node, entered))
-	_hide_ball_popup()
 	# Main/Buttons
 	_info_button.pressed.connect(func(): info_button_pressed.emit())
 	_options_button.pressed.connect(func(): options_button_pressed.emit())
+	# Main/HelpArea
+	for node in get_tree().get_nodes_in_group("help_area"):
+		if node is HelpArea:
+			print(node)
+			node.hovered.connect(func(n, v): _on_help_area_hovered(node, v))
 
 	# Tax
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
@@ -285,34 +275,6 @@ func popup_score(from: Vector2, text: String, color: Color = Color.WHITE, ratio:
 	popup_score.popup(from, text)
 
 
-func _on_deck_extra_balls_hovered(ball: Ball, entered: bool) -> void:
-	if entered:
-		_show_ball_popup(ball)
-		ball.show_hover()
-	else:
-		_hide_ball_popup()
-		ball.hide_hover()
-
-
-func _show_ball_popup(ball: Ball) -> void:
-	#print("[GameUi] _show_ball_popup(%s)" % [ball])
-	_popup.visible = true
-	_popup.position = ball.global_position + BALL_POPUP_POSITION_DIFF
-	if ball.number < 0:
-		_popup_title.text = "-"
-		_popup_title_sub.text = ""
-		_popup_title_sub.self_modulate = Color.WHITE
-	else:
-		_popup_title.text = "%s-%s" % [Ball.Pool.keys()[ball.pool], ball.number]
-		_popup_title_sub.text = BallEffect.RARITY_TEXT[ball.rarity]
-		_popup_title_sub.self_modulate = ColorPalette.BALL_RARITY_COLORS[ball.rarity]
-	_popup_description.text = BallEffect.get_effect_description(ball.number, ball.rarity)
-
-func _hide_ball_popup() -> void:
-	#print("[GameUi] _hide_ball_popup()")
-	_popup.visible = false
-
-
 func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: int) -> void:
 	var index = 0
 	for node in parent_node.get_children():
@@ -329,6 +291,11 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 			#print("refresh ball %s, %s" % [node.number, node.rarity])
 			node.refresh_view()
 			index += 1
+
+
+func _on_help_area_hovered(help_area: HelpArea, hovered: bool) -> void:
+	_help_popup.visible = hovered
+	_help_popup.update_help_popup(help_area)
 
 
 func _on_bunny_pressed() -> void:

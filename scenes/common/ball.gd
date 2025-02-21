@@ -55,19 +55,16 @@ const BALL_NUMBER_DISABLED_SLOT := -2 # 使用不可スロット用
 @export var _trail_line: Line2D
 # Hole 用の当たり判定
 @export var _hole_area: Area2D
-# pressed, hovered 用
-@export var _touch_button: TextureButton
+
+@export var _help_area: HelpArea
 
 
 # ボールがビリヤード盤面上にあるかどうか
 var is_on_billiards := false:
 	set(v):
 		is_on_billiards = v
-		# ビリヤード盤面上にあるときは DragShooter 用に Touch の入力をスルーする
-		if is_on_billiards:
-			_touch_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		else:
-			_touch_button.mouse_filter = Control.MOUSE_FILTER_STOP
+		# ビリヤード盤面上にあるときは DragShooter 用に HelpArea の入力をスルーする
+		_help_area.disabled = not is_on_billiards
 # 他のボールにぶつかって有効化されたかどうか
 var is_active := true
 # Gain に触れたかどうか
@@ -105,9 +102,6 @@ func _init(number: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	_touch_button.pressed.connect(func(): pressed.emit())
-	_touch_button.mouse_entered.connect(func(): hovered.emit(true))
-	_touch_button.mouse_exited.connect(func(): hovered.emit(false))
 
 	if not is_display:
 		# 残像の頂点の記録を開始する
