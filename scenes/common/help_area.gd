@@ -15,9 +15,7 @@ const SHOW_DURATION := 0.2
 
 
 @export var shape_type: ShapeType
-@export var title_key: String
-@export var title_sub_key: String
-@export var description_key: String
+@export var translation_key: String
 @export var related_object: Node
 
 

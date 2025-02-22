@@ -6,7 +6,7 @@ const SHOW_DURATION := 0.2
 
 
 @export var _panel_container: PanelContainer
-@export var _description_label: RichTextLabel
+@export var _label: RichTextLabel
 
 
 var _tween: Tween:
@@ -52,7 +52,9 @@ func hide_popup() -> void:
 
 
 func _update_content_common(help_area: HelpArea) -> void:
-	_description_label.text = tr(help_area.description_key)
+	var title := tr("%s_title" % [help_area.translation_key])
+	var description := tr("%s_desc" % [help_area.translation_key])
+	_label.text = "[b]%s[/b]\n%s" % [title, description]
 
 
 func _update_content_ball(ball: Ball) -> bool:
@@ -67,7 +69,7 @@ func _update_content_ball(ball: Ball) -> bool:
 		text += "[b]%s-%s %s[/b]\n" % [pool, ball.number, rarity]
 	text += BallEffect.get_effect_description(ball.number, ball.rarity)
 
-	_description_label.text = text
+	_label.text = text
 	return false
 
 
@@ -91,4 +93,4 @@ func _update_content_hole(hole: Hole) -> void:
 		Hole.HoleType.STACK:
 			pass
 
-	_description_label.text = "[b]%s[/b]\n%s" % [title, description]
+	_label.text = "[b]%s[/b]\n%s" % [title, description]

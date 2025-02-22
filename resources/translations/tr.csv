@@ -37,19 +37,35 @@ bunny_normal_2,ビリヤードポケットに入ったボールはパチンコ�
 bunny_normal_3,ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～,The ball launched in billiards is not activated unless it hits another ball.
 bunny_shop_start,なんか買ってく？,Would you like to buy something?
 bunny_tax_start,ゲームを続けたいなら延長料を払ってね～,"If you want to continue playing the game, pay the extension fee."
-product_DECK_CLEANER_desc,DECK の左端のボール x1 を削除する,Delete the leftmost ball x1 of the DECK
-product_DECK_CLEANER_title,DECK Cleaner,DECK Cleaner
-product_DECK_PACK_desc,DECK にランダムなボール x2 を追加する,Add random balls x2 to the DECK
-product_DECK_PACK_title,DECK Pack,DECK Pack
-product_EXTRA_CLEANER_desc,EXTRA の左端のボール x1 を削除する,Delete the leftmost ball x1 of EXTRA
-product_EXTRA_CLEANER_title,EXTRA Cleaner,EXTRA Cleaner
-product_EXTRA_PACK_desc,EXTRA にランダムなボール x2 を追加する,Add random balls x2 to EXTRA
-product_EXTRA_PACK_title,EXTRA Pack,EXTRA Pack
-hole_WARP_TO_desc,WHITE ポケット {a} にワープする,Warp to WHITE pocket {a}
-hole_WARP_TO_title,BLACK ポケット {a},BLACK pocket {a}
-hole_WARP_FROM_desc,WHITE ポケット {a} からワープする,Warp from WHITE pocket {a}
-hole_WARP_FROM_title,WHITE ポケット {a},WHITE pocket {a}
-hole_EXTRA_desc,(1) パチンコの抽選を開始する\n(2) ビリヤード上に EXTRA スロットのホールをランダムに1個生成する,(1) Start the pachinko lottery\n(2) Randomly generate one EXTRA slot hole on the billiards board
+help_balls_desc,現在所持しているボール数,Number of balls currently in possession
+help_balls_title,所持ボール数,Number of balls in possession
+help_billiards_balls_desc,(TODO),(TODO)
+help_billiards_balls_title,(TODO),(TODO)
+help_deck_desc,現在所持している DECK ボール。ビリヤード上でドラッグするとこの中から1つランダムに生成される。,"DECK ball currently in possession. When you drag it on the billiards, one of these will be randomly generated."
+help_deck_title,DECK スロット,DECK slot
+help_extra_desc,現在所持している EXTRA ボール。ボールが EXTRA ポケットに入るとこの中から1つランダムに生成される。,"EXTRA ball that I currently have. When the ball enters the EXTRA pocket, one of these will be randomly generated."
+help_extra_title,EXTRA スロット,EXTRA slot
+help_next_balls_desc,次の延長時に支払う予定のボール数,Number of balls to be paid at the next overtime
+help_next_balls_title,支払予定ボール数,Number of balls to be paid
+help_next_turn_desc,次の延長料を支払うターン数,Number of turns to pay the next extension fee
+help_next_turn_title,支払予定ターン数,Number of turns to be paid
+help_pachinko_rush_desc,(TODO),(TODO)
+help_pachinko_rush_title,(TODO),(TODO)
+help_turn_desc,現在経過したターン数\nボールを1個発射するごとに1進む。,Number of turns that have currently passed\nIncrements by 1 for each ball fired.
+help_turn_title,経過ターン数,Number of turns elapsed
+hole_EXTRA_desc,(1) パチンコの抽選を開始する。\n(2) ビリヤード上に EXTRA スロットボールをランダムに1個生成する。,(1) Start the pachinko lottery. \n(2) Randomly generate one EXTRA slot ball on the billiards.
 hole_EXTRA_title,EXTRA ポケット,EXTRA pocket
 hole_GAIN_desc,<ボール番号> x {a} 個のボールを払い出す,Payout <ball number> x {a} balls
 hole_GAIN_title,GAIN ポケット,GAIN pocket
+hole_WARP_FROM_desc,WHITE ポケット {a} からワープしたボールを射出する。,WHITE Fires a warped ball from pocket {a}.
+hole_WARP_FROM_title,WHITE ポケット {a},WHITE pocket {a}
+hole_WARP_TO_desc,WHITE ポケット {a} にワープする。,Warp to WHITE pocket {a}.
+hole_WARP_TO_title,BLACK ポケット {a},BLACK pocket {a}
+product_DECK_CLEANER_desc,DECK の左端のボール x1 を削除する。,Delete the leftmost ball x1 of the DECK.
+product_DECK_CLEANER_title,DECK Cleaner,DECK Cleaner
+product_DECK_PACK_desc,DECK にランダムなボール x2 を追加する。,Add random balls x2 to the DECK.
+product_DECK_PACK_title,DECK Pack,DECK Pack
+product_EXTRA_CLEANER_desc,EXTRA の左端のボール x1 を削除する。,Delete the leftmost ball x1 of EXTRA.
+product_EXTRA_CLEANER_title,EXTRA Cleaner,EXTRA Cleaner
+product_EXTRA_PACK_desc,EXTRA にランダムなボール x2 を追加する。,Add random balls x2 to EXTRA.
+product_EXTRA_PACK_title,EXTRA Pack,EXTRA Pack

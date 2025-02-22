@@ -14,26 +14,24 @@ expand_margin_top = 10.0
 expand_margin_right = 10.0
 expand_margin_bottom = 10.0
 
-[node name="HelpPopup" type="Control" node_paths=PackedStringArray("_panel_container", "_description_label")]
+[node name="HelpPopup" type="Control" node_paths=PackedStringArray("_panel_container", "_label")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("1_s4kpv")
 script = ExtResource("2_rjtf8")
 _panel_container = NodePath("PanelContainer")
-_description_label = NodePath("PanelContainer/Description")
+_label = NodePath("PanelContainer/RichTextLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 160.0
-offset_bottom = 80.0
+offset_right = 240.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lm53j")
 
-[node name="Description" type="RichTextLabel" parent="PanelContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer"]
 layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風"
 fit_content = true
 scroll_active = false
