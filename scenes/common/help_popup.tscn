@@ -3,18 +3,19 @@
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_s4kpv"]
 [ext_resource type="Script" path="res://scenes/common/help_popup.gd" id="2_rjtf8"]
 
-[node name="HelpPopup" type="Control" node_paths=PackedStringArray("_help_popup_title", "_help_popup_title_sub", "_help_popup_description")]
+[node name="HelpPopup" type="Control" node_paths=PackedStringArray("_panel", "_title_label", "_title_sub_label", "_description_label")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("1_s4kpv")
 script = ExtResource("2_rjtf8")
-_help_popup_title = NodePath("TitleMain")
-_help_popup_title_sub = NodePath("TitleSub")
-_help_popup_description = NodePath("Description")
+_panel = NodePath("Panel")
+_title_label = NodePath("TitleMain")
+_title_sub_label = NodePath("TitleSub")
+_description_label = NodePath("Description")
 
 [node name="Panel" type="Panel" parent="."]
-self_modulate = Color(0.05, 0.05, 0.05, 1)
+self_modulate = Color(0.1, 0.1, 0.1, 1)
 layout_mode = 0
 offset_right = 240.0
 offset_bottom = 160.0

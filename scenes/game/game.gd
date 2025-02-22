@@ -88,7 +88,7 @@ var _game_state := GameState.GAME:
 	set(v):
 		if _game_state != v:
 			_game_state = v
-			_on_change__game_state(v)
+			_on_change_game_state(v)
 			print("[Game] _game_state changed to %s" % [GameState.keys()[v]])
 # コンボの状態
 var _combo_state := ComboState.IDLE:
@@ -192,6 +192,7 @@ func initialize() -> void:
 		ball.number = ball_data.number
 		ball.rarity = ball_data.rarity
 		ball.is_active = ball_data.is_active
+		ball.is_on_billiards = true
 		ball.global_position = ball_data.global_position
 		_balls_parent.add_child(ball)
 	_billiards.update_balls_count(_billiards_balls_count)
@@ -209,7 +210,7 @@ func _save_run() -> void:
 	SaveManager.save_game()
 
 
-func _on_change__game_state(state: GameState) -> void:
+func _on_change_game_state(state: GameState) -> void:
 	match state:
 		GameState.GAME:
 			_game_ui.hide_shop_window()

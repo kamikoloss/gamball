@@ -1454,10 +1454,10 @@ offset_right = 840.0
 offset_bottom = 300.0
 
 [node name="HelpPopup" parent="UI/Main/Help" instance=ExtResource("21_75o20")]
-offset_left = 180.0
-offset_top = 170.0
-offset_right = 180.0
-offset_bottom = 170.0
+offset_left = 40.0
+offset_top = 140.0
+offset_right = 40.0
+offset_bottom = 140.0
 
 [node name="Tax" type="Control" parent="UI"]
 visible = false

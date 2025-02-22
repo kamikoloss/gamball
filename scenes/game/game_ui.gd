@@ -97,8 +97,8 @@ func _ready() -> void:
 	# Main/HelpArea
 	for node in get_tree().get_nodes_in_group("help_area"):
 		if node is HelpArea:
-			print(node)
 			node.hovered.connect(func(n, v): _on_help_area_hovered(node, v))
+	_help_popup.visible = false
 
 	# Tax
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
@@ -295,7 +295,7 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 
 func _on_help_area_hovered(help_area: HelpArea, hovered: bool) -> void:
 	_help_popup.visible = hovered
-	_help_popup.update_help_popup(help_area)
+	_help_popup.update_content(help_area)
 
 
 func _on_bunny_pressed() -> void:
