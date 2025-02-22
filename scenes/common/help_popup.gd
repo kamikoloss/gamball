@@ -2,53 +2,93 @@ class_name HelpPopup
 extends Control
 
 
-@export var _panel: Panel
-@export var _title_label: Label
-@export var _title_sub_label: Label
+const SHOW_DURATION := 0.2
+
+
+@export var _panel_container: PanelContainer
 @export var _description_label: RichTextLabel
 
 
-func update_content(help_area: HelpArea) -> void:
+var _tween: Tween:
+	get():
+		if _tween:
+			_tween.kill()
+		return create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+
+
+func show_popup(help_area: HelpArea) -> void:
+	# 表示内容を更新する
+	var not_show := false
+	if help_area.related_object:
+		if help_area.related_object is Ball:
+			not_show = _update_content_ball(help_area.related_object)
+		elif help_area.related_object is Hole:
+			_update_content_hole(help_area.related_object)
+	else:
+		_update_content_common(help_area)
+	if not_show:
+		return
+	# NOTE: _panel_container.size に Label の大きさが反映されないのでこうしている
+	_panel_container.visible = false
+	_panel_container.visible = true
+
+	# 出現位置を調整する
+	# 画面の 左/右 x 上/下 で4パターン
 	var viewport_width = ProjectSettings.get_setting("display/window/size/viewport_width")
 	var viewport_height = ProjectSettings.get_setting("display/window/size/viewport_height")
 	var diff_x := help_area.size.x # 左上
 	var diff_y := help_area.size.y # 左上
 	if (viewport_width / 2) < help_area.global_position.x:
-		diff_x = _panel.size.x * -1 # 右対応
+		diff_x = _panel_container.size.x * -1 # 右
 	if (viewport_height / 2) < help_area.global_position.y:
-		diff_y = _panel.size.y * -1 # 下対応
+		diff_y = _panel_container.size.y * -1 # 下
 	global_position = help_area.global_position + Vector2(diff_x, diff_y)
 
-	if help_area.related_object:
-		if help_area.related_object is Ball:
-			_update_content_ball(help_area.related_object)
-		elif help_area.related_object is Hole:
-			_update_content_hole(help_area.related_object)
-	else:
-		_update_content_common(help_area)
+	_tween.tween_property(self, "modulate", Color.WHITE, SHOW_DURATION)
+
+
+func hide_popup() -> void:
+	_tween.tween_property(self, "modulate", Color.TRANSPARENT, SHOW_DURATION)
 
 
 func _update_content_common(help_area: HelpArea) -> void:
-	_title_label.text = tr(help_area.title_key)
-	_title_sub_label.text = tr(help_area.title_sub_key)
 	_description_label.text = tr(help_area.description_key)
 
 
-func _update_content_ball(ball: Ball) -> void:
+func _update_content_ball(ball: Ball) -> bool:
+	# ビリヤード上のボールは popup を表示しない
 	if ball.is_on_billiards:
-		visible = false
-		return
+		return true
 
-	if ball.number < 0:
-		_title_label.text = "-"
-		_title_sub_label.text = ""
-		_title_sub_label.self_modulate = Color.WHITE
-	else:
-		_title_label.text = "%s-%s" % [Ball.Pool.keys()[ball.pool], ball.number]
-		_title_sub_label.text = BallEffect.RARITY_TEXT[ball.rarity]
-		_title_sub_label.self_modulate = ColorPalette.BALL_RARITY_COLORS[ball.rarity]
-	_description_label.text = BallEffect.get_effect_description(ball.number, ball.rarity)
+	var text := ""
+	if 0 <= ball.number:
+		var pool = Ball.Pool.keys()[ball.pool]
+		var rarity = BallEffect.RARITY_TEXT[ball.rarity]
+		text += "[b]%s-%s %s[/b]\n" % [pool, ball.number, rarity]
+	text += BallEffect.get_effect_description(ball.number, ball.rarity)
+
+	_description_label.text = text
+	return false
 
 
 func _update_content_hole(hole: Hole) -> void:
-	pass
+	var hole_type_string = Hole.HoleType.keys()[hole.hole_type]
+	var title := tr("hole_%s_title" % [hole_type_string])
+	var description := tr("hole_%s_desc" % [hole_type_string])
+
+	match hole.hole_type:
+		Hole.HoleType.WARP_TO, Hole.HoleType.WARP_FROM:
+			var warp_type_string = Hole.WarpGroup.keys()[hole.warp_group]
+			title = title.format({ "a": warp_type_string })
+			description = description.format({ "a": warp_type_string })
+		Hole.HoleType.EXTRA:
+			pass
+		Hole.HoleType.GAIN:
+			title = title.format({ "a": hole.gain_ratio })
+			description = description.format({ "a": hole.gain_ratio })
+		Hole.HoleType.LOST:
+			pass
+		Hole.HoleType.STACK:
+			pass
+
+	_description_label.text = "[b]%s[/b]\n%s" % [title, description]

@@ -41,7 +41,6 @@ var disabled := false:
 
 var _target_panel: Control
 
-
 # 現在ホバーしているかどうか
 var _hovered := false:
 	set(v):

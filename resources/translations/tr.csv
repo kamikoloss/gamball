@@ -24,24 +24,32 @@ ball_effect_RARITY_TOP_DOWN,{a} の出現確率 -1 (最大 -2),Probability of ap
 ball_effect_RARITY_TOP_UP,{a} の出現確率 +1,{a} appearance probability +1
 ball_effect_TAX_DOWN,延長料 -{a}% (最大 -50%),Extension fee -{a}% (maximum -50%)
 ball_optional_slot,空きスロット,empty slot
-bunny_countdown_0,ゼロ～～,Zero～～
-bunny_countdown_1,い～～ち,I~~chi
-bunny_countdown_2,に～～い,Nii~i
-bunny_countdown_3,さ～～ん,Sa~~n
+bunny_countdown_0,ゼロ～～,Zeeeeero
+bunny_countdown_1,い～～ち,Onnne
+bunny_countdown_2,に～～い,Twooo
+bunny_countdown_3,さ～～ん,Threeee
 bunny_countdown_start,[color=DARK_RED]延長[/color]のお時間で～す,It's [color=DARK_RED]extension[/color] time.
-bunny_move_finished,よいしょっと,Good shots
+bunny_move_finished,よいしょっと,Heave-ho
 bunny_no_money,お金が足りないよ～,I don't have enough money
 bunny_normal_0,いらっしゃ～い！調子どう？,Welcome! how are you?
-bunny_normal_1,[rainbow]GAMBALL[/rainbow] は近未来のバーチャルハイリスクハイリターンギャンブルだよ！,"[rainbow]GAMBALL[/rainbow] is a virtual high-risk, high-reward gamble in the near future!"
+bunny_normal_1,[rainbow]GAMBALL[/rainbow] は最先端のバーチャルハイリスクハイリターンギャンブルだよ！,"[rainbow]GAMBALL[/rainbow] is the most advanced virtual high-risk, high-reward gambling game!"
 bunny_normal_2,ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。,The ball that enters the billiard pocket will warp onto the pachinko board surface.
 bunny_normal_3,ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～,The ball launched in billiards is not activated unless it hits another ball.
 bunny_shop_start,なんか買ってく？,Would you like to buy something?
 bunny_tax_start,ゲームを続けたいなら延長料を払ってね～,"If you want to continue playing the game, pay the extension fee."
 product_DECK_CLEANER_desc,DECK の左端のボール x1 を削除する,Delete the leftmost ball x1 of the DECK
 product_DECK_CLEANER_title,DECK Cleaner,DECK Cleaner
-product_DECK_PACK_desc,DECK にランダムなボール x2 を追加する,Add random balls x2 to DECK
+product_DECK_PACK_desc,DECK にランダムなボール x2 を追加する,Add random balls x2 to the DECK
 product_DECK_PACK_title,DECK Pack,DECK Pack
 product_EXTRA_CLEANER_desc,EXTRA の左端のボール x1 を削除する,Delete the leftmost ball x1 of EXTRA
 product_EXTRA_CLEANER_title,EXTRA Cleaner,EXTRA Cleaner
 product_EXTRA_PACK_desc,EXTRA にランダムなボール x2 を追加する,Add random balls x2 to EXTRA
 product_EXTRA_PACK_title,EXTRA Pack,EXTRA Pack
+hole_WARP_TO_desc,WHITE ポケット {a} にワープする,Warp to WHITE pocket {a}
+hole_WARP_TO_title,BLACK ポケット {a},BLACK pocket {a}
+hole_WARP_FROM_desc,WHITE ポケット {a} からワープする,Warp from WHITE pocket {a}
+hole_WARP_FROM_title,WHITE ポケット {a},WHITE pocket {a}
+hole_EXTRA_desc,(1) パチンコの抽選を開始する\n(2) ビリヤード上に EXTRA スロットのホールをランダムに1個生成する,(1) Start the pachinko lottery\n(2) Randomly generate one EXTRA slot hole on the billiards board
+hole_EXTRA_title,EXTRA ポケット,EXTRA pocket
+hole_GAIN_desc,<ボール番号> x {a} 個のボールを払い出す,Payout <ball number> x {a} balls
+hole_GAIN_title,GAIN ポケット,GAIN pocket

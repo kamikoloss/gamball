@@ -1,52 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxgi8dji2yllp"]
+[gd_scene load_steps=4 format=3 uid="uid://dxgi8dji2yllp"]
 
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="1_s4kpv"]
 [ext_resource type="Script" path="res://scenes/common/help_popup.gd" id="2_rjtf8"]
 
-[node name="HelpPopup" type="Control" node_paths=PackedStringArray("_panel", "_title_label", "_title_sub_label", "_description_label")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lm53j"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[node name="HelpPopup" type="Control" node_paths=PackedStringArray("_panel_container", "_description_label")]
 z_index = 20
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("1_s4kpv")
 script = ExtResource("2_rjtf8")
-_panel = NodePath("Panel")
-_title_label = NodePath("TitleMain")
-_title_sub_label = NodePath("TitleSub")
-_description_label = NodePath("Description")
+_panel_container = NodePath("PanelContainer")
+_description_label = NodePath("PanelContainer/Description")
 
-[node name="Panel" type="Panel" parent="."]
-self_modulate = Color(0.1, 0.1, 0.1, 1)
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 240.0
-offset_bottom = 160.0
+offset_right = 160.0
+offset_bottom = 80.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lm53j")
 
-[node name="TitleMain" type="Label" parent="."]
-layout_mode = 0
-offset_left = 10.0
-offset_right = 230.0
-offset_bottom = 40.0
-theme_type_variation = &"LabelBold"
-theme_override_font_sizes/font_size = 24
-text = "A-99"
-vertical_alignment = 1
-
-[node name="TitleSub" type="Label" parent="."]
-layout_mode = 0
-offset_left = 10.0
-offset_right = 230.0
-offset_bottom = 40.0
-text = "★★★★★"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="Description" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 40.0
-offset_right = 230.0
-offset_bottom = 150.0
+[node name="Description" type="RichTextLabel" parent="PanelContainer"]
+layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
-autowrap_mode = 1
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風"
+fit_content = true
+scroll_active = false
