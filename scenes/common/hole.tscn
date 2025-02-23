@@ -130,10 +130,10 @@ gravity_point = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gravity"]
 shape = SubResource("CircleShape2D_okw7p")
 
-[node name="HelpArea" parent="." node_paths=PackedStringArray("related_object") instance=ExtResource("4_oex1c")]
+[node name="HelpArea" parent="." node_paths=PackedStringArray("object") instance=ExtResource("4_oex1c")]
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 shape_type = 2
-related_object = NodePath("..")
+object = NodePath("..")

@@ -18,7 +18,7 @@ point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_awq4m"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_view_slot", "_view_main", "_body_texture", "_inner_texture", "_inner_line_texture", "_stripe_top_texture", "_stripe_bottom_texture", "_inactive_texture", "_number_label", "_hover_texture", "_trail_line", "_hole_area", "_help_area")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("_view_parent", "_view_slot", "_view_main", "_body_texture", "_inner_texture", "_inner_line_texture", "_stripe_top_texture", "_stripe_bottom_texture", "_inactive_texture", "_number_label", "_trail_line", "_hole_area", "_help_area")]
 z_index = 1
 collision_layer = 3
 physics_material_override = SubResource("PhysicsMaterial_nh6hv")
@@ -35,7 +35,6 @@ _stripe_top_texture = NodePath("View/Mask/Main/StripeTop")
 _stripe_bottom_texture = NodePath("View/Mask/Main/StripeBottom")
 _inactive_texture = NodePath("View/Mask/Main/Inactive")
 _number_label = NodePath("View/Mask/Main/Number")
-_hover_texture = NodePath("View/Hover")
 _trail_line = NodePath("Trail")
 _hole_area = NodePath("Hole")
 _help_area = NodePath("HelpArea")
@@ -234,10 +233,10 @@ width_curve = SubResource("Curve_pexpb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
 shape = SubResource("CircleShape2D_awq4m")
 
-[node name="HelpArea" parent="." node_paths=PackedStringArray("related_object") instance=ExtResource("5_1ot2r")]
+[node name="HelpArea" parent="." node_paths=PackedStringArray("object") instance=ExtResource("5_1ot2r")]
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 shape_type = 2
-related_object = NodePath("..")
+object = NodePath("..")

@@ -81,7 +81,6 @@ offset_right = 1280.0
 offset_bottom = 200.0
 mouse_filter = 2
 color = Color(0.05, 0.05, 0.05, 1)
-metadata/_edit_lock_ = true
 
 [node name="Main" type="Node2D" parent="."]
 
@@ -1410,56 +1409,56 @@ anchors_preset = 0
 offset_left = 40.0
 offset_top = 20.0
 offset_right = 320.0
-translation_key = "help_deck"
+key = "help_deck"
 
 [node name="HelpAreaExtra" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
 offset_left = 40.0
 offset_top = 80.0
 offset_right = 320.0
 offset_bottom = 100.0
-translation_key = "help_extra"
+key = "help_extra"
 
 [node name="HelpAreaTurn" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
 offset_left = 360.0
 offset_top = 20.0
 offset_right = 480.0
 offset_bottom = 80.0
-translation_key = "help_turn"
+key = "help_turn"
 
 [node name="HelpAreaTurnNext" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
 offset_left = 480.0
 offset_top = 20.0
 offset_right = 600.0
 offset_bottom = 80.0
-translation_key = "help_next_turn"
+key = "help_next_turn"
 
 [node name="HelpAreaBalls" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
 offset_left = 360.0
 offset_top = 80.0
 offset_right = 480.0
 offset_bottom = 140.0
-translation_key = "help_balls"
+key = "help_balls"
 
 [node name="HelpAreaBallsNext" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
 offset_left = 480.0
 offset_top = 80.0
 offset_right = 600.0
 offset_bottom = 140.0
-translation_key = "help_next_balls"
+key = "help_next_balls"
 
 [node name="HelpAreaBilliardsBalls" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
 offset_left = 240.0
 offset_top = 260.0
 offset_right = 320.0
 offset_bottom = 300.0
-translation_key = "help_billiards_balls"
+key = "help_billiards_balls"
 
 [node name="HelpAreaPachinkoRush" parent="UI/Main/Help/HelpAreas" instance=ExtResource("23_c674a")]
 offset_left = 760.0
 offset_top = 260.0
 offset_right = 840.0
 offset_bottom = 300.0
-translation_key = "help_pachinko_rush"
+key = "help_pachinko_rush"
 
 [node name="HelpPopup" parent="UI/Main/Help" instance=ExtResource("21_75o20")]
 

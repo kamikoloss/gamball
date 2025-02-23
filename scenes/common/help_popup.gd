@@ -19,11 +19,11 @@ var _tween: Tween:
 func show_popup(help_area: HelpArea) -> void:
 	# 表示内容を更新する
 	var not_show := false
-	if help_area.related_object:
-		if help_area.related_object is Ball:
-			not_show = _update_content_ball(help_area.related_object)
-		elif help_area.related_object is Hole:
-			_update_content_hole(help_area.related_object)
+	if help_area.object:
+		if help_area.object is Ball:
+			not_show = _update_content_ball(help_area.object)
+		elif help_area.object is Hole:
+			_update_content_hole(help_area.object)
 	else:
 		_update_content_common(help_area)
 	if not_show:
@@ -52,8 +52,8 @@ func hide_popup() -> void:
 
 
 func _update_content_common(help_area: HelpArea) -> void:
-	var title := tr("%s_title" % [help_area.translation_key])
-	var description := tr("%s_desc" % [help_area.translation_key])
+	var title := tr("%s_title" % [help_area.key])
+	var description := tr("%s_desc" % [help_area.key])
 	_label.text = "[b]%s[/b]\n%s" % [title, description]
 
 
