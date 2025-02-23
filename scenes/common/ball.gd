@@ -2,10 +2,6 @@ class_name Ball
 extends RigidBody2D
 
 
-signal pressed # ()
-signal hovered # (entered: bool)
-
-
 # ボールのレア度
 enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 # ボールのプール 名称表示に使用される
@@ -48,8 +44,6 @@ const BALL_NUMBER_DISABLED_SLOT := -2 # 使用不可スロット用
 @export var _inactive_texture: TextureRect
 # ボール番号
 @export var _number_label: Label
-# ボールの選択を示す周辺部分
-@export var _hover_texture: TextureRect
 
 # 残像
 @export var _trail_line: Line2D
@@ -114,7 +108,6 @@ func _ready() -> void:
 
 	refresh_view()
 	refresh_physics()
-	hide_hover()
 	_init_effects()
 
 
@@ -182,13 +175,6 @@ func refresh_physics() -> void:
 	if is_display:
 		collision_layer = 0
 		collision_mask = 0
-
-
-func show_hover() -> void:
-	_hover_texture.visible = true
-
-func hide_hover() -> void:
-	_hover_texture.visible = false
 
 
 # ワープする (WARP_TO 用)

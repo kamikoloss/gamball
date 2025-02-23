@@ -102,7 +102,6 @@ func _ready() -> void:
 	for ball: Ball in _balls_parent.get_children():
 		ball.number = ball_number
 		ball.refresh_view()
-		ball.pressed.connect(func(): _on_ball_pressed(ball))
 		ball_number += 1
 
 	# MainLabels
@@ -112,6 +111,7 @@ func _ready() -> void:
 	labels_tween.tween_callback(_refresh_labels)
 
 
+# TODO: HelpArea 対応
 func _on_ball_pressed(ball: Ball) -> void:
 	_game._extra_ball_list.push_back(Ball.new(ball.number, ball.rarity))
 	_game._apply_extra_ball_effects()
