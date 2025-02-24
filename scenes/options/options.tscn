@@ -91,6 +91,7 @@ offset_left = 160.0
 offset_right = 400.0
 
 [node name="StatsTransmission" type="Control" parent="Game"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = 50.0
