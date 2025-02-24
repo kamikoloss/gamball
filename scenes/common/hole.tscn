@@ -12,8 +12,9 @@ radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_okw7p"]
 
-[node name="Hole" type="Area2D" node_paths=PackedStringArray("_gravity_area", "_gravity_texture", "_body_texture", "_label") groups=["hole"]]
+[node name="Hole" type="Area2D" node_paths=PackedStringArray("help_area", "_gravity_area", "_gravity_texture", "_body_texture", "_label") groups=["hole"]]
 script = ExtResource("1_226au")
+help_area = NodePath("HelpArea")
 _gravity_area = NodePath("Gravity")
 _gravity_texture = NodePath("View/Gravity")
 _body_texture = NodePath("View/Body")
@@ -130,10 +131,9 @@ gravity_point = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gravity"]
 shape = SubResource("CircleShape2D_okw7p")
 
-[node name="HelpArea" parent="." node_paths=PackedStringArray("object") instance=ExtResource("4_oex1c")]
+[node name="HelpArea" parent="." instance=ExtResource("4_oex1c")]
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 shape_type = 2
-object = NodePath("..")

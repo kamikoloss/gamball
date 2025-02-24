@@ -15,7 +15,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="HelpArea" type="Control" node_paths=PackedStringArray("_panel_square", "_panel_square_rounded", "_panel_circle") groups=["help_area"]]
+[node name="HelpArea" type="Control" node_paths=PackedStringArray("_panel_square", "_panel_square_rounded", "_panel_circle")]
 modulate = Color(1, 1, 1, 0.6)
 layout_mode = 3
 anchors_preset = 0

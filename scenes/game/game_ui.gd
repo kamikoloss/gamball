@@ -45,8 +45,8 @@ const LOG_LINES_MAX := 100
 @export var _popup_score_scene: PackedScene
 
 @export_category("Main/Balls")
-@export var _deck_balls_parent: Node2D
-@export var _extra_balls_parent: Node2D
+@export var _deck_balls_parent: Node
+@export var _extra_balls_parent: Node
 @export var _deck_min_lamp: Control
 @export var _extra_max_lamp: Control
 @export_category("Main/Score")
@@ -66,7 +66,6 @@ const LOG_LINES_MAX := 100
 @export_category("Main/Others")
 @export var _combo_bar: ColorRect
 @export var _help_popup: HelpPopup
-
 
 @export_category("Tax")
 @export var _tax_window: Control
@@ -91,14 +90,17 @@ var _tweens := {}
 
 
 func _ready() -> void:
+	# Main/Balls
+	for node in _deck_balls_parent.get_children():
+		if node is Ball:
+			node.help_area_hovered.connect(func(n, h): _on_ball_help_area_hovered(node, h))
+	for node in _extra_balls_parent.get_children():
+		if node is Ball:
+			node.help_area_hovered.connect(func(n, h): _on_ball_help_area_hovered(node, h))
+	_help_popup.hide_popup()
 	# Main/Buttons
 	_info_button.pressed.connect(func(): info_button_pressed.emit())
 	_options_button.pressed.connect(func(): options_button_pressed.emit())
-	# Main/HelpArea
-	for node in get_tree().get_nodes_in_group("help_area"):
-		if node is HelpArea:
-			node.hovered.connect(func(n, v): _on_help_area_hovered(node, v))
-	_help_popup.hide_popup()
 
 	# Tax
 	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
@@ -275,6 +277,20 @@ func popup_score(from: Vector2, text: String, color: Color = Color.WHITE, ratio:
 	popup_score.popup(from, text)
 
 
+func _on_ball_help_area_hovered(ball: Ball, hovered: bool) -> void:
+	if hovered:
+		_help_popup.show_popup_ball(ball)
+	else:
+		_help_popup.hide_popup()
+
+
+func _on_bunny_pressed() -> void:
+	# セリフをランダムに変更する
+	# TODO: 状態に応じてランダムの取得元を変更する
+	var key := "bunny_normal_%s" % [randi_range(0, 3)]
+	set_dialogue_with_bunny(tr(key))
+
+
 func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: int) -> void:
 	var index = 0
 	for node in parent_node.get_children():
@@ -291,20 +307,6 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 			#print("refresh ball %s, %s" % [node.number, node.rarity])
 			node.refresh_view()
 			index += 1
-
-
-func _on_help_area_hovered(help_area: HelpArea, hovered: bool) -> void:
-	if hovered:
-		_help_popup.show_popup(help_area)
-	else:
-		_help_popup.hide_popup()
-
-
-func _on_bunny_pressed() -> void:
-	# セリフをランダムに変更する
-	# TODO: 状態に応じてランダムの取得元を変更する
-	var key := "bunny_normal_%s" % [randi_range(0, 3)]
-	set_dialogue_with_bunny(tr(key))
 
 
 func _get_tween(type: TweenType) -> Tween:

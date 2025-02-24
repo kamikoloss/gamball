@@ -3,9 +3,9 @@ extends Control
 
 
 # ホバーしたとき
-signal hovered # (node: HelpArea, hobered: bool)
+signal hovered # (help_area: HelpArea, hovered: bool)
 # クリックしたとき
-signal pressed # (node: HelpArea)
+signal pressed # (help_area: HelpArea)
 
 
 enum ShapeType { SQUARE, SQUARE_ROUNDED, CIRCLE }
@@ -16,7 +16,6 @@ const SHOW_DURATION := 0.2
 
 @export var shape_type: ShapeType
 @export var key: String
-@export var object: Node
 
 
 @export var _panel_square: Control

@@ -3,7 +3,11 @@ extends Area2D
 
 
 # Ball が Hole に落ちたとき
-signal ball_entered # (Hole, Ball)
+signal ball_entered # (hole: Hole, ball: Ball)
+# HelpArea ホバー時
+signal help_area_hovered # (help_area: HelpArea, hovered: bool)
+# HelpArea クリック時
+signal help_area_pressed # (help_area: HelpArea)
 
 
 # Hole のタイプ
@@ -33,6 +37,8 @@ const GRAVITY_SCALE_STEP := 0.25
 @export var gain_ratio := 0
 # (HoleType.WARP_XXXX 用) ワープが通じるグループ
 @export var warp_group := WarpGroup.NONE
+#
+@export var help_area: HelpArea
 
 
 @export var _gravity_area: Area2D

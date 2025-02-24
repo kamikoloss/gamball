@@ -2,6 +2,12 @@ class_name Ball
 extends RigidBody2D
 
 
+# HelpArea ホバー時
+signal help_area_hovered # (help_area: HelpArea, hovered: bool)
+# HelpArea クリック時
+signal help_area_pressed # (help_area: HelpArea)
+
+
 # ボールのレア度
 enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 # ボールのプール 名称表示に使用される
@@ -28,6 +34,8 @@ const BALL_NUMBER_DISABLED_SLOT := -2 # 使用不可スロット用
 
 # 展示用かどうか
 @export var is_display := false
+#
+@export var help_area: HelpArea
 
 
 # 見た目部分をまとめる親
@@ -50,15 +58,13 @@ const BALL_NUMBER_DISABLED_SLOT := -2 # 使用不可スロット用
 # Hole 用の当たり判定
 @export var _hole_area: Area2D
 
-@export var _help_area: HelpArea
-
 
 # ボールがビリヤード盤面上にあるかどうか
 var is_on_billiards := false:
 	set(v):
 		is_on_billiards = v
 		# ビリヤード盤面上にあるときは DragShooter 用に HelpArea の入力をスルーする
-		_help_area.disabled = not is_on_billiards
+		help_area.disabled = not is_on_billiards
 # 他のボールにぶつかって有効化されたかどうか
 var is_active := true
 # Gain に触れたかどうか
@@ -96,6 +102,8 @@ func _init(number: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+	help_area.hovered.connect(func(n, b): help_area_hovered.emit(n, b))
+	help_area.pressed.connect(func(n): help_area_pressed.emit(n))
 
 	if not is_display:
 		# 残像の頂点の記録を開始する

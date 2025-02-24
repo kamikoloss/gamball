@@ -41,10 +41,11 @@ func _ready() -> void:
 	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
 
 	# HelpArea
-	for node in get_tree().get_nodes_in_group("help_area"):
-		if node is HelpArea:
-			node.hovered.connect(func(n, v): _on_help_area_hovered(node, v))
-			#node.pressed.connect(func(n): _on_help_area_pressed(node))
+	for node in _balls_parent.get_children():
+		if node is Ball:
+			pass
+			#node.help_area_hovered.connect(func(n, v): _on_ball_help_area_hovered(node, v))
+			#node.help_area_hovered.connect(func(n): _on_ball_help_area_pressed(node))
 	# Windows
 	_init_ball_effects()
 	_init_licenses()
@@ -55,22 +56,19 @@ func _ready() -> void:
 		_show_window(_default_menu_help_area)
 
 
-func _on_help_area_hovered(help_area: HelpArea, hovered: bool) -> void:
+func _on_ball_help_area_hovered(ball: Ball, hovered: bool) -> void:
 	if not hovered:
 		return
-	if help_area.object:
-		if help_area.object is Ball:
-			_update_ball_effect_label(help_area.object)
-		else:
-			_show_window(help_area)
+	#_update_ball_effect_label(ball)
+	#_show_window(ball.help_area)
 
 
 func _show_window(help_area: HelpArea) -> void:
 	var tween := _get_tween(TweenType.WINDOW)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 
-	var window_from = _current_menu_help_area.object
-	var window_to = help_area.object
+	var window_from = _current_menu_help_area
+	var window_to = help_area
 	_current_menu_help_area = help_area
 	# 現在表示中の Window を非表示にする
 	tween.tween_property(_windows_parent, "modulate", Color.TRANSPARENT, WINDOW_SHOW_DURATION)

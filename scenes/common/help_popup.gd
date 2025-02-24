@@ -16,35 +16,21 @@ var _tween: Tween:
 		return create_tween().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 
 
-func show_popup(help_area: HelpArea) -> void:
-	# 表示内容を更新する
-	var not_show := false
-	if help_area.object:
-		if help_area.object is Ball:
-			not_show = _update_content_ball(help_area.object)
-		elif help_area.object is Hole:
-			_update_content_hole(help_area.object)
-	else:
-		_update_content_common(help_area)
+func show_popup_common(help_area: HelpArea) -> void:
+	_update_content_common(help_area)
+	_show_popup(help_area)
+
+
+func show_popup_ball(ball: Ball) -> void:
+	var not_show := _update_content_ball(ball)
 	if not_show:
 		return
-	# NOTE: _panel_container.size に Label の大きさが反映されないのでこうしている
-	_panel_container.visible = false
-	_panel_container.visible = true
+	_show_popup(ball.help_area)
 
-	# 出現位置を調整する
-	# 画面の 左/右 x 上/下 で4パターン
-	var viewport_width = ProjectSettings.get_setting("display/window/size/viewport_width")
-	var viewport_height = ProjectSettings.get_setting("display/window/size/viewport_height")
-	var diff_x := help_area.size.x # 左上
-	var diff_y := help_area.size.y # 左上
-	if (viewport_width / 2) < help_area.global_position.x:
-		diff_x = _panel_container.size.x * -1 # 右
-	if (viewport_height / 2) < help_area.global_position.y:
-		diff_y = _panel_container.size.y * -1 # 下
-	global_position = help_area.global_position + Vector2(diff_x, diff_y)
 
-	_tween.tween_property(self, "modulate", Color.WHITE, SHOW_DURATION)
+func show_popup_hole(hole: Hole) -> void:
+	_update_content_hole(hole)
+	_show_popup(hole.help_area)
 
 
 func hide_popup() -> void:
@@ -94,3 +80,23 @@ func _update_content_hole(hole: Hole) -> void:
 			pass
 
 	_label.text = "[b]%s[/b]\n%s" % [title, description]
+
+
+func _show_popup(help_area: HelpArea) -> void:
+	# NOTE: _panel_container.size に Label の大きさが反映されないのでこうしている
+	_panel_container.visible = false
+	_panel_container.visible = true
+
+	# 出現位置を調整する
+	# 画面の 左/右 x 上/下 で4パターン
+	var viewport_width = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var viewport_height = ProjectSettings.get_setting("display/window/size/viewport_height")
+	var diff_x := help_area.size.x # 左上
+	var diff_y := help_area.size.y # 左上
+	if (viewport_width / 2) < help_area.global_position.x:
+		diff_x = _panel_container.size.x * -1 # 右
+	if (viewport_height / 2) < help_area.global_position.y:
+		diff_y = _panel_container.size.y * -1 # 下
+	global_position = help_area.global_position + Vector2(diff_x, diff_y)
+
+	_tween.tween_property(self, "modulate", Color.WHITE, SHOW_DURATION)
