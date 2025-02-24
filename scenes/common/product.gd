@@ -66,7 +66,7 @@ func _ready() -> void:
 	mouse_entered.connect(func(): _hovered = true)
 	mouse_exited.connect(func(): _hovered = false)
 	_buy_button.pressed.connect(func(): pressed.emit(self))
-	
+
 	_refresh_view()
 
 

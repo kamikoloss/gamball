@@ -53,6 +53,7 @@ var _target_panel: Control
 
 
 func _ready() -> void:
+	# shape_type を元に対象の Control を決定する
 	match shape_type:
 		ShapeType.SQUARE:
 			_target_panel = _panel_square

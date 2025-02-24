@@ -1,146 +1,307 @@
-[gd_scene load_steps=8 format=3 uid="uid://0ajps5kdo6nb"]
+[gd_scene load_steps=10 format=3 uid="uid://0ajps5kdo6nb"]
 
 [ext_resource type="Script" path="res://scenes/information/information.gd" id="1_5baeu"]
+[ext_resource type="PackedScene" uid="uid://bu3eu3emjmtq8" path="res://scenes/common/help_area.tscn" id="3_3yiv3"]
 [ext_resource type="PackedScene" uid="uid://0yg37qutkxad" path="res://scenes/common/ball.tscn" id="4_p785c"]
+[ext_resource type="PackedScene" uid="uid://b27wfweeshboa" path="res://scenes/common/ui/selector.tscn" id="4_uowvm"]
 [ext_resource type="Theme" uid="uid://bula4jj133y50" path="res://themes/theme_default.tres" id="4_wugw1"]
 [ext_resource type="PackedScene" uid="uid://bjd632ntwegwj" path="res://scenes/common/bunny.tscn" id="5_7wbwg"]
 [ext_resource type="Texture2D" uid="uid://c1c20ab2v1t7a" path="res://images/people/bunny2/bunny2a.png" id="6_yhis1"]
 [ext_resource type="Texture2D" uid="uid://c30d2k1hmhmry" path="res://images/icons/logout.png" id="7_gvdnq"]
 [ext_resource type="Texture2D" uid="uid://bgcrwicqdrc4a" path="res://images/people/bunny2/bunny2b.png" id="7_ogwcd"]
 
-[node name="Information" type="Control" node_paths=PackedStringArray("_exit_button", "_balls_parent", "_ball_popup_title", "_ball_popup_description")]
+[node name="Information" type="Control" node_paths=PackedStringArray("_exit_button", "_menu_help_areas", "_default_menu_help_area", "_balls_parent", "_ball_effect_selector", "_ball_effect_description")]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("4_wugw1")
 script = ExtResource("1_5baeu")
 _exit_button = NodePath("Exit")
-_balls_parent = NodePath("Balls")
-_ball_popup_title = NodePath("BallPopup/Title")
-_ball_popup_description = NodePath("BallPopup/Description")
+_menu_help_areas = NodePath("MenuHelpAreas")
+_default_menu_help_area = NodePath("MenuHelpAreas/HelpAreaRules")
+_balls_parent = NodePath("Windows/BallEffects/Balls")
+_ball_effect_selector = NodePath("Windows/BallEffects/Selector")
+_ball_effect_description = NodePath("Windows/BallEffects/Description")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
+offset_left = 20.0
 offset_top = -40.0
-offset_right = 640.0
+offset_right = 660.0
 offset_bottom = 120.0
 theme_type_variation = &"LabelHeader"
 theme_override_font_sizes/font_size = 64
 text = "INFORMATION"
 vertical_alignment = 1
 
-[node name="PoolA" type="Label" parent="."]
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(0.1, 0.1, 0.1, 1)
 layout_mode = 0
 offset_left = 40.0
-offset_top = 120.0
-offset_right = 200.0
-offset_bottom = 160.0
-theme_type_variation = &"LabelBold"
-theme_override_font_sizes/font_size = 24
-text = "Pool A"
-vertical_alignment = 1
+offset_top = 100.0
+offset_right = 280.0
+offset_bottom = 700.0
 
-[node name="Balls" type="Control" parent="."]
+[node name="Panel2" type="Panel" parent="."]
+self_modulate = Color(0.1, 0.1, 0.1, 1)
+layout_mode = 0
+offset_left = 320.0
+offset_top = 100.0
+offset_right = 800.0
+offset_bottom = 700.0
+
+[node name="Menu" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 100.0
-offset_top = 180.0
-offset_right = 100.0
-offset_bottom = 180.0
-
-[node name="Ball" parent="Balls" instance=ExtResource("4_p785c")]
-is_display = true
-
-[node name="Ball2" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(40, 0)
-is_display = true
-
-[node name="Ball3" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(80, 0)
-is_display = true
-
-[node name="Ball4" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(120, 0)
-is_display = true
-
-[node name="Ball5" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(160, 0)
-is_display = true
-
-[node name="Ball6" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(200, 0)
-is_display = true
-
-[node name="Ball7" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(240, 0)
-is_display = true
-
-[node name="Ball8" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(280, 0)
-is_display = true
-
-[node name="Ball9" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(0, 40)
-is_display = true
-
-[node name="Ball10" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(40, 40)
-is_display = true
-
-[node name="Ball11" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(80, 40)
-is_display = true
-
-[node name="Ball12" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(120, 40)
-is_display = true
-
-[node name="Ball13" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(160, 40)
-is_display = true
-
-[node name="Ball14" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(200, 40)
-is_display = true
-
-[node name="Ball15" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(240, 40)
-is_display = true
-
-[node name="Ball16" parent="Balls" instance=ExtResource("4_p785c")]
-position = Vector2(280, 40)
-is_display = true
-
-[node name="BallPopup" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 480.0
+offset_left = 60.0
 offset_top = 120.0
-offset_right = 480.0
+offset_right = 60.0
 offset_bottom = 120.0
 
-[node name="Title" type="Label" parent="BallPopup"]
+[node name="Rules" type="Label" parent="Menu"]
 layout_mode = 0
-offset_right = 240.0
+offset_right = 200.0
 offset_bottom = 40.0
 theme_type_variation = &"LabelBold"
 theme_override_font_sizes/font_size = 24
-text = "A-99"
+text = "Rules"
 vertical_alignment = 1
 
-[node name="Description" type="RichTextLabel" parent="BallPopup"]
+[node name="BallEffects" type="Label" parent="Menu"]
 layout_mode = 0
 offset_top = 40.0
-offset_right = 240.0
-offset_bottom = 600.0
+offset_right = 200.0
+offset_bottom = 80.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "Ball Effects"
+vertical_alignment = 1
+
+[node name="Stats" type="Label" parent="Menu"]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 200.0
+offset_bottom = 120.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "Stats"
+vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="Menu"]
+layout_mode = 0
+offset_top = 480.0
+offset_right = 200.0
+offset_bottom = 520.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "Credits"
+vertical_alignment = 1
+
+[node name="Licenses" type="Label" parent="Menu"]
+layout_mode = 0
+offset_top = 520.0
+offset_right = 200.0
+offset_bottom = 560.0
+theme_type_variation = &"LabelBold"
+theme_override_font_sizes/font_size = 24
+text = "Licenses"
+vertical_alignment = 1
+
+[node name="MenuHelpAreas" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 60.0
+offset_top = 120.0
+offset_right = 60.0
+offset_bottom = 120.0
+
+[node name="HelpAreaRules" parent="MenuHelpAreas" node_paths=PackedStringArray("object") instance=ExtResource("3_3yiv3")]
+layout_mode = 0
+offset_left = -20.0
+offset_right = 220.0
+key = "windows"
+object = NodePath("../../Windows/Rules")
+
+[node name="HelpAreaBallEffects" parent="MenuHelpAreas" node_paths=PackedStringArray("object") instance=ExtResource("3_3yiv3")]
+layout_mode = 0
+offset_left = -20.0
+offset_top = 40.0
+offset_right = 220.0
+offset_bottom = 80.0
+key = "windows"
+object = NodePath("../../Windows/BallEffects")
+
+[node name="HelpAreaStats" parent="MenuHelpAreas" node_paths=PackedStringArray("object") instance=ExtResource("3_3yiv3")]
+layout_mode = 0
+offset_left = -20.0
+offset_top = 80.0
+offset_right = 220.0
+offset_bottom = 120.0
+key = "windows"
+object = NodePath("../../Windows/Stats")
+
+[node name="HelpAreaCredits" parent="MenuHelpAreas" node_paths=PackedStringArray("object") instance=ExtResource("3_3yiv3")]
+layout_mode = 0
+offset_left = -20.0
+offset_top = 480.0
+offset_right = 220.0
+offset_bottom = 520.0
+key = "windows"
+object = NodePath("../../Windows/Credits")
+
+[node name="HelpAreaLicenses" parent="MenuHelpAreas" node_paths=PackedStringArray("object") instance=ExtResource("3_3yiv3")]
+layout_mode = 0
+offset_left = -20.0
+offset_top = 520.0
+offset_right = 220.0
+offset_bottom = 560.0
+key = "windows"
+object = NodePath("../../Windows/Licenses")
+
+[node name="Windows" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 340.0
+offset_top = 120.0
+offset_right = 340.0
+offset_bottom = 120.0
+
+[node name="Rules" type="Control" parent="Windows"]
+visible = false
+anchors_preset = 0
+
+[node name="Description" type="RichTextLabel" parent="Windows/Rules"]
+layout_mode = 0
+offset_right = 440.0
+offset_bottom = 560.0
+bbcode_enabled = true
+
+[node name="BallEffects" type="Control" parent="Windows"]
+visible = false
+anchors_preset = 0
+
+[node name="Selector" parent="Windows/BallEffects" instance=ExtResource("4_uowvm")]
+offset_left = 40.0
+offset_top = -10.0
+offset_right = 280.0
+offset_bottom = 30.0
+scale = Vector2(1.5, 1.5)
+
+[node name="Balls" type="Control" parent="Windows/BallEffects"]
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 100.0
+offset_right = 80.0
+offset_bottom = 100.0
+
+[node name="Ball" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+is_display = true
+
+[node name="Ball2" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(40, 0)
+is_display = true
+
+[node name="Ball3" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(80, 0)
+is_display = true
+
+[node name="Ball4" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(120, 0)
+is_display = true
+
+[node name="Ball5" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(160, 0)
+is_display = true
+
+[node name="Ball6" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(200, 0)
+is_display = true
+
+[node name="Ball7" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(240, 0)
+is_display = true
+
+[node name="Ball8" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(280, 0)
+is_display = true
+
+[node name="Ball9" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(0, 40)
+is_display = true
+
+[node name="Ball10" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(40, 40)
+is_display = true
+
+[node name="Ball11" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(80, 40)
+is_display = true
+
+[node name="Ball12" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(120, 40)
+is_display = true
+
+[node name="Ball13" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(160, 40)
+is_display = true
+
+[node name="Ball14" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(200, 40)
+is_display = true
+
+[node name="Ball15" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(240, 40)
+is_display = true
+
+[node name="Ball16" parent="Windows/BallEffects/Balls" instance=ExtResource("4_p785c")]
+position = Vector2(280, 40)
+is_display = true
+
+[node name="Description" type="RichTextLabel" parent="Windows/BallEffects"]
+layout_mode = 0
+offset_top = 180.0
+offset_right = 440.0
+offset_bottom = 560.0
 bbcode_enabled = true
 text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
 autowrap_mode = 1
 
+[node name="Stats" type="Control" parent="Windows"]
+visible = false
+anchors_preset = 0
+
+[node name="Credits" type="Control" parent="Windows"]
+visible = false
+anchors_preset = 0
+
+[node name="Description" type="RichTextLabel" parent="Windows/Credits"]
+layout_mode = 0
+offset_right = 440.0
+offset_bottom = 560.0
+bbcode_enabled = true
+text = "[b]Direction, Programming[/b]
+[font_size=24]Kamiko Loss[/font_size]
+[font_size=8] [/font_size]
+[b]Art[/b]
+[font_size=24]LM7[/font_size]
+[font_size=8] [/font_size]
+[b]Special Thanks[/b]
+itsuki, kadomatsu, kokamumo, minami110, ochi, zukachang"
+
+[node name="Licenses" type="Control" parent="Windows"]
+visible = false
+anchors_preset = 0
+
+[node name="Description" type="RichTextLabel" parent="Windows/Licenses"]
+layout_mode = 0
+offset_right = 440.0
+offset_bottom = 560.0
+bbcode_enabled = true
+text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
+
 [node name="Exit" type="Button" parent="."]
 layout_mode = 0
-offset_left = 360.0
-offset_top = 580.0
-offset_right = 480.0
-offset_bottom = 700.0
+offset_left = 840.0
+offset_top = 560.0
+offset_right = 960.0
+offset_bottom = 680.0
 theme_type_variation = &"ButtonCircle"
 
 [node name="TextureRect" type="TextureRect" parent="Exit"]
@@ -166,8 +327,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Bunny" parent="." instance=ExtResource("5_7wbwg")]
-offset_left = 1040.0
-offset_top = -40.0
-offset_right = 1040.0
-offset_bottom = -40.0
+layout_mode = 0
+offset_left = 1160.0
+offset_right = 1160.0
 _parts_1_textures = Array[Texture]([ExtResource("6_yhis1"), ExtResource("7_ogwcd")])
