@@ -19,7 +19,9 @@ const LICENSE_SELECTOR_LABELS := {
 
 
 @export var _exit_button: Button
-@export var _default_menu_help_area: HelpArea
+
+@export var _help_areas_parent: Control
+@export var _default_window: Node
 
 @export_category("Windows")
 @export var _windows_parent: Control
@@ -33,7 +35,7 @@ const LICENSE_SELECTOR_LABELS := {
 @export var _license_label_2: RichTextLabel
 
 
-var _current_menu_help_area: HelpArea
+var _current_window: Node
 var _tweens := {}
 
 
@@ -41,35 +43,29 @@ func _ready() -> void:
 	_exit_button.pressed.connect(func(): exit_button_pressed.emit())
 
 	# HelpArea
+	for node in _help_areas_parent.get_children():
+		if node is HelpArea:
+			node.pressed.connect(func(n): _show_window(node.object))
 	for node in _balls_parent.get_children():
 		if node is Ball:
-			pass
-			#node.help_area_hovered.connect(func(n, v): _on_ball_help_area_hovered(node, v))
-			#node.help_area_hovered.connect(func(n): _on_ball_help_area_pressed(node))
+			node.help_area_pressed.connect(func(n): _update_ball_effect_label(node))
 	# Windows
 	_init_ball_effects()
 	_init_licenses()
 	for window in _windows_parent.get_children():
 		window.visible = false
-	if _default_menu_help_area:
-		_current_menu_help_area = _default_menu_help_area
-		_show_window(_default_menu_help_area)
+	if _default_window:
+		_current_window = _default_window
+		_show_window(_current_window)
 
 
-func _on_ball_help_area_hovered(ball: Ball, hovered: bool) -> void:
-	if not hovered:
-		return
-	#_update_ball_effect_label(ball)
-	#_show_window(ball.help_area)
-
-
-func _show_window(help_area: HelpArea) -> void:
+func _show_window(window: Node) -> void:
 	var tween := _get_tween(TweenType.WINDOW)
 	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 
-	var window_from = _current_menu_help_area
-	var window_to = help_area
-	_current_menu_help_area = help_area
+	var window_from = _current_window
+	var window_to = window
+	_current_window = window
 	# 現在表示中の Window を非表示にする
 	tween.tween_property(_windows_parent, "modulate", Color.TRANSPARENT, WINDOW_SHOW_DURATION)
 	tween.tween_callback(func(): window_from.visible = false)

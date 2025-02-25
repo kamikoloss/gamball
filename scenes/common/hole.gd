@@ -62,6 +62,8 @@ var _tweens := {}
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
+	help_area.hovered.connect(func(n, h): help_area_hovered.emit(n, h))
+	help_area.pressed.connect(func(n): help_area_pressed.emit(n))
 
 	_hole_scale_base = self.scale
 	_gravity_scale_base = _gravity_area.scale

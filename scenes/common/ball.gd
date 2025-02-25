@@ -102,7 +102,7 @@ func _init(number: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	help_area.hovered.connect(func(n, b): help_area_hovered.emit(n, b))
+	help_area.hovered.connect(func(n, h): help_area_hovered.emit(n, h))
 	help_area.pressed.connect(func(n): help_area_pressed.emit(n))
 
 	if not is_display:

@@ -45,6 +45,7 @@ vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="."]
 self_modulate = Color(0.1, 0.1, 0.1, 1)
+layout_mode = 0
 offset_left = 40.0
 offset_top = 100.0
 offset_right = 520.0
@@ -52,6 +53,7 @@ offset_bottom = 700.0
 
 [node name="Panel2" type="Panel" parent="."]
 self_modulate = Color(0.1, 0.1, 0.1, 1)
+layout_mode = 0
 offset_left = 560.0
 offset_top = 100.0
 offset_right = 1040.0

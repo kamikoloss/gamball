@@ -848,13 +848,14 @@ position = Vector2(280, 460)
 
 [node name="Balls" type="Node2D" parent="."]
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_balls_label", "_next_balls_label", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_combo_bar", "_help_popup", "_tax_window", "_tax_pay_button", "_shop_window", "_shop_exit_button", "_products_parent")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("_log_label", "_combo_bar", "_deck_balls_parent", "_extra_balls_parent", "_deck_min_lamp", "_extra_max_lamp", "_turn_label", "_next_turn_label", "_balls_label", "_next_balls_label", "_info_button", "_options_button", "_bunny", "_bubble_top", "_dialogue_top", "_bubble_bottom", "_dialogue_bottom", "_help_areas", "_help_popup", "_tax_window", "_tax_pay_button", "_shop_window", "_shop_exit_button", "_products_parent")]
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("7_m16gi")
 script = ExtResource("16_qduhm")
 _log_label = NodePath("Main/Log/RichTextLabel")
+_combo_bar = NodePath("Main/Combo/ComboBar")
 _popup_score_scene = ExtResource("17_k13dc")
 _deck_balls_parent = NodePath("Main/Balls/DeckBalls")
 _extra_balls_parent = NodePath("Main/Balls/ExtraBalls")
@@ -871,7 +872,7 @@ _bubble_top = NodePath("Bubbles/BubbleTop")
 _dialogue_top = NodePath("Bubbles/BubbleTop/RichTextLabel")
 _bubble_bottom = NodePath("Bubbles/BubbleBottom")
 _dialogue_bottom = NodePath("Bubbles/BubbleBottom/RichTextLabel")
-_combo_bar = NodePath("Main/Combo/ComboBar")
+_help_areas = NodePath("Main/Help/HelpAreas")
 _help_popup = NodePath("Main/Help/HelpPopup")
 _tax_window = NodePath("Tax")
 _tax_pay_button = NodePath("Tax/Pay")

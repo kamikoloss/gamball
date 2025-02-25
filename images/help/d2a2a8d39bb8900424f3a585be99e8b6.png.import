@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kmwqgkhvd7bn"
-path="res://.godot/imported/pachinko.png-79ac4d9a791514b1cc001438726de36a.ctex"
+uid="uid://jh8s16gh6wrf"
+path="res://.godot/imported/d2a2a8d39bb8900424f3a585be99e8b6.png-237530c040659c6ff4d62d89eb47f5d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/help/pachinko.png"
-dest_files=["res://.godot/imported/pachinko.png-79ac4d9a791514b1cc001438726de36a.ctex"]
+source_file="res://images/help/d2a2a8d39bb8900424f3a585be99e8b6.png"
+dest_files=["res://.godot/imported/d2a2a8d39bb8900424f3a585be99e8b6.png-237530c040659c6ff4d62d89eb47f5d1.ctex"]
 
 [params]
 

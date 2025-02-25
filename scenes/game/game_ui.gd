@@ -40,6 +40,7 @@ const LOG_LINES_MAX := 100
 
 
 @export var _log_label: RichTextLabel
+@export var _combo_bar: ColorRect
 
 @export_category("Scenes")
 @export var _popup_score_scene: PackedScene
@@ -57,14 +58,14 @@ const LOG_LINES_MAX := 100
 @export_category("Main/Buttons")
 @export var _info_button: Button
 @export var _options_button: Button
-@export_category("Main/Bunny+")
+@export_category("Main/Bunny+Bubbles")
 @export var _bunny: Bunny
 @export var _bubble_top: Control
 @export var _dialogue_top: RichTextLabel
 @export var _bubble_bottom: Control
 @export var _dialogue_bottom: RichTextLabel
-@export_category("Main/Others")
-@export var _combo_bar: ColorRect
+@export_category("Main/Help")
+@export var _help_areas: Control
 @export var _help_popup: HelpPopup
 
 @export_category("Tax")
@@ -101,18 +102,11 @@ func _ready() -> void:
 	# Main/Buttons
 	_info_button.pressed.connect(func(): info_button_pressed.emit())
 	_options_button.pressed.connect(func(): options_button_pressed.emit())
-
-	# Tax
-	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
-
-	# Shop
-	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
-	for node in _products_parent.get_children():
-		if node is Product:
-			node.hovered.connect(func(n, on): product_hovered.emit(n, on))
-			node.pressed.connect(func(n): product_pressed.emit(n))
-
-	# Bunny+
+	# mina/Help
+	for node in _help_areas.get_children():
+		if node is HelpArea:
+			node.hovered.connect(func(n, h): _on_help_area_hovered(node, h))
+	# Main/Bunny+Bubbles
 	_bunny.pressed.connect(func(): _on_bunny_pressed())
 	_bunny.size_type = Bunny.SizeType.SMALL
 	set_dialogue("...")
@@ -120,6 +114,19 @@ func _ready() -> void:
 	_bubble_bottom.modulate = Color.TRANSPARENT
 	_target_bubble = _bubble_top
 	_target_dialogue = _dialogue_top
+	# Tax
+	_tax_pay_button.pressed.connect(func(): tax_pay_button_pressed.emit())
+	# Shop
+	_shop_exit_button.pressed.connect(func(): shop_exit_button_pressed.emit())
+	for node in _products_parent.get_children():
+		if node is Product:
+			node.hovered.connect(func(n, h): product_hovered.emit(n, h))
+			node.pressed.connect(func(n): product_pressed.emit(n))
+
+	# Hole
+	for node in get_tree().get_nodes_in_group("hole"):
+		if node is Hole:
+			node.help_area_hovered.connect(func(n, h): _on_hole_help_area_hovered(node, h))
 
 
 func show_tax_window() -> void:
@@ -277,9 +284,21 @@ func popup_score(from: Vector2, text: String, color: Color = Color.WHITE, ratio:
 	popup_score.popup(from, text)
 
 
+func _on_help_area_hovered(help_area: HelpArea, hovered: bool) -> void:
+	if hovered:
+		_help_popup.show_popup_common(help_area)
+	else:
+		_help_popup.hide_popup()
+
 func _on_ball_help_area_hovered(ball: Ball, hovered: bool) -> void:
 	if hovered:
 		_help_popup.show_popup_ball(ball)
+	else:
+		_help_popup.hide_popup()
+
+func _on_hole_help_area_hovered(hole: Hole, hovered: bool) -> void:
+	if hovered:
+		_help_popup.show_popup_hole(hole)
 	else:
 		_help_popup.hide_popup()
 

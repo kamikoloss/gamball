@@ -22,9 +22,10 @@ func show_popup_common(help_area: HelpArea) -> void:
 
 
 func show_popup_ball(ball: Ball) -> void:
-	var not_show := _update_content_ball(ball)
-	if not_show:
+	# ビリヤード上のボールは popup を表示しない
+	if ball.is_on_billiards:
 		return
+	_update_content_ball(ball)
 	_show_popup(ball.help_area)
 
 
@@ -43,20 +44,14 @@ func _update_content_common(help_area: HelpArea) -> void:
 	_label.text = "[b]%s[/b]\n%s" % [title, description]
 
 
-func _update_content_ball(ball: Ball) -> bool:
-	# ビリヤード上のボールは popup を表示しない
-	if ball.is_on_billiards:
-		return true
-
+func _update_content_ball(ball: Ball) -> void:
 	var text := ""
 	if 0 <= ball.number:
 		var pool = Ball.Pool.keys()[ball.pool]
 		var rarity = BallEffect.RARITY_TEXT[ball.rarity]
 		text += "[b]%s-%s %s[/b]\n" % [pool, ball.number, rarity]
 	text += BallEffect.get_effect_description(ball.number, ball.rarity)
-
 	_label.text = text
-	return false
 
 
 func _update_content_hole(hole: Hole) -> void:

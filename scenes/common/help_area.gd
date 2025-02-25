@@ -16,6 +16,7 @@ const SHOW_DURATION := 0.2
 
 @export var shape_type: ShapeType
 @export var key: String
+@export var object: Node
 
 
 @export var _panel_square: Control
