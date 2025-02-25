@@ -144,7 +144,8 @@ static func get_effect_description(number: int, rarity: Ball.Rarity) -> String:
 	if number == Ball.BALL_NUMBER_OPTIONAL_SLOT:
 		return "(%s)" % [TranslationServer.translate("ball_optional_slot")]
 	if number == Ball.BALL_NUMBER_DISABLED_SLOT:
-		return "(%s)" % [TranslationServer.translate("ball_disabled_slot")]
+		var color := ColorPalette.DANGER.to_html()
+		return "[color=%s](%s)[/color]" % [color, TranslationServer.translate("ball_disabled_slot")]
 	if rarity == Ball.Rarity.COMMON:
 		return "(%s)" % [TranslationServer.translate("ball_effect_no")]
 

@@ -89,7 +89,7 @@ func _init_ball_effects() -> void:
 			node.refresh_view()
 			number += 1
 	# Label
-	_ball_effect_label.text = ""
+	_ball_effect_label.text = "ボールをクリックして効果を表示する" # TODO
 
 
 func _init_licenses() -> void:

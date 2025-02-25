@@ -74,6 +74,10 @@ func _update_content_hole(hole: Hole) -> void:
 		Hole.HoleType.STACK:
 			pass
 
+	if hole.disabled:
+		var color := ColorPalette.DANGER.to_html()
+		description += "\n[color=%s](%s)[/color]" % [color, tr("hole_disabled")]
+
 	_label.text = "[b]%s[/b]\n%s" % [title, description]
 
 

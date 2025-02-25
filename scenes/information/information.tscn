@@ -391,8 +391,6 @@ offset_top = 180.0
 offset_right = 440.0
 offset_bottom = 560.0
 bbcode_enabled = true
-text = "あの[rainbow]イーハトーヴォ[/rainbow]のすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。"
-autowrap_mode = 1
 
 [node name="Holes" type="Control" parent="Windows"]
 visible = false
@@ -487,7 +485,6 @@ bbcode_enabled = true
 text = "TODO"
 
 [node name="Credits" type="Control" parent="Windows"]
-visible = false
 anchors_preset = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Windows/Credits"]
@@ -495,15 +492,14 @@ layout_mode = 0
 offset_right = 440.0
 offset_bottom = 560.0
 bbcode_enabled = true
-text = "[b]Direction, Programming[/b]
+text = "[b]Design, Code[/b]
 [font_size=24]Kamiko Loss[/font_size]
 [font_size=8] [/font_size]
 [b]Art[/b]
 [font_size=24]LM7[/font_size]
 [font_size=8] [/font_size]
 [b]Special Thanks[/b]
-itsuki, kadomatsu, kokamumo, minami110, ochi, zukachang
-[font_size=8] [/font_size]"
+itsuki, kadomatsu, kokamumo, minami110, ochi, zukachang"
 
 [node name="Licenses" type="Control" parent="Windows"]
 visible = false

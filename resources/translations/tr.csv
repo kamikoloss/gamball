@@ -32,7 +32,7 @@ bunny_countdown_start,[color=DARK_RED]延長[/color]のお時間で～す,It's [
 bunny_move_finished,よいしょっと,Heave-ho
 bunny_no_money,お金が足りないよ～,I don't have enough money
 bunny_normal_0,いらっしゃ～い！調子どう？,Welcome! how are you?
-bunny_normal_1,[rainbow]GAMBALL[/rainbow] は最先端のバーチャルハイリスクハイリターンギャンブルだよ！,"[rainbow]GAMBALL[/rainbow] is the most advanced virtual high-risk, high-reward gambling game!"
+bunny_normal_1,[rainbow]GAMBALL[/rainbow] は最先端のバーチャルハイリスクハイリターンギャンブルだよ！,[rainbow]GAMBALL[/rainbow] is a state-of-the-art virtual high-risk high-return gamble!
 bunny_normal_2,ビリヤードポケットに入ったボールはパチンコ盤面上にワープしていくよ。,The ball that enters the billiard pocket will warp onto the pachinko board surface.
 bunny_normal_3,ビリヤードで打ち出すボールは他のボールにぶつからないと有効化されないんだよね～,The ball launched in billiards is not activated unless it hits another ball.
 bunny_shop_start,なんか買ってく？,Would you like to buy something?
@@ -61,7 +61,7 @@ hole_WARP_FROM_desc,WHITE ポケット {a} からワープしたボールを射�
 hole_WARP_FROM_title,WHITE ポケット {a},WHITE pocket {a}
 hole_WARP_TO_desc,WHITE ポケット {a} にワープする。,Warp to WHITE pocket {a}.
 hole_WARP_TO_title,BLACK ポケット {a},BLACK pocket {a}
-product_DECK_CLEANER_desc,DECK の左端のボール x1 を削除する。,Delete the leftmost ball x1 of the DECK.
+product_DECK_CLEANER_desc,DECK の左端のボール x1 を削除する。,Delete ball x1 on the left end of the DECK.
 product_DECK_CLEANER_title,DECK Cleaner,DECK Cleaner
 product_DECK_PACK_desc,DECK にランダムなボール x2 を追加する。,Add random balls x2 to the DECK.
 product_DECK_PACK_title,DECK Pack,DECK Pack
@@ -69,3 +69,4 @@ product_EXTRA_CLEANER_desc,EXTRA の左端のボール x1 を削除する。,Del
 product_EXTRA_CLEANER_title,EXTRA Cleaner,EXTRA Cleaner
 product_EXTRA_PACK_desc,EXTRA にランダムなボール x2 を追加する。,Add random balls x2 to EXTRA.
 product_EXTRA_PACK_title,EXTRA Pack,EXTRA Pack
+hole_disabled,無効,Disabled
