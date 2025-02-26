@@ -9,7 +9,7 @@ signal exited
 
 enum GameState { GAME, COUNT_DOWN, TAX, SHOP }
 enum ComboState { IDLE, CONTINUE, COOLTIME }
-enum TweenType { COMBO, TAX_COUNT_DOWN }
+enum TweenType { BALLS, COMBO, TAX_COUNT_DOWN }
 
 
 # Ball を発射する強さ
@@ -54,6 +54,8 @@ const EXTRA_BALL_NUMBER_RARITY := {
 	Ball.Rarity.EPIC: [4, 5, 10, 11],
 	Ball.Rarity.LEGENDARY: [0, 1, 14, 15],
 }
+
+const BALLS_CHANGE_DURATION := 1.0
 
 
 # Scenes
@@ -196,18 +198,6 @@ func initialize() -> void:
 		ball.global_position = ball_data.global_position
 		_balls_parent.add_child(ball)
 	_billiards.update_balls_count(_billiards_balls_count)
-
-
-func _save_run() -> void:
-	var billiards_balls: Array[Ball]
-	for ball: Ball in _balls_parent.get_children():
-		billiards_balls.append(ball)
-	SaveManager.game_run.turn = _turn
-	SaveManager.game_run.balls = _balls
-	SaveManager.game_run.deck = _deck_ball_list
-	SaveManager.game_run.extra = _extra_ball_list
-	SaveManager.game_run.billiards = billiards_balls
-	SaveManager.save_game()
 
 
 func _on_change_game_state(state: GameState) -> void:
@@ -497,6 +487,25 @@ func _on_product_pressed(product: Product) -> void:
 	_on_product_hovered(product, true)
 	# DECK/EXTRA の見た目を更新する
 	_refresh_deck_extra()
+
+
+# 現在の状態を保存する
+func _save_run() -> void:
+	var billiards_balls: Array[Ball]
+	for ball: Ball in _balls_parent.get_children():
+		billiards_balls.append(ball)
+	SaveManager.game_run.turn = _turn
+	SaveManager.game_run.balls = _balls
+	SaveManager.game_run.deck = _deck_ball_list
+	SaveManager.game_run.extra = _extra_ball_list
+	SaveManager.game_run.billiards = billiards_balls
+	SaveManager.save_game()
+
+
+func _increase_balls(balls_diff: int) -> void:
+	var tween = _get_tween(TweenType.BALLS)
+	tween.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_method(func(v): _balls = v, _balls, _balls + balls_diff, BALLS_CHANGE_DURATION)
 
 
 # EXTRA Ball の効果をまとめて反映する

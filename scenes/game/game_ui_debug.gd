@@ -25,10 +25,10 @@ var _main_functions: Dictionary = {
 	# Game
 	"TURN +10": func(): _game._turn += 10,
 	"TURN -10": func(): _game._turn -= 10,
-	"BALLS +10": func(): _game._balls += 10,
-	"BALLS +100": func(): _game._balls += 100,
-	"BALLS -10": func(): _game._balls -= 10,
-	"BALLS -100": func(): _game._balls -= 100,
+	"BALLS +10": func(): _game._increase_balls(10),
+	"BALLS +100": func(): _game._increase_balls(100),
+	"BALLS -10": func(): _game._increase_balls(-10),
+	"BALLS -100": func(): _game._increase_balls(-100),
 	# Pachinko
 	"start_lottery": func(): _pachinko.start_lottery(true),
 	"_start_rush": func(): _pachinko._start_rush(),
