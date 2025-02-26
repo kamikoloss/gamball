@@ -34,25 +34,25 @@ const TAX_LIST := [
 
 # レア度の割合
 const RAIRTY_WEIGHT := {
-	Ball.Rarity.COMMON: 50,
-	Ball.Rarity.UNCOMMON: 40,
-	Ball.Rarity.RARE: 30,
-	Ball.Rarity.EPIC: 20,
-	Ball.Rarity.LEGENDARY: 10,
+	Rarity.Type.COMMON: 50,
+	Rarity.Type.UNCOMMON: 40,
+	Rarity.Type.RARE: 30,
+	Rarity.Type.EPIC: 20,
+	Rarity.Type.LEGENDARY: 10,
 }
 # DECK Ball の番号の排出率
 const DECK_BALL_NUMBER_RARITY := {
-	Ball.Rarity.UNCOMMON: [0, 1, 2, 3],
-	Ball.Rarity.RARE: [4, 5, 6, 7],
-	Ball.Rarity.EPIC: [8, 9, 10, 11],
-	Ball.Rarity.LEGENDARY: [12, 13, 14, 15],
+	Rarity.Type.UNCOMMON: [0, 1, 2, 3],
+	Rarity.Type.RARE: [4, 5, 6, 7],
+	Rarity.Type.EPIC: [8, 9, 10, 11],
+	Rarity.Type.LEGENDARY: [12, 13, 14, 15],
 }
 # EXTRA Ball の番号の排出率
 const EXTRA_BALL_NUMBER_RARITY := {
-	Ball.Rarity.UNCOMMON: [6, 7, 8, 9],
-	Ball.Rarity.RARE: [2, 3, 12, 13],
-	Ball.Rarity.EPIC: [4, 5, 10, 11],
-	Ball.Rarity.LEGENDARY: [0, 1, 14, 15],
+	Rarity.Type.UNCOMMON: [6, 7, 8, 9],
+	Rarity.Type.RARE: [2, 3, 12, 13],
+	Rarity.Type.EPIC: [4, 5, 10, 11],
+	Rarity.Type.LEGENDARY: [0, 1, 14, 15],
 }
 
 const BALLS_CHANGE_DURATION := 1.0
@@ -178,13 +178,13 @@ func initialize() -> void:
 			5: [280, 300],
 		}
 		for number in deck_numbers:
-			var ball := Ball.new(number, Ball.Rarity.COMMON)
+			var ball := Ball.new(number, Rarity.Type.COMMON)
 			_deck_ball_list.append(ball)
 		for number in extra_numbers:
-			var ball := Ball.new(number, Ball.Rarity.COMMON)
+			var ball := Ball.new(number, Rarity.Type.COMMON)
 			_extra_ball_list.append(ball)
 		for number in billiards_numbers_postions.keys():
-			var ball := Ball.new(number, Ball.Rarity.COMMON)
+			var ball := Ball.new(number, Rarity.Type.COMMON)
 			var pos = billiards_numbers_postions[number]
 			ball.global_position = Vector2(pos[0], pos[1])
 			billiards_balls.append(ball)
@@ -446,7 +446,7 @@ func _on_product_pressed(product: Product) -> void:
 				var number_rarity = _pick_random_rarity(true) # COMMON 抜き
 				var number = DECK_BALL_NUMBER_RARITY[number_rarity].pick_random()
 				_deck_ball_list.push_back(Ball.new(number))
-				print("[Game] DECK_PACK level: %s (%s)" % [number, Ball.Rarity.keys()[number_rarity]])
+				print("[Game] DECK_PACK level: %s (%s)" % [number, Rarity.Type.keys()[number_rarity]])
 
 		Product.Type.DECK_CLEANER:
 			if _deck_ball_list.size() <= _deck_size_min:
@@ -465,7 +465,7 @@ func _on_product_pressed(product: Product) -> void:
 				var number = EXTRA_BALL_NUMBER_RARITY[number_rarity].number_rarity()
 				var rarity = _pick_random_rarity()
 				_extra_ball_list.push_back(Ball.new(number, rarity))
-				print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [number, Ball.Rarity.keys()[number_rarity], Ball.Rarity.keys()[rarity]])
+				print("[Game] EXTRA_PACK level: %s (%s), rarity: %s" % [number, Rarity.Type.keys()[number_rarity], Rarity.Type.keys()[rarity]])
 			_apply_extra_ball_effects()
 
 		Product.Type.EXTRA_CLEANER:
@@ -582,7 +582,7 @@ func _get_extra_ball_effects(target_effect_type: BallEffect.Type) -> Array:
 
 # Ball instance を作成する
 # TODO: init を充実させたらこれはいらない
-func _create_new_ball(number: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON, is_active = true) -> Ball:
+func _create_new_ball(number: int = 0, rarity: Rarity.Type = Rarity.Type.COMMON, is_active = true) -> Ball:
 	var ball: Ball = _ball_scene.instantiate()
 	ball.number = number
 	ball.rarity = rarity
@@ -594,12 +594,12 @@ func _create_new_ball(number: int = 0, rarity: Ball.Rarity = Ball.Rarity.COMMON,
 
 # 重み付きのレア度を抽選する
 # exclude_common: COMMON 抜きの抽選を行う (Ball LV 用)
-func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
+func _pick_random_rarity(exclude_common: bool = false) -> Rarity.Type:
 	var rarity_weight = RAIRTY_WEIGHT.duplicate()
-	# ex: [Type.RARITY_TOP_UP, Ball.Rarity.RARE]
+	# ex: [Type.RARITY_TOP_UP, Rarity.Type.RARE]
 	for effect_data in _get_extra_ball_effects(BallEffect.Type.RARITY_TOP_UP):
 		rarity_weight[effect_data[1]] += RAIRTY_WEIGHT[effect_data[1]]
-	# ex: [Type.RARITY_TOP_DOWN, Ball.Rarity.COMMON]
+	# ex: [Type.RARITY_TOP_DOWN, Rarity.Type.COMMON]
 	for effect_data in _get_extra_ball_effects(BallEffect.Type.RARITY_TOP_DOWN):
 		var rarity_top_down = rarity_weight[effect_data[1]] - RAIRTY_WEIGHT[effect_data[1]] / 2
 		rarity_weight[effect_data[1]] = clampi(rarity_top_down, 0, rarity_top_down)
@@ -608,7 +608,7 @@ func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 	# 抽選の分母 (合計)
 	var rarity_weight_total = 0
 	for rarity in RAIRTY_WEIGHT.keys():
-		if exclude_common and rarity == Ball.Rarity.COMMON:
+		if exclude_common and rarity == Rarity.Type.COMMON:
 			continue
 		else:
 			rarity_weight_total += RAIRTY_WEIGHT[rarity]
@@ -618,9 +618,9 @@ func _pick_random_rarity(exclude_common: bool = false) -> Ball.Rarity:
 
 	# 抽選した整数に対応するレア度を決定する
 	var rarity_check = 0
-	var random_rarity = Ball.Rarity.COMMON
+	var random_rarity = Rarity.Type.COMMON
 	for rarity in RAIRTY_WEIGHT.keys():
-		if exclude_common and rarity == Ball.Rarity.COMMON:
+		if exclude_common and rarity == Rarity.Type.COMMON:
 			continue
 		else:
 			random_rarity = rarity

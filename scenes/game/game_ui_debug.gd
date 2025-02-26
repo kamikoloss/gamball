@@ -48,11 +48,11 @@ var _main_functions: Dictionary = {
 }
 # { <ボタン文字列: string>: <ボタン処理: Callable>, ... } 
 var _balls_functions: Dictionary = {
-	"Lv.1": func(): _on_balls_rarity_pressed(Ball.Rarity.COMMON),
-	"Lv.2": func(): _on_balls_rarity_pressed(Ball.Rarity.UNCOMMON),
-	"Lv.3": func(): _on_balls_rarity_pressed(Ball.Rarity.RARE),
-	"Lv.4": func(): _on_balls_rarity_pressed(Ball.Rarity.EPIC),
-	"Lv.5": func(): _on_balls_rarity_pressed(Ball.Rarity.LEGENDARY),
+	"Lv.1": func(): _on_balls_rarity_pressed(Rarity.Type.COMMON),
+	"Lv.2": func(): _on_balls_rarity_pressed(Rarity.Type.UNCOMMON),
+	"Lv.3": func(): _on_balls_rarity_pressed(Rarity.Type.RARE),
+	"Lv.4": func(): _on_balls_rarity_pressed(Rarity.Type.EPIC),
+	"Lv.5": func(): _on_balls_rarity_pressed(Rarity.Type.LEGENDARY),
 	"DECK-": func(): _on_balls_remove_pressed(false),
 	"EXTRA-": func(): _on_balls_remove_pressed(true),
 }
@@ -118,7 +118,7 @@ func _on_ball_pressed(ball: Ball) -> void:
 	_game._refresh_deck_extra()
 	_game._refresh_next()
 
-func _on_balls_rarity_pressed(rarity: Ball.Rarity) -> void:
+func _on_balls_rarity_pressed(rarity: Rarity.Type) -> void:
 	for ball: Ball in _balls_parent.get_children():
 		ball.rarity = rarity
 		ball.refresh_view()

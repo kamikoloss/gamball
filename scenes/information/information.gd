@@ -118,8 +118,8 @@ func _update_ball_effect_label(ball: Ball) -> void:
 	var pool_text = Ball.Pool.keys()[ball.pool]
 	text += "[font_size=24][b]%s-%s[/b][/font_size]\n" % [pool_text, ball.number]
 	text += "[font_size=8] [/font_size]\n" # ハーフ改行
-	for rarity in Ball.Rarity.values():
-		var rarity_text = BallEffect.RARITY_TEXT[rarity]
+	for rarity in Rarity.Type.values():
+		var rarity_text = Rarity.RARITY_TEXT[rarity]
 		var rarity_color: Color = ColorPalette.BALL_RARITY_COLORS[rarity]
 		var rarity_color_code = rarity_color.to_html()
 		text += "[color=%s][b]%s[/b][/color]\n" % [rarity_color_code, rarity_text]

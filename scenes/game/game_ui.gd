@@ -319,10 +319,9 @@ func _refresh_balls(parent_node: Node, ball_list: Array[Ball], min: int, max: in
 				node.rarity = ball_list[index].rarity
 			elif max <= index:
 				node.number = Ball.BALL_NUMBER_DISABLED_SLOT
-				node.rarity = Ball.Rarity.COMMON
 			else:
 				node.number = Ball.BALL_NUMBER_OPTIONAL_SLOT
-				node.rarity = Ball.Rarity.COMMON
+				node.rarity = Rarity.Type.COMMON
 			#print("refresh ball %s, %s" % [node.number, node.rarity])
 			node.refresh_view()
 			index += 1

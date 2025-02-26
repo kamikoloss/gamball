@@ -8,8 +8,6 @@ signal help_area_hovered # (help_area: HelpArea, hovered: bool)
 signal help_area_pressed # (help_area: HelpArea)
 
 
-# ボールのレア度
-enum Rarity { COMMON, UNCOMMON, RARE, EPIC, LEGENDARY }
 # ボールのプール 名称表示に使用される
 enum Pool { A }
 # Tween
@@ -77,7 +75,7 @@ var is_shrinked := false
 # ボール番号
 var number := 0
 # ボールのレア度
-var rarity := Rarity.COMMON
+var rarity := Rarity.Type.COMMON
 # ボールのプール
 var pool := Pool.A
 # ボールの効果
@@ -94,7 +92,7 @@ var _trail_default_width := 0.0
 var _tweens := {}
 
 
-func _init(number: int = 0, rarity: Rarity = Rarity.COMMON) -> void:
+func _init(number := 0, rarity := Rarity.Type.COMMON) -> void:
 	self.number = number
 	self.rarity = rarity
 	_init_effects()
@@ -134,7 +132,7 @@ func refresh_view() -> void:
 	_body_texture.self_modulate = rarity_color
 	_inner_texture.self_modulate = rarity_color
 	# レア度による本体色の変化
-	if rarity == Rarity.COMMON:
+	if rarity == Rarity.Type.COMMON:
 		_inner_line_texture.self_modulate = ColorPalette.GRAY_60
 		_stripe_top_texture.self_modulate = ColorPalette.GRAY_60
 		_stripe_bottom_texture.self_modulate = ColorPalette.GRAY_60
@@ -307,7 +305,7 @@ func _disable_shrink(hide: bool = false) -> void:
 func _init_effects() -> void:
 	if effects.is_empty():
 		return
-	if rarity == Rarity.COMMON:
+	if rarity == Rarity.Type.COMMON:
 		return
 
 	var effects_data := {

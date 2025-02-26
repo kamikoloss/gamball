@@ -48,7 +48,7 @@ func _update_content_ball(ball: Ball) -> void:
 	var text := ""
 	if 0 <= ball.number:
 		var pool = Ball.Pool.keys()[ball.pool]
-		var rarity = BallEffect.RARITY_TEXT[ball.rarity]
+		var rarity = Rarity.RARITY_TEXT[ball.rarity]
 		text += "[b]%s-%s %s[/b]\n" % [pool, ball.number, rarity]
 	text += BallEffect.get_effect_description(ball.number, ball.rarity)
 	_label.text = text

@@ -25,9 +25,9 @@ const LEGENDARY := 	Color("#b19e4c")
 
 # Ball
 const BALL_RARITY_COLORS := {
-	Ball.Rarity.COMMON: COMMON,
-	Ball.Rarity.UNCOMMON: UNCOMMON,
-	Ball.Rarity.RARE: RARE,
-	Ball.Rarity.EPIC: EPIC,
-	Ball.Rarity.LEGENDARY: LEGENDARY,
+	Rarity.Type.COMMON: COMMON,
+	Rarity.Type.UNCOMMON: UNCOMMON,
+	Rarity.Type.RARE: RARE,
+	Rarity.Type.EPIC: EPIC,
+	Rarity.Type.LEGENDARY: LEGENDARY,
 }
